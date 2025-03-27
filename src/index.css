@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== PRINT ONLY MARKDOWN CONTENT ========== */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  .markdown-content,
+  .markdown-content * {
+    visibility: visible !important;
+  }
+
+  .markdown-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    background: white;
+  }
+}
+
+/* ========== MARKDOWN TABLE ENHANCEMENTS ========== */
+.prose table {
+  @apply w-full border border-gray-300 rounded;
+}
+
+.prose thead {
+  @apply bg-gray-100;
+}
+
+.prose th,
+.prose td {
+  @apply border px-4 py-2 text-sm text-gray-800;
+}
+
+.prose tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+.prose tr:hover {
+  @apply bg-blue-50;
+}
