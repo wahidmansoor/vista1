@@ -1,38 +1,80 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Calculator, AlertTriangle, ClipboardList, Activity, Thermometer, ShieldAlert, Brain, Clock } from 'lucide-react';
+import ToolCard from './components/ToolCard';
 
-const ToolCard = ({ title, description, path }: { title: string; description: string; path: string }) => {
+const Tools: React.FC = () => {
   const navigate = useNavigate();
+
+  const handleOpenTool = (id: string) => {
+    navigate(`/tools/${id}`);
+  };
+
+  const tools = [
+    {
+      id: 'calculators',
+      title: 'Clinical Calculators',
+      description: 'BSA, CrCl, ANC, Corrected Calcium, BMI, and more.',
+      icon: Calculator
+    },
+    {
+      id: 'redflags',
+      title: 'Red Flags & Emergencies',
+      description: 'Neutropenic Fever, Hypercalcemia, TLS, Spinal Cord Compression.',
+      icon: AlertTriangle
+    },
+    {
+      id: 'quickguides',
+      title: 'Symptom Control Quick Guides',
+      description: 'Pain Ladder, Anti-emetic protocols, Delirium management.',
+      icon: ClipboardList
+    },
+    {
+      id: 'labs',
+      title: 'Important Labs Reference',
+      description: 'Critical lab values, Tumor markers, Electrolyte corrections.',
+      icon: Thermometer
+    },
+    {
+      id: 'emergencyregimens',
+      title: 'Emergency Regimens',
+      description: 'TLS prophylaxis, Neutropenic fever antibiotics, Adrenal rescue.',
+      icon: ShieldAlert
+    },
+    {
+      id: 'cognitive',
+      title: 'Cognitive Tools',
+      description: 'MMSE, GCS, Delirium Triage Screening.',
+      icon: Brain
+    },
+    {
+      id: 'toxicities',
+      title: 'Treatment Toxicity Checklists',
+      description: 'Chemotherapy, Radiotherapy, Immunotherapy toxicity alerts.',
+      icon: Activity
+    },
+    {
+      id: 'reminders',
+      title: 'Scheduling and Reminders',
+      description: 'Next treatment reminders, Lab follow-up calendars.',
+      icon: Clock
+    }
+  ];
+
   return (
-    <div className="border rounded shadow-sm p-4 mb-4 bg-white">
-      <h3 className="text-lg font-semibold mb-1 text-blue-700">{title}</h3>
-      <p className="text-sm text-gray-600 mb-2">{description}</p>
-      <button
-        onClick={() => navigate(path)}
-        className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm"
-      >
-        Open
-      </button>
-    </div>
-  );
-};
-
-const Tools = () => {
-  return (
-    <div className="max-w-3xl mx-auto px-4 py-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Tools Dashboard</h2>
-
-      <ToolCard
-        title="Calculators"
-        description="Quick-access oncology calculators (BSA, AUC, CrCl, ANC)"
-        path="/tools/calculators"
-      />
-
-      <ToolCard
-        title="Red Flags"
-        description="Urgent clinical signs that require immediate attention"
-        path="/tools/redflags"
-      />
+    <div className="p-6">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">🛠️ Tools Hub</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {tools.map((tool) => (
+          <ToolCard
+            key={tool.id}
+            title={tool.title}
+            description={tool.description}
+            icon={tool.icon}
+            onClick={() => handleOpenTool(tool.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 };

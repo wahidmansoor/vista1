@@ -1,3 +1,0 @@
-# Immunocompromised
-
-Coming soon...

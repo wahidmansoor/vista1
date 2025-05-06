@@ -1,17 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./layout/Layout";
-import AppRoutes from "./routes/AppRoutes";
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { Layout } from './layout/Layout';
+import AppRoutes from './routes/AppRoutes';
+import { LayoutProvider } from './context/LayoutContext';
+import { Toast } from "@/components/ui/toast";
+import { ToastProvider } from "@/components/ui/toast"; // Add this import
 
-function App() {
+const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/*" element={<AppRoutes />} />
-        </Route>
-      </Routes>
-    </Router>
+    <LayoutProvider>
+      <BrowserRouter>
+        <ToastProvider>
+          <Toast />
+          <Layout>
+            <AppRoutes />
+          </Layout>
+        </ToastProvider>
+      </BrowserRouter>
+    </LayoutProvider>
   );
-}
+};
 
 export default App;

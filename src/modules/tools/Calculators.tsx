@@ -1,53 +1,56 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Calculator, Activity, BarChart } from 'lucide-react';
 
-const Calculators = () => {
+const Calculators: React.FC = () => {
   const navigate = useNavigate();
 
+  const calculators = [
+    {
+      id: 'bsa',
+      title: 'BSA Calculator',
+      description: 'Body Surface Area using Mosteller Formula',
+      icon: Calculator,
+      isImplemented: true
+    },
+    {
+      id: 'crcl',
+      title: 'CrCl Calculator',
+      description: 'Creatinine Clearance using Cockcroft-Gault Formula',
+      icon: Activity,
+      isImplemented: true
+    },
+    {
+      id: 'anc',
+      title: 'ANC Calculator',
+      description: 'Absolute Neutrophil Count estimation',
+      icon: BarChart,
+      isImplemented: true
+    }
+  ];
+
   return (
-    <div className="max-w-3xl mx-auto px-4 py-6">
-      <h2 className="text-2xl font-bold mb-6">Oncology Calculators</h2>
-
-      <div className="space-y-4">
-        <div className="bg-white p-4 rounded shadow">
-          <h3 className="text-blue-600 font-semibold">1. BSA (Body Surface Area)</h3>
-          <p className="text-sm">
-            <strong>Formula:</strong> √((Height(cm) × Weight(kg)) / 3600)<br />
-            <em>Example: Height = 170 cm, Weight = 65 kg → BSA ≈ 1.74 m²</em>
-          </p>
-        </div>
-
-        <div className="bg-white p-4 rounded shadow">
-          <h3 className="text-blue-600 font-semibold">2. AUC (Carboplatin Dose)</h3>
-          <p className="text-sm">
-            <strong>Formula:</strong> Dose = AUC × (GFR + 25)<br />
-            <em>Example: AUC = 5, GFR = 70 → Dose = 475 mg</em>
-          </p>
-        </div>
-
-        <div className="bg-white p-4 rounded shadow">
-          <h3 className="text-blue-600 font-semibold">3. CrCl (Cockcroft-Gault)</h3>
-          <p className="text-sm">
-            <strong>Formula:</strong> (140 - age) × weight / (72 × Cr) [× 0.85 if female]<br />
-            <em>Example: Age = 60, Wt = 70 kg, Cr = 1.2 → CrCl ≈ 68 mL/min</em>
-          </p>
-        </div>
-
-        <div className="bg-white p-4 rounded shadow">
-          <h3 className="text-blue-600 font-semibold">4. ANC (Absolute Neutrophil Count)</h3>
-          <p className="text-sm">
-            <strong>Formula:</strong> ANC = WBC × (%Neutrophils + %Bands) / 100<br />
-            <em>Example: WBC = 4.5, Neutrophils 55%, Bands 3% → ANC ≈ 2610</em>
-          </p>
-        </div>
+    <div className="p-6">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">🧮 Clinical Calculators</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {calculators.map((calc) => (
+          <button
+            key={calc.id}
+            onClick={() => navigate(`/tools/calculators/${calc.id}`)}
+            disabled={!calc.isImplemented}
+            className={`p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center justify-center space-y-2 text-center ${
+              calc.isImplemented ? 'hover:scale-105' : 'opacity-50 cursor-not-allowed'
+            }`}
+          >
+            <calc.icon className="w-8 h-8 text-indigo-500 dark:text-indigo-400" />
+            <span className="font-semibold text-gray-800 dark:text-gray-200">{calc.title}</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">{calc.description}</span>
+            {!calc.isImplemented && (
+              <span className="text-xs text-yellow-600 dark:text-yellow-400">Coming soon...</span>
+            )}
+          </button>
+        ))}
       </div>
-
-      <button
-        onClick={() => navigate("/tools")}
-        className="mt-6 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm"
-      >
-        ← Back to Tools
-      </button>
     </div>
   );
 };

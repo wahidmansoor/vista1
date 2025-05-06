@@ -1,3 +1,0 @@
-# Histopathology
-
-Coming soon...

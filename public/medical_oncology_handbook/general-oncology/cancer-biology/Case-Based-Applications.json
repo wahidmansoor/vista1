@@ -1,0 +1,382 @@
+{
+  "title": "Case-Based Applications in Oncology",
+  "category": "Clinical Oncology",
+  "section": "Case Studies",
+  "summary": "Interactive case-based learning integrating tumor biology, biomarker-driven therapy, and clinical decision-making across various cancer types.",
+  "author": "Oncology Education Team",
+  "lastUpdated": "2024-01-15T08:45:00Z",
+  "version": "1.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 40,
+    "targetAudience": ["Oncology Fellows", "Clinical Oncologists"],
+    "educationalLevel": "Advanced",
+    "keywords": [
+      "case-based learning",
+      "precision oncology",
+      "resistance mechanisms",
+      "biomarker-driven therapy",
+      "clinical decision making"
+    ],
+    "references": [
+      "NCCN Guidelines 2023",
+      "ASCO Educational Book 2023",
+      "ESMO Clinical Practice Guidelines"
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Case-Based Applications in Oncology"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Case-based learning is a cornerstone of clinical oncology education. It bridges fundamental cancer biology with real-world decision-making. Each case below integrates pathophysiology, biomarker-driven therapy, clinical guidelines, and molecular oncology, with added prompts to encourage diagnostic reasoning and therapeutic precision."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Case 1: EGFR-Mutated NSCLC – Acquired Resistance"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Expanded Clinical Scenario"
+    },
+    {
+      "type": "list",
+      "items": [
+        "A 58-year-old never-smoker with metastatic lung adenocarcinoma harboring an EGFR exon 19 deletion started first-line osimertinib. After 16 months of clinical stability, a new liver lesion is detected."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Expansion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Molecular Workup: Liquid biopsy confirms MET amplification without EGFR C797S.",
+        "Decision Point: Switch to osimertinib + MET inhibitor (e.g., savolitinib—investigational).",
+        "Teaching Tip: Always reassess tumor biology at progression; resistance mechanisms evolve."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "What if no resistance mutations are detected—consider histologic transformation (e.g., small cell)."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Case 2: MSI-High Colon Cancer – First-Line Immunotherapy"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Expanded Clinical Scenario"
+    },
+    {
+      "type": "list",
+      "items": [
+        "A 65-year-old male with metastatic CRC and MSI-H on PCR. He is asymptomatic with low-volume liver disease."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Expansion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Treatment Decision: Initiate pembrolizumab monotherapy (KEYNOTE-177).",
+        "Follow-up: Assess for pseudoprogression; initial imaging at 8–12 weeks.",
+        "Biomarker Rationale: MSI-H → high neoantigen burden → immune-responsive."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "What if progression after ICI → assess TMB, POLE mutation, or consider chemo/ICI combo."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Case 3: HER2-Low Breast Cancer – Redefining Biomarkers"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Expanded Clinical Scenario"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Patient previously classified as HER2-negative (IHC 1+), now receives T-DXd (trastuzumab deruxtecan) after endocrine therapy failure."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Expansion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Mechanism of Action: ADC releases cytotoxic payload into HER2-low cells and neighboring tumor cells (bystander effect).",
+        "Trial Impact: DESTINY-Breast04 established HER2-low as a new actionable subset.",
+        "Toxicity: Monitor for interstitial lung disease (ILD), a class effect of ADCs."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Discussion Point: How does the concept of HER2 'low' challenge old binary HER2 classification?"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Case 4: HPV-Associated Oropharyngeal Cancer – Viral Oncogenesis"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Expanded Clinical Scenario"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Biopsy of a left tonsillar mass shows p16+ squamous cell carcinoma. HPV16 PCR confirms viral etiology."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Expansion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Staging: AJCC 8th edition separates HPV+ from HPV- HNSCC.",
+        "Prognosis: Favorable; many qualify for treatment de-intensification trials.",
+        "Biologic Insight: Viral E6/E7 inactivates tumor suppressors → carcinogenesis."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "What if HPV-negative SCC? Consider aggressive treatment and worse prognosis."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Case 5: BRAF-Mutant Melanoma – Resistance to Targeted Therapy"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Expanded Clinical Scenario"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Initial response to dabrafenib + trametinib is followed by relapse after 9 months."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Expansion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Next Steps: Resistance via NRAS mutation → re-biopsy or ctDNA.",
+        "Options: ICI (nivolumab + ipilimumab) if not previously given.",
+        "Clinical Note: Dual BRAF/MEK inhibition delays, but does not prevent, resistance."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Discussion Point: How might intermittent dosing or combination with ICI impact durability of response?"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Case 6: AML Relapse – Targeting Cancer Stem Cells"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Expanded Clinical Scenario"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Patient relapses with same immunophenotype, suggesting persistence of LSCs."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Expansion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Resistance Mechanism: LSCs in bone marrow niche evade chemotherapy.",
+        "Therapy: Venetoclax + hypomethylating agent targets BCL-2 overexpressed in LSCs.",
+        "Monitoring: Measurable residual disease (MRD) via flow cytometry."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "What if relapse with different mutations → clonal evolution, consider sequencing again."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Case 7: Glioblastoma – TME and Angiogenesis"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Expanded Clinical Scenario"
+    },
+    {
+      "type": "list",
+      "items": [
+        "MRI shows central necrosis, pseudopalisading cells on pathology."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Expansion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Biologic Insight: Hypoxia drives VEGF expression; irregular vessels impair therapy.",
+        "Current Role of Bevacizumab: Symptom palliation, not survival benefit.",
+        "Emerging: IDH mutation, MGMT methylation guide prognosis/therapy."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "What if MGMT promoter unmethylated → poor response to temozolomide."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Case 8: Prostate Cancer – Hormonal Resistance Evolution"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Expanded Clinical Scenario"
+    },
+    {
+      "type": "list",
+      "items": [
+        "New mets despite castrate testosterone → castration-resistant prostate cancer (CRPC)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Expansion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Mechanism: AR splice variants, gene amplifications → persistent AR signaling.",
+        "Management: Add darolutamide, consider PARP inhibitors if BRCA mutated.",
+        "Next-Gen Sequencing: Recommended at CRPC stage for actionable targets."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Discussion Point: Role of early intensification in hormone-sensitive disease?"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Case 9: NTRK Fusion Sarcoma – Tissue-Agnostic Precision Therapy"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Expanded Clinical Scenario"
+    },
+    {
+      "type": "list",
+      "items": [
+        "NGS reveals rare ETV6-NTRK3 fusion."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Expansion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Therapy: Larotrectinib or entrectinib (FDA-approved, regardless of histology).",
+        "Response: Often rapid and durable.",
+        "Challenge: Resistance mutations at kinase domain → next-gen TRK inhibitors."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Pearl: Molecular profiling should be routine in undifferentiated or rare cancers."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Case 10: T-Cell Exhaustion – Immunotherapy Failure"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Expanded Clinical Scenario"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Initial response to dual ICI followed by immune escape."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Expansion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Mechanism: Upregulation of alternate checkpoints (TIM-3, TIGIT).",
+        "Next Steps: Clinical trial enrollment or switch to VEGF + ICI combo (e.g., cabozantinib + nivolumab).",
+        "Immune Profiling: TIL density, TMB, and RNA signatures under evaluation."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "What if resistance develops via loss of neoantigen → need for personalized neoantigen vaccines."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "These cases highlight the complexity of oncologic care in the era of precision medicine. Integrating tumor biology with clinical presentation, biomarkers, and trial evidence is essential. Continued exposure to such cases prepares clinicians to navigate dynamic resistance landscapes and personalize therapies in an evolving therapeutic ecosystem."
+    }
+  ]
+}

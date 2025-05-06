@@ -1,3 +1,0 @@
-# Svc Syndrome
-
-Coming soon...

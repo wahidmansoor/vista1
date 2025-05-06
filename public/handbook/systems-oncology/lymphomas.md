@@ -1,3 +1,0 @@
-# Lymphomas
-
-Coming soon...

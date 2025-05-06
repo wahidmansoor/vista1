@@ -1,0 +1,239 @@
+{
+  "title": "Tumor Immune Evasion and Immunoediting",
+  "category": "Medical Oncology",
+  "section": "Cancer Immunology",
+  "summary": "Explores the mechanisms of tumor immune evasion and the immunoediting process, including clinical implications for immunotherapy.",
+  "author": "Dr. Oncology Specialist",
+  "lastUpdated": "2023-10-20T09:00:00Z",
+  "version": "1.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 20,
+    "keywords": ["immune evasion", "immunoediting", "checkpoint inhibitors", "tumor microenvironment"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Tumor Immune Evasion and Immunoediting"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumor cells are capable of avoiding immune detection and destruction through a process known as immune evasion. This ability plays a central role in carcinogenesis and the progression of malignancy. The concept of tumor immunoediting captures the dynamic interplay between tumors and the immune system across three evolutionary stages: elimination, equilibrium, and escape. Understanding these mechanisms is vital for advancing immunotherapies and improving clinical outcomes."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Tumor Immunoediting Phases"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Elimination"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Involves both innate and adaptive immune responses.",
+        "Cytotoxic T cells, NK cells, and macrophages recognize and destroy transformed cells.",
+        "Key mediators include IFN-γ, perforin, and granzyme."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Equilibrium"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tumor cells that survive elimination enter a dormant state.",
+        "Immune selection pressure favors variants with reduced immunogenicity.",
+        "Cells accumulate further mutations but are kept in check."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Escape"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Immune-resistant clones proliferate unchecked.",
+        "Tumors evade immune detection or actively suppress immune responses.",
+        "Leads to clinically detectable disease."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Mechanisms of Immune Evasion"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Reduced MHC Class I Expression"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumors downregulate MHC I surface expression. Prevents recognition by CD8+ cytotoxic T cells."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Immune Checkpoint Upregulation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumors express PD-L1 and PD-L2:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Bind PD-1 receptors on T cells → inhibit T-cell function.",
+        "Targeted by nivolumab, pembrolizumab, atezolizumab, etc."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "CTLA-4 upregulation competes with CD28 for co-stimulation:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Prevents T-cell activation.",
+        "Blocked by ipilimumab."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Immunosuppressive Secretions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumors and associated cells secrete:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "TGF-β: dampens cytotoxic T-cell activity.",
+        "VEGF: inhibits dendritic cell maturation."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Enhanced Regulatory T-cell Activity"
+    },
+    {
+      "type": "paragraph",
+      "text": "Promotes tolerance to tumor antigens. Limits effective immune surveillance."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Tumor Microenvironment (TME)"
+    },
+    {
+      "type": "paragraph",
+      "text": "The TME fosters immune evasion through:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Hypoxia: impairs immune cell function and promotes adenosine accumulation.",
+        "Fibrosis: creates a physical barrier to immune infiltration.",
+        "Immunosuppressive cells: including regulatory T cells and myeloid-derived suppressor cells (MDSCs)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Resistance to Immunotherapy"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Mechanisms of Resistance"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Loss of β2-microglobulin: impairs MHC I surface expression.",
+        "JAK1/2 mutations: disrupt interferon signaling.",
+        "Tumor heterogeneity: emergence of non-immunogenic clones."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Overcoming Resistance"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use of checkpoint inhibitors (PD-1/PD-L1 and CTLA-4 antibodies). Combination strategies:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ICIs with chemotherapy, radiation, or anti-VEGF agents.",
+        "Targeted therapies aimed at restoring antigen presentation."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Clinical Implications"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Approved Immunotherapies"
+    },
+    {
+      "type": "table",
+      "headers": ["Drug", "Target", "Indications"],
+      "rows": [
+        ["Ipilimumab", "CTLA-4", "Melanoma, RCC"],
+        ["Nivolumab", "PD-1", "NSCLC, melanoma, RCC"],
+        ["Pembrolizumab", "PD-1", "NSCLC, HNSCC, MSI-H tumors"],
+        ["Atezolizumab", "PD-L1", "NSCLC, urothelial carcinoma"],
+        ["Durvalumab", "PD-L1", "NSCLC"],
+        ["Avelumab", "PD-L1", "Merkel cell carcinoma, urothelial carcinoma"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Predictive Biomarkers"
+    },
+    {
+      "type": "list",
+      "items": [
+        "PD-L1 expression",
+        "Tumor mutation burden (TMB)",
+        "Microsatellite instability (MSI-H/dMMR)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumor immune evasion is a critical barrier to immune-mediated tumor clearance and therapy efficacy. The process of immunoediting shapes tumor evolution, allowing malignant cells to escape immune recognition. Advances in immunotherapy, particularly immune checkpoint blockade, have revolutionized oncology. However, understanding and overcoming immune resistance remain key to achieving sustained tumor control."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "When considering immunotherapy, always assess PD-L1 expression status and tumor mutation burden, as these can predict response to checkpoint inhibitors."
+    }
+  ]
+}

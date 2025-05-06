@@ -1,3 +1,0 @@
-# Gyn Cancers
-
-Coming soon...

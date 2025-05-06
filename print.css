@@ -1,0 +1,136 @@
+@media print {
+  /* Hide UI elements */
+  header, nav, footer, .sidebar, button {
+    display: none !important;
+  }
+
+  /* Reset page layout */
+  body {
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: black;
+    font-size: 12pt;
+  }
+
+  /* Content area */
+  .prose {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Headers */
+  h1 {
+    font-size: 24pt;
+    margin-bottom: 1cm;
+    page-break-after: avoid;
+  }
+
+  h2 {
+    font-size: 18pt;
+    margin-top: 1cm;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 14pt;
+    margin-top: 0.8cm;
+    page-break-after: avoid;
+  }
+
+  /* Links */
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  /* Show URLs after links */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Tables */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    page-break-inside: avoid;
+    margin: 1cm 0;
+  }
+
+  th, td {
+    border: 1px solid #999;
+    padding: 0.3cm;
+    text-align: left;
+  }
+
+  th {
+    background: #f0f0f0;
+  }
+
+  /* Clinical pearls and warnings */
+  blockquote, .warning {
+    border: 1px solid #999;
+    padding: 0.5cm;
+    margin: 0.8cm 0;
+    page-break-inside: avoid;
+  }
+
+  /* Glossary terms */
+  .glossary-term {
+    font-weight: bold;
+  }
+
+  /* Page breaks */
+  h1, h2, h3, table, figure, img {
+    page-break-before: auto;
+    page-break-after: auto;
+    page-break-inside: avoid;
+  }
+
+  /* Print specific elements */
+  .print-header {
+    display: block;
+    text-align: center;
+    margin-bottom: 1cm;
+    border-bottom: 1pt solid #999;
+    padding-bottom: 0.5cm;
+  }
+
+  .print-footer {
+    display: block;
+    text-align: center;
+    margin-top: 1cm;
+    border-top: 1pt solid #999;
+    padding-top: 0.5cm;
+    font-size: 9pt;
+  }
+
+  /* Ensure good contrast for dark mode content */
+  .dark\:prose-invert {
+    color: black !important;
+  }
+
+  .dark\:prose-invert h1,
+  .dark\:prose-invert h2,
+  .dark\:prose-invert h3,
+  .dark\:prose-invert h4,
+  .dark\:prose-invert h5,
+  .dark\:prose-invert h6 {
+    color: black !important;
+  }
+
+  /* Page margins and size */
+  @page {
+    margin: 2cm;
+    size: A4;
+  }
+
+  /* Remove background colors and gradients */
+  * {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}

@@ -1,3 +1,0 @@
-# Febrile Neutropenia
-
-Coming soon...

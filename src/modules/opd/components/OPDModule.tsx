@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React from "react";
+import { Tab } from "@headlessui/react";
 import {
   UserCheck,
   ScanLine,
@@ -12,8 +13,7 @@ import PathwayCard from "../cards/PathwayCard";
 import ScreeningCard from "../cards/ScreeningCard";
 import ReferralCard from "../cards/ReferralCard";
 import FollowUpCard from "../cards/FollowUpCard";
-
-import AISummary from "../components/AISummaryPlaceholder";
+import AISummary from "./AISummary";
 
 import PatientEvaluation from "../patient-evaluation/PatientEvaluation";
 import DiagnosticPathways from "../diagnostic-pathways/DiagnosticPathways";
@@ -22,69 +22,86 @@ import ReferralGuidelines from "../referral-guidelines/ReferralGuidelines";
 import FollowUpOncology from "../follow-up-oncology/FollowUpOncology";
 
 const tabs = [
-  { label: "Patient Evaluation", icon: UserCheck },
-  { label: "Diagnostic Pathways", icon: ScanLine },
-  { label: "Cancer Screening", icon: ShieldCheck },
-  { label: "Referral Guidelines", icon: Send },
-  { label: "Follow-Up Oncology", icon: CalendarClock },
+  { 
+    label: "Patient Evaluation", 
+    icon: UserCheck, 
+    component: PatientEvaluation, 
+    card: EvaluationCard 
+  },
+  { 
+    label: "Diagnostic Pathways", 
+    icon: ScanLine, 
+    component: DiagnosticPathways, 
+    card: PathwayCard 
+  },
+  { 
+    label: "Cancer Screening", 
+    icon: ShieldCheck, 
+    component: CancerScreening, 
+    card: ScreeningCard 
+  },
+  { 
+    label: "Referral Guidelines", 
+    icon: Send, 
+    component: ReferralGuidelines, 
+    card: ReferralCard 
+  },
+  { 
+    label: "Follow-Up Oncology", 
+    icon: CalendarClock, 
+    component: FollowUpOncology, 
+    card: FollowUpCard 
+  },
 ];
 
-export default function OPDModule() {
-  const [activeTab, setActiveTab] = useState("Patient Evaluation");
+const OPDModule: React.FC = () => {
+  // Mock patient data for AI summary demonstration
+  const mockPatientData = {
+    age: 58,
+    gender: "female",
+    chiefComplaint: "Persistent cough and weight loss",
+    riskFactors: ["Smoking history", "Family history of lung cancer"]
+  };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-        🧑‍⚕️ Oncology OPD Module
+    <div>
+      <h1 className="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-2">
+        🏥 Oncology OPD Module
       </h1>
 
-      <div className="flex gap-3 mb-6 overflow-x-auto">
-        {tabs.map(({ label, icon: Icon }) => (
-          <button
-            key={label}
-            onClick={() => setActiveTab(label)}
-            className={`flex items-center gap-2 px-4 py-2 rounded shadow-sm text-sm font-medium ${
-              activeTab === label
-                ? "bg-purple-600 text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            <Icon className="w-4 h-4" />
-            {label}
-          </button>
-        ))}
-      </div>
-
-      {activeTab === "Patient Evaluation" && (
-        <EvaluationCard>
-          <PatientEvaluation />
-          <AISummary />
-        </EvaluationCard>
-      )}
-      {activeTab === "Diagnostic Pathways" && (
-        <PathwayCard>
-          <DiagnosticPathways />
-          <AISummary />
-        </PathwayCard>
-      )}
-      {activeTab === "Cancer Screening" && (
-        <ScreeningCard>
-          <CancerScreening />
-          <AISummary />
-        </ScreeningCard>
-      )}
-      {activeTab === "Referral Guidelines" && (
-        <ReferralCard>
-          <ReferralGuidelines />
-          <AISummary />
-        </ReferralCard>
-      )}
-      {activeTab === "Follow-Up Oncology" && (
-        <FollowUpCard>
-          <FollowUpOncology />
-          <AISummary />
-        </FollowUpCard>
-      )}
+      <Tab.Group>
+        <Tab.List className="flex space-x-2 mb-8">
+          {tabs.map(({ label, icon: Icon }) => (
+            <Tab
+              key={label}
+              className={({ selected }) => `
+                opd-tab flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all
+                ${
+                  selected
+                    ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md scale-[1.02]"
+                    : "bg-white text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                }
+              `}
+            >
+              <Icon className="w-4 h-4" />
+              {label}
+            </Tab>
+          ))}
+        </Tab.List>
+        
+        <Tab.Panels>
+          {tabs.map(({ label, component: Component, card: Card }) => (
+            <Tab.Panel key={label}>
+              <Card>
+                <Component />
+                <AISummary patientData={mockPatientData} isEnabled={true} />
+              </Card>
+            </Tab.Panel>
+          ))}
+        </Tab.Panels>
+      </Tab.Group>
     </div>
   );
-}
+};
+
+export default OPDModule;

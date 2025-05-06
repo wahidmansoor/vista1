@@ -1,3 +1,0 @@
-# Gi Cancers
-
-Coming soon...

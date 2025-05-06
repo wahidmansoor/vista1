@@ -1,3 +1,0 @@
-# Spinal Compression
-
-Coming soon...

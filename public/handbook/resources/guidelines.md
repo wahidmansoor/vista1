@@ -1,3 +1,0 @@
-# Guidelines
-
-Coming soon...

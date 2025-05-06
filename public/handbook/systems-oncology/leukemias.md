@@ -1,3 +1,0 @@
-# Leukemias
-
-Coming soon...

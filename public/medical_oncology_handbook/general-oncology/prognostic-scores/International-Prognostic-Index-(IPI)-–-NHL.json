@@ -1,0 +1,298 @@
+{
+  "title": "Prognostic Scores: International Prognostic Index (IPI) – Non-Hodgkin Lymphoma (NHL)",
+  "category": "Hematologic Malignancies",
+  "section": "Lymphoma",
+  "summary": "Comprehensive guide to the International Prognostic Index (IPI) and its modern variants for risk stratification in aggressive non-Hodgkin lymphomas.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-11-20T00:00:00Z",
+  "version": "2.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 12,
+    "relatedTopics": [
+      "Diffuse Large B-Cell Lymphoma Management",
+      "Lymphoma Staging Systems",
+      "Molecular Prognostics in Hematologic Malignancies"
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Prognostic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Topic 3: International Prognostic Index (IPI) – Non-Hodgkin Lymphoma (NHL)"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The International Prognostic Index (IPI) is the most established clinical risk stratification tool for aggressive non-Hodgkin lymphomas (NHLs), especially diffuse large B-cell lymphoma (DLBCL). It predicts overall survival and treatment response, allowing oncologists to personalize therapy and guide patient counseling."
+    },
+    {
+      "type": "paragraph",
+      "text": "Despite being developed over 30 years ago, IPI remains clinically relevant, especially in settings lacking genomic testing or advanced imaging. Modern adaptations—R-IPI, NCCN-IPI, and biological IPI—have extended its value in the era of rituximab and beyond."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Historical Context"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Introduced in 1993 by an international collaboration using outcomes data from >2000 patients treated with CHOP-like chemotherapy.",
+        "The IPI aimed to simplify risk prediction for DLBCL and other aggressive NHLs using five easily obtainable clinical variables.",
+        "Since then, it has been refined to match therapeutic advances (e.g., R-CHOP, PET-CT staging)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Classic IPI: Five Risk Factors"
+    },
+    {
+      "type": "paragraph",
+      "text": "Each variable scores 1 point, with a total possible score from 0–5."
+    },
+    {
+      "type": "table",
+      "headers": ["Risk Factor", "Threshold"],
+      "rows": [
+        ["Age", "> 60 years"],
+        ["ECOG Performance Status", "≥ 2"],
+        ["Serum LDH", "Above upper limit"],
+        ["Ann Arbor Stage", "III or IV"],
+        ["Extranodal Sites Involved", "More than 1"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Risk Group Classification"
+    },
+    {
+      "type": "table",
+      "headers": ["IPI Score", "Risk Group", "5-Year OS (Pre-Rituximab)"],
+      "rows": [
+        ["0–1", "Low", "~73%"],
+        ["2", "Low-Intermediate", "~51%"],
+        ["3", "High-Intermediate", "~43%"],
+        ["4–5", "High", "~26%"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Limitation: Original IPI does not account for biologic heterogeneity, rituximab-era outcomes, or PET-based response metrics."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Revised IPI (R-IPI)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Developed to reflect improved survival in the R-CHOP era (post-rituximab), it simplifies stratification into three groups:"
+    },
+    {
+      "type": "table",
+      "headers": ["Group", "IPI Score", "4-Year OS"],
+      "rows": [
+        ["Very Good", "0", "~94%"],
+        ["Good", "1–2", "~79%"],
+        ["Poor", "3–5", "~55%"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "R-IPI is commonly used in clinical practice for DLBCL treated with immunochemotherapy."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. NCCN-IPI (2014)"
+    },
+    {
+      "type": "paragraph",
+      "text": "A further refinement developed by the National Comprehensive Cancer Network (NCCN):"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Stratifies age more precisely (e.g., <40, 41–60, 61–75, >75).",
+        "Highlights high-risk extranodal involvement (e.g., CNS, bone marrow, GI tract, liver).",
+        "Improves prognostic accuracy in rituximab-treated cohorts."
+      ]
+    },
+    {
+      "type": "table",
+      "headers": ["NCCN-IPI Score", "Risk Group", "5-Year OS"],
+      "rows": [
+        ["0–1", "Low", "~96%"],
+        ["2–3", "Low-Intermediate", "~82%"],
+        ["4–5", "High-Intermediate", "~64%"],
+        ["6–8", "High", "~33%"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Clinical Applications of IPI and Its Derivatives"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "✅ Widely used for:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Initial risk stratification",
+        "Identifying candidates for consolidative radiation or stem cell transplant",
+        "Decisions on CNS prophylaxis (e.g., in cases of elevated LDH and extranodal involvement)",
+        "Stratification in clinical trials"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "❌ Not used for:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Indolent lymphomas (e.g., follicular lymphoma)",
+        "Primary CNS lymphoma",
+        "Peripheral T-cell lymphoma (distinct biology and natural history)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Biological IPI and Molecular Refinement"
+    },
+    {
+      "type": "paragraph",
+      "text": "While still under investigation, the biological IPI (B-IPI) aims to enhance prognostication through:"
+    },
+    {
+      "type": "table",
+      "headers": ["Biomarker", "Prognostic Insight"],
+      "rows": [
+        ["MYC, BCL2, BCL6", "Double-hit lymphomas → high risk"],
+        ["Cell of Origin (GCB vs ABC)", "Distinct outcomes, influences therapy"],
+        ["PET-CT Deauville Score", "Dynamic response prediction"],
+        ["Gene expression profiling", "Improved subtype precision"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Integrated models combining clinical + imaging + molecular data are the future of lymphoma prognostics."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. IPI vs Interim PET/CT"
+    },
+    {
+      "type": "table",
+      "headers": ["Modality", "Purpose", "Use Case"],
+      "rows": [
+        ["IPI", "Baseline static risk", "Initial treatment decisions"],
+        ["Interim PET/CT", "Dynamic response prediction", "Adapt treatment based on early response"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Combining IPI and PET improves risk-adaptive treatment strategies, especially in trials."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Role in the CAR-T and Novel Therapy Era"
+    },
+    {
+      "type": "paragraph",
+      "text": "Even in the age of CAR-T:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "IPI remains relevant pre-CAR-T, guiding patient selection, bridging therapy, and post-infusion expectations.",
+        "Novel scores (e.g., CARTITUDE, ZUMA-derived models) incorporate IPI alongside inflammatory and immune markers."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Limitations and Updates"
+    },
+    {
+      "type": "table",
+      "headers": ["Challenge", "Strategy"],
+      "rows": [
+        ["Pre-rituximab outcome bias", "Use R-IPI or NCCN-IPI"],
+        ["Non-uniform extranodal risk weighting", "NCCN-IPI addresses this"],
+        ["Exclusion of genomic profiling", "Consider adding NGS/IHC data"],
+        ["Inapplicability to some NHL subtypes", "Use disease-specific tools"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "12. Comparison Summary: IPI Variants"
+    },
+    {
+      "type": "table",
+      "headers": ["Score", "Key Features", "Best Use Case"],
+      "rows": [
+        ["IPI", "5 clinical variables", "Legacy tool, resource-limited settings"],
+        ["R-IPI", "Simplified 3-tier risk model", "Post-rituximab, routine clinical use"],
+        ["NCCN-IPI", "Granular age and site data", "High-precision DLBCL prognostication"],
+        ["B-IPI", "Includes biologic markers, GEP, PET data", "Precision oncology and research use"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "13. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "The IPI remains the cornerstone of risk stratification in aggressive NHL. While newer models improve accuracy, its simplicity and historical utility make it indispensable. Clinicians must now adapt IPI-based frameworks with:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Biologic markers",
+        "Imaging data",
+        "Patient-specific comorbidities and goals"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This integrated approach ensures personalized therapy and better-informed patient discussions."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Clinical Takeaways"
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Use classic IPI for initial risk stratification in DLBCL",
+        "Prefer R-IPI or NCCN-IPI for patients receiving rituximab-containing regimens",
+        "Consider molecular testing (MYC/BCL2/BCL6) for high-risk cases",
+        "Combine with interim PET/CT for dynamic risk assessment",
+        "IPI remains relevant even in novel therapy paradigms like CAR-T"
+      ]
+    }
+  ]
+}

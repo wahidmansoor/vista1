@@ -1,46 +1,154 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-/* ========== PRINT ONLY MARKDOWN CONTENT ========== */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 262.1 83.3% 57.8%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 263.4 70% 50.4%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
 @media print {
-  body * {
-    visibility: hidden !important;
+  /* Hide navigation elements */
+  nav, 
+  header,
+  .sidebar,
+  button,
+  .print-hide {
+    display: none !important;
   }
 
-  .markdown-content,
-  .markdown-content * {
-    visibility: visible !important;
+  /* Ensure proper page breaks */
+  h1, h2 {
+    page-break-before: always;
   }
 
-  .markdown-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 2rem;
-    background: white;
+  h3, h4 {
+    page-break-after: avoid;
   }
-}
 
-/* ========== MARKDOWN TABLE ENHANCEMENTS ========== */
-.prose table {
-  @apply w-full border border-gray-300 rounded;
-}
+  /* No page break inside important elements */
+  pre, blockquote, tr, img, ul, ol {
+    page-break-inside: avoid;
+  }
 
-.prose thead {
-  @apply bg-gray-100;
-}
+  /* Reset background colors for better printing */
+  * {
+    background-color: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
 
-.prose th,
-.prose td {
-  @apply border px-4 py-2 text-sm text-gray-800;
-}
+  /* Enhance table readability */
+  table {
+    border-collapse: collapse !important;
+  }
 
-.prose tr:nth-child(even) {
-  @apply bg-gray-50;
-}
+  th, td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+  }
 
-.prose tr:hover {
-  @apply bg-blue-50;
+  /* Show URLs after links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.875em;
+    font-style: italic;
+  }
+
+  /* Adjust margins and typography */
+  @page {
+    margin: 2cm;
+  }
+
+  body {
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Enhance clinical content readability */
+  blockquote {
+    margin: 2em 0 !important;
+    padding: 1em !important;
+    border-left: 3px solid #666 !important;
+  }
+
+  /* Clinical terminology glossary */
+  .glossary-term {
+    text-decoration: underline dotted !important;
+  }
+
+  /* Ensure code blocks are readable */
+  pre, code {
+    border: 1px solid #ddd !important;
+    page-break-inside: avoid;
+    white-space: pre-wrap !important;
+  }
 }

@@ -1,3 +1,0 @@
-# Hypercalcemia
-
-Coming soon...

@@ -1,3 +1,0 @@
-# Acute Chronic
-
-Coming soon...

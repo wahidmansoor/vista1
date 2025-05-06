@@ -1,3 +1,0 @@
-# Lung Cancer
-
-Coming soon...

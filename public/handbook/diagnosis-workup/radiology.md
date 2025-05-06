@@ -1,3 +1,0 @@
-# Radiology
-
-Coming soon...

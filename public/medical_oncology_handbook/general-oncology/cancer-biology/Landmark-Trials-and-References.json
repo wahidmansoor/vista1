@@ -1,0 +1,300 @@
+{
+  "title": "Landmark Trials and References",
+  "category": "Oncology Research",
+  "section": "Clinical Evidence",
+  "summary": "Key clinical trials that have defined modern oncology practice, organized by therapeutic domain with biological rationale and clinical impact.",
+  "author": "Oncology Research Team",
+  "lastUpdated": "2024-03-05T11:20:00Z",
+  "version": "1.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 30,
+    "targetAudience": ["Oncologists", "Researchers", "Fellows"],
+    "educationalLevel": "Advanced",
+    "keywords": [
+      "clinical trials",
+      "landmark studies",
+      "targeted therapy",
+      "immunotherapy",
+      "trial design"
+    ],
+    "references": [
+      "New England Journal of Medicine",
+      "Journal of Clinical Oncology",
+      "Lancet Oncology"
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Landmark Trials and References"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Landmark oncology trials define the current standards of cancer care and represent the crucial bridge between molecular discoveries and clinical practice. These trials not only validate diagnostic markers and therapeutic strategies but also refine risk stratification, identify resistance mechanisms, and inform guideline development. In this expanded section, we align key trials with their biological rationale, therapeutic impact, and real-world application, organized by therapeutic domain."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Oncogene-Targeted Therapies"
+    },
+    {
+      "type": "table",
+      "headers": ["Trial", "Cancer Type", "Target", "Key Outcome", "Impact"],
+      "rows": [
+        [
+          "IPASS (2009)",
+          "NSCLC (Asian, non-smokers)",
+          "EGFR mutation",
+          "Gefitinib superior to chemo in EGFR+ patients",
+          "First major step toward personalized lung cancer therapy"
+        ],
+        [
+          "BRIM-3 (2011)",
+          "Melanoma",
+          "BRAF V600E",
+          "Vemurafenib improved OS vs. dacarbazine",
+          "Validated molecular targeting in solid tumors"
+        ],
+        [
+          "CLEOPATRA (2012)",
+          "HER2+ breast cancer",
+          "HER2",
+          "Dual HER2 blockade extended OS and PFS",
+          "Foundation for trastuzumab + pertuzumab"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Immunotherapy Milestones"
+    },
+    {
+      "type": "table",
+      "headers": ["Trial", "Indication", "Checkpoint Axis", "Key Results", "Clinical Influence"],
+      "rows": [
+        [
+          "CheckMate 067 (2015)",
+          "Advanced melanoma",
+          "PD-1 + CTLA-4",
+          "Combo improved 5-yr OS (>50%)",
+          "Dual checkpoint blockade standard-of-care"
+        ],
+        [
+          "KEYNOTE-024 (2016)",
+          "PD-L1 ≥50% NSCLC",
+          "PD-1",
+          "Pembrolizumab superior to platinum chemo",
+          "First-line monotherapy in PD-L1-high NSCLC"
+        ],
+        [
+          "IMpower150 (2018)",
+          "NSCLC with liver mets",
+          "PD-L1 + VEGF",
+          "Benefit in PD-L1-low, liver mets subgroup",
+          "Immuno-angiogenesis synergy demonstrated"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Resistance & Monitoring Trials"
+    },
+    {
+      "type": "table",
+      "headers": ["Trial", "Focus", "Mechanism Explored", "Takeaway"],
+      "rows": [
+        [
+          "AURA3 (2016)",
+          "EGFR-mutated NSCLC (T790M+)",
+          "Acquired resistance",
+          "Osimertinib improved PFS; CNS penetration"
+        ],
+        [
+          "TRACERx (Ongoing)",
+          "Longitudinal NSCLC",
+          "Clonal evolution, ctDNA",
+          "Demonstrated role of real-time resistance tracking via liquid biopsy"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. DNA Repair & PARP Inhibition"
+    },
+    {
+      "type": "table",
+      "headers": ["Trial", "Cancer Type", "Mutation", "Therapy", "Outcome"],
+      "rows": [
+        [
+          "OlympiAD (2017)",
+          "BRCA+ breast cancer",
+          "BRCA1/2",
+          "Olaparib",
+          "Improved PFS, fewer side effects vs chemo"
+        ],
+        [
+          "PROfound (2020)",
+          "Prostate cancer (HRD+)",
+          "BRCA/ATM",
+          "Olaparib",
+          "PFS benefit in BRCA subgroup"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Hormonal Therapy Trials"
+    },
+    {
+      "type": "table",
+      "headers": ["Trial", "Population", "Treatment Strategy", "Impact"],
+      "rows": [
+        [
+          "ATAC (2002)",
+          "Postmenopausal ER+ breast cancer",
+          "Anastrozole vs tamoxifen",
+          "AIs superior in DFS, fewer thrombotic events"
+        ],
+        [
+          "LATITUDE (2017)",
+          "High-risk mCRPC",
+          "Abiraterone + ADT",
+          "Early intensification improves OS"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Screening & Prevention Studies"
+    },
+    {
+      "type": "table",
+      "headers": ["Trial", "Domain", "Key Outcome"],
+      "rows": [
+        [
+          "FUTURE I & II (2007)",
+          "HPV prevention",
+          "HPV 16/18 vaccine prevented >90% of cervical precancers"
+        ],
+        [
+          "NLST (2011)",
+          "Lung cancer screening",
+          "20% mortality reduction with low-dose CT"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Angiogenesis and TME-Targeting Trials"
+    },
+    {
+      "type": "table",
+      "headers": ["Trial", "Cancer Type", "Therapy", "Insight"],
+      "rows": [
+        [
+          "E2100 (2007)",
+          "Breast cancer",
+          "Paclitaxel ± bevacizumab",
+          "PFS gain without OS benefit → biomarker need emphasized"
+        ],
+        [
+          "AVAglio (2014)",
+          "Glioblastoma",
+          "Bevacizumab + standard",
+          "Improved radiographic PFS but not OS → raised questions on anti-VEGF strategy"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Conceptual Foundations & Ongoing Initiatives"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Reviews & Frameworks"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Hallmarks of Cancer (Hanahan & Weinberg, 2000 → 2022): Expanded to include phenotypic plasticity, non-mutational epigenetics, and senescence",
+        "The Cancer Genome Atlas (TCGA): Multi-omic characterization of >30 tumor types",
+        "AACR GENIE Project: Clinico-genomic integration across institutions"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Guidelines and Resources"
+    },
+    {
+      "type": "list",
+      "items": [
+        "NCCN: Authoritative clinical decision algorithms",
+        "ASCO/ESMO: Consensus guidelines incorporating trial data and real-world outcomes"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Trial Design and Methodological Insights"
+    },
+    {
+      "type": "table",
+      "headers": ["Design Principle", "Application", "Example"],
+      "rows": [
+        [
+          "Randomized Control Trial (RCT)",
+          "Gold standard for causality",
+          "KEYNOTE series"
+        ],
+        [
+          "Basket Trial",
+          "One biomarker across tumor types",
+          "NTRK fusion trials"
+        ],
+        [
+          "Umbrella Trial",
+          "Multiple biomarkers within one cancer",
+          "Lung-MAP (NSCLC umbrella study)"
+        ],
+        [
+          "Adaptive Design",
+          "Protocol adjusts based on interim data",
+          "I-SPY trials (breast cancer)"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "See [AMBOSS: Epidemiology & Clinical Trials](https://www.amboss.com/us/knowledge/epidemiology?utm_medium=chatgpt-plugin&utm_source=chatgpt) for detailed trial design phases."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "Landmark trials are the milestones of translational oncology. By aligning biological discoveries with trial outcomes, they validate treatment strategies, shape guidelines, and identify new questions. Understanding trial design and context is essential not only for clinicians but also for those interpreting the next generation of data in precision medicine."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "When evaluating trial results, always consider the patient population characteristics and whether they match your clinical scenario - efficacy in highly selected trial patients may not translate directly to real-world practice."
+    }
+  ]
+}

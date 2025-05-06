@@ -1,0 +1,379 @@
+{
+  "title": "Prognostic Scores: IPSS – International Prognostic Scoring System – Myelodysplastic Syndromes (MDS)",
+  "category": "Hematologic Malignancies",
+  "section": "Myelodysplastic Syndromes",
+  "summary": "Comprehensive guide to IPSS, IPSS-R and IPSS-M prognostic scoring systems for myelodysplastic syndromes, including clinical applications and molecular integration.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-12-05T00:00:00Z",
+  "version": "2.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 15,
+    "relatedTopics": [
+      "Molecular Profiling in MDS",
+      "MDS Treatment Algorithms",
+      "Transplant Decision Making in MDS"
+    ],
+    "externalResources": [
+      {
+        "name": "IPSS-M Online Calculator",
+        "url": "https://mds-risk-model.com"
+      }
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Prognostic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Topic 6: IPSS – International Prognostic Scoring System – Myelodysplastic Syndromes (MDS)"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Myelodysplastic syndromes (MDS) are a clonal disorder of hematopoietic stem cells, characterized by:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Ineffective hematopoiesis leading to peripheral cytopenias",
+        "Bone marrow dysplasia",
+        "Genomic instability with diverse mutational profiles",
+        "Potential for progression to acute myeloid leukemia (AML)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Given the high heterogeneity in clinical behavior—from indolent cytopenias to rapidly progressive disease—risk stratification tools are critical for:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Estimating overall survival (OS) and AML transformation risk",
+        "Guiding treatment intensity",
+        "Determining transplant timing",
+        "Structuring clinical trial enrollment"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Prognostic scoring systems have evolved over decades, transitioning from morphology-based models to molecularly integrated algorithms like IPSS-M."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Evolution of IPSS Models"
+    },
+    {
+      "type": "table",
+      "headers": ["Model", "Introduced", "Key Innovations"],
+      "rows": [
+        ["IPSS", "1997", "First international standard; 3 parameters (cytopenias, blasts, cytogenetics)"],
+        ["IPSS-R", "2012", "Refined cytogenetics (5-tier), continuous hematologic data, improved risk tiers"],
+        ["IPSS-M", "2022", "Integration of 31 gene mutations via NGS; advanced risk modeling"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "IPSS-M represents the next generation of personalized medicine in MDS care, enabling a biologically driven approach."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. IPSS (1997): Classic Model"
+    },
+    {
+      "type": "paragraph",
+      "text": "The original IPSS was based on clinical and pathologic parameters at diagnosis:"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Variables:"
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Bone marrow blasts: <5%, 5–10%, 11–20%, 21–30%",
+        "Cytogenetics (Good, Intermediate, Poor)",
+        "Number of cytopenias (Hgb <10 g/dL, ANC <1800/μL, Platelets <100k/μL)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Risk Stratification:"
+    },
+    {
+      "type": "table",
+      "headers": ["Score", "Risk Group", "Median OS", "25% AML Transformation Time"],
+      "rows": [
+        ["0", "Low", "~5.7 years", "~9 years"],
+        ["0.5–1.0", "Int-1", "~3.5 years", "~3.3 years"],
+        ["1.5–2.0", "Int-2", "~1.2 years", "~1.1 years"],
+        ["≥2.5", "High", "~0.4 years", "~0.2 years"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Widely used for transplant decisions and early treatment referral in the pre-molecular era."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. IPSS-R (2012): Revised System"
+    },
+    {
+      "type": "paragraph",
+      "text": "The IPSS-R used data from >7,000 patients to enhance prognostic accuracy."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Improvements:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "More granular cytogenetic risk classification:",
+        "5 categories: Very Good, Good, Intermediate, Poor, Very Poor",
+        "Continuous scoring of:",
+        "Hemoglobin",
+        "Platelet count",
+        "ANC",
+        "Blast percentage",
+        "Expanded risk groups: Very Low to Very High"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "IPSS-R Risk Groups:"
+    },
+    {
+      "type": "table",
+      "headers": ["Risk Group", "Score Range", "Median OS (yrs)", "5-Year AML Risk"],
+      "rows": [
+        ["Very Low", "≤1.5", ">8.8", "~3%"],
+        ["Low", ">1.5–3.0", "~5.3", "~9%"],
+        ["Intermediate", ">3.0–4.5", "~3.0", "~20%"],
+        ["High", ">4.5–6.0", "~1.6", "~35%"],
+        ["Very High", ">6.0", "~0.8", "~50%"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "IPSS-R is the most widely used clinical tool in daily practice and trials."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. IPSS-M (2022): Molecular Model"
+    },
+    {
+      "type": "paragraph",
+      "text": "The IPSS-M reflects the current era of molecular oncology, integrating 31 prognostic gene mutations derived from next-generation sequencing (NGS) data."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Features:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Includes all IPSS-R parameters",
+        "Adds mutation status for genes such as:"
+      ]
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "TP53, SF3B1, ASXL1, SRSF2, EZH2, RUNX1, ETV6, NRAS"
+      ]
+    },
+    {
+      "type": "list",
+      "items": [
+        "Stratifies into 6 risk groups (Very Low to Very High)",
+        "Provides superior discrimination of OS and AML progression risk"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Why IPSS-M matters:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Detects poor prognosis even in 'low-risk' cytogenetic profiles (e.g., TP53 mutations)",
+        "Improves identification of transplant candidates",
+        "Available via online calculator: mds-risk-model.com"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. IPSS in Clinical Practice"
+    },
+    {
+      "type": "table",
+      "headers": ["Application Area", "Role of IPSS-R/IPSS-M"],
+      "rows": [
+        ["Diagnosis", "Sets prognosis and informs need for active treatment"],
+        ["ESA eligibility", "IPSS-R Very Low/Low benefit most"],
+        ["Transplant decisions", "IPSS-R High or IPSS-M High/Very High → early referral"],
+        ["Clinical trials", "Defines inclusion/exclusion criteria, subgroup stratification"],
+        ["HMA use", "Common in Intermediate–Very High groups"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "In resource-limited settings, IPSS-R remains the practical standard due to limited access to NGS."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Side-by-Side Comparison of Models"
+    },
+    {
+      "type": "table",
+      "headers": ["Characteristic", "IPSS (1997)", "IPSS-R (2012)", "IPSS-M (2022)"],
+      "rows": [
+        ["Cytogenetic Groups", "3", "5", "5"],
+        ["Cytopenia Handling", "Binary", "Continuous", "Continuous"],
+        ["Molecular Input", "❌", "❌", "✅ (31 genes)"],
+        ["Risk Groups", "4", "5", "6"],
+        ["AML Risk Accuracy", "Low", "Moderate", "High"],
+        ["Real-World Use", "Historic", "Clinical standard", "Emerging / high-resource centers"],
+        ["Decision Support", "Basic", "Improved", "Precision-driven"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Limitations and Practical Challenges"
+    },
+    {
+      "type": "table",
+      "headers": ["Limitation", "Commentary"],
+      "rows": [
+        ["Access to NGS", "IPSS-M not feasible in all clinical environments"],
+        ["Static Models", "IPSS systems use diagnosis-only data, not dynamic status"],
+        ["No comorbidity adjustment", "Doesn't factor in age, frailty, cardiac/renal disease"],
+        ["Interpretation variability", "Lab values and marrow estimates may differ by institution"],
+        ["Limited pediatric use", "Validated only in adults; pediatric MDS requires separate tools"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Complementary Tools for Full Risk Assessment"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Use Case"],
+      "rows": [
+        ["HCT-CI (comorbidity index)", "Transplant risk and mortality post-HSCT"],
+        ["IMWG Frailty Index", "Tailors therapy intensity for elderly MDS"],
+        ["MRD testing (via flow cytometry/NGS)", "Predicts relapse post-treatment/transplant"],
+        ["ELN Guidelines", "Recommend IPSS-R/IPSS-M for front-line staging"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "A multimodal approach using IPSS-M, comorbidity scores, and MRD is becoming standard in specialized centers."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Management by Risk Category"
+    },
+    {
+      "type": "table",
+      "headers": ["IPSS-M / IPSS-R Risk", "Management Strategy"],
+      "rows": [
+        ["Very Low / Low", "Supportive care, ESAs, lenalidomide (del(5q)), monitor progression"],
+        ["Intermediate", "Consider azacitidine/decitabine or transplant (if fit)"],
+        ["High / Very High", "Prompt HMA therapy, transplant referral, clinical trial enrollment"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Drug Options by Setting:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ESAs (EPO, darbepoetin) – first-line for anemia in low-risk",
+        "Lenalidomide – especially effective in isolated del(5q) MDS",
+        "Luspatercept – approved for ring sideroblast-associated anemia",
+        "Azacitidine/Decitabine – HMA standard for high-risk patients",
+        "ATG + Cyclosporine – for hypoplastic or autoimmune-associated MDS"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Only allogeneic HSCT offers a potential cure, but it's reserved for select, fit patients."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "The International Prognostic Scoring System (IPSS) and its successors, IPSS-R and IPSS-M, form the cornerstone of risk-based management in MDS."
+    },
+    {
+      "type": "list",
+      "items": [
+        "IPSS: Pioneering model, still referenced but outdated.",
+        "IPSS-R: Clinical standard, widely adopted and validated.",
+        "IPSS-M: Molecularly integrated, allows precision risk stratification, but requires NGS access."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key advantages of modern systems:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Better discrimination of survival outcomes",
+        "More accurate AML transformation prediction",
+        "Improved ability to select patients for transplant or clinical trials"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "As genomic testing becomes routine and dynamic markers like MRD are integrated, future scoring systems will likely evolve into adaptive, AI-supported tools guiding real-time decision-making in MDS care."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Implementation Guide"
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Use IPSS-R as baseline risk assessment for all new MDS diagnoses",
+        "Consider IPSS-M testing for patients with discordant features or transplant candidates",
+        "Reassess risk status at progression or treatment failure",
+        "Combine with comorbidity assessment for treatment decisions",
+        "Document IPSS score in all MDS patient records for trial eligibility"
+      ]
+    }
+  ]
+}

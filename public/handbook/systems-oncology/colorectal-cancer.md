@@ -1,3 +1,0 @@
-# Colorectal Cancer
-
-Coming soon...

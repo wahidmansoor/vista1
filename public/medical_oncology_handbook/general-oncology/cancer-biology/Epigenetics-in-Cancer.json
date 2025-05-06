@@ -1,0 +1,406 @@
+{
+  "title": "Epigenetics in Cancer",
+  "category": "Molecular Biology",
+  "section": "Cancer Biology",
+  "summary": "Comprehensive overview of epigenetic mechanisms in cancer including DNA methylation, histone modifications, noncoding RNAs, and their clinical applications in diagnosis and therapy.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-11-20T00:00:00Z",
+  "version": "1.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 45,
+    "complexityLevel": "Advanced"
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Epigenetics in Cancer"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Epigenetics encompasses heritable yet reversible modifications to gene expression that do not alter the underlying DNA sequence. These modifications orchestrate chromatin structure and accessibility, thereby regulating transcriptional activity. In cancer, aberrant epigenetic programming is not merely a consequence of oncogenesis—it actively drives tumor initiation, progression, and resistance to therapy. Unlike genetic mutations, epigenetic alterations are reversible, making them attractive diagnostic markers and therapeutic targets."
+    },
+    {
+      "type": "list",
+      "items": [
+        "DNA methylation",
+        "Histone modifications",
+        "Chromatin remodeling",
+        "Noncoding RNAs",
+        "Genomic imprinting"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These mechanisms collectively reshape the transcriptional landscape of cancer cells, silencing tumor suppressor genes and activating oncogenic programs."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. DNA Methylation in Cancer"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Mechanism"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Occurs at cytosines within CpG dinucleotides, especially in promoter-associated CpG islands.",
+        "DNA methyltransferases (DNMT1, DNMT3A/B) catalyze the addition of methyl groups.",
+        "Methylated promoters suppress transcription via: Blocking transcription factor binding, Recruiting methyl-binding domain (MBD) proteins, Facilitating chromatin compaction"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Role in Tumorigenesis"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Global hypomethylation"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Leads to genomic instability",
+        "Activates oncogenes and transposable elements",
+        "Associated with aneuploidy and CIN (chromosomal instability)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Promoter hypermethylation"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Functionally equivalent to gene silencing",
+        "Affects tumor suppressor genes such as: MLH1 → microsatellite instability (MSI), BRCA1 → homologous recombination defect, CDKN2A/p16, GSTP1, RARB"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Implications"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Diagnostic marker"
+    },
+    {
+      "type": "list",
+      "items": [
+        "SEPT9 methylation → blood-based screening for colorectal cancer",
+        "GSTP1 methylation → prostate cancer"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Therapeutics"
+    },
+    {
+      "type": "list",
+      "items": [
+        "DNMT inhibitors: Azacitidine and decitabine → reactivation of silenced tumor suppressors",
+        "Approved for myelodysplastic syndrome (MDS) and acute myeloid leukemia (AML)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Histone Modifications in Cancer"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Basic Concepts"
+    },
+    {
+      "type": "paragraph",
+      "text": "Histone proteins are subject to post-translational modifications (PTMs) on their N-terminal tails. These modifications regulate the accessibility of DNA to the transcriptional machinery."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Types of Modifications and Effects"
+    },
+    {
+      "type": "table",
+      "headers": ["Modification", "Enzyme", "Effect on Transcription"],
+      "rows": [
+        ["Acetylation", "HATs/HDACs", "Activation (open chromatin)"],
+        ["Methylation", "HMTs/HDMs", "Activation or repression (site-dependent)"],
+        ["Phosphorylation", "Kinases/phosphatases", "Signal transduction, repair"],
+        ["Ubiquitination", "E3 ligases/DUBs", "Proteasomal targeting or regulation"],
+        ["Sumoylation", "SUMO ligases", "Transcriptional repression"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Oncogenic Dysregulation"
+    },
+    {
+      "type": "list",
+      "items": [
+        "EZH2: Histone methyltransferase that tri-methylates H3K27 → gene silencing. Overexpressed or mutated in prostate cancer, follicular lymphoma, breast cancer",
+        "Loss of H3K27me3: Observed in diffuse intrinsic pontine gliomas (DIPG) due to H3K27M mutation",
+        "Mutations in core histone genes: H3F3A (H3.3) in pediatric gliomas, HIST1H3B in chondroblastoma"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Therapeutic Implications"
+    },
+    {
+      "type": "list",
+      "items": [
+        "HDAC inhibitors: Vorinostat, romidepsin. Used in cutaneous/peripheral T-cell lymphoma",
+        "EZH2 inhibitors: Tazemetostat for EZH2-mutant follicular lymphoma",
+        "BET inhibitors: Target BRD4, a bromodomain protein involved in MYC-driven tumors. Trials ongoing for NUT midline carcinoma and AML"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Noncoding RNAs and Epigenetic Regulation"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "MicroRNAs (miRNAs)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Short, ~22-nt RNAs that post-transcriptionally regulate gene expression.",
+        "Function via RNA-induced silencing complex (RISC) to degrade target mRNAs or inhibit translation.",
+        "Examples: miR-21: Oncogenic, suppresses PTEN, PDCD4. miR-34a: Tumor suppressor, p53-inducible; targets CDK6, BCL2"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Long Noncoding RNAs (lncRNAs)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "> 200 nt; involved in transcriptional regulation, chromatin remodeling, and mRNA stability.",
+        "Examples: HOTAIR: Recruits PRC2 and LSD1 complexes; overexpressed in breast and colorectal cancers. MALAT1: Associated with metastasis and poor prognosis"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "PIWI-interacting RNAs (piRNAs)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Suppress transposable elements in germline cells",
+        "Emerging roles in somatic tumors"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Relevance"
+    },
+    {
+      "type": "list",
+      "items": [
+        "miRNA expression profiles distinguish cancer types and subtypes",
+        "Therapeutic modulation: miR-34a mimic trials (e.g., MRX34) were halted due to immune toxicity. Antagomirs against miR-21, miR-155 under development"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. X Chromosome Inactivation and Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "XIST (lncRNA) mediates silencing of one X chromosome in females",
+        "In cancer: Loss of XIST expression can reactivate oncogenic genes on the inactive X. Associated with hematologic malignancies, breast cancer, and ovarian tumors",
+        "Escape from X-inactivation may unmask mutations or amplify gene dosage"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Genomic Imprinting and Cancer"
+    },
+    {
+      "type": "paragraph",
+      "text": "Imprinted genes are monoallelically expressed, determined by parental origin. Maintained via differential methylation during gametogenesis."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Disruption in Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Loss of imprinting (LOI) → biallelic expression or silencing",
+        "IGF2 LOI → unregulated growth signaling in Wilms tumor, colon cancer"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Notable Syndromes"
+    },
+    {
+      "type": "table",
+      "headers": ["Syndrome", "Imprinted Genes", "Tumor Risk"],
+      "rows": [
+        ["Beckwith-Wiedemann", "IGF2, CDKN1C", "Wilms tumor, hepatoblastoma"],
+        ["Silver-Russell", "IGF2 (hypomethylation)", "Reduced growth, low cancer risk"],
+        ["Prader-Willi/Angelman", "Chr 15q11-13", "Rare malignancies, imprinting model system"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Environmental Epigenetics in Cancer"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Carcinogens"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tobacco smoke: Methylation of CDKN2A (p16), MLH1",
+        "Alcohol: Disrupts folate cycle → impaired methylation",
+        "Heavy metals (arsenic, cadmium): Inhibit DNA repair and alter methylation"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Diet"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Folate, choline, B vitamins: Methyl donors essential for SAM cycle",
+        "Phytochemicals: Sulforaphane (cruciferous vegetables): HDAC inhibitor. Curcumin: DNMT inhibitor. EGCG (green tea): Affects DNMT and HAT activity"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Aging and Epigenetic Drift"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Global hypomethylation with promoter hypermethylation",
+        "Alters stem cell function, inflammation, and oncogene expression",
+        "Epigenetic clocks (e.g., Horvath clock) predict biological aging"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Epigenetics and Tumor Heterogeneity"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Intratumoral epigenetic heterogeneity contributes to: Clonal evolution, Drug resistance, Immune evasion",
+        "Single-cell epigenomics reveals: Distinct methylation states, Transcriptional plasticity",
+        "Epigenetic therapy may resensitize tumors to chemotherapy or immunotherapy"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Epigenetic Therapies and Precision Oncology"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Approved Agents"
+    },
+    {
+      "type": "table",
+      "headers": ["Agent", "Target", "Indication"],
+      "rows": [
+        ["Azacitidine", "DNMT", "MDS, AML"],
+        ["Decitabine", "DNMT", "AML"],
+        ["Vorinostat", "HDAC", "Cutaneous T-cell lymphoma"],
+        ["Romidepsin", "HDAC", "Peripheral T-cell lymphoma"],
+        ["Tazemetostat", "EZH2 (HMT)", "EZH2-mutant follicular lymphoma"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Emerging Therapies"
+    },
+    {
+      "type": "list",
+      "items": [
+        "BET inhibitors (e.g., molibresib): Block chromatin readers like BRD4",
+        "IDH1/2 inhibitors (e.g., ivosidenib): Reverse 2-HG-induced methylation",
+        "Combination strategies: Epigenetic + immune checkpoint inhibitors, Epigenetic priming before chemotherapy"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Predictive Biomarkers"
+    },
+    {
+      "type": "list",
+      "items": [
+        "MGMT promoter methylation: Predicts temozolomide response in glioblastoma",
+        "IDH mutations: Cause widespread epigenetic changes (CIMP phenotype)",
+        "EZH2 mutations: Indicate sensitivity to tazemetostat"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Experimental Approaches and Future Directions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "CRISPR/dCas9-based epigenetic editing: Targeted DNA methylation/demethylation, Histone acetylation modulation",
+        "Organoid models: Recapitulate patient-specific epigenetic profiles",
+        "Multi-omic integration: Combine methylome, transcriptome, chromatin accessibility",
+        "AI-based prediction tools: Interpret epigenetic biomarkers, Stratify patients for epigenetic therapies",
+        "Reversible reprogramming: Transient induction of pluripotency for regeneration and tumor suppression"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "Epigenetics represents a dynamic, reversible layer of gene regulation central to the pathogenesis and progression of cancer. The interplay of methylation, histone modification, noncoding RNAs, and chromatin structure not only drives tumor heterogeneity and therapeutic resistance but also opens the door to precision medicine. Advances in epigenetic therapies, diagnostics, and predictive biomarkers are poised to revolutionize cancer management, especially as tools like CRISPR and single-cell omics refine our understanding of tumor epigenomes."
+    }
+  ]
+}

@@ -1,3 +1,0 @@
-# Palliative
-
-Coming soon...

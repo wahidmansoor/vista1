@@ -1,0 +1,249 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Handbook Content Schema",
+  "description": "Schema for OncoVISTA handbook content JSON files",
+  "type": "object",
+  "required": ["title", "content"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the handbook page"
+    },
+    "category": {
+      "type": "string",
+      "description": "The category this content belongs to (e.g., 'Medical Oncology')"
+    },
+    "section": {
+      "type": "string",
+      "description": "The section within the category (e.g., 'General Oncology')"
+    },
+    "summary": {
+      "type": "string",
+      "description": "A brief summary of the content"
+    },
+    "author": {
+      "type": "string",
+      "description": "Author of the content"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date when the content was last updated"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the content"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata for the content",
+      "additionalProperties": true
+    },
+    "content": {
+      "type": "array",
+      "description": "The content blocks for the handbook page",
+      "items": {
+        "$ref": "#/definitions/ContentBlock"
+      }
+    }
+  },
+  "definitions": {
+    "ContentBlock": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Optional unique identifier for the block"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of content block",
+          "enum": [
+            "heading",
+            "paragraph",
+            "list",
+            "numbers",
+            "table",
+            "code",
+            "clinical_pearl",
+            "markdown",
+            "definitions",
+            "action_button"
+          ]
+        },
+        "level": {
+          "type": "integer",
+          "description": "The level of the heading (1-6)",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "text": {
+          "type": "string",
+          "description": "The text content of the block"
+        },
+        "content": {
+          "type": "string",
+          "description": "Alternative to text for block content"
+        },
+        "items": {
+          "type": "array",
+          "description": "Items for list, numbers, or definitions block types",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "term": {
+                    "type": "string",
+                    "description": "Term for definition"
+                  },
+                  "definition": {
+                    "type": "string",
+                    "description": "Definition for the term"
+                  }
+                },
+                "required": ["term", "definition"]
+              }
+            ]
+          }
+        },
+        "headers": {
+          "type": "array",
+          "description": "Headers for table blocks",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "description": "Rows for table blocks",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "language": {
+          "type": "string",
+          "description": "Language for code blocks (e.g., javascript, python)"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": { "enum": ["heading"] }
+            }
+          },
+          "then": {
+            "required": ["text", "level"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": { "enum": ["paragraph", "clinical_pearl", "markdown"] }
+            }
+          },
+          "then": {
+            "anyOf": [
+              { "required": ["text"] },
+              { "required": ["content"] }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": { "enum": ["list", "numbers", "definitions"] }
+            }
+          },
+          "then": {
+            "required": ["items"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": { "enum": ["table"] }
+            }
+          },
+          "then": {
+            "required": ["headers", "rows"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": { "enum": ["code"] }
+            }
+          },
+          "then": {
+            "anyOf": [
+              { "required": ["text"] },
+              { "required": ["content"] }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "examples": [
+    {
+      "title": "Introduction to Oncology",
+      "category": "Medical Oncology",
+      "section": "General Oncology",
+      "summary": "An overview of the field of oncology.",
+      "author": "Dr. Jane Smith",
+      "lastUpdated": "2023-09-15T12:00:00Z",
+      "version": "1.0.0",
+      "metadata": {
+        "reviewStatus": "peer-reviewed",
+        "readingTimeMinutes": 15
+      },
+      "content": [
+        {
+          "type": "heading",
+          "level": 1,
+          "text": "Introduction to Oncology"
+        },
+        {
+          "type": "paragraph",
+          "text": "Oncology is the branch of medicine that deals with the prevention, diagnosis, and treatment of cancer."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Key Concepts"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Cancer biology",
+            "Tumor classification",
+            "Staging and grading",
+            "Treatment modalities"
+          ]
+        },
+        {
+          "type": "clinical_pearl",
+          "text": "Always consider a patient's performance status when recommending treatment options."
+        },
+        {
+          "type": "table",
+          "headers": ["Treatment", "Common Side Effects", "Typical Duration"],
+          "rows": [
+            ["Chemotherapy", "Nausea, hair loss", "3-6 months"],
+            ["Radiation", "Skin changes, fatigue", "4-8 weeks"],
+            ["Surgery", "Pain, infection risk", "Single procedure"]
+          ]
+        }
+      ]
+    }
+  ]
+} 
