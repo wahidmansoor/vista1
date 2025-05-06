@@ -8,6 +8,7 @@
     "dev:server": "cross-env NODE_ENV=development ts-node-dev --transpile-only src/server/index.ts",
     "dev:all": "run-p dev dev:server",
     "build": "vite build",
+    "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "test": "vitest"
   },
