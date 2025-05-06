@@ -1,0 +1,378 @@
+{
+    "title": "Prognostic Scores in Oncology: Key Prognostic Score Types",
+    "category": "Clinical Oncology",
+    "section": "Patient Assessment",
+    "summary": "Comprehensive guide to major prognostic scoring systems in oncology, including disease-specific, organ-specific, and biomarker-integrated models.",
+    "author": "OncoVISTA Team",
+    "lastUpdated": "2023-11-15T00:00:00Z",
+    "version": "2.0.0",
+    "metadata": {
+      "reviewStatus": "peer-reviewed",
+      "readingTimeMinutes": 15,
+      "relatedTopics": [
+        "Performance Status Assessment",
+        "Predictive Biomarkers in Oncology",
+        "Geriatric Oncology Assessment"
+      ]
+    },
+    "content": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Prognostic Scores in Oncology"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Topic 2: Key Prognostic Score Types"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "1. Overview"
+      },
+      {
+        "type": "paragraph",
+        "text": "Prognostic tools in oncology vary widely based on cancer type, disease stage, and available diagnostics. They serve to stratify patient risk, guide treatment intensity, and support shared decision-making."
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern scores range from simple clinical indices to genomically integrated models. They help predict outcomes such as:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Overall survival (OS)",
+          "Progression-free survival (PFS)",
+          "Treatment toxicity risk",
+          "Relapse likelihood"
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "Prognostic scores should be interpreted in clinical context - they inform but don't dictate treatment decisions."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "2. Disease-Specific Scoring Systems"
+      },
+      {
+        "type": "paragraph",
+        "text": "These tools integrate tumor biology, staging, and patient-specific variables to inform care. Common examples include:"
+      },
+      {
+        "type": "table",
+        "headers": ["Score", "Cancer Type", "Key Variables"],
+        "rows": [
+          [
+            "IPI",
+            "Non-Hodgkin lymphoma",
+            "Age, LDH, ECOG performance status, Ann Arbor stage, extranodal involvement"
+          ],
+          [
+            "FLIPI",
+            "Follicular lymphoma",
+            "Age > 60, Ann Arbor stage III-IV, hemoglobin < 12 g/dL, >4 nodal areas, LDH"
+          ],
+          [
+            "R-ISS",
+            "Multiple myeloma",
+            "β2-microglobulin, albumin, high-risk cytogenetics (e.g., del(17p), t(4;14)), LDH"
+          ],
+          [
+            "IPSS/IPSS-R",
+            "Myelodysplastic syndrome",
+            "Hemoglobin, ANC, platelets, % marrow blasts, cytogenetics, transfusion dependence"
+          ],
+          [
+            "IPS",
+            "Hodgkin lymphoma (adv.)",
+            "Age ≥45, stage IV, male sex, low albumin, low hemoglobin, high WBC, low lymphocytes"
+          ]
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "These scores often form the basis of treatment algorithms and influence trial eligibility."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2.1 International Prognostic Index (IPI) Deep Dive"
+      },
+      {
+        "type": "paragraph",
+        "text": "The IPI remains the gold standard for aggressive lymphomas. Each risk factor counts as 1 point:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Age > 60 years",
+          "Elevated LDH",
+          "ECOG PS ≥ 2",
+          "Ann Arbor stage III/IV",
+          ">1 extranodal site"
+        ]
+      },
+      {
+        "type": "table",
+        "headers": ["Score", "Risk Group", "5-year OS"],
+        "rows": [
+          ["0-1", "Low", "73%"],
+          ["2", "Low-intermediate", "51%"],
+          ["3", "High-intermediate", "43%"],
+          ["4-5", "High", "26%"]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "3. Organ-Specific Prognostic Models"
+      },
+      {
+        "type": "paragraph",
+        "text": "Used where organ function strongly influences prognosis, especially in primary or metastatic cancers affecting the liver, brain, or kidneys."
+      },
+      {
+        "type": "table",
+        "headers": ["Score", "Context", "Use"],
+        "rows": [
+          [
+            "Child-Pugh / MELD",
+            "Cirrhosis, HCC",
+            "Liver function; influences resection, transplant candidacy"
+          ],
+          [
+            "BCLC",
+            "Hepatocellular carcinoma",
+            "Combines tumor stage, liver function, PS to guide therapy"
+          ],
+          [
+            "Motzer / IMDC",
+            "Renal cell carcinoma",
+            "Guides immunotherapy and TKI-based treatments"
+          ],
+          [
+            "RPA / GPA",
+            "Brain metastases",
+            "Helps select patients for surgery or radiosurgery"
+          ]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "3.1 Child-Pugh Score Components"
+      },
+      {
+        "type": "table",
+        "headers": ["Parameter", "1 point", "2 points", "3 points"],
+        "rows": [
+          ["Bilirubin (mg/dL)", "<2", "2-3", ">3"],
+          ["Albumin (g/dL)", ">3.5", "2.8-3.5", "<2.8"],
+          ["INR", "<1.7", "1.7-2.3", ">2.3"],
+          ["Ascites", "None", "Mild", "Moderate-severe"],
+          ["Encephalopathy", "None", "Grade 1-2", "Grade 3-4"]
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Classification: A (5-6 points), B (7-9 points), C (10-15 points)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "4. Biomarker-Integrated Scores"
+      },
+      {
+        "type": "paragraph",
+        "text": "These tools integrate molecular and genomic data to refine risk. They are often validated to guide adjuvant therapy or surveillance."
+      },
+      {
+        "type": "table",
+        "headers": ["Tool", "Cancer Type", "Notes"],
+        "rows": [
+          [
+            "Oncotype DX (21-gene RS)",
+            "ER+/HER2− breast cancer",
+            "Assesses benefit of chemotherapy vs. endocrine therapy"
+          ],
+          [
+            "Decipher score",
+            "Prostate cancer",
+            "Predicts metastasis post-prostatectomy"
+          ],
+          [
+            "ctDNA",
+            "Colorectal, lung, others",
+            "Detects minimal residual disease, early relapse"
+          ],
+          [
+            "PD-L1, TMB",
+            "Multiple cancers",
+            "Prognostic and predictive for immune checkpoint therapy"
+          ]
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "Circulating biomarkers (e.g., ctDNA) are gaining traction in dynamic prognosis post-surgery or therapy."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "4.1 Oncotype DX Recurrence Score Interpretation"
+      },
+      {
+        "type": "table",
+        "headers": ["Score Range", "Risk Category", "Chemo Benefit"],
+        "rows": [
+          ["<18", "Low", "Unlikely"],
+          ["18-30", "Intermediate", "Uncertain"],
+          [">30", "High", "Likely"]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "5. Frailty and Functional Assessment Scores"
+      },
+      {
+        "type": "paragraph",
+        "text": "Although not traditional prognostic tools, these significantly impact outcomes in older and comorbid patients."
+      },
+      {
+        "type": "table",
+        "headers": ["Score", "Function", "Clinical Role"],
+        "rows": [
+          [
+            "CGA / G8 / VES-13",
+            "Multidomain frailty assessment",
+            "Predicts treatment tolerance, hospitalization, mortality"
+          ],
+          [
+            "CFS (Clinical Frailty Scale)",
+            "Visual functional frailty grading",
+            "Used in ICU triage, oncology, and surgical planning"
+          ],
+          [
+            "ECOG / KPS / Lansky",
+            "Performance status evaluation",
+            "Predicts survival, informs treatment thresholds"
+          ]
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "Increasingly, these are used in combination with cancer-specific scores to personalize treatment."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "5.1 G8 Screening Tool Components"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Has food intake declined due to loss of appetite, digestive problems, chewing or swallowing difficulties?",
+          "Weight loss during last 3 months?",
+          "Mobility issues?",
+          "Neuropsychological problems?",
+          "BMI <22?",
+          "Takes more than 3 medications?",
+          "Self-perception of health status?",
+          "Age >85 years?"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Score ≤14 suggests frailty requiring comprehensive geriatric assessment."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "6. Composite and AI-Driven Models"
+      },
+      {
+        "type": "paragraph",
+        "text": "Newer approaches involve nomograms or machine learning algorithms built from real-world and trial datasets."
+      },
+      {
+        "type": "list",
+        "items": [
+          "MSKCC nomograms: Available for breast, prostate, and sarcoma; combine multiple clinical/pathologic factors",
+          "AI algorithms: Integrate EHR data, imaging, and genomics for individualized prognostication",
+          "Radiomics and deep learning: Under evaluation to predict outcomes based on imaging phenotypes"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "7. Clinical Use Case Mapping"
+      },
+      {
+        "type": "table",
+        "headers": ["Setting", "Best Prognostic Tool(s)"],
+        "rows": [
+          [
+            "Newly diagnosed lymphoma",
+            "IPI, FLIPI"
+          ],
+          [
+            "Post-induction myeloma",
+            "R-ISS + response category (e.g., VGPR, sCR)"
+          ],
+          [
+            "Elderly cancer patient",
+            "CGA + G8 or CFS + disease-specific score"
+          ],
+          [
+            "Pediatric oncology",
+            "Age-adapted scores + Lansky + tumor type-specific models"
+          ],
+          [
+            "Advanced solid tumors (general)",
+            "ECOG + organ scores (e.g., Child-Pugh) + frailty assessment"
+          ],
+          [
+            "Clinical trial design",
+            "Trial-specific stratification using PS + molecular markers"
+          ]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "8. Summary"
+      },
+      {
+        "type": "paragraph",
+        "text": "Prognostic scoring in oncology is evolving to reflect a multidimensional understanding of disease biology, host factors, and treatment context. Key principles include:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "No one-size-fits-all: Choose tools based on disease, age, and treatment goals.",
+          "Combine functional, biochemical, and molecular insights.",
+          "Use scores to communicate prognosis, guide therapy, and identify trial candidates.",
+          "Stay updated as AI-based models and liquid biomarkers reshape the prognostic landscape."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Key Takeaways"
+      },
+      {
+        "type": "numbers",
+        "items": [
+          "Disease-specific scores (IPI, R-ISS) remain fundamental for treatment planning",
+          "Organ function scores (Child-Pugh, MELD) are critical for hepatic malignancies",
+          "Molecular tools (Oncotype, ctDNA) add precision to risk stratification",
+          "Frailty assessments (G8, CFS) are essential in geriatric oncology",
+          "Emerging AI models may integrate all these dimensions in the future"
+        ]
+      }
+    ]
+  }

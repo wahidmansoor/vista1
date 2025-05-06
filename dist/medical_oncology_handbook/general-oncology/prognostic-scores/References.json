@@ -1,0 +1,319 @@
+{
+  "title": "Prognostic Scores: References",
+  "category": "Clinical Assessment",
+  "section": "Patient Evaluation",
+  "summary": "Comprehensive reference list for prognostic tools in oncology, organized by disease type and clinical application.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-10-20T00:00:00Z",
+  "version": "1.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 10,
+    "targetAudience": ["Oncologists", "Researchers", "Fellows"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Prognostic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Topic 12: References"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1. Foundational Concepts in Prognostication and Frailty"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Balducci L, Extermann M. Management of cancer in the older person. Oncologist. 2000;5(3):224–237. (Pioneered geriatric oncology frameworks emphasizing function and tolerance.)",
+        "Fried LP, et al. Frailty in older adults. J Gerontol A. 2001;56(3):M146–M156. (Defined the physical frailty phenotype now widely used in CGA models.)",
+        "Walter LC, Covinsky KE. Cancer screening in the elderly: a framework for individualized decision making. JAMA. 2001;285(21):2750–2756."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2. Hematologic Malignancy–Specific Scores"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Diffuse Large B-Cell Lymphoma (DLBCL)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "[DLBCL – AMBOSS Knowledge Library](https://www.amboss.com/us/knowledge/diffuse-large-b-cell-lymphoma?utm_medium=chatgpt-plugin&utm_source=chatgpt)",
+        "International Prognostic Index (IPI): N Engl J Med. 1993;329(14):987–994.",
+        "Enhanced IPI (NCCN-IPI): Blood. 2014;123(6):837–842."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Follicular Lymphoma"
+    },
+    {
+      "type": "list",
+      "items": [
+        "FLIPI: Blood. 2004;104(5):1258–1265.",
+        "FLIPI-2: Blood. 2009;113(15):3153–3160.",
+        "m7-FLIPI integrates genomic mutations for improved POD24 prediction."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Multiple Myeloma"
+    },
+    {
+      "type": "list",
+      "items": [
+        "R-ISS: J Clin Oncol. 2015;33(26):2863–2869.",
+        "R2-ISS: J Clin Oncol. 2022;40(29):3356–3365."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Myelodysplastic Syndromes (MDS)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "[MDS – AMBOSS Knowledge Library](https://www.amboss.com/us/knowledge/myelodysplastic-syndrome?utm_medium=chatgpt-plugin&utm_source=chatgpt)",
+        "IPSS: Blood. 1997;89(6):2079–2088.",
+        "IPSS-R: Blood. 2012;120(12):2454–2465.",
+        "IPSS-M: Nat Med. 2022;28(5):1023–1030. [Online calculator](https://mds-risk-model.com)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "AML"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ELN 2022: Integrates FLT3, NPM1, TP53, and karyotype.",
+        "MRD assessment: Validated across multiple trials using NGS and flow."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "CLL and ALL"
+    },
+    {
+      "type": "list",
+      "items": [
+        "TP53/IGHV/MRD: Define therapy selection and risk (e.g., BTK inhibitors vs chemo).",
+        "Pediatric ALL: MRD at day 28 is the strongest early predictor of outcome."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3. Solid Tumor Prognostic Systems"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Breast Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Oncotype DX: N Engl J Med. 2004;351(27):2817–2826.",
+        "MammaPrint: Nature. 2002;415(6871):530–536.",
+        "PAM50 (Prosigna): Luminal A/B, HER2, basal subtyping."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Prostate Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "CAPRA Score: J Urol. 2005;173(5):1938–1942.",
+        "Decipher Genomic Classifier: Eur Urol. 2014;66(3):550–560. [MSKCC and Decipher Nomograms](https://www.mskcc.org/nomograms)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Colorectal Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Oncotype Colon: J Clin Oncol. 2010;28(15):2904–2909.",
+        "MSI/MMR: Immunotherapy predictor in stage IV; poor 5-FU response in stage II."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Lung Cancer (NSCLC)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "PD-L1: IHC scoring for IO response.",
+        "EGFR/ALK/ROS1/TMB: Molecular predictors of targeted/IO efficacy."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Hepatocellular Carcinoma (HCC)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "BCLC: Comprehensive model integrating tumor burden and liver function.",
+        "ALBI and Child-Pugh: Guide therapy based on hepatic reserve.",
+        "[HCC – AMBOSS Knowledge Library](https://www.amboss.com/us/knowledge/hepatocellular-carcinoma?utm_medium=chatgpt-plugin&utm_source=chatgpt)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "CNS Tumors"
+    },
+    {
+      "type": "list",
+      "items": [
+        "MGMT methylation: N Engl J Med. 2005;352(10):997–1003.",
+        "IDH1/2 mutations: N Engl J Med. 2009;360(8):765–773.",
+        "1p/19q co-deletion: Strong predictor of chemosensitivity in oligodendroglioma."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4. Frailty and Geriatric Oncology"
+    },
+    {
+      "type": "list",
+      "items": [
+        "CGA in oncology: J Clin Oncol. 2012;30(26):3457–3465.",
+        "GAP70+ Trial: J Clin Oncol. 2020;38(15):1536–1545.",
+        "VES-13, G8, and CFS validated in multiple geriatric oncology cohorts.",
+        "[ePrognosis Tool](https://eprognosis.ucsf.edu): Mortality estimates for older adults."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5. Dynamic and Biomarker-Based Tools"
+    },
+    {
+      "type": "list",
+      "items": [
+        "MRD in AML/MM/ALL: Flow cytometry and NGS are predictive of relapse and OS.",
+        "ctDNA:",
+        "  - JAMA Oncol. 2019;5(12):1710–1717. (Tie et al., colon cancer recurrence)",
+        "  - Cancer Treat Rev. 2020;90:102109. (Review of liquid biopsy platforms)",
+        "TMB and IO response:",
+        "  - Science. 2015;348(6230):124–128. (Rizvi et al., NSCLC and TMB)",
+        "  - N Engl J Med. 2015;372(26):2509–2520. (Le et al., MSI-H and PD-1 therapy)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6. Critical Illness and Comorbid Conditions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "[SOFA and APACHE II – AMBOSS Critical Care](https://www.amboss.com/us/knowledge/care-of-the-critically-ill-patient?utm_medium=chatgpt-plugin&utm_source=chatgpt)",
+        "MELD Score: Assesses mortality in liver disease (used in HCC, alcoholic hepatitis).",
+        "Lille Model and Maddrey DF: Alcoholic hepatitis response and mortality prediction. [Alcoholic Hepatitis – AMBOSS](https://www.amboss.com/us/knowledge/alcohol-associated-hepatitis?utm_medium=chatgpt-plugin&utm_source=chatgpt)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "7. Additional Cancer-Specific Tools"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Hodgkin Lymphoma"
+    },
+    {
+      "type": "list",
+      "items": [
+        "IPS Score: Predicts 5-year OS and PFS.",
+        "Newer model: A-HIPI may outperform IPS in modern regimens. [Hodgkin Lymphoma – AMBOSS](https://www.amboss.com/us/knowledge/hodgkin-lymphoma?utm_medium=chatgpt-plugin&utm_source=chatgpt)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Melanoma"
+    },
+    {
+      "type": "list",
+      "items": [
+        "TMB, BRAF, GEP signatures guide targeted/IO therapy."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Pancreatic and GI Cancers"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Glasgow-Blatchford Bleeding Score: Risk in upper GI bleeding.",
+        "Ranson Criteria: Predicts severity in acute pancreatitis."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "8. Clinical Guidelines and Organizational Frameworks"
+    },
+    {
+      "type": "list",
+      "items": [
+        "NCCN: Risk-adapted treatment pathways [https://www.nccn.org](https://www.nccn.org)",
+        "ESMO Guidelines: Europe-focused stratification and prognostic models [https://www.esmo.org/guidelines](https://www.esmo.org/guidelines)",
+        "IMWG: International Myeloma Working Group [https://www.myeloma.org](https://www.myeloma.org)",
+        "ASH Guidelines: Hematologic disease risk stratification [https://www.hematology.org](https://www.hematology.org)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "9. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "This reference catalog synthesizes:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Landmark publications,",
+        "AMBOSS-validated scoring overviews, and",
+        "Societal guidelines across tumor types."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "They form the evidence base underpinning modern risk stratification in oncology—across curative, palliative, and investigational pathways. These references serve as anchor points for both clinical decision-making and future innovation in personalized prognostics."
+    }
+  ]
+}
