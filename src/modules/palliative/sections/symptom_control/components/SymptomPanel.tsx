@@ -5,81 +5,113 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Plus, AlertTriangle } from 'lucide-react';
-import { usePalliativeContext } from '../../../context/PalliativeContext';
+import { Plus, AlertTriangle, Star } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { usePalliativeCare } from '../../../context/PalliativeContext';
 import type { Symptom } from '../../../context/PalliativeContext';
 import type { SymptomTemplate } from '../data/SymptomData';
 import SeverityCard from './SeverityCard';
 import SymptomSearch from './SymptomSearch';
 
 const SymptomPanel: React.FC = () => {
-  const { symptoms, updateSymptoms } = usePalliativeContext();
-  const [isAddingSymptom, setIsAddingSymptom] = useState(false);
+  const palliativeContext = usePalliativeCare();
+  const { state, updateSymptom, toggleFavorite } = palliativeContext;
   const [selectedSymptom, setSelectedSymptom] = useState<Symptom | null>(null);
+  const [isAddingSymptom, setIsAddingSymptom] = useState(false);
+  const [expandAll, setExpandAll] = useState(false);
+  const favoriteSymptomIds = state.favoriteSymptomIds || [];
+  const symptoms = state.currentSymptoms || [];
+
+  // Filter symptoms by severity or favorites
+  const filterSymptoms = (filter: 'all' | 'mild' | 'moderate' | 'severe' | 'favorites'): Symptom[] => {
+    let filtered = symptoms;
+    if (filter === 'favorites') {
+      return filtered.filter((s: Symptom) => favoriteSymptomIds.includes(s.id));
+    }
+    if (filter !== 'all') {
+      filtered = filtered.filter((s: Symptom) => s.severity === filter);
+    }
+    return filtered;
+  };
+
+  const handleFavoriteToggle = (symptom: Symptom) => {
+    toggleFavorite(symptom.id);
+  };
 
   const handleAddSymptom = (template: SymptomTemplate) => {
     const newSymptom: Symptom = {
+      ...template,
       id: template.id,
-      name: template.name,
-      description: template.description,
-      severity: 'moderate',
-      onset: new Date().toISOString(),
+      severity: 'mild', // Default to mild initially
       interventions: [],
+      onset: new Date().toISOString(),
       notes: '',
-      assessmentPoints: template.assessmentPoints,
-      redFlags: template.redFlags,
-      suggestedInterventions: template.interventions
+      suggestedInterventions: {
+        nonPharmacological: template.interventions.nonPharmacological || [],
+        pharmacological: template.interventions.pharmacological || []
+      }
     };
-    
-    updateSymptoms([...symptoms, newSymptom]);
+    updateSymptom(newSymptom);
     setIsAddingSymptom(false);
-  };
-
-  const filterSymptoms = (severity: 'all' | 'mild' | 'moderate' | 'severe') => {
-    if (severity === 'all') return symptoms;
-    return symptoms.filter(s => s.severity === severity);
+    console.log('Added new symptom:', newSymptom); // Debug log
   };
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold">Active Symptoms</h3>
-        <Button 
-          onClick={() => setIsAddingSymptom(true)}
-          className="gap-2"
-        >
-          <Plus className="w-4 h-4" />
-          Add Symptom
-        </Button>
+      <div className="flex justify-between items-center gap-4">
+        <h2 className="text-2xl font-bold">Symptom Management</h2>
+        <div className="flex gap-2">
+          <Button 
+            variant="outline"
+            onClick={() => setExpandAll(prev => !prev)}
+            className="gap-2"
+          >
+            {expandAll ? "Collapse All" : "Expand All"}
+          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button 
+                variant="outline"
+                onClick={() => setIsAddingSymptom(true)}
+                className="gap-2"
+              >
+                <Plus className="w-4 h-4" />
+                Add Symptom
+              </Button>
+            </DialogTrigger>
+          </Dialog>
+        </div>
       </div>
 
       <Tabs defaultValue="all" className="w-full">
-        <TabsList>
-          <TabsTrigger value="all">All</TabsTrigger>
+        <TabsList className="mb-4">
+          <TabsTrigger value="all">All Symptoms</TabsTrigger>
           <TabsTrigger value="mild">Mild</TabsTrigger>
           <TabsTrigger value="moderate">Moderate</TabsTrigger>
-          <TabsTrigger value="severe">
-            <div className="flex items-center gap-2">
-              Severe
-              {filterSymptoms('severe').length > 0 && (
-                <AlertTriangle className="w-4 h-4 text-red-500" />
-              )}
+          <TabsTrigger value="severe">Severe</TabsTrigger>
+          <TabsTrigger value="favorites" className="gap-2">
+            <div className="flex items-center gap-1.5">
+              <Star className="w-4 h-4 text-yellow-500" />
+              Favorites
             </div>
           </TabsTrigger>
         </TabsList>
 
-        {(['all', 'mild', 'moderate', 'severe'] as const).map(severity => (
+        {(['all', 'mild', 'moderate', 'severe', 'favorites'] as const).map(severity => (
           <TabsContent key={severity} value={severity}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filterSymptoms(severity).map(symptom => (
+              {filterSymptoms(severity).map((symptom: Symptom) => (
                 <SeverityCard
                   key={symptom.id}
                   symptom={symptom}
                   onSelect={() => setSelectedSymptom(symptom)}
+                  onFavorite={() => handleFavoriteToggle(symptom)}
+                  isFavorite={favoriteSymptomIds.includes(symptom.id)}
                 />
               ))}
               {filterSymptoms(severity).length === 0 && (
@@ -103,7 +135,7 @@ const SymptomPanel: React.FC = () => {
           <ScrollArea className="max-h-[60vh] pr-4">
             <SymptomSearch
               onSelectSymptom={handleAddSymptom}
-              currentSymptoms={symptoms.map(s => s.id)}
+              currentSymptoms={symptoms.map((s: Symptom) => s.id)}
             />
           </ScrollArea>
         </DialogContent>

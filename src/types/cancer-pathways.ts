@@ -4,6 +4,8 @@ export interface RedFlag {
   message: string;
   severity: 'warning' | 'critical';
   recommendations: string[];
+  urgency?: "Immediate" | "Same-day" | "Routine";
+  actionType?: string;
 }
 
 export interface PathwayStep {
@@ -18,6 +20,12 @@ export interface PathwayStep {
     next: string;
     triggers?: string[]; // IDs of any red flags this option triggers
   }[];
+  evidenceLevel?: "I" | "II" | "III";
+  guidelineSource?: string;
+  calculatorId?: string;
+  patientInfo?: string;
+  requiresMDT?: boolean;
+  pitfalls?: string[];
 }
 
 export interface StepBasedPathway {

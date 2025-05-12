@@ -28,7 +28,18 @@ export default defineConfig(({ mode }) => {
   validateEnv(env);
 
   return {
-    plugins: [react()],
+    plugins: [
+      react({
+        fastRefresh: true,
+        // Include runtime configuration
+        include: "**/*.{jsx,tsx}",
+        babel: {
+          plugins: [
+            ["@babel/plugin-transform-react-jsx", { runtime: "automatic" }]
+          ]
+        }
+      })
+    ],
     css: {
       postcss: {
         plugins: [

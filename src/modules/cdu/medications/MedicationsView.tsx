@@ -262,69 +262,43 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
       setLoading(true);
       setError(null);
 
-      console.log('Fetching medications...');
-      let query = supabase
-        .from('oncology_medications')
-        .select('*');
+      // Support for searching across name, classification and JSONB indications
+      const searchFilter = searchQuery ? encodeURIComponent(`
+        or=(
+          name.ilike."%${searchQuery}%",
+          classification.ilike."%${searchQuery}%",
+          indications->>cancer_types.ilike."%${searchQuery}%"
+        )
+      `.trim()) : '';
 
-      // Apply premedications filter first
-      if (showPremedsOnly) {
-        query = query.eq('is_premedication', true);
+      const classFilter = selectedClass ? 
+        `&classification=eq.${encodeURIComponent(selectedClass)}` : '';
+
+      const baseUrl = `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/oncology_medications`;
+      const url = `${baseUrl}?select=*${searchFilter ? `&${searchFilter}` : ''}${classFilter}&order=name.asc.nullslast`;
+
+      const response = await fetch(url, {
+        headers: {
+          apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Supabase fetch failed: ${response.statusText} (status: ${response.status})`);
       }
 
-      // Apply classification filter
-      if (selectedClass) {
-        query = query.eq('classification', selectedClass);
-      }
-
-      if (searchQuery) {
-        // Handle case where search_vector column might not exist
-        try {
-          const searchTerms = searchQuery
-            .split(' ')
-            .filter(Boolean)
-            .map(term => `${term}:*`)
-            .join(' & ');
-          
-          query = query
-            .or(`name.ilike.%${searchQuery}%,classification.ilike.%${searchQuery}%,indications->>'cancer_types'.ilike.%${searchQuery}%`);
-        } catch (searchError) {
-          console.warn('Advanced search failed, falling back to basic search:', searchError);
-          query = query.ilike('name', `%${searchQuery}%`);
-        }
-      }
-
-      // Apply sorting with fallback
-      if (sort.field === 'updated_at') {
-        query = query.order('updated_at', { ascending: sort.order === 'asc', nullsFirst: false });
-      } else if (sort.field === 'classification') {
-        query = query.order('classification', { ascending: sort.order === 'asc', nullsFirst: false });
-      } else {
-        query = query.order('name', { ascending: sort.order === 'asc', nullsFirst: false });
-      }
-
-      const { data, error: fetchError } = await query;
-
-      if (fetchError) {
-        console.error('Supabase query error:', fetchError);
-        throw new Error(fetchError.message || 'Failed to fetch medications');
-      }
-
-      if (!data) {
-        throw new Error('No data received from database');
-      }
-
+      const data = await response.json();
+      console.log("✅ Medications fetched:", data);
       setMedications(data);
-    } catch (err) {
-      console.error('Error fetching medications:', err);
-      const errorMsg = err instanceof Error 
-        ? err.message 
-        : 'Failed to fetch medications. Please try again.';
+
+    } catch (error) {
+      const typedError = error as Error;
+      console.error("❌ Error fetching medications:", typedError); 
+      const errorMsg = typedError.message || 'Failed to fetch medications. Please try again.';
       setError(errorMsg);
-      playSound('error');
+      if (isAudioSupported()) playSound('error');
       showSortFeedback(`Error: ${errorMsg}`);
-      
-      // Set empty medications array to prevent undefined errors
       setMedications([]);
     } finally {
       setLoading(false);

@@ -1,23 +1,21 @@
-import React from "react";
+import React, { Suspense, useState } from "react";
 import { usePalliativeCare } from "../../context/PalliativeContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { AlertTriangle, Search } from "lucide-react";
+import { Search, AlertTriangle } from "lucide-react";
+import { SymptomCard } from "@/components/ui/symptom-card";
+import { SymptomCardSkeleton } from "@/components/ui/symptom-card-skeleton";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { SymptomSearch } from "../../../../components/ui/symptom-search";
+import { SymptomTemplate } from "../../../../types/symptoms";
 
 import type { Symptom } from "../../context/PalliativeContext";
 
-interface DeliriumAssessment {
-  consciousness: 'alert' | 'drowsy' | 'stupor';
-  orientation: boolean[];  // Array of orientation domains [person, place, time]
-  attention: 'normal' | 'impaired';
-  onset: 'acute' | 'gradual';
-  fluctuating: boolean;
-}
+const DeliriumAssessment = React.lazy(() => import("../delirium/DeliriumAssessment"));
 
 const deliriumCriteria = {
   consciousness: ['alert', 'drowsy', 'stupor'],
@@ -28,195 +26,145 @@ const deliriumCriteria = {
 
 const SymptomControl = () => {
   const { state, updateSymptom } = usePalliativeCare();
-  const [deliriumData, setDeliriumData] = React.useState<DeliriumAssessment>({
-    consciousness: 'alert',
-    orientation: [true, true, true],
-    attention: 'normal',
-    onset: 'gradual',
-    fluctuating: false
-  });
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState("active");
+  const [isAddingSymptom, setIsAddingSymptom] = useState(false);
 
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const [activeTab, setActiveTab] = React.useState("active");
-
-  const handleDeliriumUpdate = (field: keyof DeliriumAssessment, value: any) => {
-    setDeliriumData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const isDeliriumLikely = () => {
-    return (
-      deliriumData.consciousness !== 'alert' ||
-      deliriumData.orientation.includes(false) ||
-      deliriumData.attention === 'impaired' ||
-      (deliriumData.onset === 'acute' && deliriumData.fluctuating)
-    );
-  };
+  // Filter symptoms based on search query
+  const filteredSymptoms = state.currentSymptoms.filter(symptom =>
+    symptom.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    symptom.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-4 mb-6">
+    <div className="palliative-section">
+      <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
           <Input
             type="text"
             placeholder="Search symptoms..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
+            aria-label="Search symptoms"
           />
         </div>
-        <Button variant="outline">Add New Symptom</Button>
+        <button
+          onClick={() => setIsAddingSymptom(true)}
+          className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+          aria-label="Add new symptom"
+        >
+          Add New Symptom
+        </button>
       </div>
 
+      {/* Add Dialog for new symptom */}
+      <Dialog open={isAddingSymptom} onOpenChange={setIsAddingSymptom}>
+        <DialogContent className="max-w-4xl max-h-[90vh]">
+          <DialogHeader>
+            <DialogTitle>Add New Symptom</DialogTitle>
+            <DialogDescription>
+              Search and select a symptom to start tracking
+            </DialogDescription>
+          </DialogHeader>
+          <ScrollArea className="max-h-[60vh] pr-4">
+            <SymptomSearch
+              onSelectSymptom={(template: SymptomTemplate) => {
+                // Handle adding the symptom here
+                const newSymptom: Symptom = {
+                  id: template.id,
+                  name: template.name,
+                  description: template.description || '',
+                  severity: 'mild',
+                  onset: new Date().toISOString(),
+                  notes: '',
+                  interventions: [],
+                  suggestedInterventions: {
+                    pharmacological: template.interventions?.pharmacological?.map(i => i.name) || [],
+                    nonPharmacological: template.interventions?.nonPharmacological?.map(i => i.name) || []
+                  },
+                  assessmentPoints: [],
+                  redFlags: []
+                };
+                updateSymptom(newSymptom);
+                setIsAddingSymptom(false);
+              }}
+              currentSymptoms={state.currentSymptoms.map(s => s.id)}
+            />
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
+
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList>
-          <TabsTrigger value="active">Active Symptoms</TabsTrigger>
-          <TabsTrigger value="delirium">Delirium Assessment</TabsTrigger>
-          <TabsTrigger value="history">Symptom History</TabsTrigger>
+        <TabsList aria-label="Symptom management sections">
+          <TabsTrigger 
+            value="active"
+            aria-controls="active-symptoms-content"
+          >
+            Active Symptoms
+          </TabsTrigger>
+          <TabsTrigger 
+            value="delirium"
+            aria-controls="delirium-assessment-content"
+          >
+            Delirium Assessment
+          </TabsTrigger>
+          <TabsTrigger 
+            value="history"
+            aria-controls="symptom-history-content"
+          >
+            Symptom History
+          </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="active">
+        <TabsContent value="active" id="active-symptoms-content" role="tabpanel">
           <Card>
             <CardHeader>
               <CardTitle>Current Symptoms</CardTitle>
             </CardHeader>
             <CardContent>
-              {state.currentSymptoms.length === 0 ? (
-                <p className="text-gray-500 text-center py-4">No active symptoms recorded</p>
-              ) : (
-                <div className="space-y-4">
-                  {state.currentSymptoms.map(symptom => (
-                    <SymptomCard 
-                      key={symptom.id} 
-                      symptom={symptom}
-                      onUpdate={updateSymptom}
-                    />
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="delirium">
-          <Card>
-            <CardHeader>
-              <CardTitle>Delirium Assessment</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                <div>
-                  <Label>Level of Consciousness</Label>
-                  <RadioGroup
-                    value={deliriumData.consciousness}
-                    onValueChange={(value) => 
-                      handleDeliriumUpdate('consciousness', value)
-                    }
-                    className="flex gap-4 mt-2"
-                  >
-                    {deliriumCriteria.consciousness.map(level => (
-                      <div key={level} className="flex items-center space-x-2">
-                        <RadioGroupItem value={level} id={level} />
-                        <Label htmlFor={level} className="capitalize">{level}</Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </div>
-
-                <div>
-                  <Label>Orientation</Label>
-                  <div className="grid grid-cols-3 gap-4 mt-2">
-                    {deliriumCriteria.orientationDomains.map((domain, index) => (
-                      <Button
-                        key={domain}
-                        variant={deliriumData.orientation[index] ? "default" : "destructive"}
-                        onClick={() => {
-                          const newOrientation = [...deliriumData.orientation];
-                          newOrientation[index] = !newOrientation[index];
-                          handleDeliriumUpdate('orientation', newOrientation);
-                        }}
-                      >
-                        {domain}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <Label>Attention</Label>
-                  <RadioGroup
-                    value={deliriumData.attention}
-                    onValueChange={(value) => 
-                      handleDeliriumUpdate('attention', value)
-                    }
-                    className="flex gap-4 mt-2"
-                  >
-                    {deliriumCriteria.attentionStates.map(state => (
-                      <div key={state} className="flex items-center space-x-2">
-                        <RadioGroupItem value={state} id={state} />
-                        <Label htmlFor={state} className="capitalize">{state}</Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </div>
-
-                <div>
-                  <Label>Onset</Label>
-                  <RadioGroup
-                    value={deliriumData.onset}
-                    onValueChange={(value) => 
-                      handleDeliriumUpdate('onset', value)
-                    }
-                    className="flex gap-4 mt-2"
-                  >
-                    {deliriumCriteria.onsetTypes.map(type => (
-                      <div key={type} className="flex items-center space-x-2">
-                        <RadioGroupItem value={type} id={type} />
-                        <Label htmlFor={type} className="capitalize">{type}</Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={deliriumData.fluctuating}
-                    onChange={(e) => 
-                      handleDeliriumUpdate('fluctuating', e.target.checked)
-                    }
-                    className="rounded border-gray-300"
-                  />
-                  <Label>Symptoms fluctuate throughout the day</Label>
-                </div>
-
-                {isDeliriumLikely() && (
-                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="font-semibold text-red-800">Delirium Likely</h4>
-                      <p className="text-sm text-red-700 mt-1">
-                        Immediate assessment needed. Consider reversible causes:
-                        medications, infection, metabolic disturbance, organ failure.
-                      </p>
-                    </div>
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {filteredSymptoms.length === 0 && !searchQuery && (
+                  <p className="col-span-full text-center py-4 text-gray-500 dark:text-gray-400">
+                    No active symptoms recorded
+                  </p>
                 )}
+                {filteredSymptoms.length === 0 && searchQuery && (
+                  <p className="col-span-full text-center py-4 text-gray-500 dark:text-gray-400">
+                    No symptoms match your search
+                  </p>
+                )}
+                {filteredSymptoms.map(symptom => (
+                  <SymptomCard 
+                    key={symptom.id} 
+                    symptom={symptom}
+                    onUpdate={updateSymptom}
+                  />
+                ))}
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="history">
+        <TabsContent value="delirium" id="delirium-assessment-content" role="tabpanel">
+          <Suspense fallback={
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <SymptomCardSkeleton />
+              <SymptomCardSkeleton />
+            </div>
+          }>
+            <DeliriumAssessment />
+          </Suspense>
+        </TabsContent>
+
+        <TabsContent value="history" id="symptom-history-content" role="tabpanel">
           <Card>
             <CardHeader>
               <CardTitle>Symptom History</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-500 text-center py-4">
+              <p className="text-gray-500 dark:text-gray-400 text-center py-4">
                 Symptom history will be displayed here
               </p>
             </CardContent>
@@ -227,44 +175,4 @@ const SymptomControl = () => {
   );
 };
 
-interface SymptomCardProps {
-  symptom: Symptom;
-  onUpdate: (symptom: Symptom) => void;
-}
-
-const SymptomCard = ({ symptom, onUpdate }: SymptomCardProps) => {
-  return (
-    <Card>
-      <CardContent className="p-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="font-medium">{symptom.name}</h3>
-            <p className="text-sm text-gray-500">Onset: {symptom.onset}</p>
-          </div>
-          <Badge
-            variant={
-              symptom.severity === 'severe' ? 'destructive' :
-              symptom.severity === 'moderate' ? 'default' :
-              'secondary'
-            }
-          >
-            {symptom.severity}
-          </Badge>
-        </div>
-        <p className="mt-2 text-sm text-gray-600">{symptom.description}</p>
-        {symptom.interventions.length > 0 && (
-          <div className="mt-3">
-            <h4 className="text-sm font-medium mb-1">Current Interventions:</h4>
-            <ul className="list-disc list-inside text-sm text-gray-600">
-              {symptom.interventions.map((intervention, index) => (
-                <li key={index}>{intervention}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
-};
-
-export default SymptomControl;
+export default React.memo(SymptomControl);

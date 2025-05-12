@@ -1,6 +1,15 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import type { Medication } from './../types'; // Corrected import path
+import type { Medication } from './../types';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface Props {
   medication: Medication | null;
@@ -9,150 +18,227 @@ interface Props {
 }
 
 export default function MedicationDetailModal({ medication, isOpen, onClose }: Props) {
-  if (!isOpen || !medication) return null;
-
-  // Helper function to check if a field is a JSON object
-  const isJsonObject = (value: any): boolean => {
-    try {
-      return typeof value === 'object' && value !== null && !Array.isArray(value);
-    } catch {
-      return false;
-    }
-  };
-
-  // Helper function to render any value
-  const renderValue = (value: any): JSX.Element => {
-    if (Array.isArray(value)) {
-      return (
-        <ul className="list-disc pl-5 text-gray-600">
-          {value.map((item, index) => (
-            <li key={index}>{renderValue(item)}</li>
-          ))}
-        </ul>
-      );
-    } else if (isJsonObject(value)) {
-      return (
-        <div className="space-y-2">
-          {Object.entries(value).map(([key, val], index) => (
-            <div key={index}>
-              <h4 className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent capitalize">
-                {key.replace(/_/g, ' ')}:
-              </h4>
-              {renderValue(val)}
-            </div>
-          ))}
-        </div>
-      );
-    } else {
-      return <span className="text-gray-600">{String(value)}</span>;
-    }
-  };
-
-  // Core fields that have specific rendering requirements
-  const renderCoreFields = () => (
-    <>
-      {/* Header */}
-      <div className="bg-white/30 backdrop-blur-md border-b border-white/20 px-6 py-4 flex justify-between items-center shadow-lg hover:shadow-xl opacity-80 hover:opacity-100 transition-all duration-300">
-        <div>
-          <h2 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{medication.name}</h2>
-          <p className="text-sm text-gray-500">{medication.brand_names.join(', ')}</p>
-        </div>
-        <button
-          onClick={onClose}
-          className="text-gray-400 hover:text-indigo-600 transition-all duration-300"
-          aria-label="Close modal"
-        >
-          <X className="h-6 w-6" />
-        </button>
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-6">
-        {/* Classification */}
-        <div>
-          <h3 className="text-lg font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">Classification</h3>
-          <span className="px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-indigo-600 text-sm font-medium border border-gray-200 border-opacity-40">
-            {medication.classification}
-          </span>
-        </div>
-
-        {/* Indications */}
-        <div>
-          <h3 className="text-lg font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">Indications</h3>
-          {renderValue(medication.indications)}
-        </div>
-
-        {/* Dosage & Administration */}
-        <div>
-          <h3 className="text-lg font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">Dosage & Administration</h3>
-          <div className="space-y-4">
-            <div>
-              <h4 className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Dosage:</h4>
-              {renderValue(medication.dosage)}
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Administration:</h4>
-              {renderValue(medication.administration)}
-            </div>
-          </div>
-        </div>
-
-        {/* Side Effects & Interactions */}
-        <div>
-          <h3 className="text-lg font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">Side Effects & Interactions</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <h4 className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Side Effects:</h4>
-              {renderValue(medication.side_effects)}
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Interactions:</h4>
-              {renderValue(medication.interactions)}
-            </div>
-          </div>
-        </div>
-
-        {/* Monitoring */}
-        <div>
-          <h3 className="text-lg font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">Monitoring Guidelines</h3>
-          {renderValue(medication.monitoring)}
-        </div>
-
-        {/* References */}
-        <div>
-          <h3 className="text-lg font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">References</h3>
-          {renderValue(medication.reference_sources)}
-        </div>
-
-        {/* Additional Fields */}
-        {Object.entries(medication).map(([key, value]) => {
-          // Skip core fields that are already rendered
-          if ([
-            'id', 'name', 'brand_names', 'classification', 'indications',
-            'dosage', 'administration', 'side_effects', 'interactions',
-            'monitoring', 'reference_sources', 'created_at', 'updated_at'
-          ].includes(key)) {
-            return null;
-          }
-
-          return (
-            <div key={key}>
-              <h3 className="text-lg font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2 capitalize">
-                {key.replace(/_/g, ' ')}
-              </h3>
-              {renderValue(value)}
-            </div>
-          );
-        })}
-      </div>
-    </>
-  );
+  if (!medication) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white/30 backdrop-blur-md border border-white/20 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-lg hover:shadow-xl opacity-80 hover:opacity-100 transition-all duration-300">
-        {renderCoreFields()}
-      </div>
-    </div>
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-[700px] w-[94vw] max-h-[90vh] flex flex-col bg-white dark:bg-gray-900">
+        <DialogHeader className="border-b dark:border-gray-800">
+          <div className="flex items-start justify-between">
+            <div>
+              <DialogTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                {medication.name}
+              </DialogTitle>
+              {medication.brand_names?.length > 0 && (
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                  {medication.brand_names.join(', ')}
+                </p>
+              )}
+            </div>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+              aria-label="Close dialog"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+        </DialogHeader>
+
+        <ScrollArea className="flex-1">
+          <div className="p-6 space-y-6">
+            {/* Classification */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Classification</h3>
+              <Badge variant="outline" className="text-sm">
+                {medication.classification}
+              </Badge>
+            </div>
+
+            {/* Indications */}
+            {medication.indications && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Indications</h3>
+                <div className="space-y-2">
+                  {medication.indications?.cancer_types && medication.indications.cancer_types.length > 0 && (
+                    <div>
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Cancer Types</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {medication.indications.cancer_types.map((type, index) => (
+                          <Badge key={index} variant="secondary">{type}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {medication.indications?.biomarkers && medication.indications.biomarkers.length > 0 && (
+                    <div>
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Biomarkers</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {medication.indications.biomarkers.map((marker, index) => (
+                          <Badge key={index} variant="secondary">{marker}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Dosing */}
+            {medication.dosing && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Dosing & Administration</h3>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 space-y-4">
+                  {medication.dosing.standard && (
+                    <div>
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-1">Standard Dose</h4>
+                      <p className="text-gray-600 dark:text-gray-400">{medication.dosing.standard}</p>
+                    </div>
+                  )}
+                  {medication.dosing.schedule && (
+                    <div>
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-1">Schedule</h4>
+                      <p className="text-gray-600 dark:text-gray-400">{medication.dosing.schedule}</p>
+                    </div>
+                  )}
+                  {medication.dosing?.adjustments && medication.dosing.adjustments.length > 0 && (
+                    <div>
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-1">Dose Adjustments</h4>
+                      <ul className="list-disc list-inside space-y-1">
+                        {medication.dosing.adjustments.map((adjustment, index) => (
+                          <li key={index} className="text-gray-600 dark:text-gray-400">{adjustment}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Side Effects */}
+            {medication.side_effects && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Side Effects</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {medication.side_effects?.common && medication.side_effects.common.length > 0 && (
+                    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Common</h4>
+                      <ul className="list-disc list-inside space-y-1">
+                        {medication.side_effects.common.map((effect, index) => (
+                          <li key={index} className="text-gray-600 dark:text-gray-400">{effect}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {medication.side_effects?.severe && medication.side_effects.severe.length > 0 && (
+                    <div className="bg-red-50 dark:bg-red-900/10 rounded-lg p-4">
+                      <h4 className="font-medium text-red-800 dark:text-red-200 mb-2">Severe</h4>
+                      <ul className="list-disc list-inside space-y-1">
+                        {medication.side_effects.severe.map((effect, index) => (
+                          <li key={index} className="text-red-600 dark:text-red-400">{effect}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Monitoring */}
+            {medication.monitoring && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Monitoring</h3>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 space-y-4">
+                  {medication.monitoring?.baseline && medication.monitoring.baseline.length > 0 && (
+                    <div>
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-1">Baseline</h4>
+                      <ul className="list-disc list-inside space-y-1">
+                        {medication.monitoring.baseline.map((item, index) => (
+                          <li key={index} className="text-gray-600 dark:text-gray-400">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {medication.monitoring?.ongoing && medication.monitoring.ongoing.length > 0 && (
+                    <div>
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-1">Ongoing</h4>
+                      <ul className="list-disc list-inside space-y-1">
+                        {medication.monitoring.ongoing.map((item, index) => (
+                          <li key={index} className="text-gray-600 dark:text-gray-400">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {medication.monitoring.frequency && (
+                    <div>
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-1">Frequency</h4>
+                      <p className="text-gray-600 dark:text-gray-400">{medication.monitoring.frequency}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Interactions */}
+            {medication.interactions && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Drug Interactions</h3>
+                {medication.interactions?.contraindications && medication.interactions.contraindications.length > 0 && (
+                  <div className="mb-4">
+                    <h4 className="font-medium text-red-800 dark:text-red-200 mb-2">Contraindications</h4>
+                    <ul className="list-disc list-inside space-y-1">
+                      {medication.interactions.contraindications.map((item, index) => (
+                        <li key={index} className="text-red-600 dark:text-red-400">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {medication.interactions?.drugs && medication.interactions.drugs.length > 0 && (
+                  <div>
+                    <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Interacting Medications</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {medication.interactions.drugs.map((drug, index) => (
+                        <Badge key={index} variant="outline">{drug}</Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Additional Info */}
+            {medication.additional_info && Object.keys(medication.additional_info).length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Additional Information</h3>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 space-y-4">
+                  {medication.additional_info?.warnings && medication.additional_info.warnings.length > 0 && (
+                    <div>
+                      <h4 className="font-medium text-amber-800 dark:text-amber-200 mb-1">Warnings</h4>
+                      <ul className="list-disc list-inside space-y-1">
+                        {medication.additional_info.warnings.map((warning, index) => (
+                          <li key={index} className="text-amber-600 dark:text-amber-400">{warning}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {medication.additional_info.special_populations && (
+                    <div>
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-1">Special Populations</h4>
+                      <p className="text-gray-600 dark:text-gray-400">{medication.additional_info.special_populations}</p>
+                    </div>
+                  )}
+                  {medication.additional_info.storage && (
+                    <div>
+                      <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-1">Storage</h4>
+                      <p className="text-gray-600 dark:text-gray-400">{medication.additional_info.storage}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </ScrollArea>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Activity, Search, ThermometerSnowflake, Wind, AlertTriangle, Clock } from 'lucide-react';
-import { cn } from '../../../lib/utils';
 
 interface EnhancedSymptom extends ClassicSymptom {
   severity: {

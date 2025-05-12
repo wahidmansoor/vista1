@@ -9,7 +9,10 @@ import ErrorBoundary from "../../../components/ErrorBoundary";
 import { Skeleton } from "../../../components/ui/skeleton";
 import debounce from 'lodash.debounce';
 import { getProtocols, ProtocolFilters } from '../../../services/protocols';
-import type { Protocol, Drug } from '../../../types/protocol';
+import type { Protocol, Drug, SupportiveCareItem, ContraindicationItem, SpecialNote } from '../../../types/protocol';
+import ProtocolCard from "./ProtocolCard";
+import ProtocolDetailsDrawer from "./ProtocolDetailsDrawer";
+import { SupabaseTester } from "../../../components/SupabaseTester";
 
 // Update interfaces for the components
 interface RegimenGroup {
@@ -69,38 +72,6 @@ const groupProtocols = (protocols: Protocol[]): RegimenGroup[] => {
   }
 };
 
-const ProtocolCard: React.FC<{ protocol: Protocol; onClick: () => void }> = ({ protocol, onClick }) => (
-  <div 
-    onClick={onClick}
-    className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 hover:shadow-lg transition cursor-pointer transform hover:scale-[1.02] active:scale-[0.98] border border-gray-100 dark:border-gray-700"
-  >
-    <div className="flex justify-between items-start mb-3">
-      <h4 className="font-bold text-md text-gray-900 dark:text-gray-100">
-        {protocol?.title || 'Untitled'}
-      </h4>
-      <div className="flex flex-col items-end gap-2">
-        <span className="text-xs bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-100 px-2 py-1 rounded-full flex items-center gap-1">
-          <Pill className="w-3 h-3" />
-          {protocol?.count || 0} drugs
-        </span>
-        {protocol?.treatment_intent && (
-          <span className="text-xs bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-100 px-2 py-1 rounded-full">
-            {protocol.treatment_intent}
-          </span>
-        )}
-      </div>
-    </div>
-    <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 hover:line-clamp-none">
-      {Array.isArray(protocol?.drugs) ? 
-        protocol.drugs
-          .map(drug => drug?.name)
-          .filter(Boolean)
-          .join(", ") 
-        : 'No drugs listed'}
-    </p>
-  </div>
-);
-
 const DrugDetailView = ({ drug, onBack }: { drug: Drug; onBack: () => void }) => (
   <div className="space-y-6">
     <button
@@ -120,18 +91,7 @@ const DrugDetailView = ({ drug, onBack }: { drug: Drug; onBack: () => void }) =>
         <section>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Dosing</h3>
           <p className="text-gray-700 dark:text-gray-300">
-            {drug?.dose && typeof drug.dose === 'string' 
-              ? drug.dose 
-              : 'No dosing information available'}
-          </p>
-        </section>
-
-        <section>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Schedule</h3>
-          <p className="text-gray-700 dark:text-gray-300">
-            {drug?.timing && typeof drug.timing === 'string'
-              ? drug.timing
-              : 'No schedule information available'}
+            {drug?.dose || 'No dosing information available'}
           </p>
         </section>
 
@@ -139,8 +99,21 @@ const DrugDetailView = ({ drug, onBack }: { drug: Drug; onBack: () => void }) =>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Supportive Care</h3>
           <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
             {Array.isArray(drug?.supportiveCare) && drug.supportiveCare.length > 0 ? (
-              drug.supportiveCare.map((item, index) => (
-                <li key={index}>{typeof item === 'string' ? item : ''}</li>
+              drug.supportiveCare.map((item: string | SupportiveCareItem, index) => (
+                <li key={index}>
+                  {typeof item === 'string' ? (
+                    item
+                  ) : (
+                    <div>
+                      {item.name && <strong>{item.name}</strong>}
+                      {item.dose && <span> — {item.dose}</span>}
+                      {item.timing && <span> at {item.timing}</span>}
+                      {item.route && <span> via {item.route}</span>}
+                      {item.purpose && <div className="ml-4 text-sm">Purpose: {item.purpose}</div>}
+                      {!item.name && !item.dose && <span>{JSON.stringify(item)}</span>}
+                    </div>
+                  )}
+                </li>
               ))
             ) : (
               <li>No supportive care information available</li>
@@ -152,14 +125,50 @@ const DrugDetailView = ({ drug, onBack }: { drug: Drug; onBack: () => void }) =>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Contraindications</h3>
           <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
             {Array.isArray(drug?.contraindications) && drug.contraindications.length > 0 ? (
-              drug.contraindications.map((item, index) => (
-                <li key={index}>{typeof item === 'string' ? item : ''}</li>
+              drug.contraindications.map((item: string | ContraindicationItem, index) => (
+                <li key={index}>
+                  {typeof item === 'string' ? (
+                    item
+                  ) : (
+                    <div>
+                      {item.condition && <strong>{item.condition}</strong>}
+                      {item.severity && <span> ({item.severity})</span>}
+                      {item.management && <div className="ml-4 text-sm">Management: {item.management}</div>}
+                      {!item.condition && <span>{JSON.stringify(item)}</span>}
+                    </div>
+                  )}
+                </li>
               ))
             ) : (
               <li>No contraindication information available</li>
             )}
           </ul>
         </section>
+
+        {drug?.special_notes && (
+          <section>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Special Notes</h3>
+            <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+              {Array.isArray(drug.special_notes) ? (
+                drug.special_notes.map((note: string | SpecialNote, index: number) => (
+                  <li key={index}>
+                    {typeof note === 'string' ? (
+                      note
+                    ) : (
+                      <div>
+                        {note.title && <strong>{note.title}</strong>}
+                        {note.description && <div className="ml-4 text-sm">{note.description}</div>}
+                        {!note.title && !note.description && <span>{JSON.stringify(note)}</span>}
+                      </div>
+                    )}
+                  </li>
+                ))
+              ) : (
+                <li>{String(drug.special_notes)}</li>
+              )}
+            </ul>
+          </section>
+        )}
       </div>
     </div>
   </div>
@@ -224,21 +233,6 @@ interface SectionProps {
   group: RegimenGroup;
   onProtocolSelect: (protocol: Protocol) => void;
 }
-
-const Section: React.FC<SectionProps> = ({ group, onProtocolSelect }) => (
-  <section className={`mb-8 p-6 rounded-xl ${group.color}`}>
-    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">{group.title}</h3>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {group.items.map((item, index) => (
-        <ProtocolCard 
-          key={`${item.title}-${index}`} 
-          protocol={item} 
-          onClick={() => onProtocolSelect(item)} 
-        />
-      ))}
-    </div>
-  </section>
-);
 
 // Add these types after the other interfaces
 interface FilterState {
@@ -354,9 +348,12 @@ const SearchAndFilter = ({
 
 export const RegimensLibrary = () => {
   return (
-    <ErrorBoundary moduleName="Treatment Regimens">
-      <RegimensLibraryContent />
-    </ErrorBoundary>
+    <div className="space-y-6 p-6">
+      <SupabaseTester module="chemotherapy" />
+      <ErrorBoundary moduleName="Treatment Regimens">
+        <RegimensLibraryContent />
+      </ErrorBoundary>
+    </div>
   );
 };
 
@@ -395,6 +392,8 @@ const RegimensLibraryContent: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGroups, setSelectedGroups] = useState<string[]>([]);
   const [selectedIntent, setSelectedIntent] = useState<'Curative' | 'Adjuvant' | 'Neoadjuvant' | 'Palliative'>();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerProtocol, setDrawerProtocol] = useState<any>(null);
 
   // Create debounced search handler
   const debouncedSearch = useMemo(
@@ -470,29 +469,26 @@ const RegimensLibraryContent: React.FC = () => {
     }
   };
 
-  const filteredGroups = useMemo(() => {
-    return regimenGroups.map(group => ({
-      ...group,
-      items: group.items.filter(protocol => {
-        const matchesSearch = searchQuery === "" || (
-          (protocol.title?.toLowerCase().includes(searchQuery.toLowerCase()) || false) ||
-          protocol.drugs?.some(drug => 
-            drug.name.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-        );
-        
-        const matchesGroups = selectedGroups.length === 0 || 
-          selectedGroups.includes(protocol.tumour_group);
-        
-        return matchesSearch && matchesGroups;
-      })
-    })).filter(group => group.items.length > 0);
-  }, [regimenGroups, searchQuery, selectedGroups]);
+  const handleProtocolView = (protocol: any) => {
+    setDrawerProtocol(protocol);
+    setDrawerOpen(true);
+  };
 
-  const availableGroups = useMemo(() => 
-    Array.from(new Set(regimenGroups.map(g => g.title))),
-    [regimenGroups]
-  );
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+    setDrawerProtocol(null);
+  };
+
+  // Groups are already filtered by the backend
+  const filteredGroups = useMemo(() => {
+    return regimenGroups.filter(group => group.items.length > 0);
+  }, [regimenGroups]);
+
+  const availableGroups = useMemo(() => {
+    // Ensure we have unique groups and they're sorted
+    const groups = Array.from(new Set(regimenGroups.map(g => g.title)));
+    return groups.sort();
+  }, [regimenGroups]);
 
   // Add toast notifications for error states
   useEffect(() => {
@@ -555,6 +551,24 @@ const RegimensLibraryContent: React.FC = () => {
     );
   };
 
+  // Replace ProtocolCard usage in Section with new version
+  const Section: React.FC<SectionProps> = ({ group }) => (
+    <section className={`mb-8 p-6 rounded-xl ${group.color}`}>
+      <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+        {group.title} <span className="ml-2 text-sm text-gray-500">– {group.items.length} protocols</span>
+      </h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {group.items.map((item, index) => (
+          <ProtocolCard 
+            key={`${item.title}-${index}`} 
+            protocol={item} 
+            onView={() => handleProtocolView(item)}
+          />
+        ))}
+      </div>
+    </section>
+  );
+
   return (
     <div className="p-6 space-y-6">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
@@ -591,6 +605,7 @@ const RegimensLibraryContent: React.FC = () => {
           onDrugSelect={handleDrugSelect}
         />
       ) : renderContent()}
+      <ProtocolDetailsDrawer protocol={drawerProtocol} open={drawerOpen} onClose={handleDrawerClose} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabaseClient';
 
 export interface ToxicityData {
   id: string;
@@ -80,4 +80,4 @@ export const getToxicitiesByMedication = async (medicationId: string): Promise<T
     console.error('Error fetching toxicities by medication:', err);
     throw err;
   }
-}; 
+};

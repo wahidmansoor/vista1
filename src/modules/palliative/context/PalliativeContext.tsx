@@ -4,10 +4,18 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 export interface Symptom {
   id: string;
   name: string;
-  onset: string;
   severity: 'mild' | 'moderate' | 'severe';
   description: string;
   interventions: string[];
+  onset: string;
+  notes: string;
+  assessmentPoints: string[];
+  redFlags: string[];
+  isFavorite?: boolean;
+  suggestedInterventions: {
+    nonPharmacological: string[];
+    pharmacological: string[];
+  };
 }
 
 export interface FamilyMember {
@@ -33,6 +41,7 @@ interface PalliativeState {
   painScore: number;
   familyMembers: FamilyMember[];
   advanceDirectives: AdvanceDirective[];
+  favoriteSymptomIds: string[];
   lastUpdated: string;
 }
 
@@ -47,13 +56,15 @@ type PalliativeAction =
   | { type: 'REMOVE_FAMILY_MEMBER'; payload: string }
   | { type: 'UPDATE_ADVANCE_DIRECTIVE'; payload: AdvanceDirective }
   | { type: 'REMOVE_ADVANCE_DIRECTIVE'; payload: string }
-  | { type: 'LOAD_STATE'; payload: PalliativeState };
+  | { type: 'LOAD_STATE'; payload: PalliativeState }
+  | { type: 'TOGGLE_FAVORITE'; payload: string };
 
 const initialState: PalliativeState = {
   currentSymptoms: [],
   painScore: 0,
   familyMembers: [],
   advanceDirectives: [],
+  favoriteSymptomIds: [],
   lastUpdated: new Date().toISOString()
 };
 
@@ -69,6 +80,7 @@ const PalliativeContext = createContext<{
   removeFamilyMember: (id: string) => void;
   updateAdvanceDirective: (directive: AdvanceDirective) => void;
   removeAdvanceDirective: (id: string) => void;
+  toggleFavorite: (symptomId: string) => void;
 } | undefined>(undefined);
 
 // Reducer
@@ -146,6 +158,15 @@ function palliativeReducer(state: PalliativeState, action: PalliativeAction): Pa
         lastUpdated: new Date().toISOString()
       };
 
+    case 'TOGGLE_FAVORITE':
+      return {
+        ...state,
+        favoriteSymptomIds: state.favoriteSymptomIds.includes(action.payload)
+          ? state.favoriteSymptomIds.filter(id => id !== action.payload)
+          : [...state.favoriteSymptomIds, action.payload],
+        lastUpdated: new Date().toISOString()
+      };
+
     case 'LOAD_STATE':
       return action.payload;
 
@@ -212,6 +233,10 @@ export function PalliativeCareProvider({ children }: { children: React.ReactNode
     dispatch({ type: 'REMOVE_ADVANCE_DIRECTIVE', payload: id });
   };
 
+  const toggleFavorite = (symptomId: string) => {
+    dispatch({ type: 'TOGGLE_FAVORITE', payload: symptomId });
+  };
+
   return (
     <PalliativeContext.Provider value={{
       state,
@@ -223,7 +248,8 @@ export function PalliativeCareProvider({ children }: { children: React.ReactNode
       updateFamilyMember,
       removeFamilyMember,
       updateAdvanceDirective,
-      removeAdvanceDirective
+      removeAdvanceDirective,
+      toggleFavorite
     }}>
       {children}
     </PalliativeContext.Provider>

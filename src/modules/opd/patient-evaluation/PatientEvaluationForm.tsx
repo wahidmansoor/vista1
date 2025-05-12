@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AlertTriangle, CheckCircle, AlertCircle, Save, Trash2, Printer, Brain } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
@@ -54,10 +54,25 @@ const PatientEvaluationForm: React.FC = () => {
     kps: 100
   });
 
+  // Define currentTemplate first as getStepStatus depends on it.
   const currentTemplate = useMemo(() => {
     if (!selectedCancerType) return null;
     return evaluationTemplates[selectedCancerType];
   }, [selectedCancerType]);
+
+  // Function to determine step status
+  const getStepStatus = useCallback((sectionIndex: number) => {
+    if (!currentTemplate) return 'upcoming';
+    
+    const sectionFields = currentTemplate.sections[sectionIndex].items.map(
+      (_, itemIndex) => `section-${sectionIndex}-item-${itemIndex}`
+    );
+    
+    const isComplete = sectionFields.every(id => formData[id]?.trim());
+    const isCurrent = !isComplete && sectionFields.some(id => formData[id]?.trim());
+    
+    return isComplete ? 'complete' : isCurrent ? 'current' : 'upcoming';
+  }, [currentTemplate, formData]);
 
   // Calculate form progress steps
   const steps = useMemo(() => {
@@ -69,20 +84,7 @@ const PatientEvaluationForm: React.FC = () => {
       description: section.cancerSpecificNotes?.[0] || '',
       status: getStepStatus(index) as 'complete' | 'current' | 'upcoming'
     }));
-  }, [currentTemplate, formData]);
-
-  const getStepStatus = (sectionIndex: number) => {
-    if (!currentTemplate) return 'upcoming';
-    
-    const sectionFields = currentTemplate.sections[sectionIndex].items.map(
-      (_, itemIndex) => `section-${sectionIndex}-item-${itemIndex}`
-    );
-    
-    const isComplete = sectionFields.every(id => formData[id]?.trim());
-    const isCurrent = !isComplete && sectionFields.some(id => formData[id]?.trim());
-    
-    return isComplete ? 'complete' : isCurrent ? 'current' : 'upcoming';
-  };
+  }, [currentTemplate, formData, getStepStatus]);
 
   // Print functionality
   const handlePrint = () => {

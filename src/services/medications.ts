@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabaseClient';
 import type { Medication, SortConfig } from '../modules/cdu/types';
 
 /**
@@ -137,5 +137,46 @@ export const getMedicationById = async (id: string): Promise<Medication | null> 
   } catch (err) {
     console.error('Error in getMedicationById:', err);
     throw err;
+  }
+};
+
+/**
+ * 🔒 Secure Supabase Fetch for Oncology Medications
+ * ✅ Handles 401 Unauthorized errors 
+ * ✅ Properly encodes 'or' filter for multi-field fuzzy search
+ * 🧪 Uses Vite environment variables
+ */
+export const fetchMedications = async (searchTerm?: string): Promise<Medication[]> => {
+  try {
+    const baseUrl = `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/oncology_medications`;
+    
+    // Build filter based on search term if provided
+    const filter = searchTerm ? encodeURIComponent(`
+      or=(
+        name.ilike."%${searchTerm}%",
+        classification.ilike."%${searchTerm}%",
+        indications->>cancer_types.ilike."%${searchTerm}%"
+      )
+    `.trim()) : '';
+
+    const url = `${baseUrl}/select=*${filter ? `&${filter}` : ''}&order=name.asc.nullslast`;
+
+    const response = await fetch(url, {
+      headers: {
+        apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Supabase fetch failed: ${response.status} (${response.statusText})`);
+    }
+
+    const data = await response.json();
+    console.log("✅ Medications fetched:", data);
+    return data;
+  } catch (error) {
+    console.error("❌ Error fetching medications:", error);
+    throw error;
   }
 };
