@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { BookOpen, Atom, Heart } from "lucide-react"; // Use specific icons if needed, or keep generic ones
+import { BookOpen, Atom, Heart } from "lucide-react";
+import type { FC, ReactElement } from 'react';
 
 // Updated sections data for the landing page
 const sections = [
@@ -29,7 +30,7 @@ const sections = [
   }
 ];
 
-export default function HandbookLanding() {
+const HandbookLanding: FC = (): ReactElement => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
       <div className="p-8 max-w-7xl mx-auto">
@@ -44,7 +45,7 @@ export default function HandbookLanding() {
           {sections.map((section) => (
             <Link
               key={section.id}
-              to={section.path} // Use the updated path
+              to={section.path}
               className="group block p-6 bg-white dark:bg-slate-800 rounded-xl
                 shadow-sm hover:shadow-md transition-all duration-300
                 border border-gray-100 dark:border-gray-700
@@ -60,7 +61,6 @@ export default function HandbookLanding() {
                 <div className="mb-4 p-3 rounded-lg inline-block 
                   bg-gradient-to-br from-purple-100 to-blue-100
                   dark:from-purple-900/50 dark:to-blue-900/50">
-                  {/* Render Lucide icon directly */}
                   <section.icon className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                 </div>
                 
@@ -118,4 +118,6 @@ export default function HandbookLanding() {
       </div>
     </div>
   );
-}
+};
+
+export default HandbookLanding;

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLayout } from '@/context/LayoutContext';
 import { Sidebar } from './Sidebar';
+import Header from './Header'; // Import the Header component
 import { useWindowWidth } from '@react-hook/window-size';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -15,11 +16,14 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   }, [windowWidth]);
 
   return (
-    <div className="flex min-h-screen bg-background text-gray-900 dark:text-white transition-colors duration-300">
-      <Sidebar />
-      <main className="flex-1 p-6">
-        {children}
-      </main>
+    <div className="flex flex-col min-h-screen bg-background text-gray-900 dark:text-white transition-colors duration-300">
+      <Header />
+      <div className="flex flex-1">
+        <Sidebar />
+        <main className="flex-1 p-6 mt-16">
+          {children}
+        </main>
+      </div>
     </div>
   );
 };

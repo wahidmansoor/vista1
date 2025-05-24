@@ -1,13 +1,8 @@
 import express, { Request, Response, Router } from 'express';
 import { z } from 'zod';
-import { createClient } from '@supabase/supabase-js';
+import { getSupabase } from '../../lib/supabaseClient';
 
 const router: Router = express.Router();
-
-// Initialize Supabase client
-const supabaseUrl = process.env.VITE_SUPABASE_URL;
-const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl!, supabaseKey!);
 
 // Validation schema for patient evaluation
 const PatientEvaluationSchema = z.object({
@@ -35,6 +30,7 @@ router.post('/', (req: AuthenticatedRequest, res: Response) => {
       }
 
       const { cancerType, formData, timestamp } = validation.data;
+      const supabase = getSupabase();
 
       // Save to Supabase
       const { data, error } = await supabase

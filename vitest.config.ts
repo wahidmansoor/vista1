@@ -1,12 +1,16 @@
 import { defineConfig } from 'vitest/config';
+import path from 'path';
 
 export default defineConfig({
   test: {
     globals: true,
-    environment: 'node',
+    environment: 'jsdom',
     testTimeout: 10000, // 10 seconds
     hookTimeout: 10000,
     setupFiles: ['src/__tests__/setup.ts'],
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],

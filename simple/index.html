@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OncoVista Simple</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🧬 OncoVista</h1>
+    <nav>
+      <button onclick="showSection('dashboard')">Dashboard</button>
+      <button onclick="showSection('opd')">OPD</button>
+      <button onclick="showSection('cdu')">CDU</button>
+      <button onclick="showSection('inpatient')">Inpatient</button>
+      <button onclick="showSection('palliative')">Palliative</button>
+      <button onclick="showSection('tools')">Tools</button>
+      <button onclick="showSection('handbook')">Handbook</button>
+    </nav>
+  </header>
+  <main>
+    <section id="dashboard" class="active">
+      <h2>Welcome to OncoVista</h2>
+      <p>AI-Powered Oncology Support For Modern Clinicians</p>
+      <ul>
+        <li>Outpatient workflows, diagnostics, and follow-up</li>
+        <li>Chemotherapy protocols, side effects, and calculations</li>
+        <li>Admissions, rounds, complications, and supportive care</li>
+        <li>End-of-life care, symptom control, and family support</li>
+        <li>Oncology calculators and clinical red flags</li>
+      </ul>
+    </section>
+    <section id="opd">
+      <h2>Oncology OPD</h2>
+      <p>Outpatient workflows, diagnostics, and follow-up</p>
+    </section>
+    <section id="cdu">
+      <h2>Chemotherapy Day Unit (CDU)</h2>
+      <p>Chemo protocols, side effects, and calculations</p>
+    </section>
+    <section id="inpatient">
+      <h2>Inpatient Oncology</h2>
+      <p>Admissions, rounds, complications, and supportive care</p>
+    </section>
+    <section id="palliative">
+      <h2>Palliative Care</h2>
+      <p>End-of-life care, symptom control, and family support</p>
+    </section>
+    <section id="tools">
+      <h2>Tools</h2>
+      <ul>
+        <li>Clinical Calculators</li>
+        <li>Red Flags & Emergencies</li>
+        <li>Symptom Control Quick Guides</li>
+        <li>Important Labs Reference</li>
+        <li>Emergency Regimens</li>
+        <li>Cognitive Tools</li>
+        <li>Treatment Toxicity Checklists</li>
+        <li>Scheduling and Reminders</li>
+      </ul>
+    </section>
+    <section id="handbook">
+      <h2>Handbook</h2>
+      <p>Comprehensive oncology handbook and quick reference.</p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 OncoVista · Empowering Oncology Excellence</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronLeft,
@@ -14,12 +14,36 @@ import {
   Book,
   Pill,
   HeartPulse,
-  Activity
+  Activity,
+  Beaker,
+  Syringe,
+  FileHeart,
+  Shield,
+  AlarmClock,
+  NotebookPen,
+  Bot,
+  CalendarDays,
+  Clock,
+  ScrollText
 } from 'lucide-react';
-import { getProtocols, ProtocolFilters } from "../../../../services/protocols";
+import { getSupergroups, getProtocols } from '@/services/protocols';
 import type { Protocol, Drug } from '../../../../types/protocol';
 
-type TabType = 'overview' | 'tests' | 'treatment' | 'modifications' | 'precautions' | 'pharmacology' | 'supportive' | 'monitoring';
+type TabType = 
+  | 'overview' 
+  | 'eligibility'
+  | 'treatment'
+  | 'tests'
+  | 'monitoring'
+  | 'toxicity'
+  | 'modifications'
+  | 'pharmacology'
+  | 'administration'
+  | 'prepost'
+  | 'rescue'
+  | 'precautions'
+  | 'ai'
+  | 'info';
 
 interface TabDefinition {
   id: TabType;
@@ -42,53 +66,95 @@ const TABS: TabDefinition[] = [
     icon: <Info className="w-4 h-4" />
   },
   { 
-    id: 'tests',
-    label: 'Tests & Premedications',
-    color: 'bg-purple-500',
-    hoverColor: 'hover:bg-purple-600',
+    id: 'eligibility',
+    label: 'Eligibility',
+    color: 'bg-green-500',
+    hoverColor: 'hover:bg-green-600',
     icon: <Check className="w-4 h-4" />
   },
   { 
     id: 'treatment',
-    label: 'Treatment Details',
-    color: 'bg-green-500',
-    hoverColor: 'hover:bg-green-600',
-    icon: <Plus className="w-4 h-4" />
+    label: 'Treatment',
+    color: 'bg-purple-500',
+    hoverColor: 'hover:bg-purple-600',
+    icon: <Pill className="w-4 h-4" />
+  },
+  { 
+    id: 'tests',
+    label: 'Tests',
+    color: 'bg-amber-500',
+    hoverColor: 'hover:bg-amber-600',
+    icon: <Beaker className="w-4 h-4" />
+  },
+  { 
+    id: 'monitoring',
+    label: 'Monitoring',
+    color: 'bg-cyan-500',
+    hoverColor: 'hover:bg-cyan-600',
+    icon: <Activity className="w-4 h-4" />
+  },
+  { 
+    id: 'toxicity',
+    label: 'Toxicity',
+    color: 'bg-red-500',
+    hoverColor: 'hover:bg-red-600',
+    icon: <AlertTriangle className="w-4 h-4" />
   },
   { 
     id: 'modifications',
-    label: 'Dose Modifications',
+    label: 'Modifications',
     color: 'bg-yellow-500',
     hoverColor: 'hover:bg-yellow-600',
-    icon: <AlertTriangle className="w-4 h-4" />
+    icon: <FileHeart className="w-4 h-4" />
   },
-  {
+  { 
     id: 'pharmacology',
     label: 'Pharmacology',
     color: 'bg-pink-500',
     hoverColor: 'hover:bg-pink-600',
-    icon: <Pill className="w-4 h-4" />
+    icon: <Syringe className="w-4 h-4" />
   },
-  {
-    id: 'supportive',
-    label: 'Supportive Care',
-    color: 'bg-teal-500',
-    hoverColor: 'hover:bg-teal-600',
-    icon: <HeartPulse className="w-4 h-4" />
+  { 
+    id: 'administration',
+    label: 'Administration',
+    color: 'bg-violet-500',
+    hoverColor: 'hover:bg-violet-600',
+    icon: <Clock className="w-4 h-4" />
   },
-  {
-    id: 'monitoring',
-    label: 'Monitoring',
-    color: 'bg-orange-500',
-    hoverColor: 'hover:bg-orange-600',
-    icon: <Activity className="w-4 h-4" />
+  { 
+    id: 'prepost',
+    label: 'Pre/Post Meds',
+    color: 'bg-emerald-500',
+    hoverColor: 'hover:bg-emerald-600',
+    icon: <CalendarDays className="w-4 h-4" />
+  },
+  { 
+    id: 'rescue',
+    label: 'Rescue & Support',
+    color: 'bg-rose-500',
+    hoverColor: 'hover:bg-rose-600',
+    icon: <Shield className="w-4 h-4" />
   },
   { 
     id: 'precautions',
-    label: 'Precautions & References',
-    color: 'bg-red-500',
-    hoverColor: 'hover:bg-red-600',
-    icon: <AlertTriangle className="w-4 h-4" />
+    label: 'Precautions',
+    color: 'bg-orange-500',
+    hoverColor: 'hover:bg-orange-600',
+    icon: <AlarmClock className="w-4 h-4" />
+  },
+  { 
+    id: 'ai',
+    label: 'AI Insights',
+    color: 'bg-indigo-500',
+    hoverColor: 'hover:bg-indigo-600',
+    icon: <Bot className="w-4 h-4" />
+  },
+  { 
+    id: 'info',
+    label: 'Info & Metadata',
+    color: 'bg-slate-500',
+    hoverColor: 'hover:bg-slate-600',
+    icon: <ScrollText className="w-4 h-4" />
   }
 ];
 
@@ -246,23 +312,34 @@ const TabContent: React.FC<{
     );
   };
 
-  const content = {
+  const content: Record<TabType, React.ReactNode> = {
     overview: (
       <div className="space-y-6">
-        {protocol.exclusions?.criteria && (
+        {protocol.eligibility?.exclusion_criteria && (
           <AlertBanner
             type="error"
             title="Exclusion Criteria"
-            message={protocol.exclusions.criteria.join(', ')}
+            message={protocol.eligibility.exclusion_criteria.join(', ')}
           />
         )}
         
         <Accordion title="Eligibility Criteria" defaultOpen={true}>
-          {renderList(protocol.eligibility)}
+          {renderList(protocol.eligibility?.inclusion_criteria)}
         </Accordion>
 
         <Accordion title="Exclusions">
-          {renderList(protocol.exclusions?.criteria)}
+          {renderList(protocol.eligibility?.exclusion_criteria)}
+        </Accordion>
+      </div>
+    ),
+    eligibility: (
+      <div className="space-y-6">
+        <Accordion title="Inclusion Criteria" defaultOpen={true}>
+          {renderList(protocol.eligibility?.inclusion_criteria)}
+        </Accordion>
+        
+        <Accordion title="Exclusion Criteria">
+          {renderList(protocol.eligibility?.exclusion_criteria)}
         </Accordion>
       </div>
     ),
@@ -278,15 +355,15 @@ const TabContent: React.FC<{
       </div>
     ),
     treatment: (
-      <div className="space-y-6">
-        {protocol.treatment?.protocol && (
-          <div className="mb-6">
-            <h4 className="font-semibold text-indigo-900 mb-2">Treatment Protocol</h4>
-            <p className="text-gray-700">{protocol.treatment.protocol}</p>
-          </div>
-        )}
-
-        {protocol.treatment?.drugs && (
+        <div className="space-y-6">
+          {protocol.treatment && 'protocol' in protocol.treatment && (
+            <div className="mb-6">
+              <h4 className="font-semibold text-indigo-900 mb-2">Treatment Protocol</h4>
+              <p className="text-gray-700">{(protocol.treatment as any).protocol}</p>
+            </div>
+          )}
+  
+          {protocol.treatment?.drugs && (
           <div>
             <h4 className="font-semibold text-indigo-900 mb-4">Treatment Details</h4>
             <DataTable data={protocol.treatment.drugs} />
@@ -294,169 +371,6 @@ const TabContent: React.FC<{
         )}
       </div>
     ),
-    modifications: (
-      <div className="space-y-6">
-        {protocol.dose_modifications?.hematological && (
-          <Accordion title="Hematological Modifications" defaultOpen={true}>
-            {renderList(protocol.dose_modifications.hematological)}
-          </Accordion>
-        )}
-        
-        {protocol.dose_modifications?.nonHematological && (
-          <Accordion title="Non-Hematological Modifications">
-            {renderList(protocol.dose_modifications.nonHematological)}
-          </Accordion>
-        )}
-        
-        {protocol.dose_modifications?.renal && (
-          <Accordion title="Renal Modifications">
-            {renderList(protocol.dose_modifications.renal)}
-          </Accordion>
-        )}
-        
-        {protocol.dose_modifications?.hepatic && (
-          <Accordion title="Hepatic Modifications">
-            {renderList(protocol.dose_modifications.hepatic)}
-          </Accordion>
-        )}
-      </div>
-    ),
-    precautions: (
-      <div className="space-y-6">
-        {protocol.precautions && protocol.precautions.length > 0 && (
-          <AlertBanner
-            type="warning"
-            title="Precautions"
-            message={protocol.precautions.join(', ')}
-          />
-        )}
-        
-        <Accordion title="Precautions" defaultOpen={true}>
-          {renderList(protocol.precautions)}
-        </Accordion>
-        
-        <Accordion title="References">
-          {renderList(protocol.reference_list)}
-        </Accordion>
-      </div>
-    ),
-    pharmacology: (
-      <div className="space-y-6">
-        {protocol.drug_class && (
-          <div className="bg-pink-50 p-4 rounded-lg">
-            <h4 className="text-lg font-semibold text-pink-900 mb-2">Drug Classification</h4>
-            <div className="space-y-2">
-              {protocol.drug_class.name && (
-                <p className="text-pink-800">
-                  <span className="font-medium">Class:</span> {protocol.drug_class.name}
-                </p>
-              )}
-              {protocol.drug_class.mechanism && (
-                <p className="text-pink-800">
-                  <span className="font-medium">Mechanism:</span> {protocol.drug_class.mechanism}
-                </p>
-              )}
-              {protocol.drug_class.classification && (
-                <p className="text-pink-800">
-                  <span className="font-medium">Classification:</span> {protocol.drug_class.classification}
-                </p>
-              )}
-            </div>
-          </div>
-        )}
-
-        <Accordion title="Pharmacokinetics" defaultOpen={true}>
-          <pre className="whitespace-pre-wrap text-sm">
-            {JSON.stringify(protocol.pharmacokinetics, null, 2)}
-          </pre>
-        </Accordion>
-
-        {protocol.interactions && (
-          <div className="space-y-4">
-            <Accordion title="Drug Interactions">
-              {renderList(protocol.interactions.drugs)}
-            </Accordion>
-            <Accordion title="Contraindications">
-              {renderList(protocol.interactions.contraindications)}
-            </Accordion>
-            <Accordion title="Special Precautions">
-              {renderList(protocol.interactions.precautions)}
-            </Accordion>
-          </div>
-        )}
-
-        {protocol.administration_notes && (
-          <Accordion title="Administration Notes">
-            {renderList(protocol.administration_notes)}
-          </Accordion>
-        )}
-      </div>
-    ),
-
-    supportive: (
-      <div className="space-y-6">
-        {protocol.supportive_care && (
-          <>
-            <Accordion title="Required Supportive Care" defaultOpen={true}>
-              {renderList(protocol.supportive_care.required)}
-            </Accordion>
-            <Accordion title="Optional Supportive Care">
-              {renderList(protocol.supportive_care.optional)}
-            </Accordion>
-            <Accordion title="Supportive Care Monitoring">
-              {renderList(protocol.supportive_care.monitoring)}
-            </Accordion>
-          </>
-        )}
-
-        {protocol.rescue_agents && protocol.rescue_agents.length > 0 && (
-          <div className="bg-teal-50 rounded-lg p-4">
-            <h4 className="text-lg font-semibold text-teal-900 mb-4">Rescue Agents</h4>
-            <div className="divide-y divide-teal-200">
-              {protocol.rescue_agents.map((agent: { name: string; indication: string; dosing: string }, idx: number) => (
-                <div key={idx} className="py-3">
-                  <h5 className="font-medium text-teal-800">{agent.name}</h5>
-                  <p className="text-sm text-teal-700 mt-1"><span className="font-medium">Indication:</span> {agent.indication}</p>
-                  <p className="text-sm text-teal-700 mt-1"><span className="font-medium">Dosing:</span> {agent.dosing}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {protocol.supportive_meds && protocol.supportive_meds.length > 0 && (
-          <div className="bg-teal-50 rounded-lg p-4">
-            <h4 className="text-lg font-semibold text-teal-900 mb-4">Supportive Medications</h4>
-            <DataTable data={protocol.supportive_meds} />
-          </div>
-        )}
-
-        {protocol.pre_medications && (
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-teal-900 mb-4">Pre-medications</h4>
-            <Accordion title="Required Pre-medications">
-              <DataTable data={protocol.pre_medications.required} />
-            </Accordion>
-            <Accordion title="Optional Pre-medications">
-              <DataTable data={protocol.pre_medications.optional} />
-            </Accordion>
-          </div>
-        )}
-
-        {protocol.post_medications && (
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-teal-900 mb-4">Post-medications</h4>
-            <Accordion title="Required Post-medications">
-              <DataTable data={protocol.post_medications.required} />
-            </Accordion>
-            <Accordion title="Optional Post-medications">
-              <DataTable data={protocol.post_medications.optional} />
-            </Accordion>
-          </div>
-        )}
-      </div>
-    ),
-
     monitoring: (
       <div className="space-y-6">
         {protocol.toxicity_monitoring && (
@@ -514,15 +428,238 @@ const TabContent: React.FC<{
                 {renderList(protocol.ai_notes.warnings)}
               </Accordion>
             )}
-            {protocol.ai_notes.considerations && (
-              <Accordion title="Special Considerations">
-                {renderList(protocol.ai_notes.considerations)}
+          </div>
+        )}
+      </div>
+    ),
+    toxicity: (
+      <div className="space-y-6">
+        {protocol.toxicity_monitoring && (
+          <Accordion title="Toxicity Monitoring" defaultOpen={true}>
+            {renderList(protocol.toxicity_monitoring?.parameters)}
+          </Accordion>
+        )}
+      </div>
+    ),
+    modifications: (
+      <div className="space-y-6">
+        {protocol.dose_modifications?.hematological && (
+          <Accordion title="Hematological Modifications" defaultOpen={true}>
+            {renderList(protocol.dose_modifications.hematological)}
+          </Accordion>
+        )}
+        
+        {protocol.dose_modifications?.nonHematological && (
+          <Accordion title="Non-Hematological Modifications">
+            {renderList(protocol.dose_modifications.nonHematological)}
+          </Accordion>
+        )}
+        
+        {protocol.dose_modifications?.renal && (
+          <Accordion title="Renal Modifications">
+            {renderList(protocol.dose_modifications.renal)}
+          </Accordion>
+        )}
+        
+        {protocol.dose_modifications?.hepatic && (
+          <Accordion title="Hepatic Modifications">
+            {renderList(protocol.dose_modifications.hepatic)}
+          </Accordion>
+        )}
+      </div>
+    ),
+    pharmacology: (
+      <div className="space-y-6">
+        {protocol.drug_class && (
+          <div className="bg-pink-50 p-4 rounded-lg">
+            <h4 className="text-lg font-semibold text-pink-900 mb-2">Drug Classification</h4>
+            <div className="space-y-2">
+              {protocol.drug_class.name && (
+                <p className="text-pink-800">
+                  <span className="font-medium">Class:</span> {protocol.drug_class.name}
+                </p>
+              )}
+              {protocol.drug_class.mechanism && (
+                <p className="text-pink-800">
+                  <span className="font-medium">Mechanism:</span> {protocol.drug_class.mechanism}
+                </p>
+              )}
+              {protocol.drug_class.classification && (
+                <p className="text-pink-800">
+                  <span className="font-medium">Classification:</span> {protocol.drug_class.classification}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+
+        <Accordion title="Pharmacokinetics" defaultOpen={true}>
+          <pre className="whitespace-pre-wrap text-sm">
+            {JSON.stringify(protocol.pharmacokinetics, null, 2)}
+          </pre>
+        </Accordion>
+
+        {protocol.interactions && (
+          <div className="space-y-4">
+            <Accordion title="Drug Interactions">
+              {renderList(protocol.interactions.drugs)}
+            </Accordion>
+            <Accordion title="Contraindications">
+              {renderList(protocol.interactions.contraindications)}
+            </Accordion>
+            <Accordion title="Special Precautions">
+              {renderList(protocol.interactions.precautions)}
+            </Accordion>
+          </div>
+        )}
+
+        {protocol.administration_notes && (
+          <Accordion title="Administration Notes">
+            {renderList(protocol.administration_notes)}
+          </Accordion>
+        )}
+      </div>
+    ),
+    administration: (
+      <div className="space-y-6">
+        {protocol.administration_notes && (
+          <Accordion title="Administration Notes" defaultOpen={true}>
+            {renderList(protocol.administration_notes)}
+          </Accordion>
+        )}
+      </div>
+    ),
+    prepost: (
+      <div className="space-y-6">
+        {protocol.pre_medications && (
+          <div className="space-y-4">
+            <h4 className="text-lg font-semibold text-teal-900 mb-4">Pre-medications</h4>
+            <Accordion title="Required Pre-medications" defaultOpen={true}>
+              <DataTable data={protocol.pre_medications.required} />
+            </Accordion>
+            <Accordion title="Optional Pre-medications">
+              <DataTable data={protocol.pre_medications.optional} />
+            </Accordion>
+          </div>
+        )}
+
+        {protocol.post_medications && (
+          <div className="space-y-4">
+            <h4 className="text-lg font-semibold text-teal-900 mb-4">Post-medications</h4>
+            <Accordion title="Required Post-medications">
+              <DataTable data={protocol.post_medications.required} />
+            </Accordion>
+            <Accordion title="Optional Post-medications">
+              <DataTable data={protocol.post_medications.optional} />
+            </Accordion>
+          </div>
+        )}
+      </div>
+    ),
+    rescue: (
+      <div className="space-y-6">
+        {protocol.rescue_agents && protocol.rescue_agents.length > 0 && (
+          <div className="bg-teal-50 rounded-lg p-4">
+            <h4 className="text-lg font-semibold text-teal-900 mb-4">Rescue Agents</h4>
+            <div className="divide-y divide-teal-200">
+              {protocol.rescue_agents.map((agent: { name: string; indication: string; dosing: string }, idx: number) => (
+                <div key={idx} className="py-3">
+                  <h5 className="font-medium text-teal-800">{agent.name}</h5>
+                  <p className="text-sm text-teal-700 mt-1"><span className="font-medium">Indication:</span> {agent.indication}</p>
+                  <p className="text-sm text-teal-700 mt-1"><span className="font-medium">Dosing:</span> {agent.dosing}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {protocol.supportive_meds && protocol.supportive_meds.length > 0 && (
+          <div className="bg-teal-50 rounded-lg p-4">
+            <h4 className="text-lg font-semibold text-teal-900 mb-4">Supportive Medications</h4>
+            <DataTable data={protocol.supportive_meds} />
+          </div>
+        )}
+      </div>
+    ),
+    precautions: (
+      <div className="space-y-6">
+        {protocol.precautions && protocol.precautions.length > 0 && (
+          <AlertBanner
+            type="warning"
+            title="Precautions"
+            message={protocol.precautions.join(', ')}
+          />
+        )}
+        
+        <Accordion title="Precautions" defaultOpen={true}>
+          {renderList(protocol.precautions)}
+        </Accordion>
+        
+        <Accordion title="References">
+          {renderList(protocol.reference_list)}
+        </Accordion>
+      </div>
+    ),
+    ai: (
+      <div className="space-y-6">
+        {protocol.ai_notes && (
+          <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-4">
+            <h4 className="text-lg font-semibold text-purple-900 mb-4">AI Insights</h4>
+            {protocol.ai_notes.recommendations && (
+              <Accordion title="Recommendations" defaultOpen={true}>
+                {renderList(protocol.ai_notes.recommendations)}
+              </Accordion>
+            )}
+            {protocol.ai_notes.warnings && (
+              <Accordion title="Warnings">
+                {renderList(protocol.ai_notes.warnings)}
               </Accordion>
             )}
           </div>
         )}
       </div>
     ),
+    info: (
+      <div className="space-y-6">
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h4 className="text-lg font-semibold text-gray-900 mb-4">Protocol Information</h4>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-sm text-gray-600">Code</p>
+              <p className="font-medium">{protocol.code}</p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-600">Tumor Group</p>
+              <p className="font-medium">{protocol.tumour_group}</p>
+            </div>
+            {protocol.treatment_intent && (
+              <div>
+                <p className="text-sm text-gray-600">Treatment Intent</p>
+                <p className="font-medium">{protocol.treatment_intent}</p>
+              </div>
+            )}
+            {protocol.version && (
+              <div>
+                <p className="text-sm text-gray-600">Version</p>
+                <p className="font-medium">{protocol.version}</p>
+              </div>
+            )}
+            {protocol.last_reviewed && (
+              <div>
+                <p className="text-sm text-gray-600">Last Reviewed</p>
+                <p className="font-medium">{protocol.last_reviewed}</p>
+              </div>
+            )}
+          </div>
+        </div>
+        
+        {protocol.reference_list && protocol.reference_list.length > 0 && (
+          <Accordion title="References" defaultOpen={true}>
+            {renderList(protocol.reference_list)}
+          </Accordion>
+        )}
+      </div>
+    )
   };
 
   return (
@@ -575,103 +712,62 @@ const ProtocolCard: React.FC<{
   );
 };
 
-const TumorGroupCard: React.FC<{
-  group: string;
-  protocols: Protocol[];
-  onClick: () => void;
-}> = ({ group, protocols, onClick }) => {
-  return (
-    <motion.div
-      className="relative border p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-br from-indigo-50 to-indigo-100 cursor-pointer group"
-      whileHover={{ scale: 1.02 }}
-      onClick={onClick}
-    >
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-xl font-bold text-indigo-900">{group}</h3>
-        <div className="bg-indigo-600 text-white px-3 py-1 rounded-full text-sm">
-          {protocols.length} protocols
-        </div>
-      </div>
-      
-      <div className="space-y-2">
-        <div className="flex items-center text-gray-600">
-          <Book className="w-4 h-4 mr-2" />
-          <span>
-            {protocols.slice(0, 3).map(p => p.code).join(', ')}
-            {protocols.length > 3 ? '...' : ''}
-          </span>
-        </div>
-      </div>
-
-      <div className="absolute inset-0 bg-indigo-600 opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300" />
-    </motion.div>
-  );
-};
-
-export default function RegimensLibrary() {
+const TreatmentProtocols: React.FC = () => {
+  const [supergroups, setSupergroups] = useState<string[]>([]);
+  const [selectedSupergroup, setSelectedSupergroup] = useState<string | null>(null);
   const [protocols, setProtocols] = useState<Protocol[]>([]);
-  const [groupedProtocols, setGroupedProtocols] = useState<ProtocolsByGroup>({});
-  const [selectedTumorGroup, setSelectedTumorGroup] = useState<string | null>(null);
-  const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null);
-  const [activeTab, setActiveTab] = useState<TabType>('overview');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [filters, setFilters] = useState<ProtocolFilters>({
-    tumorGroup: null,
-    drugName: null,
-    treatmentIntent: null
-  });
 
-  const groupProtocolsByTumorGroup = (protocols: Protocol[]): ProtocolsByGroup => {
-    const grouped = protocols.reduce((acc: ProtocolsByGroup, protocol) => {
-      const group = protocol.tumour_group || 'Other';
-      if (!acc[group]) acc[group] = [];
-      acc[group].push(protocol);
-      return acc;
-    }, {});
-
-    Object.keys(grouped).forEach(group => {
-      grouped[group].sort((a: Protocol, b: Protocol) => a.code.localeCompare(b.code));
-    });
-
-    return grouped;
-  };
-
-  const fetchProtocols = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await getProtocols(filters);
-      setProtocols(data as Protocol[]);
-      setGroupedProtocols(groupProtocolsByTumorGroup(data as Protocol[]));
-    } catch (err: any) {
-      setError(err.message || 'Failed to load protocols.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // Fetch supergroups on mount
   useEffect(() => {
-    fetchProtocols();
-  }, [filters]);
+    const fetchSupergroups = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await getSupergroups();
+        setSupergroups(data);
+      } catch (err) {
+        setError('Failed to load tumour supergroups.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSupergroups();
+  }, []);
 
-  const handleTumorGroupClick = (group: string) => {
-    setSelectedTumorGroup(group);
-  };
+  // Fetch protocols for selected supergroup
+  useEffect(() => {
+    if (selectedSupergroup) {
+      const fetchProtocols = async () => {
+        try {
+          setLoading(true);
+          setError(null);
+          const data = await getProtocols({ tumorGroup: selectedSupergroup, drugName: null, treatmentIntent: null });
+          setProtocols(data);
+        } catch (err) {
+          setError('Failed to load protocols for this supergroup.');
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchProtocols();
+    }
+  }, [selectedSupergroup]);
 
   const handleBack = () => {
     if (selectedProtocol) {
       setSelectedProtocol(null);
-      setActiveTab('overview');
-    } else if (selectedTumorGroup) {
-      setSelectedTumorGroup(null);
+    } else if (selectedSupergroup) {
+      setSelectedSupergroup(null);
+      setProtocols([]);
     }
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-32 text-indigo-600">
-        Loading protocols...
+        Loading...
       </div>
     );
   }
@@ -681,19 +777,11 @@ export default function RegimensLibrary() {
       <div className="p-4 border border-red-300 rounded-lg bg-red-50 text-red-700">
         {error}
         <button
-          onClick={fetchProtocols}
+          onClick={handleBack}
           className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
         >
-          Retry
+          Back
         </button>
-      </div>
-    );
-  }
-
-  if (Object.keys(groupedProtocols).length === 0) {
-    return (
-      <div className="p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-600">
-        No protocols found.
       </div>
     );
   }
@@ -743,52 +831,54 @@ export default function RegimensLibrary() {
     );
   }
 
-  if (selectedTumorGroup) {
+  if (!selectedSupergroup) {
+    // Step 1: Show supergroups
     return (
-      <div className="space-y-6">
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={handleBack}
-            className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-800"
-          >
-            <ChevronLeft className="w-5 h-5 mr-1" />
-            Back to Tumor Groups
-          </button>
-        </div>
-        <div className="bg-white rounded-lg p-6 shadow-lg">
-          <h2 className="text-2xl font-bold text-indigo-900 mb-6">
-            {selectedTumorGroup}
-            <span className="ml-2 text-sm text-gray-500">
-              ({groupedProtocols[selectedTumorGroup].length} protocols)
-            </span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {groupedProtocols[selectedTumorGroup].map((protocol) => (
-              <ProtocolCard
-                key={protocol.code}
-                protocol={protocol}
-                onClick={() => setSelectedProtocol(protocol)}
-              />
-            ))}
-          </div>
+      <div className="space-y-8">
+        <h1 className="text-3xl font-bold text-indigo-900 mb-8">Select Tumour Supergroup</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {supergroups.map((sg) => (
+            <div
+              key={sg}
+              className="cursor-pointer p-6 rounded-xl shadow-md bg-gradient-to-br from-indigo-50 to-indigo-100 hover:bg-indigo-200 transition"
+              onClick={() => setSelectedSupergroup(sg)}
+            >
+              <h2 className="text-xl font-bold text-indigo-900">{sg}</h2>
+            </div>
+          ))}
         </div>
       </div>
     );
   }
 
-  return (
-    <div className="space-y-8">
-      <h1 className="text-3xl font-bold text-indigo-900 mb-8">Regimens Library</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Object.entries(groupedProtocols).map(([tumorGroup, protocols]) => (
-          <TumorGroupCard
-            key={tumorGroup}
-            group={tumorGroup}
-            protocols={protocols}
-            onClick={() => handleTumorGroupClick(tumorGroup)}
-          />
-        ))}
+  // Step 2: Show protocols for selected supergroup
+  if (selectedSupergroup && !selectedProtocol) {
+    return (
+      <div className="space-y-8">
+        <button
+          onClick={handleBack}
+          className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-800"
+        >
+          <ChevronLeft className="w-5 h-5 mr-1" />
+          Back to Supergroups
+        </button>
+        <h1 className="text-3xl font-bold text-indigo-900 mb-8">Protocols in {selectedSupergroup}</h1>
+        {protocols.length === 0 ? (
+          <div className="text-center text-gray-500 dark:text-gray-400 mt-8">
+            No protocols found.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {protocols.map((protocol) => (
+              <UnifiedProtocolCard key={protocol.code} protocol={protocol} />
+            ))}
+          </div>
+        )}
       </div>
-    </div>
-  );
-}
+    );
+  }
+
+  return null;
+};
+
+export default TreatmentProtocols;

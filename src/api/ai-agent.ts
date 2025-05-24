@@ -4,6 +4,7 @@ import { getOfflineResponse } from '../components/ai-agent/mockResponses';
 import { v4 as uuidv4 } from 'uuid';
 import { ModuleType, PromptIntent, AIRequestBody, AIError } from '@/types/ai-agent';
 import { RateLimiter } from '../lib/rate-limit';
+import { z } from 'zod';
 
 const router = express.Router();
 
@@ -71,10 +72,31 @@ function validateResponse(text: string): { valid: boolean; sanitized?: string } 
   }
 }
 
+/**
+ * Zod schema for LLM prompt validation.
+ * - String, max 500 chars
+ * - Only alphanumeric, whitespace, and . , ? ! -
+ */
+export const promptSchema = z.string().max(500).regex(/^[\w\s.,?!-]+$/);
+
 // Main route handler
 router.post('/', async (req: Request, res: Response) => {
   try {
     const { prompt, mockMode, module, intent, context, history, iterationCount, previousResponse, feedbackType } = req.body as AIRequestBody;
+
+    // Zod prompt validation
+    try {
+      await promptSchema.parseAsync(prompt);
+    } catch (validationError: any) {
+      if (typeof LogRocket !== 'undefined') {
+        LogRocket.error('Prompt validation failed', validationError);
+      }
+      return res.status(400).json({
+        error: 'Prompt validation failed',
+        code: 'INVALID_PROMPT',
+        details: validationError.errors || validationError.message
+      });
+    }
 
     // Handle mock mode first
     if (mockMode) {

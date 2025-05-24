@@ -1,178 +1,165 @@
-import React, { Suspense, useState } from "react";
-import { usePalliativeCare } from "../../context/PalliativeContext";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import React, { useMemo, useEffect, useState } from "react";
+import { useSymptomData } from "../../hooks/useSymptomData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Search, AlertTriangle } from "lucide-react";
-import { SymptomCard } from "@/components/ui/symptom-card";
-import { SymptomCardSkeleton } from "@/components/ui/symptom-card-skeleton";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { SymptomSearch } from "../../../../components/ui/symptom-search";
-import { SymptomTemplate } from "../../../../types/symptoms";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AlertTriangle, Loader2 } from "lucide-react";
+import { marked } from "marked";
+import clsx from "clsx";
 
-import type { Symptom } from "../../context/PalliativeContext";
+// Utility to group symptoms by name
+function groupBy<T, K extends keyof any>(arr: T[], key: (item: T) => K) {
+  return arr.reduce((acc, item) => {
+    const group = key(item);
+    if (!acc[group]) acc[group] = [];
+    acc[group].push(item);
+    return acc;
+  }, {} as Record<K, T[]>);
+}
 
-const DeliriumAssessment = React.lazy(() => import("../delirium/DeliriumAssessment"));
+const SymptomControl: React.FC = () => {
+  const [search, setSearch] = useState("");
+  const { data, loading, error } = useSymptomData({
+    search: search.trim() ? search : undefined,
+  });
 
-const deliriumCriteria = {
-  consciousness: ['alert', 'drowsy', 'stupor'],
-  orientationDomains: ['Person', 'Place', 'Time'],
-  attentionStates: ['normal', 'impaired'],
-  onsetTypes: ['acute', 'gradual']
-};
-
-const SymptomControl = () => {
-  const { state, updateSymptom } = usePalliativeCare();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState("active");
-  const [isAddingSymptom, setIsAddingSymptom] = useState(false);
-
-  // Filter symptoms based on search query
-  const filteredSymptoms = state.currentSymptoms.filter(symptom =>
-    symptom.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    symptom.description.toLowerCase().includes(searchQuery.toLowerCase())
+  // Defensive: Always define these hooks before any return
+  const activeData = Array.isArray(data) ? data.filter((s) => s.status === "active") : [];
+  const grouped = useMemo(
+    () => groupBy(activeData, (s) => s.symptom_name),
+    [activeData]
   );
+  const symptomNames = Object.keys(grouped);
+
+  // Debug log for Supabase data
+  useEffect(() => {
+    console.log("Fetched Supabase symptoms:", data);
+  }, [data]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-16">
+        <Loader2 className="animate-spin w-8 h-8 text-gray-400" />
+        <span className="ml-3 text-gray-500">Loading symptoms...</span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center py-16">
+        <AlertTriangle className="w-8 h-8 text-red-500 mb-2" />
+        <span className="text-red-600 font-medium">Error: {error}</span>
+      </div>
+    );
+  }
+
+  if (!Array.isArray(data)) {
+    return (
+      <div className="flex flex-col items-center py-16">
+        <AlertTriangle className="w-8 h-8 text-red-500 mb-2" />
+        <span className="text-red-600 font-medium">Unexpected data format from Supabase.</span>
+      </div>
+    );
+  }
 
   return (
-    <div className="palliative-section">
+    <div className="palliative-section max-w-5xl mx-auto">
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
           <Input
             type="text"
             placeholder="Search symptoms..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="pl-10"
             aria-label="Search symptoms"
           />
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+            <Loader2 className={clsx("w-4 h-4", loading && "animate-spin")} />
+          </span>
         </div>
-        <button
-          onClick={() => setIsAddingSymptom(true)}
-          className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-          aria-label="Add new symptom"
-        >
-          Add New Symptom
-        </button>
       </div>
 
-      {/* Add Dialog for new symptom */}
-      <Dialog open={isAddingSymptom} onOpenChange={setIsAddingSymptom}>
-        <DialogContent className="max-w-4xl max-h-[90vh]">
-          <DialogHeader>
-            <DialogTitle>Add New Symptom</DialogTitle>
-            <DialogDescription>
-              Search and select a symptom to start tracking
-            </DialogDescription>
-          </DialogHeader>
-          <ScrollArea className="max-h-[60vh] pr-4">
-            <SymptomSearch
-              onSelectSymptom={(template: SymptomTemplate) => {
-                // Handle adding the symptom here
-                const newSymptom: Symptom = {
-                  id: template.id,
-                  name: template.name,
-                  description: template.description || '',
-                  severity: 'mild',
-                  onset: new Date().toISOString(),
-                  notes: '',
-                  interventions: [],
-                  suggestedInterventions: {
-                    pharmacological: template.interventions?.pharmacological?.map(i => i.name) || [],
-                    nonPharmacological: template.interventions?.nonPharmacological?.map(i => i.name) || []
-                  },
-                  assessmentPoints: [],
-                  redFlags: []
-                };
-                updateSymptom(newSymptom);
-                setIsAddingSymptom(false);
-              }}
-              currentSymptoms={state.currentSymptoms.map(s => s.id)}
-            />
-          </ScrollArea>
-        </DialogContent>
-      </Dialog>
-
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList aria-label="Symptom management sections">
-          <TabsTrigger 
-            value="active"
-            aria-controls="active-symptoms-content"
-          >
-            Active Symptoms
-          </TabsTrigger>
-          <TabsTrigger 
-            value="delirium"
-            aria-controls="delirium-assessment-content"
-          >
-            Delirium Assessment
-          </TabsTrigger>
-          <TabsTrigger 
-            value="history"
-            aria-controls="symptom-history-content"
-          >
-            Symptom History
-          </TabsTrigger>
+      <Tabs defaultValue={symptomNames[0] || "none"} className="w-full">
+        <TabsList aria-label="Symptom groups">
+          {symptomNames.length > 0 ? (
+            symptomNames.map((name) => (
+              <TabsTrigger key={name} value={name}>
+                {name}
+              </TabsTrigger>
+            ))
+          ) : (
+            <TabsTrigger value="none" disabled>
+              No Symptoms
+            </TabsTrigger>
+          )}
         </TabsList>
 
-        <TabsContent value="active" id="active-symptoms-content" role="tabpanel">
-          <Card>
-            <CardHeader>
-              <CardTitle>Current Symptoms</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {filteredSymptoms.length === 0 && !searchQuery && (
-                  <p className="col-span-full text-center py-4 text-gray-500 dark:text-gray-400">
-                    No active symptoms recorded
-                  </p>
-                )}
-                {filteredSymptoms.length === 0 && searchQuery && (
-                  <p className="col-span-full text-center py-4 text-gray-500 dark:text-gray-400">
-                    No symptoms match your search
-                  </p>
-                )}
-                {filteredSymptoms.map(symptom => (
-                  <SymptomCard 
-                    key={symptom.id} 
-                    symptom={symptom}
-                    onUpdate={updateSymptom}
-                  />
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="delirium" id="delirium-assessment-content" role="tabpanel">
-          <Suspense fallback={
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <SymptomCardSkeleton />
-              <SymptomCardSkeleton />
+        {symptomNames.length === 0 && (
+          <TabsContent value="none">
+            <div className="text-center py-16 text-gray-500">
+              No active symptoms recorded
             </div>
-          }>
-            <DeliriumAssessment />
-          </Suspense>
-        </TabsContent>
+          </TabsContent>
+        )}
 
-        <TabsContent value="history" id="symptom-history-content" role="tabpanel">
-          <Card>
-            <CardHeader>
-              <CardTitle>Symptom History</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-500 dark:text-gray-400 text-center py-4">
-                Symptom history will be displayed here
-              </p>
-            </CardContent>
-          </Card>
-        </TabsContent>
+        {symptomNames.map((name) => (
+          <TabsContent key={name} value={name}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {grouped[name].map((symptom) => (
+                <Card key={symptom.id} className="border shadow-sm">
+                  <CardHeader>
+                    <div className="flex items-center gap-2">
+                      <CardTitle className="text-lg">{symptom.symptom_name}</CardTitle>
+                      <span
+                        className={clsx(
+                          "px-2 py-1 rounded text-xs font-semibold",
+                          symptom.severity_level === "Mild" && "bg-green-100 text-green-700",
+                          symptom.severity_level === "Moderate" && "bg-yellow-100 text-yellow-700",
+                          symptom.severity_level === "Severe" && "bg-red-100 text-red-700"
+                        )}
+                      >
+                        {symptom.severity_level}
+                      </span>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="prose prose-sm max-w-none mb-2">
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: marked.parse(symptom.management || ""),
+                        }}
+                      />
+                    </div>
+                    {symptom.is_red_flag && (
+                      <div className="flex items-center gap-2 mt-2 text-red-600">
+                        <AlertTriangle className="w-4 h-4" />
+                        <span className="font-medium">Red Flag</span>
+                      </div>
+                    )}
+                    {symptom.preferred_route && (
+                      <div className="mt-2 text-xs text-gray-500">
+                        <span className="font-semibold">Preferred Route:</span> {symptom.preferred_route}
+                        {symptom.route_note && (
+                          <span className="ml-2 italic">{symptom.route_note}</span>
+                        )}
+                      </div>
+                    )}
+                    {symptom.evidence_grade && (
+                      <div className="mt-2 text-xs text-blue-500">
+                        <span className="font-semibold">Evidence:</span> {symptom.evidence_grade}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+        ))}
       </Tabs>
     </div>
   );
 };
 
-export default React.memo(SymptomControl);
+export default SymptomControl;

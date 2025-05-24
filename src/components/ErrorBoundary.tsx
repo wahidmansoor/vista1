@@ -1,7 +1,23 @@
 import React, { Component, ReactNode } from 'react';
 import { AlertOctagon, ArrowLeft, RefreshCcw, ChevronDown, LifeBuoy } from 'lucide-react';
-import LogRocket from 'logrocket';
 import { getEnvVar } from '@/utils/environment';
+import { logError } from '@/utils/log';
+import PropTypes from 'prop-types';
+import LogRocket from 'logrocket';
+import { Button, Typography, Box, Paper, Link as MuiLink } from '@mui/material';
+
+// ErrorBoundary: A React component to catch and handle errors in its child components.
+// Props:
+// - children: The child components wrapped by the ErrorBoundary.
+// - moduleName: Optional name of the module for error tracking.
+// - fallback: Optional fallback UI to display when an error occurs.
+//
+// State:
+// - hasError: Indicates if an error has been caught.
+// - error: The error object caught by the boundary.
+// - errorInfo: Additional error information, such as the component stack.
+// - isRetrying: Indicates if the user is attempting to retry after an error.
+// - isDetailsOpen: Toggles the visibility of error details in the UI.
 
 interface Props {
   children?: ReactNode;
@@ -9,157 +25,191 @@ interface Props {
   fallback?: ReactNode;
 }
 
-interface State {
+interface ErrorBoundaryState {
   hasError: boolean;
-  error?: Error;
-  errorInfo?: React.ErrorInfo;
-  isRetrying: boolean;
+  error: Error | null;
+  errorInfo: React.ErrorInfo | null;
+  retryCount: number;
+  resetKey: number;
   isDetailsOpen: boolean;
+  isRetrying: boolean;
 }
 
-class ErrorBoundary extends Component<Props, State> {
-  state: State = {
-    hasError: false,
-    isRetrying: false,
-    isDetailsOpen: false
+let errorCount = 0;
+const ERROR_RATE_THRESHOLD = 5;
+
+function digestError(error: Error, errorInfo: React.ErrorInfo) {
+  return {
+    message: error?.message,
+    name: error?.name,
+    stack: error?.stack,
+    componentStack: errorInfo?.componentStack,
+  };
+}
+
+class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
+  private _recoveryTimeout?: ReturnType<typeof setTimeout>;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      hasError: false,
+      error: null,
+      errorInfo: null,
+      retryCount: 0,
+      resetKey: 0,
+      isDetailsOpen: false,
+      isRetrying: false,
+    };
+  }
+
+  static propTypes = {
+    children: PropTypes.node,
+    moduleName: PropTypes.string,
+    fallback: PropTypes.node,
   };
 
+  // Methods:
+  // - getDerivedStateFromError: Updates state when an error is caught.
   static getDerivedStateFromError(error: Error) {
     return { hasError: true, error };
   }
 
+  // - componentDidCatch: Logs the error and updates state with error details.
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     this.setState({ error, errorInfo });
 
-    // Development logging with detailed information
-    if (getEnvVar('NODE_ENV') === 'development') {
-      console.group('Error caught by ErrorBoundary:');
-      console.error('Error:', error);
-      console.error('Component Stack:', errorInfo.componentStack);
-      console.error('Module:', this.props.moduleName || 'global');
-      console.groupEnd();
-    }
-    
-    // Enhanced production error tracking
-    LogRocket.captureException(error, {
-      tags: {
-        module: this.props.moduleName || 'global',
-        errorName: error.name,
-        errorType: error.constructor.name,
-      },
-      extra: {
-        componentStack: errorInfo.componentStack || 'No component stack available',
-        message: error.message,
-        environment: getEnvVar('NODE_ENV') || 'development',
-        timestamp: new Date().toISOString(),
-      },
+    logError(error, errorInfo, {
+      moduleName: this.props.moduleName,
+      retryCount: this.state.retryCount,
     });
+    // Error digestion for LogRocket
+    if (typeof LogRocket !== 'undefined' && LogRocket?.error) {
+      LogRocket.error('ErrorBoundary', digestError(error, errorInfo));
+    }
+    // Error rate monitoring
+    errorCount++;
+    if (errorCount >= ERROR_RATE_THRESHOLD && typeof LogRocket !== 'undefined' && LogRocket?.track) {
+      LogRocket.track('error-rate-threshold', { count: errorCount });
+    }
   }
 
-  handleReset = async () => {
-    this.setState({ isRetrying: true });
-    try {
-      await new Promise(resolve => setTimeout(resolve, 800));
-      this.setState({ hasError: false, error: undefined, errorInfo: undefined });
-      window.location.reload();
-    } catch (err) {
-      this.setState({ isRetrying: false });
-    }
+  // - handleReset: Resets the error state to allow retrying.
+  handleReset = () => {
+    this.setState((prevState) => ({
+      hasError: false,
+      error: null,
+      errorInfo: null,
+      retryCount: prevState.retryCount + 1,
+      resetKey: prevState.resetKey + 1,
+      isDetailsOpen: false,
+      isRetrying: true,
+    }));
   };
 
+  // - handleNavigateHome: Redirects the user to the home page.
   handleNavigateHome = () => {
     window.location.href = '/';
   };
 
+  // - handleToggleDetails: Toggles the visibility of error details in the UI.
   handleToggleDetails = () => {
-    this.setState(prev => ({ isDetailsOpen: !prev.isDetailsOpen }));
+    this.setState((prev) => ({
+      isDetailsOpen: !prev.isDetailsOpen,
+    }));
   };
 
-  renderErrorUI() {
+  // - renderErrorUI: Renders the error UI with retry and home navigation options.
+  renderErrorUI = () => {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm">
-        <div className="w-full max-w-2xl p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-800 transform transition-all duration-300 ease-out">
-          <div className="flex flex-col items-center text-center">
-            <div className="w-20 h-20 mb-8 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center transform transition-all duration-300 hover:scale-105">
-              <AlertOctagon className="w-10 h-10 text-red-600 dark:text-red-400" />
-            </div>
-
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+      <Box position="fixed" top={0} left={0} width="100vw" height="100vh" zIndex={1300} display="flex" alignItems="center" justifyContent="center" p={4} bgcolor="rgba(255,255,255,0.8)" style={{backdropFilter: 'blur(4px)'}}>
+        <Paper elevation={24} sx={{ maxWidth: 600, width: '100%', p: 6, borderRadius: 4, border: 1, borderColor: 'grey.100', bgcolor: 'background.paper' }}>
+          <Box display="flex" flexDirection="column" alignItems="center" gap={3}>
+            <Box width={80} height={80} mb={2} display="flex" alignItems="center" justifyContent="center" borderRadius="50%" bgcolor="error.light">
+              <AlertOctagon className="w-10 h-10" color="#d32f2f" />
+            </Box>
+            <Typography variant="h4" fontWeight={700} color="text.primary" mb={2} align="center">
               {this.props.moduleName ? `Error in ${this.props.moduleName}` : 'Something went wrong'}
-            </h1>
-
-            <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-md">
+            </Typography>
+            <Typography color="text.secondary" mb={3} align="center">
               We apologize for the inconvenience. Our team has been notified and is working to resolve this issue.
-            </p>
-
+            </Typography>
             {this.state.error && (
-              <details 
-                open={this.state.isDetailsOpen}
-                onToggle={this.handleToggleDetails}
-                className="w-full mb-8 text-left group"
-              >
-                <summary className="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${this.state.isDetailsOpen ? 'rotate-180' : ''}`} />
+              <details open={this.state.isDetailsOpen} onToggle={this.handleToggleDetails} style={{ width: '100%', marginBottom: 24 }}>
+                <summary style={{ cursor: 'pointer', fontWeight: 500, color: '#616161' }}>
+                  <ChevronDown className={`w-4 h-4`} style={{ verticalAlign: 'middle', marginRight: 8, transition: 'transform 0.2s', transform: this.state.isDetailsOpen ? 'rotate(180deg)' : 'none' }} />
                   Technical Details
                 </summary>
-                <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-xs font-mono overflow-auto max-h-[200px] transition-all">
-                  <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                    <p className="font-semibold">Error:</p>
-                    <pre className="whitespace-pre-wrap mb-4 pl-4 border-l-2 border-red-500/30">
-                      {this.state.error?.toString()}
-                    </pre>
-                    {this.state.errorInfo && (
-                      <>
-                        <p className="font-semibold">Component Stack:</p>
-                        <pre className="whitespace-pre-wrap pl-4 border-l-2 border-gray-500/30">
-                          {this.state.errorInfo?.componentStack}
-                        </pre>
-                      </>
-                    )}
-                  </div>
-                </div>
+                <Box mt={2} color="text.secondary" data-testid="error-details-box">
+                  <Typography variant="subtitle2">Error:</Typography>
+                  <pre style={{ whiteSpace: 'pre-wrap', marginBottom: 16, paddingLeft: 16, borderLeft: '2px solid #f44336' }}>{this.state.error && this.state.error.toString()}</pre>
+                  {this.state.errorInfo && (
+                    <>
+                      <Typography variant="subtitle2">Component Stack:</Typography>
+                      <pre style={{ whiteSpace: 'pre-wrap', paddingLeft: 16, borderLeft: '2px solid #90caf9' }}>{this.state.errorInfo.componentStack}</pre>
+                    </>
+                  )}
+                </Box>
               </details>
             )}
-
-            <div className="flex gap-4">
-              <button
-                onClick={this.handleNavigateHome}
-                className="px-6 py-3 flex items-center gap-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 hover:scale-105"
-              >
-                <ArrowLeft className="w-4 h-4" />
+            <Box display="flex" gap={2} mt={2}>
+              <button type="button" onClick={this.handleNavigateHome} className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary">
+                <span className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium"><svg className="lucide lucide-arrow-left" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></span>
                 Go Home
               </button>
-              <button
-                onClick={this.handleReset}
-                disabled={this.state.isRetrying}
-                className="px-6 py-3 flex items-center gap-2 text-white bg-red-600 hover:bg-red-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:scale-105 active:scale-95"
-              >
-                <RefreshCcw className={`w-4 h-4 ${this.state.isRetrying ? 'animate-spin' : ''}`} />
+              <button type="button" onClick={this.handleReset} disabled={this.state.isRetrying} className={`MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedError MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorError${this.state.isRetrying ? ' Mui-disabled' : ''}`}>
+                <span className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium">
+                  <svg className={`lucide lucide-refresh-ccw${this.state.isRetrying ? ' animate-spin' : ''}`} fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+                </span>
                 {this.state.isRetrying ? 'Retrying...' : 'Try Again'}
               </button>
-            </div>
-
-            <div className="mt-8 text-sm text-center">
-              <a 
-                href="mailto:support@oncovista.com" 
-                className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-              >
-                <LifeBuoy className="w-4 h-4" />
-                Contact technical support
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+            </Box>
+            <a className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover" href="mailto:support@oncovista.com">
+              <svg className="lucide lucide-life-buoy w-4 h-4" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg>
+              Contact technical support
+            </a>
+          </Box>
+        </Paper>
+      </Box>
     );
+  };
+
+  componentDidUpdate(prevProps: Props, prevState: ErrorBoundaryState) {
+    // Recovery mechanism: auto-reset error after 10s
+    if (this.state.hasError && !prevState.hasError) {
+      this._recoveryTimeout = setTimeout(() => {
+        if (this.state.hasError) {
+          this.handleReset();
+        }
+      }, 10000);
+    }
+    if (!this.state.hasError && prevState.hasError && this._recoveryTimeout) {
+      clearTimeout(this._recoveryTimeout);
+      this._recoveryTimeout = undefined;
+    }
+    // Reset isRetrying after error is cleared
+    if (!this.state.hasError && prevState.hasError && this.state.isRetrying) {
+      this.setState({ isRetrying: false });
+    }
   }
 
-  render() {
-    if (this.state.hasError || !this.props.children) {
-      return this.props.fallback || this.renderErrorUI();
+  componentWillUnmount() {
+    if (this._recoveryTimeout) {
+      clearTimeout(this._recoveryTimeout);
     }
+  }
 
-    return this.props.children;
+  // Fix the render method
+  render() {
+    // If a custom fallback is provided and error, render it
+    if (this.state.hasError && this.props.fallback) {
+      return this.props.fallback;
+    }
+    if (this.state.hasError) {
+      return this.renderErrorUI();
+    }
+    // Use resetKey to force remount children after reset
+    return <React.Fragment key={this.state.resetKey}>{this.props.children}</React.Fragment>;
   }
 }
 

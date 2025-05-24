@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import OPDModule from './components/OPDModule';
 import OPDLayout from './layout/OPDLayout';
-import ErrorBoundaryOPD from './components/ErrorBoundaryOPD';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import { PatientEvaluationForm } from './patient-evaluation/PatientEvaluationForm';
 import DiagnosticPathways from './diagnostic-pathways/DiagnosticPathways';
 import CancerScreening from './cancer-screening/CancerScreening';
@@ -13,7 +13,7 @@ import { EvaluationProvider } from './context/EvaluationContext';
 
 const OPD = () => {
   return (
-    <ErrorBoundaryOPD>
+    <ErrorBoundary moduleName="Oncology OPD">
       <EvaluationProvider>
         <OPDLayout>
           <Routes>
@@ -27,7 +27,7 @@ const OPD = () => {
           <Toaster />
         </OPDLayout>
       </EvaluationProvider>
-    </ErrorBoundaryOPD>
+    </ErrorBoundary>
   );
 };
 

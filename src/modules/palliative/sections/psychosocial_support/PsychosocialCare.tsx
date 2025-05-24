@@ -7,7 +7,8 @@ import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
 import { Brain, HeartHandshake, Plus } from 'lucide-react';
 import { usePsychosocialData, AssessmentType } from './hooks/usePsychosocialData';
-import { sortByDate, formatDate } from '../../utils/palliativeUtils';
+import { sortByDate } from '../../utils/palliativeUtils';
+import { formatDate } from '@/utils/formatDate';
 import AssessmentTrends from './components/AssessmentTrends';
 
 const assessmentTypes: { type: AssessmentType; label: string; icon: React.FC }[] = [

@@ -36,12 +36,18 @@ const AccordionItem = ({ toxicity, isOpen, onToggle }: {
     <button
       onClick={onToggle}
       className="flex items-center justify-between w-full px-3 py-2 text-left hover:bg-gray-50/50"
+      aria-expanded={isOpen}
     >
       <div className="flex items-center gap-2">
         <span className="text-base font-medium text-gray-900">{toxicity.name}</span>
         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${getSeverityColor(toxicity.severity)}`}>
           {toxicity.severity}
         </span>
+        {toxicity.is_dose_limiting && (
+          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700">
+            DLT
+          </span>
+        )}
       </div>
       <ChevronDown 
         className={`h-4 w-4 text-gray-500 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
@@ -49,13 +55,49 @@ const AccordionItem = ({ toxicity, isOpen, onToggle }: {
     </button>
     
     {isOpen && (
-      <div className="px-3 pb-2 text-sm">
-        <div className="space-y-2 pt-1">
+      <div className="px-3 pb-3 text-sm">
+        <div className="space-y-3 pt-1">
+          {/* Clinical Details */}
           <section>
-            <h3 className="font-medium text-gray-900 mb-1">Recognition</h3>
-            <p className="leading-snug text-gray-700">{toxicity.recognition}</p>
+            <h3 className="font-medium text-gray-900 mb-1">Clinical Details</h3>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              <div>
+                <span className="text-gray-500">Category:</span>
+                <span className="ml-1 text-gray-900">{toxicity.clinical_category}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">Grade:</span>
+                <span className="ml-1 text-gray-900">{toxicity.grading_scale}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">Onset:</span>
+                <span className="ml-1 text-gray-900">{toxicity.expected_onset}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">Reversibility:</span>
+                <span className="ml-1 text-gray-900">{toxicity.reversibility}</span>
+              </div>
+            </div>
           </section>
 
+          {/* Recognition & Symptoms */}
+          <section>
+            <h3 className="font-medium text-gray-900 mb-1">Recognition</h3>
+            <p className="leading-snug text-gray-700 mb-2">{toxicity.recognition}</p>
+            
+            {toxicity.symptoms.length > 0 && (
+              <div className="mt-2">
+                <h4 className="text-sm font-medium text-gray-700">Symptoms</h4>
+                <ul className="list-disc pl-4 space-y-0.5">
+                  {toxicity.symptoms.map((symptom, i) => (
+                    <li key={i} className="text-gray-600">{symptom}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+
+          {/* Management */}
           <section>
             <h3 className="font-medium text-gray-900 mb-1">Management</h3>
             <ul className="list-disc pl-4 space-y-0.5">
@@ -65,32 +107,105 @@ const AccordionItem = ({ toxicity, isOpen, onToggle }: {
             </ul>
           </section>
 
-          {toxicity.doseGuidance.length > 0 && (
+          {/* Monitoring */}
+          {toxicity.monitoring_recommendations.length > 0 && (
             <section>
-              <h3 className="font-medium text-gray-900 mb-1">Dose Guidance</h3>
+              <h3 className="font-medium text-gray-900 mb-1">Monitoring</h3>
+              <div className="space-y-2">
+                <div className="grid grid-cols-3 gap-2 text-sm">
+                  <div>
+                    <span className="text-gray-500 block">Initial:</span>
+                    <span className="text-gray-900">{toxicity.monitoring_frequency.initial}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 block">Follow-up:</span>
+                    <span className="text-gray-900">{toxicity.monitoring_frequency.followup}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 block">Long-term:</span>
+                    <span className="text-gray-900">{toxicity.monitoring_frequency.longterm}</span>
+                  </div>
+                </div>
+                <ul className="list-disc pl-4 space-y-0.5 mt-2">
+                  {toxicity.monitoring_recommendations.map((rec, i) => (
+                    <li key={i} className="text-gray-700 leading-snug">{rec}</li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          )}
+
+          {/* Laboratory & Imaging */}
+          {(toxicity.labs.length > 0 || toxicity.imaging.length > 0) && (
+            <section>
+              <h3 className="font-medium text-gray-900 mb-1">Investigations</h3>
+              {toxicity.labs.length > 0 && (
+                <div className="mb-2">
+                  <h4 className="text-sm font-medium text-gray-700">Laboratory Tests</h4>
+                  <ul className="list-disc pl-4 space-y-0.5">
+                    {toxicity.labs.map((lab, i) => (
+                      <li key={i} className="text-gray-600">{lab}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {toxicity.imaging.length > 0 && (
+                <div>
+                  <h4 className="text-sm font-medium text-gray-700">Imaging</h4>
+                  <ul className="list-disc pl-4 space-y-0.5">
+                    {toxicity.imaging.map((img, i) => (
+                      <li key={i} className="text-gray-600">{img}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </section>
+          )}
+
+          {/* Dose Modification */}
+          {toxicity.dose_guidance.length > 0 && (
+            <section>
+              <h3 className="font-medium text-gray-900 mb-1">Dose Modification</h3>
               <div className="space-y-0.5">
-                {toxicity.doseGuidance.map((guide, i) => (
+                {toxicity.dose_guidance.map((guide, i) => (
                   <p key={i} className="leading-snug text-gray-700">{guide}</p>
                 ))}
               </div>
             </section>
           )}
 
-          {toxicity.culpritDrugs.length > 0 && (
+          {/* Causative Agents */}
+          {(toxicity.culprit_drugs.length > 0 || toxicity.culprit_classes.length > 0) && (
             <section>
-              <h3 className="font-medium text-gray-900 mb-1">Responsible Drugs</h3>
-              <div className="flex flex-wrap gap-1">
-                {toxicity.culpritDrugs.slice(0, 3).map((drug, i) => (
-                  <span key={i} className="px-2 py-0.5 text-xs bg-purple-50 text-purple-700 rounded-full">
-                    {drug}
-                  </span>
-                ))}
-                {toxicity.culpritDrugs.length > 3 && (
-                  <span className="px-2 py-0.5 text-xs bg-gray-100 text-gray-700 rounded-full">
-                    +{toxicity.culpritDrugs.length - 3} more
-                  </span>
-                )}
-              </div>
+              <h3 className="font-medium text-gray-900 mb-1">Causative Agents</h3>
+              {toxicity.culprit_drugs.length > 0 && (
+                <div className="flex flex-wrap gap-1 mb-1">
+                  {toxicity.culprit_drugs.map((drug, i) => (
+                    <span key={i} className="px-2 py-0.5 text-xs bg-purple-50 text-purple-700 rounded-full">
+                      {drug}
+                    </span>
+                  ))}
+                </div>
+              )}
+              {toxicity.culprit_classes.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {toxicity.culprit_classes.map((cls, i) => (
+                    <span key={i} className="px-2 py-0.5 text-xs bg-blue-50 text-blue-700 rounded-full">
+                      {cls}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </section>
+          )}
+
+          {/* Clinical Notes */}
+          {toxicity.notes_clinical_pearls && (
+            <section>
+              <h3 className="font-medium text-gray-900 mb-1">Clinical Pearls</h3>
+              <p className="text-gray-700 leading-snug whitespace-pre-wrap">
+                {toxicity.notes_clinical_pearls}
+              </p>
             </section>
           )}
         </div>
@@ -144,6 +259,11 @@ const Toxicity = () => {
               title="Error Loading Data"
               message={error}
             />
+          ) : toxicities.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-full text-gray-500">
+              <AlertCircle className="h-8 w-8 mb-2" />
+              <p>No toxicity data available</p>
+            </div>
           ) : (
             <div className="h-full overflow-y-auto scrollbar-thin pr-2">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

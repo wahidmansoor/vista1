@@ -5,6 +5,10 @@ import './index.css';
 import ErrorBoundary from './components/ErrorBoundary';
 import LogRocket from 'logrocket';
 import setupLogRocketReact from 'logrocket-react';
+import { validateEnv } from './utils/validateEnv';
+
+// Validate environment variables
+validateEnv();
 
 // Only initialize LogRocket in production
 if (import.meta.env.PROD) {

@@ -10,8 +10,9 @@ import { useHandbookData } from '@/hooks/useHandbookData';
 import { parseHandbookPath } from '@/utils/pathUtils';
 import { parseErrorDetails } from '@/utils/errorUtils';
 import { sectionsMeta } from './constants';
+import type { FC, ReactElement } from 'react';
 
-export default function Handbook() {
+const Handbook: FC = (): ReactElement => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -118,7 +119,7 @@ export default function Handbook() {
                 </button>
               </div>
 
-              <ErrorBoundary>
+              <ErrorBoundary moduleName="AI Handbook">
                 <JsonHandbookViewer filePath={activeFile} />
               </ErrorBoundary>
             </>
@@ -138,4 +139,6 @@ export default function Handbook() {
       </div>
     </div>
   );
-}
+};
+
+export default Handbook;

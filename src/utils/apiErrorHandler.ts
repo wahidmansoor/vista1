@@ -26,9 +26,3 @@ export async function handleApiError<T>(
     throw error;
   }
 }
-
-// Usage example:
-// const data = await handleApiError(
-//   fetchPatientData(id),
-//   { module: 'OPD', operation: 'fetchPatientData', data: { id } }
-// );

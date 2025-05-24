@@ -1,4 +1,5 @@
 import { vi, afterEach } from 'vitest';
+import '@testing-library/jest-dom';
 
 // Set up test environment
 process.env.VITE_GEMINI_API_KEY = 'test-key';
@@ -6,9 +7,9 @@ process.env.VITE_GEMINI_API_KEY = 'test-key';
 
 // Mock rate limiter for tests
 vi.mock('../lib/rate-limit', () => ({
-  default: {
-    check: vi.fn().mockReturnValue(true),
-    reset: vi.fn()
+  RateLimiter: class {
+    check = vi.fn().mockReturnValue(true);
+    reset = vi.fn();
   }
 }));
 
@@ -30,3 +31,8 @@ vi.setConfig({ testTimeout: 10000 });
 afterEach(() => {
   vi.clearAllMocks();
 });
+
+// Polyfill scrollIntoView for JSDOM
+if (document.defaultView) {
+  document.defaultView.HTMLElement.prototype.scrollIntoView = function() {};
+}

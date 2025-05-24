@@ -1,7 +1,196 @@
-// src/services/protocols.ts
+import { supabase } from '@/lib/supabaseClient';
+import type { 
+  Protocol,
+  Drug,
+  Eligibility,
+  ToxicityMonitoring,
+  SupportiveCare,
+  Monitoring,
+  Interactions,
+  Medications,
+  DrugClass
+} from '@/types/protocol';
 
-import { supabase } from '../lib/supabaseClient';
-import type { Protocol, Drug } from '../types/protocol';
+interface DatabaseProtocol {
+  id: string;
+  code: string;
+  tumour_group: string;
+  treatment_intent?: string;
+  treatment?: any;
+  eligibility?: any;
+  tests?: any;
+  dose_modifications?: any;
+  precautions?: any;
+  reference_list?: any;
+  toxicity_monitoring?: any;
+  supportive_care?: any;
+  monitoring?: any;
+  drug_class?: any;
+  interactions?: any;
+  administration_notes?: string[];
+  pre_medications?: any;
+  post_medications?: any;
+  rescue_agents?: any;
+  created_at?: string;
+  updated_at?: string;
+}
+
+// Type guard to check if an object matches DatabaseProtocol shape
+const isDatabaseProtocol = (obj: unknown): obj is DatabaseProtocol => {
+  if (!obj || typeof obj !== 'object') return false;
+  const protocol = obj as Record<string, unknown>;
+  return (
+    typeof protocol.id === 'string' &&
+    typeof protocol.code === 'string' &&
+    typeof protocol.tumour_group === 'string'
+  );
+};
+
+// Convert DatabaseProtocol to Protocol type
+const toProtocol = (dbProtocol: DatabaseProtocol): Protocol => {
+  // Safely parse a value as JSON only if it looks like JSON.
+  const safeJSONParse = (data: any): any => {
+    if (typeof data === 'string') {
+      const trimmed = data.trim();
+      if (
+        (trimmed.startsWith('{') && trimmed.endsWith('}')) ||
+        (trimmed.startsWith('[') && trimmed.endsWith(']'))
+      ) {
+        try {
+          return JSON.parse(trimmed);
+        } catch (err) {
+          console.warn('Invalid JSON:', data);
+          return data;
+        }
+      }
+      return data; // plain non-JSON string (e.g., "CBC and LFTs")
+    }
+    return data; // already an object, array, or other type
+  };
+
+  // Add debug logging
+  console.log('Raw treatment data:', dbProtocol.treatment);
+
+  const protocol: Protocol = {
+    id: dbProtocol.id,
+    code: dbProtocol.code,
+    tumour_group: dbProtocol.tumour_group,
+    treatment_intent: dbProtocol.treatment_intent || '',
+    eligibility: safeJSONParse(dbProtocol.eligibility),
+    treatment: safeJSONParse(dbProtocol.treatment),
+    tests: safeJSONParse(dbProtocol.tests),
+    dose_modifications: safeJSONParse(dbProtocol.dose_modifications),
+    precautions: safeJSONParse(dbProtocol.precautions),
+    reference_list: safeJSONParse(dbProtocol.reference_list),
+    toxicity_monitoring: safeJSONParse(dbProtocol.toxicity_monitoring),
+    supportive_care: safeJSONParse(dbProtocol.supportive_care),
+    drug_class: safeJSONParse(dbProtocol.drug_class),
+    interactions: safeJSONParse(dbProtocol.interactions),
+    administration_notes: dbProtocol.administration_notes || [],
+    pre_medications: safeJSONParse(dbProtocol.pre_medications),
+    post_medications: safeJSONParse(dbProtocol.post_medications),
+    rescue_agents: safeJSONParse(dbProtocol.rescue_agents)
+  };
+
+  // Add debug logging for transformed protocol
+  console.log('Transformed protocol:', {
+    id: protocol.id,
+    code: protocol.code,
+    treatment: protocol.treatment
+  });
+
+  return protocol;
+};
+
+export const getSupergroups = async (): Promise<string[]> => {
+  const { data, error } = await supabase
+    .from('cd_protocols')
+    .select('tumour_supergroup')
+    .order('tumour_supergroup');
+
+  if (error) {
+    console.error('Error fetching tumour supergroups:', error);
+    throw new Error('Failed to fetch tumour supergroups.');
+  }
+
+  if (!Array.isArray(data)) {
+    console.error('Invalid response format for tumour supergroups');
+    return [];
+  }
+
+  // Extract unique supergroups and ensure they're strings
+  const uniqueSupergroups = [...new Set(data
+    .map(row => row.tumour_supergroup)
+    .filter((sg): sg is string => typeof sg === 'string')
+  )];
+
+  return uniqueSupergroups;
+};
+
+export const getTumorGroups = async (supergroup?: string): Promise<string[]> => {
+  let query = supabase
+    .from('cd_protocols')
+    .select('tumour_group, tumour_supergroup')
+    .order('tumour_group');
+
+  if (supergroup) {
+    query = query.eq('tumour_supergroup', supergroup);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error('Error fetching tumor groups:', error);
+    throw new Error('Failed to fetch tumor groups.');
+  }
+
+  if (!Array.isArray(data)) {
+    console.error('Invalid response format for tumor groups');
+    return [];
+  }
+
+  // Extract unique tumor groups and ensure they're strings
+  const uniqueGroups = [...new Set(data
+    .map(row => row.tumour_group)
+    .filter((group): group is string => typeof group === 'string')
+  )];
+
+  return uniqueGroups;
+};
+
+export const getProtocolsByTumorGroup = async (tumorGroup: string): Promise<Protocol[]> => {
+  const { data, error } = await supabase
+    .from('cd_protocols') // MIGRATED
+    .select('*')
+    .eq('tumour_group', tumorGroup)
+    .order('code');
+
+  if (error) {
+    console.error('Error fetching protocols for tumor group', tumorGroup, ':', error);
+    throw new Error(`Failed to fetch protocols for tumor group ${tumorGroup}.`);
+  }
+
+  if (!Array.isArray(data)) {
+    console.error('Invalid response format:', data);
+    return [];
+  }
+
+  // Validate and transform the data
+  const validProtocols: Protocol[] = [];
+  data.forEach((item, index) => {
+    if (isDatabaseProtocol(item)) {
+      try {
+        validProtocols.push(toProtocol(item));
+      } catch (err) {
+        console.warn(`Failed to process protocol at index ${index}:`, err);
+      }
+    } else {
+      console.warn(`Invalid protocol data at index ${index}`);
+    }
+  });
+
+  return validProtocols;
+};
 
 export interface ProtocolFilters {
   tumorGroup: string | null;
@@ -9,70 +198,11 @@ export interface ProtocolFilters {
   treatmentIntent: string | null;
 }
 
-// Utility function to validate protocol data
-export const isValidProtocol = (protocol: Partial<Protocol>): boolean => {
-  return !!(
-    protocol.id &&
-    protocol.code &&
-    protocol.tumour_group &&
-    protocol.treatment?.drugs?.length
-  );
-};
-
-// Safely parse JSON string or return default value
-const safeJSONParse = <T>(value: unknown, defaultValue: T): T => {
-  if (typeof value === 'string') {
-    try {
-      return JSON.parse(value) as T;
-    } catch (error) {
-      console.warn('Error parsing JSON:', error);
-      return defaultValue;
-    }
-  }
-  return value as T || defaultValue;
-};
-
-export const getProtocols = async (filters?: ProtocolFilters): Promise<Protocol[]> => {
+export const getProtocols = async (filters: ProtocolFilters): Promise<Protocol[]> => {
   try {
     let query = supabase
-      .from('protocols')
-      .select(`
-        id,
-        code,
-        tumour_group,
-        treatment_intent,
-        eligibility,
-        treatment,
-        tests,
-        dose_modifications,
-        precautions,
-        reference_list,
-        pharmacokinetics,
-        interactions,
-        drug_class,
-        administration_notes,
-        supportive_care,
-        toxicity_monitoring,
-        rescue_agents,
-        pre_medications,
-        post_medications,
-        monitoring,
-        supportive_meds,
-        ai_notes,
-        tags,
-        comments,
-        summary,
-        created_by,
-        updated_by,
-        version,
-        clinical_scenario,
-        natural_language_prompt,
-        cycle_info,
-        dose_reductions,
-        created_at,
-        updated_at,
-        last_reviewed
-      `);
+      .from('cd_protocols') // MIGRATED
+      .select('*');
 
     if (filters) {
       if (filters.tumorGroup) {
@@ -87,264 +217,116 @@ export const getProtocols = async (filters?: ProtocolFilters): Promise<Protocol[
     }
 
     const { data, error } = await query;
-
+    console.log('[CDU] cd_protocols data:', data); // AUDIT
     if (error) throw error;
     if (!data?.length) return [];
 
-    // Process and validate each protocol
-    let protocols: Protocol[] = data
-      .map((item): Protocol | null => {
-        try {
-          const treatment = safeJSONParse<{ drugs: Drug[]; protocol?: string }>(
-            item.treatment,
-            { drugs: [] }
-          );
-          
-          // Validate drugs array structure
-          if (!Array.isArray(treatment.drugs)) {
-            console.warn(`Invalid drugs array for protocol ${item.code}`);
-            return null;
+    // Warn in dev if required fields are missing
+    if (process.env.NODE_ENV === 'development') {
+      data.forEach((row, idx) => {
+        ['id', 'code', 'tumour_group', 'treatment'].forEach(field => {
+          if (!(field in row)) {
+            console.warn(`[CDU] cd_protocols row missing field: ${field} (row #${idx})`, row);
           }
-
-          return {
-            id: item.id,
-            code: item.code,
-            tumour_group: item.tumour_group,
-            treatment_intent: item.treatment_intent,
-            eligibility: safeJSONParse<string[]>(item.eligibility, []),
-            treatment,
-            tests: safeJSONParse(item.tests, { baseline: [], monitoring: [] }),
-            dose_modifications: safeJSONParse(item.dose_modifications, {
-              hematological: [],
-              nonHematological: [],
-              renal: [],
-              hepatic: []
-            }),
-            precautions: safeJSONParse<string[]>(item.precautions, []),
-            reference_list: safeJSONParse<string[]>(item.reference_list, []),
-
-            // New fields
-            pharmacokinetics: safeJSONParse(item.pharmacokinetics, {}),
-            interactions: safeJSONParse(item.interactions, {
-              drugs: [],
-              contraindications: [],
-              precautions: []
-            }),
-            drug_class: safeJSONParse(item.drug_class, {
-              name: '',
-              mechanism: '',
-              classification: ''
-            }),
-            administration_notes: safeJSONParse<string[]>(item.administration_notes, []),
-            supportive_care: safeJSONParse(item.supportive_care, {
-              required: [],
-              optional: [],
-              monitoring: []
-            }),
-            toxicity_monitoring: safeJSONParse(item.toxicity_monitoring, {
-              parameters: [],
-              frequency: '',
-              thresholds: {}
-            }),
-            rescue_agents: safeJSONParse(item.rescue_agents, []),
-            pre_medications: safeJSONParse(item.pre_medications, {
-              required: [],
-              optional: []
-            }),
-            post_medications: safeJSONParse(item.post_medications, {
-              required: [],
-              optional: []
-            }),
-            monitoring: safeJSONParse(item.monitoring, {
-              baseline: [],
-              ongoing: [],
-              frequency: ''
-            }),
-            supportive_meds: safeJSONParse<Drug[]>(item.supportive_meds, []),
-            ai_notes: safeJSONParse(item.ai_notes, {
-              recommendations: [],
-              warnings: [],
-              considerations: []
-            }),
-            tags: safeJSONParse<string[]>(item.tags, []),
-
-            comments: item.comments,
-            summary: item.summary,
-            created_by: item.created_by,
-            updated_by: item.updated_by,
-            version: item.version,
-            clinical_scenario: item.clinical_scenario,
-            natural_language_prompt: item.natural_language_prompt,
-            cycle_info: item.cycle_info,
-            dose_reductions: safeJSONParse(item.dose_reductions, {
-              criteria: [],
-              levels: {}
-            }),
-
-            created_at: item.created_at,
-            updated_at: item.updated_at,
-            last_reviewed: item.last_reviewed
-          };
-        } catch (error) {
-          console.error(`Error processing protocol ${item.code}:`, error);
-          return null;
-        }
-      })
-      .filter((protocol): protocol is Protocol => {
-        if (!protocol) return false;
-        const isValid = isValidProtocol(protocol);
-        if (!isValid) {
-          console.warn('Invalid protocol data:', { code: protocol?.code, id: protocol?.id });
-        }
-        return isValid;
+        });
       });
+    }
 
-    return protocols;
+    // Validate and transform the data
+    const validProtocols: Protocol[] = [];
+    data.forEach((item, index) => {
+      if (isDatabaseProtocol(item)) {
+        try {
+          const protocol = toProtocol(item);
+          validProtocols.push(protocol);
+        } catch (err) {
+          console.warn(`Failed to process protocol at index ${index}:`, err);
+        }
+      } else {
+        console.warn(`Invalid protocol data at index ${index}`);
+      }
+    });
 
+    return validProtocols;
   } catch (error) {
-    console.error('Protocol service error:', error);
-    throw error;
+    console.error('Error fetching protocols:', error);
+    throw new Error(`Failed to fetch protocols: ${error instanceof Error ? error.message : String(error)}`);
   }
 };
 
-export const getProtocolByCode = async (code: string): Promise<Protocol | null> => {
-  const { data, error } = await supabase
-    .from('protocols')
-    .select(`
-      id,
-      code,
-      tumour_group,
-      treatment_intent,
-      eligibility,
-      treatment, 
-      tests,
-      dose_modifications,
-      precautions,
-      reference_list,
-      pharmacokinetics,
-      interactions,
-      drug_class,
-      administration_notes,
-      supportive_care,
-      toxicity_monitoring,
-      rescue_agents,
-      pre_medications,
-      post_medications,
-      monitoring,
-      supportive_meds,
-      ai_notes,
-      tags,
-      comments,
-      summary,
-      created_by,
-      updated_by,
-      version,
-      clinical_scenario,
-      natural_language_prompt,
-      cycle_info,
-      dose_reductions,
-      created_at,
-      updated_at,
-      last_reviewed
-    `)
-    .eq('code', code)
-    .single();
-
-  if (error) {
-    console.error('Error fetching protocol by code:', error);
-    return null;
-  }
-
-  if (!data) return null;
-
+export const getProtocolById = async (id: string): Promise<Protocol | null> => {
   try {
-    const protocol: Protocol = {
-      id: data.id,
-      code: data.code,
-      tumour_group: data.tumour_group,
-      treatment_intent: data.treatment_intent,
-      eligibility: safeJSONParse<string[]>(data.eligibility, []),
-      treatment: safeJSONParse<{ drugs: Drug[]; protocol?: string }>(
-        data.treatment,
-        { drugs: [] }
-      ),
-      tests: safeJSONParse(data.tests, { baseline: [], monitoring: [] }),
-      dose_modifications: safeJSONParse(data.dose_modifications, {
-        hematological: [],
-        nonHematological: [],
-        renal: [],
-        hepatic: []
-      }),
-      precautions: safeJSONParse<string[]>(data.precautions, []),
-      reference_list: safeJSONParse<string[]>(data.reference_list, []),
+    const { data, error } = await supabase
+      .from('cd_protocols') // MIGRATED
+      .select(`
+        id,
+        code,
+        tumour_group,
+        treatment_intent,
+        eligibility,
+        treatment,
+        tests,
+        dose_modifications,
+        precautions,
+        reference_list,
+        toxicity_monitoring,
+        supportive_care,
+        monitoring,
+        drug_class,
+        interactions,
+        administration_notes,
+        pre_medications,
+        post_medications,
+        rescue_agents,
+        created_at,
+        updated_at,
+        pharmacokinetics,
+        comments,
+        tags,
+        clinical_scenario,
+        last_reviewed,
+        summary,
+        ai_notes,
+        natural_language_prompt,
+        supportive_meds,
+        cycle_info,
+        dose_reductions
+      `)
+      .eq('id', id)
+      .single();
 
-      // New fields
-      pharmacokinetics: safeJSONParse(data.pharmacokinetics, {}),
-      interactions: safeJSONParse(data.interactions, {
-        drugs: [],
-        contraindications: [],
-        precautions: []
-      }),
-      drug_class: safeJSONParse(data.drug_class, {}),
-      administration_notes: safeJSONParse<string[]>(data.administration_notes, []),
-      supportive_care: safeJSONParse(data.supportive_care, {
-        required: [],
-        optional: [],
-        monitoring: []
-      }),
-      toxicity_monitoring: safeJSONParse(data.toxicity_monitoring, {
-        parameters: [],
-        frequency: '',
-        thresholds: {}
-      }),
-      rescue_agents: safeJSONParse(data.rescue_agents, []),
-      pre_medications: safeJSONParse(data.pre_medications, {
-        required: [],
-        optional: []
-      }),
-      post_medications: safeJSONParse(data.post_medications, {
-        required: [],
-        optional: []
-      }),
-      monitoring: safeJSONParse(data.monitoring, {
-        baseline: [],
-        ongoing: [],
-        frequency: ''
-      }),
-      supportive_meds: safeJSONParse<Drug[]>(data.supportive_meds, []),
-      ai_notes: safeJSONParse(data.ai_notes, {
-        recommendations: [],
-        warnings: [],
-        considerations: []
-      }),
-      tags: safeJSONParse<string[]>(data.tags, []),
+    if (error) {
+      console.error('Error fetching protocol:', error);
+      throw error;
+    }
 
-      comments: data.comments,
-      summary: data.summary,
-      created_by: data.created_by,
-      updated_by: data.updated_by,
-      version: data.version,
-      clinical_scenario: data.clinical_scenario,
-      natural_language_prompt: data.natural_language_prompt,
-      cycle_info: data.cycle_info,
-      dose_reductions: safeJSONParse(data.dose_reductions, {
-        criteria: [],
-        levels: {}
-      }),
+    // Add debug logging for raw data
+    console.log('Raw protocol data:', JSON.stringify(data, null, 2));
 
-      created_at: data.created_at,
-      updated_at: data.updated_at,
-      last_reviewed: data.last_reviewed
-    };
-
-    if (!isValidProtocol(protocol)) {
-      console.warn('Invalid protocol data for code:', code);
+    if (!data) {
       return null;
     }
 
-    return protocol;
-  } catch (parseError) {
-    console.error('Error parsing protocol data:', parseError);
-    return null;
+    if (!isDatabaseProtocol(data)) {
+      console.warn('Invalid protocol data structure:', data);
+      return null;
+    }
+
+    try {
+      const protocol = toProtocol(data);
+      console.log('Transformed protocol:', {
+        id: protocol.id,
+        code: protocol.code,
+        treatment: protocol.treatment
+      });
+      return protocol;
+    } catch (err) {
+      console.error('Failed to transform protocol:', err);
+      return null;
+    }
+
+  } catch (error) {
+    console.error('Failed to fetch protocol:', error);
+    throw error;
   }
 };

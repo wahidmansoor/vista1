@@ -30,7 +30,6 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       react({
-        fastRefresh: true,
         // Include runtime configuration
         include: "**/*.{jsx,tsx}",
         babel: {
@@ -84,11 +83,31 @@ export default defineConfig(({ mode }) => {
       sourcemap: true,
       rollupOptions: {
         output: {
-          manualChunks: {
-            'gemini-sdk': ['@google/generative-ai']
-          }
-        }
-      }
+          manualChunks(id) {
+            // Split out gemini-sdk
+            if (id.includes('node_modules/@google/generative-ai')) {
+              return 'gemini-sdk';
+            }
+            // Split out React and React DOM
+            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+              return 'react-vendor';
+            }
+            // Split all other node_modules into vendor
+            if (id.includes('node_modules')) {
+              return 'vendor';
+            }
+            // Optionally: split large feature folders (customize as needed)
+            if (id.includes('/src/modules/')) {
+              const dirs = id.split('/');
+              const idx = dirs.indexOf('modules');
+              if (idx !== -1 && dirs[idx + 1]) {
+                return `module-${dirs[idx + 1]}`;
+              }
+            }
+          },
+        },
+      },
+      chunkSizeWarningLimit: 1000, // Optional: increase warning limit
     }
   };
 });

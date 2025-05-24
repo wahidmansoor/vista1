@@ -6,9 +6,8 @@ import type { Medication, SortConfig } from '../modules/cdu/types';
  * @returns Promise resolving to an array of medications
  */
 export const getAllMedications = async (): Promise<Medication[]> => {
-  try {
-    const { data, error } = await supabase
-      .from('medications')
+  try {    const { data, error } = await supabase
+      .from('oncology_medications')
       .select('*');
       
     if (error) {
@@ -34,7 +33,7 @@ export const getMedications = async (options: {
   isPremedOnly?: boolean
 }): Promise<Medication[]> => {
   try {
-    let query = supabase.from('medications').select('*');
+    let query = supabase.from('oncology_medications').select('*');
     
     // Apply filters
     if (options.filterClass) {
@@ -96,8 +95,7 @@ export const getMedications = async (options: {
  */
 export const getMedicationsByCategory = async (category: string): Promise<Medication[]> => {
   try {
-    const { data, error } = await supabase
-      .from('medications')
+    const { data, error } = await supabase      .from('oncology_medications')
       .select('*')
       .ilike('classification', `%${category}%`);
       
@@ -119,8 +117,7 @@ export const getMedicationsByCategory = async (category: string): Promise<Medica
  */
 export const getMedicationById = async (id: string): Promise<Medication | null> => {
   try {
-    const { data, error } = await supabase
-      .from('medications')
+    const { data, error } = await supabase      .from('oncology_medications')
       .select('*')
       .eq('id', id)
       .single();
@@ -178,5 +175,53 @@ export const fetchMedications = async (searchTerm?: string): Promise<Medication[
   } catch (error) {
     console.error("❌ Error fetching medications:", error);
     throw error;
+  }
+};
+
+/**
+ * Search medications using full-text search
+ * @param query Search terms
+ * @returns Promise<Medication[]>
+ */
+export const searchMedicationsFullText = async (query: string): Promise<Medication[]> => {
+  try {
+    const { data, error } = await supabase
+      .from('oncology_medications')
+      .select('*')
+      .textSearch('search_vector', query, {
+        config: 'english',
+      });
+
+    if (error) {
+      throw new Error(`Error in full-text search: ${error.message}`);
+    }
+
+    return data || [];
+  } catch (err) {
+    console.error('Error in searchMedicationsFullText:', err);
+    throw err;
+  }
+};
+
+/**
+ * Get medications by tumor type
+ * @param tumorType The cancer/tumor type to filter by
+ * @returns Promise<Medication[]>
+ */
+export const getMedicationsByTumorType = async (tumorType: string): Promise<Medication[]> => {
+  try {
+    const { data, error } = await supabase
+      .from('oncology_medications')
+      .select('*')
+      .containedBy('indications->cancer_types', [tumorType]);
+
+    if (error) {
+      throw new Error(`Error fetching by tumor type: ${error.message}`);
+    }
+
+    return data || [];
+  } catch (err) {
+    console.error('Error in getMedicationsByTumorType:', err);
+    throw err;
   }
 };

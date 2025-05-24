@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeSanitize from 'rehype-sanitize';
 import { Paper, Box } from '@mui/material';
 
 interface MarkdownViewerProps {
@@ -39,6 +40,7 @@ const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, filePath }) =>
       <Box sx={{ p: 3 }}>
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeSanitize]}
           components={{
             img: ({ src, alt }) => (
               <img src={src} alt={alt} style={{ maxWidth: '100%', height: 'auto' }} />

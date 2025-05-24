@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Tab } from "@headlessui/react";
+import { Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import TreatmentProtocols from "./treatmentProtocols/TreatmentProtocols";
+import ProtocolDetailPageContainer from "./safe/treatmentProtocols/TreatmentProtocols";
 import Toxicity from "./toxicity/Toxicity";
 import DiseaseProgressTracker from "./sections/DiseaseProgressTracker";
 import MedicationsView from "./medications/MedicationsView";
@@ -47,7 +49,14 @@ const CDU = () => {
           <Tab.Panels>
             {TABS.map((tab, index) => (
               <Tab.Panel key={index}>
-                {tab.component}
+                {tab.id === 'treatment-protocols' ? (
+                  <Routes>
+                    <Route index element={tab.component} />
+                    <Route path="treatment-protocols/:id" element={<ProtocolDetailPageContainer />} />
+                  </Routes>
+                ) : (
+                  tab.component
+                )}
               </Tab.Panel>
             ))}
           </Tab.Panels>

@@ -1,0 +1,510 @@
+// src/services/protocols.ts
+
+import { supabase } from '../lib/supabaseClient';
+import type { Protocol, Drug } from '../types/protocol';
+import { protocolCache } from './protocolCache';
+
+// Helper function to safely coerce values to strings
+const safeString = (value: unknown): string => {
+  if (value === null || value === undefined) return '';
+  return String(value);
+};
+
+// Helper function for optional strings
+const safeOptionalString = (value: unknown): string | undefined => {
+  if (value === null || value === undefined) return undefined;
+  return String(value);
+};
+
+// Helper function for record access
+const getRecordValue = (obj: Record<string, unknown>, key: string): unknown => {
+  return key in obj ? obj[key] : undefined;
+};
+
+// Helper function for array access
+const getArrayValue = <T>(arr: unknown[], index: number, defaultValue: T): T => {
+  return index < arr.length ? (arr[index] as T) : defaultValue;
+};
+
+// Helper function to safely split strings or handle arrays
+const safeSplit = (value: unknown): string[] => {
+  if (!value) return [];
+  if (Array.isArray(value)) {
+    return value.map(item => String(item)).filter(Boolean);
+  }
+  if (typeof value === 'string') {
+    if (value.startsWith('[') && value.endsWith(']')) {
+      try {
+        const parsed = JSON.parse(value);
+        if (Array.isArray(parsed)) {
+          return parsed.map(item => typeof item === 'string' ? item : JSON.stringify(item));
+        }
+      } catch (e) {
+        console.warn('Failed to parse JSON array string:', e);
+      }
+    }
+    return value.split(';').map(item => item.trim()).filter(Boolean);
+  }
+  if (typeof value === 'object' && value !== null) {
+    return Object.values(value)
+      .filter(v => v !== null && v !== undefined)
+      .map(v => String(v));
+  }
+  return [];
+};
+
+// Process and normalize medications with strong typing
+const processMedications = (medications: unknown): { required: Drug[]; optional: Drug[] } => {
+  const defaultDrug = (value: unknown): Drug => {
+    if (typeof value === 'string') {
+      return {
+        name: value,
+        dose: '',
+        timing: '',
+        administration: '',
+        alternative_switches: [],
+        supportiveCare: [],
+        contraindications: [],
+        special_notes: []
+      };
+    }
+
+    const drugData = value as Record<string, unknown>;
+    return {
+      name: safeString(drugData?.name || 'Unknown'),
+      dose: safeString(drugData?.dose),
+      timing: safeString(drugData?.timing),
+      administration: safeString(drugData?.administration),
+      alternative_switches: Array.isArray(drugData?.alternative_switches) 
+        ? drugData.alternative_switches.filter((x): x is string => typeof x === 'string')
+        : [],
+      supportiveCare: Array.isArray(drugData?.supportiveCare)
+        ? drugData.supportiveCare.filter(x => typeof x === 'string' || (typeof x === 'object' && x !== null))
+        : [],
+      contraindications: Array.isArray(drugData?.contraindications)
+        ? drugData.contraindications.filter(x => typeof x === 'string' || (typeof x === 'object' && x !== null))
+        : [],
+      special_notes: Array.isArray(drugData?.special_notes)
+        ? drugData.special_notes.filter(x => typeof x === 'string' || (typeof x === 'object' && x !== null))
+        : []
+    };
+  };
+
+  if (!medications) {
+    return { required: [], optional: [] };
+  }
+
+  // Handle string input
+  if (typeof medications === 'string') {
+    try {
+      const parsed = JSON.parse(medications);
+      return processMedications(parsed);
+    } catch (e) {
+      return { required: [defaultDrug(medications)], optional: [] };
+    }
+  }
+
+  // Handle well-formed medications object
+  if (typeof medications === 'object' && medications !== null) {
+    const med = medications as Record<string, unknown>;
+    
+    if ('required' in med || 'optional' in med) {
+      return {
+        required: Array.isArray(med.required) ? med.required.map(defaultDrug) : [],
+        optional: Array.isArray(med.optional) ? med.optional.map(defaultDrug) : []
+      };
+    }
+
+    if (Array.isArray(medications)) {
+      return { required: medications.map(defaultDrug), optional: [] };
+    }
+
+    if ('name' in med) {
+      return { required: [defaultDrug(med)], optional: [] };
+    }
+
+    const values = Object.values(med).filter(val => val !== null && val !== undefined);
+    return { required: values.map(defaultDrug), optional: [] };
+  }
+
+  return { required: [], optional: [] };
+};
+
+// Process drug data with strong typing
+const processDrugs = (drugs: unknown): Drug[] => {
+  if (!drugs || !Array.isArray(drugs)) return [];
+
+  return drugs
+    .filter((drug): drug is Record<string, unknown> => (
+      drug !== null && 
+      typeof drug === 'object' &&
+      'name' in drug
+    ))
+    .map(drug => ({
+      name: safeString(drug.name || 'Unnamed Drug'),
+      dose: safeString(drug.dose),
+      timing: safeString(drug.timing),
+      administration: safeString(drug.administration),
+      alternative_switches: Array.isArray(drug.alternative_switches) 
+        ? drug.alternative_switches.filter((x): x is string => typeof x === 'string')
+        : [],
+      supportiveCare: Array.isArray(drug.supportiveCare)
+        ? drug.supportiveCare.filter(x => typeof x === 'string' || (typeof x === 'object' && x !== null))
+        : [],
+      contraindications: Array.isArray(drug.contraindications)
+        ? drug.contraindications.filter(x => typeof x === 'string' || (typeof x === 'object' && x !== null))
+        : [],
+      special_notes: Array.isArray(drug.special_notes)
+        ? drug.special_notes.filter(x => typeof x === 'string' || (typeof x === 'object' && x !== null))
+        : []
+    }));
+};
+
+// Process monitoring data with strong typing
+const processMonitoring = (monitoring: unknown): { baseline: string[]; ongoing: string[]; frequency?: string } => {
+  if (!monitoring) {
+    return { baseline: [], ongoing: [] };
+  }
+
+  // Handle string input
+  if (typeof monitoring === 'string') {
+    try {
+      const parsed = JSON.parse(monitoring);
+      return processMonitoring(parsed);
+    } catch (e) {
+      return { baseline: [monitoring], ongoing: [] };
+    }
+  }
+
+  // Handle array input
+  if (Array.isArray(monitoring)) {
+    return {
+      baseline: monitoring.filter(item => typeof item === 'string'),
+      ongoing: []
+    };
+  }
+
+  // Handle object format
+  if (typeof monitoring === 'object' && monitoring !== null) {
+    const monitoringObj = monitoring as Record<string, unknown>;
+    
+    return {
+      baseline: Array.isArray(monitoringObj.baseline)
+        ? monitoringObj.baseline.filter(item => typeof item === 'string')
+        : [],
+      ongoing: Array.isArray(monitoringObj.ongoing)
+        ? monitoringObj.ongoing.filter(item => typeof item === 'string')
+        : [],
+      ...(typeof monitoringObj.frequency === 'string' ? { frequency: monitoringObj.frequency } : {})
+    };
+  }
+
+  return { baseline: [], ongoing: [] };
+};
+
+// Safely parse JSON with type checking
+const safeJSONParse = <T>(value: unknown, defaultValue: T): T => {
+  if (value === null || value === undefined) {
+    return defaultValue;
+  }
+
+  if (typeof value === 'string') {
+    try {
+      return JSON.parse(value) as T;
+    } catch {
+      return defaultValue;
+    }
+  }
+
+  if (typeof value === 'object') {
+    if (defaultValue === null) {
+      return value as T;
+    }
+    if (Array.isArray(defaultValue) && !Array.isArray(value)) {
+      return defaultValue;
+    }
+    return value as T;
+  }
+
+  return defaultValue;
+};
+
+// Critical fields that must be present
+const CRITICAL_FIELDS = [
+  'treatment_intent',
+  'eligibility',
+  'treatment',
+  'tests',
+  'dose_modifications',
+  'precautions'
+] as const;
+
+// Protocol fields to select
+const PROTOCOL_FIELDS = `
+  id,
+  code,
+  tumour_group,
+  treatment_intent,
+  eligibility,
+  treatment,
+  tests,
+  dose_modifications,
+  precautions,
+  reference_list,
+  pharmacokinetics,
+  interactions,
+  drug_class,
+  administration_notes,
+  supportive_care,
+  toxicity_monitoring,
+  rescue_agents,
+  pre_medications,
+  post_medications,
+  monitoring,
+  comments,
+  created_by,
+  updated_by,
+  version,
+  tags,
+  clinical_scenario,
+  last_reviewed,
+  summary,
+  ai_notes,
+  natural_language_prompt,
+  supportive_meds,
+  cycle_info,
+  dose_reductions,
+  created_at,
+  updated_at
+`;
+
+// Protocol filter interface
+export interface ProtocolFilters {
+  tumorGroup: string | null;
+  drugName: string | null;
+  treatmentIntent: string | null;
+}
+
+// Enhanced protocol validation
+export const isValidProtocol = (protocol: Partial<Protocol>): boolean => {
+  const requiredFields = ['id', 'code', 'tumour_group'];
+  const hasRequiredFields = requiredFields.every(field => !!protocol[field as keyof Protocol]);
+  
+  if (protocol.treatment && !Array.isArray(protocol.treatment.drugs)) {
+    console.warn(`Invalid drugs array for protocol ${protocol.code}`);
+    return false;
+  }
+
+  const missingCriticalFields = CRITICAL_FIELDS.filter(
+    field => !protocol[field as keyof Protocol]
+  );
+
+  if (missingCriticalFields.length > 0) {
+    console.warn(`Protocol ${protocol.code} is missing critical fields:`, missingCriticalFields);
+  }
+
+  return hasRequiredFields;
+};
+
+// Get protocols with filters
+export const getProtocols = async (filters?: ProtocolFilters): Promise<Protocol[]> => {
+  try {
+    let query = supabase.from('cd_protocols').select(PROTOCOL_FIELDS); // MIGRATED
+
+    if (filters) {
+      if (filters.tumorGroup) {
+        query = query.eq('tumour_group', filters.tumorGroup);
+      }
+      if (filters.treatmentIntent) {
+        query = query.eq('treatment_intent', filters.treatmentIntent);
+      }
+      if (filters.drugName) {
+        query = query.contains('treatment->>drugs', filters.drugName);
+      }
+    }
+
+    const { data, error } = await query;
+    if (error) throw error;
+    if (!data?.length) return [];
+
+    const processedData = data
+      .map((item): Protocol => {
+        const rawTreatment = safeJSONParse(item.treatment, { drugs: [] });
+        const treatmentDrugs = processDrugs(rawTreatment.drugs || []);
+        const monitoringData = processMonitoring(item.monitoring);
+
+        return {
+          id: safeString(item.id),
+          code: safeString(item.code),
+          tumour_group: safeString(item.tumour_group),
+          treatment_intent: safeOptionalString(item.treatment_intent),
+          eligibility: safeJSONParse(item.eligibility, {
+            inclusion_criteria: [],
+            exclusion_criteria: []
+          }),
+          treatment: {
+            ...rawTreatment,
+            drugs: treatmentDrugs
+          },
+          tests: safeJSONParse(item.tests, {
+            baseline: [],
+            monitoring: []
+          }),
+          dose_modifications: safeJSONParse(item.dose_modifications, {
+            hematological: [],
+            nonHematological: [],
+            renal: [],
+            hepatic: []
+          }),
+          precautions: safeSplit(item.precautions),
+          reference_list: safeSplit(item.reference_list),
+          pharmacokinetics: safeJSONParse(item.pharmacokinetics, {}),
+          interactions: safeJSONParse(item.interactions, {
+            drugs: [],
+            contraindications: [],
+            precautions: []
+          }),
+          drug_class: safeJSONParse(item.drug_class, {}),
+          administration_notes: safeSplit(item.administration_notes),
+          supportive_care: safeJSONParse(item.supportive_care, {
+            required: [],
+            optional: [],
+            monitoring: []
+          }),
+          toxicity_monitoring: safeJSONParse(item.toxicity_monitoring, {
+            parameters: [],
+            frequency: '',
+            thresholds: {}
+          }),
+          rescue_agents: safeJSONParse(item.rescue_agents, []),
+          pre_medications: processMedications(item.pre_medications),
+          post_medications: processMedications(item.post_medications),
+          monitoring: monitoringData,
+          comments: safeOptionalString(item.comments),
+          created_by: safeOptionalString(item.created_by),
+          updated_by: safeOptionalString(item.updated_by),
+          version: safeOptionalString(item.version),
+          tags: safeSplit(item.tags),
+          clinical_scenario: safeOptionalString(item.clinical_scenario),
+          last_reviewed: safeOptionalString(item.last_reviewed),
+          summary: safeOptionalString(item.summary),
+          ai_notes: safeJSONParse(item.ai_notes, {
+            recommendations: [],
+            warnings: []
+          }),
+          natural_language_prompt: safeOptionalString(item.natural_language_prompt),
+          supportive_meds: processDrugs(safeJSONParse(item.supportive_meds, [])),
+          cycle_info: safeOptionalString(item.cycle_info),
+          dose_reductions: safeJSONParse(item.dose_reductions, {
+            levels: {},
+            criteria: []
+          }),
+          created_at: safeOptionalString(item.created_at),
+          updated_at: safeOptionalString(item.updated_at)
+        };
+      })
+      .filter(isValidProtocol);
+
+    return processedData;
+  } catch (err) {
+    console.error('Protocol service error:', err);
+    throw err;
+  }
+};
+
+// Get protocol by code
+export const getProtocolByCode = async (code: string): Promise<Protocol | null> => {
+  const { data, error } = await supabase
+    .from('protocols')
+    .select(PROTOCOL_FIELDS)
+    .eq('code', code)
+    .single();
+
+  if (error || !data) {
+    console.error('Error fetching protocol by code:', error);
+    return null;
+  }
+
+  try {
+    const rawTreatment = safeJSONParse(data.treatment, { drugs: [] });
+    const protocol: Protocol = {
+      id: safeString(data.id),
+      code: safeString(data.code),
+      tumour_group: safeString(data.tumour_group),
+      treatment_intent: safeOptionalString(data.treatment_intent),
+      eligibility: safeJSONParse(data.eligibility, {
+        inclusion_criteria: [],
+        exclusion_criteria: []
+      }),
+      treatment: {
+        ...rawTreatment,
+        drugs: processDrugs(rawTreatment.drugs)
+      },
+      tests: safeJSONParse(data.tests, {
+        baseline: [],
+        monitoring: []
+      }),
+      dose_modifications: safeJSONParse(data.dose_modifications, {
+        hematological: [],
+        nonHematological: [],
+        renal: [],
+        hepatic: []
+      }),
+      precautions: safeSplit(data.precautions),
+      reference_list: safeSplit(data.reference_list),
+      pharmacokinetics: safeJSONParse(data.pharmacokinetics, {}),
+      interactions: safeJSONParse(data.interactions, {
+        drugs: [],
+        contraindications: [],
+        precautions: []
+      }),
+      drug_class: safeJSONParse(data.drug_class, {}),
+      administration_notes: safeSplit(data.administration_notes),
+      supportive_care: safeJSONParse(data.supportive_care, {
+        required: [],
+        optional: [],
+        monitoring: []
+      }),
+      toxicity_monitoring: safeJSONParse(data.toxicity_monitoring, {
+        parameters: [],
+        frequency: '',
+        thresholds: {}
+      }),
+      rescue_agents: safeJSONParse(data.rescue_agents, []),
+      pre_medications: processMedications(data.pre_medications),
+      post_medications: processMedications(data.post_medications),
+      monitoring: processMonitoring(data.monitoring),
+      comments: safeOptionalString(data.comments),
+      created_by: safeOptionalString(data.created_by),
+      updated_by: safeOptionalString(data.updated_by),
+      version: safeOptionalString(data.version),
+      tags: safeSplit(data.tags),
+      clinical_scenario: safeOptionalString(data.clinical_scenario),
+      last_reviewed: safeOptionalString(data.last_reviewed),
+      summary: safeOptionalString(data.summary),
+      ai_notes: safeJSONParse(data.ai_notes, {
+        recommendations: [],
+        warnings: []
+      }),
+      natural_language_prompt: safeOptionalString(data.natural_language_prompt),
+      supportive_meds: processDrugs(safeJSONParse(data.supportive_meds, [])),
+      cycle_info: safeOptionalString(data.cycle_info),
+      dose_reductions: safeJSONParse(data.dose_reductions, {
+        levels: {},
+        criteria: []
+      }),
+      created_at: safeOptionalString(data.created_at),
+      updated_at: safeOptionalString(data.updated_at)
+    };
+
+    if (!isValidProtocol(protocol)) {
+      console.warn('Invalid protocol data for code:', code);
+      return null;
+    }
+
+    return protocol;
+  } catch (parseError) {
+    console.error('Error parsing protocol data:', parseError);
+    return null;
+  }
+};

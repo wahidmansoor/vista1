@@ -3,5 +3,16 @@
   "css.validate": false,
   "scss.validate": false,
   "less.validate": false,
-  "stylelint.validate": ["css", "scss"]
+  "stylelint.validate": [
+    "css",
+    "scss"
+  ],
+  "notebook.defaultFormatter": "GitHub.copilot",
+  "github.copilot.chat.codesearch.enabled": true,
+  "CodeGPT.apiKey": "CodeGPT Plus",
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.chat.completionContext.typescript.mode": "on",
+  "github.copilot.chat.editor.temporalContext.enabled": true,
+  "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+  "github.copilot.chat.languageContext.typescript.enabled": true
 }

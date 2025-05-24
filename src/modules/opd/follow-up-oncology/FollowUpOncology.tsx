@@ -11,6 +11,9 @@ import { CancerType } from './data/followUpTemplates';
 import { generateFollowUpPlan, Stage } from './logic/generateFollowUpPlan';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { callAIAgent } from '@/lib/api/aiAgentAPI';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import AIFollowUpAssistant from './components/AIFollowUpAssistant';
 
 // Helper type and functions for mock data
 type MockData<T> = {
@@ -25,13 +28,14 @@ function getMockData<T>(data: MockData<T>, cancer: CancerType): T | undefined {
   return hasData(data, cancer) ? data[cancer] : undefined;
 }
 
-export default function FollowUpOncology() {
+const FollowUpOncology: React.FC = () => {
   const [mockMode, setMockMode] = useState(false);
   const [selectedCancer, setSelectedCancer] = useState<CancerType | null>(null);
   const [stage, setStage] = useState<TNMStage>({ t: '', n: '', m: '' });
   const [intent, setIntent] = useState<'curative' | 'palliative'>('curative');
   const [isLoading, setIsLoading] = useState(false);
   const [followUpPlan, setFollowUpPlan] = useState<any>(null);
+  const [aiInsights, setAIInsights] = useState<string | null>(null);
 
   // Generate follow-up plan when cancer type changes
   useEffect(() => {
@@ -87,9 +91,27 @@ export default function FollowUpOncology() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <DiagnosticTimeline 
-                  events={getMockData(mockDiagnosticEvents, selectedCancer) || []}
-                />
+                <Card className="dark:bg-gray-900 shadow-lg">
+                  <CardHeader>
+                    <CardTitle>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <span>Diagnostic Timeline</span>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Key milestones in the diagnostic journey</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <DiagnosticTimeline 
+                      events={getMockData(mockDiagnosticEvents, selectedCancer) || []}
+                    />
+                  </CardContent>
+                </Card>
               </motion.div>
 
               <motion.div 
@@ -97,9 +119,27 @@ export default function FollowUpOncology() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <PerformanceScoreChart 
-                  data={getMockData(mockPerformanceData, selectedCancer) || []}
-                />
+                <Card className="dark:bg-gray-900 shadow-lg">
+                  <CardHeader>
+                    <CardTitle>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <span>Performance Score Trends</span>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>ECOG and KPS scores over time</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <PerformanceScoreChart 
+                      data={getMockData(mockPerformanceData, selectedCancer) || []}
+                    />
+                  </CardContent>
+                </Card>
               </motion.div>
 
               <motion.div 
@@ -107,29 +147,54 @@ export default function FollowUpOncology() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <SmartFollowUpSummary
-                  cancerType={selectedCancer}
-                  stage={`${stage.t}${stage.n}${stage.m}`}
-                  tnmStage={stage}
-                  diagnosisDate="2025-04-01"
-                  currentECOG={0}
-                  currentKPS={90}
-                  onGenerate={async () => {
-                    try {
-                      const response = await callAIAgent({
-                        module: 'OPD',
-                        intent: 'follow-up',
-                        prompt: "Generate a follow-up summary and recommendations",
-                        context: `Cancer Type: ${selectedCancer}\nStage: ${stage.t}${stage.n}${stage.m}\nIntent: ${intent}`,
-                        mockMode
-                      });
-                      return response.content;
-                    } catch (error) {
-                      console.error('Error generating AI summary:', error);
-                      throw error;
-                    }
-                  }}
-                />
+                <Card className="dark:bg-gray-900 shadow-lg">
+                  <CardHeader>
+                    <CardTitle>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <span>Smart Follow-Up Summary</span>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>AI-generated follow-up summary and recommendations</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <SmartFollowUpSummary
+                      cancerType={selectedCancer}
+                      stage={`${stage.t}${stage.n}${stage.m}`}
+                      tnmStage={stage}
+                      diagnosisDate="2025-04-01"
+                      currentECOG={0}
+                      currentKPS={90}
+                      onGenerate={async () => {
+                        try {
+                          const response = await callAIAgent({
+                            module: 'OPD',
+                            intent: 'follow-up',
+                            prompt: "Generate a follow-up summary and recommendations",
+                            context: `Cancer Type: ${selectedCancer}\nStage: ${stage.t}${stage.n}${stage.m}\nIntent: ${intent}`,
+                            mockMode
+                          });
+                          return response.content;
+                        } catch (error) {
+                          console.error('Error generating AI summary:', error);
+                          throw error;
+                        }
+                      }}
+                    />
+                    <AIFollowUpAssistant 
+                      cancerType={selectedCancer}
+                      stage={stage}
+                      intent="follow-up"
+                      plan={followUpPlan}
+                      onInsightsReady={setAIInsights}
+                    />
+                  </CardContent>
+                </Card>
               </motion.div>
             </>
           )}
@@ -153,4 +218,6 @@ export default function FollowUpOncology() {
       </div>
     </ErrorBoundary>
   );
-}
+};
+
+export default FollowUpOncology;

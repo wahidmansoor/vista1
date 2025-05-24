@@ -18,6 +18,7 @@ interface Investigation {
   title: string;
   frequency: string;
   description?: string;
+  duration?: string; // Added duration property
 }
 
 interface TemplateMetadata {
@@ -64,6 +65,21 @@ export interface FollowUpTemplate {
   }>;
 }
 
+// Diagnostic Timeline Event type
+export interface TimelineEvent {
+  type: 'first_visit' | 'imaging' | 'biopsy' | 'histopathology' | 'molecular' | 'final';
+  date: string;
+  detail: string;
+  status: 'completed' | 'pending' | 'scheduled';
+}
+
+// Performance Score Chart Data type
+export interface PerformanceData {
+  date: string;
+  ecog: number; // 0-4 scale
+  kps: number;  // 0-100 scale
+}
+
 export const cancerTemplates: Record<CancerType, FollowUpTemplate> = {
   breast: {
     metadata: {
@@ -80,14 +96,19 @@ export const cancerTemplates: Record<CancerType, FollowUpTemplate> = {
           { title: 'Mammogram', frequency: 'Every 6-12 months' },
           { title: 'Blood tests', frequency: 'As clinically indicated' }
         ],
-        // ...other intervals
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       },
       palliative: {
         '3mo': [
           { title: 'Symptom assessment', frequency: 'Every visit' },
           { title: 'Pain evaluation', frequency: 'Every visit' }
         ],
-        // ...other intervals
+        '6mo': [],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       }
     },
     stageGuidelines: {
@@ -153,10 +174,17 @@ export const cancerTemplates: Record<CancerType, FollowUpTemplate> = {
           { title: 'Chest CT', frequency: 'Every 3-6 months for 2 years' },
           { title: 'Physical exam', frequency: 'Every 3 months' }
         ],
-        // ...other intervals
+        '6mo': [],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       },
       palliative: {
-        // ...palliative intervals
+        '3mo': [],
+        '6mo': [],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       }
     },
     stageGuidelines: {
@@ -219,10 +247,17 @@ export const cancerTemplates: Record<CancerType, FollowUpTemplate> = {
           { title: 'CEA test', frequency: 'Every 3-6 months for 5 years' },
           { title: 'CT scan', frequency: 'Every 6-12 months for 5 years' }
         ],
-        // ...other intervals
+        '6mo': [],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       },
       palliative: {
-        // ...palliative intervals
+        '3mo': [],
+        '6mo': [],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       }
     },
     stageGuidelines: {
@@ -282,10 +317,17 @@ export const cancerTemplates: Record<CancerType, FollowUpTemplate> = {
     intervals: {
       curative: {
         '3mo': [{ title: 'PSA test', frequency: 'Every 3 months for 2 years' }],
-        '6mo': [{ title: 'Physical exam', frequency: 'Every 6 months' }]
+        '6mo': [{ title: 'Physical exam', frequency: 'Every 6 months' }],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       },
       palliative: {
-        // ... palliative intervals
+        '3mo': [],
+        '6mo': [],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       }
     },
     stageGuidelines: {
@@ -348,10 +390,17 @@ export const cancerTemplates: Record<CancerType, FollowUpTemplate> = {
           { title: 'CA 19-9', frequency: 'Every 3 months', duration: '2 years' },
           { title: 'CT abdomen', frequency: 'Every 3-6 months', duration: '2 years' }
         ],
-        // ...other intervals
+        '6mo': [],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       },
       palliative: {
-        // ...palliative intervals
+        '3mo': [],
+        '6mo': [],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       }
     },
     stageGuidelines: {
@@ -417,13 +466,20 @@ export const cancerTemplates: Record<CancerType, FollowUpTemplate> = {
         '6mo': [
           { title: 'Physical exam', frequency: 'Every 6 months', duration: '3 years' },
           { title: 'Nutritional assessment', frequency: 'Every 6 months' }
-        ]
+        ],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       },
       palliative: {
         '3mo': [
           { title: 'Symptom assessment', frequency: 'Every 3 months' },
           { title: 'Weight monitoring', frequency: 'Every visit' }
-        ]
+        ],
+        '6mo': [],
+        '1yr': [],
+        '2yr': [],
+        '5yr': []
       }
     },
     stageGuidelines: {
@@ -433,7 +489,9 @@ export const cancerTemplates: Record<CancerType, FollowUpTemplate> = {
         labTests: []
       },
       advanced: {
-        // ...advanced stage guidelines
+        surveillance: [],
+        imaging: [],
+        labTests: []
       }
     },
     surveillance: {
@@ -457,5 +515,180 @@ export const cancerTemplates: Record<CancerType, FollowUpTemplate> = {
       { symptom: 'Swallowing difficulty', severity: 'high', relatedFlags: ['Progressive dysphagia'] }
     ]
   },
-  // ...additional new cancer templates
+  bladder: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
+  headneck: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
+  ovarian: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
+  gastric: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
+  lymphoma: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
+  melanoma: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
+  thyroid: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
+  hepatocellular: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
+  testicular: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
+  brain: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
+  sarcoma: {
+    metadata: { version: '1.0.0', lastUpdated: '2024-01-20' },
+    intervals: {
+      curative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] },
+      palliative: { '3mo': [], '6mo': [], '1yr': [], '2yr': [], '5yr': [] }
+    },
+    stageGuidelines: {
+      early: { surveillance: [], imaging: [], labTests: [] },
+      advanced: { surveillance: [], imaging: [], labTests: [] }
+    },
+    surveillance: { investigations: [], examinations: [] },
+    redFlags: [],
+    urgentFlags: [],
+    qolTopics: [],
+    commonSymptoms: []
+  },
 };

@@ -1,20 +1,29 @@
-import LandingPage from "../pages/LandingPage";
+import type { FC } from "react";
 import { Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import NotFoundRedirect from "@/components/NotFoundRedirect";
-import Handbook from "../modules/handbook";
-import OPD from "../modules/opd";
-import CDU from "../modules/cdu";
-import Inpatient from "../modules/inpatient";
-import Palliative from "../modules/palliative/Palliative";
-import Tools from "../modules/tools";
-import Calculators from "../modules/tools/Calculators";
-import RedFlagsPage from "../modules/tools/RedFlags";
-import BSACalculator from "../modules/tools/calculators/BSA";
-import CrClCalculator from "../modules/tools/calculators/CrCl";
-import ANCCalculator from "../modules/tools/calculators/ANC";
+import LandingPage from "@/pages/LandingPage";
+import Handbook from "@/modules/handbook/Handbook";
+import OPD from "@/modules/opd/OPD";
+import CDU from "@/modules/cdu/CDU";
+import ProtocolDashboard from "@/modules/cdu/components/ProtocolDashboard";
+import Inpatient from "@/modules/inpatient";
+import Palliative from "@/modules/palliative/Palliative";
+import Tools from "@/modules/tools";
+import Calculators from "@/modules/tools/Calculators";
+import RedFlagsPage from "@/modules/tools/RedFlags";
+import BSACalculator from "@/modules/tools/calculators/BSA";
+import CrClCalculator from "@/modules/tools/calculators/CrCl";
+import ANCCalculator from "@/modules/tools/calculators/ANC";
 
-const AppRoutes = () => {
+// Import routes
+import type { ReactElement } from 'react';
+import opdRoutes from './opdRoutes';
+import cduRoutes from './cduRoutes';
+// Use the alias pattern for consistent imports
+import ProtocolDetailPageContainer from "@/modules/cdu/safe/treatmentProtocols/TreatmentProtocols"; 
+
+const AppRoutes: FC = () => {
   return (
     <Routes>
       {/* Landing page */}
@@ -31,11 +40,19 @@ const AppRoutes = () => {
         </ErrorBoundary>
       } />
       
-      {/* Other routes */}
-      <Route path="/opd/*" element={<OPD />} />
-      <Route path="/cdu" element={<CDU />} />
-      <Route path="/inpatient" element={<Inpatient />} />
-      <Route path="/palliative" element={<Palliative />} />
+      {/* Feature routes */}
+      {opdRoutes}
+      {cduRoutes}
+      <Route path="/inpatient" element={
+        <ErrorBoundary moduleName="Inpatient">
+          <Inpatient />
+        </ErrorBoundary>
+      } />
+      <Route path="/palliative" element={
+        <ErrorBoundary moduleName="Palliative">
+          <Palliative />
+        </ErrorBoundary>
+      } />
       
       {/* Tools module routes */}
       <Route path="/tools" element={
@@ -69,8 +86,19 @@ const AppRoutes = () => {
         </ErrorBoundary>
       } />
 
+      {/* Protocol Detail Page Route - Note: This might be superseded by cduRoutes if that file also defines a similar path */}
+      <Route path="/cdu/treatment-protocols/:id" element={ 
+        <ErrorBoundary moduleName="Protocol Detail">
+          <ProtocolDetailPageContainer />
+        </ErrorBoundary>
+      } />
+
       {/* Fallback catch-all route */}
-      <Route path="*" element={<NotFoundRedirect />} />
+      <Route path="*" element={
+        <ErrorBoundary moduleName="Not Found">
+          <NotFoundRedirect />
+        </ErrorBoundary>
+      } />
     </Routes>
   );
 };
