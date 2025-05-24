@@ -179,3 +179,4 @@ class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
 }
 
 export default ErrorBoundary;
+ 
