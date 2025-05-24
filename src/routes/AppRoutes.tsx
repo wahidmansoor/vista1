@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Routes, Route } from "react-router-dom";
-import ErrorBoundary from "@/components/ErrorBoundary";
+import ErrorBoundary from "@/components/ErrorBoundaryNew"; // ✅ renamed import
 import NotFoundRedirect from "@/components/NotFoundRedirect";
 import LandingPage from "@/pages/LandingPage";
 import Handbook from "@/modules/handbook/Handbook";
@@ -16,33 +16,29 @@ import BSACalculator from "@/modules/tools/calculators/BSA";
 import CrClCalculator from "@/modules/tools/calculators/CrCl";
 import ANCCalculator from "@/modules/tools/calculators/ANC";
 
-// Import routes
 import type { ReactElement } from 'react';
 import opdRoutes from './opdRoutes';
 import cduRoutes from './cduRoutes';
-// Use the alias pattern for consistent imports
-import ProtocolDetailPageContainer from "@/modules/cdu/safe/treatmentProtocols/TreatmentProtocols"; 
+import ProtocolDetailPageContainer from "@/modules/cdu/safe/treatmentProtocols/TreatmentProtocols";
 
 const AppRoutes: FC = () => {
   return (
     <Routes>
-      {/* Landing page */}
       <Route path="/" element={
         <ErrorBoundary moduleName="Landing">
           <LandingPage />
         </ErrorBoundary>
       } />
-      
-      {/* Consolidated handbook route that handles all handbook paths */}
+
       <Route path="/handbook/*" element={
         <ErrorBoundary moduleName="Handbook">
           <Handbook />
         </ErrorBoundary>
       } />
-      
-      {/* Feature routes */}
+
       {opdRoutes}
       {cduRoutes}
+
       <Route path="/inpatient" element={
         <ErrorBoundary moduleName="Inpatient">
           <Inpatient />
@@ -53,8 +49,7 @@ const AppRoutes: FC = () => {
           <Palliative />
         </ErrorBoundary>
       } />
-      
-      {/* Tools module routes */}
+
       <Route path="/tools" element={
         <ErrorBoundary moduleName="Tools">
           <Tools />
@@ -86,14 +81,12 @@ const AppRoutes: FC = () => {
         </ErrorBoundary>
       } />
 
-      {/* Protocol Detail Page Route - Note: This might be superseded by cduRoutes if that file also defines a similar path */}
-      <Route path="/cdu/treatment-protocols/:id" element={ 
+      <Route path="/cdu/treatment-protocols/:id" element={
         <ErrorBoundary moduleName="Protocol Detail">
           <ProtocolDetailPageContainer />
         </ErrorBoundary>
       } />
 
-      {/* Fallback catch-all route */}
       <Route path="*" element={
         <ErrorBoundary moduleName="Not Found">
           <NotFoundRedirect />
