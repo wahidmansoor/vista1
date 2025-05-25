@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Routes, Route } from "react-router-dom";
-import ErrorBoundary from "@/components/ErrorBoundaryNew"; // ✅ renamed import
+import ErrorBoundary from "@/components/ErrorBoundary"; // ✅ updated to match filename
 import NotFoundRedirect from "@/components/NotFoundRedirect";
 import LandingPage from "@/pages/LandingPage";
 import Handbook from "@/modules/handbook/Handbook";

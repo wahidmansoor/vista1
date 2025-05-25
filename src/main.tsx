@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
-import ErrorBoundary from './components/ErrorBoundaryNew'; // ✅ updated import
+import ErrorBoundary from './components/ErrorBoundary'; // ✅ Corrected import
 import LogRocket from 'logrocket';
 import setupLogRocketReact from 'logrocket-react';
 import { validateEnv } from './utils/validateEnv';
 
-// Validate environment variables
+// ✅ Step 1: Validate environment variables
 validateEnv();
 
-// Only initialize LogRocket in production
+// ✅ Step 2: Setup LogRocket only in production
 if (import.meta.env.PROD) {
   try {
     LogRocket.init('oncovista/oncovista-app', {
@@ -21,11 +21,9 @@ if (import.meta.env.PROD) {
       },
       network: {
         requestSanitizer: request => {
-          // Don't record requests to certain endpoints
           if (request.url.includes('/api/health')) {
             return null;
           }
-          // Remove sensitive headers
           request.headers = {};
           return request;
         }
@@ -38,6 +36,7 @@ if (import.meta.env.PROD) {
   }
 }
 
+// ✅ Step 3: Render the app with ErrorBoundary
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
