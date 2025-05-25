@@ -1,35 +1,24 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import * as React from 'react';
 import { AlertOctagon, ArrowLeft, RefreshCcw, ChevronDown, LifeBuoy } from 'lucide-react';
-import LogRocket from 'logrocket';
 import { Typography, Box, Paper, Button, Link as MuiLink } from '@mui/material';
 
 interface Props {
-  children?: ReactNode;
+  children?: React.ReactNode;
   moduleName?: string;
-  fallback?: ReactNode;
+  fallback?: React.ReactNode;
 }
 
-interface ErrorBoundaryState {
+interface State {
   hasError: boolean;
   error: Error | null;
-  errorInfo: ErrorInfo | null;
+  errorInfo: React.ErrorInfo | null;
   retryCount: number;
   resetKey: number;
   isDetailsOpen: boolean;
   isRetrying: boolean;
 }
 
-const ERROR_RATE_THRESHOLD = 5;
-let errorCount = 0;
-
-const digestError = (error: Error, errorInfo: ErrorInfo) => ({
-  message: error?.message,
-  name: error?.name,
-  stack: error?.stack,
-  componentStack: errorInfo?.componentStack,
-});
-
-class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
+class ErrorBoundary extends React.Component<Props, State> {
   private recoveryTimeout?: NodeJS.Timeout;
 
   constructor(props: Props) {
@@ -45,20 +34,13 @@ class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
     };
   }
 
-  static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
+  static getDerivedStateFromError(error: Error): Partial<State> {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     this.setState({ error, errorInfo });
-    
-    // Log to your error tracking system
-    if (typeof LogRocket !== 'undefined') {
-      LogRocket.error('ErrorBoundary', digestError(error, errorInfo));
-      if (++errorCount >= ERROR_RATE_THRESHOLD) {
-        LogRocket.track('error-rate-threshold', { count: errorCount });
-      }
-    }
+    console.error('ErrorBoundary caught an error:', error, errorInfo);
   }
 
   handleReset = (): void => {
@@ -83,32 +65,14 @@ class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
     }));
   };
 
-  renderErrorUI = (): ReactNode => (
-    <Box 
-      position="fixed" 
-      top={0} 
-      left={0} 
-      width="100vw" 
-      height="100vh" 
-      zIndex={1300} 
-      display="flex" 
-      alignItems="center" 
-      justifyContent="center" 
-      p={4} 
-      bgcolor="rgba(255,255,255,0.8)" 
-      style={{ backdropFilter: 'blur(4px)' }}
-    >
+  renderErrorUI = (): React.ReactNode => (
+    <Box position="fixed" top={0} left={0} width="100vw" height="100vh" zIndex={1300} 
+         display="flex" alignItems="center" justifyContent="center" p={4} 
+         bgcolor="rgba(255,255,255,0.8)" style={{ backdropFilter: 'blur(4px)' }}>
       <Paper elevation={24} sx={{ maxWidth: 600, width: '100%', p: 6, borderRadius: 4 }}>
         <Box display="flex" flexDirection="column" alignItems="center" gap={3}>
-          <Box 
-            width={80} 
-            height={80} 
-            display="flex" 
-            alignItems="center" 
-            justifyContent="center" 
-            borderRadius="50%" 
-            bgcolor="error.light"
-          >
+          <Box width={80} height={80} display="flex" alignItems="center" 
+               justifyContent="center" borderRadius="50%" bgcolor="error.light">
             <AlertOctagon size={40} color="#d32f2f" />
           </Box>
           
@@ -117,16 +81,14 @@ class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
           </Typography>
           
           <Typography color="text.secondary" align="center">
-            We apologize for the inconvenience. Our team has been notified.
+            Please try refreshing the page or contact support.
           </Typography>
 
           {this.state.error && (
             <Box width="100%">
-              <Button 
-                onClick={this.handleToggleDetails} 
-                endIcon={this.state.isDetailsOpen ? <ChevronDown /> : <ChevronDown />}
-                sx={{ textTransform: 'none' }}
-              >
+              <Button onClick={this.handleToggleDetails} 
+                      endIcon={<ChevronDown />}
+                      sx={{ textTransform: 'none' }}>
                 Technical Details
               </Button>
               
@@ -146,19 +108,11 @@ class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
           )}
 
           <Box display="flex" gap={2} mt={2}>
-            <Button 
-              variant="outlined" 
-              startIcon={<ArrowLeft size={18} />} 
-              onClick={this.handleNavigateHome}
-            >
+            <Button variant="outlined" startIcon={<ArrowLeft />} onClick={this.handleNavigateHome}>
               Go Home
             </Button>
-            <Button 
-              variant="contained" 
-              startIcon={<RefreshCcw size={18} />} 
-              onClick={this.handleReset} 
-              disabled={this.state.isRetrying}
-            >
+            <Button variant="contained" startIcon={<RefreshCcw />} 
+                    onClick={this.handleReset} disabled={this.state.isRetrying}>
               {this.state.isRetrying ? 'Retrying...' : 'Try Again'}
             </Button>
           </Box>
@@ -173,19 +127,12 @@ class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
     </Box>
   );
 
-  componentDidUpdate(prevProps: Props, prevState: ErrorBoundaryState): void {
+  componentDidUpdate(prevProps: Props, prevState: State): void {
     if (this.state.hasError && !prevState.hasError) {
-      this.recoveryTimeout = setTimeout(() => {
-        if (this.state.hasError) this.handleReset();
-      }, 10000);
+      this.recoveryTimeout = setTimeout(() => this.handleReset(), 10000);
     }
-    
     if (!this.state.hasError && this.recoveryTimeout) {
       clearTimeout(this.recoveryTimeout);
-    }
-    
-    if (!this.state.hasError && this.state.isRetrying) {
-      this.setState({ isRetrying: false });
     }
   }
 
@@ -193,7 +140,7 @@ class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
     if (this.recoveryTimeout) clearTimeout(this.recoveryTimeout);
   }
 
-  render(): ReactNode {
+  render(): React.ReactNode {
     if (this.state.hasError) {
       return this.props.fallback || this.renderErrorUI();
     }

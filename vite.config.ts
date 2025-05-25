@@ -30,15 +30,25 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       react({
-        // Include runtime configuration
+        // CHANGED: Added jsxRuntime setting to ensure consistent React imports
+        jsxRuntime: 'classic',
         include: "**/*.{jsx,tsx}",
         babel: {
           plugins: [
-            ["@babel/plugin-transform-react-jsx", { runtime: "automatic" }]
+            ["@babel/plugin-transform-react-jsx", { 
+              runtime: "automatic",
+              // ADDED: Explicit import source
+              importSource: 'react' 
+            }]
           ]
         }
       })
     ],
+    // ADDED: Environment definitions
+    define: {
+      'process.env': {},
+      __APP_ENV__: JSON.stringify(env.NODE_ENV)
+    },
     css: {
       postcss: {
         plugins: [
@@ -80,23 +90,23 @@ export default defineConfig(({ mode }) => {
       }
     },
     build: {
+      // CHANGED: Explicit output directory
+      outDir: 'dist',
       sourcemap: true,
+      // ADDED: Minification control
+      minify: mode === 'production' ? 'terser' : false,
       rollupOptions: {
         output: {
           manualChunks(id) {
-            // Split out gemini-sdk
             if (id.includes('node_modules/@google/generative-ai')) {
               return 'gemini-sdk';
             }
-            // Split out React and React DOM
             if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
               return 'react-vendor';
             }
-            // Split all other node_modules into vendor
             if (id.includes('node_modules')) {
               return 'vendor';
             }
-            // Optionally: split large feature folders (customize as needed)
             if (id.includes('/src/modules/')) {
               const dirs = id.split('/');
               const idx = dirs.indexOf('modules');
@@ -107,7 +117,9 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
-      chunkSizeWarningLimit: 1000, // Optional: increase warning limit
+      chunkSizeWarningLimit: 1000,
+      // ADDED: Assets handling
+      assetsInlineLimit: 4096
     }
   };
 });
