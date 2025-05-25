@@ -1,13 +1,145 @@
+# Netlify configuration for OncoVista React/TypeScript SPA
+
 [build]
+  # Build command - runs the Vite build process
   command = "npm run build"
+  
+  # Directory to publish - Vite outputs to 'dist' by default
   publish = "dist"
-  functions = "functions"
+  
+  # Functions directory (commented out since not using Netlify Functions currently)
+  # functions = "functions"
 
 [build.environment]
+  # Specify Node.js version for consistent builds
   NODE_VERSION = "18"
-  VITE_APP_VERSION = "$npm_package_version"
+  
+  # NPM flags for faster, more reliable builds
+  NPM_FLAGS = "--prefer-offline --no-audit --no-fund"
+  
+  # Enable corepack for package manager compatibility
+  COREPACK_ENABLE_STRICT = "0"
 
+# Build processing settings
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+# SPA redirects - Essential for React Router to work properly
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = false
+  
+  # Optional: Add conditions to exclude API routes or assets if needed
+  # conditions = {Role = ["admin"]}
+
+# Security headers for enhanced protection
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent the site from being embedded in frames (clickjacking protection)
+    X-Frame-Options = "DENY"
+    
+    # Enable XSS protection in older browsers
+    X-XSS-Protection = "1; mode=block"
+    
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    
+    # Control referrer information
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (adjust based on your needs)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.openai.com https://generativelanguage.googleapis.com https://*.supabase.co;"
+    
+    # Permissions Policy (formerly Feature Policy)
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Cache control for static assets (CSS, JS, images)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    # Cache static assets for 1 year since they have hash-based names
+    Cache-Control = "public, max-age=31536000, immutable"
+    
+    # Enable CORS for assets if needed
+    Access-Control-Allow-Origin = "*"
+
+# Cache control for HTML files
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    # Cache HTML for 5 minutes to allow quick updates
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+# Cache control for service worker (if you add one later)
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    # Don't cache service worker
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Cache control for API-like endpoints (if you add any)
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Optimize fonts if you're using custom fonts
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+
+# Handle favicon and manifest files
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "application/json"
+
+# Custom error pages (optional)
+# [[redirects]]
+#   from = "/404"
+#   to = "/404.html"
+#   status = 404
+
+# Environment-specific settings (optional)
+[context.production.environment]
+  NODE_ENV = "production"
+  GENERATE_SOURCEMAP = "false"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "production"
+  GENERATE_SOURCEMAP = "true"
+
+[context.branch-deploy.environment]
+  NODE_ENV = "development"
+  GENERATE_SOURCEMAP = "true"
+
+# Form handling (if you have contact forms)
+# [form]
+#   name = "contact"
+#   action = "/thank-you"
+#   method = "POST"
