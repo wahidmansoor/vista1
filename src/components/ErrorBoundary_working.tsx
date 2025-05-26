@@ -1,23 +1,23 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import * as React from 'react';
 import { AlertOctagon, ArrowLeft, RefreshCcw, ChevronDown, LifeBuoy } from 'lucide-react';
 import { logError } from '@/utils/log';
 
 interface Props {
-  children?: ReactNode;
+  children?: React.ReactNode;
   moduleName?: string;
-  fallback?: ReactNode;
+  fallback?: React.ReactNode;
 }
 
 interface State {
   hasError: boolean;
   error: Error | null;
-  errorInfo: ErrorInfo | null;
+  errorInfo: React.ErrorInfo | null;
   retryCount: number;
   resetKey: number;
   isDetailsOpen: boolean;
 }
 
-class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -34,7 +34,7 @@ class ErrorBoundary extends Component<Props, State> {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     this.setState({ error, errorInfo });
     logError(error, errorInfo, { 
       retryCount: this.state.retryCount,
@@ -43,7 +43,7 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   handleReset = (): void => {
-    this.setState((prevState: State) => ({
+    this.setState(prevState => ({
       hasError: false,
       error: null,
       errorInfo: null,
@@ -58,12 +58,12 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   handleToggleDetails = (): void => {
-    this.setState((prev: State) => ({
+    this.setState(prev => ({
       isDetailsOpen: !prev.isDetailsOpen,
     }));
   };
 
-  renderErrorUI = (): ReactNode => (
+  renderErrorUI = (): React.ReactNode => (
     <div style={{
       position: 'fixed',
       top: 0,
@@ -258,7 +258,7 @@ class ErrorBoundary extends Component<Props, State> {
     </div>
   );
 
-  render(): ReactNode {
+  render(): React.ReactNode {
     if (this.state.hasError) {
       return this.props.fallback || this.renderErrorUI();
     }

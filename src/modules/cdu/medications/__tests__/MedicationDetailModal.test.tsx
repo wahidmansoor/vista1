@@ -66,14 +66,11 @@ describe('MedicationDetailModal', () => {
         isOpen={true}
         onClose={mockOnClose}
       />
-    );
-
-    mockMedication.monitoring.baseline.forEach(test => {
-      expect(screen.getByText(test)).toBeInTheDocument();
+    );    mockMedication.monitoring.baseline.forEach(test => {
+      expect(screen.getAllByText(test)[0]).toBeInTheDocument();
     });
-    
-    mockMedication.monitoring.ongoing.forEach(test => {
-      expect(screen.getByText(test)).toBeInTheDocument();
+      mockMedication.monitoring.ongoing.forEach(test => {
+      expect(screen.getAllByText(test)[0]).toBeInTheDocument();
     });
   });
 

@@ -1,8 +1,8 @@
 # Netlify configuration for OncoVista React/TypeScript SPA
 
 [build]
-  # Build command - runs the Vite build process
-  command = "npm run build"
+  # Updated build command to ensure production-only dependencies
+  command = "npm install --omit=dev && npm run build"
   
   # Directory to publish - Vite outputs to 'dist' by default
   publish = "dist"
@@ -13,12 +13,14 @@
 [build.environment]
   # Specify Node.js version for consistent builds
   NODE_VERSION = "18"
-  
-  # NPM flags for faster, more reliable builds
-  NPM_FLAGS = "--prefer-offline --no-audit --no-fund"
-  
-  # Enable corepack for package manager compatibility
+    # Updated NPM flags to ensure production install
+  NPM_FLAGS = "--omit=dev --prefer-offline --no-audit --no-fund"
+    # Enable corepack for package manager compatibility
   COREPACK_ENABLE_STRICT = "0"
+
+  # Environment variables (add your specific ones here)
+  NODE_ENV = "production"
+  GENERATE_SOURCEMAP = "false"
 
 # Build processing settings
 [build.processing]

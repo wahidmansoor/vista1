@@ -1,23 +1,26 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import * as React from 'react';
 import { AlertOctagon, ArrowLeft, RefreshCcw, ChevronDown, LifeBuoy } from 'lucide-react';
 import { logError } from '@/utils/log';
 
 interface Props {
-  children?: ReactNode;
+  children?: React.ReactNode;
   moduleName?: string;
-  fallback?: ReactNode;
+  fallback?: React.ReactNode;
 }
 
 interface State {
   hasError: boolean;
   error: Error | null;
-  errorInfo: ErrorInfo | null;
+  errorInfo: React.ErrorInfo | null;
   retryCount: number;
   resetKey: number;
+  isRetrying: boolean;
   isDetailsOpen: boolean;
 }
 
-class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends React.Component<Props, State> {
+  private recoveryTimeout?: NodeJS.Timeout;
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -27,14 +30,13 @@ class ErrorBoundary extends Component<Props, State> {
       retryCount: 0,
       resetKey: 0,
       isDetailsOpen: false,
+      isRetrying: false,
     };
   }
 
   static getDerivedStateFromError(error: Error): Partial<State> {
     return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+  }  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     this.setState({ error, errorInfo });
     logError(error, errorInfo, { 
       retryCount: this.state.retryCount,
@@ -43,14 +45,20 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   handleReset = (): void => {
-    this.setState((prevState: State) => ({
+    this.setState(prev => ({
       hasError: false,
       error: null,
       errorInfo: null,
-      retryCount: prevState.retryCount + 1,
-      resetKey: prevState.resetKey + 1,
+      retryCount: prev.retryCount + 1,
+      resetKey: prev.resetKey + 1,
       isDetailsOpen: false,
+      isRetrying: true,
     }));
+
+    // Reset isRetrying after a short delay
+    setTimeout(() => {
+      this.setState({ isRetrying: false });
+    }, 1000);
   };
 
   handleNavigateHome = (): void => {
@@ -58,12 +66,12 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   handleToggleDetails = (): void => {
-    this.setState((prev: State) => ({
+    this.setState(prev => ({
       isDetailsOpen: !prev.isDetailsOpen,
     }));
   };
 
-  renderErrorUI = (): ReactNode => (
+  renderErrorUI = (): React.ReactNode => (
     <div style={{
       position: 'fixed',
       top: 0,
@@ -119,9 +127,7 @@ class ErrorBoundary extends Component<Props, State> {
           fontSize: '1.1rem'
         }}>
           Please try refreshing the page or contact support if the problem persists.
-        </p>
-
-        {this.state.error && (
+        </p>        {this.state.error && (
           <div style={{ width: '100%' }}>
             <details>
               <summary 
@@ -196,8 +202,7 @@ class ErrorBoundary extends Component<Props, State> {
           marginTop: '1rem',
           flexWrap: 'wrap',
           justifyContent: 'center'
-        }}>
-          <button 
+        }}>          <button 
             onClick={this.handleNavigateHome}
             data-testid="goHomeButton"
             style={{
@@ -212,13 +217,19 @@ class ErrorBoundary extends Component<Props, State> {
               fontSize: '1rem',
               transition: 'all 0.2s'
             }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = '#f5f5f5';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = 'white';
+            }}
           >
             <ArrowLeft size={18} />
             Go Home
           </button>
-
-          <button 
+            <button 
             onClick={this.handleReset}
+            disabled={this.state.isRetrying}
             data-testid="tryAgainButton"
             style={{
               display: 'flex',
@@ -227,15 +238,25 @@ class ErrorBoundary extends Component<Props, State> {
               padding: '0.75rem 1.5rem',
               border: 'none',
               borderRadius: '0.5rem',
-              backgroundColor: '#1976d2',
+              backgroundColor: this.state.isRetrying ? '#ccc' : '#1976d2',
               color: 'white',
-              cursor: 'pointer',
+              cursor: this.state.isRetrying ? 'not-allowed' : 'pointer',
               fontSize: '1rem',
               transition: 'all 0.2s'
             }}
+            onMouseOver={(e) => {
+              if (!this.state.isRetrying) {
+                e.currentTarget.style.backgroundColor = '#1565c0';
+              }
+            }}
+            onMouseOut={(e) => {
+              if (!this.state.isRetrying) {
+                e.currentTarget.style.backgroundColor = '#1976d2';
+              }
+            }}
           >
             <RefreshCcw size={18} />
-            Try Again
+            {this.state.isRetrying ? 'Retrying...' : 'Try Again'}
           </button>
         </div>
 
@@ -250,6 +271,12 @@ class ErrorBoundary extends Component<Props, State> {
             fontSize: '0.9rem',
             marginTop: '0.5rem'
           }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.textDecoration = 'underline';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.textDecoration = 'none';
+          }}
         >
           <LifeBuoy size={18} />
           Contact support
@@ -258,15 +285,32 @@ class ErrorBoundary extends Component<Props, State> {
     </div>
   );
 
-  render(): ReactNode {
+  componentDidUpdate(prevProps: Props, prevState: State): void {
+    if (this.state.hasError && !prevState.hasError) {
+      this.recoveryTimeout = setTimeout(() => {
+        if (this.state.retryCount < 3) { // Limit auto-retry attempts
+          this.handleReset();
+        }
+      }, 10000);
+    }
+    if (!this.state.hasError && this.recoveryTimeout) {
+      clearTimeout(this.recoveryTimeout);
+    }
+  }
+
+  componentWillUnmount(): void {
+    if (this.recoveryTimeout) {
+      clearTimeout(this.recoveryTimeout);
+    }
+  }
+  render(): React.ReactNode {
     if (this.state.hasError) {
       return this.props.fallback || this.renderErrorUI();
     }
-
     return (
-      <div key={this.state.resetKey} data-testid="recovered">
+      <React.Fragment key={this.state.resetKey} data-testid="recovered">
         {this.props.children}
-      </div>
+      </React.Fragment>
     );
   }
 }

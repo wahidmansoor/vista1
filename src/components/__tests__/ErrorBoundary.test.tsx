@@ -106,15 +106,17 @@ describe('ErrorBoundary', () => {
       expect(detailsElement.parentElement?.open).toBe(false);
     }
   });
-
   it('resets error state when clicking try again button', async () => {
-    // Only throw error on first render
+    // Use a global counter to ensure we only throw once across all instances
+    let renderCount = 0;
+    
     const ThrowOnce: React.FC = () => {
-      const [thrown, setThrown] = React.useState(false);
-      if (!thrown) {
-        setThrown(true);
+      renderCount++;
+      
+      if (renderCount === 1) {
         throw new Error('Test Error');
       }
+      
       return <div data-testid="recovered">Recovered Content</div>;
     };
 
