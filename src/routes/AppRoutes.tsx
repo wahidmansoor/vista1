@@ -4,6 +4,7 @@ import ErrorBoundary from "@/components/ErrorBoundary"; // ✅ updated to match 
 import NotFoundRedirect from "@/components/NotFoundRedirect";
 import LandingPage from "@/pages/LandingPage";
 import Handbook from "@/modules/handbook/Handbook";
+import { SearchPage } from "@/components/HandbookSearch";
 import OPD from "@/modules/opd/OPD";
 import CDU from "@/modules/cdu/CDU";
 import ProtocolDashboard from "@/modules/cdu/components/ProtocolDashboard";
@@ -28,11 +29,15 @@ const AppRoutes: FC = () => {
         <ErrorBoundary moduleName="Landing">
           <LandingPage />
         </ErrorBoundary>
-      } />
-
-      <Route path="/handbook/*" element={
+      } />      <Route path="/handbook/*" element={
         <ErrorBoundary moduleName="Handbook">
           <Handbook />
+        </ErrorBoundary>
+      } />
+
+      <Route path="/search" element={
+        <ErrorBoundary moduleName="Handbook Search">
+          <SearchPage />
         </ErrorBoundary>
       } />
 

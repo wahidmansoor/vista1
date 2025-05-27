@@ -11,6 +11,7 @@ import {
 import { useLayout } from '@/context/LayoutContext';
 
 const navItems = [
+  { path: "/search", label: "Search", icon: "/icons/search.svg" },
   { path: "/opd", label: "OPD", icon: "/icons/opd.png" },
   { path: "/cdu", label: "CDU", icon: "/icons/cdu.png" },
   { path: "/inpatient", label: "Inpatient", icon: "/icons/inpatient.png" },
