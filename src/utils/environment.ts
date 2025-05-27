@@ -12,7 +12,7 @@ export interface EnvironmentVariables {
 }
 
 // Environment variable keys
-export type EnvVarKey = 'SUPABASE_URL' | 'SUPABASE_ANON_KEY' | 'OPENAI_API_KEY' | 'GEMINI_API_KEY';
+export type EnvVarKey = 'SUPABASE_URL' | 'SUPABASE_ANON_KEY' | 'OPENAI_API_KEY' | 'GEMINI_API_KEY' | 'AUTH0_DOMAIN' | 'AUTH0_CLIENT_ID';
 
 // List of required environment variables
 const REQUIRED_ENV_VARS: string[] = [
@@ -20,6 +20,13 @@ const REQUIRED_ENV_VARS: string[] = [
   'VITE_SUPABASE_ANON_KEY', 
   'VITE_OPENAI_API_KEY',
   'VITE_GEMINI_API_KEY'
+];
+
+// List of optional environment variables (Auth0 is optional)
+const OPTIONAL_ENV_VARS: string[] = [
+  'VITE_AUTH0_DOMAIN',
+  'VITE_AUTH0_CLIENT_ID',
+  'VITE_AUTH0_CALLBACK_URL'
 ];
 
 /**

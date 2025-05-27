@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import ErrorBoundary from './components/ErrorBoundary';
+import { Auth0Provider } from './providers/Auth0Provider';
 import LogRocket from 'logrocket';
 import setupLogRocketReact from 'logrocket-react';
 import { validateEnv } from './utils/validateEnv';
@@ -31,9 +32,11 @@ if (import.meta.env.PROD) {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ErrorBoundary moduleName="App Root">
-      <App />
-    </ErrorBoundary>
+    <Auth0Provider>
+      <ErrorBoundary moduleName="App Root">
+        <App />
+      </ErrorBoundary>
+    </Auth0Provider>
   </React.StrictMode>
 );
 

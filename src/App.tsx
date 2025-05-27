@@ -4,20 +4,23 @@ import { Layout } from './layout/Layout';
 import AppRoutes from './routes/AppRoutes';
 import { LayoutProvider } from './context/LayoutContext';
 import { Toast } from "@/components/ui/toast";
-import { ToastProvider } from "@/components/ui/toast"; // Add this import
+import { ToastProvider } from "@/components/ui/toast";
+import Auth0Provider from './providers/Auth0Provider';
 
 const App: React.FC = () => {
   return (
-    <LayoutProvider>
-      <BrowserRouter>
-        <ToastProvider>
-          <Toast />
-          <Layout>
-            <AppRoutes />
-          </Layout>
-        </ToastProvider>
-      </BrowserRouter>
-    </LayoutProvider>
+    <Auth0Provider>
+      <LayoutProvider>
+        <BrowserRouter>
+          <ToastProvider>
+            <Toast />
+            <Layout>
+              <AppRoutes />
+            </Layout>
+          </ToastProvider>
+        </BrowserRouter>
+      </LayoutProvider>
+    </Auth0Provider>
   );
 };
 
