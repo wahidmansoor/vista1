@@ -2,7 +2,7 @@
 
 [build]
   # Build command - install all dependencies (including dev deps for build tools like TypeScript)
-  command = "npm install && npm run build"
+  command = "npm ci --include=dev && npm run build"
   
   # Directory to publish - Vite outputs to 'dist' by default
   publish = "dist"
@@ -18,7 +18,7 @@
   COREPACK_ENABLE_STRICT = "0"
 
   # Environment variables (add your specific ones here)
-  NODE_ENV = "production"
+  # NODE_ENV = "production"  # Don't set this during build as it prevents devDependencies installation
   GENERATE_SOURCEMAP = "false"
 
 # Build processing settings
