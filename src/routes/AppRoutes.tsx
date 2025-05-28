@@ -6,6 +6,7 @@ import LandingPage from "@/pages/LandingPage";
 import Dashboard from "@/pages/Dashboard";
 import ProtectedPage from "@/pages/ProtectedPage";
 import CallbackPage from "@/pages/CallbackPage";
+import ProtectedRoute from "@/auth/ProtectedRoute";
 import Handbook from "@/modules/handbook/Handbook";
 import { SearchPage } from "@/components/HandbookSearch";
 import OPD from "@/modules/opd/OPD";
@@ -21,91 +22,140 @@ import CrClCalculator from "@/modules/tools/calculators/CrCl";
 import ANCCalculator from "@/modules/tools/calculators/ANC";
 
 import type { ReactElement } from 'react';
-import opdRoutes from './opdRoutes';
-import cduRoutes from './cduRoutes';
 import ProtocolDetailPageContainer from "@/modules/cdu/safe/treatmentProtocols/TreatmentProtocols";
 
 const AppRoutes: FC = () => {
-  return (    <Routes>      <Route path="/" element={
+  return (
+    <Routes>
+      {/* Public routes - no authentication required */}
+      <Route path="/" element={
         <ErrorBoundary moduleName="Landing">
           <LandingPage />
         </ErrorBoundary>
-      } />      <Route path="/dashboard" element={
-        <ErrorBoundary moduleName="Dashboard">
-          <Dashboard />
-        </ErrorBoundary>
-      } />      <Route path="/callback" element={
+      } />
+      
+      <Route path="/callback" element={
         <ErrorBoundary moduleName="Auth Callback">
           <CallbackPage />
         </ErrorBoundary>
       } />
 
+      {/* Protected routes - authentication required */}
+      <Route path="/dashboard" element={
+        <ErrorBoundary moduleName="Dashboard">
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        </ErrorBoundary>
+      } />
+
       <Route path="/protected" element={
         <ErrorBoundary moduleName="Protected Page">
-          <ProtectedPage />
+          <ProtectedRoute>
+            <ProtectedPage />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
 
       <Route path="/handbook/*" element={
         <ErrorBoundary moduleName="Handbook">
-          <Handbook />
+          <ProtectedRoute>
+            <Handbook />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
 
       <Route path="/search" element={
         <ErrorBoundary moduleName="Handbook Search">
-          <SearchPage />
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
 
-      {opdRoutes}
-      {cduRoutes}
+      {/* Protected OPD Routes */}
+      <Route path="/opd/*" element={
+        <ErrorBoundary moduleName="OPD">
+          <ProtectedRoute>
+            <OPD />
+          </ProtectedRoute>
+        </ErrorBoundary>
+      } />
 
-      <Route path="/inpatient" element={
+      {/* Protected CDU Routes */}
+      <Route path="/cdu/*" element={
+        <ErrorBoundary moduleName="CDU">
+          <ProtectedRoute>
+            <CDU />
+          </ProtectedRoute>
+        </ErrorBoundary>
+      } />      <Route path="/inpatient/*" element={
         <ErrorBoundary moduleName="Inpatient">
-          <Inpatient />
+          <ProtectedRoute>
+            <Inpatient />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
-      <Route path="/palliative" element={
+      
+      <Route path="/palliative/*" element={
         <ErrorBoundary moduleName="Palliative">
-          <Palliative />
+          <ProtectedRoute>
+            <Palliative />
+          </ProtectedRoute>
         </ErrorBoundary>
-      } />
-
-      <Route path="/tools" element={
+      } />      <Route path="/tools/*" element={
         <ErrorBoundary moduleName="Tools">
-          <Tools />
+          <ProtectedRoute>
+            <Tools />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
+      
       <Route path="/tools/calculators" element={
         <ErrorBoundary moduleName="Clinical Calculators">
-          <Calculators />
+          <ProtectedRoute>
+            <Calculators />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
+      
       <Route path="/tools/calculators/bsa" element={
         <ErrorBoundary moduleName="BSA Calculator">
-          <BSACalculator />
+          <ProtectedRoute>
+            <BSACalculator />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
+      
       <Route path="/tools/calculators/crcl" element={
         <ErrorBoundary moduleName="CrCl Calculator">
-          <CrClCalculator />
+          <ProtectedRoute>
+            <CrClCalculator />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
+      
       <Route path="/tools/calculators/anc" element={
         <ErrorBoundary moduleName="ANC Calculator">
-          <ANCCalculator />
+          <ProtectedRoute>
+            <ANCCalculator />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
+      
       <Route path="/tools/redflags" element={
         <ErrorBoundary moduleName="Red Flags">
-          <RedFlagsPage />
+          <ProtectedRoute>
+            <RedFlagsPage />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
 
       <Route path="/cdu/treatment-protocols/:id" element={
         <ErrorBoundary moduleName="Protocol Detail">
-          <ProtocolDetailPageContainer />
+          <ProtectedRoute>
+            <ProtocolDetailPageContainer />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
 

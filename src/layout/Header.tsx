@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
 import { HandbookSearch } from "@/components/HandbookSearch";
 import { CommonIcons } from "@/utils/iconUtils";
+import LoginButton from '@/components/LoginButton';
+import LogoutButton from '@/components/LogoutButton';
 
 /**
  * Global header component for OncoVista that appears on every page
- * Shows welcome message, live clock, dark mode toggle, and authentication status
- * 
- * TODO: Replace mock authentication with Supabase auth:
- * 1. Import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
- * 2. Replace isLoggedIn state with useUser() hook
- * 3. Replace handleAuthClick with actual Supabase signIn/signOut methods
+ * Shows welcome message, live clock, dark mode toggle, and Auth0 authentication status
  */
 const Header: React.FC = () => {
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem("theme") === "dark");
   const [currentTime, setCurrentTime] = useState(new Date());
-  // Mock authentication state - replace with Supabase auth later
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showQuickSearch, setShowQuickSearch] = useState(false);
   const navigate = useNavigate();
+  const { isAuthenticated, isLoading, user } = useAuth0();
 
   // Handle dark mode
   useEffect(() => {
@@ -31,7 +28,6 @@ const Header: React.FC = () => {
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
-
   // Setup live-updating clock
   useEffect(() => {
     const timer = setInterval(() => {
@@ -40,11 +36,6 @@ const Header: React.FC = () => {
 
     return () => clearInterval(timer);
   }, []);
-
-  // Mock auth handler - replace with Supabase auth later
-  const handleAuthClick = () => {
-    setIsLoggedIn(!isLoggedIn);
-  };
 
   const handleSearchClick = () => {
     navigate('/search');
@@ -99,10 +90,9 @@ const Header: React.FC = () => {
                 {currentTime.toLocaleTimeString()}
               </div>
             </div>
-          </div>
-
-          {/* Right side - Dark mode & Auth buttons */}
-          <div className="flex items-center gap-4">            <button
+          </div>          {/* Right side - Dark mode & Auth buttons */}
+          <div className="flex items-center gap-4">
+            <button
               onClick={() => setDarkMode(!darkMode)}
               className="p-2 rounded-full hover:bg-white/10 transition-colors"
               title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
@@ -110,25 +100,25 @@ const Header: React.FC = () => {
               <span className="text-lg">{darkMode ? "☀️" : "🌙"}</span>
             </button>
 
-            <button
-              onClick={handleAuthClick}
-              className="inline-flex items-center px-4 py-2 rounded-md 
-                       text-sm font-medium bg-blue-700 hover:bg-blue-800 
-                       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
-                       dark:bg-blue-600 dark:hover:bg-blue-700
-                       transition-colors duration-200"
-            >              {isLoggedIn ? (
-                <>
-                  <span className="mr-2">🚪</span>
-                  Logout
-                </>
-              ) : (
-                <>
-                  <span className="mr-2">🔑</span>
-                  Login
-                </>
-              )}
-            </button>
+            {/* Authentication Section */}
+            {isLoading ? (
+              <div className="text-white/80">Loading...</div>
+            ) : isAuthenticated ? (
+              <div className="flex items-center gap-3">
+                <span className="text-white/90 hidden sm:block">
+                  Welcome, {user?.name || user?.email}
+                </span>
+                <button
+                  onClick={() => navigate('/dashboard')}
+                  className="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm font-medium"
+                >
+                  Dashboard
+                </button>
+                <LogoutButton className="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200" />
+              </div>
+            ) : (
+              <LoginButton className="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200" />
+            )}
           </div>
         </div>
       </div>
