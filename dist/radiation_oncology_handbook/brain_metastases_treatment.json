@@ -1,0 +1,64 @@
+{
+  "title": "Brain Metastases Treatment",
+  "lastUpdated": "2024-01-15",
+  "sections": [
+    {
+      "type": "header",
+      "level": 1,
+      "content": "Radiation Therapy for Brain Metastases"
+    },
+    {
+      "type": "text",
+      "content": "Brain metastases occur in 20-40% of cancer patients. Radiation therapy plays a crucial role in management, with options ranging from whole brain radiation therapy to stereotactic radiosurgery."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Treatment Modalities"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Whole Brain Radiation Therapy (WBRT)**: 30 Gy in 10 fractions or 20 Gy in 5 fractions",
+        "**Stereotactic Radiosurgery (SRS)**: Single high-dose treatment for ≤4 lesions",
+        "**Stereotactic Radiotherapy (SRT)**: Fractionated stereotactic treatment",
+        "**Hippocampal-Sparing WBRT**: Cognitive preservation technique"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "SRS Dose Prescriptions"
+    },
+    {
+      "type": "table",
+      "headers": ["Tumor Size", "Single Fraction Dose", "Prescription Isodose"],
+      "rows": [
+        ["<2 cm", "20-24 Gy", "80-90%"],
+        ["2-3 cm", "18-20 Gy", "80-90%"],
+        ["3-4 cm", "15-18 Gy", "80-90%"],
+        [">4 cm", "Consider SRT", "3-5 fractions"]
+      ]
+    },
+    {
+      "type": "callout",
+      "calloutType": "warning",
+      "content": "**Brainstem Tolerance**: Maximum point dose should not exceed 12-15 Gy for SRS near brainstem structures."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Patient Selection Criteria"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Performance Status**: KPS ≥70 or ECOG 0-2",
+        "**Number of Lesions**: SRS preferred for 1-4 lesions",
+        "**Lesion Size**: Each lesion <3-4 cm diameter",
+        "**Extracranial Disease**: Controlled or limited progression",
+        "**Life Expectancy**: >3 months"
+      ]
+    }
+  ]
+}

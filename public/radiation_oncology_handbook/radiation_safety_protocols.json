@@ -1,0 +1,230 @@
+{
+  "id": "radiation_safety_protocols",
+  "title": "Radiation Safety and Protection Protocols",
+  "description": "Comprehensive safety protocols for radiation therapy departments",
+  "category": "Quality Assurance",
+  "lastUpdated": "2024-01-15",
+  "version": "1.0",
+  "tags": ["safety", "radiation protection", "ALARA", "protocols", "QA"],
+  "content": [
+    {
+      "type": "header",
+      "level": 1,
+      "text": "Radiation Safety and Protection Protocols"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "title": "ALARA Principle",
+      "content": "All radiation exposures should be kept As Low As Reasonably Achievable (ALARA), taking into account economic and social factors."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Fundamental Safety Principles"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Time:** Minimize exposure time",
+        "**Distance:** Maximize distance from radiation source",
+        "**Shielding:** Use appropriate protective barriers",
+        "**Training:** Ensure all personnel are properly trained",
+        "**Monitoring:** Continuous radiation monitoring programs"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Personnel Safety Requirements"
+    },
+    {
+      "type": "table",
+      "headers": ["Personnel Category", "Annual Dose Limit", "Monitoring Requirement", "Training Frequency"],
+      "rows": [
+        ["Radiation Workers", "50 mSv (5 rem)", "Personal dosimetry", "Annual"],
+        ["Pregnant Workers", "5 mSv (0.5 rem)", "Enhanced monitoring", "Special training"],
+        ["General Public", "1 mSv (0.1 rem)", "Area monitoring", "N/A"],
+        ["Minors (<18 years)", "10% of adult limit", "Special oversight", "Enhanced training"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Personal Protective Equipment (PPE)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Lead Aprons:** 0.25-0.5 mm Pb equivalent minimum",
+        "**Thyroid Shields:** 0.25 mm Pb equivalent minimum",
+        "**Lead Gloves:** For fluoroscopy and brachytherapy procedures",
+        "**Protective Eyewear:** 0.25 mm Pb equivalent for lens protection",
+        "**Mobile Shields:** Available for all treatment areas"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Treatment Room Safety"
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Access Control Systems"
+    },
+    {
+      "type": "text",
+      "content": "All treatment rooms must have comprehensive safety systems to prevent accidental exposure to patients, staff, and the public."
+    },
+    {
+      "type": "table",
+      "headers": ["Safety Feature", "Requirement", "Testing Frequency", "Action Level"],
+      "rows": [
+        ["Door interlocks", "Fail-safe operation", "Daily", "Immediate repair"],
+        ["Emergency stops", "Multiple locations", "Daily", "Immediate repair"],
+        ["Audio/visual monitors", "Clear communication", "Daily", "Same day repair"],
+        ["Warning lights", "Visible from all angles", "Daily", "Same day repair"],
+        ["Radiation monitors", "Calibrated detectors", "Monthly", "Investigate >threshold"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Emergency Procedures"
+    },
+    {
+      "type": "callout",
+      "variant": "error",
+      "title": "Emergency Response",
+      "content": "All staff must be trained in emergency procedures and know the location of emergency equipment and contacts."
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Patient Emergency:** Stop beam immediately, enter room, provide medical care",
+        "**Equipment Malfunction:** Follow lockout/tagout procedures, notify physicist",
+        "**Fire/Evacuation:** Secure radioactive sources, evacuate per facility protocol",
+        "**Radiation Exposure:** Document incident, notify radiation safety officer",
+        "**Source Loss:** Implement search procedures, notify regulatory authorities"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Brachytherapy Safety"
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "High Dose Rate (HDR) Safety"
+    },
+    {
+      "type": "text",
+      "content": "HDR brachytherapy requires specialized safety protocols due to the high activity sources used."
+    },
+    {
+      "type": "table",
+      "headers": ["Safety Measure", "HDR Requirement", "Verification", "Documentation"],
+      "rows": [
+        ["Source check", "Daily activity verification", "Survey meter", "Log book entry"],
+        ["Room monitor", "Area radiation detector", "Function test", "Daily check"],
+        ["Source guide tube", "Integrity inspection", "Visual/leak test", "Weekly log"],
+        ["Emergency equipment", "Long forceps, lead container", "Availability check", "Daily verification"],
+        ["Patient monitoring", "Audio/visual communication", "Function test", "Before each fraction"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Low Dose Rate (LDR) Safety"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Patient Isolation:** Private room with radiation precautions",
+        "**Visitor Restrictions:** Limited time and distance requirements",
+        "**Nursing Care:** Minimize exposure time, maximize distance",
+        "**Waste Management:** Segregated disposal of contaminated materials",
+        "**Source Accountability:** Continuous monitoring of implanted sources"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Radiation Detection and Monitoring"
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Personal Dosimetry"
+    },
+    {
+      "type": "table",
+      "headers": ["Dosimeter Type", "Application", "Sensitivity", "Read Frequency"],
+      "rows": [
+        ["TLD", "Routine monitoring", "0.1 mrem", "Monthly/Quarterly"],
+        ["OSL", "Routine monitoring", "0.01 mrem", "Monthly/Quarterly"],
+        ["Electronic", "Real-time monitoring", "0.1 mrem", "Continuous"],
+        ["Ring badge", "Extremity monitoring", "0.3 mrem", "Monthly/Quarterly"],
+        ["Fetal badge", "Pregnancy monitoring", "0.01 mrem", "Monthly"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Area Monitoring"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Fixed Monitors:** Permanently installed in high-risk areas",
+        "**Portable Surveys:** Regular contamination and exposure surveys",
+        "**Leak Testing:** Semi-annual testing of sealed sources",
+        "**Air Sampling:** When airborne contamination is possible",
+        "**Bioassay:** For workers with internal contamination risk"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Regulatory Compliance"
+    },
+    {
+      "type": "text",
+      "content": "Radiation therapy facilities must comply with federal, state, and local regulations governing the use of ionizing radiation."
+    },
+    {
+      "type": "table",
+      "headers": ["Regulatory Body", "Jurisdiction", "Key Requirements", "Inspection Frequency"],
+      "rows": [
+        ["NRC", "Federal (agreement states)", "Licensing, safety programs", "Every 3-5 years"],
+        ["State agencies", "Non-agreement states", "Licensing, inspections", "Varies by state"],
+        ["FDA", "Medical devices", "Equipment approval", "As needed"],
+        ["OSHA", "Worker safety", "Safety standards", "Complaint-driven"],
+        ["Joint Commission", "Hospital accreditation", "Safety protocols", "Every 3 years"]
+      ]
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "title": "Documentation Requirements",
+      "content": "Maintain comprehensive records of all safety activities, training, incidents, and monitoring results for regulatory compliance."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Training and Competency"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Initial Training:** Comprehensive radiation safety program for all new employees",
+        "**Annual Refresher:** Update on procedures, regulations, and incident reviews",
+        "**Specialized Training:** Role-specific training for different job categories",
+        "**Emergency Drills:** Regular practice of emergency procedures",
+        "**Competency Assessment:** Regular evaluation of safety knowledge and skills"
+      ]
+    }
+  ]
+}

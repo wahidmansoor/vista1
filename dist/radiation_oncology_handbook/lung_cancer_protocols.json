@@ -1,0 +1,151 @@
+{
+  "id": "lung_cancer_protocols",
+  "title": "Lung Cancer Treatment Protocols",
+  "description": "Comprehensive radiation therapy protocols for lung cancer management",
+  "category": "Site-Specific Treatments",
+  "lastUpdated": "2024-01-15",
+  "version": "1.0",
+  "tags": ["lung cancer", "NSCLC", "SCLC", "SBRT", "protocols"],
+  "content": [
+    {
+      "type": "header",
+      "level": 1,
+      "text": "Lung Cancer Radiation Therapy Protocols"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "title": "Clinical Overview",
+      "content": "Lung cancer is the leading cause of cancer deaths worldwide. Radiation therapy plays a crucial role in both curative and palliative treatment approaches across all stages of disease."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Non-Small Cell Lung Cancer (NSCLC)"
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Early Stage NSCLC (T1-2, N0)"
+    },
+    {
+      "type": "text",
+      "content": "For medically inoperable early-stage NSCLC, stereotactic body radiation therapy (SBRT) is the standard of care, offering excellent local control and minimal toxicity."
+    },
+    {
+      "type": "table",
+      "headers": ["Treatment", "Dose/Fractionation", "Target", "Constraints"],
+      "rows": [
+        ["SBRT (peripheral)", "54 Gy/3 fx or 50 Gy/5 fx", "GTV + 3-5mm margin", "Lung V20 < 10%"],
+        ["SBRT (central)", "50 Gy/5 fx or 60 Gy/8 fx", "GTV + 5-8mm margin", "Proximal bronchus < 105%"],
+        ["Conventional RT", "60-66 Gy/30-33 fx", "GTV + 1cm margin", "Lung V20 < 20%"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Locally Advanced NSCLC (Stage III)"
+    },
+    {
+      "type": "text",
+      "content": "Concurrent chemoradiation remains the standard for unresectable stage III NSCLC. Recent trials have shown benefit for consolidation immunotherapy."
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Standard Dose:** 60 Gy in 30 fractions (2 Gy/fx)",
+        "**Concurrent Chemotherapy:** Carboplatin/Paclitaxel or Cisplatin/Etoposide",
+        "**Consolidation:** Durvalumab (anti-PD-L1) for 12 months",
+        "**Planning:** 4D-CT for respiratory motion assessment",
+        "**Target Definition:** GTV + 6-8mm for CTV, CTV + 5mm for PTV"
+      ]
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "title": "Critical Structures",
+      "content": "Pay special attention to spinal cord (< 50 Gy), heart (mean < 26 Gy), and lung constraints (V20 < 35%, mean dose < 20 Gy)."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Small Cell Lung Cancer (SCLC)"
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Limited Stage SCLC"
+    },
+    {
+      "type": "text",
+      "content": "Concurrent chemoradiation with early initiation (cycle 1-2) provides optimal outcomes for limited-stage SCLC."
+    },
+    {
+      "type": "table",
+      "headers": ["Parameter", "Recommendation", "Notes"],
+      "rows": [
+        ["Total Dose", "45 Gy/30 fx BID or 60-70 Gy/30-35 fx QD", "BID preferred if feasible"],
+        ["Timing", "Start with cycle 1-2 of chemotherapy", "Early concurrent preferred"],
+        ["Chemotherapy", "Cisplatin/Etoposide or Carboplatin/Etoposide", "4-6 cycles"],
+        ["PCI", "25 Gy/10 fx", "For patients with CR/PR to initial therapy"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Extensive Stage SCLC"
+    },
+    {
+      "type": "text",
+      "content": "Thoracic radiation therapy to the primary site and involved lymph nodes may provide survival benefit in patients with good response to initial chemotherapy."
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Indication:** Good response to 4-6 cycles of chemotherapy",
+        "**Dose:** 30 Gy/10 fx or 45 Gy/15 fx",
+        "**Target:** Primary tumor and involved lymph nodes",
+        "**PCI:** Consider for patients with CR to systemic therapy"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Prophylactic Cranial Irradiation (PCI)"
+    },
+    {
+      "type": "text",
+      "content": "PCI reduces the incidence of brain metastases and improves overall survival in limited-stage SCLC patients who achieve complete or partial response to initial therapy."
+    },
+    {
+      "type": "table",
+      "headers": ["Disease Stage", "Indication", "Dose", "Technique"],
+      "rows": [
+        ["Limited SCLC", "CR/PR to initial therapy", "25 Gy/10 fx", "Whole brain"],
+        ["Extensive SCLC", "CR to initial therapy", "25 Gy/10 fx", "Whole brain"],
+        ["NSCLC", "Generally not indicated", "N/A", "N/A"]
+      ]
+    },
+    {
+      "type": "callout",
+      "variant": "clinical",
+      "title": "Quality Measures",
+      "content": "Document performance status, pulmonary function tests, and cardiac evaluation. Ensure multidisciplinary team review for all cases."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Follow-up and Surveillance"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Imaging:** CT chest every 3-6 months for 2 years, then annually",
+        "**Brain MRI:** Every 3-6 months for SCLC patients",
+        "**Pulmonary Function:** Baseline and as clinically indicated",
+        "**Toxicity Assessment:** Acute and late effects monitoring",
+        "**Smoking Cessation:** Ongoing counseling and support"
+      ]
+    }
+  ]
+}

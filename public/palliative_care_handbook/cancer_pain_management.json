@@ -1,0 +1,82 @@
+{
+  "title": "Cancer Pain Management",
+  "lastUpdated": "2024-01-15",
+  "sections": [
+    {
+      "type": "header",
+      "level": 1,
+      "content": "Cancer Pain Management"
+    },
+    {
+      "type": "text",
+      "content": "Cancer pain affects 70-90% of patients with advanced cancer. Effective pain management is achievable in >90% of patients with appropriate assessment and treatment."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "WHO Analgesic Ladder"
+    },
+    {
+      "type": "table",
+      "headers": ["Step", "Pain Level", "Medications", "Adjuvants"],
+      "rows": [
+        ["Step 1", "Mild (1-3/10)", "Non-opioids (acetaminophen, NSAIDs)", "Consider adjuvants"],
+        ["Step 2", "Moderate (4-6/10)", "Weak opioids + non-opioids", "Add adjuvants"],
+        ["Step 3", "Severe (7-10/10)", "Strong opioids ± non-opioids", "Continue adjuvants"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Opioid Conversion Guidelines"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Morphine to Oxycodone**: 1:0.67 ratio (reduce by 33%)",
+        "**Morphine to Fentanyl**: Calculate 24h morphine, divide by 2 for mcg/h patch",
+        "**Oral to IV Morphine**: 3:1 ratio (reduce by 67% for IV)",
+        "**Cross-tolerance**: Reduce calculated dose by 25-50% when switching"
+      ]
+    },
+    {
+      "type": "callout",
+      "calloutType": "warning",
+      "content": "**Safety Alert**: Always reduce calculated equianalgesic dose by 25-50% when rotating opioids to account for incomplete cross-tolerance."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Breakthrough Pain Management"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Dose**: 10-20% of 24-hour opioid requirement",
+        "**Frequency**: Every 1-2 hours as needed",
+        "**Onset**: Immediate-release formulations preferred",
+        "**Assessment**: If >4 doses/day needed, increase baseline dose"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Adjuvant Medications"
+    },
+    {
+      "type": "table",
+      "headers": ["Pain Type", "First-Line Adjuvant", "Dose Range", "Notes"],
+      "rows": [
+        ["Neuropathic", "Gabapentin", "300-3600 mg/day", "Titrate slowly"],
+        ["Bone Pain", "Bisphosphonates", "Varies by agent", "Consider radiation"],
+        ["Muscle Spasm", "Baclofen", "5-80 mg/day", "Start low, titrate"],
+        ["Inflammation", "Dexamethasone", "4-16 mg/day", "Limited duration"]
+      ]
+    },
+    {
+      "type": "callout",
+      "calloutType": "tip",
+      "content": "**Clinical Pearl**: Neuropathic pain often requires combination therapy with opioids plus adjuvant medications for optimal control."
+    }
+  ]
+}

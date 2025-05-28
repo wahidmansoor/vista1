@@ -57,19 +57,18 @@ describe('MedicationsView', () => {
     await waitFor(() => {
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     }, { timeout: 20000 });
-  });
-  it('handles search functionality', async () => {
+  });  it('handles search functionality', async () => {
     render(<MedicationsView initialData={mockMedications} />);
     
     const searchInput = screen.getByPlaceholderText(/search medications/i);
     await userEvent.type(searchInput, mockMedications[0].name);
 
+    // Wait for debounced search with increased timeout
     await waitFor(() => {
       expect(screen.getByText(mockMedications[0].name)).toBeInTheDocument();
       expect(screen.queryByText(mockMedications[1].name)).not.toBeInTheDocument();
-    }, { timeout: 5000 });
-  });
-  it('handles classification filter', async () => {
+    }, { timeout: 1000 }); // Increased timeout to account for debouncing
+  });  it('handles classification filter', async () => {
     render(<MedicationsView initialData={mockMedications} />);
     
     const filterSelect = screen.getByRole('combobox', { name: /filter by classification/i });
@@ -77,7 +76,7 @@ describe('MedicationsView', () => {
 
     await waitFor(() => {
       expect(screen.getByText(mockMedications[0].classification)).toBeInTheDocument();
-    }, { timeout: 5000 });
+    }, { timeout: 1000 }); // Reduced timeout since this doesn't involve debouncing
   });
   it('handles keyboard navigation', () => {
     render(<MedicationsView initialData={mockMedications} />);
@@ -86,15 +85,15 @@ describe('MedicationsView', () => {
     const firstMedCard = screen.getByRole('button', { name: new RegExp(mockMedications[0].name) });
     expect(firstMedCard).toBeInTheDocument();
     expect(firstMedCard).toHaveAttribute('tabIndex', '0');
-  });
-  it('shows empty state when no medications match filters', async () => {
+  });  it('shows empty state when no medications match filters', async () => {
     render(<MedicationsView initialData={mockMedications} />);
     
     const searchInput = screen.getByPlaceholderText(/search medications/i);
     await userEvent.type(searchInput, 'NonexistentMedication');
 
+    // Wait for debounced search and empty state
     await waitFor(() => {
       expect(screen.getByText(/no medications found/i)).toBeInTheDocument();
-    }, { timeout: 5000 });
+    }, { timeout: 1000 }); // Increased timeout for debouncing
   });
 });

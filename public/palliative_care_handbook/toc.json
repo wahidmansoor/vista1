@@ -1,0 +1,557 @@
+[
+  {
+    "title": "Fundamentals",
+    "items": [
+      {
+        "title": "Principles and Philosophy",
+        "items": [
+          {
+            "title": "Introduction to Palliative Care",
+            "path": "fundamentals/principles/introduction"
+          },
+          {
+            "title": "Core Principles and Values",
+            "path": "fundamentals/principles/core-principles"
+          },
+          {
+            "title": "Palliative vs Curative Care",
+            "path": "fundamentals/principles/palliative-vs-curative"
+          },
+          {
+            "title": "Goals of Care Discussions",
+            "path": "fundamentals/principles/goals-of-care"
+          },
+          {
+            "title": "Quality of Life Focus",
+            "path": "fundamentals/principles/quality-of-life"
+          },
+          {
+            "title": "Patient and Family-Centered Care",
+            "path": "fundamentals/principles/patient-family-centered"
+          },
+          {
+            "title": "Multidisciplinary Team Approach",
+            "path": "fundamentals/principles/multidisciplinary-team"
+          }
+        ]
+      },
+      {
+        "title": "Communication Skills",
+        "items": [
+          {
+            "title": "Breaking Bad News",
+            "path": "fundamentals/communication/breaking-bad-news"
+          },
+          {
+            "title": "Discussing Prognosis",
+            "path": "fundamentals/communication/discussing-prognosis"
+          },
+          {
+            "title": "Goals of Care Conversations",
+            "path": "fundamentals/communication/goals-conversations"
+          },
+          {
+            "title": "Advanced Care Planning",
+            "path": "fundamentals/communication/advanced-care-planning"
+          },
+          {
+            "title": "Difficult Conversations",
+            "path": "fundamentals/communication/difficult-conversations"
+          },
+          {
+            "title": "Family Meetings",
+            "path": "fundamentals/communication/family-meetings"
+          },
+          {
+            "title": "Cultural Sensitivity",
+            "path": "fundamentals/communication/cultural-sensitivity"
+          }
+        ]
+      },
+      {
+        "title": "Prognostication",
+        "items": [
+          {
+            "title": "Prognostic Tools and Indicators",
+            "path": "fundamentals/prognostication/prognostic-tools"
+          },
+          {
+            "title": "Performance Status Assessment",
+            "path": "fundamentals/prognostication/performance-status"
+          },
+          {
+            "title": "Disease-Specific Prognostic Factors",
+            "path": "fundamentals/prognostication/disease-specific-factors"
+          },
+          {
+            "title": "Trajectory of Illness",
+            "path": "fundamentals/prognostication/illness-trajectory"
+          },
+          {
+            "title": "The Surprise Question",
+            "path": "fundamentals/prognostication/surprise-question"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Symptom Management",
+    "items": [
+      {
+        "title": "Pain Management",
+        "items": [
+          {
+            "title": "Pain Assessment",
+            "path": "symptom-management/pain/pain-assessment"
+          },
+          {
+            "title": "Pain Assessment Tools",
+            "path": "symptom-management/pain/assessment-tools"
+          },
+          {
+            "title": "Types of Cancer Pain",
+            "path": "symptom-management/pain/types-cancer-pain"
+          },
+          {
+            "title": "WHO Analgesic Ladder",
+            "path": "symptom-management/pain/who-analgesic-ladder"
+          },
+          {
+            "title": "Opioid Management",
+            "path": "symptom-management/pain/opioid-management"
+          },
+          {
+            "title": "Adjuvant Analgesics",
+            "path": "symptom-management/pain/adjuvant-analgesics"
+          },
+          {
+            "title": "Breakthrough Pain",
+            "path": "symptom-management/pain/breakthrough-pain"
+          },
+          {
+            "title": "Neuropathic Pain",
+            "path": "symptom-management/pain/neuropathic-pain"
+          },
+          {
+            "title": "Interventional Pain Management",
+            "path": "symptom-management/pain/interventional-pain"
+          }
+        ]
+      },
+      {
+        "title": "Respiratory Symptoms",
+        "items": [
+          {
+            "title": "Dyspnea Assessment and Management",
+            "path": "symptom-management/respiratory/dyspnea"
+          },
+          {
+            "title": "Cough Management",
+            "path": "symptom-management/respiratory/cough"
+          },
+          {
+            "title": "Hemoptysis",
+            "path": "symptom-management/respiratory/hemoptysis"
+          },
+          {
+            "title": "Death Rattle",
+            "path": "symptom-management/respiratory/death-rattle"
+          },
+          {
+            "title": "Respiratory Secretions",
+            "path": "symptom-management/respiratory/secretions"
+          },
+          {
+            "title": "Oxygen Therapy Considerations",
+            "path": "symptom-management/respiratory/oxygen-therapy"
+          }
+        ]
+      },
+      {
+        "title": "Gastrointestinal Symptoms",
+        "items": [
+          {
+            "title": "Nausea and Vomiting",
+            "path": "symptom-management/gastrointestinal/nausea-vomiting"
+          },
+          {
+            "title": "Constipation Management",
+            "path": "symptom-management/gastrointestinal/constipation"
+          },
+          {
+            "title": "Diarrhea",
+            "path": "symptom-management/gastrointestinal/diarrhea"
+          },
+          {
+            "title": "Bowel Obstruction",
+            "path": "symptom-management/gastrointestinal/bowel-obstruction"
+          },
+          {
+            "title": "Ascites",
+            "path": "symptom-management/gastrointestinal/ascites"
+          },
+          {
+            "title": "Anorexia and Cachexia",
+            "path": "symptom-management/gastrointestinal/anorexia-cachexia"
+          },
+          {
+            "title": "Oral Care",
+            "path": "symptom-management/gastrointestinal/oral-care"
+          }
+        ]
+      },
+      {
+        "title": "Neuropsychiatric Symptoms",
+        "items": [
+          {
+            "title": "Delirium Assessment and Management",
+            "path": "symptom-management/neuropsychiatric/delirium"
+          },
+          {
+            "title": "Anxiety Management",
+            "path": "symptom-management/neuropsychiatric/anxiety"
+          },
+          {
+            "title": "Depression in Palliative Care",
+            "path": "symptom-management/neuropsychiatric/depression"
+          },
+          {
+            "title": "Sleep Disorders",
+            "path": "symptom-management/neuropsychiatric/sleep-disorders"
+          },
+          {
+            "title": "Fatigue Management",
+            "path": "symptom-management/neuropsychiatric/fatigue"
+          },
+          {
+            "title": "Cognitive Impairment",
+            "path": "symptom-management/neuropsychiatric/cognitive-impairment"
+          },
+          {
+            "title": "Seizure Management",
+            "path": "symptom-management/neuropsychiatric/seizures"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "End-of-Life Care",
+    "items": [
+      {
+        "title": "Terminal Care",
+        "items": [
+          {
+            "title": "End-of-Life Signs and Symptoms",
+            "path": "end-of-life/terminal-care/eol-signs-symptoms"
+          },
+          {
+            "title": "Comfort Measures",
+            "path": "end-of-life/terminal-care/comfort-measures"
+          },
+          {
+            "title": "Medication Management at End-of-Life",
+            "path": "end-of-life/terminal-care/medication-management"
+          },
+          {
+            "title": "Family Support During Dying",
+            "path": "end-of-life/terminal-care/family-support"
+          },
+          {
+            "title": "After-Death Care",
+            "path": "end-of-life/terminal-care/after-death-care"
+          }
+        ]
+      },
+      {
+        "title": "Psychosocial Support",
+        "items": [
+          {
+            "title": "Psychological Support for Patients",
+            "path": "end-of-life/psychosocial/patient-psychological-support"
+          },
+          {
+            "title": "Family Coping and Support",
+            "path": "end-of-life/psychosocial/family-coping"
+          },
+          {
+            "title": "Bereavement Care",
+            "path": "end-of-life/psychosocial/bereavement-care"
+          },
+          {
+            "title": "Spiritual Care",
+            "path": "end-of-life/psychosocial/spiritual-care"
+          },
+          {
+            "title": "Staff Support and Self-Care",
+            "path": "end-of-life/psychosocial/staff-support"
+          }
+        ]
+      },
+      {
+        "title": "Practical Arrangements",
+        "items": [
+          {
+            "title": "Advanced Directives",
+            "path": "end-of-life/practical/advanced-directives"
+          },
+          {
+            "title": "Legal and Ethical Considerations",
+            "path": "end-of-life/practical/legal-ethical"
+          },
+          {
+            "title": "Discharge Planning",
+            "path": "end-of-life/practical/discharge-planning"
+          },
+          {
+            "title": "Financial Planning and Resources",
+            "path": "end-of-life/practical/financial-planning"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Ethical Issues",
+    "items": [
+      {
+        "title": "Decision-Making",
+        "items": [
+          {
+            "title": "Decision-Making Capacity",
+            "path": "ethical-issues/decision-making/capacity-assessment"
+          },
+          {
+            "title": "Informed Consent in Palliative Care",
+            "path": "ethical-issues/decision-making/informed-consent"
+          },
+          {
+            "title": "Surrogate Decision-Making",
+            "path": "ethical-issues/decision-making/surrogate-decision"
+          },
+          {
+            "title": "Conflicts in Care Goals",
+            "path": "ethical-issues/decision-making/care-conflicts"
+          }
+        ]
+      },
+      {
+        "title": "End-of-Life Decisions",
+        "items": [
+          {
+            "title": "Withholding and Withdrawing Treatment",
+            "path": "ethical-issues/eol-decisions/withholding-withdrawing"
+          },
+          {
+            "title": "Do Not Resuscitate (DNR) Orders",
+            "path": "ethical-issues/eol-decisions/dnr-orders"
+          },
+          {
+            "title": "Medical Aid in Dying (MAiD)",
+            "path": "ethical-issues/eol-decisions/medical-aid-dying"
+          },
+          {
+            "title": "Futility in Medical Care",
+            "path": "ethical-issues/eol-decisions/medical-futility"
+          }
+        ]
+      },
+      {
+        "title": "Cultural and Religious Considerations",
+        "items": [
+          {
+            "title": "Cultural Considerations in End-of-Life Care",
+            "path": "ethical-issues/cultural-religious/cultural-considerations"
+          },
+          {
+            "title": "Religious and Spiritual Beliefs",
+            "path": "ethical-issues/cultural-religious/religious-beliefs"
+          },
+          {
+            "title": "Language and Communication Barriers",
+            "path": "ethical-issues/cultural-religious/language-barriers"
+          },
+          {
+            "title": "Family Dynamics and Cultural Norms",
+            "path": "ethical-issues/cultural-religious/family-dynamics"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Special Populations",
+    "items": [
+      {
+        "title": "Pediatric Palliative Care",
+        "items": [
+          {
+            "title": "Introduction to Pediatric Palliative Care",
+            "path": "special-populations/pediatric/introduction"
+          },
+          {
+            "title": "Pediatric Pain Management",
+            "path": "special-populations/pediatric/pain-management"
+          },
+          {
+            "title": "Family-Centered Care in Pediatrics",
+            "path": "special-populations/pediatric/family-centered-care"
+          },
+          {
+            "title": "School and Social Support",
+            "path": "special-populations/pediatric/school-social-support"
+          },
+          {
+            "title": "Transition to Adult Care",
+            "path": "special-populations/pediatric/transition-adult-care"
+          }
+        ]
+      },
+      {
+        "title": "Geriatric Considerations",
+        "items": [
+          {
+            "title": "Geriatric Assessment in Palliative Care",
+            "path": "special-populations/geriatric/geriatric-assessment"
+          },
+          {
+            "title": "Polypharmacy Management",
+            "path": "special-populations/geriatric/polypharmacy"
+          },
+          {
+            "title": "Cognitive Impairment and Dementia",
+            "path": "special-populations/geriatric/cognitive-impairment"
+          },
+          {
+            "title": "Social Isolation in Elderly",
+            "path": "special-populations/geriatric/social-isolation"
+          }
+        ]
+      },
+      {
+        "title": "Non-Cancer Conditions",
+        "items": [
+          {
+            "title": "Heart Failure",
+            "path": "special-populations/non-cancer/heart-failure"
+          },
+          {
+            "title": "Chronic Kidney Disease",
+            "path": "special-populations/non-cancer/chronic-kidney-disease"
+          },
+          {
+            "title": "Chronic Obstructive Pulmonary Disease",
+            "path": "special-populations/non-cancer/copd"
+          },
+          {
+            "title": "Neurodegenerative Diseases",
+            "path": "special-populations/non-cancer/neurodegenerative"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Oncologic Emergencies in Palliative Care",
+    "items": [
+      {
+        "title": "Common Oncologic Emergencies",
+        "items": [
+          {
+            "title": "Superior Vena Cava Syndrome",
+            "path": "oncologic-emergencies/common/svc-syndrome"
+          },
+          {
+            "title": "Spinal Cord Compression",
+            "path": "oncologic-emergencies/common/spinal-cord-compression"
+          },
+          {
+            "title": "Hypercalcemia of Malignancy",
+            "path": "oncologic-emergencies/common/hypercalcemia"
+          },
+          {
+            "title": "Tumor Lysis Syndrome",
+            "path": "oncologic-emergencies/common/tumor-lysis"
+          },
+          {
+            "title": "Febrile Neutropenia",
+            "path": "oncologic-emergencies/common/febrile-neutropenia"
+          }
+        ]
+      },
+      {
+        "title": "Emergency Symptom Management",
+        "items": [
+          {
+            "title": "Severe Pain Crisis",
+            "path": "oncologic-emergencies/symptoms/pain-crisis"
+          },
+          {
+            "title": "Severe Dyspnea",
+            "path": "oncologic-emergencies/symptoms/severe-dyspnea"
+          },
+          {
+            "title": "Intractable Nausea and Vomiting",
+            "path": "oncologic-emergencies/symptoms/intractable-nausea"
+          },
+          {
+            "title": "Delirium Management",
+            "path": "oncologic-emergencies/symptoms/delirium-management"
+          },
+          {
+            "title": "Bleeding Episodes",
+            "path": "oncologic-emergencies/symptoms/bleeding"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Quality Improvement",
+    "items": [
+      {
+        "title": "Quality Measures",
+        "items": [
+          {
+            "title": "Palliative Care Quality Indicators",
+            "path": "quality-improvement/measures/quality-indicators"
+          },
+          {
+            "title": "Patient and Family Satisfaction",
+            "path": "quality-improvement/measures/satisfaction"
+          },
+          {
+            "title": "Outcome Measurement",
+            "path": "quality-improvement/measures/outcome-measurement"
+          },
+          {
+            "title": "Benchmarking and Standards",
+            "path": "quality-improvement/measures/benchmarking"
+          }
+        ]
+      },
+      {
+        "title": "Program Development",
+        "items": [
+          {
+            "title": "Building a Palliative Care Program",
+            "path": "quality-improvement/program/building-program"
+          },
+          {
+            "title": "Staff Training and Education",
+            "path": "quality-improvement/program/staff-training"
+          },
+          {
+            "title": "Integration with Oncology Services",
+            "path": "quality-improvement/program/integration-oncology"
+          },
+          {
+            "title": "Community Partnerships",
+            "path": "quality-improvement/program/community-partnerships"
+          }
+        ]
+      }
+    ]
+  }
+]

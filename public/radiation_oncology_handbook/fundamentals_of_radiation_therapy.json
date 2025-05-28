@@ -1,0 +1,78 @@
+{
+  "title": "Fundamentals of Radiation Therapy",
+  "lastUpdated": "2024-01-15",
+  "sections": [
+    {
+      "type": "header",
+      "level": 1,
+      "content": "Fundamentals of Radiation Therapy"
+    },
+    {
+      "type": "text",
+      "content": "Radiation therapy is a cornerstone treatment modality in oncology, utilizing high-energy radiation to destroy cancer cells while minimizing damage to surrounding healthy tissues."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Principles of Radiation Biology"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**DNA Damage**: Radiation causes direct and indirect DNA damage through ionization",
+        "**Cell Cycle Effects**: Different phases of cell cycle show varying radiosensitivity",
+        "**Oxygen Enhancement**: Well-oxygenated tissues are more radiosensitive",
+        "**Repair Mechanisms**: Normal tissues have better DNA repair capacity than tumors"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Types of Radiation"
+    },
+    {
+      "type": "table",
+      "headers": ["Type", "Source", "Penetration", "Clinical Use"],
+      "rows": [
+        ["Photons (X-rays)", "Linear Accelerator", "High", "External beam therapy"],
+        ["Electrons", "Linear Accelerator", "Limited", "Superficial tumors"],
+        ["Protons", "Cyclotron/Synchrotron", "Precise", "Pediatric tumors, CNS"],
+        ["Gamma rays", "Cobalt-60", "High", "Stereotactic procedures"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Fractionation Principles"
+    },
+    {
+      "type": "text",
+      "content": "Fractionation exploits the differential response between normal tissues and tumors to radiation damage."
+    },
+    {
+      "type": "callout",
+      "calloutType": "info",
+      "content": "**Standard Fractionation**: 1.8-2.0 Gy per fraction, 5 days per week\n\n**Hypofractionation**: >2.0 Gy per fraction, fewer total fractions\n\n**Hyperfractionation**: <1.8 Gy per fraction, multiple daily fractions"
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Treatment Planning Process"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Simulation**: CT-based treatment planning with immobilization",
+        "**Contouring**: Delineation of target volumes and organs at risk",
+        "**Dose Prescription**: Specification of total dose and fractionation",
+        "**Plan Optimization**: Achievement of dose coverage while minimizing toxicity",
+        "**Quality Assurance**: Verification of treatment delivery accuracy"
+      ]
+    },
+    {
+      "type": "callout",
+      "calloutType": "warning",
+      "content": "**Critical Safety Point**: All treatment plans must undergo independent verification before first treatment delivery."
+    }
+  ]
+}

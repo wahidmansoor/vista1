@@ -264,7 +264,6 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
       console.warn('Failed to save sort preference');
     }
   }, [sort]);
-
   const handleKeyNavigation = (e: KeyboardEvent) => {
     if (document.activeElement?.tagName === 'INPUT') return;
     
@@ -272,7 +271,7 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
       case 'ArrowDown':
       case 'j': {
         e.preventDefault();
-        const nextIndex = focusedIndex < medications.length - 1 ? focusedIndex + 1 : focusedIndex;
+        const nextIndex = focusedIndex < filteredMedications.length - 1 ? focusedIndex + 1 : focusedIndex;
         handleIndexChange(nextIndex);
         break;
       }
@@ -285,8 +284,8 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
       }
       case 'Enter':
         e.preventDefault();
-        if (focusedIndex >= 0 && focusedIndex < medications.length) {
-          setSelectedMedication(medications[focusedIndex]);
+        if (focusedIndex >= 0 && focusedIndex < filteredMedications.length) {
+          setSelectedMedication(filteredMedications[focusedIndex]);
           playSound('select');
         }
         break;
@@ -296,7 +295,7 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
         break;
       case 'End':
         e.preventDefault();
-        setFocusedIndex(medications.length - 1);
+        setFocusedIndex(filteredMedications.length - 1);
         break;
       // Sort shortcuts
       case 'n':
@@ -414,11 +413,10 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
 
     return () => clearTimeout(timer);
   }, [searchQuery, selectedClass, initialData]);
-
   // Reset focus when results change
   useEffect(() => {
     setFocusedIndex(-1);
-  }, [medications]);
+  }, [filteredMedications]);
 
   // Handle initial URL parameters
   useEffect(() => {
@@ -480,7 +478,7 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [searchQuery, selectedClass, medications.length]);
+  }, [searchQuery, selectedClass, filteredMedications.length]);
 
   // Scroll focused item into view
   useEffect(() => {
@@ -624,9 +622,9 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
                   <option value="PI3K Inhibitor">PI3K Inhibitor</option>
                   <option value="CDK4/6 Inhibitor">CDK4/6 Inhibitor</option>
                   <option value="BTK Inhibitor">BTK Inhibitor</option>
-                </optgroup>
-                <optgroup label="Hormone Therapy">
+                </optgroup>                <optgroup label="Hormone Therapy">
                   <option value="Selective Estrogen Receptor Modulator (SERM)">SERM</option>
+                  <option value="CYP17 Inhibitor">CYP17 Inhibitor</option>
                 </optgroup>
               </select>
               <Filter className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
@@ -761,10 +759,9 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
         </div>
 
         {/* Active Filters and Results Count */}
-        <div className="flex flex-wrap items-center gap-2 text-sm border-t border-gray-200/30 pt-3 mt-3">
-          {!loading && !error && (
+        <div className="flex flex-wrap items-center gap-2 text-sm border-t border-gray-200/30 pt-3 mt-3">          {!loading && !error && (
             <span className="text-gray-600">
-              Found {medications.length} medication{medications.length !== 1 ? 's' : ''}
+              Found {filteredMedications.length} medication{filteredMedications.length !== 1 ? 's' : ''}
               {(searchQuery || selectedClass) && ' matching filters'}
             </span>
           )}
@@ -810,15 +807,13 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
             <X className="h-5 w-5" />
             <p>{error}</p>
           </div>
-        )}
-
-        <div className="space-y-4">
-          {medications.length === 0 ? (
+        )}        <div className="space-y-4">
+          {filteredMedications.length === 0 ? (
             <div className="text-center p-8 bg-white/30 backdrop-blur-md border border-white/20 rounded-xl shadow-lg hover:shadow-xl opacity-80 hover:opacity-100 transition-all duration-300">
-              No medications found. {searchQuery || selectedClass ? 'Try adjusting your filters.' : ''}
+              no medications found. {searchQuery || selectedClass ? 'Try adjusting your filters.' : ''}
             </div>
           ) : (
-            medications.map((medication, index) => (
+            filteredMedications.map((medication, index) => (
               <div
                 key={medication.id}
                 id={`medication-${index}`}
@@ -835,9 +830,8 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
                     : 'motion-safe:slide-in-from-top-4'
                   }
                   motion-safe:duration-500
-                  motion-safe:delay-[${Math.min(index * 50, 1000)}ms]`}
-                onClick={() => setSelectedMedication(medication)}
-                title={`Click to view detailed information (${index + 1} of ${medications.length})`}
+                  motion-safe:delay-[${Math.min(index * 50, 1000)}ms]`}                onClick={() => setSelectedMedication(medication)}
+                title={`Click to view detailed information (${index + 1} of ${filteredMedications.length})`}
                 role="button"
                 tabIndex={0}
                 aria-selected={focusedIndex === index ? "true" : "false"}

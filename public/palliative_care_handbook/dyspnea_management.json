@@ -1,0 +1,318 @@
+{
+  "id": "dyspnea_management",
+  "title": "Dyspnea Management in Advanced Cancer",
+  "description": "Comprehensive approach to managing breathlessness in palliative care patients",
+  "category": "Symptom Management",
+  "lastUpdated": "2024-01-15",
+  "version": "1.0",
+  "tags": ["dyspnea", "breathlessness", "symptom management", "advanced cancer"],
+  "content": [
+    {
+      "type": "header",
+      "level": 1,
+      "text": "Dyspnea Management in Advanced Cancer"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "title": "Definition",
+      "content": "Dyspnea is a subjective experience of breathing discomfort that consists of qualitatively distinct sensations varying in intensity. It affects 70% of patients with advanced cancer."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Assessment of Dyspnea"
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Clinical Evaluation"
+    },
+    {
+      "type": "text",
+      "content": "Comprehensive assessment should include both subjective experience and objective findings to guide appropriate intervention."
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Subjective Assessment:** Patient's description of breathing difficulty",
+        "**Intensity Scales:** 0-10 numerical rating scale or visual analog scale",
+        "**Quality Descriptors:** Tightness, air hunger, work/effort of breathing",
+        "**Functional Impact:** Activities of daily living limitations",
+        "**Emotional Response:** Anxiety, fear, panic associated with dyspnea"
+      ]
+    },
+    {
+      "type": "table",
+      "headers": ["Assessment Tool", "Description", "Application", "Scoring"],
+      "rows": [
+        ["Dyspnea NRS", "0-10 numerical rating", "Intensity measurement", "0=none, 10=worst"],
+        ["Modified Borg Scale", "0-10 perceived exertion", "Exercise-related dyspnea", "0=nothing at all, 10=maximal"],
+        ["Cancer Dyspnea Scale", "12-item questionnaire", "Multidimensional assessment", "Sense of effort, anxiety, discomfort"],
+        ["Edmonton Symptom Scale", "9 symptoms including dyspnea", "Overall symptom burden", "0-10 for each symptom"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Etiology Assessment"
+    },
+    {
+      "type": "text",
+      "content": "Identifying reversible causes is crucial for optimal management, even in advanced disease."
+    },
+    {
+      "type": "table",
+      "headers": ["Category", "Causes", "Diagnostic Approach", "Treatment Options"],
+      "rows": [
+        ["Respiratory", "Pleural effusion, pneumonia, PE", "CXR, CT, D-dimer", "Thoracentesis, antibiotics, anticoagulation"],
+        ["Cardiac", "Heart failure, pericardial effusion", "Echo, BNP, ECG", "Diuretics, pericardiocentesis"],
+        ["Hematologic", "Anemia, hyperviscosity", "CBC, protein electrophoresis", "Transfusion, plasmapheresis"],
+        ["Metabolic", "Acidosis, electrolyte imbalance", "ABG, BMP", "Correction of underlying disorder"],
+        ["Mechanical", "Ascites, tumor burden", "Physical exam, imaging", "Paracentesis, palliative RT"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Non-Pharmacological Management"
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Environmental and Positioning"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Air Movement:** Fan directed toward face, open windows, cool air",
+        "**Positioning:** Upright position, forward lean, supported arms",
+        "**Room Environment:** Cool, well-ventilated spaces",
+        "**Clothing:** Loose-fitting, breathable fabrics",
+        "**Activity Pacing:** Energy conservation techniques"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Breathing Techniques"
+    },
+    {
+      "type": "table",
+      "headers": ["Technique", "Method", "Benefits", "Training Required"],
+      "rows": [
+        ["Pursed-lip breathing", "Inhale through nose, exhale slowly through pursed lips", "Reduces respiratory rate, improves gas exchange", "Minimal"],
+        ["Diaphragmatic breathing", "Focus on abdominal expansion during inspiration", "Improves ventilation efficiency", "Moderate"],
+        ["Box breathing", "4-count inhale, hold, exhale, hold pattern", "Reduces anxiety, promotes relaxation", "Minimal"],
+        ["Progressive relaxation", "Systematic muscle tension and release", "Reduces overall tension and anxiety", "Extensive"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Psychological Support"
+    },
+    {
+      "type": "text",
+      "content": "Dyspnea often creates significant anxiety and fear, creating a cycle that worsens the symptom. Psychological interventions are essential."
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Cognitive Behavioral Therapy:** Addressing catastrophic thoughts about breathing",
+        "**Mindfulness and Meditation:** Present-moment awareness and acceptance",
+        "**Relaxation Training:** Progressive muscle relaxation, guided imagery",
+        "**Support Groups:** Peer support and shared coping strategies",
+        "**Family Education:** Understanding and supporting patient's experience"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Pharmacological Management"
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Opioids for Dyspnea"
+    },
+    {
+      "type": "callout",
+      "variant": "clinical",
+      "title": "Evidence Base",
+      "content": "Systemic opioids are the most evidence-based pharmacological treatment for dyspnea in advanced cancer, with low-dose morphine being first-line therapy."
+    },
+    {
+      "type": "table",
+      "headers": ["Medication", "Starting Dose", "Titration", "Route", "Notes"],
+      "rows": [
+        ["Morphine IR", "2.5-5 mg q4h", "Increase by 25-50% q24-48h", "PO", "First-line, well-studied"],
+        ["Morphine SR", "15 mg q12h", "Adjust based on breakthrough use", "PO", "For continuous dyspnea"],
+        ["Oxycodone IR", "2.5-5 mg q4h", "Similar to morphine", "PO", "Alternative to morphine"],
+        ["Fentanyl patch", "12 mcg/h q72h", "Increase by 12 mcg/h q3d", "TD", "For stable patients"],
+        ["Morphine nebulized", "2.5-5 mg q4h", "Limited evidence", "Inhaled", "Theoretical benefit only"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Anxiolytics"
+    },
+    {
+      "type": "text",
+      "content": "Benzodiazepines may be helpful for anxiety-related dyspnea but should be used with caution due to respiratory depression risk."
+    },
+    {
+      "type": "table",
+      "headers": ["Medication", "Dose", "Duration", "Indication", "Precautions"],
+      "rows": [
+        ["Lorazepam", "0.5-1 mg q6-8h", "Short-acting", "Acute anxiety with dyspnea", "Sedation, respiratory depression"],
+        ["Clonazepam", "0.25-0.5 mg q12h", "Long-acting", "Chronic anxiety", "Accumulation in elderly"],
+        ["Midazolam", "1-2 mg q4h", "Very short", "End-of-life dyspnea", "Continuous infusion option"],
+        ["Buspirone", "5-10 mg TID", "Non-sedating", "Chronic anxiety", "Takes weeks for effect"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Adjuvant Medications"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Bronchodilators:** Albuterol, ipratropium for airway obstruction",
+        "**Corticosteroids:** Dexamethasone for lymphangitic spread, COPD exacerbation",
+        "**Diuretics:** Furosemide for fluid overload and heart failure",
+        "**Oxygen:** For hypoxemic patients (SpO2 < 90%) or comfort",
+        "**Heliox:** Helium-oxygen mixture for upper airway obstruction"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Oxygen Therapy"
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Indications and Evidence"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "title": "Important Note",
+      "content": "Oxygen therapy should be reserved for hypoxemic patients (SpO2 < 90%) or when it clearly improves comfort. Room air via fan may be equally effective for non-hypoxemic dyspnea."
+    },
+    {
+      "type": "table",
+      "headers": ["Clinical Scenario", "Oxygen Indication", "Delivery Method", "Flow Rate"],
+      "rows": [
+        ["SpO2 < 90% at rest", "Clear indication", "Nasal cannula", "1-4 L/min"],
+        ["SpO2 90-94% with symptoms", "Trial recommended", "Nasal cannula", "1-2 L/min"],
+        ["SpO2 > 94% with dyspnea", "Questionable benefit", "Fan preferred", "N/A"],
+        ["End-of-life comfort", "Comfort measure", "Nasal cannula", "1-2 L/min"],
+        ["Severe hypoxemia", "Essential", "Non-rebreather mask", "10-15 L/min"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Interventional Approaches"
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Pleural Interventions"
+    },
+    {
+      "type": "text",
+      "content": "Pleural effusions are common in advanced cancer and can significantly contribute to dyspnea."
+    },
+    {
+      "type": "table",
+      "headers": ["Intervention", "Indication", "Benefits", "Risks", "Prognosis Consideration"],
+      "rows": [
+        ["Thoracentesis", "Symptomatic effusion", "Rapid symptom relief", "Pneumothorax, bleeding", "> 1 month life expectancy"],
+        ["Pleurodesis", "Recurrent effusion", "Prevents re-accumulation", "Procedure mortality", "> 2-3 months life expectancy"],
+        ["Indwelling catheter", "Recurrent effusion", "Outpatient management", "Infection, tract metastases", "Any life expectancy"],
+        ["PleurX catheter", "Trapped lung", "Home drainage", "Requires caregiver", "Weeks to months"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Airway Interventions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Bronchoscopy:** Tumor debulking, stent placement for central obstruction",
+        "**Laser Therapy:** Endobronchial tumor ablation",
+        "**Stenting:** Metallic stents for tracheal or bronchial obstruction",
+        "**Radiation Therapy:** External beam or brachytherapy for airway compression",
+        "**Surgical Bypass:** Rarely appropriate in palliative setting"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "End-of-Life Dyspnea Management"
+    },
+    {
+      "type": "callout",
+      "variant": "compassionate",
+      "title": "Comfort Focus",
+      "content": "In the final days of life, the goal shifts entirely to comfort. Aggressive interventions are generally inappropriate, and medication titration focuses on symptom relief rather than dose limitations."
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Terminal Dyspnea Protocol"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Morphine:** Increase dose by 50-100% of previous effective dose",
+        "**Midazolam:** 1-2 mg IV/SC q1-2h PRN, consider continuous infusion",
+        "**Positioning:** Upright, supported position for comfort",
+        "**Environment:** Fan, cool room, minimize exertion",
+        "**Family Support:** Explain normal process, provide reassurance"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 3,
+      "text": "Death Rattle Management"
+    },
+    {
+      "type": "text",
+      "content": "Noisy breathing near death is more distressing to family than patients, who are usually unconscious."
+    },
+    {
+      "type": "table",
+      "headers": ["Intervention", "Mechanism", "Dosing", "Effectiveness"],
+      "rows": [
+        ["Positioning", "Gravity drainage", "Turn to side, elevate head", "Often effective"],
+        ["Scopolamine patch", "Anticholinergic", "1.5 mg q72h", "Modest benefit"],
+        ["Glycopyrrolate", "Anticholinergic", "0.2 mg SC q4h", "Modest benefit"],
+        ["Atropine drops", "Anticholinergic", "1-2 drops SL q4h", "Limited evidence"],
+        ["Suctioning", "Mechanical", "Gentle oral suctioning", "Often ineffective, uncomfortable"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Quality Measures and Outcomes"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Regular Assessment:** Daily symptom scores in acute care, weekly in outpatient",
+        "**Functional Impact:** Activities of daily living, quality of life measures",
+        "**Patient Satisfaction:** Effectiveness of interventions from patient perspective",
+        "**Family Understanding:** Education about treatment goals and expectations",
+        "**Care Coordination:** Integration with respiratory therapy, psychology, chaplaincy"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,536 @@
+[
+  {
+    "title": "Fundamentals",
+    "items": [
+      {
+        "title": "Radiation Physics",
+        "items": [
+          {
+            "title": "Introduction to Radiation Physics",
+            "path": "fundamentals/radiation-physics/introduction"
+          },
+          {
+            "title": "Interaction of Radiation with Matter",
+            "path": "fundamentals/radiation-physics/radiation-matter-interaction"
+          },
+          {
+            "title": "Radiation Dosimetry Concepts",
+            "path": "fundamentals/radiation-physics/dosimetry-concepts"
+          },
+          {
+            "title": "Linear Energy Transfer (LET)",
+            "path": "fundamentals/radiation-physics/linear-energy-transfer"
+          },
+          {
+            "title": "Relative Biological Effectiveness (RBE)",
+            "path": "fundamentals/radiation-physics/relative-biological-effectiveness"
+          }
+        ]
+      },
+      {
+        "title": "Radiobiology",
+        "items": [
+          {
+            "title": "Introduction to Radiobiology",
+            "path": "fundamentals/radiobiology/introduction"
+          },
+          {
+            "title": "Cell Cycle and Radiosensitivity",
+            "path": "fundamentals/radiobiology/cell-cycle-radiosensitivity"
+          },
+          {
+            "title": "DNA Damage and Repair Mechanisms",
+            "path": "fundamentals/radiobiology/dna-damage-repair"
+          },
+          {
+            "title": "The 5 R's of Radiobiology",
+            "path": "fundamentals/radiobiology/five-rs-radiobiology"
+          },
+          {
+            "title": "Fractionation Principles",
+            "path": "fundamentals/radiobiology/fractionation-principles"
+          }
+        ]
+      },
+      {
+        "title": "Radiation Safety",
+        "items": [
+          {
+            "title": "ALARA Principles",
+            "path": "fundamentals/radiation-safety/alara-principles"
+          },
+          {
+            "title": "Radiation Protection Standards",
+            "path": "fundamentals/radiation-safety/protection-standards"
+          },
+          {
+            "title": "Emergency Procedures",
+            "path": "fundamentals/radiation-safety/emergency-procedures"
+          },
+          {
+            "title": "Quality Assurance Programs",
+            "path": "fundamentals/radiation-safety/qa-programs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Treatment Planning",
+    "items": [
+      {
+        "title": "Simulation and Immobilization",
+        "items": [
+          {
+            "title": "CT Simulation Process",
+            "path": "treatment-planning/simulation/ct-simulation"
+          },
+          {
+            "title": "Patient Positioning Techniques",
+            "path": "treatment-planning/simulation/positioning-techniques"
+          },
+          {
+            "title": "Immobilization Devices",
+            "path": "treatment-planning/simulation/immobilization-devices"
+          },
+          {
+            "title": "Motion Management Strategies",
+            "path": "treatment-planning/simulation/motion-management"
+          }
+        ]
+      },
+      {
+        "title": "Target Volume Definition",
+        "items": [
+          {
+            "title": "GTV (Gross Tumor Volume) Definition",
+            "path": "treatment-planning/target-volumes/gtv-definition"
+          },
+          {
+            "title": "CTV (Clinical Target Volume) Concepts",
+            "path": "treatment-planning/target-volumes/ctv-concepts"
+          },
+          {
+            "title": "PTV (Planning Target Volume) Margins",
+            "path": "treatment-planning/target-volumes/ptv-margins"
+          },
+          {
+            "title": "OAR (Organs at Risk) Delineation",
+            "path": "treatment-planning/target-volumes/oar-delineation"
+          }
+        ]
+      },
+      {
+        "title": "Dose Prescription and Planning",
+        "items": [
+          {
+            "title": "Fractionation Schemes",
+            "path": "treatment-planning/dose-prescription/fractionation-schemes"
+          },
+          {
+            "title": "Dose Constraints and Limits",
+            "path": "treatment-planning/dose-prescription/dose-constraints"
+          },
+          {
+            "title": "Plan Optimization Techniques",
+            "path": "treatment-planning/dose-prescription/plan-optimization"
+          },
+          {
+            "title": "DVH Analysis",
+            "path": "treatment-planning/dose-prescription/dvh-analysis"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Treatment Techniques",
+    "items": [
+      {
+        "title": "External Beam Radiotherapy",
+        "items": [
+          {
+            "title": "3D Conformal Radiotherapy (3DCRT)",
+            "path": "treatment-techniques/external-beam/3d-conformal"
+          },
+          {
+            "title": "Intensity-Modulated RT (IMRT)",
+            "path": "treatment-techniques/external-beam/imrt"
+          },
+          {
+            "title": "Volumetric-Modulated Arc Therapy (VMAT)",
+            "path": "treatment-techniques/external-beam/vmat"
+          },
+          {
+            "title": "Stereotactic Body RT (SBRT)",
+            "path": "treatment-techniques/external-beam/sbrt"
+          },
+          {
+            "title": "Stereotactic Radiosurgery (SRS)",
+            "path": "treatment-techniques/external-beam/srs"
+          }
+        ]
+      },
+      {
+        "title": "Brachytherapy",
+        "items": [
+          {
+            "title": "High-Dose-Rate Brachytherapy",
+            "path": "treatment-techniques/brachytherapy/high-dose-rate"
+          },
+          {
+            "title": "Low-Dose-Rate Brachytherapy",
+            "path": "treatment-techniques/brachytherapy/low-dose-rate"
+          },
+          {
+            "title": "Permanent Seed Implants",
+            "path": "treatment-techniques/brachytherapy/permanent-implants"
+          },
+          {
+            "title": "Electronic Brachytherapy",
+            "path": "treatment-techniques/brachytherapy/electronic-brachy"
+          }
+        ]
+      },
+      {
+        "title": "Special Techniques",
+        "items": [
+          {
+            "title": "Total Body Irradiation (TBI)",
+            "path": "treatment-techniques/special/total-body-irradiation"
+          },
+          {
+            "title": "Craniospinal Irradiation",
+            "path": "treatment-techniques/special/craniospinal"
+          },
+          {
+            "title": "Total Skin Electron Therapy (TSET)",
+            "path": "treatment-techniques/special/tset"
+          },
+          {
+            "title": "Proton Therapy",
+            "path": "treatment-techniques/special/proton-therapy"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Site-Specific Treatments",
+    "items": [
+      {
+        "title": "Central Nervous System",
+        "items": [
+          {
+            "title": "Brain Tumors",
+            "path": "site-specific/cns/brain-tumors"
+          },
+          {
+            "title": "Spinal Cord Tumors",
+            "path": "site-specific/cns/spinal-cord"
+          },
+          {
+            "title": "Meningiomas",
+            "path": "site-specific/cns/meningiomas"
+          },
+          {
+            "title": "Brain Metastases",
+            "path": "site-specific/cns/brain-metastases"
+          }
+        ]
+      },
+      {
+        "title": "Head and Neck",
+        "items": [
+          {
+            "title": "Nasopharyngeal Cancer",
+            "path": "site-specific/head-neck/nasopharynx"
+          },
+          {
+            "title": "Laryngeal Cancer",
+            "path": "site-specific/head-neck/larynx"
+          },
+          {
+            "title": "Oral Cavity Cancer",
+            "path": "site-specific/head-neck/oral-cavity"
+          },
+          {
+            "title": "Oropharyngeal Cancer",
+            "path": "site-specific/head-neck/oropharynx"
+          }
+        ]
+      },
+      {
+        "title": "Thoracic",
+        "items": [
+          {
+            "title": "Lung Cancer",
+            "path": "site-specific/thoracic/lung-cancer"
+          },
+          {
+            "title": "Esophageal Cancer",
+            "path": "site-specific/thoracic/esophageal"
+          },
+          {
+            "title": "Breast Cancer",
+            "path": "site-specific/thoracic/breast"
+          },
+          {
+            "title": "Thymoma",
+            "path": "site-specific/thoracic/thymoma"
+          }
+        ]
+      },
+      {
+        "title": "Abdominal",
+        "items": [
+          {
+            "title": "Pancreatic Cancer",
+            "path": "site-specific/abdominal/pancreatic"
+          },
+          {
+            "title": "Hepatocellular Carcinoma",
+            "path": "site-specific/abdominal/hepatic"
+          },
+          {
+            "title": "Gastric Cancer",
+            "path": "site-specific/abdominal/gastric"
+          },
+          {
+            "title": "Cholangiocarcinoma",
+            "path": "site-specific/abdominal/cholangiocarcinoma"
+          }
+        ]
+      },
+      {
+        "title": "Pelvis",
+        "items": [
+          {
+            "title": "Prostate Cancer",
+            "path": "site-specific/pelvis/prostate"
+          },
+          {
+            "title": "Cervical Cancer",
+            "path": "site-specific/pelvis/cervical"
+          },
+          {
+            "title": "Rectal Cancer",
+            "path": "site-specific/pelvis/rectal"
+          },
+          {
+            "title": "Bladder Cancer",
+            "path": "site-specific/pelvis/bladder"
+          },
+          {
+            "title": "Endometrial Cancer",
+            "path": "site-specific/pelvis/endometrial"
+          }
+        ]
+      },
+      {
+        "title": "Pediatric",
+        "items": [
+          {
+            "title": "Pediatric Brain Tumors",
+            "path": "site-specific/pediatric/brain-tumors"
+          },
+          {
+            "title": "Wilms Tumor",
+            "path": "site-specific/pediatric/wilms-tumor"
+          },
+          {
+            "title": "Pediatric Sarcomas",
+            "path": "site-specific/pediatric/sarcomas"
+          },
+          {
+            "title": "Neuroblastoma",
+            "path": "site-specific/pediatric/neuroblastoma"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Side Effects and Toxicity",
+    "items": [
+      {
+        "title": "Acute Toxicities",
+        "items": [
+          {
+            "title": "Skin Reactions",
+            "path": "side-effects/acute/skin-reactions"
+          },
+          {
+            "title": "Mucositis Management",
+            "path": "side-effects/acute/mucositis"
+          },
+          {
+            "title": "Acute GI Toxicity",
+            "path": "side-effects/acute/gi-toxicity"
+          },
+          {
+            "title": "Fatigue Management",
+            "path": "side-effects/acute/fatigue"
+          }
+        ]
+      },
+      {
+        "title": "Late Toxicities",
+        "items": [
+          {
+            "title": "Fibrosis and Scarring",
+            "path": "side-effects/late/fibrosis"
+          },
+          {
+            "title": "Secondary Malignancies",
+            "path": "side-effects/late/secondary-malignancies"
+          },
+          {
+            "title": "Organ-Specific Late Effects",
+            "path": "side-effects/late/organ-specific"
+          },
+          {
+            "title": "Reproductive Effects",
+            "path": "side-effects/late/reproductive"
+          }
+        ]
+      },
+      {
+        "title": "Toxicity Management",
+        "items": [
+          {
+            "title": "Prevention Strategies",
+            "path": "side-effects/management/prevention"
+          },
+          {
+            "title": "Supportive Care",
+            "path": "side-effects/management/supportive-care"
+          },
+          {
+            "title": "Dose Modifications",
+            "path": "side-effects/management/dose-modifications"
+          },
+          {
+            "title": "Long-term Follow-up",
+            "path": "side-effects/management/long-term-followup"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Quality Assurance",
+    "items": [
+      {
+        "title": "Machine QA",
+        "items": [
+          {
+            "title": "Daily QA Procedures",
+            "path": "quality-assurance/machine-qa/daily-qa"
+          },
+          {
+            "title": "Monthly QA Procedures",
+            "path": "quality-assurance/machine-qa/monthly-qa"
+          },
+          {
+            "title": "Annual QA Procedures",
+            "path": "quality-assurance/machine-qa/annual-qa"
+          },
+          {
+            "title": "Commissioning",
+            "path": "quality-assurance/machine-qa/commissioning"
+          }
+        ]
+      },
+      {
+        "title": "Patient-Specific QA",
+        "items": [
+          {
+            "title": "Plan Verification",
+            "path": "quality-assurance/patient-qa/plan-verification"
+          },
+          {
+            "title": "In-Vivo Dosimetry",
+            "path": "quality-assurance/patient-qa/in-vivo-dosimetry"
+          },
+          {
+            "title": "Image Guidance QA",
+            "path": "quality-assurance/patient-qa/image-guidance-qa"
+          },
+          {
+            "title": "Treatment Delivery QA",
+            "path": "quality-assurance/patient-qa/treatment-delivery-qa"
+          }
+        ]
+      },
+      {
+        "title": "Safety Protocols",
+        "items": [
+          {
+            "title": "Incident Reporting",
+            "path": "quality-assurance/safety/incident-reporting"
+          },
+          {
+            "title": "Risk Assessment",
+            "path": "quality-assurance/safety/risk-assessment"
+          },
+          {
+            "title": "Safety Culture",
+            "path": "quality-assurance/safety/safety-culture"
+          },
+          {
+            "title": "Error Prevention",
+            "path": "quality-assurance/safety/error-prevention"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Emergency Procedures",
+    "items": [
+      {
+        "title": "Radiation Emergencies",
+        "items": [
+          {
+            "title": "Equipment Malfunction",
+            "path": "emergency-procedures/radiation/equipment-malfunction"
+          },
+          {
+            "title": "Source Exposure Incidents",
+            "path": "emergency-procedures/radiation/source-exposure"
+          },
+          {
+            "title": "Contamination Procedures",
+            "path": "emergency-procedures/radiation/contamination"
+          },
+          {
+            "title": "Emergency Contacts",
+            "path": "emergency-procedures/radiation/emergency-contacts"
+          }
+        ]
+      },
+      {
+        "title": "Medical Emergencies",
+        "items": [
+          {
+            "title": "Patient Emergency Protocols",
+            "path": "emergency-procedures/medical/patient-emergency"
+          },
+          {
+            "title": "Anaphylaxis Management",
+            "path": "emergency-procedures/medical/anaphylaxis"
+          },
+          {
+            "title": "Cardiac Events",
+            "path": "emergency-procedures/medical/cardiac-events"
+          },
+          {
+            "title": "Respiratory Distress",
+            "path": "emergency-procedures/medical/respiratory-distress"
+          }
+        ]
+      }
+    ]
+  }
+]

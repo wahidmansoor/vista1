@@ -1,0 +1,75 @@
+{
+  "title": "Philosophy and Principles of Palliative Care",
+  "lastUpdated": "2024-01-15",
+  "sections": [
+    {
+      "type": "header",
+      "level": 1,
+      "content": "Philosophy and Principles of Palliative Care"
+    },
+    {
+      "type": "text",
+      "content": "Palliative care is specialized medical care focused on providing relief from symptoms and stress of serious illness, with the goal of improving quality of life for both patients and families."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Core Principles"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Whole-Person Care**: Addressing physical, emotional, social, and spiritual needs",
+        "**Patient and Family-Centered**: Including family as the unit of care",
+        "**Goal-Concordant Care**: Aligning treatments with patient values and preferences",
+        "**Interdisciplinary Approach**: Team-based care coordination",
+        "**Communication**: Honest, compassionate, and culturally sensitive",
+        "**Comfort Focus**: Optimizing quality of life over quantity"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "WHO Definition of Palliative Care"
+    },
+    {
+      "type": "callout",
+      "calloutType": "info",
+      "content": "Palliative care is an approach that improves the quality of life of patients and their families facing the problems associated with life-threatening illness, through the prevention and relief of suffering by means of early identification and impeccable assessment and treatment of pain and other problems, physical, psychosocial and spiritual."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "When to Initiate Palliative Care"
+    },
+    {
+      "type": "table",
+      "headers": ["Disease Stage", "Palliative Care Role", "Focus Areas"],
+      "rows": [
+        ["Early/Curative", "Concurrent with treatment", "Symptom management, psychosocial support"],
+        ["Advanced/Chronic", "Primary care approach", "Goals of care, advance planning"],
+        ["End-of-Life", "Intensive involvement", "Comfort care, family support"],
+        ["Bereavement", "Family support", "Grief counseling, memorial services"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Misconceptions vs. Reality"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Myth**: Palliative care is only for dying patients\n**Reality**: Appropriate at any stage of serious illness",
+        "**Myth**: Palliative care means giving up hope\n**Reality**: Focuses on hope for comfort, meaningful time, quality of life",
+        "**Myth**: Palliative care hastens death\n**Reality**: Studies show improved survival and quality of life",
+        "**Myth**: Pain medications are dangerous\n**Reality**: Proper pain management is safe and essential"
+      ]
+    },
+    {
+      "type": "callout",
+      "calloutType": "tip",
+      "content": "**Best Practice**: Palliative care should be introduced early in the disease trajectory, ideally within 8 weeks of diagnosis of advanced cancer."
+    }
+  ]
+}

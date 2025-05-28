@@ -1,0 +1,64 @@
+{
+  "title": "IMRT and VMAT Techniques",
+  "lastUpdated": "2024-01-15",
+  "sections": [
+    {
+      "type": "header",
+      "level": 1,
+      "content": "Intensity-Modulated Radiation Therapy (IMRT) and Volumetric Modulated Arc Therapy (VMAT)"
+    },
+    {
+      "type": "text",
+      "content": "Advanced radiation delivery techniques that allow for precise dose conformity and improved sparing of organs at risk."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "IMRT Fundamentals"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Inverse Planning**: Computer optimization based on dose constraints",
+        "**Multileaf Collimator**: Dynamic shaping of radiation beams",
+        "**Dose Conformity**: Steep dose gradients around target volumes",
+        "**Multiple Beam Angles**: Typically 5-9 fixed gantry positions"
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "VMAT Advantages"
+    },
+    {
+      "type": "table",
+      "headers": ["Parameter", "IMRT", "VMAT"],
+      "rows": [
+        ["Treatment Time", "10-20 minutes", "2-4 minutes"],
+        ["Gantry Movement", "Static", "Continuous rotation"],
+        ["Monitor Units", "Higher", "Lower"],
+        ["Dose Rate", "Variable", "Variable"],
+        ["Plan Complexity", "Moderate", "High"]
+      ]
+    },
+    {
+      "type": "callout",
+      "calloutType": "tip",
+      "content": "**Clinical Indication**: VMAT is particularly beneficial for complex targets requiring rapid treatment delivery with excellent conformity."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "content": "Quality Assurance"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Patient-Specific QA**: Measurement verification for each plan",
+        "**Gamma Analysis**: 3%/3mm criteria commonly used",
+        "**Machine QA**: Daily, monthly, and annual checks",
+        "**Imaging Verification**: CBCT or kV imaging for setup"
+      ]
+    }
+  ]
+}
