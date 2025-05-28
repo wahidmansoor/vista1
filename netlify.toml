@@ -135,22 +135,22 @@
   NODE_ENV = "production"
   GENERATE_SOURCEMAP = "false"
   # Production Auth0 URLs
-  VITE_AUTH0_CALLBACK_URL = "https://mwoncovista.netlify.app/callback"
-  VITE_AUTH0_REDIRECT_URI = "https://mwoncovista.netlify.app"
+  VITE_AUTH0_CALLBACK_URL = "https://mwoncovista.com/callback"
+  VITE_AUTH0_REDIRECT_URI = "https://mwoncovista.com"
 
 [context.deploy-preview.environment]
   NODE_ENV = "production"
   GENERATE_SOURCEMAP = "true"
   # Deploy preview URLs (Netlify will inject the actual URL)
-  VITE_AUTH0_CALLBACK_URL = "https://deploy-preview-${REVIEW_ID}--mwoncovista.netlify.app/callback"
-  VITE_AUTH0_REDIRECT_URI = "https://deploy-preview-${REVIEW_ID}--mwoncovista.netlify.app"
+  VITE_AUTH0_CALLBACK_URL = "https://deploy-preview-${REVIEW_ID}--mwoncovista.com/callback"
+  VITE_AUTH0_REDIRECT_URI = "https://deploy-preview-${REVIEW_ID}--mwoncovista.com"
 
 [context.branch-deploy.environment]
   NODE_ENV = "development"
   GENERATE_SOURCEMAP = "true"
   # Branch deploy URLs (Netlify will inject the actual URL)
-  VITE_AUTH0_CALLBACK_URL = "https://${BRANCH}--mwoncovista.netlify.app/callback"
-  VITE_AUTH0_REDIRECT_URI = "https://${BRANCH}--mwoncovista.netlify.app"
+  VITE_AUTH0_CALLBACK_URL = "https://${BRANCH}--mwoncovista.com/callback"
+  VITE_AUTH0_REDIRECT_URI = "https://${BRANCH}--mwoncovista.com"
 
 # Form handling (if you have contact forms)
 # [form]
