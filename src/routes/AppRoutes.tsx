@@ -7,6 +7,9 @@ import Dashboard from "@/pages/Dashboard";
 import ProtectedPage from "@/pages/ProtectedPage";
 import CallbackPage from "@/pages/CallbackPage";
 import AutoLogoutTest from "@/pages/AutoLogoutTest";
+import ErrorDebugPage from "@/pages/ErrorDebugPage";
+import ProductionErrorAnalyzer from "@/pages/ProductionErrorAnalyzer";
+import ErrorTestPage from "@/pages/ErrorTestPage";
 import ProtectedRoute from "@/auth/ProtectedRoute";
 import Handbook from "@/modules/handbook/Handbook";
 import { SearchPage } from "@/components/HandbookSearch";
@@ -164,6 +167,29 @@ const AppRoutes: FC = () => {
         <ErrorBoundary moduleName="Protocol Detail">
           <ProtectedRoute>
             <ProtocolDetailPageContainer />
+          </ProtectedRoute>
+        </ErrorBoundary>
+      } />
+
+      {/* Debug route - only accessible in development or for debugging */}
+      <Route path="/debug/errors" element={
+        <ErrorBoundary moduleName="Error Debug">
+          <ProtectedRoute>
+            <ErrorDebugPage />
+          </ProtectedRoute>
+        </ErrorBoundary>
+      } />      <Route path="/debug/analyzer" element={
+        <ErrorBoundary moduleName="Error Analyzer">
+          <ProtectedRoute>
+            <ProductionErrorAnalyzer />
+          </ProtectedRoute>
+        </ErrorBoundary>
+      } />
+
+      <Route path="/debug/test" element={
+        <ErrorBoundary moduleName="Error Test">
+          <ProtectedRoute>
+            <ErrorTestPage />
           </ProtectedRoute>
         </ErrorBoundary>
       } />

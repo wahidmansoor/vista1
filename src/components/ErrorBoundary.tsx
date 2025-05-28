@@ -15,6 +15,7 @@ interface State {
   retryCount: number;
   resetKey: number;
   isDetailsOpen: boolean;
+  errorId: string;
 }
 
 class ErrorBoundary extends Component<Props, State> {
@@ -27,19 +28,48 @@ class ErrorBoundary extends Component<Props, State> {
       retryCount: 0,
       resetKey: 0,
       isDetailsOpen: false,
+      errorId: '',
     };
   }
 
   static getDerivedStateFromError(error: Error): Partial<State> {
-    return { hasError: true, error };
+    // Generate a unique error ID for tracking
+    const errorId = `error_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return { hasError: true, error, errorId };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+    // Enhanced error information for debugging
+    const enhancedErrorInfo = {
+      ...errorInfo,
+      userAgent: navigator.userAgent,
+      url: window.location.href,
+      timestamp: new Date().toISOString(),
+      stackTrace: error.stack,
+      errorId: this.state.errorId,
+    };
+
     this.setState({ error, errorInfo });
+    
+    // Log error with enhanced context
     logError(error, errorInfo, { 
       retryCount: this.state.retryCount,
-      moduleName: this.props.moduleName 
+      moduleName: this.props.moduleName,
+      extra: enhancedErrorInfo
     });
+
+    // Send error to external service if available
+    if (window.reportError) {
+      window.reportError(this.props.moduleName || 'Unknown', error, enhancedErrorInfo);
+    }
+
+    // Console log for immediate debugging
+    console.group(`🚨 Error Boundary Caught Error [${this.state.errorId}]`);
+    console.error('Module:', this.props.moduleName);
+    console.error('Error:', error);
+    console.error('Component Stack:', errorInfo.componentStack);
+    console.error('Enhanced Info:', enhancedErrorInfo);
+    console.groupEnd();
   }
 
   handleReset = (): void => {
@@ -50,6 +80,7 @@ class ErrorBoundary extends Component<Props, State> {
       retryCount: prevState.retryCount + 1,
       resetKey: prevState.resetKey + 1,
       isDetailsOpen: false,
+      errorId: '',
     }));
   };
 

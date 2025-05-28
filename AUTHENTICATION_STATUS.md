@@ -7,6 +7,7 @@
 - **Login/Logout**: Functional login and logout buttons throughout the application
 - **User Context**: Global user state management with React Context
 - **Protected Routes**: All main application routes now require authentication
+- **Auto-Logout Security**: Automatic logout after 10 minutes of inactivity with 2-minute warning
 
 ### **Route Protection**
 The following routes are now **PROTECTED** and require authentication:
@@ -74,6 +75,11 @@ VITE_AUTH0_REDIRECT_URI=http://localhost:3000
    - Complete Auth0 authentication
    - Should be redirected back to intended page
    - Header should show user information
+
+5. **Test Auto-Logout**:
+   - Remain inactive for 10 minutes
+   - Should be logged out automatically
+   - Attempting to access protected routes should redirect to login
 
 ## 📁 Key Files
 
