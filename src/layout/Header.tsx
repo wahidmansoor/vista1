@@ -5,6 +5,7 @@ import { HandbookSearch } from "@/components/HandbookSearch";
 import { CommonIcons } from "@/utils/iconUtils";
 import LoginButton from '@/components/LoginButton';
 import LogoutButton from '@/components/LogoutButton';
+import AutoLogoutStatus from '@/components/AutoLogoutStatus';
 
 /**
  * Global header component for OncoVista that appears on every page
@@ -98,13 +99,14 @@ const Header: React.FC = () => {
               title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
               <span className="text-lg">{darkMode ? "☀️" : "🌙"}</span>
-            </button>
-
-            {/* Authentication Section */}
+            </button>            {/* Authentication Section */}
             {isLoading ? (
               <div className="text-white/80">Loading...</div>
             ) : isAuthenticated ? (
               <div className="flex items-center gap-3">
+                {/* Auto-logout status */}
+                <AutoLogoutStatus />
+                
                 <span className="text-white/90 hidden sm:block">
                   Welcome, {user?.name || user?.email}
                 </span>

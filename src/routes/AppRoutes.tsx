@@ -6,6 +6,7 @@ import LandingPage from "@/pages/LandingPage";
 import Dashboard from "@/pages/Dashboard";
 import ProtectedPage from "@/pages/ProtectedPage";
 import CallbackPage from "@/pages/CallbackPage";
+import AutoLogoutTest from "@/pages/AutoLogoutTest";
 import ProtectedRoute from "@/auth/ProtectedRoute";
 import Handbook from "@/modules/handbook/Handbook";
 import { SearchPage } from "@/components/HandbookSearch";
@@ -45,6 +46,14 @@ const AppRoutes: FC = () => {
         <ErrorBoundary moduleName="Dashboard">
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        </ErrorBoundary>
+      } />
+
+      <Route path="/auto-logout-test" element={
+        <ErrorBoundary moduleName="Auto-Logout Test">
+          <ProtectedRoute>
+            <AutoLogoutTest />
           </ProtectedRoute>
         </ErrorBoundary>
       } />
