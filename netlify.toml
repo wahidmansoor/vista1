@@ -11,7 +11,7 @@
   # functions = "functions"
 
 [build.environment]  # Specify Node.js version for consistent builds
-  NODE_VERSION = "18"
+  NODE_VERSION = "20.11.0"
   # Use npm ci for faster, reliable installs in CI
   NPM_FLAGS = "--prefer-offline --no-audit --no-fund"
   # Enable corepack for package manager compatibility
@@ -63,7 +63,7 @@
     X-Content-Type-Options = "nosniff"
     
     # Control referrer information
-    Referrer-Policy = "strict-origin-when-cross-origin"
+    Referrer-Policy = "same-origin"
     
     # Content Security Policy (adjust based on your needs)
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.openai.com https://generativelanguage.googleapis.com https://*.supabase.co;"
