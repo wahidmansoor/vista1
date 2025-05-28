@@ -15,73 +15,27 @@ const Separator: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) => (
 interface ContentRendererProps {
   content: HandbookContentBlock[];
   className?: string;
+  enableActiveHighlighting?: boolean;
 }
 
-// TypeScript type definitions for complex content structures
-interface DefinitionItem {
-  term: string;
-  definition?: string;
-  sublist?: any[];
-  [key: string]: any;
-}
-
-interface ListItemWithSublist {
-  text: string;
-  sublist: any[];
-  [key: string]: any;
-}
-
-// UI Components with proper accessibility and dark mode support
-const Table: React.FC<React.HTMLAttributes<HTMLTableElement>> = (props) => (
-  <table {...props} className={cn("min-w-full border-collapse border border-gray-200 dark:border-gray-700", props.className)} />
-);
-
-const TableHeader: React.FC<React.HTMLAttributes<HTMLTableSectionElement>> = (props) => (
-  <thead {...props} className={cn("bg-gray-50 dark:bg-gray-800", props.className)} />
-);
-
-const TableRow: React.FC<React.HTMLAttributes<HTMLTableRowElement>> = (props) => (
-  <tr {...props} className={cn("border-b border-gray-200 dark:border-gray-700", props.className)} />
-);
-
-const TableHead: React.FC<React.ThHTMLAttributes<HTMLTableCellElement>> = (props) => (
-  <th {...props} className={cn("px-4 py-3 text-left font-medium text-gray-700 dark:text-gray-300", props.className)} />
-);
-
-const TableBody: React.FC<React.HTMLAttributes<HTMLTableSectionElement>> = (props) => (
-  <tbody {...props} className={cn("divide-y divide-gray-200 dark:divide-gray-700", props.className)} />
-);
-
-const TableCell: React.FC<React.TdHTMLAttributes<HTMLTableCellElement>> = (props) => (
-  <td {...props} className={cn("px-4 py-3 text-gray-800 dark:text-gray-200", props.className)} />
-);
-
-// Code block with syntax highlighting support
-const CodeBlock: React.FC<{
-  language?: string;
-  value: string;
-  showLineNumbers?: boolean;
-}> = ({ language, value, showLineNumbers }) => {
-  return (
-    <pre className="bg-gray-50 dark:bg-gray-800 p-4 rounded-md text-sm overflow-auto border border-gray-200 dark:border-gray-700">
-      <code className={cn(
-        "block whitespace-pre",
-        language ? `language-${language}` : ''
-      )}>
-        {value}
-      </code>
-    </pre>
-  );
-};
-
-// Helper function to safely render HTML content via markdown with GFM support
+// Enhanced markdown rendering with better prose styling
 const renderMarkdown = (text: string) => {
   if (!text) return null;
   
   return (
-    <div className="prose-sm max-w-none dark:prose-invert">
-      <ReactMarkdown 
-        remarkPlugins={[remarkGfm]} 
+    <div className="prose prose-slate dark:prose-invert prose-headings:scroll-mt-8 max-w-none 
+                   prose-h1:text-2xl prose-h1:font-bold prose-h1:text-gray-900 dark:prose-h1:text-gray-100
+                   prose-h2:text-xl prose-h2:font-semibold prose-h2:text-gray-800 dark:prose-h2:text-gray-200
+                   prose-h3:text-lg prose-h3:font-medium prose-h3:text-gray-800 dark:prose-h3:text-gray-200
+                   prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
+                   prose-li:text-gray-700 dark:prose-li:text-gray-300
+                   prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+                   prose-pre:bg-gray-50 dark:prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-gray-700
+                   prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5
+                   prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                   prose-strong:font-semibold prose-strong:text-gray-900 dark:prose-strong:text-gray-100">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
       >
         {text}

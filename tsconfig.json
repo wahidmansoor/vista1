@@ -18,20 +18,20 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
-    "paths": {
+    "baseUrl": ".",    "paths": {
       "@/*": ["./src/*"]
-    },    "typeRoots": ["./node_modules/@types"],
+    },
+    "typeRoots": ["./node_modules/@types"],
     "types": []
-  },
-  "include": [
+  },  "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.js",
     "src/**/*.jsx",
     "src/**/*.d.ts",
     "src/vite-env.d.ts"
-  ],  "exclude": [
+  ],
+  "exclude": [
     "node_modules",
     "dist",
     "build", 

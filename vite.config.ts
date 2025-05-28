@@ -12,8 +12,7 @@ export default defineConfig(({ command, mode }) => {
         jsxRuntime: 'automatic', // Changed from 'classic' to match tsconfig
         include: "**/*.{jsx,tsx}"
       })
-    ],
-    resolve: {
+    ],    resolve: {
       alias: {
         '@': path.resolve(__dirname, './src')
       }
@@ -32,7 +31,8 @@ export default defineConfig(({ command, mode }) => {
           }
         }
       }
-    },    server: {
+    },
+    server: {
       port: 3003,
       open: true
     },

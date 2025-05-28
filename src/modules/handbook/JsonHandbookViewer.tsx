@@ -7,11 +7,61 @@ interface JsonHandbookViewerProps {
   filePath: string;
 }
 
+// Add sticky header with metadata and progress
+function StickyHeader({ metadata, totalBlocks, currentBlock }: {
+  metadata?: any;
+  totalBlocks: number;
+  currentBlock: number;
+}) {
+  const progress = totalBlocks > 0 ? (currentBlock / totalBlocks) * 100 : 0;
+  
+  return (
+    <div className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 print:hidden">
+      <div className="px-6 py-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            {metadata?.title && (
+              <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100 truncate">
+                {metadata.title}
+              </h1>
+            )}
+            {metadata?.category && (
+              <span className="px-2 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                {metadata.category}
+              </span>
+            )}
+          </div>
+          
+          <div className="flex items-center gap-3">
+            {metadata?.lastUpdated && (
+              <span className="text-xs text-gray-500 dark:text-gray-400">
+                Updated: {metadata.lastUpdated}
+              </span>
+            )}
+            <div className="text-xs text-gray-500 dark:text-gray-400">
+              {currentBlock}/{totalBlocks} sections
+            </div>
+          </div>
+        </div>
+        
+        {/* Progress bar */}
+        <div className="mt-2 h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+          <div 
+            className="h-full bg-primary transition-all duration-300 ease-out"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
   const [content, setContent] = useState<HandbookContentBlock[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [metadata, setMetadata] = useState<any>(null);
+  const [currentVisibleBlock, setCurrentVisibleBlock] = useState(0);
 
   useEffect(() => {
     const loadContent = async () => {
@@ -347,6 +397,25 @@ export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
     }
   }, [filePath]);
 
+  // Add scroll tracking for progress indicator
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('[data-block-index]');
+      const viewportTop = window.scrollY + 200; // Offset for sticky header
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i] as HTMLElement;
+        if (section.offsetTop <= viewportTop) {
+          setCurrentVisibleBlock(i + 1);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [content]);
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-32">
@@ -389,5 +458,17 @@ export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
     );
   }
 
-  return <ContentRenderer content={content} />;
+  return (
+    <div className="relative">
+      <StickyHeader 
+        metadata={metadata}
+        totalBlocks={content?.length || 0}
+        currentBlock={currentVisibleBlock}
+      />
+      
+      <div className="pt-4">
+        <ContentRenderer content={content} />
+      </div>
+    </div>
+  );
 }
