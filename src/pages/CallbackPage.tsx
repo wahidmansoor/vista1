@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,37 +9,34 @@ import { useNavigate } from 'react-router-dom';
 const CallbackPage: React.FC = () => {
   const { isLoading, error, isAuthenticated, handleRedirectCallback } = useAuth0();
   const navigate = useNavigate();
-  const hasProcessed = useRef(false);
 
   useEffect(() => {
-    // Prevent double processing
-    if (hasProcessed.current) return;
-
     const processCallback = async () => {
       try {
-        // Always call handleRedirectCallback on callback page
-        const result = await handleRedirectCallback();
-        hasProcessed.current = true;
-        
-        // Extract returnTo from appState or default to dashboard
-        const returnTo = result?.appState?.returnTo || '/dashboard';
-        
-        console.log('Auth0 callback successful, redirecting to:', returnTo);
-        navigate(returnTo, { replace: true });
+        // Wait for Auth0 to process the callback
+        if (!isLoading && !error) {
+          // Get the return URL from session storage or default to dashboard
+          const returnTo = sessionStorage.getItem('auth_return_to') || '/dashboard';
+          sessionStorage.removeItem('auth_return_to');
+          
+          console.log('Auth0 callback successful, redirecting to:', returnTo);
+          
+          // Use replace to avoid adding to history stack
+          navigate(returnTo, { replace: true });
+        }
       } catch (err) {
-        console.error('Auth0 callback error:', err);
-        hasProcessed.current = true;
-        
-        // On error, redirect to home page
+        console.error('Auth0 callback processing error:', err);
         navigate('/', { replace: true });
       }
     };
 
-    // Process callback when not loading
-    if (!isLoading && !hasProcessed.current) {
+    if (!isLoading && isAuthenticated) {
       processCallback();
+    } else if (!isLoading && error) {
+      console.error('Auth0 callback error:', error);
+      navigate('/', { replace: true });
     }
-  }, [isLoading, handleRedirectCallback, navigate]);
+  }, [isLoading, isAuthenticated, error, navigate]);
 
   if (error) {
     return (

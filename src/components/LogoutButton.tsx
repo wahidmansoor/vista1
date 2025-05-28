@@ -13,11 +13,10 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({
   className = "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors",
   children = "Log Out"
 }) => {
-  const { logout, isLoading } = useAuth0();
-  const handleLogout = () => {
+  const { logout, isLoading } = useAuth0();  const handleLogout = () => {
     logout({
       logoutParams: {
-        returnTo: 'https://mwoncovista.netlify.app',
+        returnTo: window.location.origin,
       },
     });
   };

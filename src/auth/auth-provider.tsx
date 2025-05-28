@@ -29,9 +29,7 @@ export const Auth0Provider: React.FC<Auth0ProviderProps> = ({ children }) => {
     
     // Return children without Auth0 wrapper if env vars are missing
     return <>{children}</>;
-  }
-
-  return (
+  }  return (
     <Auth0ReactProvider
       domain={domain}
       clientId={clientId}
@@ -43,7 +41,6 @@ export const Auth0Provider: React.FC<Auth0ProviderProps> = ({ children }) => {
       useRefreshTokens={true}
       useRefreshTokensFallback={true}
       cacheLocation="localstorage"
-      skipRedirectCallback={window.location.pathname === '/callback'}
       onRedirectCallback={(appState) => {
         // Redirect to dashboard or home after successful authentication
         window.history.replaceState(

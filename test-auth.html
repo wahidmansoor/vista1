@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth0 CSP Test</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        @import url('https://rsms.me/inter/inter.css');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .test-item {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        
+        .success { background: rgba(0, 255, 0, 0.2); }
+        .error { background: rgba(255, 0, 0, 0.2); }
+        
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧬 OncoVista - Auth0 & CSP Test</h1>
+        
+        <div class="test-item">
+            <h3>📝 Font Loading Test</h3>
+            <p>This text uses Google Fonts (Inter). If you see this styled text, fonts are loading correctly.</p>
+            <p style="font-family: 'Inter', sans-serif; font-weight: 600;">Bold Inter font test</p>
+        </div>
+        
+        <div class="test-item">
+            <h3>🔒 Auth0 Script Loading Test</h3>
+            <button onclick="testAuth0Script()">Test Auth0 CDN Access</button>
+            <div id="auth0-result"></div>
+        </div>
+        
+        <div class="test-item">
+            <h3>🌐 Network Connectivity Test</h3>
+            <button onclick="testConnectivity()">Test Auth0 Domain Access</button>
+            <div id="connectivity-result"></div>
+        </div>
+        
+        <div class="test-item">
+            <h3>📊 Browser Console</h3>
+            <p>Check the browser console (F12) for any CSP violation errors. If you see no errors, the CSP is working correctly.</p>
+        </div>
+        
+        <div class="test-item">
+            <h3>✅ Expected Results</h3>
+            <ul>
+                <li>Fonts should load without CSP errors</li>
+                <li>No "Content Security Policy" errors in console</li>
+                <li>Auth0 domains should be accessible</li>
+                <li>All network requests should succeed</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function testAuth0Script() {
+            const resultDiv = document.getElementById('auth0-result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            // Test loading Auth0 script
+            const script = document.createElement('script');
+            script.src = 'https://cdn.auth0.com/js/auth0/9.23.1/auth0.min.js';
+            script.onload = () => {
+                resultDiv.innerHTML = '<span class="success">✅ Auth0 CDN accessible</span>';
+            };
+            script.onerror = () => {
+                resultDiv.innerHTML = '<span class="error">❌ Auth0 CDN blocked by CSP</span>';
+            };
+            document.head.appendChild(script);
+        }
+        
+        async function testConnectivity() {
+            const resultDiv = document.getElementById('connectivity-result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            const domains = [
+                'https://dev-bqqm5fdnyx1sdqja.us.auth0.com',
+                'https://mvoncovista.us.auth0.com',
+                'https://cdn.auth0.com'
+            ];
+            
+            let results = [];
+            
+            for (const domain of domains) {
+                try {
+                    // Test if domain is reachable (this will be blocked by CORS, but CSP should allow the attempt)
+                    const response = await fetch(domain + '/.well-known/jwks.json', { mode: 'no-cors' });
+                    results.push(`✅ ${domain} - Accessible`);
+                } catch (error) {
+                    if (error.message.includes('CSP')) {
+                        results.push(`❌ ${domain} - Blocked by CSP`);
+                    } else {
+                        results.push(`⚠️ ${domain} - CORS blocked (normal)`);
+                    }
+                }
+            }
+            
+            resultDiv.innerHTML = results.join('<br>');
+        }
+        
+        // Log successful font loading
+        document.fonts.ready.then(() => {
+            console.log('✅ All fonts loaded successfully');
+        });
+        
+        // Check for CSP violations
+        document.addEventListener('securitypolicyviolation', (e) => {
+            console.error('🚨 CSP Violation:', e.violatedDirective, e.blockedURI);
+        });
+        
+        console.log('🧪 OncoVista Auth0 & CSP Test Page Loaded');
+        console.log('📋 Check this console for any CSP violations...');
+    </script>
+</body>
+</html>
