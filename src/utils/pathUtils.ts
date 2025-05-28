@@ -6,8 +6,9 @@
 
 /**
  * Base handbook directory within the public folder.
+ * Note: In Vite, public files are served from root, not from /public/
  */
-export const HANDBOOK_BASE_DIR = '/public';
+export const HANDBOOK_BASE_DIR = '';
 
 /**
  * Maps section IDs to their corresponding handbook types
@@ -40,7 +41,7 @@ export function sectionToFolderName(section: HandbookSection): string {
  */
 export function getTocPath(section: HandbookSection): string {
   const folderName = sectionToFolderName(section);
-  return `${HANDBOOK_BASE_DIR}/${folderName}/toc.json`;
+  return `/${folderName}/toc.json`;
 }
 
 /**
@@ -52,7 +53,7 @@ export function getTocPath(section: HandbookSection): string {
  */
 export function getContentPath(section: HandbookSection, topic?: string | null): string {
   const folderName = sectionToFolderName(section);
-  const basePath = `${HANDBOOK_BASE_DIR}/${folderName}`;
+  const basePath = `/${folderName}`;
 
   if (!topic) {
     return `${basePath}/overview.json`;

@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { Loader2, BookOpen, Book } from 'lucide-react';
+import { Loader2, BookOpen } from 'lucide-react';
 import { useLocation, useNavigate } from "react-router-dom";
 import ErrorWrapper from "@/components/ErrorWrapper";
 import ErrorBoundary from "@/components/ErrorBoundary";
