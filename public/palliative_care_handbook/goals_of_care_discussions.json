@@ -1,0 +1,184 @@
+{
+  "title": "Goals of Care Discussions",
+  "category": "Palliative Care", 
+  "section": "Fundamentals",
+  "summary": "Framework for conducting effective goals of care conversations with patients and families",
+  "author": "Palliative Care Team",
+  "version": "1.0",
+  "lastUpdated": "2025-05-29",
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Goals of Care Discussions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Goals of care discussions are fundamental to providing patient-centered palliative care. These conversations help align medical treatments with patient values, preferences, and realistic outcomes."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Preparation for the Discussion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Review medical information**: Current condition, prognosis, treatment options",
+        "**Identify participants**: Patient, family members, healthcare team",
+        "**Choose appropriate setting**: Private, comfortable, uninterrupted",
+        "**Plan adequate time**: Allow 30-60 minutes for initial discussion",
+        "**Prepare emotionally**: Anticipate difficult emotions and reactions"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Start goals of care discussions early in the illness trajectory, not just when curative options are exhausted."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "The SPIKES Protocol"
+    },
+    {
+      "type": "paragraph",
+      "text": "A structured approach for conducting difficult conversations:"
+    },
+    {
+      "type": "table",
+      "headers": ["Step", "Description", "Key Actions"],
+      "rows": [
+        ["**S**etting", "Prepare the environment", "Private space, sitting, phones off"],
+        ["**P**erception", "Assess understanding", "What is your understanding of your illness?"],
+        ["**I**nvitation", "Ask permission to share", "Would you like me to explain the test results?"],
+        ["**K**nowledge", "Share information", "Use clear, simple language"],
+        ["**E**motions", "Respond to feelings", "Acknowledge and validate emotions"],
+        ["**S**trategy", "Develop plan together", "What's most important to you now?"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Key Questions to Explore"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use these open-ended questions to understand patient values and preferences:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "What is your understanding of your current health condition?",
+        "What are your biggest fears or concerns?",
+        "What gives your life meaning and purpose?",
+        "What does a good day look like for you?",
+        "What would be unacceptable to you?",
+        "If your health worsens, what's most important to you?",
+        "How much are you willing to go through for the possibility of more time?"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Common Goals Categories"
+    },
+    {
+      "type": "paragraph",
+      "text": "Help patients identify their priorities across different domains:"
+    },
+    {
+      "type": "table",
+      "headers": ["Domain", "Examples", "Assessment Questions"],
+      "rows": [
+        ["Functional", "Independence, mobility, self-care", "What activities are most important to you?"],
+        ["Social", "Family time, relationships", "Who are the most important people in your life?"],
+        ["Spiritual", "Religious practices, meaning", "What gives your life meaning?"],
+        ["Medical", "Symptom control, longevity", "What are your hopes for medical treatment?"],
+        ["Practical", "Location of care, financial", "Where would you want to be cared for?"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Responding to Common Reactions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Anticipate and prepare for various emotional responses:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Denial**: 'This can't be happening' - Acknowledge the shock, don't argue",
+        "**Anger**: 'You're giving up on me' - Validate emotions, clarify intent to continue care",
+        "**Bargaining**: 'What if we try everything?' - Explore what 'everything' means to them",
+        "**Sadness**: Crying, grief - Sit with silence, offer tissues, acknowledge loss",
+        "**Hope**: 'Miracles happen' - Distinguish hope for cure vs. hope for comfort/meaning"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Use the phrase 'hoping for the best and preparing for the worst' to help patients hold both hope and realistic planning simultaneously."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Translating Goals into Medical Plans"
+    },
+    {
+      "type": "paragraph",
+      "text": "Connect patient goals to specific medical interventions:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Goal**: Comfort and dignity → **Plan**: Focus on symptom management, avoid burdensome interventions",
+        "**Goal**: Time with family → **Plan**: Consider home care, minimize hospitalizations",
+        "**Goal**: Maintain independence → **Plan**: Physical therapy, assistive devices, home modifications",
+        "**Goal**: See grandson graduate → **Plan**: Aggressive but time-limited trial of treatment"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Documentation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Clearly document goals of care discussions:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Participants in the discussion",
+        "Patient's understanding of diagnosis and prognosis",
+        "Stated goals and values",
+        "Specific preferences for care",
+        "Plan for follow-up discussions",
+        "Any advance directive updates"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Follow-up and Reassessment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Goals of care are not static and need regular reassessment:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Schedule regular check-ins about goals",
+        "Reassess when condition changes significantly",
+        "Be prepared to modify plans as goals evolve",
+        "Ensure all team members understand current goals"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Remember that goals of care discussions are a process, not a single conversation. Be patient and allow goals to emerge over time."
+    }
+  ]
+}

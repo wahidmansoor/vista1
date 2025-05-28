@@ -15,8 +15,8 @@ export const HANDBOOK_BASE_DIR = '';
  */
 export const HANDBOOK_TYPES = {
   'medical-oncology': 'medical_oncology_handbook',
-  'radiation-oncology': 'radiation_handbook',
-  'palliative-care': 'palliative_handbook'
+  'radiation-oncology': 'radiation_oncology_handbook',
+  'palliative-care': 'palliative_care_handbook'
 } as const;
 
 export type HandbookSection = keyof typeof HANDBOOK_TYPES;

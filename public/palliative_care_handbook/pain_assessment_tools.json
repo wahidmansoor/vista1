@@ -1,0 +1,138 @@
+{
+  "title": "Pain Assessment Tools",
+  "category": "Palliative Care",
+  "section": "Symptom Management",
+  "summary": "Comprehensive guide to pain assessment tools used in palliative care settings",
+  "author": "Palliative Care Team",
+  "version": "1.0",
+  "lastUpdated": "2025-05-29",
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Pain Assessment Tools in Palliative Care"
+    },
+    {
+      "type": "paragraph",
+      "text": "Effective pain management begins with accurate assessment. This guide covers the essential tools and approaches for assessing pain in palliative care patients."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Numeric Rating Scale (NRS)"
+    },
+    {
+      "type": "paragraph",
+      "text": "The most commonly used tool for pain assessment in conscious, cognitively intact patients."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Scale from 0-10 (0 = no pain, 10 = worst possible pain)",
+        "Simple and quick to administer",
+        "Good correlation with patient's subjective experience",
+        "Useful for tracking pain trends over time"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Always ask patients to rate their pain at rest AND with movement, as this provides important information for activity planning and medication timing."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Faces Pain Scale"
+    },
+    {
+      "type": "paragraph",
+      "text": "Particularly useful for pediatric patients, elderly patients with mild cognitive impairment, or those with language barriers."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Uses facial expressions to indicate pain levels",
+        "Validated for ages 3 and up",
+        "Reduces cultural and language barriers",
+        "Easy to understand and use"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Behavioral Pain Assessment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Essential for patients who cannot self-report pain due to cognitive impairment, sedation, or communication barriers."
+    },
+    {
+      "type": "table",
+      "headers": ["Behavioral Indicator", "Examples", "Scoring"],
+      "rows": [
+        ["Facial Expression", "Grimacing, frowning, rapid blinking", "0-2 points"],
+        ["Vocalization", "Moaning, crying, calling out", "0-2 points"],
+        ["Body Movement", "Restlessness, guarding, rigidity", "0-2 points"],
+        ["Changes in Activity", "Decreased mobility, sleep disturbance", "0-2 points"],
+        ["Mental Status", "Confusion, irritability", "0-2 points"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Comprehensive Pain Assessment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Beyond intensity, comprehensive assessment should include:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Location**: Use body diagrams when possible",
+        "**Quality**: Sharp, dull, burning, cramping, shooting",
+        "**Timing**: Constant vs. intermittent, breakthrough episodes",
+        "**Aggravating factors**: Movement, position, stress",
+        "**Relieving factors**: Medications, positioning, heat/cold",
+        "**Impact on function**: Sleep, mood, activities of daily living",
+        "**Previous treatments**: What has worked or failed"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Remember that pain is 'whatever the patient says it is, existing whenever the patient says it does.' Avoid making judgments about pain validity based on patient appearance or behavior."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Special Considerations"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Cancer pain**: Often has multiple etiologies (tumor, treatment-related, concurrent conditions)",
+        "**Neuropathic pain**: May require specific assessment tools like DN4 or LANSS",
+        "**Psychosocial factors**: Assess for anxiety, depression, and social support",
+        "**Cultural factors**: Pain expression varies across cultures"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Documentation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Proper documentation should include:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Pain score with specified scale used",
+        "Location and quality of pain",
+        "Functional impact",
+        "Current interventions and effectiveness",
+        "Plan for reassessment"
+      ]
+    }
+  ]
+}

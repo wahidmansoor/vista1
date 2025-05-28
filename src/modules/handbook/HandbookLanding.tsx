@@ -19,11 +19,10 @@ const sections = [
     icon: Atom,
     isImage: false,
     path: "/handbook/radiation-oncology"
-  },
-  {
+  },  {
     id: "palliative-care",
     title: "Palliative Care",
-    description: "Guidelines for symptom management, pain control, and improving quality of life for patients with advanced cancer.",
+    description: "Guidelines for symptom management, pain control, and improving quality of life for patients with serious illnesses across all specialties.",
     icon: Heart,
     isImage: false,
     path: "/handbook/palliative-care"

@@ -1,0 +1,90 @@
+{
+  "title": "Palliative Care Handbook Overview",
+  "category": "Palliative Care",
+  "section": "Overview",
+  "summary": "Comprehensive palliative care guidelines for healthcare professionals",
+  "author": "OncoVista Team",
+  "version": "1.0",
+  "lastUpdated": "2025-05-29",
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Palliative Care Handbook"
+    },
+    {
+      "type": "paragraph",
+      "text": "Welcome to the OncoVista Palliative Care Handbook. This comprehensive resource provides evidence-based guidelines, practical tools, and clinical protocols for delivering high-quality palliative care across all healthcare settings."
+    },
+    {
+      "type": "clinical_pearl",
+      "title": "Core Principle",
+      "content": "Palliative care is appropriate at any stage of a serious illness and can be provided alongside curative treatments."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Handbook Sections"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Fundamentals of Palliative Care - Core principles, definitions, and prognostication",
+        "Symptom Management - Pain, dyspnea, nausea, fatigue, and other common symptoms",
+        "Psychosocial Care - Emotional support, coping strategies, and spiritual care",
+        "Communication Skills - Breaking bad news, goals of care discussions, and family meetings",
+        "Care Coordination - Interdisciplinary teamwork and care transitions",
+        "Special Populations - Pediatric, geriatric, and cultural considerations"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Getting Started"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use the navigation sidebar to explore specific topics. Each section contains practical guidelines, assessment tools, and treatment protocols to support clinical decision-making."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Quick Access Topics"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Pain Assessment Tools - Comprehensive pain evaluation methods",
+        "Goals of Care Discussions - Structured communication approaches",
+        "Dyspnea Management - Evidence-based interventions for breathlessness"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "title": "Clinical Reminder",
+      "content": "Early integration of palliative care has been shown to improve quality of life and may even extend survival in patients with serious illnesses."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Using This Handbook"
+    },
+    {
+      "type": "paragraph",
+      "text": "This handbook is designed for:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Physicians and nurse practitioners",
+        "Registered nurses and advanced practice nurses",
+        "Social workers and chaplains",
+        "Other healthcare professionals involved in palliative care"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Each topic includes evidence-based recommendations, practical implementation tips, and relevant clinical considerations."
+    }
+  ]
+}

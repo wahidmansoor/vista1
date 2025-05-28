@@ -9,10 +9,13 @@ declare module 'lucide-react' {
   }
 
   export type LucideIcon = ComponentType<LucideProps>;
-
   export const AlertOctagon: LucideIcon;
   export const ArrowLeft: LucideIcon;
   export const RefreshCcw: LucideIcon;
   export const ChevronDown: LucideIcon;
   export const LifeBuoy: LucideIcon;
+  export const BookOpen: LucideIcon;
+  export const Heart: LucideIcon;
+  export const Atom: LucideIcon;
+  export const Loader2: LucideIcon;
 }
