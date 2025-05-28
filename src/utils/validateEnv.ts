@@ -4,10 +4,10 @@ const requiredEnvVars = [
   'VITE_SUPABASE_ANON_KEY',
 ] as const;
 
-// Optional environment variables with warnings
+// Optional environment variables with warnings (AI keys are now server-side)
 const optionalEnvVars = [
-  'VITE_OPENAI_API_KEY',
-  'VITE_GEMINI_API_KEY'
+  'VITE_AUTH0_DOMAIN',
+  'VITE_AUTH0_CLIENT_ID'
 ] as const;
 
 /**

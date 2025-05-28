@@ -7,8 +7,8 @@
   # Directory to publish - Vite outputs to 'dist' by default
   publish = "dist"
   
-  # Functions directory (commented out since not using Netlify Functions currently)
-  # functions = "functions"
+  # Functions directory for server-side AI endpoints
+  functions = "netlify/functions"
 
 [build.environment]  # Specify Node.js version for consistent builds
   NODE_VERSION = "20.11.0"
@@ -20,6 +20,10 @@
   # Environment variables (add your specific ones here)
   # NODE_ENV = "production"  # Don't set this during build as it prevents devDependencies installation
   GENERATE_SOURCEMAP = "false"
+  
+  # Secrets scanning configuration - exclude build output and omit known client-safe keys
+  SECRETS_SCAN_OMIT_PATHS = "dist/**,src/**/*.js,src/**/*.ts"
+  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_AUTH0_CLIENT_ID,VITE_AUTH0_DOMAIN"
 
 # Build processing settings
 [build.processing]
@@ -126,18 +130,27 @@
 #   to = "/404.html"
 #   status = 404
 
-# Environment-specific settings (optional)
+# Environment-specific settings
 [context.production.environment]
   NODE_ENV = "production"
   GENERATE_SOURCEMAP = "false"
+  # Production Auth0 URLs
+  VITE_AUTH0_CALLBACK_URL = "https://mwoncovista.netlify.app/callback"
+  VITE_AUTH0_REDIRECT_URI = "https://mwoncovista.netlify.app"
 
 [context.deploy-preview.environment]
   NODE_ENV = "production"
   GENERATE_SOURCEMAP = "true"
+  # Deploy preview URLs (Netlify will inject the actual URL)
+  VITE_AUTH0_CALLBACK_URL = "https://deploy-preview-${REVIEW_ID}--mwoncovista.netlify.app/callback"
+  VITE_AUTH0_REDIRECT_URI = "https://deploy-preview-${REVIEW_ID}--mwoncovista.netlify.app"
 
 [context.branch-deploy.environment]
   NODE_ENV = "development"
   GENERATE_SOURCEMAP = "true"
+  # Branch deploy URLs (Netlify will inject the actual URL)
+  VITE_AUTH0_CALLBACK_URL = "https://${BRANCH}--mwoncovista.netlify.app/callback"
+  VITE_AUTH0_REDIRECT_URI = "https://${BRANCH}--mwoncovista.netlify.app"
 
 # Form handling (if you have contact forms)
 # [form]
