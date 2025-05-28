@@ -10,16 +10,16 @@ Go to **Netlify Dashboard > Site Settings > Environment Variables** and add:
 
 ```bash
 # AI Service API Keys
-GEMINI_API_KEY=AIzaSyBMbuv9SC-5j2BUuCDskrROlw_ETk213Yc
+GEMINI_API_KEY=your-gemini-api-key-here
 OPENAI_API_KEY=your-openai-api-key-if-needed
 
 # Database Configuration (client-safe)
-VITE_SUPABASE_URL=https://hdrsfyljgabmxwxmpbix.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkcnNmeWxqZ2FibXh3eG1wYml4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIwNjc5NDAsImV4cCI6MjA1NzY0Mzk0MH0.VPnBZfe-BFSZ3L-YyWJUHYZz4fwt7uyY57KWYYAa3C4
+VITE_SUPABASE_URL=your-supabase-project-url
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
 
 # Auth0 Configuration (client-safe - public identifiers)
-VITE_AUTH0_DOMAIN=dev-bqgm5fdnyx1sdqja.us.auth0.com
-VITE_AUTH0_CLIENT_ID=oG0aJlsqUul3crrmzdLJJz7r9KvU8IHp
+VITE_AUTH0_DOMAIN=your-auth0-domain.auth0.com
+VITE_AUTH0_CLIENT_ID=your-auth0-client-id
 VITE_AUTH0_AUDIENCE=your-auth0-api-identifier
 ```
 

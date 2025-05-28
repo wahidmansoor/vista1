@@ -22,8 +22,8 @@
   GENERATE_SOURCEMAP = "false"
   
   # Secrets scanning configuration - exclude build output and omit known client-safe keys
-  SECRETS_SCAN_OMIT_PATHS = "dist/**,src/**/*.js,src/**/*.ts"
-  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_AUTH0_CLIENT_ID,VITE_AUTH0_DOMAIN"
+  SECRETS_SCAN_OMIT_PATHS = "dist/**,src/**/*.js,src/**/*.ts,.env,NETLIFY_SETUP.md"
+  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_AUTH0_CLIENT_ID,VITE_AUTH0_DOMAIN,AUTH0_DOMAIN,AUTH0_CLIENT_ID"
 
 # Build processing settings
 [build.processing]
