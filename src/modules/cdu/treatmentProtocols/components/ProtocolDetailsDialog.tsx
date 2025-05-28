@@ -261,7 +261,7 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 <h3 className="font-semibold text-lg mb-2">Hematological Modifications</h3>
                 {Array.isArray(doseModifications.hematological) && doseModifications.hematological.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.hematological.map((item: string, idx: number) => (
+                    {doseModifications.hematological?.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
@@ -274,7 +274,7 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 <h3 className="font-semibold text-lg mb-2">Non-Hematological Modifications</h3>
                 {Array.isArray(doseModifications.nonHematological) && doseModifications.nonHematological.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.nonHematological.map((item: string, idx: number) => (
+                    {doseModifications.nonHematological?.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>                ) : (
@@ -286,7 +286,7 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 <h3 className="font-semibold text-lg mb-2">Renal Modifications</h3>
                 {Array.isArray(doseModifications.renal) && doseModifications.renal.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.renal.map((item: string, idx: number) => (
+                    {doseModifications.renal?.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
@@ -298,7 +298,7 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 <h3 className="font-semibold text-lg mb-2">Hepatic Modifications</h3>
                 {Array.isArray(doseModifications.hepatic) && doseModifications.hepatic.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.hepatic.map((item: string, idx: number) => (
+                    {doseModifications.hepatic?.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
