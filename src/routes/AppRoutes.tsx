@@ -3,6 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary"; // ✅ updated to match filename
 import NotFoundRedirect from "@/components/NotFoundRedirect";
 import LandingPage from "@/pages/LandingPage";
+import Dashboard from "@/pages/Dashboard";
+import ProtectedPage from "@/pages/ProtectedPage";
+import CallbackPage from "@/pages/CallbackPage";
 import Handbook from "@/modules/handbook/Handbook";
 import { SearchPage } from "@/components/HandbookSearch";
 import OPD from "@/modules/opd/OPD";
@@ -23,13 +26,27 @@ import cduRoutes from './cduRoutes';
 import ProtocolDetailPageContainer from "@/modules/cdu/safe/treatmentProtocols/TreatmentProtocols";
 
 const AppRoutes: FC = () => {
-  return (
-    <Routes>
-      <Route path="/" element={
+  return (    <Routes>      <Route path="/" element={
         <ErrorBoundary moduleName="Landing">
           <LandingPage />
         </ErrorBoundary>
-      } />      <Route path="/handbook/*" element={
+      } />      <Route path="/dashboard" element={
+        <ErrorBoundary moduleName="Dashboard">
+          <Dashboard />
+        </ErrorBoundary>
+      } />      <Route path="/callback" element={
+        <ErrorBoundary moduleName="Auth Callback">
+          <CallbackPage />
+        </ErrorBoundary>
+      } />
+
+      <Route path="/protected" element={
+        <ErrorBoundary moduleName="Protected Page">
+          <ProtectedPage />
+        </ErrorBoundary>
+      } />
+
+      <Route path="/handbook/*" element={
         <ErrorBoundary moduleName="Handbook">
           <Handbook />
         </ErrorBoundary>
