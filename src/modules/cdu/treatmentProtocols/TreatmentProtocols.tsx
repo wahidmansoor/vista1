@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import UnifiedProtocolCard from './UnifiedProtocolCard';
-import DrawerOverlay from './DrawerOverlay';
+import ProtocolDetailsDialog from './components/ProtocolDetailsDialog';
 import { Protocol } from '@/types/protocol';
 import { getSupergroups, getTumorGroups, getProtocolsByTumorGroup } from '@/services/protocols';
 import ProtocolErrorState from './ProtocolErrorState';
@@ -154,15 +154,15 @@ export default function TreatmentProtocols() {
                 <UnifiedProtocolCard protocol={protocol} />
               </div>
             ))}
-          </div>
-        )}
-        {/* Protocol detail overlay */}
+          </div>        )}
+        {/* Protocol detail dialog */}
         {selectedProtocol && (
-          <DrawerOverlay
-            isOpen={!!selectedProtocol}
+          <ProtocolDetailsDialog
             protocol={selectedProtocol}
-            onClose={() => setSelectedProtocol(null)}
-            onDrugSelect={() => {}}
+            open={!!selectedProtocol}
+            onOpenChange={(open) => {
+              if (!open) setSelectedProtocol(null);
+            }}
           />
         )}
       </motion.div>

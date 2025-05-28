@@ -37,10 +37,13 @@ export interface DoseModification {
 }
 
 export interface ToxicityMonitoring {
-  parameters: string[];
-  frequency: string;
+  parameters?: string[];
+  frequency?: string;
   expected_toxicities?: string[];
-  thresholds: Record<string, string>;
+  thresholds?: Record<string, string>;
+  monitoring_parameters?: string;
+  frequency_details?: string;
+  thresholds_for_action?: Record<string, string>;
 }
 
 export interface DrugClass {
@@ -88,9 +91,11 @@ export interface RescueAgent {
 }
 
 export interface Interactions {
-  drugs: string[];
-  contraindications: string[];
-  precautions: string[];
+  drugs?: string[];
+  contraindications?: string[];
+  precautions?: string[];
+  drugs_to_avoid?: string[];
+  precautions_with_other_drugs?: string[];
 }
 
 // Protocol note structure for precautions and similar fields
@@ -126,14 +131,13 @@ export interface Protocol {
   eligibility?: ProtocolEligibility;
   treatment?: {
     drugs: ProtocolDrug[];
-  };
-  tests?: {
-    baseline?: Test[];
-    monitoring?: Test[];
-  };
-  status?: string;
-  dose_modifications?: DoseModification;
+  };  tests?: {
+    baseline?: Test[] | string[];
+    monitoring?: Test[] | string[];
+  } | Test[];
+  status?: string;  dose_modifications?: DoseModification;
   precautions: ProtocolNote[];
+  contraindications?: string | any[];
   reference_list?: string[];
   created_at?: string;
   updated_at?: string;

@@ -32,9 +32,8 @@ export default defineConfig(({ command, mode }) => {
           }
         }
       }
-    },
-    server: {
-      port: 3000,
+    },    server: {
+      port: 3003,
       open: true
     },
     preview: {

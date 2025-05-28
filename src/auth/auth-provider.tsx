@@ -20,7 +20,7 @@ const Auth0Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 export const Auth0Provider: React.FC<Auth0ProviderProps> = ({ children }) => {
   const domain = import.meta.env.VITE_AUTH0_DOMAIN;
   const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-  const callbackUrl = import.meta.env.VITE_AUTH0_CALLBACK_URL || 'https://mwoncovista.netlify.app/callback';
+  const callbackUrl = import.meta.env.VITE_AUTH0_CALLBACK_URL || 'http://localhost:3003/callback';
   const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
 
   // Check if required environment variables are set

@@ -2,7 +2,7 @@ import { ModuleType, PromptIntent, AIResponse } from '@/components/ai-agent/type
 import { promptBuilder } from '@/components/ai-agent/promptBuilder';
 import OpenAI from 'openai';
 import { v4 as uuidv4 } from 'uuid';
-import { generateGeminiResponse, generateGeminiChat } from '@/lib/gemini';
+import { generateGeminiResponse } from '@/lib/gemini';
 import { getOfflineResponse } from '../../components/ai-agent/mockResponses';
 
 // Mock responses for development
@@ -40,11 +40,22 @@ interface AIAgentParams {
   feedbackType?: 'refine' | 'elaborate' | 'correct';
 }
 
-// Initialize OpenAI client with Vite environment variable
-const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true // Since we're using Vite, enable browser usage
-});
+// Initialize OpenAI client conditionally to avoid errors when API key is not available
+let openai: OpenAI | null = null;
+
+function getOpenAIClient(): OpenAI {
+  if (!openai) {
+    const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+    if (!apiKey || apiKey === 'your-openai-api-key-here') {
+      throw new APIError('OpenAI API key not configured. Please set VITE_OPENAI_API_KEY or use mock mode.', 'MISSING_API_KEY');
+    }
+    openai = new OpenAI({
+      apiKey,
+      dangerouslyAllowBrowser: true // Since we're using Vite, enable browser usage
+    });
+  }
+  return openai;
+}
 
 class APIError extends Error {
   constructor(message: string, public code: string) {
@@ -65,10 +76,9 @@ export const aiAgentAPI = {
   ): Promise<AIResponse> {
     try {
       // Generate specialized prompt using promptBuilder
-      const enhancedPrompt = promptBuilder(module, intent, prompt);
-
-      // Call OpenAI API
-      const completion = await openai.chat.completions.create({
+      const enhancedPrompt = promptBuilder(module, intent, prompt);      // Call OpenAI API
+      const openaiClient = getOpenAIClient();
+      const completion = await openaiClient.chat.completions.create({
         model: "gpt-4-turbo-preview",
         messages: [
           {
@@ -196,18 +206,17 @@ Current Task:
 ${enhancedPrompt}
 
 Please provide a comprehensive response suitable for a medical professional.`;
-
   try {
     const response = await generateGeminiResponse(fullPrompt);
     
     return {
-      id: uuidv4(),
-      content: response,
-      timestamp: new Date(),
+      id: response.id,
+      content: response.content,
+      timestamp: new Date(response.timestamp),
       metadata: {
         module,
         intent,
-        model: 'gemini'
+        model: response.metadata.model
       }
     };
   } catch (error) {
