@@ -20,7 +20,7 @@ const Auth0Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 export const Auth0Provider: React.FC<Auth0ProviderProps> = ({ children }) => {
   const domain = import.meta.env.VITE_AUTH0_DOMAIN;
   const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-  const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI || window.location.origin;
+  const redirectUri = import.meta.env.VITE_AUTH0_CALLBACK_URL || `${window.location.origin}/callback`;
   const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
 
   // Check if required environment variables are set

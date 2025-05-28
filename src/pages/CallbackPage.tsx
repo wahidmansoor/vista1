@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,32 +6,40 @@ import { useNavigate } from 'react-router-dom';
  * Callback page that handles Auth0 authentication redirect
  * Redirects to dashboard after successful authentication
  */
-const CallbackPage: React.FC = () => {  const { isLoading, error, isAuthenticated, handleRedirectCallback } = useAuth0();
+const CallbackPage: React.FC = () => {
+  const { isLoading, error, isAuthenticated, handleRedirectCallback } = useAuth0();
   const navigate = useNavigate();
+  const hasProcessed = useRef(false);
 
   useEffect(() => {
-    if (!isLoading) {
-      if (error) {
-        console.error('Authentication error:', error);
-        // Redirect to home page on error
-        navigate('/', { replace: true });
-        return;
-      }
+    // Prevent double processing
+    if (hasProcessed.current) return;
 
-      if (isAuthenticated) {
-        // Handle the callback to get the appState
-        handleRedirectCallback()
-          .then((result) => {
-            const returnTo = result?.appState?.returnTo || '/dashboard';
-            navigate(returnTo, { replace: true });
-          })
-          .catch((err) => {
-            console.error('Redirect callback error:', err);
-            navigate('/dashboard', { replace: true });
-          });
+    const processCallback = async () => {
+      try {
+        // Always call handleRedirectCallback on callback page
+        const result = await handleRedirectCallback();
+        hasProcessed.current = true;
+        
+        // Extract returnTo from appState or default to dashboard
+        const returnTo = result?.appState?.returnTo || '/dashboard';
+        
+        console.log('Auth0 callback successful, redirecting to:', returnTo);
+        navigate(returnTo, { replace: true });
+      } catch (err) {
+        console.error('Auth0 callback error:', err);
+        hasProcessed.current = true;
+        
+        // On error, redirect to home page
+        navigate('/', { replace: true });
       }
+    };
+
+    // Process callback when not loading
+    if (!isLoading && !hasProcessed.current) {
+      processCallback();
     }
-  }, [isLoading, error, isAuthenticated, navigate, handleRedirectCallback]);
+  }, [isLoading, handleRedirectCallback, navigate]);
 
   if (error) {
     return (
