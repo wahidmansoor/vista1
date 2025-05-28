@@ -93,44 +93,37 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
     }
     return protocol.tests || { baseline: [], monitoring: [] };
   }, [protocol.tests]);
-  
-  const doseModifications = React.useMemo(() => 
-    protocol.dose_modifications || {
-      hematological: [],
-      nonHematological: [],
-      renal: [],
-      hepatic: []
-    }, 
-    [protocol.dose_modifications]
-  );
-
-  const toxicityMonitoring = React.useMemo(() => 
-    protocol.toxicity_monitoring || {
-      expected_toxicities: [],
-      monitoring_parameters: '',
-      frequency_details: '',
-      thresholds_for_action: {}
-    },
-    [protocol.toxicity_monitoring]
-  );
-
-  const supportiveCare = React.useMemo(() => 
-    protocol.supportive_care || {
-      required: [],
-      optional: [],
-      monitoring: []
-    },
-    [protocol.supportive_care]
-  );
-
-  const interactions = React.useMemo(() => 
-    protocol.interactions || {
-      drugs_to_avoid: [],
-      contraindications: [],
-      precautions_with_other_drugs: []
-    },
-    [protocol.interactions]
-  );
+  const doseModifications = React.useMemo(() => {
+    const modifications = protocol.dose_modifications || {} as any;
+    return {
+      hematological: Array.isArray(modifications.hematological) ? modifications.hematological : [],
+      nonHematological: Array.isArray(modifications.nonHematological) ? modifications.nonHematological : [],
+      renal: Array.isArray(modifications.renal) ? modifications.renal : [],
+      hepatic: Array.isArray(modifications.hepatic) ? modifications.hepatic : []
+    };
+  }, [protocol.dose_modifications]);const toxicityMonitoring = React.useMemo(() => {
+    const toxicityData = protocol.toxicity_monitoring || {} as any;
+    return {
+      expected_toxicities: Array.isArray(toxicityData.expected_toxicities) ? toxicityData.expected_toxicities : [],
+      monitoring_parameters: toxicityData.monitoring_parameters || '',
+      frequency_details: toxicityData.frequency_details || '',
+      thresholds_for_action: toxicityData.thresholds_for_action || {}
+    };
+  }, [protocol.toxicity_monitoring]);const supportiveCare = React.useMemo(() => {
+    const supportiveData = protocol.supportive_care || {} as any;
+    return {
+      required: Array.isArray(supportiveData.required) ? supportiveData.required : [],
+      optional: Array.isArray(supportiveData.optional) ? supportiveData.optional : [],
+      monitoring: Array.isArray(supportiveData.monitoring) ? supportiveData.monitoring : []
+    };
+  }, [protocol.supportive_care]);  const interactions = React.useMemo(() => {
+    const interactionData = protocol.interactions || {} as any;
+    return {
+      drugs_to_avoid: Array.isArray(interactionData.drugs_to_avoid) ? interactionData.drugs_to_avoid : [],
+      contraindications: Array.isArray(interactionData.contraindications) ? interactionData.contraindications : [],
+      precautions_with_other_drugs: Array.isArray(interactionData.precautions_with_other_drugs) ? interactionData.precautions_with_other_drugs : []
+    };
+  }, [protocol.interactions]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -264,10 +257,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               )}
             </div>
           </TabsContent>          <TabsContent value="doseModifications">
-            <div className="space-y-6">
-              <div>
+            <div className="space-y-6">              <div>
                 <h3 className="font-semibold text-lg mb-2">Hematological Modifications</h3>
-                {doseModifications.hematological?.length > 0 ? (
+                {Array.isArray(doseModifications.hematological) && doseModifications.hematological.length > 0 ? (
                   <ul className="list-disc list-inside">
                     {doseModifications.hematological.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
@@ -280,20 +272,19 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Non-Hematological Modifications</h3>
-                {doseModifications.nonHematological?.length > 0 ? (
+                {Array.isArray(doseModifications.nonHematological) && doseModifications.nonHematological.length > 0 ? (
                   <ul className="list-disc list-inside">
                     {doseModifications.nonHematological.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
-                  </ul>
-                ) : (
+                  </ul>                ) : (
                   <p className="text-muted-foreground">No non-hematological modifications specified.</p>
                 )}
               </div>
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Renal Modifications</h3>
-                {doseModifications.renal?.length > 0 ? (
+                {Array.isArray(doseModifications.renal) && doseModifications.renal.length > 0 ? (
                   <ul className="list-disc list-inside">
                     {doseModifications.renal.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
@@ -303,10 +294,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                   <p className="text-muted-foreground">No renal modifications specified.</p>
                 )}
               </div>
-              
-              <div>
+                <div>
                 <h3 className="font-semibold text-lg mb-2">Hepatic Modifications</h3>
-                {doseModifications.hepatic?.length > 0 ? (
+                {Array.isArray(doseModifications.hepatic) && doseModifications.hepatic.length > 0 ? (
                   <ul className="list-disc list-inside">
                     {doseModifications.hepatic.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
