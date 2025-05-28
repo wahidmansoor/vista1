@@ -41,15 +41,15 @@ These routes remain **PUBLIC** (no authentication required):
 
 ### **Environment Variables**
 ```env
-VITE_AUTH0_DOMAIN=dev-bqqm5fdnyx1sdqja.us.auth0.com
-VITE_AUTH0_CLIENT_ID=c5IeUoB13bplh7umoolLJZr67Vx1e6fg
+VITE_AUTH0_DOMAIN=your-auth0-domain.auth0.com
+VITE_AUTH0_CLIENT_ID=your-auth0-client-id
 VITE_AUTH0_CALLBACK_URL=http://localhost:3000/callback
 VITE_AUTH0_REDIRECT_URI=http://localhost:3000
 ```
 
 ### **Auth0 Application Settings**
-- **Domain**: `dev-bqqm5fdnyx1sdqja.us.auth0.com`
-- **Client ID**: `c5IeUoB13bplh7umoolLJZr67Vx1e6fg`
+- **Domain**: `your-auth0-domain.auth0.com`
+- **Client ID**: `your-auth0-client-id`
 - **Allowed Callback URLs**: 
   - `http://localhost:3000/callback` (development)
   - `https://mwoncovista.netlify.app/callback` (production)

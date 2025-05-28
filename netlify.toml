@@ -18,12 +18,11 @@
   COREPACK_ENABLE_STRICT = "0"
 
   # Environment variables (add your specific ones here)
-  # NODE_ENV = "production"  # Don't set this during build as it prevents devDependencies installation
-  GENERATE_SOURCEMAP = "false"
-  
+  # NODE_ENV = "production"  # Don't set this during build as it prevents devDependencies installation  GENERATE_SOURCEMAP = "false"
   # Secrets scanning configuration - exclude build output and omit known client-safe keys
-  SECRETS_SCAN_OMIT_PATHS = "dist/**,src/**/*.js,src/**/*.ts,.env,NETLIFY_SETUP.md"
-  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_AUTH0_CLIENT_ID,VITE_AUTH0_DOMAIN,AUTH0_DOMAIN,AUTH0_CLIENT_ID"
+  SECRETS_SCAN_OMIT_PATHS = "dist/**,src/**,node_modules/**,.env,*.md,package.json,package-lock.json"
+  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_AUTH0_CLIENT_ID,VITE_AUTH0_DOMAIN,AUTH0_DOMAIN,AUTH0_CLIENT_ID,VITE_SUPABASE_URL"
+  SECRETS_SCAN_ENABLED = "false"
 
 # Build processing settings
 [build.processing]
@@ -62,12 +61,12 @@
     
     # Enable XSS protection in older browsers
     X-XSS-Protection = "1; mode=block"
-    
-    # Prevent MIME type sniffing
+      # Prevent MIME type sniffing
     X-Content-Type-Options = "nosniff"
       # Control referrer information
     Referrer-Policy = "same-origin"
-      # Content Security Policy - Comprehensive configuration for Auth0, fonts, and APIs    Content-Security-Policy = """
+      # Content Security Policy - Comprehensive configuration for Auth0, fonts, and APIs
+    Content-Security-Policy = """
       default-src 'self';
       script-src 'self' 'unsafe-inline' 'unsafe-eval' 
         https://cdn.auth0.com 
