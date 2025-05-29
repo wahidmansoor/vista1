@@ -180,7 +180,20 @@ export const getProtocolsByTumorGroup = async (tumorGroup: string): Promise<Prot
   data.forEach((item, index) => {
     if (isDatabaseProtocol(item)) {
       try {
-        validProtocols.push(toProtocol(item));
+        const protocol = toProtocol(item);
+        
+        // Add overview object with fields from the top-level protocol
+        protocol.overview = {
+          treatment_intent: protocol.treatment_intent,
+          version: protocol.version,
+          last_reviewed: protocol.last_reviewed,
+          summary: protocol.summary,
+          cycle_info: protocol.cycle_info,
+          clinical_scenario: protocol.clinical_scenario,
+          status: protocol.status
+        };
+        
+        validProtocols.push(protocol);
       } catch (err) {
         console.warn(`Failed to process protocol at index ${index}:`, err);
       }
@@ -230,14 +243,24 @@ export const getProtocols = async (filters: ProtocolFilters): Promise<Protocol[]
           }
         });
       });
-    }
-
-    // Validate and transform the data
+    }    // Validate and transform the data
     const validProtocols: Protocol[] = [];
     data.forEach((item, index) => {
       if (isDatabaseProtocol(item)) {
         try {
           const protocol = toProtocol(item);
+          
+          // Add overview object with fields from the top-level protocol
+          protocol.overview = {
+            treatment_intent: protocol.treatment_intent,
+            version: protocol.version,
+            last_reviewed: protocol.last_reviewed,
+            summary: protocol.summary,
+            cycle_info: protocol.cycle_info,
+            clinical_scenario: protocol.clinical_scenario,
+            status: protocol.status
+          };
+          
           validProtocols.push(protocol);
         } catch (err) {
           console.warn(`Failed to process protocol at index ${index}:`, err);
@@ -310,14 +333,25 @@ export const getProtocolById = async (id: string): Promise<Protocol | null> => {
     if (!isDatabaseProtocol(data)) {
       console.warn('Invalid protocol data structure:', data);
       return null;
-    }
-
-    try {
+    }    try {
       const protocol = toProtocol(data);
+      
+      // Add overview object with fields from the top-level protocol
+      protocol.overview = {
+        treatment_intent: protocol.treatment_intent,
+        version: protocol.version,
+        last_reviewed: protocol.last_reviewed,
+        summary: protocol.summary,
+        cycle_info: protocol.cycle_info,
+        clinical_scenario: protocol.clinical_scenario,
+        status: protocol.status
+      };
+      
       console.log('Transformed protocol:', {
         id: protocol.id,
         code: protocol.code,
-        treatment: protocol.treatment
+        treatment: protocol.treatment,
+        overview: protocol.overview
       });
       return protocol;
     } catch (err) {
