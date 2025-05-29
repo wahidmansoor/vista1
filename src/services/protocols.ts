@@ -33,6 +33,12 @@ interface DatabaseProtocol {
   rescue_agents?: any;
   created_at?: string;
   updated_at?: string;
+  summary?: string;
+  version?: string;
+  last_reviewed?: string;
+  cycle_info?: any;
+  clinical_scenario?: string;
+  status?: string;
 }
 
 // Type guard to check if an object matches DatabaseProtocol shape
@@ -70,12 +76,12 @@ const toProtocol = (dbProtocol: DatabaseProtocol): Protocol => {
 
   // Add debug logging
   console.log('Raw treatment data:', dbProtocol.treatment);
-
   const protocol: Protocol = {
     id: dbProtocol.id,
     code: dbProtocol.code,
     tumour_group: dbProtocol.tumour_group,
     treatment_intent: dbProtocol.treatment_intent || '',
+    summary: dbProtocol.summary || '',
     eligibility: safeJSONParse(dbProtocol.eligibility),
     treatment: safeJSONParse(dbProtocol.treatment),
     tests: safeJSONParse(dbProtocol.tests),
