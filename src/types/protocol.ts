@@ -103,6 +103,17 @@ export interface ProtocolNote {
   note: string;
 }
 
+// Overview structure that groups protocol metadata
+export interface ProtocolOverview {
+  treatment_intent?: string;
+  version?: string;
+  last_reviewed?: string;
+  summary?: string;
+  cycle_info?: string;
+  clinical_scenario?: string;
+  status?: string;
+}
+
 // Eligibility structure with inclusion/exclusion criteria as objects
 export interface ProtocolEligibility {
   inclusion_criteria?: Array<{ criterion: string }>;
@@ -129,6 +140,7 @@ export interface Protocol {
   treatment_intent?: string;
   notes?: any[];
   eligibility?: ProtocolEligibility;
+  overview?: ProtocolOverview;
   treatment?: {
     drugs: ProtocolDrug[];
   };  tests?: {
