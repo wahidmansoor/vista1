@@ -1,0 +1,21 @@
+{
+  "title": "Acoustic Neuroma",
+  "category": "Radiation Oncology",
+  "section": "CNS Tumors",
+  "summary": "Radiation therapy management of Acoustic Neuroma including techniques and dose prescriptions.", 
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Clinical Overview"
+    },
+    {
+      "type": "paragraph",
+      "text": "This section covers diagnosis, staging, and radiation therapy approaches for this CNS condition."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Careful treatment planning and dose constraints are essential for CNS treatments to minimize neurotoxicity."
+    }
+  ]
+}

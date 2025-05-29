@@ -1,0 +1,39 @@
+{
+  "title": "Secondary Malignancies",
+  "category": "Radiation Oncology",
+  "section": "Late Effects",
+  "summary": "Radiation-induced secondary malignancies are a rare but serious late effect of radiation therapy, typically occurring 5-30 years after treatment with risk factors including age at exposure, dose, and genetic predisposition.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Epidemiology and Risk Factors"
+    },
+    {
+      "type": "paragraph",
+      "text": "The absolute risk of secondary malignancy is approximately 1 in 1000 patients per year of follow-up. Risk is highest in children and young adults, with solid tumors typically occurring 10-30 years post-treatment and hematologic malignancies within 5-10 years."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Common Secondary Malignancies"
+    },
+    {
+      "type": "paragraph",
+      "text": "Breast cancer (following chest irradiation for Hodgkin lymphoma), thyroid cancer (following neck irradiation), lung cancer (following chest irradiation), sarcomas (within radiation fields), and acute leukemia (dose-dependent, peaks at 5-9 years)."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Prevention and Monitoring"
+    },
+    {
+      "type": "paragraph",
+      "text": "Risk reduction strategies include minimizing radiation dose and volume, avoiding radiation in young patients when possible, and implementing long-term surveillance protocols based on radiation sites and patient age at treatment."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "The benefit-risk ratio strongly favors radiation therapy for most cancer patients, as the risk of secondary malignancy is far outweighed by the benefit of curing the primary cancer."
+    }
+  ]
+}

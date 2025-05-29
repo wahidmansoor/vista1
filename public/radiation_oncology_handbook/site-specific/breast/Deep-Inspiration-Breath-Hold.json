@@ -1,0 +1,28 @@
+﻿{
+  "title": "Deep Inspiration Breath Hold",
+  "category": "Site Specific",
+  "section": "Breast",
+  "summary": "Clinical overview of Deep Inspiration Breath Hold in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Deep Inspiration Breath Hold including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Deep Inspiration Breath Hold."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

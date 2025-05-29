@@ -1,0 +1,28 @@
+﻿{
+  "title": "Radiation Protection and Safety",
+  "category": "Fundamentals",
+  "section": "Physics",
+  "summary": "Clinical overview of Radiation Protection and Safety in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Radiation Protection and Safety including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Radiation Protection and Safety."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

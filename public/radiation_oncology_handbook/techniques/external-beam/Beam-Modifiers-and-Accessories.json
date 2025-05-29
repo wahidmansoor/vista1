@@ -1,0 +1,21 @@
+{
+  "title": "Beam Modifiers and Accessories",
+  "category": "Radiation Oncology",
+  "section": "External Beam Techniques", 
+  "summary": "Clinical applications and technical considerations for Beam Modifiers and Accessories.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Technical Overview"
+    },
+    {
+      "type": "paragraph",
+      "text": "This section covers the technical aspects and clinical applications of this treatment technique."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Proper technique selection and implementation are crucial for optimal treatment outcomes."
+    }
+  ]
+}

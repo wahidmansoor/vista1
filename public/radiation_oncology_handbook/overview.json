@@ -1,0 +1,42 @@
+{
+  "title": "Radiation Oncology Handbook",
+  "specialty": "Radiation Oncology",
+  "description": "Comprehensive radiation oncology handbook covering fundamental principles, treatment techniques, site-specific protocols, toxicity management, and quality assurance in radiation therapy practice.",
+  "version": "1.0",
+  "lastUpdated": "2025-05-29",
+  "sections": [
+    {
+      "name": "Fundamentals",
+      "description": "Core principles of radiation physics, radiobiology, equipment, and dosimetry",
+      "icon": "🔬"
+    },
+    {
+      "name": "Techniques",
+      "description": "External beam, brachytherapy, stereotactic, and image-guided radiation therapy techniques",
+      "icon": "⚡"
+    },
+    {
+      "name": "Site Specific",
+      "description": "Anatomical site-specific treatment protocols and clinical considerations",
+      "icon": "🎯"
+    },
+    {
+      "name": "Toxicities",
+      "description": "Acute, late, and organ-specific radiation toxicity management",
+      "icon": "⚠️"
+    },
+    {
+      "name": "Quality Assurance",
+      "description": "Safety protocols, QA procedures, and treatment planning verification",
+      "icon": "✅"
+    }
+  ],
+  "clinicalPearl": "The art of radiation oncology lies in maximizing tumor control while minimizing normal tissue toxicity through precise dose delivery and careful treatment planning.",
+  "keyPrinciples": [
+    "ALARA principle: As Low As Reasonably Achievable",
+    "Fractionation optimizes therapeutic ratio",
+    "Image guidance enhances treatment precision",
+    "Quality assurance ensures patient safety",
+    "Multidisciplinary approach improves outcomes"
+  ]
+}

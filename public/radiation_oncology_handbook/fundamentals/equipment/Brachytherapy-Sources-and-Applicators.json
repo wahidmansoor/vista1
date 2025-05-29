@@ -1,0 +1,28 @@
+﻿{
+  "title": "Brachytherapy Sources and Applicators",
+  "category": "Fundamentals",
+  "section": "Equipment",
+  "summary": "Clinical overview of Brachytherapy Sources and Applicators in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Brachytherapy Sources and Applicators including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Brachytherapy Sources and Applicators."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

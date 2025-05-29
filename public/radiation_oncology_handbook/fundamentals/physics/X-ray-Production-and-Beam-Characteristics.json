@@ -1,0 +1,21 @@
+{
+  "title": "X ray Production and Beam Characteristics",
+  "category": "Radiation Oncology",
+  "section": "Physics",
+  "summary": "Essential concepts in X ray Production and Beam Characteristics for radiation therapy applications.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Overview"
+    },
+    {
+      "type": "paragraph", 
+      "text": "This topic covers essential physics concepts relevant to radiation oncology practice."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Understanding physics principles is crucial for safe and effective radiation therapy delivery."
+    }
+  ]
+}

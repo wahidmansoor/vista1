@@ -1,0 +1,28 @@
+﻿{
+  "title": "Salivary Gland Tumors",
+  "category": "Site Specific",
+  "section": "Head and Neck",
+  "summary": "Clinical overview of Salivary Gland Tumors in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Salivary Gland Tumors including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Salivary Gland Tumors."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

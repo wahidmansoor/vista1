@@ -1,0 +1,39 @@
+{
+  "title": "Glioblastoma Treatment",
+  "category": "Radiation Oncology",
+  "section": "CNS Tumors", 
+  "summary": "Glioblastoma multiforme (GBM) is the most common and aggressive primary brain tumor in adults. Standard treatment involves maximal safe resection followed by concurrent chemoradiation with temozolomide.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Standard Treatment Protocol"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Stupp protocol involves 60 Gy in 30 fractions with concurrent temozolomide 75 mg/m² daily, followed by adjuvant temozolomide for 6-12 cycles. This approach has become the standard of care based on landmark randomized trials."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Target Volume Definition"
+    },
+    {
+      "type": "paragraph",
+      "text": "GTV includes the resection cavity and residual enhancement on T1 post-contrast MRI. CTV1 (46 Gy) includes GTV + 2 cm margin, while CTV2 (60 Gy) includes GTV + 1.5 cm margin, accounting for FLAIR abnormality and anatomical barriers."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Hypofractionated Approaches"
+    },
+    {
+      "type": "paragraph",
+      "text": "For elderly patients (>65-70 years) or poor performance status, hypofractionated regimens like 40 Gy in 15 fractions or 34 Gy in 10 fractions provide similar outcomes with reduced treatment burden."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "MGMT promoter methylation status is a key biomarker predicting benefit from temozolomide and should be tested in all GBM patients."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "Linear Quadratic Model",
+  "category": "Radiation Oncology", 
+  "section": "Radiobiology",
+  "summary": "The Linear Quadratic (LQ) model is the most widely used mathematical framework for describing the relationship between radiation dose and biological effect, fundamental for fractionation schemes and treatment planning.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Mathematical Foundation"
+    },
+    {
+      "type": "paragraph",
+      "text": "The LQ model describes cell survival as S = e^(-αD - βD²), where α represents single-hit kill and β represents two-hit kill. The α/β ratio characterizes tissue radiosensitivity and determines optimal fractionation."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Clinical Applications"
+    },
+    {
+      "type": "paragraph",
+      "text": "Late-responding normal tissues typically have low α/β ratios (1-5 Gy), while early-responding tissues and most tumors have high α/β ratios (8-15 Gy). This difference forms the basis for fractionated radiotherapy."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Limitations and Considerations"
+    },
+    {
+      "type": "paragraph",
+      "text": "The LQ model has limitations at very high doses per fraction (>8-10 Gy) and doesn't account for repair, repopulation, reoxygenation, and redistribution during prolonged treatments."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Hypofractionated treatments benefit from low α/β ratio tissues more than high α/β ratio tissues, explaining the success of SBRT for many tumor types."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+﻿{
+  "title": "Ureteral and Urethral Tumors",
+  "category": "Site Specific",
+  "section": "Genitourinary",
+  "summary": "Clinical overview of Ureteral and Urethral Tumors in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Ureteral and Urethral Tumors including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Ureteral and Urethral Tumors."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

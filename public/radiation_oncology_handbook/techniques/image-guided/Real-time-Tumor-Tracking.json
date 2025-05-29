@@ -1,0 +1,28 @@
+﻿{
+  "title": "Real-time Tumor Tracking",
+  "category": "Techniques",
+  "section": "Image Guided",
+  "summary": "Clinical overview of Real-time Tumor Tracking in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Real-time Tumor Tracking including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Real-time Tumor Tracking."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

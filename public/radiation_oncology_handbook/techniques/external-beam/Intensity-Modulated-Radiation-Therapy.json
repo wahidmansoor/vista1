@@ -1,0 +1,39 @@
+{
+  "title": "Intensity Modulated Radiation Therapy",
+  "category": "Radiation Oncology",
+  "section": "External Beam Techniques",
+  "summary": "IMRT uses computer-controlled linear accelerators to deliver precise radiation beams that conform to complex tumor shapes while sparing surrounding normal tissue through inverse treatment planning optimization.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Technical Principles"
+    },
+    {
+      "type": "paragraph",
+      "text": "IMRT delivers non-uniform fluence across treatment fields using multileaf collimators (MLCs) that dynamically shape the beam during delivery. Inverse planning algorithms optimize beam intensities to meet dose-volume constraints."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Delivery Methods"
+    },
+    {
+      "type": "paragraph",
+      "text": "IMRT can be delivered using step-and-shoot (segmental MLC), dynamic MLC (sliding window), or volumetric modulated arc therapy (VMAT) techniques, each with specific advantages and quality assurance requirements."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Clinical Applications"
+    },
+    {
+      "type": "paragraph",
+      "text": "IMRT is particularly beneficial for tumors near critical organs such as head and neck cancers, prostate cancer, and brain tumors where dose escalation and normal tissue sparing are crucial."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "IMRT requires comprehensive QA including dose verification, MLC positional accuracy, and patient-specific plan verification before treatment delivery."
+    }
+  ]
+}

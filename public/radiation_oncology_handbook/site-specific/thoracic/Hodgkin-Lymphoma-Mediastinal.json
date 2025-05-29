@@ -1,0 +1,28 @@
+﻿{
+  "title": "Hodgkin Lymphoma Mediastinal",
+  "category": "Site Specific",
+  "section": "Thoracic",
+  "summary": "Clinical overview of Hodgkin Lymphoma Mediastinal in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Hodgkin Lymphoma Mediastinal including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Hodgkin Lymphoma Mediastinal."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

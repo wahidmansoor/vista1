@@ -1,0 +1,28 @@
+﻿{
+  "title": "Fiducial Marker Systems",
+  "category": "Techniques",
+  "section": "Image Guided",
+  "summary": "Clinical overview of Fiducial Marker Systems in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Fiducial Marker Systems including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Fiducial Marker Systems."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

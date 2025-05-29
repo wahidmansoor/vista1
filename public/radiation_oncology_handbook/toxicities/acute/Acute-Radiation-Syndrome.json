@@ -1,0 +1,39 @@
+{
+  "title": "Acute Radiation Syndrome",
+  "category": "Radiation Oncology",
+  "section": "Acute Toxicities",
+  "summary": "Acute radiation syndrome (ARS) occurs following high-dose whole-body or significant partial-body irradiation, characterized by prodromal, latent, manifest illness, and recovery phases with distinct clinical presentations.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Pathophysiology"
+    },
+    {
+      "type": "paragraph",
+      "text": "ARS results from radiation damage to rapidly dividing cell populations, particularly hematopoietic, gastrointestinal, and neurovascular systems. The severity depends on dose, dose rate, and extent of body exposure."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Clinical Phases"
+    },
+    {
+      "type": "paragraph",
+      "text": "Prodromal phase (0-48 hours): nausea, vomiting, diarrhea, fatigue. Latent phase (48 hours-weeks): apparent recovery. Manifest illness phase: bone marrow, GI, or neurovascular syndrome. Recovery phase: gradual improvement or death."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Dose-Response Relationships"
+    },
+    {
+      "type": "paragraph",
+      "text": "Hematopoietic syndrome (1-10 Gy): lymphopenia, thrombocytopenia, anemia. GI syndrome (10-50 Gy): severe diarrhea, dehydration, infection. Neurovascular syndrome (>50 Gy): altered consciousness, seizures, death within days."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Lymphocyte count depression within 48 hours is the most reliable early indicator of significant radiation exposure and dose estimation."
+    }
+  ]
+}

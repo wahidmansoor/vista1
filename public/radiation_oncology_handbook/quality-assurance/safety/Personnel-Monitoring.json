@@ -1,0 +1,21 @@
+{
+  "title": "Personnel Monitoring",
+  "category": "Radiation Oncology",
+  "section": "Safety", 
+  "summary": "Safety protocols and procedures for Personnel Monitoring in radiation therapy.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Overview"
+    },
+    {
+      "type": "paragraph",
+      "text": "Quality assurance procedures and protocols to ensure safe and accurate radiation therapy delivery."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Comprehensive QA programs are essential for maintaining treatment quality and patient safety."
+    }
+  ]
+}

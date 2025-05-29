@@ -1,0 +1,39 @@
+{
+  "title": "ALARA Principles",
+  "category": "Radiation Oncology",
+  "section": "Radiation Safety",
+  "summary": "ALARA (As Low As Reasonably Achievable) is the fundamental principle of radiation protection, ensuring radiation exposures are kept as low as reasonably achievable while maintaining clinical effectiveness.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Core ALARA Principles"
+    },
+    {
+      "type": "paragraph",
+      "text": "Time: minimize exposure time. Distance: maximize distance from radiation source (inverse square law). Shielding: use appropriate barriers. Activity: use minimum radioactive source strength necessary for clinical objectives."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Implementation Strategies"
+    },
+    {
+      "type": "paragraph",
+      "text": "Proper training, regular safety meetings, dose monitoring programs, equipment maintenance, optimization of procedures, and regular review of radiation protection practices to identify improvement opportunities."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Regulatory Framework"
+    },
+    {
+      "type": "paragraph",
+      "text": "ALARA is mandated by regulatory bodies including NRC, state agencies, and international organizations. Facilities must demonstrate ALARA compliance through policies, procedures, and dose monitoring programs."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "ALARA is not just about meeting dose limits—it's about continuously striving to reduce exposures through good safety practices and technological improvements."
+    }
+  ]
+}
