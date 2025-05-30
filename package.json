@@ -3,7 +3,8 @@
   "name": "onco-vista-starter",
   "private": true,
   "version": "0.0.1",
-  "type": "module",  "scripts": {
+  "type": "module",
+  "scripts": {
     "dev": "vite",
     "dev:server": "cross-env NODE_ENV=development ts-node-dev --transpile-only --esm src/server/index.ts",
     "dev:all": "run-p dev dev:server",
@@ -58,6 +59,7 @@
     "google-auth-library": "^8.9.0",
     "helmet": "^7.0.0",
     "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
     "langchain": "^0.3.27",
     "lodash.debounce": "^4.0.8",
     "logrocket": "^9.0.2",

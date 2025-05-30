@@ -18,8 +18,8 @@ export default defineConfig(({ command, mode }) => {
       }
     },    build: {
       outDir: 'dist',
-      // Disable source maps in production for better performance
-      sourcemap: mode === 'development', 
+      // Enable source maps for all builds to help with debugging
+      sourcemap: true, 
       minify: 'terser',
       cssMinify: true,
       rollupOptions: {
