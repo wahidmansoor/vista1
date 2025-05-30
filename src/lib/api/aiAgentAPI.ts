@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { generateGeminiResponse } from '@/lib/gemini';
 import { getOfflineResponse } from '../../components/ai-agent/mockResponses';
 
+// Re-export AIResponse type for consumers
+export type { AIResponse } from '@/components/ai-agent/types';
+
 // Mock responses for development
 const mockResponses: Record<ModuleType, Record<PromptIntent, string[]>> = {
   OPD: {

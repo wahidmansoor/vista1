@@ -32,7 +32,16 @@ export type ModuleType = 'OPD' | 'CDU' | 'Inpatient' | 'Palliative' | 'RadOnc';
 /**
  * Represents different types of AI agent prompts
  */
-export type PromptIntent = 'screening' | 'triage' | 'follow-up' | 'evaluation' | 'toxicity';
+export type PromptIntent = 
+  | 'screening' 
+  | 'triage' 
+  | 'follow-up' 
+  | 'evaluation' 
+  | 'toxicity'
+  | 'general'
+  | 'dose-check'
+  | 'pathway'
+  | 'rescue-agent';
 
 /**
  * Represents the context provided to the AI agent
