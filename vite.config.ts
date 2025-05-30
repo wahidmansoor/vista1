@@ -16,11 +16,12 @@ export default defineConfig(({ command, mode }) => {
       alias: {
         '@': path.resolve(__dirname, './src')
       }
-    },
-    build: {
+    },    build: {
       outDir: 'dist',
-      // Enable source maps in production for better debugging
-      sourcemap: true,
+      // Disable source maps in production for better performance
+      sourcemap: mode === 'development', 
+      minify: 'terser',
+      cssMinify: true,
       rollupOptions: {
         output: {
           manualChunks: {
@@ -30,7 +31,12 @@ export default defineConfig(({ command, mode }) => {
             ai: ['@google/generative-ai', 'openai'],
             utils: ['lucide-react']
           }
-        }
+        },
+        external: [],
+      },
+      commonjsOptions: {
+        include: [/node_modules/],
+        transformMixedEsModules: true,
       }
     },
     server: {
@@ -40,9 +46,14 @@ export default defineConfig(({ command, mode }) => {
     preview: {
       port: 4173,
       open: true
+    },    optimizeDeps: {
+      include: ['react', 'react-dom', 'react-router-dom', '@emotion/react', '@emotion/styled', '@mui/material'],
+      esbuildOptions: {
+        target: 'es2020',
+      }
     },
-    optimizeDeps: {
-      include: ['react', 'react-dom', 'react-router-dom']
+    esbuild: {
+      logOverride: { 'this-is-undefined-in-esm': 'silent' }
     }
   }
 })

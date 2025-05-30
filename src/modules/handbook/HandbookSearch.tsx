@@ -23,8 +23,8 @@ import {
   Trash2
 } from 'lucide-react';
 import debounce from 'lodash.debounce';
-import SearchResults from '../components/SearchResults';
-import { useSearchHistory, SearchHistoryEntry, ViewedTopicEntry } from '../hooks/useSearchHistory';
+import SearchResults from './components/SearchResults';
+import { useSearchHistory, SearchHistoryEntry, ViewedTopicEntry } from './hooks/useSearchHistory';
 import { 
   Tooltip, 
   TooltipContent, 

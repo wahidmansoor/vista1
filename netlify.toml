@@ -1,8 +1,8 @@
 # Netlify configuration for OncoVista React/TypeScript SPA
 
 [build]
-  # Build command - install all dependencies (including dev deps for build tools like TypeScript)
-  command = "npm ci --include=dev && npm run build"
+  # Use the dedicated Netlify build script
+  command = "npm run build:netlify"
   
   # Directory to publish - Vite outputs to 'dist' by default
   publish = "dist"
@@ -11,14 +11,15 @@
   functions = "netlify/functions"
 
 [build.environment]  # Specify Node.js version for consistent builds
-  NODE_VERSION = "20.11.0"
-  # Use npm ci for faster, reliable installs in CI
-  NPM_FLAGS = "--prefer-offline --no-audit --no-fund"
+  NODE_VERSION = "18.16.0"
+  # Ensure we install all dependencies needed for build
+  NPM_FLAGS = "--legacy-peer-deps --force"
   # Enable corepack for package manager compatibility
   COREPACK_ENABLE_STRICT = "0"
 
   # Environment variables (add your specific ones here)
-  # NODE_ENV = "production"  # Don't set this during build as it prevents devDependencies installation  GENERATE_SOURCEMAP = "false"
+  NODE_ENV = "production"
+  GENERATE_SOURCEMAP = "false"
   # Secrets scanning configuration - exclude build output and omit known client-safe keys
   SECRETS_SCAN_OMIT_PATHS = "dist/**,src/**,node_modules/**,.env,*.md,package.json,package-lock.json"
   SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_AUTH0_CLIENT_ID,VITE_AUTH0_DOMAIN,AUTH0_DOMAIN,AUTH0_CLIENT_ID,VITE_SUPABASE_URL"
