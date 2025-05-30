@@ -1,15 +1,18 @@
 import { useCallback, useMemo } from 'react';
-import { Loader2, BookOpen } from 'lucide-react';
-import { useLocation, useNavigate } from "react-router-dom";
+import { Loader2, BookOpen, Search } from 'lucide-react';
+import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
 import ErrorWrapper from "@/components/ErrorWrapper";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import HandbookLanding from "./HandbookLanding";
 import { HandbookSidebarNew } from './HandbookSidebarNew';
 import { JsonHandbookViewer } from './JsonHandbookViewer';
+import HandbookSearch from './HandbookSearch';
 import { useHandbookData } from '@/hooks/useHandbookData';
 import { parseHandbookPath } from '@/utils/pathUtils';
 import { parseErrorDetails } from '@/utils/errorUtils';
 import { sectionsMeta } from './constants';
+import HandbookQuickSearch from './components/HandbookQuickSearch';
+import { Button } from '@/components/ui/button';
 import type { FC, ReactElement } from 'react';
 
 const Handbook: FC = (): ReactElement => {
@@ -55,6 +58,10 @@ const Handbook: FC = (): ReactElement => {
       console.error('❌ Navigation error:', err);
     }
   }, [navigate]);
+  // Check if we're on the search page
+  if (location.pathname === '/handbook/search') {
+    return <HandbookSearch />;
+  }
 
   // Only show landing page if we're at /handbook root
   if (location.pathname === '/handbook') {
@@ -94,9 +101,14 @@ const Handbook: FC = (): ReactElement => {
         />
       )}
 
-      {/* Content Area */}
-      <div className="flex-1 p-8 overflow-y-auto min-h-screen" id="handbook-content-area">
-        <ErrorWrapper>
+      {/* Content Area */}      <div className="flex-1 overflow-y-auto min-h-screen" id="handbook-content-area">
+        {/* Quick search button */}
+        <div className="flex justify-end p-4 sticky top-0 z-10 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
+          <HandbookQuickSearch buttonClassName="w-full sm:w-auto" />
+        </div>
+        
+        <div className="px-8 pb-8">
+          <ErrorWrapper>
           {activeFile ? (
             <>
               {/* Header */}
@@ -133,9 +145,9 @@ const Handbook: FC = (): ReactElement => {
               <p className="text-muted-foreground mt-2">
                 You are currently in the <span className="font-semibold">{currentSectionMeta?.title || 'Handbook'}</span> section.
               </p>
-            </div>
-          )}
+            </div>          )}
         </ErrorWrapper>
+        </div>
       </div>
     </div>
   );

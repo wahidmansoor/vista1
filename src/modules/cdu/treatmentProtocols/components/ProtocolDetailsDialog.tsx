@@ -124,10 +124,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
       precautions_with_other_drugs: Array.isArray(interactionData.precautions_with_other_drugs) ? interactionData.precautions_with_other_drugs : []
     };
   }, [protocol.interactions]);
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-6xl max-h-[90vh] min-w-[80vw] md:min-w-[85vw] lg:min-w-[90vw] xl:min-w-[80vw] 2xl:min-w-[70vw] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{protocol.code || "Protocol Details"}</DialogTitle>
           <DialogDescription>
@@ -191,10 +190,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 </div>
               )}
             </div>
-          </TabsContent>
-          <TabsContent value="treatment">
+          </TabsContent>          <TabsContent value="treatment" className="h-[70vh] overflow-y-auto px-1">
             <TreatmentTab treatment={treatment} />
-          </TabsContent>          <TabsContent value="tests">
+          </TabsContent><TabsContent value="tests">
             <div className="space-y-6">
               <div>
                 <h3 className="font-semibold text-lg mb-2">Baseline Tests</h3>                {tests?.baseline && tests.baseline.length > 0 ? (

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { BookOpen, Atom, Heart } from "lucide-react";
 import type { FC, ReactElement } from 'react';
+import HandbookQuickSearch from './components/HandbookQuickSearch';
 
 // Updated sections data for the landing page
 const sections = [
@@ -36,9 +37,32 @@ const HandbookLanding: FC = (): ReactElement => {
         <h1 className="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-500">
           OncoVista Handbook
         </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-12 text-lg max-w-2xl">
+        <p className="text-gray-600 dark:text-gray-400 mb-6 text-lg max-w-2xl">
           Select a section to explore detailed oncology guidelines and protocols
         </p>
+
+        {/* Prominent Search Bar */}
+        <div className="mb-12 max-w-2xl">
+          <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+            <h2 className="font-semibold text-lg mb-3 text-gray-900 dark:text-white">
+              Search Handbook Content
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              Find protocols, guidelines, and clinical information across all handbook sections
+            </p>
+            <HandbookQuickSearch 
+              buttonClassName="w-full justify-between h-10"
+              placeholder="Search for topics, protocols, or guidelines..."
+              maxResults={10}
+            />
+            <div className="flex gap-2 mt-3 text-xs text-gray-500 dark:text-gray-400">
+              <span>Press <kbd className="px-1.5 py-0.5 rounded border bg-gray-100 dark:bg-gray-700">⌘K</kbd> to search anytime</span>
+              <span className="flex-1 text-right">
+                <Link to="/handbook/search" className="text-purple-600 hover:underline">Advanced search</Link>
+              </span>
+            </div>
+          </div>
+        </div>
         
         <div className="grid md:grid-cols-3 gap-8">
           {sections.map((section) => (
