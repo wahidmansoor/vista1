@@ -7,14 +7,13 @@ interface PromptSuggestionsProps {
   onSelect: (prompt: string) => void;
 }
 
-const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {
-  OPD: {
+const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {  OPD: {
     screening: [
       'Analyze cancer screening recommendations for this patient',
       'Suggest additional screening tests based on risk factors',
       'Review current screening schedule compliance'
     ],
-    follow_up: [
+    'follow-up': [
       'Review follow-up plan and suggest optimizations',
       'Analyze surveillance frequency based on guidelines',
       'Recommend quality of life monitoring points'

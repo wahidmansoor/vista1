@@ -35,27 +35,22 @@ export interface EvaluationSection {
 }
 
 export interface EvaluationTemplate {
-  title: string;
-  sections: Array<{
-    title: string;
-    items: Array<{
-      text: string;
-      required?: boolean;
-      type: 'text' | 'number' | 'select' | 'staging' | 'performance';
-      options?: string[];
-      redFlags?: string[];
-    }>;
-    cancerSpecificNotes?: string[];
-  }>;
+  title?: string;
+  sections: EvaluationSection[];
   staging?: {
     tnm: TNMStage;
     performance: PerformanceStatus;
   };
-  notes: string[];
-  redFlags: string[];
+  notes?: string[];
+  redFlags?: string[];
   commonFindings?: string[];
 }
 
+// Cancer type templates for evaluation
 export interface CancerTypeTemplate {
-  [key: string]: EvaluationTemplate;
+  [key: string]: {
+    sections: EvaluationSection[];
+    notes?: string[];
+    redFlags?: string[];
+  };
 }

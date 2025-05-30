@@ -4,9 +4,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { AlertTriangle, Package, Shield, BookOpen, Pill } from "lucide-react";
 import { Protocol, Test } from "@/types/protocol";
-import TreatmentTab from "../TreatmentTab";
-import TestsSectionTab from "../TestsSectionTab";
-import DoseModificationsTab from "../DoseModificationsTab";
+import TreatmentTab from "../tabs/TreatmentTab";
+import TestsSectionTab from "../tabs/TestsSectionTab";
+import { DoseModificationsTab } from "../tabs/DoseModificationsTab";
 
 interface ProtocolDetailsDialogProps {
   protocol: Protocol;

@@ -6,6 +6,8 @@ import remarkGfm from 'remark-gfm';
 import { AlertCircle, AlertTriangle, Info, FileText, Book } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import CodeBlock from '@/components/ui/CodeBlock';
 
 // Create simple UI components to avoid external dependencies
 const Separator: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) => (

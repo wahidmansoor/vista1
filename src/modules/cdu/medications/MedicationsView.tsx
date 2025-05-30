@@ -6,6 +6,7 @@ import type { Medication, SortConfig, SortField } from './../types';
 import { playSound, isAudioSupported } from '@/utils/audioFeedback';
 import { useDebounce } from '@/hooks/useDebounce';
 import { MedicationErrorBoundary } from '@/components/MedicationErrorBoundary';
+import { adaptCDUMedicationToTypesMedication } from '@/utils/medicationHelpers';
 
 // Utility function for string comparison in sorting
 const compareStrings = (a: string, b: string) => a.localeCompare(b);
@@ -880,7 +881,7 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
 
         {/* Modal */}
         <MedicationDetailModal
-          medication={selectedMedication}
+          medication={selectedMedication ? adaptCDUMedicationToTypesMedication(selectedMedication) : null}
           isOpen={!!selectedMedication}
           onClose={() => {
             setSelectedMedication(null);

@@ -4,7 +4,7 @@ import {
   Beaker, Heart, Clock, Scale, BarChart,
   Loader2
 } from 'lucide-react';
-import type { Medication } from './../types';
+import type { Medication } from '@/types/medications';
 import {
   Dialog,
   DialogContent,

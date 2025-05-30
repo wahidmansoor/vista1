@@ -21,10 +21,9 @@ const sanitizeToxicity = (data: Partial<ToxicityData>): ToxicityData => ({
   id: data.id || crypto.randomUUID(),
   name: data.name || 'Not specified',
   severity: data.severity || 'Not specified',
-  recognition: data.recognition || 'Not specified',
-  management: Array.isArray(data.management) ? data.management : [],
-  doseGuidance: Array.isArray(data.doseGuidance) ? data.doseGuidance : [],
-  culpritDrugs: Array.isArray(data.culpritDrugs) ? data.culpritDrugs : []
+  recognition: data.recognition || 'Not specified',  management: Array.isArray(data.management) ? data.management : [],
+  dose_guidance: Array.isArray(data.dose_guidance) ? data.dose_guidance : [],
+  culprit_drugs: Array.isArray(data.culprit_drugs) ? data.culprit_drugs : []
 });
 
 const AccordionItem = ({ toxicity, isOpen, onToggle }: {

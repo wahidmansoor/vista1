@@ -27,7 +27,8 @@ import {
   ScrollText
 } from 'lucide-react';
 import { getSupergroups, getProtocols } from '@/services/protocols';
-import type { Protocol, Drug } from './types/protocol';
+import type { Protocol, Drug } from '@/types/protocol';
+import UnifiedProtocolCard from './UnifiedProtocolCard';
 
 type TabType = 
   | 'overview' 
@@ -248,9 +249,8 @@ const DataTable: React.FC<{
 
 const TabContent: React.FC<{
   protocol: Protocol;
-  activeTab: TabType;
-}> = ({ protocol, activeTab }) => {
-  const renderList = (items: any[] | undefined | null) => {
+  activeTab: string;
+}> = ({ protocol, activeTab }) => {  const renderList = (items: any[] | undefined | null) => {
     if (!items || !Array.isArray(items) || items.length === 0) {
       return <p className="text-gray-600">No information available</p>;
     }
@@ -661,7 +661,6 @@ const TabContent: React.FC<{
       </div>
     )
   };
-
   return (
     <motion.div
       key={activeTab}
@@ -671,7 +670,7 @@ const TabContent: React.FC<{
       transition={{ duration: 0.2 }}
       className="p-6"
     >
-      {content[activeTab]}
+      {content[activeTab as TabType] || <div>Tab content not available</div>}
     </motion.div>
   );
 };
@@ -716,6 +715,8 @@ const TreatmentProtocols: React.FC = () => {
   const [supergroups, setSupergroups] = useState<string[]>([]);
   const [selectedSupergroup, setSelectedSupergroup] = useState<string | null>(null);
   const [protocols, setProtocols] = useState<Protocol[]>([]);
+  const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null);
+  const [activeTab, setActiveTab] = useState<string>('treatment');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
