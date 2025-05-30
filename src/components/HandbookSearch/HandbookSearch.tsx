@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Search, X, Clock, BookOpen, Filter, Loader2 } from 'lucide-react';
+import { Search, X, Clock, BookOpen, SlidersHorizontal, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { handbookSearch, SearchResult, SearchOptions } from '@/services/handbookSearch';
@@ -48,105 +48,132 @@ export function HandbookSearch({
   const saveRecentSearch = useCallback((searchQuery: string) => {
     const trimmed = searchQuery.trim();
     if (!trimmed || trimmed.length < 3) return;
-
+    
+    // Update state
     setRecentSearches(prev => {
-      const filtered = prev.filter(s => s !== trimmed);
-      const updated = [trimmed, ...filtered].slice(0, 5);
-      localStorage.setItem('handbook-recent-searches', JSON.stringify(updated));
-      return updated;
+      // Remove duplicates and keep most recent at the top
+      const newSearches = prev.filter(s => s.toLowerCase() !== trimmed.toLowerCase());
+      newSearches.unshift(trimmed);
+      // Limit to 5 recent searches
+      const limitedSearches = newSearches.slice(0, 5);
+      
+      // Update localStorage
+      try {
+        localStorage.setItem('handbook-recent-searches', JSON.stringify(limitedSearches));
+      } catch (e) {
+        console.warn('Failed to save recent searches');
+      }
+      
+      return limitedSearches;
     });
   }, []);
 
-  // Debounced search function
-  const debouncedSearch = useCallback((searchQuery: string) => {
-    const timeoutId = setTimeout(async () => {
-      if (!searchQuery.trim()) {
-        setResults([]);
-        setSuggestions([]);
-        return;
-      }
-
-      setIsLoading(true);
-      try {
-        const options: SearchOptions = {
-          maxResults: 20,
-          minScore: 0.1
-        };
-
-        if (selectedSection !== 'all') {
-          options.sections = [selectedSection];
-        }
-
-        const searchResults = await handbookSearch.search(searchQuery, options);
-        setResults(searchResults);
-
-        // Get suggestions for short queries
-        if (searchQuery.length < 10) {
-          const searchSuggestions = await handbookSearch.getSuggestions(searchQuery, 5);
-          setSuggestions(searchSuggestions);
-        } else {
-          setSuggestions([]);
-        }
-
-      } catch (error) {
-        console.error('Search error:', error);
-        setResults([]);
-        setSuggestions([]);
-      } finally {
-        setIsLoading(false);
-      }
-    }, 300);
-
-    return () => clearTimeout(timeoutId);
-  }, [selectedSection]);
-
-  // Handle search input change
+  // Perform search when query changes (debounced)
   useEffect(() => {
-    const cleanup = debouncedSearch(query);
-    return cleanup;
-  }, [query, debouncedSearch]);
+    let timer: ReturnType<typeof setTimeout>;
+    
+    if (query && query.length >= 2) {
+      setIsLoading(true);
+      setSuggestions([]);
+      
+      timer = setTimeout(async () => {
+        try {
+          // Only search specified section if not 'all'
+          const options: SearchOptions = {
+            maxResults: 10,
+            includeContent: false
+          };
+          
+          if (selectedSection && selectedSection !== 'all') {
+            options.sections = [selectedSection];
+          }
+          
+          // Make sure service is initialized
+          await handbookSearch.initialize();
+          const searchResults = await handbookSearch.search(query, options);
+          setResults(searchResults);
+          
+          // Get suggestions if no results
+          if (searchResults.length === 0) {
+            const searchSuggestions = await handbookSearch.getSuggestions(query, 5);
+            setSuggestions(searchSuggestions);
+          }
+        } catch (err) {
+          console.error('Search error:', err);
+          setResults([]);
+        } finally {
+          setIsLoading(false);
+        }
+      }, 300);
+    } else {
+      setResults([]);
+      setIsLoading(false);
+    }
+    
+    return () => clearTimeout(timer);
+  }, [query, selectedSection]);
 
-  // Handle result selection
+  // Handle click outside to close
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (resultsRef.current && 
+          !resultsRef.current.contains(event.target as Node) &&
+          inputRef.current && 
+          !inputRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Handle selecting a search result
   const handleResultSelect = useCallback((result: SearchResult) => {
-    saveRecentSearch(query);
-    setIsOpen(false);
-    setQuery('');
-
     if (onResultSelect) {
       onResultSelect(result);
     } else {
-      // Navigate to the result
-      const path = `/handbook/${result.section}/${result.path}`;
-      navigate(path);
+      // Navigate to the handbook page
+      navigate(result.path);
     }
-  }, [query, onResultSelect, navigate, saveRecentSearch]);
+    
+    // Save to recent searches
+    saveRecentSearch(query);
+    
+    // Close dropdown and clear search
+    setQuery('');
+    setResults([]);
+    setSuggestions([]);
+    setIsOpen(false);
+  }, [navigate, onResultSelect, query, saveRecentSearch]);
 
-  // Handle suggestion click
+  // Handle clicking on a suggestion
   const handleSuggestionClick = useCallback((suggestion: string) => {
     setQuery(suggestion);
-    inputRef.current?.focus();
   }, []);
 
-  // Handle recent search click
-  const handleRecentSearchClick = useCallback((recentQuery: string) => {
-    setQuery(recentQuery);
-    inputRef.current?.focus();
+  // Handle clicking on a recent search
+  const handleRecentSearchClick = useCallback((search: string) => {
+    setQuery(search);
   }, []);
 
-  // Handle input focus/blur
+  // Handle focus and blur events
   const handleFocus = useCallback(() => {
     setIsOpen(true);
   }, []);
 
-  const handleBlur = useCallback((e: React.FocusEvent) => {
-    // Don't close if clicking within results
-    if (resultsRef.current?.contains(e.relatedTarget as Node)) {
-      return;
-    }
-    setTimeout(() => setIsOpen(false), 150);
+  const handleBlur = useCallback(() => {
+    // Delay hiding to allow click events to process first
+    setTimeout(() => {
+      if (document.activeElement !== inputRef.current) {
+        setIsOpen(false);
+      }
+    }, 100);
   }, []);
 
-  // Clear search
+  // Handle clearing the search input
   const handleClear = useCallback(() => {
     setQuery('');
     setResults([]);
@@ -202,13 +229,11 @@ export function HandbookSearch({
             </button>
           ) : null}
         </div>
-      </div>
-
-      {/* Section Filter */}
+      </div>      {/* Section Filter */}
       {showFilters && (
         <div className="mt-2">
           <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-gray-500" />
+            <SlidersHorizontal className="h-4 w-4 text-gray-500" />
             <select
               value={selectedSection}
               onChange={(e) => setSelectedSection(e.target.value)}

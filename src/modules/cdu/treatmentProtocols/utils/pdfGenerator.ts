@@ -1,4 +1,4 @@
-import { Protocol, ProtocolDrug } from '../../../../types/protocol';
+import { Protocol, ProtocolDrug } from './types/protocol';
 
 export const generateProtocolPDF = (protocol: Protocol): string => {
   if (protocol.treatment?.drugs?.length) {

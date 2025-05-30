@@ -27,7 +27,7 @@ import {
   ScrollText
 } from 'lucide-react';
 import { getSupergroups, getProtocols } from '@/services/protocols';
-import type { Protocol, Drug } from '../../../../types/protocol';
+import type { Protocol, Drug } from './types/protocol';
 
 type TabType = 
   | 'overview' 

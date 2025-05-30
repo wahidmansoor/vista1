@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import type { Protocol } from '../../../../types/protocol';
+import type { Protocol } from './types/protocol';
 
 interface UseProtocolUpdatesOptions {
   onSuccess?: () => void;

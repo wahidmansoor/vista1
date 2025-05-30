@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import express from 'express';
 import request from 'supertest';
-import router from '../api/ai-agent';
+import router from '../server/api/ai-agent';
 
 vi.mock('@google/generative-ai', async () => {
   const actual = await vi.importActual('@google/generative-ai');

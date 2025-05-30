@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from 'react';
-import type { Protocol } from '../../../../types/protocol';
+import type { Protocol } from './types/protocol';
 
 interface UseProtocolKeyboardProps {
   protocols: Protocol[];

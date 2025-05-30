@@ -1,14 +1,14 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useAIResponseHistory } from '@/hooks/useAIResponseHistory';
 import { callAIAgent } from '@/lib/api/aiAgentAPI';
-import { ModuleType, PromptIntent } from '@/types';
+import { ModuleType, PromptIntent } from '@/components/ai-agent/types';
 import { toast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Loader2, ThumbsUp, ThumbsDown, CornerDownLeft, RefreshCcw, AlertTriangle } from 'lucide-react';
-import { agentLogger } from '@/lib/logger';
+import { agentLogger } from '@/components/ai-agent/agentLogger';
 import { cn } from '@/lib/utils';
 
 interface AIChatAssistantProps {

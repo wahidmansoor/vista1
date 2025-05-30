@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
-import { AlertTriangle, CheckCircle } from "lucide-react";
+import { AlertTriangle, CircleCheck } from "lucide-react";
 import { Badge } from "./ui/badge";
 
 interface Props {
@@ -37,9 +37,8 @@ export const SupabaseTester: React.FC<Props> = ({ module }) => {
   }, [module]);
 
   return (
-    <div className="flex items-center gap-3 p-3 mt-4 rounded-md bg-gray-100 dark:bg-gray-800 text-sm">
-      {status === "success" ? (
-        <CheckCircle className="text-green-500 w-5 h-5" />
+    <div className="flex items-center gap-3 p-3 mt-4 rounded-md bg-gray-100 dark:bg-gray-800 text-sm">      {status === "success" ? (
+        <CircleCheck className="text-green-500 w-5 h-5" />
       ) : status === "error" ? (
         <AlertTriangle className="text-red-500 w-5 h-5" />
       ) : (

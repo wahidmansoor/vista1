@@ -1,4 +1,4 @@
-import type { Protocol } from '../../../../types/protocol';
+import type { Protocol } from './types/protocol';
 
 /**
  * Generates and exports a PDF document from a treatment protocol
