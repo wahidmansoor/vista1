@@ -1,194 +1,180 @@
 # Netlify configuration for OncoVista React/TypeScript SPA
 
 [build]
-  # Use the dedicated Netlify build script
-  command = "npm run build:netlify"
-  
+  # Use the standard build script - Netlify handles dependency installation
+  command = "npm run build"
   # Directory to publish - Vite outputs to 'dist' by default
   publish = "dist"
-  
   # Functions directory for server-side AI endpoints
   functions = "netlify/functions"
 
-[build.environment]  # Specify Node.js version for consistent builds
-  NODE_VERSION = "18.16.0"  # Ensure we install all dependencies needed for build
+[build.environment]
+  # Node.js version for build
+  NODE_VERSION = "18"
+  # NPM configuration for legacy peer dependencies
   NPM_FLAGS = "--legacy-peer-deps --no-audit"
-  # Enable corepack for package manager compatibility
-  COREPACK_ENABLE_STRICT = "0"
+  # Build optimization
+  NODE_OPTIONS = "--max-old-space-size=4096"
 
-  # Environment variables (add your specific ones here)
-  NODE_ENV = "production"
-  GENERATE_SOURCEMAP = "false"
-  # Secrets scanning configuration - exclude build output and omit known client-safe keys
-  SECRETS_SCAN_OMIT_PATHS = "dist/**,src/**,node_modules/**,.env,*.md,package.json,package-lock.json"
-  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_AUTH0_CLIENT_ID,VITE_AUTH0_DOMAIN,AUTH0_DOMAIN,AUTH0_CLIENT_ID,VITE_SUPABASE_URL"
-  SECRETS_SCAN_ENABLED = "false"
+# Environment variables for production
+[context.production.environment]
+  VITE_NODE_ENV = "production"
+  VITE_AUTH0_DOMAIN = "mvoncovista.us.auth0.com"
+  VITE_AUTH0_CLIENT_ID = "your-auth0-client-id"
+  VITE_AUTH0_AUDIENCE = "https://mvoncovista.us.auth0.com/api/v2/"
+  VITE_AUTH0_REDIRECT_URI = "https://oncovista.netlify.app"
+  VITE_AUTH0_CALLBACK_URL = "https://oncovista.netlify.app/callback"
+  VITE_GOOGLE_AI_API_KEY = "your-google-ai-api-key"
+  VITE_API_BASE_URL = "https://oncovista.netlify.app/.netlify/functions"
 
-# Build processing settings
-[build.processing]
-  skip_processing = false
+# Environment variables for preview/branch deploys
+[context.deploy-preview.environment]
+  VITE_NODE_ENV = "development"
+  VITE_AUTH0_DOMAIN = "dev-bqgm5fdnyx1sdqja.us.auth0.com"
+  VITE_AUTH0_CLIENT_ID = "your-dev-auth0-client-id"
+  VITE_AUTH0_AUDIENCE = "https://dev-bqgm5fdnyx1sdqja.us.auth0.com/api/v2/"
+  VITE_AUTH0_REDIRECT_URI = "https://deploy-preview-*--oncovista.netlify.app"
+  VITE_AUTH0_CALLBACK_URL = "https://deploy-preview-*--oncovista.netlify.app/callback"
 
-[build.processing.css]
-  bundle = true
-  minify = true
-
-[build.processing.js]
-  bundle = true
-  minify = true
-
-[build.processing.html]
-  pretty_urls = true
-
-[build.processing.images]
-  compress = true
-
-# SPA redirects - Essential for React Router to work properly
+# SPA routing - redirect all routes to index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
   force = false
-  
-  # Optional: Add conditions to exclude API routes or assets if needed
-  # conditions = {Role = ["admin"]}
 
-# Security headers for enhanced protection
+# API routes to serverless functions
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Security headers
 [[headers]]
   for = "/*"
   [headers.values]
-    # Prevent the site from being embedded in frames (clickjacking protection)
-    X-Frame-Options = "DENY"
-    
-    # Enable XSS protection in older browsers
-    X-XSS-Protection = "1; mode=block"
-      # Prevent MIME type sniffing
+    # HTTPS Security
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
-      # Control referrer information
-    Referrer-Policy = "same-origin"
-      # Content Security Policy - Comprehensive configuration for Auth0, fonts, and APIs
-    Content-Security-Policy = """
-      default-src 'self';      script-src 'self' 'unsafe-inline' 'unsafe-eval' 
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    
+    # Content Security Policy for OncoVista with Auth0 and Google AI
+    Content-Security-Policy = '''
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' 
         https://cdn.auth0.com 
-        https://dev-bqgm5fdnyx1sdqja.us.auth0.com 
-        https://dev-bqqm5fdnyx1sdqja.us.auth0.com 
-        https://mvoncovista.us.auth0.com
-        https://cdn.lrkt-in.com;
+        https://js.auth0.com 
+        https://generativelanguage.googleapis.com;
       style-src 'self' 'unsafe-inline' 
         https://fonts.googleapis.com 
-        https://rsms.me;
-      img-src 'self' data: https: blob:
-        https://dev-bqgm5fdnyx1sdqja.us.auth0.com 
-        https://dev-bqqm5fdnyx1sdqja.us.auth0.com 
-        https://mvoncovista.us.auth0.com 
-        https://cdn.auth0.com
-        https://s.gravatar.com
-        https://www.gravatar.com
-        https://secure.gravatar.com;
-      font-src 'self' data: 
-        https://fonts.gstatic.com 
-        https://rsms.me;
-      connect-src 'self' 
-        https://api.openai.com 
-        https://generativelanguage.googleapis.com 
-        https://*.supabase.co 
-        https://dev-bqgm5fdnyx1sdqja.us.auth0.com 
-        https://dev-bqqm5fdnyx1sdqja.us.auth0.com 
-        https://mvoncovista.us.auth0.com 
         https://cdn.auth0.com;
+      font-src 'self' 
+        https://fonts.gstatic.com 
+        https://cdn.auth0.com;
+      img-src 'self' data: blob: 
+        https://*.gravatar.com 
+        https://*.auth0.com 
+        https://s.gravatar.com;
+      connect-src 'self' 
+        https://mvoncovista.us.auth0.com 
+        https://dev-bqgm5fdnyx1sdqja.us.auth0.com 
+        https://generativelanguage.googleapis.com 
+        https://api.oncovista.com 
+        wss://oncovista.netlify.app;
       frame-src 'self' 
-        https://dev-bqgm5fdnyx1sdqja.us.auth0.com 
-        https://dev-bqqm5fdnyx1sdqja.us.auth0.com 
-        https://mvoncovista.us.auth0.com;
+        https://mvoncovista.us.auth0.com 
+        https://dev-bqgm5fdnyx1sdqja.us.auth0.com;
       object-src 'none';
-      base-uri 'self';
+      media-src 'self';
+      worker-src 'self' blob:;
+      child-src 'self';
       form-action 'self' 
-        https://dev-bqgm5fdnyx1sdqja.us.auth0.com 
-        https://dev-bqqm5fdnyx1sdqja.us.auth0.com 
-        https://mvoncovista.us.auth0.com;
-    """
-    
-    # Permissions Policy (formerly Feature Policy)
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+        https://mvoncovista.us.auth0.com 
+        https://dev-bqgm5fdnyx1sdqja.us.auth0.com;
+      base-uri 'self';
+    '''
 
-# Cache control for static assets (CSS, JS, images)
+# Static asset caching
 [[headers]]
-  for = "/assets/*"
+  for = "/static/*"
   [headers.values]
-    # Cache static assets for 1 year since they have hash-based names
     Cache-Control = "public, max-age=31536000, immutable"
-    
-    # Enable CORS for assets if needed
-    Access-Control-Allow-Origin = "*"
 
-# Cache control for HTML files
 [[headers]]
-  for = "/*.html"
+  for = "*.js"
   [headers.values]
-    # Cache HTML for 5 minutes to allow quick updates
-    Cache-Control = "public, max-age=300, must-revalidate"
+    Cache-Control = "public, max-age=31536000, immutable"
 
-# Cache control for service worker (if you add one later)
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML caching (shorter duration for SPA)
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
+
+# Service Worker caching
 [[headers]]
   for = "/sw.js"
   [headers.values]
-    # Don't cache service worker
-    Cache-Control = "no-cache, no-store, must-revalidate"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
-# Cache control for API-like endpoints (if you add any)
+# API response headers
 [[headers]]
   for = "/api/*"
   [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
+    Access-Control-Allow-Origin = "https://oncovista.netlify.app"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization, X-Requested-With"
+    Access-Control-Max-Age = "86400"
 
-# Optimize fonts if you're using custom fonts
+# Medical data compliance headers (HIPAA considerations)
 [[headers]]
-  for = "/fonts/*"
+  for = "/api/patients/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Access-Control-Allow-Origin = "*"
+    Cache-Control = "no-store, no-cache, must-revalidate, private"
+    Pragma = "no-cache"
+    Expires = "0"
 
-# Handle favicon and manifest files
-[[headers]]
-  for = "/favicon.ico"
-  [headers.values]
-    Cache-Control = "public, max-age=86400"
+# Error pages
+[[redirects]]
+  from = "/404"
+  to = "/404.html"
+  status = 404
 
-[[headers]]
-  for = "/manifest.json"
-  [headers.values]
-    Cache-Control = "public, max-age=86400"
-    Content-Type = "application/json"
+[[redirects]]
+  from = "/500"
+  to = "/500.html"
+  status = 500
 
-# Custom error pages (optional)
+# Health check endpoint
+[[redirects]]
+  from = "/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+# Maintenance mode (uncomment when needed)
 # [[redirects]]
-#   from = "/404"
-#   to = "/404.html"
-#   status = 404
+#   from = "/*"
+#   to = "/maintenance.html"
+#   status = 503
+#   force = true
+#   conditions = {Role = ["maintenance"]}
 
-# Environment-specific settings
-[context.production.environment]
-  NODE_ENV = "production"
-  GENERATE_SOURCEMAP = "false"
-  # Production Auth0 URLs
-  VITE_AUTH0_CALLBACK_URL = "https://mwoncovista.com/callback"
-  VITE_AUTH0_REDIRECT_URI = "https://mwoncovista.com"
-
-[context.deploy-preview.environment]
-  NODE_ENV = "production"
-  GENERATE_SOURCEMAP = "true"
-  # Deploy preview URLs (Netlify will inject the actual URL)
-  VITE_AUTH0_CALLBACK_URL = "https://deploy-preview-${REVIEW_ID}--mwoncovista.com/callback"
-  VITE_AUTH0_REDIRECT_URI = "https://deploy-preview-${REVIEW_ID}--mwoncovista.com"
+# Branch-specific configurations
+[context.branch-deploy]
+  command = "npm run build"
 
 [context.branch-deploy.environment]
-  NODE_ENV = "development"
-  GENERATE_SOURCEMAP = "true"
-  # Branch deploy URLs (Netlify will inject the actual URL)
-  VITE_AUTH0_CALLBACK_URL = "https://${BRANCH}--mwoncovista.com/callback"
-  VITE_AUTH0_REDIRECT_URI = "https://${BRANCH}--mwoncovista.com"
-
-# Form handling (if you have contact forms)
-# [form]
-#   name = "contact"
-#   action = "/thank-you"
-#   method = "POST"
+  VITE_NODE_ENV = "staging"
