@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AlertTriangle, Thermometer, ShieldAlert, Activity, HeartPulse, ChevronDown, ChevronUp } from 'lucide-react';
 
-interface RedFlagItem {
+export interface RedFlagItem {
   id: string;
   title: string;
   description: string;
@@ -103,3 +103,4 @@ const RedFlagsPage: React.FC = () => {
 };
 
 export default RedFlagsPage;
+export { redFlags };
