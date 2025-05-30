@@ -1,0 +1,28 @@
+﻿{
+  "title": "Renal Cell Carcinoma",
+  "category": "Site Specific",
+  "section": "Abdomen and Pelvis",
+  "summary": "Clinical overview of Renal Cell Carcinoma in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Renal Cell Carcinoma including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Renal Cell Carcinoma."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

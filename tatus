@@ -1,0 +1,25 @@
+[1mdiff --git a/src/modules/handbook/components/SearchResults.tsx b/src/modules/handbook/components/SearchResults.tsx[m
+[1mindex 589a45b0..2cdcd3a2 100644[m
+[1m--- a/src/modules/handbook/components/SearchResults.tsx[m
+[1m+++ b/src/modules/handbook/components/SearchResults.tsx[m
+[36m@@ -6,7 +6,7 @@[m [mimport { Button } from '@/components/ui/button';[m
+ import { ScrollArea } from '@/components/ui/scroll-area';[m
+ import { [m
+   BookOpen, Clock, Tag, ChevronRight, [m
+[31m-  FileDown, FileText, FileSpreadsheet, FilePdf[m
+[32m+[m[32m  FileDown, FileText, FileSpreadsheet, File[m
+ } from 'lucide-react';[m
+ import { EnhancedSearchResult } from '@/services/handbookEnhancedSearch';[m
+ import { cn } from '@/lib/utils';[m
+[36m@@ -141,9 +141,8 @@[m [mexport const SearchResults: React.FC<SearchResultsProps> = ({[m
+                 <DropdownMenuItem onClick={() => handleExport('csv')}>[m
+                   <FileSpreadsheet className="mr-2 h-4 w-4" />[m
+                   <span>CSV Spreadsheet</span>[m
+[31m-                </DropdownMenuItem>[m
+[31m-                <DropdownMenuItem onClick={() => handleExport('pdf')}>[m
+[31m-                  <FilePdf className="mr-2 h-4 w-4" />[m
+[32m+[m[32m                </DropdownMenuItem>                <DropdownMenuItem onClick={() => handleExport('pdf')}>[m
+[32m+[m[32m                  <File className="mr-2 h-4 w-4" />[m
+                   <span>PDF Document</span>[m
+                 </DropdownMenuItem>[m
+                 <DropdownMenuItem onClick={() => handleExport('docx')}>[m

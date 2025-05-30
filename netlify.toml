@@ -11,9 +11,8 @@
   functions = "netlify/functions"
 
 [build.environment]  # Specify Node.js version for consistent builds
-  NODE_VERSION = "18.16.0"
-  # Ensure we install all dependencies needed for build
-  NPM_FLAGS = "--legacy-peer-deps --force"
+  NODE_VERSION = "18.16.0"  # Ensure we install all dependencies needed for build
+  NPM_FLAGS = "--legacy-peer-deps --no-audit"
   # Enable corepack for package manager compatibility
   COREPACK_ENABLE_STRICT = "0"
 

@@ -1,0 +1,28 @@
+﻿{
+  "title": "Prostate Brachytherapy",
+  "category": "Site Specific",
+  "section": "Genitourinary",
+  "summary": "Clinical overview of Prostate Brachytherapy in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Prostate Brachytherapy including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Prostate Brachytherapy."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

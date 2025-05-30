@@ -1,0 +1,28 @@
+﻿{
+  "title": "Dosimetric Quantities and Units",
+  "category": "Fundamentals",
+  "section": "Dosimetry",
+  "summary": "Clinical overview of Dosimetric Quantities and Units in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Dosimetric Quantities and Units including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Dosimetric Quantities and Units."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

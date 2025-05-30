@@ -1,0 +1,28 @@
+﻿{
+  "title": "MRI and PET Integration",
+  "category": "Fundamentals",
+  "section": "Equipment",
+  "summary": "Clinical overview of MRI and PET Integration in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to MRI and PET Integration including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for MRI and PET Integration."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
   BookOpen, Clock, Tag, ChevronRight, 
-  FileDown, FileText, FileSpreadsheet, FilePdf
+  FileDown, FileText, FileSpreadsheet, File
 } from 'lucide-react';
 import { EnhancedSearchResult } from '@/services/handbookEnhancedSearch';
 import { cn } from '@/lib/utils';
@@ -141,9 +141,8 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
                 <DropdownMenuItem onClick={() => handleExport('csv')}>
                   <FileSpreadsheet className="mr-2 h-4 w-4" />
                   <span>CSV Spreadsheet</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleExport('pdf')}>
-                  <FilePdf className="mr-2 h-4 w-4" />
+                </DropdownMenuItem>                <DropdownMenuItem onClick={() => handleExport('pdf')}>
+                  <File className="mr-2 h-4 w-4" />
                   <span>PDF Document</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleExport('docx')}>

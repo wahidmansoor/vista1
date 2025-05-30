@@ -1,0 +1,28 @@
+﻿{
+  "title": "Pulmonary Metastases",
+  "category": "Site Specific",
+  "section": "Thoracic",
+  "summary": "Clinical overview of Pulmonary Metastases in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Pulmonary Metastases including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Pulmonary Metastases."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

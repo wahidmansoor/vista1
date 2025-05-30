@@ -1,0 +1,28 @@
+﻿{
+  "title": "Re-irradiation Techniques",
+  "category": "Site Specific",
+  "section": "Head and Neck",
+  "summary": "Clinical overview of Re-irradiation Techniques in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Re-irradiation Techniques including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Re-irradiation Techniques."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

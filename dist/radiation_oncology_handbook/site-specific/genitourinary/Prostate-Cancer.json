@@ -1,0 +1,39 @@
+{
+  "title": "Prostate Cancer",
+  "category": "Radiation Oncology",
+  "section": "Genitourinary",
+  "summary": "Radiation therapy for prostate cancer includes external beam radiotherapy, brachytherapy, and combination approaches. Treatment selection depends on risk stratification, patient factors, and institutional expertise.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Risk Stratification"
+    },
+    {
+      "type": "paragraph", 
+      "text": "Low-risk (PSA <10, Gleason ≤6, T1-T2a), intermediate-risk (PSA 10-20, Gleason 7, T2b), and high-risk (PSA >20, Gleason ≥8, T3-T4) disease require different treatment approaches and dose prescriptions."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "External Beam Radiotherapy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Modern EBRT uses IMRT or VMAT with image guidance. Conventional fractionation delivers 76-80 Gy, while hypofractionated regimens like 60 Gy in 20 fractions show equivalent outcomes with improved convenience."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Brachytherapy Options"
+    },
+    {
+      "type": "paragraph",
+      "text": "Low-dose-rate (LDR) permanent seed implants deliver 144-145 Gy with I-125 or Pd-103. High-dose-rate (HDR) brachytherapy can be used as monotherapy or boost, typically 13.5 Gy x 2 fractions or 6.75 Gy x 4 fractions."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Ultrahypofractionated SBRT (35-40 Gy in 5 fractions) is emerging as an effective option for low- and intermediate-risk prostate cancer."
+    }
+  ]
+}

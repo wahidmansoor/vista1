@@ -1,0 +1,21 @@
+{
+  "title": "Chart Check Procedures",
+  "category": "Radiation Oncology",
+  "section": "QA Protocols", 
+  "summary": "Quality assurance protocols for Chart Check Procedures to ensure treatment accuracy.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Overview"
+    },
+    {
+      "type": "paragraph",
+      "text": "Quality assurance procedures and protocols to ensure safe and accurate radiation therapy delivery."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Comprehensive QA programs are essential for maintaining treatment quality and patient safety."
+    }
+  ]
+}

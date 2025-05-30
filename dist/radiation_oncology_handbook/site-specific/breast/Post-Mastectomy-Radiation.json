@@ -1,0 +1,28 @@
+﻿{
+  "title": "Post-Mastectomy Radiation",
+  "category": "Site Specific",
+  "section": "Breast",
+  "summary": "Clinical overview of Post-Mastectomy Radiation in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Post-Mastectomy Radiation including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Post-Mastectomy Radiation."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

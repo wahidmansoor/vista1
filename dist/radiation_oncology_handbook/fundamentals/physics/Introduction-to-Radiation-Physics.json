@@ -1,0 +1,39 @@
+{
+  "title": "Introduction to Radiation Physics",
+  "category": "Radiation Oncology",
+  "section": "Physics",
+  "summary": "Fundamental principles of radiation physics including atomic structure, radioactive decay, and the basic concepts underlying radiation therapy. This introduction establishes the physical foundation for understanding how radiation interacts with matter in medical applications.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Atomic Structure and Nuclear Physics"
+    },
+    {
+      "type": "paragraph",
+      "text": "Understanding radiation begins with atomic structure. Atoms consist of a nucleus containing protons and neutrons, surrounded by electrons in discrete energy shells. The stability of the nucleus determines whether an atom will undergo radioactive decay."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Types of Radiation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Ionizing radiation can be classified as either particulate (alpha particles, beta particles, neutrons, protons) or electromagnetic (X-rays, gamma rays). Each type has distinct properties that affect its clinical utility in radiation therapy."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Radioactive Decay"
+    },
+    {
+      "type": "paragraph",
+      "text": "Unstable nuclei undergo spontaneous decay following exponential decay laws. The decay constant and half-life are fundamental parameters that describe the rate of decay and are crucial for brachytherapy source calculations."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Understanding physics principles is essential for safe and effective radiation therapy delivery."
+    }
+  ]
+}

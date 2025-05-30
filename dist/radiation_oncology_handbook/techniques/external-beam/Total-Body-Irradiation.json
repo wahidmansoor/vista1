@@ -1,0 +1,21 @@
+{
+  "title": "Total Body Irradiation",
+  "category": "Radiation Oncology",
+  "section": "External Beam Techniques", 
+  "summary": "Clinical applications and technical considerations for Total Body Irradiation.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Technical Overview"
+    },
+    {
+      "type": "paragraph",
+      "text": "This section covers the technical aspects and clinical applications of this treatment technique."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Proper technique selection and implementation are crucial for optimal treatment outcomes."
+    }
+  ]
+}

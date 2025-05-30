@@ -1,0 +1,21 @@
+{
+  "title": "Cystitis",
+  "category": "Radiation Oncology",
+  "section": "Acute Toxicities",
+  "summary": "Management and prevention of acute radiation-induced Cystitis.",
+  "content": [
+    {
+      "type": "heading", 
+      "level": 2,
+      "text": "Clinical Presentation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Description of the clinical manifestations, grading, and management strategies for this radiation-related toxicity."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Early recognition and appropriate management of radiation toxicities improves patient outcomes and quality of life."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Treatment Planning QA",
+  "category": "Radiation Oncology",
+  "section": "Planning QA", 
+  "summary": "Quality assurance procedures for Treatment Planning QA in treatment planning.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Overview"
+    },
+    {
+      "type": "paragraph",
+      "text": "Quality assurance procedures and protocols to ensure safe and accurate radiation therapy delivery."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Comprehensive QA programs are essential for maintaining treatment quality and patient safety."
+    }
+  ]
+}

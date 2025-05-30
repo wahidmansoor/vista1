@@ -1,0 +1,28 @@
+﻿{
+  "title": "Prophylactic Cranial Irradiation",
+  "category": "Site Specific",
+  "section": "CNS",
+  "summary": "Clinical overview of Prophylactic Cranial Irradiation in radiation oncology practice.",
+  "content": [
+    {
+      "type": "overview",
+      "heading": "Clinical Overview",
+      "text": "Comprehensive guide to Prophylactic Cranial Irradiation including indications, techniques, and clinical considerations."
+    },
+    {
+      "type": "section",
+      "heading": "Key Points",
+      "text": "Important clinical pearls and practical considerations for Prophylactic Cranial Irradiation."
+    },
+    {
+      "type": "section",
+      "heading": "Clinical Applications",
+      "text": "Evidence-based applications and best practices in radiation oncology."
+    },
+    {
+      "type": "section",
+      "heading": "References",
+      "text": "Current literature and guidelines supporting clinical practice."
+    }
+  ]
+}

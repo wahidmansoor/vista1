@@ -1,0 +1,21 @@
+{
+  "title": "Neurocognitive Effects",
+  "category": "Radiation Oncology",
+  "section": "Late Effects",
+  "summary": "Long-term effects and management of late radiation-induced Neurocognitive Effects.",
+  "content": [
+    {
+      "type": "heading", 
+      "level": 2,
+      "text": "Clinical Presentation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Description of the clinical manifestations, grading, and management strategies for this radiation-related toxicity."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Early recognition and appropriate management of radiation toxicities improves patient outcomes and quality of life."
+    }
+  ]
+}

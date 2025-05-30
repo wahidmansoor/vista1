@@ -3,14 +3,13 @@
   "name": "onco-vista-starter",
   "private": true,
   "version": "0.0.1",
-  "type": "module",
-  "scripts": {
+  "type": "module",  "scripts": {
     "dev": "vite",
     "dev:server": "cross-env NODE_ENV=development ts-node-dev --transpile-only --esm src/server/index.ts",
     "dev:all": "run-p dev dev:server",
     "build": "vite build",
     "build:dev": "vite build --mode development",
-    "build:netlify": "npm ci --legacy-peer-deps && vite build",
+    "build:netlify": "npm ci --legacy-peer-deps --no-audit && vite build",
     "preview": "vite preview",
     "test": "vitest"
   },
@@ -87,7 +86,7 @@
     "rehype-stringify": "^10.0.1",
     "remark-gfm": "^4.0.1",
     "sonner": "^2.0.3",
-    "tailwind-merge": "^3.2.0",
+    "tailwind-merge": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",
     "terser": "^5.39.2",
     "uuid": "^11.1.0",

@@ -1,0 +1,30 @@
+{
+  "title": "Radiation Interactions with Matter",
+  "category": "Radiation Oncology",
+  "section": "Physics",
+  "summary": "Comprehensive overview of how different types of radiation interact with matter, including photoelectric effect, Compton scattering, pair production, and their clinical implications in radiation therapy.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Photon Interactions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Photons interact with matter through three primary mechanisms: photoelectric effect (predominant at low energies), Compton scattering (most important at therapeutic energies), and pair production (significant at high energies >1.02 MeV)."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Electron Interactions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Charged particles like electrons lose energy through coulomb interactions, producing excitation and ionization. The linear energy transfer (LET) and range are important parameters for understanding dose distribution."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Compton scattering is the predominant interaction for megavoltage beams, leading to forward-peaked scatter that affects dose distribution."
+    }
+  ]
+}
