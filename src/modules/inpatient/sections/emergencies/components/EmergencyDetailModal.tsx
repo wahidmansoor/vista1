@@ -10,10 +10,9 @@ interface EmergencyDetailModalProps {
 }
 
 const EmergencyDetailModal: React.FC<EmergencyDetailModalProps> = ({ protocol, onClose }) => {
-  const contentRef = useRef<HTMLDivElement>(null);
-  // Fixed: Using the correct property name 'content' instead of unsupported properties
+  const contentRef = useRef<HTMLDivElement>(null);  // Fixed: Using the correct property name 'contentRef' instead of 'content'
   const handlePrint = useReactToPrint({ 
-    content: () => contentRef.current 
+    contentRef: contentRef 
   });
 
   return (

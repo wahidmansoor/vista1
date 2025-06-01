@@ -693,8 +693,7 @@ const TreatmentGuidanceTool: React.FC = () => {
                         {rec.supportive_care && rec.supportive_care.length > 0 && (
                           <div>
                             <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Supportive Care</p>
-                            <div className="flex flex-wrap gap-2">
-                              {rec.supportive_care.map((item, idx) => (
+                            <div className="flex flex-wrap gap-2">                              {rec.supportive_care.map((item: string, idx: number) => (
                                 <span key={idx} className="px-2 py-1 bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs rounded">
                                   {item}
                                 </span>
@@ -708,8 +707,7 @@ const TreatmentGuidanceTool: React.FC = () => {
                           <div>
                             <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Eligibility Criteria</p>
                             <div className="text-sm text-gray-700 dark:text-gray-300">
-                              <ul className="list-disc list-inside space-y-1">
-                                {rec.eligibility.slice(0, 3).map((criteria, idx) => (
+                              <ul className="list-disc list-inside space-y-1">                                {rec.eligibility.slice(0, 3).map((criteria: string, idx: number) => (
                                   <li key={idx}>{criteria}</li>
                                 ))}
                                 {rec.eligibility.length > 3 && (

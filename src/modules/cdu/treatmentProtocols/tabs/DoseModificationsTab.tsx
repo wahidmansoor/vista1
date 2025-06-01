@@ -8,7 +8,7 @@ import {
   TableHeader, 
   TableRow 
 } from '@/components/ui/table';
-import type { Protocol, DoseModification, DoseReduction } from '@/types/protocol';
+import type { Protocol, DoseModification, DoseReductions } from '@/types/protocol';
 import { AlertCircle } from 'lucide-react';
 
 interface DoseModificationsTabProps {
@@ -17,7 +17,7 @@ interface DoseModificationsTabProps {
 
 const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol }) => {
   const doseModifications = protocol.dose_modifications || {} as DoseModification;
-  const doseReductions = protocol.dose_reductions || {} as DoseReduction;
+  const doseReductions = protocol.dose_reductions || {} as DoseReductions;
   const hasDoseData = Object.keys(doseModifications).length > 0 || Object.keys(doseReductions).length > 0;
 
   // Helper function to render modification sections
@@ -70,7 +70,7 @@ const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol })
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {Object.entries(doseReductions.levels).map(([level, dose]) => (
+                  {Object.entries(doseReductions.levels).map(([level, dose]: [string, string]) => (
                     <TableRow key={level}>
                       <TableCell className="font-medium">{level}</TableCell>
                       <TableCell>{dose}</TableCell>
@@ -84,9 +84,8 @@ const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol })
           {/* Render dose reduction criteria if available */}
           {doseReductions.criteria && doseReductions.criteria.length > 0 && (
             <div className="mt-8">
-              <h3 className="text-lg font-medium mb-2">Dose Reduction Criteria</h3>
-              <ul className="space-y-2 list-disc pl-5">
-                {doseReductions.criteria.map((criterion, index) => (
+              <h3 className="text-lg font-medium mb-2">Dose Reduction Criteria</h3>              <ul className="space-y-2 list-disc pl-5">
+                {doseReductions.criteria.map((criterion: string, index: number) => (
                   <li key={index} className="text-gray-700 dark:text-gray-300">{criterion}</li>
                 ))}
               </ul>

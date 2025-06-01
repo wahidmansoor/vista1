@@ -346,11 +346,11 @@ const TabContent: React.FC<{
     tests: (
       <div className="space-y-6">
         <Accordion title="Baseline Tests" defaultOpen={true}>
-          {renderList(protocol.tests?.baseline)}
+          {renderList(protocol.tests && typeof protocol.tests === 'object' && 'baseline' in protocol.tests ? protocol.tests.baseline : Array.isArray(protocol.tests) ? protocol.tests : undefined)}
         </Accordion>
         
         <Accordion title="Monitoring Tests">
-          {renderList(protocol.tests?.monitoring)}
+          {renderList(protocol.tests && typeof protocol.tests === 'object' && 'monitoring' in protocol.tests ? protocol.tests.monitoring : undefined)}
         </Accordion>
       </div>
     ),

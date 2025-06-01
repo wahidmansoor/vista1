@@ -18,12 +18,52 @@ const getSeverityBorderColor = (severity: string) => {
 };
 
 const sanitizeToxicity = (data: Partial<ToxicityData>): ToxicityData => ({
+  // Basic fields
   id: data.id || crypto.randomUUID(),
   name: data.name || 'Not specified',
   severity: data.severity || 'Not specified',
-  recognition: data.recognition || 'Not specified',  management: Array.isArray(data.management) ? data.management : [],
+  grading_scale: data.grading_scale || 'CTCAE v5.0',
+  recognition: data.recognition || 'Not specified',
+  symptoms: Array.isArray(data.symptoms) ? data.symptoms : [],
+  signs: Array.isArray(data.signs) ? data.signs : [],
+  imaging: Array.isArray(data.imaging) ? data.imaging : [],
+  labs: Array.isArray(data.labs) ? data.labs : [],
+  clinical_category: data.clinical_category || 'Uncategorized',
+  symptom_onset: data.symptom_onset || '',
+  expected_onset: data.expected_onset || '',
+  onset_timing_days: data.onset_timing_days || 0,
+  reversibility: data.reversibility || 'Unknown',
+  toxicity_type: data.toxicity_type || 'Unknown',
+  is_dose_limiting: !!data.is_dose_limiting,
+  requires_hospitalization: !!data.requires_hospitalization,
+  toxicity_risk_factors: Array.isArray(data.toxicity_risk_factors) ? data.toxicity_risk_factors : [],
+  
+  // Arrays
+  management: Array.isArray(data.management) ? data.management : [],
   dose_guidance: Array.isArray(data.dose_guidance) ? data.dose_guidance : [],
-  culprit_drugs: Array.isArray(data.culprit_drugs) ? data.culprit_drugs : []
+  culprit_drugs: Array.isArray(data.culprit_drugs) ? data.culprit_drugs : [],
+  culprit_classes: Array.isArray(data.culprit_classes) ? data.culprit_classes : [],
+  intervention_required: Array.isArray(data.intervention_required) ? data.intervention_required : [],
+  monitoring_recommendations: Array.isArray(data.monitoring_recommendations) ? data.monitoring_recommendations : [],
+  lab_triggers: Array.isArray(data.lab_triggers) ? data.lab_triggers : [],
+  related_toxicity_ids: Array.isArray(data.related_toxicity_ids) ? data.related_toxicity_ids : [],
+
+  // Special formats
+  monitoring_frequency: {
+    initial: data.monitoring_frequency?.initial || 'Not specified',
+    followup: data.monitoring_frequency?.followup || 'Not specified',
+    longterm: data.monitoring_frequency?.longterm || 'Not specified'
+  },
+  reference_data: data.reference_data || {},
+  source_reference: data.source_reference || '',
+  notes: data.notes || '',
+  notes_clinical_pearls: data.notes_clinical_pearls || '',
+  notes_ui_display: data.notes_ui_display || '',
+  toxicity_score_weight: data.toxicity_score_weight || 0,
+
+  // Timestamps
+  created_at: data.created_at || new Date().toISOString(),
+  updated_at: data.updated_at || new Date().toISOString()
 });
 
 const AccordionItem = ({ toxicity, isOpen, onToggle }: {
