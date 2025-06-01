@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+// Jest globals used: describe, it, expect, vi;
 
 // Simple test placeholder since FormField component may not exist yet
 describe('FormField Component', () => {

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+// Jest globals used: describe, it, expect, vi, beforeEach;
 
 // Mock the protocols service since we don't have it implemented yet
 describe('Protocols Service', () => {

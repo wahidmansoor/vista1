@@ -1,18 +1,19 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+// Jest globals used: describe, it, expect, vi, beforeEach, afterEach;
 import { generateGeminiResponse } from '../lib/gemini';
 
-vi.mock('@google/generative-ai', async () => {
-  const actual = await vi.importActual('@google/generative-ai');
+jest.mock('@google/generative-ai', () => {
+  // For Jest, we'll use a simpler approach instead of importActual
+  const actual = {};
   return {
     ...actual,
-    GoogleGenerativeAI: vi.fn((apiKey) => {
+    GoogleGenerativeAI: jest.fn((apiKey) => {
       if (!apiKey || apiKey === 'undefined') {
         throw new Error('Gemini API key not configured');
       }
       return {
-        getGenerativeModel: vi.fn(() => ({
-          startChat: vi.fn(() => ({
-            sendMessage: vi.fn().mockImplementation((prompt: string) => {
+        getGenerativeModel: jest.fn(() => ({
+          startChat: jest.fn(() => ({
+            sendMessage: jest.fn().mockImplementation((prompt: string) => {
               if (prompt.includes('\uffff')) {
                 throw new Error('Response contains invalid JSON characters');
               }
@@ -37,13 +38,13 @@ vi.mock('@google/generative-ai', async () => {
 
 describe('generateGeminiResponse', () => {
   beforeEach(() => {
-    vi.stubGlobal('import.meta', { 
+    Object.defineProperty(global, 'import.meta', { value: { 
       env: { 
         VITE_GEMINI_API_KEY: 'test-key',
         NODE_ENV: 'test'
       } 
-    });
-    vi.clearAllMocks();
+    }, writable: true });
+    jest.clearAllMocks();
   });
 
   afterEach(() => {
@@ -52,7 +53,7 @@ describe('generateGeminiResponse', () => {
   });
 
   it('throws error when API key is not configured', async () => {
-    vi.stubGlobal('import.meta', { env: {} });
+    Object.defineProperty(global, 'import.meta', { value: { env: {} }, writable: true });
     await expect(generateGeminiResponse('test prompt'))
       .rejects
       .toThrow('Gemini API key not configured');

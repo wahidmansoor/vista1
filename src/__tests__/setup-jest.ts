@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 
 // Set up test environment
 process.env.VITE_GEMINI_API_KEY = 'test-key';
-(process.env as any).NODE_ENV = 'test';
+process.env.NODE_ENV = 'test';
 
 // Mock rate limiter for tests
 jest.mock('../lib/rate-limit', () => ({
@@ -12,7 +12,8 @@ jest.mock('../lib/rate-limit', () => ({
   }
 }));
 
-// Mock environment variables
+// Mock global environment variables (equivalent to vi.stubGlobal)
+// In Jest, we can set properties directly on the global object
 Object.defineProperty(global, 'import', {
   value: {
     meta: { 
@@ -28,15 +29,12 @@ Object.defineProperty(global, 'import', {
 // Mock console.error to avoid noise in test output
 console.error = jest.fn();
 
-// Increase timeout for all tests
-jest.setTimeout(10000);
-
-// Reset mocks after each test
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 // Polyfill scrollIntoView for JSDOM
 if (document.defaultView) {
   document.defaultView.HTMLElement.prototype.scrollIntoView = function() {};
 }
+
+// After each test, clear all mocks
+afterEach(() => {
+  jest.clearAllMocks();
+});

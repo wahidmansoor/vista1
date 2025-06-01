@@ -1,18 +1,10 @@
 import '@testing-library/jest-dom';
-import { expect, afterEach } from 'vitest';
 import { cleanup } from '@testing-library/react';
 
+// Clean up after each test
 afterEach(() => {
   cleanup();
 });
 
-declare module 'vitest' {
-  interface JestAssertion<T = any> {
-    toBeInTheDocument(): void;
-    toBeVisible(): void;
-    toHaveTextContent(text: string): void;
-    toHaveValue(value: string | number | string[]): void;
-    toHaveClass(...classNames: string[]): void;
-    toHaveAttribute(attr: string, value?: string): void;
-  }
-}
+// Extend Jest's expect typing is not needed since @testing-library/jest-dom
+// already adds these types to Jest's global expect

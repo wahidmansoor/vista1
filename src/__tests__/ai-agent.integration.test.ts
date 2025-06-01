@@ -1,20 +1,20 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+// Jest globals used: describe, it, expect, beforeEach, afterEach, vi;
 import express from 'express';
 import request from 'supertest';
 import router from '../api/ai-agent';
 import { HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 
 // Mock the entire module
-vi.mock('@google/generative-ai', async () => {
+jest.mock('@google/generative-ai', async () => {
   const actual = await vi.importActual('@google/generative-ai');
   return {
     ...actual,
-    GoogleGenerativeAI: vi.fn((apiKey) => {      if (!apiKey || apiKey === 'undefined' || apiKey === '') {
+    GoogleGenerativeAI: jest.fn((apiKey) => {      if (!apiKey || apiKey === 'undefined' || apiKey === '') {
         throw new Error('Gemini API key not configured');
       }
-      return {        getGenerativeModel: vi.fn(() => ({
-          startChat: vi.fn(() => ({
-            sendMessage: vi.fn().mockImplementation((prompt: string) => {
+      return {        getGenerativeModel: jest.fn(() => ({
+          startChat: jest.fn(() => ({
+            sendMessage: jest.fn().mockImplementation((prompt: string) => {
               if (prompt.includes('invalid chars')) {
                 return Promise.resolve({
                   response: {
@@ -43,16 +43,16 @@ vi.mock('@google/generative-ai', async () => {
 
 describe('AI Agent Endpoint Integration', () => {
   let app: express.Application;  beforeEach(() => {
-    vi.stubGlobal('import.meta', { 
+    Object.defineProperty(global, 'import.meta', { value: { 
       env: { 
         VITE_GEMINI_API_KEY: 'test-key',
         NODE_ENV: 'test'
       } 
-    });
+    }, writable: true });
     app = express();
     app.use(express.json());
     app.use('/api/ai-agent', router);
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   afterEach(() => {

@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
+// Vitest import removed;
 import MedicationsView from '../MedicationsView';
 import { createMockMedications } from './MedicationTestDataFactory';
 
 // Mock the audio feedback module
-vi.mock('@/utils/audioFeedback', () => ({
-  playSound: vi.fn(),
+jest.mock('@/utils/audioFeedback', () => ({
+  playSound: jest.fn(),
   isAudioSupported: () => true
 }));
 
@@ -15,7 +15,7 @@ describe('MedicationsView', () => {
   const mockMedications = createMockMedications(3);
   beforeEach(() => {
     // Clear mocks before each test
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   it('renders medication cards from initial data', () => {
