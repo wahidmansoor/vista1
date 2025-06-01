@@ -13,8 +13,8 @@ interface OverviewTabProps {
 }
 
 const OverviewTab: React.FC<OverviewTabProps> = ({ protocol }) => {
-  const preMedications = getProtocolMedications(protocol, 'pre', 'all'); // Ensure 'all' is used if that's the desired default
-  const postMedications = getProtocolMedications(protocol, 'post', 'all'); // Ensure 'all' is used if that's the desired default
+  const preMedications = getProtocolMedications(protocol, 'pre'); 
+  const postMedications = getProtocolMedications(protocol, 'post');
   const precautions = getAllPrecautions(protocol); // Use new helper
   const references = getProtocolReferences(protocol); // Use new helper
   

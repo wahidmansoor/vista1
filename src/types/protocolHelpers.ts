@@ -1,11 +1,6 @@
 // src/utils/protocolHelpers.ts
-import {
-  Drug,
-  Protocol,
-  SupportiveCareItem,
-  ProtocolNote,
-  Test,
-} from '@/types/protocol';
+import { Drug, Protocol, SupportiveCareItem, ProtocolNote } from './protocol';
+import type { Test } from '../modules/cdu/safe/treatmentProtocols/types/protocol';
 
 interface TestsObject {
   baseline?: Array<Test | string>;
@@ -17,12 +12,12 @@ export const getDrugNames = (protocol: Protocol): string[] => {
   if (!protocol?.treatment?.drugs || !Array.isArray(protocol.treatment.drugs)) {
     return [];
   }
-  return [...new Set(protocol.treatment.drugs.map((drug) => drug.name))];
+  return [...new Set(protocol.treatment.drugs.map(drug => drug.name))];
 };
 
 export const findDrugByName = (protocol: Protocol, drugName: string): Drug | undefined => {
   return protocol?.treatment?.drugs?.find(
-    (drug) => drug.name.toLowerCase() === drugName.toLowerCase()
+    drug => drug.name.toLowerCase() === drugName.toLowerCase()
   );
 };
 
@@ -30,15 +25,15 @@ export const getSupportiveCareItems = (protocol: Protocol): SupportiveCareItem[]
   const items: SupportiveCareItem[] = [];
 
   if (protocol.supportive_care) {
-    protocol.supportive_care.required?.forEach((drug) => items.push(drug));
-    protocol.supportive_care.optional?.forEach((drug) => items.push(drug));
+    protocol.supportive_care.required?.forEach(drug => items.push(drug));
+    protocol.supportive_care.optional?.forEach(drug => items.push(drug));
   }
 
-  protocol.supportive_meds?.forEach((drug) => items.push(drug as SupportiveCareItem));
+  protocol.supportive_meds?.forEach(drug => items.push(drug));
 
-  protocol.treatment?.drugs?.forEach((drug) => {
+  protocol.treatment?.drugs?.forEach(drug => {
     if (Array.isArray(drug.supportiveCare)) {
-      drug.supportiveCare.forEach((item) => {
+      drug.supportiveCare.forEach(item => {
         if (typeof item === 'string') {
           items.push({ name: item });
         } else if (typeof item === 'object') {
@@ -56,22 +51,19 @@ export const getMonitoringParameters = (protocol: Protocol): string[] => {
 
   const extractNames = (tests?: Array<Test | string>) => {
     if (!Array.isArray(tests)) return;
-    tests.forEach((test) => {
+    tests.forEach(test => {
       parameters.push(typeof test === 'string' ? test : test.name);
     });
   };
 
-  const tests = protocol.tests;
-  if (Array.isArray(tests)) {
-    extractNames(tests);
-  } else if (typeof tests === 'object' && tests !== null) {
-    extractNames(tests.baseline as Array<Test | string>);
-    extractNames(tests.monitoring as Array<Test | string>);
+  if (!Array.isArray(protocol.tests) && typeof protocol.tests === 'object') {
+    extractNames(protocol.tests.baseline);
+    extractNames(protocol.tests.monitoring);
   }
 
   if (protocol.monitoring && typeof protocol.monitoring === 'object') {
-    extractNames(protocol.monitoring.baseline as Array<Test | string>);
-    extractNames(protocol.monitoring.ongoing as Array<Test | string>);
+    extractNames((protocol.monitoring as TestsObject).baseline);
+    extractNames((protocol.monitoring as TestsObject).monitoring);
   }
 
   extractNames(protocol.toxicity_monitoring?.parameters);
@@ -87,28 +79,37 @@ export const hasDoseModifications = (
   return Array.isArray(mods) && mods.length > 0;
 };
 
-export const getDoseReductionLevels = (protocol: Protocol) => {
+export const getDoseReductionLevels = (
+  protocol: Protocol
+): { levels: Record<string, any>; criteria: Array<string | { criterion: string }> } | null => {
   if (!protocol.dose_reductions) return null;
 
   return {
-    levels: protocol.dose_reductions.levels ?? {},
-    criteria: protocol.dose_reductions.criteria ?? [],
+    levels: protocol.dose_reductions?.levels ?? {},
+    criteria: protocol.dose_reductions?.criteria ?? []
   };
 };
 
 export const getAllPrecautions = (protocol: Protocol): string[] => {
   const precautions: string[] = [];
 
-  const pushNotes = (items?: Array<string | ProtocolNote>) => {
-    items?.forEach((p) => precautions.push(typeof p === 'string' ? p : p.note));
+  const pushNotes = (items?: Array<string | ProtocolNote> | null) => {
+    if (!items) return;
+    items.forEach(p => {
+      if (typeof p === 'string') {
+        precautions.push(p);
+      } else if (typeof p === 'object' && p.note) {
+        precautions.push(p.note);
+      }
+    });
   };
 
   pushNotes(protocol.precautions);
   pushNotes(protocol.interactions?.precautions);
-  pushNotes(protocol.interactions?.contraindications as Array<string | ProtocolNote>);
+  pushNotes(protocol.interactions?.contraindications);
 
-  protocol.treatment?.drugs?.forEach((drug) => {
-    drug.contraindications?.forEach((note) => {
+  protocol.treatment?.drugs?.forEach(drug => {
+    drug.contraindications?.forEach(note => {
       precautions.push(`${drug.name}: ${note}`);
     });
   });
@@ -118,9 +119,7 @@ export const getAllPrecautions = (protocol: Protocol): string[] => {
 
 export const containsDrug = (protocol: Protocol, drugName: string): boolean => {
   const name = drugName.toLowerCase();
-  return !!protocol.treatment?.drugs?.some((drug) =>
-    drug.name.toLowerCase().includes(name)
-  );
+  return !!protocol.treatment?.drugs?.some(drug => drug.name.toLowerCase().includes(name));
 };
 
 export const getReferences = (protocol: Protocol): string[] => {
@@ -144,8 +143,7 @@ export const createProtocolSummary = (protocol: Protocol): Record<string, any> =
     tumour_group: protocol.tumour_group,
     treatment_intent: protocol.treatment_intent ?? '',
     drugs: getDrugNames(protocol),
-    has_dose_modifications:
-      hasDoseModifications(protocol, 'hematological') ||
+    has_dose_modifications: hasDoseModifications(protocol, 'hematological') ||
       hasDoseModifications(protocol, 'nonHematological') ||
       hasDoseModifications(protocol, 'renal') ||
       hasDoseModifications(protocol, 'hepatic'),
@@ -153,20 +151,16 @@ export const createProtocolSummary = (protocol: Protocol): Record<string, any> =
     has_monitoring: getMonitoringParameters(protocol).length > 0,
     created_at: protocol.created_at ?? '',
     last_reviewed: protocol.last_reviewed ?? '',
-    summary: protocol.summary ?? '',
+    summary: protocol.summary ?? ''
   };
 };
 
-export const areProtocolsEquivalent = (
-  protocol1: Protocol,
-  protocol2: Protocol
-): boolean => {
+export const areProtocolsEquivalent = (protocol1: Protocol, protocol2: Protocol): boolean => {
   if (
     protocol1.id !== protocol2.id ||
     protocol1.code !== protocol2.code ||
     protocol1.tumour_group !== protocol2.tumour_group
-  )
-    return false;
+  ) return false;
 
   const drugs1 = getDrugNames(protocol1).sort();
   const drugs2 = getDrugNames(protocol2).sort();
@@ -181,19 +175,11 @@ export const getEligibilityCriteria = (
   const eligibility = protocol.eligibility;
   if (!eligibility) return [];
 
-  const process = (
-    arr?: Array<string | { criterion: string }>
-  ): string[] => {
-    return Array.isArray(arr)
-      ? arr.map((e) => (typeof e === 'string' ? e : e.criterion))
-      : [];
-  };
+  const process = (arr?: Array<string | { criterion: string }>) =>
+    Array.isArray(arr) ? arr.map(e => (typeof e === 'string' ? e : e.criterion)) : [];
 
   if (type === 'inclusion') return process(eligibility.inclusion_criteria);
   if (type === 'exclusion') return process(eligibility.exclusion_criteria);
 
-  return [
-    ...process(eligibility.inclusion_criteria),
-    ...process(eligibility.exclusion_criteria),
-  ];
+  return [...process(eligibility.inclusion_criteria), ...process(eligibility.exclusion_criteria)];
 };

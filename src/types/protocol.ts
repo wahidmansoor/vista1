@@ -78,7 +78,7 @@ export interface AIInsights {
 
 export interface DoseReductions {
   levels?: Record<string, string>;
-  criteria?: string[];
+  criteria?: Array<string | { criterion: string }>;
 }
 
 export interface Eligibility {
@@ -102,7 +102,8 @@ export interface Interactions {
 
 // Protocol note structure for precautions and similar fields
 export interface ProtocolNote {
-  note: string;
+  note?: string;
+  criterion?: string;
 }
 
 // Overview structure that groups protocol metadata
