@@ -35,7 +35,7 @@ export const SupportCard: React.FC<SupportCardProps> = ({ resource }) => {
               Available Services
             </h4>
             <ul className="space-y-1">
-              {resource.services.map((service, index) => (
+              {resource.services.map((service: string, index: number) => (
                 <li key={index} className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2 p-2 rounded-lg hover:bg-indigo-50/30 dark:hover:bg-indigo-950/30 transition-all duration-200">
                   <span className="text-indigo-500 dark:text-indigo-400 mt-0.5">•</span>
                   {service}

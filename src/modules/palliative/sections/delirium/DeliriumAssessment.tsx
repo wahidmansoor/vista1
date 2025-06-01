@@ -56,8 +56,8 @@ const DeliriumAssessment = () => {
             <RadioGroup
               id="consciousness"
               value={assessment.consciousness}
-              onValueChange={(value: DeliriumAssessment['consciousness']) => 
-                handleUpdate('consciousness', value)
+              onValueChange={(value: string) => 
+                handleUpdate('consciousness', value as DeliriumAssessment['consciousness'])
               }
               className="grid grid-cols-1 gap-2 mt-2"
             >

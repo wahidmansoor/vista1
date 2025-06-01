@@ -21,7 +21,7 @@ export const CultureBlock: React.FC<CultureBlockProps> = ({
             Key Considerations
           </h5>
           <ul className="space-y-2">
-            {considerations.map((item, i) => (
+            {considerations.map((item: string, i: number) => (
               <li key={i} className="text-sm text-blue-700 dark:text-blue-300 flex items-start gap-2">
                 <Info className="h-4 w-4 flex-shrink-0 mt-0.5" />
                 {item}
@@ -34,7 +34,7 @@ export const CultureBlock: React.FC<CultureBlockProps> = ({
             Recommendations
           </h5>
           <ul className="space-y-2">
-            {recommendations.map((item, i) => (
+            {recommendations.map((item: string, i: number) => (
               <li key={i} className="text-sm text-blue-700 dark:text-blue-300 flex items-start gap-2">
                 <Info className="h-4 w-4 flex-shrink-0 mt-0.5" />
                 {item}

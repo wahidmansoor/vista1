@@ -20,7 +20,7 @@ export const AssessmentToolCard: React.FC<AssessmentToolCardProps> = ({ tool }) 
       <div className="flex flex-wrap items-center gap-2 mb-1">
         <h4 className="text-base font-medium text-gray-800 dark:text-gray-200">{tool.name}</h4>
         <div className="flex flex-wrap gap-1">
-          {tool.tags.map((tag, index) => (
+          {tool.tags.map((tag: string, index: number) => (
             <Badge key={index} variant="outline" className="bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800 text-xs">
               {tag}
             </Badge>

@@ -53,7 +53,7 @@ const SymptomSearch: React.FC<SymptomSearchProps> = ({
         </div>
         <Select
           value={category}
-          onValueChange={setCategory}
+          onValueChange={(value: string) => setCategory(value as CategoryType)}
         >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Filter by category" />

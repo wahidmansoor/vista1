@@ -33,7 +33,7 @@ const Calculators: React.FC = () => {
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">🧮 Clinical Calculators</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {calculators.map((calc) => (
+        {calculators.map((calc: any, index: number) => (
           <button
             key={calc.id}
             onClick={() => navigate(`/tools/calculators/${calc.id}`)}

@@ -22,6 +22,8 @@ export interface AIResponse {
   error?: string;
   /** Loading state of the response */
   loading?: boolean;
+  /** The type or role of the message (e.g., assistant, user, system, error) */
+  type?: 'assistant' | 'user' | 'system' | 'error' | 'function';
 }
 
 /**

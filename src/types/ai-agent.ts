@@ -7,7 +7,14 @@ export type PromptIntent =
   | 'medication'
   | 'protocol'
   | 'emergency'
-  | 'general';
+  | 'general'
+  | 'triage'
+  | 'follow-up'
+  | 'dose-check'
+  | 'toxicity'
+  | 'evaluation'
+  | 'pathway'
+  | 'rescue-agent';
 
 export interface AIRequestBody {
   module: ModuleType;
@@ -33,6 +40,7 @@ export interface AIResponse {
   id: string;
   content: string;
   timestamp: string;
+  type?: 'assistant' | 'user' | 'system' | 'error' | 'function'; // Added type property
   metadata: {
     module: ModuleType;
     intent: PromptIntent;

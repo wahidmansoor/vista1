@@ -1,103 +1,75 @@
 // d:\Mansoor\tick-toc\src\modules\cdu\treatmentProtocols\tabs\DoseModificationsTab.tsx
 import React from 'react';
-import { Protocol } from '@/types/protocol';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from '@/components/ui/card';
+import { AlertTriangle, Shield } from 'lucide-react';
 
-interface DoseModificationsTabProps {
-  protocol: Protocol;
+export interface DoseAdjustmentType {
+  renal?: string[];
+  hepatic?: string[];
+  hematological?: string[];
+  other?: string[];
+}
+
+export interface DoseModificationsTabProps {
+  dose_modifications?: DoseAdjustmentType;
 }
 
 // DoseModificationsTab.tsx - refactored for structured UI
 
-export const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol }) => {
-  const dm = (protocol.dose_modifications ?? {}) as Record<string, any>;
-  const dr = (protocol.dose_reductions ?? {}) as Record<string, any>;
+const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ dose_modifications }) => {
+  // Ensure dose_modifications itself is an object, then safely access its properties
+  const modifications = dose_modifications ?? {};
+  const renal: string[] = Array.isArray(modifications.renal) ? modifications.renal : [];
+  const hepatic: string[] = Array.isArray(modifications.hepatic) ? modifications.hepatic : [];
+  const hematological: string[] = Array.isArray(modifications.hematological) ? modifications.hematological : [];
+  const other: string[] = Array.isArray(modifications.other) ? modifications.other : [];
+
+  const hasAnyData = renal.length > 0 || hepatic.length > 0 || hematological.length > 0 || other.length > 0;
+
+  const renderSection = (title: string, data: string[]) => {
+    if (!Array.isArray(data) || data.length === 0) return null;
+    return (
+      <div className="mb-6">
+        <h3 className="text-lg font-medium mb-2">{title}</h3>
+        <Card>
+          <CardContent className="p-4">
+            <ul className="list-disc pl-5 space-y-1">
+              {data.map((item: string, index: number) => (
+                <li key={index} className="text-gray-700 dark:text-gray-300">{item}</li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Dose Modifications & Reductions</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <div className="space-y-6 p-4">
+      <div className="flex items-center space-x-3 mb-6">
+        <Shield className="h-6 w-6 text-red-500" />
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Dose Modifications</h2>
+      </div>
 
-        {/* Dose Modifications */}
-        <section className="mb-4">
-          <h3 className="font-semibold mb-2">Hematological</h3>
-          {Array.isArray(dm?.hematological) && dm.hematological.length > 0 ? (
-            <ul className="list-disc list-inside text-sm">
-              {dm.hematological.map((item: string, idx: number) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-muted-foreground italic">No hematological modifications listed.</p>
-          )}
-        </section>
-        <section className="mb-4">
-          <h3 className="font-semibold mb-2">Non-Hematological</h3>
-          {Array.isArray(dm?.nonhematological) && dm.nonhematological.length > 0 ? (
-            <ul className="list-disc list-inside text-sm">
-              {dm.nonhematological.map((item: string, idx: number) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-muted-foreground italic">No non-hematological modifications listed.</p>
-          )}
-        </section>
-        <section className="mb-4">
-          <h3 className="font-semibold mb-2">Renal</h3>
-          {Array.isArray(dm?.renal) && dm.renal.length > 0 ? (
-            <ul className="list-disc list-inside text-sm">
-              {dm.renal.map((item: string, idx: number) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-muted-foreground italic">No renal modifications listed.</p>
-          )}
-        </section>
-        <section className="mb-4">
-          <h3 className="font-semibold mb-2">Hepatic</h3>
-          {Array.isArray(dm?.hepatic) && dm.hepatic.length > 0 ? (
-            <ul className="list-disc list-inside text-sm">
-              {dm.hepatic.map((item: string, idx: number) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-muted-foreground italic">No hepatic modifications listed.</p>
-          )}
-        </section>
-
-        {/* Dose Reductions */}
-        <section className="mb-4">
-          <h3 className="font-semibold mb-2">Dose Reductions - Criteria</h3>
-          {Array.isArray(dr?.criteria) && dr.criteria.length > 0 ? (
-            <ul className="list-disc list-inside text-sm">
-              {dr.criteria.map((item: string, idx: number) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-muted-foreground italic">No criteria listed.</p>
-          )}
-        </section>
-        <section className="mb-4">
-          <h3 className="font-semibold mb-2">Dose Reductions - Levels</h3>
-          {dr?.levels && typeof dr.levels === 'object' && Object.keys(dr.levels).length > 0 ? (
-            <div className="space-y-2 text-sm">
-              {Object.entries(dr.levels).map(([key, value], idx) => (
-                <div key={idx}>
-                  <strong>{key}:</strong> {String(value)}
-                </div>
-              ))}
+      {!hasAnyData ? (
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-center space-x-2 text-amber-500">
+              <AlertTriangle className="h-5 w-5" />
+              <p>No dose adjustment information available for this protocol.</p>
             </div>
-          ) : (
-            <p className="text-muted-foreground italic">No level-based dose reductions listed.</p>
-          )}
-        </section>
-      </CardContent>
-    </Card>
+          </CardContent>
+        </Card>
+      ) : (
+        <>
+          {renderSection('Renal Impairment', renal)}
+          {renderSection('Hepatic Impairment', hepatic)}
+          {renderSection('Hematological Toxicity', hematological)}
+          {renderSection('Other Considerations', other)}
+        </>
+      )}
+    </div>
   );
 };
+
+export default DoseModificationsTab;

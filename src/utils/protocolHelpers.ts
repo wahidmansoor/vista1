@@ -1,15 +1,19 @@
 import type { 
   Protocol, 
   Drug, 
-  Eligibility, 
   Medications, 
   SupportiveCare, 
-  SupportiveCareItem, // Added
   ToxicityMonitoring, 
   DoseModification,
   RescueAgent,
   Interactions,
-  DrugClass
+  DrugClass,
+  ProtocolNote,
+  ProtocolDrug,
+  Test,
+  ProtocolEligibility,
+  SupportiveCareItem,
+  Monitoring // Added Monitoring for explicit typing
 } from '../types/protocol';
 
 /**
@@ -119,37 +123,20 @@ export const getProtocolDrugs = (protocol?: Protocol): Drug[] => {
 
 /**
  * Get eligibility criteria as a string array
- * Handles both inclusion and exclusion criteria from the new Eligibility interface
- * @param protocol The protocol object
- * @param type Optional parameter to specify which criteria to return ('inclusion', 'exclusion', or 'all')
- * @returns Array of eligibility criteria strings
  */
 export const getProtocolEligibility = (
-  protocol?: Protocol, 
+  protocol?: Protocol,
   type: 'inclusion' | 'exclusion' | 'all' = 'all'
 ): string[] => {
   if (!protocol?.eligibility) return [];
-  
-  // Handle new structured eligibility format
-  if (typeof protocol.eligibility === 'object' && protocol.eligibility !== null) {
-    const eligibility = protocol.eligibility;
-    
-    // Return specific criteria type if requested
-    if (type === 'inclusion') {
-      return eligibility.inclusion_criteria || [];
-    }
-    
-    if (type === 'exclusion') {
-      return eligibility.exclusion_criteria || [];
-    }
-    
-    // Default: return all criteria combined
-    return [
-      ...(eligibility.inclusion_criteria || []),
-      ...(eligibility.exclusion_criteria || [])
-    ];
+  const eligibility = protocol.eligibility as ProtocolEligibility; // Cast to ProtocolEligibility
+  if (typeof eligibility === 'object' && eligibility !== null) {
+    const inclusionCriteria = eligibility.inclusion_criteria?.map(item => item.criterion) || [];
+    const exclusionCriteria = eligibility.exclusion_criteria?.map(item => item.criterion) || [];
+    if (type === 'inclusion') return inclusionCriteria;
+    if (type === 'exclusion') return exclusionCriteria;
+    return [...inclusionCriteria, ...exclusionCriteria];
   }
-  
   // For legacy support, use safeSplit if eligibility is not properly structured
   return safeSplit(protocol.eligibility);
 };
@@ -588,6 +575,9 @@ export const findDrugByName = (protocol: Protocol, drugName: string): Drug | und
 
 /**
  * Extracts all supportive care items from the protocol
+ * This function primarily processes `protocol.supportive_care` and `protocol.supportive_meds`.
+ * It does NOT process `supportiveCare` from individual drugs in `protocol.treatment.drugs`
+ * as `ProtocolDrug` type does not define `supportiveCare`.
  * @param protocol The protocol to extract from
  * @returns Array of supportive care items
  */
@@ -604,6 +594,7 @@ export const getSupportiveCareItems = (protocol: Protocol): SupportiveCareItem[]
           dose: drug.dose,
           timing: drug.timing,
           route: drug.route
+          // purpose is not in Drug, but in SupportiveCareItem. If needed, map carefully.
         });
       });
     }
@@ -622,194 +613,227 @@ export const getSupportiveCareItems = (protocol: Protocol): SupportiveCareItem[]
   }
   
   // Check supportive_meds array (legacy or alternative field)
+  // Assuming supportive_meds contains items compatible with SupportiveCareItem or Drug
   if (Array.isArray((protocol as any).supportive_meds)) {
-    (protocol as any).supportive_meds.forEach((drug: any) => {
+    ((protocol as any).supportive_meds).forEach((drug: Drug | SupportiveCareItem) => {
       items.push({
         name: drug.name,
         dose: drug.dose,
         timing: drug.timing,
-        route: drug.route
+        route: drug.route,
+        purpose: (drug as SupportiveCareItem).purpose // Include purpose if available
       });
     });
   }
   
-  // Check individual drugs for supportive care items
-  if (protocol.treatment?.drugs) {
-    protocol.treatment.drugs.forEach(drug => {
-      if (Array.isArray(drug.supportiveCare)) {
-        drug.supportiveCare.forEach(item => {
-          if (typeof item === 'string') {
-            items.push({ name: item });
-          } else if (typeof item === 'object' && item !== null) {
-            items.push(item as SupportiveCareItem);
-          }
-        });
-      }
-    });
-  }
+  // The section trying to access drug.supportiveCare from protocol.treatment.drugs
+  // was removed because ProtocolDrug does not have a supportiveCare field.
   
   return items;
 };
 
 /**
- * Gets all monitoring parameters from various protocol sections
- * @param protocol The protocol to extract from
- * @returns Array of unique monitoring parameters
+ * Helper function to extract names from Test objects or use strings directly
  */
-export const getMonitoringParameters = (protocol: Protocol): string[] => {
-  const parameters: string[] = [];
-  
-  // Get baseline tests
-  if (protocol.tests?.baseline && Array.isArray(protocol.tests.baseline)) {
-    parameters.push(...protocol.tests.baseline);
-  }
-  
-  // Get monitoring tests
-  if (protocol.tests?.monitoring && Array.isArray(protocol.tests.monitoring)) {
-    parameters.push(...protocol.tests.monitoring);
-  }
-  
-  // Get monitoring parameters from toxicity_monitoring
-  if (protocol.toxicity_monitoring?.parameters && Array.isArray(protocol.toxicity_monitoring.parameters)) {
-    parameters.push(...protocol.toxicity_monitoring.parameters);
-  }
-  
-  // Get baseline monitoring from monitoring object
-  if (protocol.monitoring?.baseline && Array.isArray(protocol.monitoring.baseline)) {
-    parameters.push(...protocol.monitoring.baseline);
-  }
-  
-  // Get ongoing monitoring from monitoring object
-  if (protocol.monitoring?.ongoing && Array.isArray(protocol.monitoring.ongoing)) {
-    parameters.push(...protocol.monitoring.ongoing);
-  }
-  
-  // Return unique parameters
-  return [...new Set(parameters)];
+const extractTestNames = (tests: (Test | string)[] | undefined): string[] => {
+  if (!tests) return [];
+  return tests.flatMap(test => {
+    if (typeof test === 'string') return [test];
+    if ('name' in test && test.name) {
+      const results: string[] = [test.name];
+      if (Array.isArray(test.parameters)) {
+        results.push(...test.parameters);
+      }
+      return results;
+    }
+    return [];
+  }).filter(Boolean); // Filter out any null/undefined entries if objects are malformed
 };
 
 /**
- * Checks if a protocol has specific dose modifications
- * @param protocol The protocol to check
- * @param modificationType The type of modification to check for
- * @returns boolean indicating if modifications exist
+ * Get all monitoring parameters from a protocol, including baseline and ongoing tests.
+ */
+export const getAllMonitoringParameters = (protocol?: Protocol): string[] => {
+  if (!protocol) return [];
+  const parametersSet = new Set<string>();
+
+  // Process protocol.tests
+  if (protocol.tests) {
+    const { baseline, monitoring } = protocol.tests;
+    if (baseline) {
+      extractTestNames(baseline).forEach(p => parametersSet.add(p));
+    }
+    if (monitoring) {
+      extractTestNames(monitoring).forEach(p => parametersSet.add(p));
+    }
+  }
+
+  // Process protocol.toxicity_monitoring.parameters
+  if (protocol.toxicity_monitoring?.parameters && Array.isArray(protocol.toxicity_monitoring.parameters)) {
+    protocol.toxicity_monitoring.parameters.forEach(p => parametersSet.add(p));
+  }
+
+  // Process protocol.monitoring (cast to Monitoring type for safety)
+  const monitoringData = protocol.monitoring as Monitoring;
+  if (monitoringData) {
+      if (monitoringData.baseline && Array.isArray(monitoringData.baseline)) {
+        monitoringData.baseline.forEach((p: string) => parametersSet.add(p));
+      }
+      if (monitoringData.ongoing && Array.isArray(monitoringData.ongoing)) {
+        monitoringData.ongoing.forEach((p: string) => parametersSet.add(p));
+      }
+  }
+  
+  return Array.from(parametersSet);
+};
+
+/**
+ * Get supportive care information from various parts of a protocol.
+ * Returns an array of strings describing the care items.
+ */
+export const getDrugSupportiveCare = (protocol?: Protocol): string[] => {
+  if (!protocol) return [];
+  const careInfoSet = new Set<string>();
+
+  // Helper to format Drug or SupportiveCareItem into a string
+  const formatCareItem = (item: Drug | SupportiveCareItem, context?: string): string | null => {
+    if (typeof item === 'string') return context ? `${context}: ${item}` : item; // Should ideally not happen with typed items
+    if (item && item.name) {
+      let desc = item.name;
+      if ('dose' in item && item.dose) desc += ` ${item.dose}`;
+      if ('timing' in item && item.timing) desc += ` (${item.timing})`;
+      if ('route' in item && item.route) desc += ` via ${item.route}`;
+      if ('purpose' in item && item.purpose) desc += ` for ${item.purpose}`;
+      return context ? `${context}: ${desc}` : desc;
+    }
+    return null;
+  };
+  
+  const addCareItems = (items: Array<Drug | SupportiveCareItem> | undefined, context?: string) => {
+    if (items && Array.isArray(items)) {
+      items.forEach(item => {
+        const formatted = formatCareItem(item, context);
+        if (formatted) careInfoSet.add(formatted);
+      });
+    }
+  };
+
+  // From protocol.supportive_care
+  if (protocol.supportive_care) {
+    addCareItems(protocol.supportive_care.required, "Required Supportive Care");
+    addCareItems(protocol.supportive_care.optional, "Optional Supportive Care");
+    if (protocol.supportive_care.monitoring && Array.isArray(protocol.supportive_care.monitoring)) {
+      protocol.supportive_care.monitoring.forEach(m => careInfoSet.add(`Monitoring for Supportive Care: ${m}`));
+    }
+  }
+
+  // From protocol.supportive_meds
+  if (protocol.supportive_meds && Array.isArray(protocol.supportive_meds)) {
+    addCareItems(protocol.supportive_meds, "Supportive Meds");
+  }
+  
+  // From Pre-medications
+  if (protocol.pre_medications) {
+    addCareItems(protocol.pre_medications.required, "Required Pre-medication");
+    addCareItems(protocol.pre_medications.optional, "Optional Pre-medication");
+  }
+
+  // From Post-medications
+  if (protocol.post_medications) {
+    addCareItems(protocol.post_medications.required, "Required Post-medication");
+    addCareItems(protocol.post_medications.optional, "Optional Post-medication");
+  }
+  
+  // Individual drugs in protocol.treatment.drugs might have supportiveCare if type Drug is used
+  // However, ProtocolDrug interface itself doesn't define it.
+  // If drugs in protocol.treatment.drugs are of type Drug (which includes supportiveCare)
+  // then this section would be relevant. For now, assuming ProtocolDrug type is strictly followed.
+  // if (protocol.treatment?.drugs) {
+  //   protocol.treatment.drugs.forEach((drug: ProtocolDrug | Drug) => {
+  //     if ('supportiveCare' in drug && drug.supportiveCare) {
+  //        // This requires drug to potentially be of type Drug, not just ProtocolDrug
+  //        // And SupportiveCareItem to be correctly typed
+  //       (drug.supportiveCare as Array<string | SupportiveCareItem>).forEach(scItem => {
+  //         if (typeof scItem === 'string') {
+  //           careInfoSet.add(`${drug.name} (Support): ${scItem}`);
+  //         } else if (scItem.name) {
+  //           careInfoSet.add(`${drug.name} (Support): ${formatCareItem(scItem)}`);
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
+
+  return Array.from(careInfoSet);
+};
+
+/**
+ * Checks if a protocol has specific dose modifications or any dose modifications.
  */
 export const hasDoseModifications = (
-  protocol: Protocol, 
-  modificationType: 'hematological' | 'nonHematological' | 'renal' | 'hepatic'
+  protocol: Protocol,
+  modificationType?: keyof DoseModification // Optional: if provided, checks for specific type
 ): boolean => {
   if (!protocol.dose_modifications) {
     return false;
   }
-  
-  const modifications = protocol.dose_modifications[modificationType];
-  return Array.isArray(modifications) && modifications.length > 0;
+  if (modificationType) {
+    const modifications = protocol.dose_modifications[modificationType];
+    return Array.isArray(modifications) && modifications.length > 0;
+  }
+  // If no specific type, check if any dose modification array has items
+  return Object.values(protocol.dose_modifications).some(arr => Array.isArray(arr) && arr.length > 0);
 };
 
 /**
- * Extracts dose reduction information if available
- * @param protocol The protocol to extract from
- * @returns Dose reduction levels or null if not available
+ * Extracts dose reduction levels information if available
  */
 export const getDoseReductionLevels = (protocol: Protocol): Record<string, any> | null => {
   if (!protocol.dose_reductions?.levels || typeof protocol.dose_reductions.levels !== 'object') {
     return null;
   }
-  
   return protocol.dose_reductions.levels;
 };
 
 /**
- * Gets all precautions from various sections of the protocol
- * @param protocol The protocol to extract from
- * @returns Array of unique precautions
- */
-export const getAllPrecautions = (protocol: Protocol): string[] => {
-  const precautions: string[] = [];
-  
-  // Get main precautions
-  if (Array.isArray(protocol.precautions)) {
-    precautions.push(...protocol.precautions);
-  }
-  
-  // Get interaction precautions
-  if (protocol.interactions?.precautions && Array.isArray(protocol.interactions.precautions)) {
-    precautions.push(...protocol.interactions.precautions);
-  }
-  
-  // Get contraindications from interactions
-  if (protocol.interactions?.contraindications && Array.isArray(protocol.interactions.contraindications)) {
-    precautions.push(...protocol.interactions.contraindications);
-  }
-  
-  // Get drug-specific contraindications
-  if (protocol.treatment?.drugs && Array.isArray(protocol.treatment.drugs)) {
-    protocol.treatment.drugs.forEach(drug => {
-      if (Array.isArray(drug.contraindications)) {
-        precautions.push(...drug.contraindications.map(item => `${drug.name}: ${item}`));
-      }
-    });
-  }
-  
-  // Return unique precautions
-  return [...new Set(precautions)];
-};
-
-/**
- * Checks if a protocol contains a specific drug (case-insensitive partial match)
- * @param protocol The protocol to check
- * @param drugName The drug name to search for
- * @returns boolean indicating if the drug is found
+ * Checks if a protocol contains a specific drug (case-insensitive partial match in name)
  */
 export const containsDrug = (protocol: Protocol, drugName: string): boolean => {
   if (!protocol?.treatment?.drugs || !Array.isArray(protocol.treatment.drugs)) {
     return false;
   }
-  
   const normalizedDrugName = drugName.toLowerCase();
-  return protocol.treatment.drugs.some(drug => 
+  return protocol.treatment.drugs.some(drug =>
     drug.name.toLowerCase().includes(normalizedDrugName)
   );
 };
 
 /**
- * Creates a simplified protocol summary for display
- * @param protocol The protocol to summarize
- * @returns Object with key summary information
+ * Creates a simplified protocol summary for display or logging
  */
 export const createProtocolSummary = (protocol: Protocol): Record<string, any> => {
   return {
     id: protocol.id,
     code: protocol.code,
     tumour_group: protocol.tumour_group,
-    treatment_intent: protocol.treatment_intent || '',
-    drugs: getDrugNames(protocol),
-    has_dose_modifications: !!(
-      protocol.dose_modifications && 
-      Object.values(protocol.dose_modifications).some(mods => 
-        Array.isArray(mods) && mods.length > 0
-      )
-    ),
-    has_supportive_care: !!(
-      getSupportiveCareItems(protocol).length > 0
-    ),
-    has_monitoring: !!(
-      getMonitoringParameters(protocol).length > 0
-    ),
+    treatment_intent: protocol.treatment_intent || protocol.overview?.treatment_intent || '',
+    drugs: protocol.treatment?.drugs?.map(d => d.name) || [],
+    has_dose_modifications: hasDoseModifications(protocol), // Checks for any dose modifications
+    has_supportive_care: getDrugSupportiveCare(protocol).length > 0,
+    has_monitoring: getAllMonitoringParameters(protocol).length > 0,
     created_at: protocol.created_at || '',
-    last_reviewed: protocol.last_reviewed || '',
-    summary: protocol.summary || ''
+    last_reviewed: protocol.last_reviewed || protocol.overview?.last_reviewed || '',
+    summary: protocol.summary || protocol.overview?.summary || ''
   };
 };
 
 /**
- * Compares two protocols for equivalence
- * @param protocol1 First protocol to compare
- * @param protocol2 Second protocol to compare
- * @returns boolean indicating if protocols are functionally equivalent
+ * Compares two protocols for basic equivalence (ID, code, tumour group, and drug names).
  */
-export const areProtocolsEquivalent = (protocol1: Protocol, protocol2: Protocol): boolean => {
-  // Check required fields
+export const areProtocolsEquivalent = (protocol1?: Protocol, protocol2?: Protocol): boolean => {
+  if (!protocol1 && !protocol2) return true; // Both null/undefined
+  if (!protocol1 || !protocol2) return false; // One is null/undefined, the other is not
+
   if (
     protocol1.id !== protocol2.id ||
     protocol1.code !== protocol2.code ||
@@ -817,20 +841,12 @@ export const areProtocolsEquivalent = (protocol1: Protocol, protocol2: Protocol)
   ) {
     return false;
   }
-  
-  // Compare drug lists
-  const drugs1 = getDrugNames(protocol1).sort();
-  const drugs2 = getDrugNames(protocol2).sort();
-  
-  if (drugs1.length !== drugs2.length) {
+
+  const drugs1 = (protocol1.treatment?.drugs?.map(d => d.name) || []).sort();
+  const drugs2 = (protocol2.treatment?.drugs?.map(d => d.name) || []).sort();
+
+  if (drugs1.length !== drugs2.length || !drugs1.every((val, index) => val === drugs2[index])) {
     return false;
   }
-  
-  for (let i = 0; i < drugs1.length; i++) {
-    if (drugs1[i] !== drugs2[i]) {
-      return false;
-    }
-  }
-  
   return true;
 };

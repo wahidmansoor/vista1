@@ -5,7 +5,7 @@ import { Button } from "../../../components/ui/button";
 import { ScrollArea } from "../../../components/ui/scroll-area";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { format } from 'date-fns';
-import type { Protocol, Drug } from '../../../types/protocol';
+import type { Protocol, Drug, ProtocolNote } from '../../../types/protocol';
 // Removed MonitoringTab import
 import TreatmentTab from './TreatmentTab';
 import TestsSectionTab from './TestsSectionTab';
@@ -54,8 +54,8 @@ const OverviewSection = ({ protocol }: { protocol?: Protocol }) => (
             ? protocol.eligibility.map((item, index) => (
                 <li key={index}>{item}</li>
               ))
-            : Object.entries(protocol.eligibility).map(([key, value]) => (
-                <li key={key}>
+            : Object.entries(protocol.eligibility as Record<string, string>).map(([key, value]) => (
+                <li key={key} className="text-gray-700">
                   <strong>{key}:</strong>{" "}
                   {Array.isArray(value) ? value.join(", ") : value}
                 </li>
@@ -67,13 +67,17 @@ const OverviewSection = ({ protocol }: { protocol?: Protocol }) => (
   </div>
 );
 
-const PrecautionsTab = ({ precautions }: { precautions?: string[] }) => (
+interface PrecautionsTabProps {
+  precautions?: ProtocolNote[];
+}
+
+const PrecautionsTab: React.FC<PrecautionsTabProps> = ({ precautions = [] }) => (
   <div>
     <h3 className="font-semibold text-lg mb-2">Precautions</h3>
-    {precautions && precautions.length > 0 ? (
+    {precautions.length > 0 ? (
       <ul className="list-disc list-inside space-y-1">
         {precautions.map((item, idx) => (
-          <li key={idx}>{item}</li>
+          <li key={idx}>{item.note}</li>
         ))}
       </ul>
     ) : (
@@ -110,11 +114,7 @@ const DrawerOverlay: React.FC<DrawerOverlayProps> = ({
     return null;
   }
   
-  // Set up data with fallbacks for each section to prevent errors
-  const monitoringData = protocol.monitoring || { baseline: [], ongoing: [] };
-  const treatmentData = protocol.treatment || { drugs: [] };
-  const testsData = protocol.tests || [];
-  const precautionsData = protocol.precautions || [];
+  // No need to set up variables that aren't being used anywhere
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);

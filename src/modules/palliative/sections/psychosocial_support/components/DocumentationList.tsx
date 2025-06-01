@@ -15,7 +15,7 @@ interface DocumentationListProps {
 export const DocumentationList: React.FC<DocumentationListProps> = ({ guidelines }) => {
   return (
     <Accordion type="multiple" className="w-full">
-      {guidelines.map((guideline) => (
+      {guidelines.map((guideline: DocumentationGuideline, index: number) => (
         <AccordionItem 
           key={guideline.id} 
           value={guideline.id}

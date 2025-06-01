@@ -19,7 +19,7 @@ export const ResourcesList: React.FC<ResourcesListProps> = ({ resources }) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {resources.map((resource) => (
+        {resources.map((resource: any, index: number) => (
           <div key={resource.id} className="relative group">
             <div className="h-full overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
               <div className="p-4 bg-gradient-to-r from-indigo-50/30 to-purple-50/30 dark:from-indigo-950/30 dark:to-purple-950/30 border-b border-gray-200 dark:border-gray-700">

@@ -135,7 +135,7 @@ const FamilySupport = () => {
         </Card>
       ) : (
         <div className="grid gap-6 md:grid-cols-2">
-          {state.familyMembers.map((member) => (
+          {state.familyMembers.map((member: FamilyMember, index: number) => (
             <Card key={member.id} className={member.isMainCaregiver ? "border-l-4 border-l-blue-500" : ""}>
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">

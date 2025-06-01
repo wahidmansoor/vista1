@@ -102,10 +102,10 @@ const SymptomPanel: React.FC = () => {
           </TabsTrigger>
         </TabsList>
 
-        {(['all', 'mild', 'moderate', 'severe', 'favorites'] as const).map(severity => (
+        {(['all', 'mild', 'moderate', 'severe', 'favorites'] as const).map((severity) => (
           <TabsContent key={severity} value={severity}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filterSymptoms(severity).map((symptom: Symptom) => (
+              {filterSymptoms(severity as 'all' | 'mild' | 'moderate' | 'severe' | 'favorites').map((symptom: Symptom) => (
                 <SeverityCard
                   key={symptom.id}
                   symptom={symptom}
@@ -114,7 +114,7 @@ const SymptomPanel: React.FC = () => {
                   isFavorite={favoriteSymptomIds.includes(symptom.id)}
                 />
               ))}
-              {filterSymptoms(severity).length === 0 && (
+              {filterSymptoms(severity as 'all' | 'mild' | 'moderate' | 'severe' | 'favorites').length === 0 && (
                 <div className="col-span-full text-center py-8 text-gray-500">
                   No {severity !== 'all' ? severity : ''} symptoms recorded
                 </div>

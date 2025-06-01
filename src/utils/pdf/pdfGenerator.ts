@@ -168,7 +168,7 @@ const formatProtocolForPDF = (
   // Warnings and precautions
   if (protocol.precautions?.length) {
     const warningsList = protocol.precautions.map(warning => 
-      `<li class="warning">⚠️ ${warning}</li>`
+      `<li class="warning">⚠️ ${warning.note}</li>`
     ).join('');
     
     sections.push(`

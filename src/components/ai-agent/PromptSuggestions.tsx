@@ -7,7 +7,28 @@ interface PromptSuggestionsProps {
   onSelect: (prompt: string) => void;
 }
 
-const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {  OPD: {
+const allPromptIntents: PromptIntent[] = [
+  'screening',
+  'general',
+  'triage',
+  'follow-up',
+  'dose-check',
+  'toxicity',
+  'evaluation',
+  'pathway',
+  'rescue-agent'
+];
+
+function fillPromptIntents(obj: Partial<Record<PromptIntent, string[]>>): Record<PromptIntent, string[]> {
+  const filled: Record<PromptIntent, string[]> = {} as Record<PromptIntent, string[]>;
+  for (const key of allPromptIntents) {
+    filled[key] = obj[key] || [];
+  }
+  return filled;
+}
+
+const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {
+  OPD: fillPromptIntents({
     screening: [
       'Analyze cancer screening recommendations for this patient',
       'Suggest additional screening tests based on risk factors',
@@ -23,8 +44,8 @@ const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {  OPD
       'Review toxicity management approach',
       'Suggest supportive care interventions'
     ]
-  },
-  CDU: {
+  }),
+  CDU: fillPromptIntents({
     toxicity: [
       'Review chemotherapy toxicity patterns',
       'Suggest prophylactic interventions',
@@ -35,8 +56,8 @@ const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {  OPD
       'Analyze dose modification patterns',
       'Suggest supportive care optimization'
     ]
-  },
-  Inpatient: {
+  }),
+  Inpatient: fillPromptIntents({
     triage: [
       'Analyze admission criteria compliance',
       'Review emergency response protocols',
@@ -47,7 +68,9 @@ const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {  OPD
       'Analyze complications and interventions',
       'Suggest discharge planning optimization'
     ]
-  }
+  }),
+  Palliative: fillPromptIntents({}),
+  RadOnc: fillPromptIntents({})
 };
 
 export const PromptSuggestions: React.FC<PromptSuggestionsProps> = ({

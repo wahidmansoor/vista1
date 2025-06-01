@@ -1,97 +1,96 @@
 import React from "react";
-
-type Test = {
-  name?: string;
-  timing?: string;
-  notes?: string;
-};
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Test } from '@/types/protocol'; // Assuming Test type is imported
 
 interface TestsSectionTabProps {
-  tests?: Array<Test> | { baseline?: string[]; monitoring?: string[] };
+  tests?: string[] | Test[] | { baseline?: string[] | Test[]; monitoring?: string[] | Test[] };
+  // Removed title prop as it's not used and not in the original brief for this step
 }
 
-// This component handles both test formats (array of test objects or object with baseline/monitoring arrays)
 const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests }) => {
-  if (!tests) {
-    return <p className="text-muted-foreground">No tests information available.</p>;
-  }
-
-  // Handle baseline/monitoring structure
-  if (!Array.isArray(tests)) {
-    const { baseline = [], monitoring = [] } = tests;
-    
-    if (baseline.length === 0 && monitoring.length === 0) {
-      return <p className="text-muted-foreground">No tests information available.</p>;
+  const renderTestList = (testData: string[] | Test[] | undefined, listTitle: string) => {
+    if (!testData || testData.length === 0) {
+      return <p className="text-sm text-gray-500">No {listTitle.toLowerCase()} tests specified.</p>;
     }
-    
+
     return (
-      <div className="space-y-6">
-        {baseline.length > 0 && (
-          <div>
-            <h3 className="font-semibold text-lg mb-2">Baseline Tests</h3>
-            <ul className="list-disc list-inside space-y-1">
-              {baseline.map((test, idx) => (
-                <li key={`baseline-${idx}`}>{test}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-        
-        {monitoring.length > 0 && (
-          <div>
-            <h3 className="font-semibold text-lg mb-2">Ongoing Tests</h3>
-            <ul className="list-disc list-inside space-y-1">
-              {monitoring.map((test, idx) => (
-                <li key={`monitoring-${idx}`}>{test}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+      <div>
+        <h4 className="font-semibold mb-1">{listTitle}</h4>
+        <ul className="list-disc pl-5 space-y-1 text-sm">
+          {testData.map((test, index) => {
+            if (typeof test === 'string') {
+              return <li key={index}>{test}</li>;
+            }
+            // Assuming Test object has a 'name' or similar property to display
+            // You might need to adjust this based on the actual structure of your Test type
+            return <li key={index}>{(test as Test).name || JSON.stringify(test)}</li>; 
+          })}
+        </ul>
       </div>
     );
+  };
+
+  let baselineTests: string[] | Test[] | undefined = [];
+  let monitoringTests: string[] | Test[] | undefined = [];
+
+  if (tests) {
+    if (Array.isArray(tests)) {
+      // If tests is a direct array, assume it's for baseline or general monitoring
+      // For simplicity, let's assign to baseline. Adjust if a different logic is needed.
+      baselineTests = tests;
+    } else {
+      if (tests.baseline) {
+        baselineTests = Array.isArray(tests.baseline) ? tests.baseline : [];
+      }
+      if (tests.monitoring) {
+        monitoringTests = Array.isArray(tests.monitoring) ? tests.monitoring : [];
+      }
+    }
   }
   
-  // Handle array of test objects structure
-  if (tests.length === 0) {
-    return <p className="text-muted-foreground">No tests information available.</p>;
+  const hasBaselineTests = baselineTests && baselineTests.length > 0;
+  const hasMonitoringTests = monitoringTests && monitoringTests.length > 0;
+
+  if (!hasBaselineTests && !hasMonitoringTests) {
+    return (
+      <Card className="mt-4">
+        <CardHeader>
+          <CardTitle>Tests</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-gray-500">No testing information provided for this protocol.</p>
+        </CardContent>
+      </Card>
+    );
   }
 
   return (
-    <div className="space-y-4">
-      <h3 className="font-semibold text-lg mb-2">Required Tests</h3>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-          <thead className="bg-gray-50 dark:bg-gray-800">
-            <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                Test
-              </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                Timing
-              </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                Notes
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
-            {tests.map((test, index) => (
-              <tr key={index}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                  {test.name || "N/A"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                  {test.timing || "N/A"}
-                </td>
-                <td className="px-6 py-4 whitespace-pre-line text-sm text-gray-500 dark:text-gray-400">
-                  {test.notes || "N/A"}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <Card className="mt-4">
+      <CardHeader>
+        <CardTitle>Tests</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Accordion type="single" collapsible className="w-full" defaultValue="baseline">
+          {hasBaselineTests && (
+            <AccordionItem value="baseline">
+              <AccordionTrigger>Baseline Tests</AccordionTrigger>
+              <AccordionContent>
+                {renderTestList(baselineTests, "Baseline")}
+              </AccordionContent>
+            </AccordionItem>
+          )}
+          {hasMonitoringTests && (
+            <AccordionItem value="monitoring">
+              <AccordionTrigger>Monitoring Tests</AccordionTrigger>
+              <AccordionContent>
+                {renderTestList(monitoringTests, "Monitoring")}
+              </AccordionContent>
+            </AccordionItem>
+          )}
+        </Accordion>
+      </CardContent>
+    </Card>
   );
 };
 

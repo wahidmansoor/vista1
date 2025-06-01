@@ -173,11 +173,9 @@ ${error.stack}
             </div>
           ) : (
             <div className="space-y-4">
-              <h2 className="text-lg font-semibold text-gray-900">
-                Captured Errors ({errors.length})
-              </h2>
               
-              {errors.map((error) => (
+              
+              {errors.map((error: any, index: number) => (
                 <div key={error.id} className="border border-gray-200 rounded-lg overflow-hidden">
                   <div 
                     className="p-4 bg-gray-50 cursor-pointer hover:bg-gray-100"

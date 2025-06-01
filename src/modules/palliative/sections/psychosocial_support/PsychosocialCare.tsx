@@ -49,7 +49,7 @@ const NewAssessmentDialog: React.FC<{
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-medium">Assessment Type</label>
-            <Tabs value={type} onValueChange={(value) => setType(value as AssessmentType)}>
+            <Tabs value={type} onValueChange={(value: string) => setType(value as AssessmentType)}>
               <TabsList className="grid grid-cols-2 gap-2">
                 {assessmentTypes.map(({ type, label }) => (
                   <TabsTrigger key={type} value={type} className="w-full">

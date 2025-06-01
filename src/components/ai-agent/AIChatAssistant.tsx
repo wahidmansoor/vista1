@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useAIResponseHistory } from '@/hooks/useAIResponseHistory';
 import { callAIAgent } from '@/lib/api/aiAgentAPI';
-import { ModuleType, PromptIntent } from '@/components/ai-agent/types';
+import { ModuleType, PromptIntent, AIResponse } from '@/components/ai-agent/types';
 import { toast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -70,7 +70,7 @@ export function AIChatAssistant({ module, intent, initialContext = '', mockMode 
     try {
       const enhancedPrompt = enhancePrompt(feedbackType);
       
-      const response = await callAIAgent({
+      const response: AIResponse = await callAIAgent({
         module,
         intent,
         prompt: enhancedPrompt,

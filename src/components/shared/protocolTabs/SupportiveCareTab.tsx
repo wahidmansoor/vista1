@@ -28,7 +28,7 @@ const DataRenderer: React.FC<{ data: any; title: string }> = ({ data, title }) =
     return (
       <div className="space-y-1">
         {Object.entries(data).length > 0 ? (
-          Object.entries(data).map(([key, value]) => (
+          Object.entries(data).map(([key, value]: [string, any]) => (
             <div key={key} className="mb-2">
               <span className="font-semibold text-sm">{key}:</span>{" "}
               {Array.isArray(value) ? (

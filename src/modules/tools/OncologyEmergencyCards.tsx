@@ -120,7 +120,7 @@ const OncologyEmergencyCards: React.FC = () => {
             />
           </div>
           
-          <Tabs defaultValue="grid" onValueChange={(value) => setViewMode(value as 'grid' | 'list')}>
+          <Tabs defaultValue="grid" onValueChange={(value: string) => setViewMode(value as 'grid' | 'list')}>
             <TabsList className="grid w-[100px] grid-cols-2">
               <TabsTrigger value="grid" className="p-2">
                 <div className="grid grid-cols-2 gap-1 w-5 h-5">

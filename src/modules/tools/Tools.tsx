@@ -65,7 +65,7 @@ const Tools: React.FC = () => {
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">🛠️ Tools Hub</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {tools.map((tool) => (
+        {tools.map((tool: any, index: number) => (
           <ToolCard
             key={tool.id}
             title={tool.title}

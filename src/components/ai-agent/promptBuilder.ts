@@ -80,9 +80,25 @@ const PROMPT_TEMPLATES: Record<ModuleType, Partial<Record<PromptIntent, PromptTe
 };
 
 /**
- * Default fallback templates when specific module+intent combination isn't found
+ * Ensure all PromptIntent keys are present in DEFAULT_TEMPLATES
  */
+const ALL_PROMPT_INTENTS: PromptIntent[] = [
+  'screening',
+  'general',
+  'triage',
+  'follow-up',
+  'dose-check',
+  'toxicity',
+  'evaluation',
+  'pathway',
+  'rescue-agent'
+];
+
 const DEFAULT_TEMPLATES: Record<PromptIntent, PromptTemplate> = {
+  'screening': {
+    instruction: 'Evaluate cancer screening needs and recommendations.',
+    contextPrefix: 'Patient factors:\n'
+  },
   'general': {
     instruction: 'Provide clinical guidance based on oncology best practices.',
     contextPrefix: 'Clinical context:\n'
@@ -91,29 +107,29 @@ const DEFAULT_TEMPLATES: Record<PromptIntent, PromptTemplate> = {
     instruction: 'Evaluate clinical urgency and recommend appropriate actions.',
     contextPrefix: 'Patient status:\n'
   },
-  'dose-check': {
-    instruction: 'Review treatment dosing parameters for safety and appropriateness.',
-    contextPrefix: 'Dosing context:\n'
-  },
-  'rescue-agent': {
-    instruction: 'Provide emergency management recommendations.',
-    contextPrefix: 'Emergency details:\n'
-  },
-  'screening': {
-    instruction: 'Evaluate cancer screening needs and recommendations.',
-    contextPrefix: 'Patient factors:\n'
-  },
   'follow-up': {
     instruction: 'Recommend appropriate follow-up and monitoring plan.',
     contextPrefix: 'Clinical history:\n'
+  },
+  'dose-check': {
+    instruction: 'Review treatment dosing parameters for safety and appropriateness.',
+    contextPrefix: 'Dosing context:\n'
   },
   'toxicity': {
     instruction: 'Assess treatment-related toxicity and provide management guidance.',
     contextPrefix: 'Toxicity details:\n'
   },
+  'evaluation': {
+    instruction: 'Evaluate patient status and summarize key findings.',
+    contextPrefix: 'Evaluation context:\n'
+  },
   'pathway': {
     instruction: 'Guide clinical decision-making based on established pathways.',
     contextPrefix: 'Clinical scenario:\n'
+  },
+  'rescue-agent': {
+    instruction: 'Provide emergency management recommendations.',
+    contextPrefix: 'Emergency details:\n'
   }
 };
 

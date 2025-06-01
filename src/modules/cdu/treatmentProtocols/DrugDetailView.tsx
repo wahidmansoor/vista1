@@ -1,31 +1,21 @@
 import React from 'react';
+import { ProtocolDrug } from '@/types/protocol';
 
 interface DrugDetailViewProps {
-  drug: {
-    name: string;
-    dosage?: string;
-    route?: string;
-    schedule?: string;
-    premedication?: string[];
-    special_instructions?: string[];
-    pharmacology?: {
-      mechanism?: string;
-      classification?: string;
-      pharmacokinetics?: string[];
-    };
-  };
+  drug: ProtocolDrug;
+  onBack: () => void;
 }
 
-const DrugDetailView: React.FC<DrugDetailViewProps> = ({ drug }) => {
+const DrugDetailView: React.FC<DrugDetailViewProps> = ({ drug, onBack }) => {
   return (
     <div className="bg-white dark:bg-gray-900 rounded-md shadow p-4">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">{drug.name}</h3>
       
       <div className="space-y-3">
-        {drug.dosage && (
+        {drug.dose && (
           <div>
             <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Dosage</h4>
-            <p className="text-gray-600 dark:text-gray-400">{drug.dosage}</p>
+            <p className="text-gray-600 dark:text-gray-400">{drug.dose}</p>
           </div>
         )}
         
@@ -54,12 +44,12 @@ const DrugDetailView: React.FC<DrugDetailViewProps> = ({ drug }) => {
           </div>
         )}
         
-        {drug.special_instructions && drug.special_instructions.length > 0 && (
+        {drug.special_notes && drug.special_notes.length > 0 && (
           <div>
             <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Special Instructions</h4>
             <ul className="list-disc ml-5">
-              {drug.special_instructions.map((instruction, index) => (
-                <li key={index} className="text-gray-600 dark:text-gray-400">{instruction}</li>
+              {drug.special_notes.map((note, index) => (
+                <li key={index} className="text-gray-600 dark:text-gray-400">{note}</li>
               ))}
             </ul>
           </div>

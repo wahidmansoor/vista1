@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import ContentRenderer from '@/modules/handbook/ContentRenderer';
+import { ContentRenderer } from '@/modules/handbook/ContentRenderer';
 
 interface HandbookPageProps {
   basePath?: string;

@@ -123,10 +123,19 @@ export interface ProtocolEligibility {
 // Drug structure for use in Protocol.treatment
 export interface ProtocolDrug {
   name: string;
-  dose: string;
-  administration: string;
-  special_notes: string[];
-  supportiveCare?: string[];
+  dose?: string;
+  administration?: string;
+  timing?: string;
+  route?: string;
+  alternative_switches?: string[];
+  supportiveCare?: Array<string | SupportiveCareItem>;
+  contraindications?: string[];
+  special_notes?: string[];
+  drug_class?: string;
+  id?: string;
+  precautions?: ProtocolNote[];
+  dose_modifications?: DoseModification;
+  toxicity_monitoring?: ToxicityMonitoring;
 }
 
 // Base Protocol interface matching database schema
@@ -143,14 +152,15 @@ export interface Protocol {
   overview?: ProtocolOverview;
   treatment?: {
     drugs: ProtocolDrug[];
-  };  tests?: {
+  };
+  tests?: {
     baseline?: Test[] | string[];
     monitoring?: Test[] | string[];
-  } | Test[];
+  };
   status?: string;  dose_modifications?: DoseModification;
   precautions: ProtocolNote[];
   contraindications?: string | any[];
-  reference_list?: string[];
+  reference_list?: Array<string | { citation?: string; title?: string; [key: string]: any }>;
   created_at?: string;
   updated_at?: string;
   pharmacokinetics?: Record<string, unknown>;

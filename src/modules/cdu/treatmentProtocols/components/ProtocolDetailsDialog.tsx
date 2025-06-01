@@ -3,10 +3,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { AlertTriangle, Package, Shield, BookOpen, Pill } from "lucide-react";
-import { Protocol, Test } from "@/types/protocol";
+import { Protocol, Test, DoseModification } from "@/types/protocol";
 import TreatmentTab from "../tabs/TreatmentTab";
 import TestsSectionTab from "../tabs/TestsSectionTab";
 import { DoseModificationsTab } from "../tabs/DoseModificationsTab";
+import { isValidProtocol } from '@/utils/protocolHelpers';
 
 interface ProtocolDetailsDialogProps {
   protocol: Protocol;
@@ -87,21 +88,50 @@ const InfoTab: React.FC<InfoTabProps> = ({
 const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol, open, onOpenChange }) => {
   // Set up data with fallbacks for each section
   const monitoring = React.useMemo(() => protocol.monitoring || { baseline: [], ongoing: [] }, [protocol.monitoring]);
-  const treatment = React.useMemo(() => protocol.treatment || { drugs: [] }, [protocol.treatment]);  const tests = React.useMemo(() => {
+  const treatment = React.useMemo(() => {
+    // Compose a Treatment object with all expected fields for TreatmentTab
+    const t = protocol.treatment && typeof protocol.treatment === 'object' ? protocol.treatment : { drugs: [] };
+    return {
+      drugs: Array.isArray(t.drugs) ? t.drugs : [],
+      intent: protocol.treatment_intent || (t as any).intent,
+      route: (t as any).route,
+      schedule: (t as any).schedule,
+      cycle_length: (t as any).cycle_length,
+      total_cycles: (t as any).total_cycles,
+      notes: Array.isArray((t as any).notes) ? (t as any).notes : protocol.notes,
+      premedication: Array.isArray((t as any).premedication) ? (t as any).premedication : undefined,
+    };
+  }, [protocol.treatment, protocol.treatment_intent, protocol.notes]);
+  const tests = React.useMemo(() => {
     if (Array.isArray(protocol.tests)) {
       return { baseline: [], monitoring: [] };
     }
     return protocol.tests || { baseline: [], monitoring: [] };
   }, [protocol.tests]);
   const doseModifications = React.useMemo(() => {
-    const modifications = protocol.dose_modifications || {} as any;
-    return {
-      hematological: Array.isArray(modifications.hematological) ? modifications.hematological : [],
-      nonHematological: Array.isArray(modifications.nonHematological) ? modifications.nonHematological : [],
-      renal: Array.isArray(modifications.renal) ? modifications.renal : [],
-      hepatic: Array.isArray(modifications.hepatic) ? modifications.hepatic : []
+    if (!isValidProtocol(protocol)) {
+      return {
+        hematological: [],
+        nonHematological: [],
+        renal: [],
+        hepatic: []
+      };
+    }
+    return protocol.dose_modifications ?? {
+      hematological: [],
+      nonHematological: [],
+      renal: [],
+      hepatic: []
     };
-  }, [protocol.dose_modifications]);const toxicityMonitoring = React.useMemo(() => {
+  }, [protocol]);
+
+  // Ensure null safety checks for dose_modifications properties
+  const hematological = Array.isArray(doseModifications.hematological) ? doseModifications.hematological : [];
+  const nonHematological = Array.isArray(doseModifications.nonHematological) ? doseModifications.nonHematological : [];
+  const renal = Array.isArray(doseModifications.renal) ? doseModifications.renal : [];
+  const hepatic = Array.isArray(doseModifications.hepatic) ? doseModifications.hepatic : [];
+
+  const toxicityMonitoring = React.useMemo(() => {
     const toxicityData = protocol.toxicity_monitoring || {} as any;
     return {
       expected_toxicities: Array.isArray(toxicityData.expected_toxicities) ? toxicityData.expected_toxicities : [],
@@ -109,14 +139,16 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
       frequency_details: toxicityData.frequency_details || '',
       thresholds_for_action: toxicityData.thresholds_for_action || {}
     };
-  }, [protocol.toxicity_monitoring]);const supportiveCare = React.useMemo(() => {
+  }, [protocol.toxicity_monitoring]);
+  const supportiveCare = React.useMemo(() => {
     const supportiveData = protocol.supportive_care || {} as any;
     return {
       required: Array.isArray(supportiveData.required) ? supportiveData.required : [],
       optional: Array.isArray(supportiveData.optional) ? supportiveData.optional : [],
       monitoring: Array.isArray(supportiveData.monitoring) ? supportiveData.monitoring : []
     };
-  }, [protocol.supportive_care]);  const interactions = React.useMemo(() => {
+  }, [protocol.supportive_care]);
+  const interactions = React.useMemo(() => {
     const interactionData = protocol.interactions || {} as any;
     return {
       drugs_to_avoid: Array.isArray(interactionData.drugs_to_avoid) ? interactionData.drugs_to_avoid : [],
@@ -223,9 +255,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
             <div className="space-y-6">
               <div>
                 <h3 className="font-semibold text-lg mb-2">Baseline Monitoring</h3>
-                {monitoring.baseline?.length > 0 ? (
+                {Array.isArray(monitoring.baseline) && monitoring.baseline.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {monitoring.baseline.map((item: string, idx: number) => (
+                    {monitoring.baseline?.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
@@ -236,9 +268,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Ongoing Monitoring</h3>
-                {monitoring.ongoing?.length > 0 ? (
+                {Array.isArray(monitoring.ongoing) && monitoring.ongoing.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {monitoring.ongoing.map((item: string, idx: number) => (
+                    {monitoring.ongoing?.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
@@ -257,9 +289,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
           </TabsContent>          <TabsContent value="doseModifications">
             <div className="space-y-6">              <div>
                 <h3 className="font-semibold text-lg mb-2">Hematological Modifications</h3>
-                {Array.isArray(doseModifications.hematological) && doseModifications.hematological.length > 0 ? (
+                {Array.isArray(hematological) && hematological.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.hematological?.map((item: string, idx: number) => (
+                    {hematological?.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
@@ -270,9 +302,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Non-Hematological Modifications</h3>
-                {Array.isArray(doseModifications.nonHematological) && doseModifications.nonHematological.length > 0 ? (
+                {Array.isArray(nonHematological) && nonHematological.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.nonHematological?.map((item: string, idx: number) => (
+                    {nonHematological?.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>                ) : (
@@ -282,9 +314,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Renal Modifications</h3>
-                {Array.isArray(doseModifications.renal) && doseModifications.renal.length > 0 ? (
+                {Array.isArray(renal) && renal.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.renal?.map((item: string, idx: number) => (
+                    {renal?.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
@@ -294,9 +326,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               </div>
                 <div>
                 <h3 className="font-semibold text-lg mb-2">Hepatic Modifications</h3>
-                {Array.isArray(doseModifications.hepatic) && doseModifications.hepatic.length > 0 ? (
+                {Array.isArray(hepatic) && hepatic.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.hepatic?.map((item: string, idx: number) => (
+                    {hepatic?.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
@@ -316,19 +348,16 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               </CardHeader>
               <CardContent className="space-y-4">
                 {protocol.precautions && (
-                  <div>
-                    <h4 className="font-semibold text-amber-600 mb-2">Precautions</h4>
-                    <div className="bg-amber-50 p-3 rounded border-l-4 border-amber-400">
-                      {typeof protocol.precautions === 'string' 
-                        ? protocol.precautions 
-                        : Array.isArray(protocol.precautions)
-                        ? protocol.precautions.map((item: any, idx: number) => (
-                            <div key={idx} className="mb-2 last:mb-0">
-                              {typeof item === 'object' ? item.note || JSON.stringify(item) : item}
-                            </div>
-                          ))
-                        : JSON.stringify(protocol.precautions, null, 2)}
-                    </div>
+                  <div className="bg-amber-50 border border-amber-200 dark:bg-amber-900/30 dark:border-amber-700 p-4 rounded-lg shadow-sm">
+                    <h4 className="font-semibold text-amber-700 dark:text-amber-400 mb-2 flex items-center">
+                      <AlertTriangle className="h-5 w-5 mr-2 text-amber-500" />
+                      Precautions
+                    </h4>
+                    <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                      {(Array.isArray(protocol.precautions) ? protocol.precautions.map(p => p.note) : [String(protocol.precautions)]).map((item: string, idx: number) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
                   </div>
                 )}
                 
@@ -495,8 +524,8 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                     <h4 className="font-semibold mb-2 text-orange-600">Emergency Action Thresholds</h4>
                     <div className="bg-orange-50 p-3 rounded border-l-4 border-orange-400">
                       <div className="grid gap-2">
-                        {Object.entries(toxicityMonitoring.thresholds_for_action).map(([condition, action]: [string, string], idx: number) => (
-                          <div key={idx} className="bg-white p-2 rounded border border-orange-200">
+                        {Object.entries(toxicityMonitoring.thresholds_for_action as Record<string, string>).map(([condition, action], idx) => (
+                          <div key={condition} className="bg-white p-2 rounded border border-orange-200">
                             <span className="font-medium text-orange-800">{condition}:</span>
                             <span className="ml-2 text-gray-700">{action}</span>
                           </div>
@@ -528,20 +557,24 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                   <div>
                     <h4 className="font-semibold mb-2 text-blue-600">Clinical References</h4>
                     <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
-                      {typeof protocol.reference_list === 'string' 
-                        ? protocol.reference_list 
-                        : Array.isArray(protocol.reference_list)
-                        ? protocol.reference_list.length > 0
-                          ? protocol.reference_list.map((ref: any, idx: number) => (
-                              <div key={idx} className="mb-3 last:mb-0 p-2 bg-white rounded border border-blue-200">
-                                <span className="text-sm text-blue-800 font-medium">[{idx + 1}]</span>
-                                <span className="ml-2">
-                                  {typeof ref === 'object' ? ref.citation || ref.title || JSON.stringify(ref) : ref}
-                                </span>
-                              </div>
-                            ))
-                          : "No references available"
-                        : JSON.stringify(protocol.reference_list, null, 2)}
+                      {typeof protocol.reference_list === 'string' ? (
+                        protocol.reference_list
+                      ) : Array.isArray(protocol.reference_list) ? (
+                        protocol.reference_list.length > 0 ? (
+                          protocol.reference_list.map((ref, idx) => (
+                            <div key={idx} className="mb-3 last:mb-0 p-2 bg-white rounded border border-blue-200">
+                              <span className="text-sm text-blue-800 font-medium">[{idx + 1}]</span>
+                              <span className="ml-2">
+                                {typeof ref === 'object' ? ref.citation || ref.title || JSON.stringify(ref) : ref}
+                              </span>
+                            </div>
+                          ))
+                        ) : (
+                          "No references available"
+                        )
+                      ) : (
+                        JSON.stringify(protocol.reference_list, null, 2)
+                      )}
                     </div>
                   </div>
                 )}
@@ -634,8 +667,8 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 <div>
                   <h3 className="font-semibold text-lg mb-2">Action Thresholds</h3>
                   <div className="grid gap-2">
-                    {Object.entries(toxicityMonitoring.thresholds_for_action).map(([condition, action]: [string, string], idx: number) => (
-                      <div key={idx} className="bg-muted p-2 rounded-md">
+                    {Object.entries(toxicityMonitoring.thresholds_for_action as Record<string, string>).map(([condition, action], index) => (
+                      <div key={index} className="bg-muted p-2 rounded-md">
                         <span className="font-medium">{condition}:</span> {action}
                       </div>
                     ))}

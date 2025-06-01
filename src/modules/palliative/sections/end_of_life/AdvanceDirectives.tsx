@@ -92,8 +92,8 @@ const AdvanceDirectives = () => {
               <Label>Type of Directive</Label>
               <RadioGroup
                 value={newDirective.type}
-                onValueChange={(value: AdvanceDirective["type"]) => 
-                  setNewDirective(prev => ({ ...prev, type: value }))
+                onValueChange={(value: string) => 
+                  setNewDirective(prev => ({ ...prev, type: value as AdvanceDirective["type"] }))
                 }
                 className="grid grid-cols-2 gap-4 mt-2"
               >
