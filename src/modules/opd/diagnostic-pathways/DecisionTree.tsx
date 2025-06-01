@@ -4,10 +4,10 @@ import PathwaySummaryCard from "../components/PathwaySummaryCard";
 import { Info } from "lucide-react";
 
 interface Props {
-  tree: StepBasedPathway;
+  pathway: StepBasedPathway;
 }
 
-const DecisionTree: React.FC<Props> = ({ tree }) => {
+const DecisionTree: React.FC<Props> = ({ pathway }) => {
   const [currentStepId, setCurrentStepId] = useState("initial");
   const [progress, setProgress] = useState<PathwayProgress>({
     completedSteps: [],
@@ -16,24 +16,22 @@ const DecisionTree: React.FC<Props> = ({ tree }) => {
     timeStarted: Date.now()
   });
 
-  const currentStep = tree.steps.find(step => step.id === currentStepId);
+  const currentStep = pathway.steps.find(step => step.id === currentStepId);
 
   // Calculate summary for the progress card
   const calculateSummary = (): PathwaySummaryType => {
-    const totalSteps = tree.steps.length;
+    const totalSteps = pathway.steps.length;
     const completedSteps = progress.completedSteps.length;
     
     // Get active red flags from completed steps
-    const activeRedFlags = tree.steps
+    const activeRedFlags = pathway.steps
       .filter(step => progress.redFlagsTriggered.some(flagId => 
         step.redFlags?.some(flag => flag.id === flagId)
       ))
       .flatMap(step => step.redFlags || [])
-      .filter(flag => progress.redFlagsTriggered.includes(flag.id));
-
-    // Calculate estimated time remaining based on pathway recommendedTimeframe
-    const estimatedTimeRemaining = tree.recommendedTimeframe 
-      ? `${tree.recommendedTimeframe} (estimated)`
+      .filter(flag => progress.redFlagsTriggered.includes(flag.id));    // Calculate estimated time remaining based on pathway recommendedTimeframe
+    const estimatedTimeRemaining = pathway.recommendedTimeframe
+      ? `${pathway.recommendedTimeframe} (estimated)`
       : undefined;
 
     // Determine next actions based on current step

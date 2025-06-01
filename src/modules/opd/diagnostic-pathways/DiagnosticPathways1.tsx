@@ -353,10 +353,9 @@ when: `Recommended timing for ${stepName}`,
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
                       className="px-6 pb-6"
-                    >
-                      {/* Conditionally render DecisionTree for Lung Cancer, otherwise render steps */}
+                    >                      {/* Conditionally render DecisionTree for Lung Cancer, otherwise render steps */}
                       {isLungCancerPathway && pathway.decisionTree ? (
-                        <DecisionTree tree={pathway.decisionTree} />
+                        <DecisionTree pathway={pathway.decisionTree} />
                       ) : (
                         <>
                           {/* Steps List with subtle divider between items */}

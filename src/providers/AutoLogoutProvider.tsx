@@ -6,6 +6,8 @@ import AutoLogoutWarning from '../components/AutoLogoutWarning';
 interface AutoLogoutContextType {
   timeRemaining: number;
   isWarningShown: boolean;
+  showWarning: boolean;
+  isActive: boolean;
   extendSession: () => void;
   logout: () => void;
 }
@@ -50,10 +52,11 @@ export const AutoLogoutProvider: React.FC<AutoLogoutProviderProps> = ({
       console.log('User logged out due to inactivity');
     }
   });
-
   const contextValue: AutoLogoutContextType = {
     timeRemaining,
     isWarningShown,
+    showWarning: isWarningShown,
+    isActive: isAuthenticated && timeRemaining > 0,
     extendSession,
     logout
   };

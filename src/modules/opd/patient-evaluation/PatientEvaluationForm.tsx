@@ -364,9 +364,8 @@ const PatientEvaluationForm: React.FC = () => {
             <h3 className="text-blue-800 font-semibold flex items-center gap-2 mb-2">
               <CheckCircle className="w-5 h-5" />
               Clinical Guidance
-            </h3>
-            <ul className="list-disc list-inside space-y-1 text-blue-700">
-              {currentTemplate.notes.map((note, index) => (
+            </h3>            <ul className="list-disc list-inside space-y-1 text-blue-700">
+              {currentTemplate.notes?.map((note, index) => (
                 <li key={index}>{note}</li>
               ))}
             </ul>
@@ -377,9 +376,8 @@ const PatientEvaluationForm: React.FC = () => {
             <h3 className="text-red-800 font-semibold flex items-center gap-2 mb-2">
               <AlertTriangle className="w-5 h-5" />
               Red Flags to Monitor
-            </h3>
-            <ul className="list-disc list-inside space-y-1 text-red-700">
-              {currentTemplate.redFlags.map((flag, index) => (
+            </h3>            <ul className="list-disc list-inside space-y-1 text-red-700">
+              {currentTemplate.redFlags?.map((flag, index) => (
                 <li key={index}>{flag}</li>
               ))}
             </ul>

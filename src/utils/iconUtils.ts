@@ -190,13 +190,10 @@ export function renderIcon(
   } = {}
 ): React.ReactElement {
   const IconComponent = getIconComponent(iconName);
-  
-  if (!IconComponent) {
+    if (!IconComponent) {
     // Return a default help circle icon as fallback
-    return React.createElement(LucideIcons.HelpCircle, {
-      ...props,
-      title: `Icon "${iconName}" not found`
-    });
+    console.warn(`Icon "${iconName}" not found, using fallback`);
+    return React.createElement(LucideIcons.HelpCircle, props);
   }
   
   return React.createElement(IconComponent, props);

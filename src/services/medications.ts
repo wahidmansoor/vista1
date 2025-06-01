@@ -156,13 +156,15 @@ export const fetchMedications = async (searchTerm?: string): Promise<Medication[
       )
     `.trim()) : '';
 
-    const url = `${baseUrl}/select=*${filter ? `&${filter}` : ''}&order=name.asc.nullslast`;
-
+    const url = `${baseUrl}/select=*${filter ? `&${filter}` : ''}&order=name.asc.nullslast`;    const apiKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+    
     const response = await fetch(url, {
+      method: 'GET',
       headers: {
-        apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-      },
+        'apikey': apiKey,
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      }
     });
 
     if (!response.ok) {

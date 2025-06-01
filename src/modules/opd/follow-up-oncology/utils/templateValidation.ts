@@ -22,9 +22,8 @@ export const validateTemplate = (
     'qolTopics',
     'commonSymptoms'
   ];
-
   requiredSections.forEach(section => {
-    if (!template[section]) {
+    if (!(template as any)[section]) {
       errors.push(`Missing required section: ${section}`);
     }
   });
@@ -71,7 +70,7 @@ export const validateTemplate = (
 
 export const formatFrequency = (frequency: string): string => {
   // Convert standardized frequency to human-readable format
-  const patterns = {
+  const patterns: Record<string, string> = {
     '3m': '3 months',
     '6m': '6 months',
     '1y': '1 year'

@@ -185,7 +185,7 @@ export async function initializeContentIndex(section: HandbookSection): Promise<
             version: contentData.metadata?.version,
             lastUpdated: contentData.metadata?.lastUpdated,
             tags: contentData.metadata?.tags,
-            clinicalLevel: contentData.metadata?.clinicalLevel as any
+            clinicalLevel: 'basic' as 'basic' | 'intermediate' | 'advanced' // Default since clinicalLevel not in metadata
           },
           headings,
           contentBlocks: contentData.content
@@ -216,7 +216,7 @@ export async function initializeContentIndex(section: HandbookSection): Promise<
  * @param matches Match indices from Fuse.js
  * @returns Excerpt with highlighted match
  */
-function getExcerpt(content: string, matches: [number, number][]): string {
+function getExcerpt(content: string, matches: readonly [number, number][]): string {
   if (!matches.length) return '';
   
   // Use the first match for excerpt
@@ -312,14 +312,13 @@ export async function enhancedHandbookSearch(
     
     // Perform search
     const sectionResults = fuse.search(query);
-    
-    // Map to enhanced results
+      // Map to enhanced results
     const mappedResults = sectionResults.map(result => {
       const { item, matches = [], score = 1 } = result;
       
       // Extract matched content for excerpt generation
       let matchedText = '';
-      let contentMatches: [number, number][] = [];
+      let contentMatches: readonly [number, number][] = [];
       
       matches.forEach(match => {
         if (match.key === 'content' && match.indices.length) {
@@ -333,12 +332,19 @@ export async function enhancedHandbookSearch(
         findMatchingBlocks(item.contentBlocks, matchedText) :
         [];
       
+      // Map matches to expected format
+      const mappedMatches = matches.map(match => ({
+        field: match.key || '',
+        value: match.value || '',
+        indices: match.indices as [number, number][]
+      }));
+      
       return {
         id: item.id,
         title: item.title,
         section: item.section,
         path: item.path,
-        matches,
+        matches: mappedMatches,
         score,
         metadata: item.metadata,
         summary: item.content.substring(0, 150) + (item.content.length > 150 ? '...' : ''),

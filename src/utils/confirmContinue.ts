@@ -4,5 +4,5 @@ export const confirmContinue = (language: string = 'en'): string => {
     de: 'Weiter iterieren?'
   };
   
-  return translations[language] || translations['en'];
+  return translations[language as keyof typeof translations] || translations['en'];
 };

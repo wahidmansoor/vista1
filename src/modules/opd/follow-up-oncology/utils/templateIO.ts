@@ -24,8 +24,7 @@ export const importTemplate = async (
       throw new Error(`Invalid template: ${validation.errors.join(', ')}`);
     }
 
-    return parsed;
-  } catch (error) {
-    throw new Error(`Failed to import template: ${error.message}`);
+    return parsed;  } catch (error) {
+    throw new Error(`Failed to import template: ${error instanceof Error ? error.message : String(error)}`);
   }
 };

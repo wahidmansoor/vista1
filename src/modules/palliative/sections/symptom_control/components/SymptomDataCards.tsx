@@ -133,23 +133,10 @@ const SymptomDataCards: React.FC = () => {
           category: categoryColorMapping
         }}
         defaultColorMapping="severity"
-        fields={[
-          {
+        fields={[          {
             key: 'severity',
             label: 'Severity',
-            badge: true,
-            className: (value, data) => {
-              switch (data.severity) {
-                case 'mild':
-                  return 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800';
-                case 'moderate':
-                  return 'bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-800';
-                case 'severe':
-                  return 'bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800';
-                default:
-                  return '';
-              }
-            }
+            badge: true
           },
           {
             key: 'status',
@@ -175,10 +162,9 @@ const SymptomDataCards: React.FC = () => {
                 <span>{value ? format(new Date(value), 'MMM d, yyyy') : 'Unknown'}</span>
               </div>
             )
-          },
-          {
+          },          {
             key: 'hasRedFlags',
-            visible: (_, data) => data.redFlags && data.redFlags.length > 0,
+            visible: (_, data): boolean => !!(data.redFlags && data.redFlags.length > 0),
             format: () => (
               <div className="flex items-center gap-1 mt-1 text-red-600 dark:text-red-400">
                 <AlertTriangle className="w-3.5 h-3.5" />
