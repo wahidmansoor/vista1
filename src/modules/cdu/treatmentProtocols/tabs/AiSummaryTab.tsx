@@ -3,25 +3,39 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 
+import type { Protocol } from '@/types/protocol';
+
+type SummaryState = {
+  loading: boolean;
+  data: string | null;
+  error: string | null;
+};
+
+// Extended type for AI summary specific fields
+interface AISummaryProtocol extends Protocol {
+  regimen_details?: string;
+  details?: string;  // Fallback for older data
+}
+
 interface AiSummaryTabProps {
-  protocol: {
-    id?: string;
-    code: string;
-    name?: string;
-    tumour_group: string;
-    treatment_intent?: string;
-    regimen_details?: string;
-  };
+  protocol: AISummaryProtocol;
+}
+
+function getProtocolDetails(protocol: AISummaryProtocol): string {
+  return protocol.regimen_details || protocol.details || '';
 }
 
 const AiSummaryTab: React.FC<AiSummaryTabProps> = ({ protocol }) => {
-  const [loading, setLoading] = useState(false);
-  const [summary, setSummary] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [state, setState] = useState<SummaryState>({
+    loading: false,
+    data: null,
+    error: null
+  });
 
-  const generateSummary = async () => {
-    setLoading(true);
-    setError(null);
+  const { loading, data: summary, error } = state;
+
+  const generateSummary = async (): Promise<void> => {
+    setState(prev => ({ ...prev, loading: true, error: null }));
     
     try {
       // In a real implementation, this would call an AI service
@@ -30,7 +44,7 @@ const AiSummaryTab: React.FC<AiSummaryTabProps> = ({ protocol }) => {
       
       const simulatedSummary = `
         Protocol ${protocol.code} is a ${protocol.treatment_intent || 'treatment'} regimen 
-        for ${protocol.tumour_group} patients. ${protocol.regimen_details || ''}
+        for ${protocol.tumour_group} patients. ${getProtocolDetails(protocol)}
         
         Key considerations:
         - Monitor for myelosuppression and adjust doses accordingly
@@ -39,12 +53,19 @@ const AiSummaryTab: React.FC<AiSummaryTabProps> = ({ protocol }) => {
         - Consider prophylactic antiemetics
       `;
       
-      setSummary(simulatedSummary.trim());
-    } catch (err) {
+      setState({
+        loading: false,
+        data: simulatedSummary.trim(),
+        error: null
+      });
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to generate summary';
       console.error('Error generating AI summary:', err);
-      setError('Failed to generate summary. Please try again later.');
-    } finally {
-      setLoading(false);
+      setState({
+        loading: false,
+        data: null,
+        error: errorMessage
+      });
     }
   };
 

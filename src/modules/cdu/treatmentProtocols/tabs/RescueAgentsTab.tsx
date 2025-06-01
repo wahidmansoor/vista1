@@ -11,13 +11,24 @@ import {
 import { Shield, AlertCircle } from 'lucide-react';
 import type { Protocol, RescueAgent } from '@/types/protocol';
 
+type EmergencyProcedures = string | string[];
+
+interface ExtendedProtocol extends Protocol {
+  emergency_procedures?: EmergencyProcedures;
+}
+
 interface RescueAgentsTabProps {
-  protocol: Protocol;
+  protocol: ExtendedProtocol;
 }
 
 const RescueAgentsTab: React.FC<RescueAgentsTabProps> = ({ protocol }) => {
-  const rescueAgents = protocol.rescue_agents || [];
-  const hasRescueAgents = Array.isArray(rescueAgents) && rescueAgents.length > 0;
+  const rescueAgents: RescueAgent[] = protocol.rescue_agents || [];
+  const hasRescueAgents = rescueAgents.length > 0;
+
+  const getEmergencyProcedures = (procedures: EmergencyProcedures | undefined): string[] => {
+    if (!procedures) return [];
+    return Array.isArray(procedures) ? procedures : [procedures];
+  };
   
   return (
     <div className="space-y-6 p-4">
@@ -69,13 +80,9 @@ const RescueAgentsTab: React.FC<RescueAgentsTabProps> = ({ protocol }) => {
           <Card>
             <CardContent className="p-6">
               <ul className="space-y-3 list-disc pl-5">
-                {Array.isArray(protocol.emergency_procedures) ? (
-                  protocol.emergency_procedures.map((procedure, idx) => (
-                    <li key={idx} className="text-gray-700 dark:text-gray-300">{procedure}</li>
-                  ))
-                ) : (
-                  <li className="text-gray-700 dark:text-gray-300">{protocol.emergency_procedures}</li>
-                )}
+                {getEmergencyProcedures(protocol.emergency_procedures).map((procedure, idx) => (
+                  <li key={idx} className="text-gray-700 dark:text-gray-300">{procedure}</li>
+                ))}
               </ul>
             </CardContent>
           </Card>

@@ -18,8 +18,8 @@ interface TreatmentTabProps {
 }
 
 const TreatmentTab: React.FC<TreatmentTabProps> = ({ treatment }) => {
-  const drugs = treatment?.drugs || [];
-  const hasDrugs = Array.isArray(drugs) && drugs.length > 0;
+  const drugs: ProtocolDrug[] = treatment?.drugs || [];
+  const hasDrugs = drugs.length > 0;
 
   // Calculate cycle information
   const cycleLength = treatment?.cycle_length || 'Not specified';
@@ -100,8 +100,8 @@ const TreatmentTab: React.FC<TreatmentTabProps> = ({ treatment }) => {
                       {drug.name}
                     </TableCell>
                     <TableCell>{drug.dose || '-'}</TableCell>
-                    <TableCell>{(drug as any).route || '-'}</TableCell>
-                    <TableCell>{(drug as any).timing || drug.administration || '-'}</TableCell>
+                    <TableCell>{drug.route || '-'}</TableCell>
+                    <TableCell>{drug.timing || drug.administration || '-'}</TableCell>
                     <TableCell>
                       {drug.special_notes && drug.special_notes.length > 0 ? (
                         <ul className="list-disc pl-5 text-sm">
@@ -125,7 +125,7 @@ const TreatmentTab: React.FC<TreatmentTabProps> = ({ treatment }) => {
           <Card>
             <CardContent className="p-4">
               <ul className="list-disc pl-5 space-y-1">
-                {treatment.premedication.map((med: string | { name: string; dose?: string }, idx: number) => (
+                {treatment.premedication.map((med, idx) => (
                   <li key={idx} className="text-gray-700 dark:text-gray-300">
                     {typeof med === 'string' ? med : med.name + (med.dose ? ` - ${med.dose}` : '')}
                   </li>

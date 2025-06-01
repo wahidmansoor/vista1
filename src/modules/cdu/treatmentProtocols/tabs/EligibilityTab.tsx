@@ -1,16 +1,35 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Check, X, AlertCircle, FileText } from 'lucide-react';
-import type { Protocol } from '@/types/protocol';
+import type { Protocol, ProtocolEligibility } from '@/types/protocol';
 
-interface EligibilityTabProps {
-  protocol: Protocol;
+interface ExtendedProtocol extends Protocol {
+  references?: string[];
 }
 
+interface EligibilityTabProps {
+  protocol: ExtendedProtocol;
+}
+
+type EligibilityCriterion = { criterion: string } | string;
+
 const EligibilityTab: React.FC<EligibilityTabProps> = ({ protocol }) => {
-  const eligibility = protocol.eligibility || {};
-  const hasInclusionCriteria = Array.isArray(eligibility.inclusion_criteria) && eligibility.inclusion_criteria.length > 0;
-  const hasExclusionCriteria = Array.isArray(eligibility.exclusion_criteria) && eligibility.exclusion_criteria.length > 0;
+  const defaultEligibility = { inclusion_criteria: [], exclusion_criteria: [] };
+  const eligibility: ProtocolEligibility = protocol.eligibility || defaultEligibility;
+
+  const formatCriterion = (criterion: EligibilityCriterion): string => {
+    return typeof criterion === 'string' ? criterion : criterion.criterion;
+  };
+
+  const getCriteria = (criteria: EligibilityCriterion[] = []): EligibilityCriterion[] => {
+    return Array.isArray(criteria) ? criteria : [];
+  };
+
+  const inclusionCriteria = getCriteria(eligibility.inclusion_criteria);
+  const exclusionCriteria = getCriteria(eligibility.exclusion_criteria);
+  
+  const hasInclusionCriteria = inclusionCriteria.length > 0;
+  const hasExclusionCriteria = exclusionCriteria.length > 0;
   const hasData = hasInclusionCriteria || hasExclusionCriteria;
   
   return (
@@ -38,10 +57,12 @@ const EligibilityTab: React.FC<EligibilityTabProps> = ({ protocol }) => {
               <Card>
                 <CardContent className="p-6">
                   <ul className="space-y-3">
-                    {eligibility.inclusion_criteria.map((criterion, index) => (
+                    {inclusionCriteria.map((criterion, index) => (
                       <li key={index} className="flex items-start space-x-3">
                         <Check className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700 dark:text-gray-300">{criterion}</span>
+                        <span className="text-gray-700 dark:text-gray-300">
+                          {formatCriterion(criterion)}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -60,10 +81,12 @@ const EligibilityTab: React.FC<EligibilityTabProps> = ({ protocol }) => {
               <Card>
                 <CardContent className="p-6">
                   <ul className="space-y-3">
-                    {eligibility.exclusion_criteria.map((criterion, index) => (
+                    {exclusionCriteria.map((criterion, index) => (
                       <li key={index} className="flex items-start space-x-3">
                         <X className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700 dark:text-gray-300">{criterion}</span>
+                        <span className="text-gray-700 dark:text-gray-300">
+                          {formatCriterion(criterion)}
+                        </span>
                       </li>
                     ))}
                   </ul>

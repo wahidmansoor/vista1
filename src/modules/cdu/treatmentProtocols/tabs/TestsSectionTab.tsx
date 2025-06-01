@@ -1,15 +1,31 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Test } from '@/types/protocol'; // Assuming Test type is imported
+import { Test } from '@/types/protocol';
+
+type TestItem = string | Test;
+type TestGroup = TestItem[] | undefined;
+type TestSections = { baseline?: TestGroup; monitoring?: TestGroup };
 
 interface TestsSectionTabProps {
-  tests?: string[] | Test[] | { baseline?: string[] | Test[]; monitoring?: string[] | Test[] };
-  title?: string; // Keeping title as it was in the original file, though not in step 2 brief
+  tests?: TestGroup | TestSections;
+  title?: string;
 }
 
+const isTest = (test: TestItem): test is Test => {
+  return typeof test !== 'string' && 'name' in test;
+};
+
+const isTestSections = (tests: TestGroup | TestSections): tests is TestSections => {
+  return !Array.isArray(tests) && typeof tests === 'object' && tests !== null;
+};
+
+const renderTestItem = (test: TestItem) => {
+  return isTest(test) ? test.name : test;
+};
+
 const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests, title = "Tests" }) => {
-  const renderTestList = (testData: string[] | Test[] | undefined, listTitle: string) => {
+  const renderTestList = (testData: TestGroup, listTitle: string) => {
     if (!testData || testData.length === 0) {
       return <p className="text-sm text-gray-500">No {listTitle.toLowerCase()} tests specified.</p>;
     }
@@ -18,31 +34,23 @@ const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests, title = "Tests
       <div>
         <h4 className="font-semibold mb-1">{listTitle}</h4>
         <ul className="list-disc pl-5 space-y-1 text-sm">
-          {testData.map((test, index) => {
-            if (typeof test === 'string') {
-              return <li key={index}>{test}</li>;
-            }
-            // Assuming Test object has a 'name' or similar property to display
-            return <li key={index}>{(test as Test).name || JSON.stringify(test)}</li>;
-          })}
+          {testData.map((test, index) => (
+            <li key={index}>{renderTestItem(test)}</li>
+          ))}
         </ul>
       </div>
     );
   };
 
-  let baselineTests: string[] | Test[] | undefined = [];
-  let monitoringTests: string[] | Test[] | undefined = [];
+  let baselineTests: TestGroup = [];
+  let monitoringTests: TestGroup = [];
 
   if (tests) {
-    if (Array.isArray(tests)) {
+    if (isTestSections(tests)) {
+      baselineTests = tests.baseline;
+      monitoringTests = tests.monitoring;
+    } else if (Array.isArray(tests)) {
       baselineTests = tests;
-    } else {
-      if (tests.baseline) {
-        baselineTests = Array.isArray(tests.baseline) ? tests.baseline : [];
-      }
-      if (tests.monitoring) {
-        monitoringTests = Array.isArray(tests.monitoring) ? tests.monitoring : [];
-      }
     }
   }
   

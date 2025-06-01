@@ -8,33 +8,120 @@ import {
   TableHeader, 
   TableRow 
 } from '@/components/ui/table';
-import type { DoseModification, Protocol, DoseReductions } from '@/types/protocol'; // Assuming Protocol is the correct type for protocol
+import type { DoseModification, Protocol, DoseReductions } from '@/types/protocol';
 import { AlertCircle } from 'lucide-react';
 
-interface DoseModificationsTabProps {
-  protocol: Protocol; // Changed TreatmentProtocol to Protocol
+// Types
+interface ReductionLevel {
+  level: string;
+  dose: string | number;
 }
 
-const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol }) => {
-  // Ensure protocol.dose_modifications exists and is an object, then safely access its properties
-  const doseModifications: DoseModification = protocol.dose_modifications ?? {
+interface DoseModificationsTabProps {
+  protocol: Protocol;
+}
+
+// Utility functions
+const formatDoseValue = (dose: unknown): string => {
+  if (typeof dose === 'number') return dose.toString();
+  if (typeof dose === 'string') return dose;
+  return String(dose || '-');
+};
+
+const formatReductionLevel = (level: string, dose: unknown): ReductionLevel => ({
+  level,
+  dose: formatDoseValue(dose)
+});
+
+// Extract protocol data
+const useProtocolModifications = (protocol: Protocol) => {
+  const modifications = protocol.dose_modifications || {
     hematological: [],
     nonHematological: [],
     renal: [],
     hepatic: []
   };
-  const hematological = doseModifications.hematological;
-  const nonHematological = doseModifications.nonHematological;
-  const renal = doseModifications.renal;
-  const hepatic = doseModifications.hepatic;
-  
-  // Ensure protocol.dose_reductions exists and is an object, then safely access its properties
-  const doseReductions: DoseReductions = protocol.dose_reductions ?? { levels: {}, criteria: [] };
-  const reductionLevels = doseReductions.levels ?? {};
-  const reductionCriteria = doseReductions.criteria ?? [];
+
+  const reductions = protocol.dose_reductions || { 
+    levels: {}, 
+    criteria: [] 
+  };
+
+  return {
+    hematological: modifications.hematological,
+    nonHematological: modifications.nonHematological,
+    renal: modifications.renal,
+    hepatic: modifications.hepatic,
+    reductionLevels: reductions.levels,
+    reductionCriteria: reductions.criteria,
+    hasData: !!(
+      modifications.hematological?.length ||
+      modifications.nonHematological?.length ||
+      modifications.renal?.length ||
+      modifications.hepatic?.length ||
+      Object.keys(reductions.levels || {}).length ||
+      reductions.criteria?.length
+    )
+  };
+};
+
+interface ReductionLevelsSectionProps {
+  levels: Record<string, string | number>;
+}
+
+const ReductionLevelsSection: React.FC<ReductionLevelsSectionProps> = ({ levels }) => (
+  <div className="mt-8">
+    <h3 className="text-lg font-medium mb-4">Dose Reduction Levels</h3>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Level</TableHead>
+          <TableHead>Dose</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {Object.entries(levels).map(([level, dose], index) => {
+          const { level: formattedLevel, dose: formattedDose } = formatReductionLevel(level, dose);
+          return (
+            <TableRow key={index}>
+              <TableCell>{formattedLevel}</TableCell>
+              <TableCell>{formattedDose}</TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  </div>
+);
+
+interface ReductionCriteriaSectionProps {
+  criteria: string[];
+}
+
+const ReductionCriteriaSection: React.FC<ReductionCriteriaSectionProps> = ({ criteria }) => (
+  <div className="mt-8">
+    <h3 className="text-lg font-medium mb-2">Dose Reduction Criteria</h3>
+    <ul className="space-y-2 list-disc pl-5">
+      {criteria.map((criterion: string, index: number) => (
+        <li key={index} className="text-gray-700 dark:text-gray-300">{criterion}</li>
+      ))}
+    </ul>
+  </div>
+);
+
+const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol }) => {
+  const {
+    hematological,
+    nonHematological,
+    renal,
+    hepatic,
+    reductionLevels,
+    reductionCriteria,
+    hasData
+  } = useProtocolModifications(protocol);
 
   const renderModificationSection = (title: string, items: string[] | undefined) => {
-    const safeItems = items ?? [];
+    const safeItems = Array.isArray(items) ? items.filter(Boolean) : [];
     if (safeItems.length === 0) return null;
     
     return (
@@ -51,19 +138,11 @@ const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol })
     );
   };
 
-  const hasDoseData = 
-    hematological.length > 0 ||
-    nonHematological.length > 0 ||
-    renal.length > 0 ||
-    hepatic.length > 0 ||
-    Object.keys(reductionLevels).length > 0 ||
-    reductionCriteria.length > 0;
-
   return (
     <div className="space-y-6 p-4">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Dose Modifications</h2>
       
-      {!hasDoseData ? (
+      {!hasData ? (
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-center space-x-2 text-amber-500">
@@ -80,40 +159,11 @@ const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol })
           {renderModificationSection('Hepatic Modifications', hepatic)}
           
           {Object.keys(reductionLevels).length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-lg font-medium mb-4">Dose Reduction Levels</h3>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Level</TableHead>
-                    <TableHead>Dose</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {Object.entries(reductionLevels as Record<string, string | number>).map(([level, dose], index) => {
-                    const safeLevel = String(level);
-                    const safeDose = String(dose);
-                    return (
-                      <TableRow key={index}>
-                        <TableCell>{safeLevel}</TableCell>
-                        <TableCell>{safeDose}</TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </div>
+            <ReductionLevelsSection levels={reductionLevels} />
           )}
 
           {reductionCriteria.length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-lg font-medium mb-2">Dose Reduction Criteria</h3>
-              <ul className="space-y-2 list-disc pl-5">
-                {reductionCriteria.map((criterion: string, index: number) => (
-                  <li key={index} className="text-gray-700 dark:text-gray-300">{criterion}</li>
-                ))}
-              </ul>
-            </div>
+            <ReductionCriteriaSection criteria={reductionCriteria} />
           )}
         </>
       )}

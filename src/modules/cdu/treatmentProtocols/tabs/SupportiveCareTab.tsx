@@ -9,21 +9,31 @@ import {
   TableRow 
 } from '@/components/ui/table';
 import { HeartPulse, AlertCircle } from 'lucide-react';
-import type { Protocol, SupportiveCareItem, Drug } from '@/types/protocol';
+import type { Protocol, SupportiveCareItem } from '@/types/protocol';
 import { getSupportiveCareItems } from '@/types/protocolHelpers';
 
-interface SupportiveCareTabProps {
-  protocol: Protocol;
+interface ExtendedProtocol extends Protocol {
+  supportive_guidelines?: string[];
 }
 
+interface SupportiveCareTabProps {
+  protocol: ExtendedProtocol;
+}
+
+type SupportiveMedication = {
+  name: string;
+  dose?: string;
+  route?: string;
+  timing?: string;
+  purpose?: string;
+};
+
 const SupportiveCareTab: React.FC<SupportiveCareTabProps> = ({ protocol }) => {
-  // Get supportive care items from various places in the protocol
-  const supportiveItems = getSupportiveCareItems(protocol);
-  const hasSupportiveItems = supportiveItems && supportiveItems.length > 0;
+  const supportiveItems: SupportiveCareItem[] = getSupportiveCareItems(protocol);
+  const hasSupportiveItems = supportiveItems.length > 0;
   
-  // Extract required and optional supportive meds
-  const requiredMeds = protocol.supportive_care?.required || [];
-  const optionalMeds = protocol.supportive_care?.optional || [];
+  const requiredMeds: SupportiveMedication[] = protocol.supportive_care?.required || [];
+  const optionalMeds: SupportiveMedication[] = protocol.supportive_care?.optional || [];
   
   return (
     <div className="space-y-6 p-4">
