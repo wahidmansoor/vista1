@@ -58,7 +58,7 @@ export const EvaluationSummary: React.FC<EvaluationSummaryProps> = ({ template, 
           <span className="text-red-700 font-medium">Red Flag Checks</span>
         </div>
         <ul className="pl-7 list-disc text-sm text-red-700 space-y-1">
-          {template.redFlags.map((flag, index) => (
+          {template.redFlags?.map((flag, index) => (
             <li key={index}>{flag}</li>
           ))}
         </ul>

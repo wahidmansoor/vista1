@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { GitBranch, ChevronDown, Info, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { DetailedInfo } from '../../types/pathways';
+import { DetailedInfo } from '../types/pathways';
 import DecisionTree from './DecisionTree';
-import { cancerPathwaysData } from '../../data/cancer-pathways';
-import { lungCancerPathway } from '../../data/diagnostic-pathways';
+import { cancerPathwaysData } from '../data/cancer-pathways';
+import { lungCancerPathway } from '../data/diagnostic-pathways';
 
 // Example structure for additional info. You can customize this per cancer type.
 const additionalCancerInfo: Record<string, Array<{ title: string; items: string[] }>> = {
@@ -127,7 +127,22 @@ export default function DiagnosticPathways() {
     },
     {
       title: 'Lung Cancer',
-      decisionTree: lungCancerPathway,
+id: 'lung-cancer-pathway',
+description: 'Lung cancer diagnostic pathway',
+decisionTree: {
+  name: 'Lung Cancer Pathway',
+  id: 'lung-cancer-pathway',
+  description: 'Lung cancer diagnostic pathway',
+steps: lungCancerPathway.decisionTree.nodes.map(node => ({
+    id: node.id,
+    title: node.question,
+    description: 'Step description',
+options: [
+  { text: 'Yes', next: node.yes },
+  { text: 'No', next: node.no }
+]
+  }))
+},
     },
     {
       title: 'Colorectal Cancer',
@@ -233,7 +248,7 @@ export default function DiagnosticPathways() {
   // Existing function for sample step details
   const getStepDetails = (pathwayTitle: string, stepName: string): DetailedInfo => {
     return {
-      when: `Recommended timing for ${stepName}`,
+when: `Recommended timing for ${stepName}`,
       considerations: [
         'Patient history and risk factors',
         'Previous test results',
@@ -400,7 +415,7 @@ export default function DiagnosticPathways() {
                                             <>
                                               <div>
                                                 <h4 className="text-lg font-semibold text-gray-800">When to Perform</h4>
-                                                <p>{details.when}</p>
+<p>{details.when}</p>
                                               </div>
                                               <div>
                                                 <h4 className="text-lg font-semibold text-gray-800">Key Considerations</h4>

@@ -1,6 +1,6 @@
 import React, { useReducer, useState, useEffect } from 'react';
 import { Tab } from '@headlessui/react';
-import { Stethoscope, User, Activity, AlertTriangle, CheckCircle, FileText, Database } from 'lucide-react';
+import { Stethoscope, User, Activity, AlertTriangle, CheckCircle, FileText } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
 import { generateClinicalRecommendations, ClinicalParameters } from '@/services/clinicalDecisionSupport';
 
@@ -144,7 +144,21 @@ const initialClinicalState: ClinicalInputState = {
 };
 
 // Reducer for clinical input management
-const clinicalInputReducer = (state: ClinicalInputState, action: any): ClinicalInputState => {
+// Action types for reducer
+type ClinicalInputAction =
+  | { type: 'UPDATE_CANCER_TYPE'; payload: string }
+  | { type: 'UPDATE_STAGE'; payload: string }
+  | { type: 'UPDATE_HISTOLOGY'; payload: string }
+  | { type: 'UPDATE_PERFORMANCE_STATUS'; payload: string }
+  | { type: 'UPDATE_AGE'; payload: string }
+  | { type: 'UPDATE_BIOMARKERS'; payload: Record<string, string> }
+  | { type: 'UPDATE_TREATMENT_LINE'; payload: string }
+  | { type: 'UPDATE_TREATMENT_GOAL'; payload: string }
+  | { type: 'ADD_COMORBIDITY'; payload: string }
+  | { type: 'REMOVE_COMORBIDITY'; payload: string }
+  | { type: 'RESET' };
+
+const clinicalInputReducer = (state: ClinicalInputState, action: ClinicalInputAction): ClinicalInputState => {
   switch (action.type) {
     case 'UPDATE_CANCER_TYPE':
       return { ...state, cancerType: action.payload, biomarkers: {} };
@@ -638,7 +652,7 @@ const TreatmentGuidanceTool: React.FC = () => {
                         <div className="mb-4">
                           <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Drug Components</p>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                            {rec.drugs.map((drug, idx) => (
+                            {rec.drugs.map((drug: any, idx: number) => (
                               <div key={idx} className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
                                 <p className="font-medium text-gray-800 dark:text-gray-200">{drug.name}</p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -655,7 +669,7 @@ const TreatmentGuidanceTool: React.FC = () => {
                         <div className="mb-4">
                           <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Required Biomarkers</p>
                           <div className="flex flex-wrap gap-2">
-                            {rec.biomarker_requirements.map((biomarker, idx) => (
+                            {rec.biomarker_requirements.map((biomarker: any, idx: number) => (
                               <span key={idx} className="px-2 py-1 bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs rounded">
                                 {biomarker}
                               </span>

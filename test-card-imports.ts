@@ -1,5 +1,5 @@
 // Test file to verify card component imports
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./src/components/ui/card";
 
 const test = Card;
 const test2 = CardHeader;

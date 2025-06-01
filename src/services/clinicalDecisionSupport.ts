@@ -2,7 +2,7 @@
 // Interfaces with Supabase cd_protocols table for real clinical recommendations
 
 import { supabase } from '@/lib/supabaseClient';
-import { Protocol } from '@/types/protocolUpdated';
+import { Protocol } from '@/types/protocol';
 
 // Clinical input interface matching our TreatmentGuidanceTool
 export interface ClinicalParameters {
@@ -375,7 +375,7 @@ const extractPrecautions = (protocol: any): string[] => {
 };
 
 const extractBiomarkerRequirements = (protocol: any, parameters: ClinicalParameters): string[] => {
-  const requirements = [];
+  const requirements: string[] = [];
   const eligibilityText = JSON.stringify(protocol.eligibility || {}).toLowerCase();
   
   // Check which biomarkers are mentioned in eligibility
