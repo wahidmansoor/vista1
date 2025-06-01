@@ -1,7 +1,7 @@
 import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "../../../../components/ui/card";
 import { AlertTriangle, Package, Shield, BookOpen, Pill } from "lucide-react";
 import { Protocol, Test } from "@/types/protocol";
 import TreatmentTab from "../tabs/TreatmentTab";
@@ -48,38 +48,128 @@ const InfoTab: React.FC<InfoTabProps> = ({
   createdAt,
   updatedAt
 }) => (
-  <div className="space-y-4">
-    {version && (
-      <div>
-        <h3 className="font-semibold text-lg mb-2">Version</h3>
-        <p>{version}</p>
-      </div>
+  <div className="space-y-6">
+    {/* Protocol Metadata Card */}
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-blue-600">
+          <Package className="w-5 h-5" />
+          Protocol Metadata
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+            <h4 className="font-semibold text-blue-800 mb-1">Version</h4>
+            <p className="text-gray-700">{version || "Not specified"}</p>
+          </div>
+          <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+            <h4 className="font-semibold text-green-800 mb-1">Status</h4>
+            <p className="text-gray-700">{status || "Active"}</p>
+          </div>
+        </div>
+        
+        {lastReviewed && (
+          <div className="bg-purple-50 p-3 rounded-lg border border-purple-200">
+            <h4 className="font-semibold text-purple-800 mb-1">Last Reviewed</h4>
+            <p className="text-gray-700">{new Date(lastReviewed).toLocaleDateString()}</p>
+            {(() => {
+              const reviewDate = new Date(lastReviewed);
+              const now = new Date();
+              const daysDiff = Math.floor((now.getTime() - reviewDate.getTime()) / (1000 * 60 * 60 * 24));
+              const yearsDiff = daysDiff / 365;
+              
+              let statusColor = 'text-green-600';
+              let statusText = 'Current';
+              let bgColor = 'bg-green-50';
+              
+              if (yearsDiff > 2) {
+                statusColor = 'text-red-600';
+                statusText = 'Requires Review';
+                bgColor = 'bg-red-50';
+              } else if (yearsDiff > 1) {
+                statusColor = 'text-amber-600';
+                statusText = 'Review Soon';
+                bgColor = 'bg-amber-50';
+              }
+              
+              return (
+                <div className={`mt-2 p-2 rounded ${bgColor}`}>
+                  <span className={`text-sm font-medium ${statusColor}`}>
+                    Review Status: {statusText} ({Math.round(yearsDiff * 10) / 10} years ago)
+                  </span>
+                </div>
+              );
+            })()}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+
+    {/* Authorship Information */}
+    {(createdBy || createdAt || updatedBy || updatedAt) && (
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-indigo-600">
+            <BookOpen className="w-5 h-5" />
+            Authorship & History
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {(createdBy || createdAt) && (
+            <div className="bg-indigo-50 p-3 rounded-lg border border-indigo-200">
+              <h4 className="font-semibold text-indigo-800 mb-2">Created</h4>
+              <div className="space-y-1">
+                {createdBy && <p className="text-gray-700">By: {createdBy}</p>}
+                {createdAt && <p className="text-gray-700">On: {new Date(createdAt).toLocaleDateString()}</p>}
+              </div>
+            </div>
+          )}
+          
+          {(updatedBy || updatedAt) && (
+            <div className="bg-teal-50 p-3 rounded-lg border border-teal-200">
+              <h4 className="font-semibold text-teal-800 mb-2">Last Updated</h4>
+              <div className="space-y-1">
+                {updatedBy && <p className="text-gray-700">By: {updatedBy}</p>}
+                {updatedAt && <p className="text-gray-700">On: {new Date(updatedAt).toLocaleDateString()}</p>}
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
     )}
-    {status && (
-      <div>
-        <h3 className="font-semibold text-lg mb-2">Status</h3>
-        <p>{status}</p>
-      </div>
-    )}
-    {lastReviewed && (
-      <div>
-        <h3 className="font-semibold text-lg mb-2">Last Reviewed</h3>
-        <p>{new Date(lastReviewed).toLocaleDateString()}</p>
-      </div>
-    )}
-    {(createdBy || createdAt) && (
-      <div>
-        <h3 className="font-semibold text-lg mb-2">Created</h3>
-        {createdBy && <p>By: {createdBy}</p>}
-        {createdAt && <p>On: {new Date(createdAt).toLocaleDateString()}</p>}
-      </div>
-    )}
-    {(updatedBy || updatedAt) && (
-      <div>
-        <h3 className="font-semibold text-lg mb-2">Last Updated</h3>
-        {updatedBy && <p>By: {updatedBy}</p>}
-        {updatedAt && <p>On: {new Date(updatedAt).toLocaleDateString()}</p>}
-      </div>
+
+    {/* Default Information Card */}
+    {!version && !status && !lastReviewed && !createdBy && !createdAt && !updatedBy && !updatedAt && (
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-600">
+            <Package className="w-5 h-5" />
+            Protocol Information
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-center py-8 text-gray-500">
+            <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <Package className="w-8 h-8 text-gray-400" />
+            </div>
+            <h3 className="font-medium text-gray-700 mb-2">Protocol Metadata</h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Additional protocol information and metadata will be displayed here when available.
+            </p>
+            <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 text-left">
+              <h4 className="font-semibold text-blue-800 mb-2">This tab typically includes:</h4>
+              <ul className="text-sm text-gray-700 space-y-1">
+                <li>• Protocol version information</li>
+                <li>• Review and approval status</li>
+                <li>• Creation and modification dates</li>
+                <li>• Author and reviewer information</li>
+                <li>• Implementation guidelines</li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     )}
   </div>
 );
@@ -88,11 +178,44 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
   // Set up data with fallbacks for each section
   const monitoring = React.useMemo(() => protocol.monitoring || { baseline: [], ongoing: [] }, [protocol.monitoring]);
   const treatment = React.useMemo(() => protocol.treatment || { drugs: [] }, [protocol.treatment]);  const tests = React.useMemo(() => {
-    if (Array.isArray(protocol.tests)) {
+  // Use monitoring field instead of tests field
+  let testsData = protocol.tests || protocol.monitoring;
+  
+  // If tests is a string, try to parse it as JSON
+  if (typeof testsData === 'string') {
+    try {
+      testsData = JSON.parse(testsData);
+    } catch (e) {
       return { baseline: [], monitoring: [] };
     }
-    return protocol.tests || { baseline: [], monitoring: [] };
-  }, [protocol.tests]);
+  }
+  
+  // If no tests data
+  if (!testsData) {
+    return { baseline: [], monitoring: [] };
+  }
+  
+  // If tests is an object with baseline and monitoring/ongoing properties
+  if (typeof testsData === 'object' && !Array.isArray(testsData)) {
+    return {
+      baseline: Array.isArray(testsData.baseline) ? testsData.baseline : [],
+      // Handle both 'monitoring' and 'ongoing' field names
+      monitoring: Array.isArray(testsData.monitoring) ? testsData.monitoring : 
+                 Array.isArray(testsData.ongoing) ? testsData.ongoing : []
+    };
+  }
+  
+  // If tests is an array (legacy format), treat as baseline tests
+  if (Array.isArray(testsData)) {
+    return {
+      baseline: testsData,
+      monitoring: []
+    };
+  }
+  
+  // Fallback
+  return { baseline: [], monitoring: [] };
+}, [protocol.tests, protocol.monitoring]);
   const doseModifications = React.useMemo(() => {
     const modifications = protocol.dose_modifications || {} as any;
     return {
@@ -131,130 +254,293 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
           <DialogTitle>{protocol.code || "Protocol Details"}</DialogTitle>
           <DialogDescription>
             {protocol.summary || "Treatment protocol details"}
-          </DialogDescription>        </DialogHeader>
-        <Tabs defaultValue="overview" className="w-full">
+          </DialogDescription>        </DialogHeader>        <Tabs defaultValue="overview" className="w-full">
           <TabsList className="mb-4 flex flex-wrap">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="treatment">Treatment</TabsTrigger>
-            <TabsTrigger value="tests">Tests</TabsTrigger>
-            <TabsTrigger value="monitoring">Monitoring</TabsTrigger>
-            <TabsTrigger value="doseModifications">Dose Modifications</TabsTrigger>
-            <TabsTrigger value="safety" className="text-red-600">
+            <TabsTrigger value="overview" className="text-blue-600 hover:bg-blue-50 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800">Overview</TabsTrigger>
+            <TabsTrigger value="treatment" className="text-purple-600 hover:bg-purple-50 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800">Treatment</TabsTrigger>
+            <TabsTrigger value="tests" className="text-green-600 hover:bg-green-50 data-[state=active]:bg-green-100 data-[state=active]:text-green-800">Tests</TabsTrigger>
+            <TabsTrigger value="doseModifications" className="text-amber-600 hover:bg-amber-50 data-[state=active]:bg-amber-100 data-[state=active]:text-amber-800">Dose Modifications</TabsTrigger>
+            <TabsTrigger value="safety" className="text-red-600 hover:bg-red-50 data-[state=active]:bg-red-100 data-[state=active]:text-red-800 flex items-center">
               <AlertTriangle className="w-4 h-4 mr-2" />
               Safety
             </TabsTrigger>
-            <TabsTrigger value="support">
+            <TabsTrigger value="support" className="text-teal-600 hover:bg-teal-50 data-[state=active]:bg-teal-100 data-[state=active]:text-teal-800 flex items-center">
               <Pill className="w-4 h-4 mr-2" />
               Support Care
             </TabsTrigger>
-            <TabsTrigger value="emergency">
+            <TabsTrigger value="emergency" className="text-orange-600 hover:bg-orange-50 data-[state=active]:bg-orange-100 data-[state=active]:text-orange-800 flex items-center">
               <Shield className="w-4 h-4 mr-2" />
               Emergency
             </TabsTrigger>
-            <TabsTrigger value="toxicity">Toxicity</TabsTrigger>
-            <TabsTrigger value="interactions">Interactions</TabsTrigger>
-            <TabsTrigger value="references">
+            <TabsTrigger value="toxicity" className="text-pink-600 hover:bg-pink-50 data-[state=active]:bg-pink-100 data-[state=active]:text-pink-800">Toxicity</TabsTrigger>
+            <TabsTrigger value="interactions" className="text-cyan-600 hover:bg-cyan-50 data-[state=active]:bg-cyan-100 data-[state=active]:text-cyan-800">Interactions</TabsTrigger>
+            <TabsTrigger value="references" className="text-indigo-600 hover:bg-indigo-50 data-[state=active]:bg-indigo-100 data-[state=active]:text-indigo-800 flex items-center">
               <BookOpen className="w-4 h-4 mr-2" />
               References
             </TabsTrigger>
-            <TabsTrigger value="supportiveCare">Supportive Care</TabsTrigger>
-            <TabsTrigger value="info">Info</TabsTrigger>
-          </TabsList>
-          <TabsContent value="overview">
+            <TabsTrigger value="info" className="text-gray-600 hover:bg-gray-50 data-[state=active]:bg-gray-100 data-[state=active]:text-gray-800">Info</TabsTrigger>
+          </TabsList><TabsContent value="overview">
             <div className="space-y-6">
               <OverviewSection overview={protocol.summary} />
               {protocol.eligibility && (
                 <div className="mt-4">
-                  <h3 className="font-semibold text-lg mb-2">Eligibility Criteria</h3>
-                  {Array.isArray(protocol.eligibility) ? (
-                    <ul className="list-disc list-inside">
-                      {protocol.eligibility.map((item: string, idx: number) => (
-                        <li key={idx}>{item}</li>
-                      ))}
-                    </ul>
+                  <h3 className="font-semibold text-lg mb-4">Eligibility Criteria</h3>
+                    {/* Check for new structure first - use safe property access */}
+                  {((protocol.eligibility as any)?.age || (protocol.eligibility as any)?.performance_status || (protocol.eligibility as any)?.tumor_criteria) ? (
+                    <div className="space-y-4">
+                      {/* Age criteria */}
+                      {(protocol.eligibility as any)?.age && (
+                        <div className="bg-blue-50 p-3 rounded-lg">
+                          <h4 className="font-medium mb-1 text-blue-800">Age Requirements</h4>
+                          <p className="text-gray-700">{(protocol.eligibility as any).age}</p>
+                        </div>
+                      )}
+                      
+                      {/* Performance status */}
+                      {(protocol.eligibility as any)?.performance_status && (
+                        <div className="bg-green-50 p-3 rounded-lg">
+                          <h4 className="font-medium mb-1 text-green-800">Performance Status</h4>
+                          <p className="text-gray-700">{(protocol.eligibility as any).performance_status}</p>
+                        </div>
+                      )}
+                      
+                      {/* Tumor criteria */}
+                      {(protocol.eligibility as any)?.tumor_criteria && Array.isArray((protocol.eligibility as any).tumor_criteria) && (
+                        <div className="bg-purple-50 p-3 rounded-lg">
+                          <h4 className="font-medium mb-2 text-purple-800">Tumor Criteria</h4>
+                          <ul className="list-disc list-inside text-gray-700">
+                            {(protocol.eligibility as any).tumor_criteria.map((criterion: string, idx: number) => (
+                              <li key={idx}>{criterion}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      
+                      {/* Laboratory criteria */}
+                      {(protocol.eligibility as any)?.laboratory_criteria && (
+                        <div className="bg-yellow-50 p-3 rounded-lg">
+                          <h4 className="font-medium mb-2 text-yellow-800">Laboratory Requirements</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-700">
+                            {Object.entries((protocol.eligibility as any).laboratory_criteria).map(([test, value], idx: number) => (
+                              <div key={idx} className="flex justify-between">
+                                <span className="font-medium">{test}:</span>
+                                <span>{String(value)}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Cardiac function */}
+                      {(protocol.eligibility as any)?.cardiac_function && (
+                        <div className="bg-red-50 p-3 rounded-lg">
+                          <h4 className="font-medium mb-1 text-red-800">Cardiac Function</h4>
+                          <p className="text-gray-700">{(protocol.eligibility as any).cardiac_function}</p>
+                        </div>
+                      )}
+                      
+                      {/* Pregnancy status */}
+                      {(protocol.eligibility as any)?.pregnancy_status && (
+                        <div className="bg-pink-50 p-3 rounded-lg">
+                          <h4 className="font-medium mb-1 text-pink-800">Pregnancy Status</h4>
+                          <p className="text-gray-700">{(protocol.eligibility as any).pregnancy_status}</p>
+                        </div>
+                      )}
+                      
+                      {/* Other criteria */}
+                      {(protocol.eligibility as any)?.other_criteria && Array.isArray((protocol.eligibility as any).other_criteria) && (
+                        <div className="bg-gray-50 p-3 rounded-lg">
+                          <h4 className="font-medium mb-2 text-gray-800">Other Requirements</h4>
+                          <ul className="list-disc list-inside text-gray-700">
+                            {(protocol.eligibility as any).other_criteria.map((criterion: string, idx: number) => (
+                              <li key={idx}>{criterion}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
                   ) : (
-                    <>                      <h4 className="font-medium mb-1">Inclusion Criteria</h4>
-                      <ul className="list-disc list-inside mb-2">
-                        {protocol.eligibility.inclusion_criteria?.map((item: { criterion: string }, idx: number) => (
-                          <li key={idx}>{item.criterion}</li>
-                        ))}
-                      </ul>
-                      <h4 className="font-medium mb-1">Exclusion Criteria</h4>
+                    /* Fallback to old structure */
+                    Array.isArray(protocol.eligibility) ? (
                       <ul className="list-disc list-inside">
-                        {protocol.eligibility.exclusion_criteria?.map((item: { criterion: string }, idx: number) => (
-                          <li key={idx}>{item.criterion}</li>
+                        {protocol.eligibility.map((item: string, idx: number) => (
+                          <li key={idx}>{item}</li>
                         ))}
                       </ul>
-                    </>
+                    ) : (
+                      <>
+                        <h4 className="font-medium mb-1">Inclusion Criteria</h4>
+                        <ul className="list-disc list-inside mb-2">
+                          {protocol.eligibility.inclusion_criteria?.map((item: string | { criterion: string }, idx: number) => (
+                            <li key={idx}>{typeof item === 'string' ? item : item.criterion}</li>
+                          ))}
+                        </ul>
+                        <h4 className="font-medium mb-1">Exclusion Criteria</h4>
+                        <ul className="list-disc list-inside">
+                          {protocol.eligibility.exclusion_criteria?.map((item: string | { criterion: string }, idx: number) => (
+                            <li key={idx}>{typeof item === 'string' ? item : item.criterion}</li>
+                          ))}
+                        </ul>
+                      </>
+                    )
                   )}
                 </div>
               )}
             </div>
-          </TabsContent>          <TabsContent value="treatment" className="h-[70vh] overflow-y-auto px-1">
-            <TreatmentTab treatment={treatment} />
-          </TabsContent><TabsContent value="tests">
+          </TabsContent><TabsContent value="treatment" className="h-[70vh] overflow-y-auto px-1">
+            <TreatmentTab protocol={protocol} />
+          </TabsContent>          <TabsContent value="tests">
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold text-lg mb-2">Baseline Tests</h3>                {tests?.baseline && tests.baseline.length > 0 ? (
-                  <ul className="list-disc list-inside">
+                <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                  <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                  Baseline Tests
+                </h3>
+                {tests?.baseline && tests.baseline.length > 0 ? (
+                  <div className="space-y-3">
                     {tests.baseline.map((test: any, idx: number) => (
-                      <li key={idx}>{typeof test === 'object' ? test.name || JSON.stringify(test) : test}</li>
+                      <div key={idx} className="bg-blue-50 p-4 rounded-lg border border-blue-200 shadow-sm">
+                        <h4 className="font-medium text-blue-800 mb-2 text-lg">
+                          {typeof test === 'object' ? (test.name || test.test || test.type || `Test ${idx + 1}`) : test}
+                        </h4>
+                        {typeof test === 'object' && (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                            {test.timing && (
+                              <div className="bg-white p-2 rounded border border-blue-100">
+                                <span className="font-medium text-blue-700">Timing:</span> 
+                                <span className="ml-1 text-gray-700">{test.timing}</span>
+                              </div>
+                            )}
+                            {test.frequency && (
+                              <div className="bg-white p-2 rounded border border-blue-100">
+                                <span className="font-medium text-blue-700">Frequency:</span> 
+                                <span className="ml-1 text-gray-700">{test.frequency}</span>
+                              </div>
+                            )}
+                            {test.parameters && test.parameters.length > 0 && (
+                              <div className="bg-white p-2 rounded border border-blue-100 md:col-span-2">
+                                <span className="font-medium text-blue-700">Parameters:</span>
+                                <div className="mt-1 flex flex-wrap gap-1">
+                                  {test.parameters.map((param: string, pIdx: number) => (
+                                    <span key={pIdx} className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
+                                      {param}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            {test.notes && (
+                              <div className="bg-white p-2 rounded border border-blue-100 md:col-span-2">
+                                <span className="font-medium text-blue-700">Notes:</span> 
+                                <span className="ml-1 text-gray-700">{test.notes}</span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 ) : (
-                  <p className="text-muted-foreground">No baseline tests specified.</p>
+                  <div className="text-center py-6 text-gray-500 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                      <span className="text-gray-400 text-xl">📋</span>
+                    </div>
+                    <p>No baseline tests specified.</p>
+                  </div>
                 )}
               </div>
               
               <div>
-                <h3 className="font-semibold text-lg mb-2">Monitoring Tests</h3>
+                <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                  <div className="w-4 h-4 bg-green-500 rounded"></div>
+                  Monitoring Tests
+                </h3>
                 {tests?.monitoring && tests.monitoring.length > 0 ? (
-                  <ul className="list-disc list-inside">
+                  <div className="space-y-3">
                     {tests.monitoring.map((test: any, idx: number) => (
-                      <li key={idx}>{typeof test === 'object' ? test.name || JSON.stringify(test) : test}</li>
+                      <div key={idx} className="bg-green-50 p-4 rounded-lg border border-green-200 shadow-sm">
+                        <h4 className="font-medium text-green-800 mb-2 text-lg">
+                          {typeof test === 'object' ? (test.name || test.test || test.type || `Monitoring Test ${idx + 1}`) : test}
+                        </h4>
+                        {typeof test === 'object' && (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                            {test.timing && (
+                              <div className="bg-white p-2 rounded border border-green-100">
+                                <span className="font-medium text-green-700">Timing:</span> 
+                                <span className="ml-1 text-gray-700">{test.timing}</span>
+                              </div>
+                            )}
+                            {test.frequency && (
+                              <div className="bg-white p-2 rounded border border-green-100">
+                                <span className="font-medium text-green-700">Frequency:</span> 
+                                <span className="ml-1 text-gray-700">{test.frequency}</span>
+                              </div>
+                            )}
+                            {test.cycle && (
+                              <div className="bg-white p-2 rounded border border-green-100">
+                                <span className="font-medium text-green-700">Cycle:</span> 
+                                <span className="ml-1 text-gray-700">{test.cycle}</span>
+                              </div>
+                            )}
+                            {test.day && (
+                              <div className="bg-white p-2 rounded border border-green-100">
+                                <span className="font-medium text-green-700">Day:</span> 
+                                <span className="ml-1 text-gray-700">{test.day}</span>
+                              </div>
+                            )}
+                            {test.parameters && test.parameters.length > 0 && (
+                              <div className="bg-white p-2 rounded border border-green-100 md:col-span-2">
+                                <span className="font-medium text-green-700">Parameters:</span>
+                                <div className="mt-1 flex flex-wrap gap-1">
+                                  {test.parameters.map((param: string, pIdx: number) => (
+                                    <span key={pIdx} className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">
+                                      {param}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            {test.notes && (
+                              <div className="bg-white p-2 rounded border border-green-100 md:col-span-2">
+                                <span className="font-medium text-green-700">Notes:</span> 
+                                <span className="ml-1 text-gray-700">{test.notes}</span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 ) : (
-                  <p className="text-muted-foreground">No monitoring tests specified.</p>
+                  <div className="text-center py-6 text-gray-500 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                      <span className="text-gray-400 text-xl">🔬</span>
+                    </div>
+                    <p>No monitoring tests specified.</p>
+                  </div>
                 )}
               </div>
-            </div>
-          </TabsContent><TabsContent value="monitoring">
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Baseline Monitoring</h3>
-                {monitoring.baseline?.length > 0 ? (
-                  <ul className="list-disc list-inside">
-                    {monitoring.baseline.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-muted-foreground">No baseline monitoring specified.</p>
-                )}
-              </div>
-              
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Ongoing Monitoring</h3>
-                {monitoring.ongoing?.length > 0 ? (
-                  <ul className="list-disc list-inside">
-                    {monitoring.ongoing.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-muted-foreground">No ongoing monitoring specified.</p>
-                )}
-              </div>
-              
-              {monitoring.frequency && (
+
+              {/* Additional monitoring from protocol.monitoring field */}
+              {protocol.monitoring && protocol.monitoring !== protocol.tests && (
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Monitoring Frequency</h3>
-                  <p className="whitespace-pre-line">{monitoring.frequency}</p>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <div className="w-4 h-4 bg-purple-500 rounded"></div>
+                    Additional Monitoring
+                  </h3>
+                  <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                    {typeof protocol.monitoring === 'string' ? (
+                      <p className="text-gray-700 whitespace-pre-line">{protocol.monitoring}</p>
+                    ) : (
+                      <pre className="text-sm text-gray-700 whitespace-pre-wrap">
+                        {JSON.stringify(protocol.monitoring, null, 2)}
+                      </pre>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
-          </TabsContent>          <TabsContent value="doseModifications">
+          </TabsContent><TabsContent value="doseModifications">
             <div className="space-y-6">              <div>
                 <h3 className="font-semibold text-lg mb-2">Hematological Modifications</h3>
                 {Array.isArray(doseModifications.hematological) && doseModifications.hematological.length > 0 ? (
@@ -388,8 +674,7 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
-          <TabsContent value="support" className="mt-6">
+          </TabsContent>          <TabsContent value="support" className="mt-6">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -398,17 +683,79 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                {/* Required Supportive Care */}
+                {supportiveCare?.required && supportiveCare.required.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold mb-2 text-blue-600">Required Supportive Care</h4>
+                    <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
+                      <div className="space-y-2">
+                        {supportiveCare.required.map((item: any, idx: number) => (
+                          <div key={idx} className="bg-white p-2 rounded border border-blue-200">
+                            {typeof item === 'object' ? (
+                              <div>
+                                <div className="font-medium">{item.name || item.drug || 'Medication'}</div>
+                                {item.dose && <div className="text-sm text-gray-600">Dose: {item.dose}</div>}
+                                {item.route && <div className="text-sm text-gray-600">Route: {item.route}</div>}
+                                {item.frequency && <div className="text-sm text-gray-600">Frequency: {item.frequency}</div>}
+                                {item.indication && <div className="text-sm text-gray-600">Indication: {item.indication}</div>}
+                              </div>
+                            ) : (
+                              <div>{item}</div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Optional Supportive Care */}
+                {supportiveCare?.optional && supportiveCare.optional.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold mb-2 text-green-600">Optional Supportive Care</h4>
+                    <div className="bg-green-50 p-3 rounded border-l-4 border-green-400">
+                      <div className="space-y-2">
+                        {supportiveCare.optional.map((item: any, idx: number) => (
+                          <div key={idx} className="bg-white p-2 rounded border border-green-200">
+                            {typeof item === 'object' ? (
+                              <div>
+                                <div className="font-medium">{item.name || item.drug || 'Medication'}</div>
+                                {item.dose && <div className="text-sm text-gray-600">Dose: {item.dose}</div>}
+                                {item.route && <div className="text-sm text-gray-600">Route: {item.route}</div>}
+                                {item.frequency && <div className="text-sm text-gray-600">Frequency: {item.frequency}</div>}
+                                {item.indication && <div className="text-sm text-gray-600">Indication: {item.indication}</div>}
+                              </div>
+                            ) : (
+                              <div>{item}</div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Pre-medications (legacy support) */}
                 {protocol.pre_medications && (
                   <div>
-                    <h4 className="font-semibold mb-2 text-blue-600">Pre-medications</h4>
-                    <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
+                    <h4 className="font-semibold mb-2 text-purple-600">Pre-medications</h4>
+                    <div className="bg-purple-50 p-3 rounded border-l-4 border-purple-400">
                       {typeof protocol.pre_medications === 'string' 
                         ? protocol.pre_medications 
                         : Array.isArray(protocol.pre_medications)
                         ? protocol.pre_medications.length > 0 
                           ? protocol.pre_medications.map((med: any, idx: number) => (
-                              <div key={idx} className="mb-2 last:mb-0">
-                                {typeof med === 'object' ? med.name || med.drug || JSON.stringify(med) : med}
+                              <div key={idx} className="mb-2 last:mb-0 bg-white p-2 rounded border border-purple-200">
+                                {typeof med === 'object' ? (
+                                  <div>
+                                    <div className="font-medium">{med.name || med.drug || 'Medication'}</div>
+                                    {med.dose && <div className="text-sm text-gray-600">Dose: {med.dose}</div>}
+                                    {med.route && <div className="text-sm text-gray-600">Route: {med.route}</div>}
+                                    {med.timing && <div className="text-sm text-gray-600">Timing: {med.timing}</div>}
+                                  </div>
+                                ) : (
+                                  <div>{med}</div>
+                                )}
                               </div>
                             ))
                           : "No pre-medications specified"
@@ -417,17 +764,27 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                   </div>
                 )}
                 
+                {/* Post-medications (legacy support) */}
                 {protocol.post_medications && (
                   <div>
-                    <h4 className="font-semibold mb-2 text-green-600">Post-medications</h4>
-                    <div className="bg-green-50 p-3 rounded border-l-4 border-green-400">
+                    <h4 className="font-semibold mb-2 text-orange-600">Post-medications</h4>
+                    <div className="bg-orange-50 p-3 rounded border-l-4 border-orange-400">
                       {typeof protocol.post_medications === 'string' 
                         ? protocol.post_medications 
                         : Array.isArray(protocol.post_medications)
                         ? protocol.post_medications.length > 0
                           ? protocol.post_medications.map((med: any, idx: number) => (
-                              <div key={idx} className="mb-2 last:mb-0">
-                                {typeof med === 'object' ? med.name || med.drug || JSON.stringify(med) : med}
+                              <div key={idx} className="mb-2 last:mb-0 bg-white p-2 rounded border border-orange-200">
+                                {typeof med === 'object' ? (
+                                  <div>
+                                    <div className="font-medium">{med.name || med.drug || 'Medication'}</div>
+                                    {med.dose && <div className="text-sm text-gray-600">Dose: {med.dose}</div>}
+                                    {med.route && <div className="text-sm text-gray-600">Route: {med.route}</div>}
+                                    {med.timing && <div className="text-sm text-gray-600">Timing: {med.timing}</div>}
+                                  </div>
+                                ) : (
+                                  <div>{med}</div>
+                                )}
                               </div>
                             ))
                           : "No post-medications specified"
@@ -435,27 +792,24 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                     </div>
                   </div>
                 )}
-                
-                {protocol.supportive_meds && (
+
+                {/* Monitoring Requirements */}
+                {supportiveCare?.monitoring && supportiveCare.monitoring.length > 0 && (
                   <div>
-                    <h4 className="font-semibold mb-2 text-purple-600">Additional Supportive Care</h4>
-                    <div className="bg-purple-50 p-3 rounded border-l-4 border-purple-400">
-                      {typeof protocol.supportive_meds === 'string' 
-                        ? protocol.supportive_meds 
-                        : Array.isArray(protocol.supportive_meds)
-                        ? protocol.supportive_meds.length > 0
-                          ? protocol.supportive_meds.map((med: any, idx: number) => (
-                              <div key={idx} className="mb-2 last:mb-0">
-                                {typeof med === 'object' ? med.name || med.drug || JSON.stringify(med) : med}
-                              </div>
-                            ))
-                          : "No additional supportive medications specified"
-                        : JSON.stringify(protocol.supportive_meds, null, 2)}
+                    <h4 className="font-semibold mb-2 text-amber-600">Monitoring Requirements</h4>
+                    <div className="bg-amber-50 p-3 rounded border-l-4 border-amber-400">
+                      <div className="space-y-1">
+                        {supportiveCare.monitoring.map((item: string, idx: number) => (
+                          <div key={idx} className="bg-white p-2 rounded border border-amber-200">
+                            {item}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
 
-                {!protocol.pre_medications && !protocol.post_medications && !protocol.supportive_meds && (
+                {!supportiveCare?.required?.length && !supportiveCare?.optional?.length && !protocol.pre_medications && !protocol.post_medications && !supportiveCare?.monitoring?.length && (
                   <div className="text-center py-8 text-gray-500">
                     <Pill className="w-12 h-12 mx-auto mb-2 text-gray-300" />
                     <p>No support medication information available for this protocol.</p>
@@ -463,8 +817,7 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
-          <TabsContent value="emergency" className="mt-6">
+          </TabsContent>          <TabsContent value="emergency" className="mt-6">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-red-600">
@@ -473,6 +826,7 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                {/* Emergency/Rescue Agents */}
                 {protocol.rescue_agents && (
                   <div>
                     <h4 className="font-semibold mb-2 text-red-600">Emergency/Rescue Agents</h4>
@@ -481,32 +835,98 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                         ? protocol.rescue_agents 
                         : Array.isArray(protocol.rescue_agents)
                         ? protocol.rescue_agents.length > 0
-                          ? protocol.rescue_agents.map((agent: any, idx: number) => (
-                              <div key={idx} className="mb-2 last:mb-0">
-                                {typeof agent === 'object' ? agent.name || agent.drug || JSON.stringify(agent) : agent}
+                          ? (
+                              <div className="space-y-3">
+                                {protocol.rescue_agents.map((agent: any, idx: number) => (
+                                  <div key={idx} className="bg-white p-3 rounded border border-red-200">
+                                    {typeof agent === 'object' ? (
+                                      <div>
+                                        <div className="font-semibold text-red-800 mb-1">
+                                          {agent.name || agent.drug || agent.agent || 'Emergency Agent'}
+                                        </div>
+                                        {agent.dose && (
+                                          <div className="text-sm text-gray-600 mb-1">
+                                            <span className="font-medium">Dose:</span> {agent.dose}
+                                          </div>
+                                        )}
+                                        {agent.route && (
+                                          <div className="text-sm text-gray-600 mb-1">
+                                            <span className="font-medium">Route:</span> {agent.route}
+                                          </div>
+                                        )}
+                                        {agent.indication && (
+                                          <div className="text-sm text-gray-600 mb-1">
+                                            <span className="font-medium">Indication:</span> {agent.indication}
+                                          </div>
+                                        )}
+                                        {agent.timing && (
+                                          <div className="text-sm text-gray-600 mb-1">
+                                            <span className="font-medium">Timing:</span> {agent.timing}
+                                          </div>
+                                        )}
+                                        {agent.notes && (
+                                          <div className="text-sm text-gray-600">
+                                            <span className="font-medium">Notes:</span> {agent.notes}
+                                          </div>
+                                        )}
+                                      </div>
+                                    ) : (
+                                      <div className="text-gray-700">{agent}</div>
+                                    )}
+                                  </div>
+                                ))}
                               </div>
-                            ))
+                            )
                           : "No rescue agents specified"
                         : JSON.stringify(protocol.rescue_agents, null, 2)}
                     </div>
                   </div>
-                )}                {toxicityMonitoring && toxicityMonitoring.thresholds_for_action && Object.keys(toxicityMonitoring.thresholds_for_action).length > 0 && (
+                )}
+
+                {/* Emergency Action Thresholds */}
+                {toxicityMonitoring && toxicityMonitoring.thresholds_for_action && Object.keys(toxicityMonitoring.thresholds_for_action).length > 0 && (
                   <div>
                     <h4 className="font-semibold mb-2 text-orange-600">Emergency Action Thresholds</h4>
                     <div className="bg-orange-50 p-3 rounded border-l-4 border-orange-400">
-                      <div className="grid gap-2">
-                        {Object.entries(toxicityMonitoring.thresholds_for_action).map(([condition, action]: [string, string], idx: number) => (
-                          <div key={idx} className="bg-white p-2 rounded border border-orange-200">
-                            <span className="font-medium text-orange-800">{condition}:</span>
-                            <span className="ml-2 text-gray-700">{action}</span>
+                      <div className="space-y-2">
+                        {Object.entries(toxicityMonitoring.thresholds_for_action).map(([condition, action], idx: number) => (
+                          <div key={idx} className="bg-white p-3 rounded border border-orange-200">
+                            <div className="font-medium text-orange-800 mb-1">{condition}</div>
+                            <div className="text-gray-700 text-sm">{String(action)}</div>
                           </div>
                         ))}
                       </div>
                     </div>
                   </div>
+                )}                {/* Emergency Contact Information */}
+                {(protocol as any)?.emergency_contact && (
+                  <div>
+                    <h4 className="font-semibold mb-2 text-purple-600">Emergency Contact Information</h4>
+                    <div className="bg-purple-50 p-3 rounded border-l-4 border-purple-400">
+                      <div className="bg-white p-3 rounded border border-purple-200">
+                        {typeof (protocol as any).emergency_contact === 'string' 
+                          ? (protocol as any).emergency_contact
+                          : typeof (protocol as any).emergency_contact === 'object'
+                          ? (
+                              <div className="space-y-1">
+                                {(protocol as any).emergency_contact.name && (
+                                  <div><span className="font-medium">Contact:</span> {(protocol as any).emergency_contact.name}</div>
+                                )}
+                                {(protocol as any).emergency_contact.phone && (
+                                  <div><span className="font-medium">Phone:</span> {(protocol as any).emergency_contact.phone}</div>
+                                )}
+                                {(protocol as any).emergency_contact.hours && (
+                                  <div><span className="font-medium">Hours:</span> {(protocol as any).emergency_contact.hours}</div>
+                                )}
+                              </div>
+                            )
+                          : JSON.stringify((protocol as any).emergency_contact, null, 2)}
+                      </div>
+                    </div>
+                  </div>
                 )}
 
-                {!protocol.rescue_agents && (!toxicityMonitoring || !toxicityMonitoring.thresholds_for_action || Object.keys(toxicityMonitoring.thresholds_for_action).length === 0) && (
+                {!protocol.rescue_agents && (!toxicityMonitoring || !toxicityMonitoring.thresholds_for_action || Object.keys(toxicityMonitoring.thresholds_for_action).length === 0) && !(protocol as any)?.emergency_contact && (
                   <div className="text-center py-8 text-gray-500">
                     <Shield className="w-12 h-12 mx-auto mb-2 text-gray-300" />
                     <p>No emergency protocol information available.</p>
@@ -602,125 +1022,209 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
-          <TabsContent value="toxicity">
-            <div className="space-y-6">              <div>
-                <h3 className="font-semibold text-lg mb-2">Expected Toxicities</h3>
+          </TabsContent>          <TabsContent value="toxicity">
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                  <div className="w-4 h-4 bg-red-500 rounded"></div>
+                  Expected Toxicities
+                </h3>
                 {toxicityMonitoring?.expected_toxicities && toxicityMonitoring.expected_toxicities.length > 0 ? (
-                  <ul className="list-disc list-inside">
+                  <div className="grid gap-2">
                     {toxicityMonitoring.expected_toxicities.map((toxicity: string, idx: number) => (
-                      <li key={idx}>{toxicity}</li>
+                      <div key={idx} className="bg-red-50 p-3 rounded-lg border border-red-200">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                          <span className="text-gray-800">{toxicity}</span>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 ) : (
-                  <p className="text-muted-foreground">No expected toxicities specified.</p>
+                  <div className="text-center py-6 text-gray-500 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                      <span className="text-gray-400 text-xl">⚠️</span>
+                    </div>
+                    <p>No expected toxicities specified.</p>
+                  </div>
                 )}
               </div>
-                {toxicityMonitoring?.monitoring_parameters && (
+
+              {toxicityMonitoring?.monitoring_parameters && (
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Monitoring Parameters</h3>
-                  <p className="whitespace-pre-line">{toxicityMonitoring.monitoring_parameters}</p>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                    Monitoring Parameters
+                  </h3>
+                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <p className="whitespace-pre-line text-gray-700">{toxicityMonitoring.monitoring_parameters}</p>
+                  </div>
                 </div>
               )}
 
               {toxicityMonitoring?.frequency_details && (
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Monitoring Frequency</h3>
-                  <p className="whitespace-pre-line">{toxicityMonitoring.frequency_details}</p>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <div className="w-4 h-4 bg-green-500 rounded"></div>
+                    Monitoring Frequency
+                  </h3>
+                  <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                    <p className="whitespace-pre-line text-gray-700">{toxicityMonitoring.frequency_details}</p>
+                  </div>
                 </div>
               )}
 
               {toxicityMonitoring?.thresholds_for_action && Object.keys(toxicityMonitoring.thresholds_for_action).length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Action Thresholds</h3>
-                  <div className="grid gap-2">
-                    {Object.entries(toxicityMonitoring.thresholds_for_action).map(([condition, action]: [string, string], idx: number) => (
-                      <div key={idx} className="bg-muted p-2 rounded-md">
-                        <span className="font-medium">{condition}:</span> {action}
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <div className="w-4 h-4 bg-orange-500 rounded"></div>
+                    Action Thresholds
+                  </h3>
+                  <div className="space-y-3">
+                    {Object.entries(toxicityMonitoring.thresholds_for_action).map(([condition, action], idx: number) => (
+                      <div key={idx} className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                        <div className="font-medium text-orange-800 mb-2">{condition}</div>
+                        <div className="text-gray-700 bg-white p-2 rounded border border-orange-100">
+                          {String(action)}
+                        </div>
                       </div>
                     ))}
                   </div>
+                </div>
+              )}              {/* Additional toxicity information */}
+              {(protocol as any)?.toxicity && (
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <div className="w-4 h-4 bg-purple-500 rounded"></div>
+                    Additional Toxicity Information
+                  </h3>
+                  <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                    {typeof (protocol as any).toxicity === 'string' ? (
+                      <p className="whitespace-pre-line text-gray-700">{(protocol as any).toxicity}</p>
+                    ) : (
+                      <pre className="text-sm text-gray-700 whitespace-pre-wrap">
+                        {JSON.stringify((protocol as any).toxicity, null, 2)}
+                      </pre>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {!toxicityMonitoring?.expected_toxicities?.length && 
+               !toxicityMonitoring?.monitoring_parameters && 
+               !toxicityMonitoring?.frequency_details && 
+               (!toxicityMonitoring?.thresholds_for_action || Object.keys(toxicityMonitoring.thresholds_for_action).length === 0) &&
+               !(protocol as any)?.toxicity && (
+                <div className="text-center py-8 text-gray-500">
+                  <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3 flex items-center justify-center">
+                    <span className="text-gray-400 text-2xl">📊</span>
+                  </div>
+                  <p className="text-lg">No toxicity monitoring information available.</p>
+                  <p className="text-sm text-gray-400 mt-1">Toxicity data will be displayed here when available.</p>
                 </div>
               )}
             </div>
           </TabsContent>          <TabsContent value="interactions">
             <div className="space-y-6">
               {interactions?.drugs_to_avoid && interactions.drugs_to_avoid.length > 0 && (
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Drugs to Avoid</h3>
-                  <ul className="list-disc list-inside">
+                <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2 text-red-800">
+                    <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-content">
+                      <span className="text-white text-xs font-bold mx-auto">⚠</span>
+                    </div>
+                    Drugs to Avoid
+                  </h3>
+                  <div className="space-y-2">
                     {interactions.drugs_to_avoid.map((drug: string, idx: number) => (
-                      <li key={idx}>{drug}</li>
+                      <div key={idx} className="bg-white p-3 rounded border border-red-100 shadow-sm">
+                        <div className="flex items-center gap-2">
+                          <span className="text-red-500 text-sm">🚫</span>
+                          <span className="font-medium text-red-700">{drug}</span>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
 
               {interactions?.contraindications && interactions.contraindications.length > 0 && (
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Contraindications</h3>
-                  <ul className="list-disc list-inside">
+                <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2 text-orange-800">
+                    <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">!</span>
+                    </div>
+                    Contraindications
+                  </h3>
+                  <div className="space-y-2">
                     {interactions.contraindications.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
+                      <div key={idx} className="bg-white p-3 rounded border border-orange-100 shadow-sm">
+                        <div className="flex items-center gap-2">
+                          <span className="text-orange-500 text-sm">⛔</span>
+                          <span className="font-medium text-orange-700">{item}</span>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
 
               {interactions?.precautions_with_other_drugs && interactions.precautions_with_other_drugs.length > 0 && (
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Precautions with Other Drugs</h3>
-                  <ul className="list-disc list-inside">
+                <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2 text-yellow-800">
+                    <div className="w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">⚠</span>
+                    </div>
+                    Precautions with Other Drugs
+                  </h3>
+                  <div className="space-y-2">
                     {interactions.precautions_with_other_drugs.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
+                      <div key={idx} className="bg-white p-3 rounded border border-yellow-100 shadow-sm">
+                        <div className="flex items-center gap-2">
+                          <span className="text-yellow-500 text-sm">⚠️</span>
+                          <span className="font-medium text-yellow-700">{item}</span>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
-            </div>
-          </TabsContent><TabsContent value="supportiveCare">
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Required Supportive Care</h3>
-                {supportiveCare?.required?.length > 0 ? (
-                  <ul className="list-disc list-inside">
-                    {supportiveCare.required.map((item: any, idx: number) => (
-                      <li key={idx}>{typeof item === 'object' ? item.name || JSON.stringify(item) : item}</li>
+
+              {/* Additional drug interaction sections if available */}
+              {(interactions as any)?.monitoring_requirements && (interactions as any).monitoring_requirements.length > 0 && (
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2 text-blue-800">
+                    <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">👁</span>
+                    </div>
+                    Monitoring Requirements
+                  </h3>
+                  <div className="space-y-2">
+                    {(interactions as any).monitoring_requirements.map((item: string, idx: number) => (
+                      <div key={idx} className="bg-white p-3 rounded border border-blue-100 shadow-sm">
+                        <div className="flex items-center gap-2">
+                          <span className="text-blue-500 text-sm">📊</span>
+                          <span className="font-medium text-blue-700">{item}</span>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
-                ) : (
-                  <p className="text-muted-foreground">No required supportive care specified.</p>
-                )}
-              </div>
-              
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Optional Supportive Care</h3>
-                {supportiveCare?.optional?.length > 0 ? (
-                  <ul className="list-disc list-inside">
-                    {supportiveCare.optional.map((item: any, idx: number) => (
-                      <li key={idx}>{typeof item === 'object' ? item.name || JSON.stringify(item) : item}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-muted-foreground">No optional supportive care specified.</p>
-                )}
-              </div>
-              
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Monitoring Requirements</h3>
-                {supportiveCare?.monitoring?.length > 0 ? (
-                  <ul className="list-disc list-inside">
-                    {supportiveCare.monitoring.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-muted-foreground">No monitoring requirements specified.</p>
-                )}
-              </div>
-            </div>
-          </TabsContent>
-          <TabsContent value="info">
+                  </div>
+                </div>
+              )}
+
+              {/* Empty state when no interactions are specified */}
+              {(!interactions?.drugs_to_avoid || interactions.drugs_to_avoid.length === 0) &&
+               (!interactions?.contraindications || interactions.contraindications.length === 0) &&
+               (!interactions?.precautions_with_other_drugs || interactions.precautions_with_other_drugs.length === 0) &&
+               (!(interactions as any)?.monitoring_requirements || (interactions as any).monitoring_requirements.length === 0) && (
+                <div className="text-center py-8 text-gray-500 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <span className="text-gray-400 text-2xl">🔄</span>
+                  </div>
+                  <h3 className="font-medium text-gray-700 mb-2">No Drug Interactions Specified</h3>
+                  <p className="text-sm">No known drug interactions, contraindications, or precautions have been documented for this protocol.</p>
+                </div>
+              )}
+            </div></TabsContent>          <TabsContent value="info">
             <InfoTab
               lastReviewed={protocol.last_reviewed}
               version={protocol.version}
@@ -730,6 +1234,102 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               createdAt={protocol.created_at}
               updatedAt={protocol.updated_at}
             />
+            
+            {/* Additional Protocol Statistics */}
+            <Card className="mt-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-emerald-600">
+                  <div className="w-5 h-5 bg-emerald-500 rounded flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">📊</span>
+                  </div>
+                  Protocol Summary
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Drug Count */}
+                  <div className="bg-blue-50 p-3 rounded-lg border border-blue-200 text-center">
+                    <div className="text-2xl font-bold text-blue-600 mb-1">
+                      {treatment?.drugs?.length || 0}
+                    </div>
+                    <div className="text-sm text-blue-800 font-medium">Drugs</div>
+                    <div className="text-xs text-gray-600 mt-1">in treatment plan</div>
+                  </div>
+                  
+                  {/* Tests Count */}
+                  <div className="bg-green-50 p-3 rounded-lg border border-green-200 text-center">
+                    <div className="text-2xl font-bold text-green-600 mb-1">
+                      {(tests?.baseline?.length || 0) + (tests?.monitoring?.length || 0)}
+                    </div>
+                    <div className="text-sm text-green-800 font-medium">Tests</div>
+                    <div className="text-xs text-gray-600 mt-1">baseline + monitoring</div>
+                  </div>
+                  
+                  {/* Toxicities Count */}
+                  <div className="bg-red-50 p-3 rounded-lg border border-red-200 text-center">
+                    <div className="text-2xl font-bold text-red-600 mb-1">
+                      {toxicityMonitoring?.expected_toxicities?.length || 0}
+                    </div>
+                    <div className="text-sm text-red-800 font-medium">Toxicities</div>
+                    <div className="text-xs text-gray-600 mt-1">expected side effects</div>
+                  </div>
+                </div>
+                
+                {/* Protocol Completeness Indicator */}
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                  <h4 className="font-semibold text-gray-800 mb-3">Protocol Completeness</h4>
+                  <div className="space-y-2">
+                    {[
+                      { label: 'Treatment Plan', hasData: treatment?.drugs?.length > 0, color: 'blue' },
+                      { label: 'Eligibility Criteria', hasData: !!protocol.eligibility, color: 'green' },
+                      { label: 'Baseline Tests', hasData: tests?.baseline?.length > 0, color: 'purple' },
+                      { label: 'Monitoring Tests', hasData: tests?.monitoring?.length > 0, color: 'indigo' },
+                      { label: 'Dose Modifications', hasData: Object.values(doseModifications).some(arr => arr.length > 0), color: 'amber' },
+                      { label: 'Safety Information', hasData: !!(protocol.precautions || protocol.contraindications), color: 'red' },
+                      { label: 'Supportive Care', hasData: supportiveCare?.required?.length > 0 || supportiveCare?.optional?.length > 0, color: 'teal' },
+                      { label: 'Emergency Protocols', hasData: !!protocol.rescue_agents, color: 'orange' }
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex items-center justify-between">
+                        <span className="text-sm text-gray-700">{item.label}</span>
+                        <div className="flex items-center gap-2">
+                          <div className={`w-3 h-3 rounded-full ${item.hasData ? `bg-${item.color}-500` : 'bg-gray-300'}`}></div>
+                          <span className={`text-xs font-medium ${item.hasData ? `text-${item.color}-600` : 'text-gray-500'}`}>
+                            {item.hasData ? 'Complete' : 'Incomplete'}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                  {/* Quick Protocol Facts */}
+                <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
+                  <h4 className="font-semibold text-indigo-800 mb-3">Quick Facts</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-700">Protocol Code:</span>
+                      <span className="font-medium text-indigo-700">{protocol.code || 'Not specified'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-700">Pre-medications:</span>
+                      <span className="font-medium text-indigo-700">
+                        {(protocol.pre_medications && (Array.isArray(protocol.pre_medications) ? protocol.pre_medications.length > 0 : true)) ? 'Yes' : 'No'}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-700">Rescue Agents:</span>
+                      <span className="font-medium text-indigo-700">
+                        {protocol.rescue_agents ? 'Available' : 'None specified'}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-700">Drug Interactions:</span>
+                      <span className="font-medium text-indigo-700">
+                        {interactions?.drugs_to_avoid?.length > 0 ? `${interactions.drugs_to_avoid.length} drugs to avoid` : 'None specified'}
+                      </span>
+                    </div>                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </DialogContent>

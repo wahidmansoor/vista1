@@ -1,7 +1,7 @@
 // d:\Mansoor\tick-toc\src\modules\cdu\treatmentProtocols\tabs\SupportiveCareTab.tsx
 import React from 'react';
 import { Protocol } from '@/types/protocol';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
 import { safeJsonParse } from '../../../types/protocol';
 
 interface SupportiveCareTabProps {

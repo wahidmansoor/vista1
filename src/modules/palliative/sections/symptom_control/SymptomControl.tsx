@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useState } from "react";
 import { useSymptomData } from "../../hooks/useSymptomData";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../../../components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AlertTriangle, Loader2 } from "lucide-react";

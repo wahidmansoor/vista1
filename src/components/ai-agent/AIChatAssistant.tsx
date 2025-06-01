@@ -147,35 +147,31 @@ export function AIChatAssistant({ module, intent, initialContext = '', mockMode 
         <div className="space-y-4">
           {history.map((msg, idx) => (
             <Card key={msg.id} className="p-4">
-              <div className="flex items-start gap-2">
-                <div className="flex-1">
+              <div className="flex items-start gap-2">                <div className="flex-1">
                   <div className="font-medium mb-1">
-                    {msg.type === 'assistant' ? 'AI Assistant' : 'You'}
+                    AI Assistant
                   </div>
                   <div className="whitespace-pre-wrap">{msg.content}</div>
                 </div>
-                {msg.type === 'assistant' && (
-                  <div className="flex gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleFeedback(msg.id, true)}
-                      title="This was helpful"
-                    >
-                      <ThumbsUp className="w-4 h-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleFeedback(msg.id, false)}
-                      title="This was not helpful"
-                    >
-                      <ThumbsDown className="w-4 h-4" />
-                    </Button>
-                  </div>
-                )}
-              </div>
-              {idx === 0 && msg.type === 'assistant' && (
+                <div className="flex gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleFeedback(msg.id, true)}
+                    title="This was helpful"
+                  >
+                    <ThumbsUp className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleFeedback(msg.id, false)}
+                    title="This was not helpful"
+                  >
+                    <ThumbsDown className="w-4 h-4" />
+                  </Button>
+                </div>              </div>
+              {idx === 0 && (
                 <div className="flex gap-2 mt-2">
                   <Button
                     variant="outline"

@@ -1,7 +1,7 @@
 // d:\Mansoor\tick-toc\src\modules\cdu\treatmentProtocols\tabs\EligibilityTab.tsx
 import React from 'react';
 import { Protocol } from '@/types/protocol';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
 import { safeJsonParse, Eligibility } from '../../../types/protocol';
 
 interface EligibilityTabProps {
@@ -26,9 +26,11 @@ export const EligibilityTab: React.FC<EligibilityTabProps> = ({ protocol }) => {
   let inclusion: string[] | undefined;
   let exclusion: string[] | undefined;
   let parseError = false;
-  if (typeof eligibility === 'string') {
-    try {
-      const parsedEligibility = safeJsonParse<Eligibility>(eligibility, {});
+  if (typeof eligibility === 'string') {    try {
+      const parsedEligibility = safeJsonParse<Eligibility>(eligibility, {
+        inclusion_criteria: [],
+        exclusion_criteria: []
+      });
       inclusion = parsedEligibility.inclusion_criteria;
       exclusion = parsedEligibility.exclusion_criteria;
     } catch (e) {

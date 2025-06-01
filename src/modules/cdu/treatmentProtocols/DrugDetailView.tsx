@@ -14,6 +14,7 @@ interface DrugDetailViewProps {
       pharmacokinetics?: string[];
     };
   };
+  onBack?: () => void;
 }
 
 const DrugDetailView: React.FC<DrugDetailViewProps> = ({ drug }) => {

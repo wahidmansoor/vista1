@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { ModuleType, PromptIntent } from './types';
 
 interface PromptSuggestionsProps {
@@ -7,7 +7,9 @@ interface PromptSuggestionsProps {
   onSelect: (prompt: string) => void;
 }
 
-const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {  OPD: {
+interface ModulePromptsType extends Partial<Record<ModuleType, Partial<Record<PromptIntent, string[]>>>> {}
+
+const modulePrompts: Partial<Record<ModuleType, Partial<Record<PromptIntent, string[]>>>> = {  OPD: {
     screening: [
       'Analyze cancer screening recommendations for this patient',
       'Suggest additional screening tests based on risk factors',
@@ -50,11 +52,11 @@ const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {  OPD
   }
 };
 
-export const PromptSuggestions: React.FC<PromptSuggestionsProps> = ({
+export const PromptSuggestions: FC<PromptSuggestionsProps> = ({
   module,
   intent,
   onSelect
-}) => {
+}: PromptSuggestionsProps) => {
   const suggestions = modulePrompts[module]?.[intent] || [];
 
   if (suggestions.length === 0) return null;
@@ -63,7 +65,7 @@ export const PromptSuggestions: React.FC<PromptSuggestionsProps> = ({
     <div className="space-y-2 mt-2">
       <p className="text-sm font-medium text-gray-500">Suggested prompts:</p>
       <div className="flex flex-wrap gap-2">
-        {suggestions.map((prompt, index) => (
+        {suggestions.map((prompt: string, index: number) => (
           <button
             key={index}
             onClick={() => onSelect(prompt)}

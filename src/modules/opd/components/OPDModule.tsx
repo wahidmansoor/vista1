@@ -1,8 +1,8 @@
 import React from "react";
 import { Tab } from "@headlessui/react";
 import {
-  UserCheck,
-  ScanLine,
+  User,
+  Search,
   ShieldCheck,
   Send,
   CalendarClock,
@@ -24,13 +24,13 @@ import FollowUpOncology from "../follow-up-oncology/FollowUpOncology";
 const tabs = [
   { 
     label: "Patient Evaluation", 
-    icon: UserCheck, 
+    icon: User, 
     component: PatientEvaluation, 
     card: EvaluationCard 
   },
   { 
     label: "Diagnostic Pathways", 
-    icon: ScanLine, 
+    icon: Search, 
     component: DiagnosticPathways, 
     card: PathwayCard 
   },

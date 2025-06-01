@@ -8,10 +8,14 @@ interface EligibilityTabProps {
 }
 
 const EligibilityTab: React.FC<EligibilityTabProps> = ({ protocol }) => {
-  const eligibility = protocol.eligibility || {};
-  const hasInclusionCriteria = Array.isArray(eligibility.inclusion_criteria) && eligibility.inclusion_criteria.length > 0;
-  const hasExclusionCriteria = Array.isArray(eligibility.exclusion_criteria) && eligibility.exclusion_criteria.length > 0;
-  const hasData = hasInclusionCriteria || hasExclusionCriteria;
+  const criteria = protocol.eligibility ?? { inclusion_criteria: [], exclusion_criteria: [] };
+  const inclusion = criteria.inclusion_criteria ?? [];
+  const exclusion = criteria.exclusion_criteria ?? [];
+  const references = protocol.reference_list ?? [];
+  
+  const hasInclusionCriteria = inclusion.length > 0;
+  const hasExclusionCriteria = exclusion.length > 0;
+  const hasData = hasInclusionCriteria || hasExclusionCriteria || references.length > 0;
   
   return (
     <div className="space-y-6 p-4">
@@ -38,10 +42,12 @@ const EligibilityTab: React.FC<EligibilityTabProps> = ({ protocol }) => {
               <Card>
                 <CardContent className="p-6">
                   <ul className="space-y-3">
-                    {eligibility.inclusion_criteria.map((criterion, index) => (
+                    {inclusion.map((criterion: string | { criterion: string }, index: number) => (
                       <li key={index} className="flex items-start space-x-3">
                         <Check className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700 dark:text-gray-300">{criterion}</span>
+                        <span className="text-gray-700 dark:text-gray-300">
+                          {typeof criterion === 'string' ? criterion : criterion.criterion}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -60,10 +66,12 @@ const EligibilityTab: React.FC<EligibilityTabProps> = ({ protocol }) => {
               <Card>
                 <CardContent className="p-6">
                   <ul className="space-y-3">
-                    {eligibility.exclusion_criteria.map((criterion, index) => (
+                    {exclusion.map((criterion: string | { criterion: string }, index: number) => (
                       <li key={index} className="flex items-start space-x-3">
                         <X className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700 dark:text-gray-300">{criterion}</span>
+                        <span className="text-gray-700 dark:text-gray-300">
+                          {typeof criterion === 'string' ? criterion : criterion.criterion}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -73,7 +81,7 @@ const EligibilityTab: React.FC<EligibilityTabProps> = ({ protocol }) => {
           )}
           
           {/* Protocol References if available */}
-          {protocol.references && protocol.references.length > 0 && (
+          {references.length > 0 && (
             <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-800">
               <div className="flex items-center mb-4 space-x-2">
                 <FileText className="h-5 w-5 text-blue-500" />
@@ -82,7 +90,7 @@ const EligibilityTab: React.FC<EligibilityTabProps> = ({ protocol }) => {
               <Card>
                 <CardContent className="p-6">
                   <ul className="space-y-3 list-decimal pl-5">
-                    {protocol.references.map((reference, index) => (
+                    {references.map((reference: string, index: number) => (
                       <li key={index} className="text-gray-700 dark:text-gray-300">
                         {reference}
                       </li>

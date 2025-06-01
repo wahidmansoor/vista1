@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { 
   Table, 
   TableBody, 
@@ -8,7 +8,7 @@ import {
   TableHeader, 
   TableRow 
 } from '@/components/ui/table';
-import type { DoseModification, Protocol } from '@/types/protocol';
+import type { Protocol, DoseModification, DoseReduction } from '@/types/protocol';
 import { AlertCircle } from 'lucide-react';
 
 interface DoseModificationsTabProps {
@@ -16,8 +16,9 @@ interface DoseModificationsTabProps {
 }
 
 const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol }) => {
-  const doseModifications = protocol.dose_modifications || {};
-  const hasDoseData = Object.keys(doseModifications).length > 0;
+  const doseModifications = protocol.dose_modifications || {} as DoseModification;
+  const doseReductions = protocol.dose_reductions || {} as DoseReduction;
+  const hasDoseData = Object.keys(doseModifications).length > 0 || Object.keys(doseReductions).length > 0;
 
   // Helper function to render modification sections
   const renderModificationSection = (title: string, items: string[] | undefined) => {
@@ -58,7 +59,7 @@ const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol })
           {renderModificationSection('Hepatic Modifications', doseModifications.hepatic)}
           
           {/* Render dose reduction levels if available */}
-          {protocol.dose_reductions?.levels && (
+          {doseReductions.levels && Object.keys(doseReductions.levels).length > 0 && (
             <div className="mt-8">
               <h3 className="text-lg font-medium mb-4">Dose Reduction Levels</h3>
               <Table>
@@ -69,7 +70,7 @@ const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol })
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {Object.entries(protocol.dose_reductions.levels).map(([level, dose]) => (
+                  {Object.entries(doseReductions.levels).map(([level, dose]) => (
                     <TableRow key={level}>
                       <TableCell className="font-medium">{level}</TableCell>
                       <TableCell>{dose}</TableCell>
@@ -81,11 +82,11 @@ const DoseModificationsTab: React.FC<DoseModificationsTabProps> = ({ protocol })
           )}
 
           {/* Render dose reduction criteria if available */}
-          {protocol.dose_reductions?.criteria && (
+          {doseReductions.criteria && doseReductions.criteria.length > 0 && (
             <div className="mt-8">
               <h3 className="text-lg font-medium mb-2">Dose Reduction Criteria</h3>
               <ul className="space-y-2 list-disc pl-5">
-                {protocol.dose_reductions.criteria.map((criterion, index) => (
+                {doseReductions.criteria.map((criterion, index) => (
                   <li key={index} className="text-gray-700 dark:text-gray-300">{criterion}</li>
                 ))}
               </ul>

@@ -7,7 +7,7 @@ type Test = {
 };
 
 interface TestsSectionTabProps {
-  tests?: Array<Test> | { baseline?: string[]; monitoring?: string[] };
+  tests?: Array<Test> | { baseline?: string[] | Test[]; monitoring?: string[] | Test[]; frequency?: string };
 }
 
 // This component handles both test formats (array of test objects or object with baseline/monitoring arrays)
@@ -28,10 +28,11 @@ const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests }) => {
       <div className="space-y-6">
         {baseline.length > 0 && (
           <div>
-            <h3 className="font-semibold text-lg mb-2">Baseline Tests</h3>
-            <ul className="list-disc list-inside space-y-1">
+            <h3 className="font-semibold text-lg mb-2">Baseline Tests</h3>            <ul className="list-disc list-inside space-y-1">
               {baseline.map((test, idx) => (
-                <li key={`baseline-${idx}`}>{test}</li>
+                <li key={`baseline-${idx}`}>
+                  {typeof test === 'string' ? test : test.name || JSON.stringify(test)}
+                </li>
               ))}
             </ul>
           </div>
@@ -39,10 +40,11 @@ const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests }) => {
         
         {monitoring.length > 0 && (
           <div>
-            <h3 className="font-semibold text-lg mb-2">Ongoing Tests</h3>
-            <ul className="list-disc list-inside space-y-1">
+            <h3 className="font-semibold text-lg mb-2">Ongoing Tests</h3>            <ul className="list-disc list-inside space-y-1">
               {monitoring.map((test, idx) => (
-                <li key={`monitoring-${idx}`}>{test}</li>
+                <li key={`monitoring-${idx}`}>
+                  {typeof test === 'string' ? test : test.name || JSON.stringify(test)}
+                </li>
               ))}
             </ul>
           </div>

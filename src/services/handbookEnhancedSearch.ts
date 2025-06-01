@@ -1,4 +1,4 @@
-import Fuse from 'fuse.js';
+import Fuse, { IFuseOptions } from 'fuse.js';
 import { HandbookContentBlock, TopicContent } from '@/modules/handbook/types/handbook';
 import { HANDBOOK_TYPES, HandbookSection } from '@/utils/pathUtils';
 
@@ -77,7 +77,7 @@ const fuseInstances: Partial<Record<HandbookSection, Fuse<ContentIndex>>> = {};
 /**
  * Default search options with optimized configuration
  */
-const defaultSearchOptions: Fuse.IFuseOptions<ContentIndex> = {
+const defaultSearchOptions: IFuseOptions<ContentIndex> = {
   keys: [
     { name: 'title', weight: 2 },
     { name: 'headings', weight: 1.5 },
@@ -302,12 +302,12 @@ export async function enhancedHandbookSearch(
   const allResults: EnhancedSearchResult[] = [];
   
   for (const section of sections) {
-    const fuse = fuseInstances[section];
+    let fuse = fuseInstances[section];
     if (!fuse) continue;
-    
-    // Apply custom threshold if provided
+      // Apply custom threshold if provided
     if (threshold !== undefined) {
-      fuse.options.threshold = threshold;
+      const currentOptions = { ...defaultSearchOptions, threshold };
+      fuse = new Fuse(contentIndices[section], currentOptions);
     }
     
     // Perform search

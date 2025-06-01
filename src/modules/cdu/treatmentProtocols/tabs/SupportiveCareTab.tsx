@@ -59,14 +59,13 @@ const SupportiveCareTab: React.FC<SupportiveCareTabProps> = ({ protocol }) => {
                         <TableHead>Purpose</TableHead>
                       </TableRow>
                     </TableHeader>
-                    <TableBody>
-                      {requiredMeds.map((med, index) => (
+                    <TableBody>                      {requiredMeds.map((med, index) => (
                         <TableRow key={index}>
                           <TableCell className="font-medium">{med.name}</TableCell>
                           <TableCell>{med.dose || '-'}</TableCell>
                           <TableCell>{med.route || '-'}</TableCell>
                           <TableCell>{med.timing || '-'}</TableCell>
-                          <TableCell>{med.purpose || '-'}</TableCell>
+                          <TableCell>{(med as any).purpose || '-'}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -92,14 +91,13 @@ const SupportiveCareTab: React.FC<SupportiveCareTabProps> = ({ protocol }) => {
                         <TableHead>Purpose</TableHead>
                       </TableRow>
                     </TableHeader>
-                    <TableBody>
-                      {optionalMeds.map((med, index) => (
+                    <TableBody>                      {optionalMeds.map((med, index) => (
                         <TableRow key={index}>
                           <TableCell className="font-medium">{med.name}</TableCell>
                           <TableCell>{med.dose || '-'}</TableCell>
                           <TableCell>{med.route || '-'}</TableCell>
                           <TableCell>{med.timing || '-'}</TableCell>
-                          <TableCell>{med.purpose || '-'}</TableCell>
+                          <TableCell>{(med as any).purpose || '-'}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

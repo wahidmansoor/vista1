@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 

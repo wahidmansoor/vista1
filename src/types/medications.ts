@@ -29,7 +29,14 @@ export interface Medication {
   summary?: string;
   black_box_warning?: string;
   special_considerations?: string;
-  pharmacokinetics?: string;
+  pharmacokinetics?: string | {
+    half_life?: string;
+    metabolism?: string;
+    excretion?: string;
+    bioavailability?: string;
+    protein_binding?: string;
+    [key: string]: string | undefined;
+  };
   contraindications?: string[];
   routine_monitoring?: string[];
   pre_treatment_tests?: string[];

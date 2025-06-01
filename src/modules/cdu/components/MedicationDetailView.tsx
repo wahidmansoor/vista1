@@ -44,11 +44,13 @@ export const MedicationDetailView: React.FC<DetailViewProps> = ({ medication, on
               <Section title="Cancer Types">
                 <TagList items={medication.indications.cancer_types} />
               </Section>
-            )}
-
-            {medication.pharmacokinetics && (
+            )}            {medication.pharmacokinetics && (
               <Section title="Pharmacokinetics">
-                <RichTextBlock content={medication.pharmacokinetics} />
+                <RichTextBlock content={
+                  typeof medication.pharmacokinetics === 'string' 
+                    ? medication.pharmacokinetics 
+                    : JSON.stringify(medication.pharmacokinetics, null, 2)
+                } />
               </Section>
             )}
           </div>

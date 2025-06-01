@@ -1,7 +1,7 @@
 // d:/Mansoor/tick-toc/src/modules/cdu/treatmentProtocols/tabs/DrugListTab.tsx
 import React from 'react';
 import { Protocol, Drug } from '@/types/protocol'; // Import Drug type
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
 import { AlertTriangle } from 'lucide-react';
 
 interface DrugListTabProps {

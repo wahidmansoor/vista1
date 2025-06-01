@@ -24,11 +24,12 @@ export const AdmissionProcessSteps: React.FC<Props> = ({ cancerType }) => {
         >
           {open ? '−' : '+'}
         </button>
-      </div>
-      {open && (
+      </div>      {open && (
         <ol className="list-decimal pl-5 text-yellow-700 text-sm leading-tight space-y-0.5">
           {steps.map((step, i) => (
-            <li key={i}>{step}</li>
+            <li key={i}>
+              <strong>{step.step}:</strong> {step.description} ({step.timeframe})
+            </li>
           ))}
         </ol>
       )}

@@ -67,13 +67,13 @@ const OverviewSection = ({ protocol }: { protocol?: Protocol }) => (
   </div>
 );
 
-const PrecautionsTab = ({ precautions }: { precautions?: string[] }) => (
+const PrecautionsTab = ({ precautions }: { precautions?: Array<string | { note: string }> }) => (
   <div>
     <h3 className="font-semibold text-lg mb-2">Precautions</h3>
     {precautions && precautions.length > 0 ? (
       <ul className="list-disc list-inside space-y-1">
         {precautions.map((item, idx) => (
-          <li key={idx}>{item}</li>
+          <li key={idx}>{typeof item === 'string' ? item : item.note}</li>
         ))}
       </ul>
     ) : (

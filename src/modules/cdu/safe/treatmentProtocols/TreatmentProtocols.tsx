@@ -386,7 +386,7 @@ const TabContent: React.FC<{
                   <span className="font-medium">Frequency:</span> {protocol.toxicity_monitoring.frequency}
                 </p>
               )}
-              {Object.keys(protocol.toxicity_monitoring.thresholds).length > 0 && (
+              {protocol.toxicity_monitoring.thresholds && Object.keys(protocol.toxicity_monitoring.thresholds).length > 0 && (
                 <div>
                   <h5 className="font-medium text-orange-800 mb-2">Threshold Values</h5>
                   <pre className="whitespace-pre-wrap text-sm text-orange-700">

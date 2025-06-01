@@ -79,3 +79,53 @@ export function getInitialOrders(cancerType: string, issue: string): string[] {
   }
   return orders;
 }
+
+export function getAdmissionAlerts(cancerType: string, issue: string): Array<{title: string, message: string, type: string}> {
+  const alerts = [];
+  
+  if (issue === 'Spinal Cord Compression') {
+    alerts.push({
+      title: 'URGENT: Spinal Cord Compression',
+      message: 'Immediate MRI spine and high-dose steroids required',
+      type: 'critical'
+    });
+  }
+  
+  if (issue === 'Febrile Neutropenia') {
+    alerts.push({
+      title: 'Febrile Neutropenia Protocol',
+      message: 'Start empirical antibiotics within 1 hour',
+      type: 'high'
+    });
+  }
+  
+  return alerts;
+}
+
+export function getAdmissionProcessSteps(cancerType: string): Array<{step: string, description: string, timeframe: string}> {
+  return [
+    {
+      step: 'Initial Assessment',
+      description: 'Complete history, physical examination, vital signs',
+      timeframe: '0-30 minutes'
+    },
+    {
+      step: 'Laboratory Orders',
+      description: 'Order appropriate blood work and imaging',
+      timeframe: '30-60 minutes'
+    },
+    {
+      step: 'Treatment Initiation',
+      description: 'Begin urgent interventions as indicated',
+      timeframe: '1-2 hours'
+    }
+  ];
+}
+
+export function getSummaryTemplate(cancerType: string): {reason: string, urgency: string, checklistStatus: string} {
+  return {
+    reason: `${cancerType} patient admitted for acute management. Initial assessment completed, appropriate investigations ordered.`,
+    urgency: 'Standard',
+    checklistStatus: 'In Progress'
+  };
+}

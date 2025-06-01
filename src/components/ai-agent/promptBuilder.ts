@@ -48,8 +48,7 @@ const PROMPT_TEMPLATES: Record<ModuleType, Partial<Record<PromptIntent, PromptTe
     },
     'toxicity': {
       instruction: 'Evaluate and manage inpatient chemotherapy complications.',
-      contextPrefix: 'Toxicity presentation:\n'
-    }
+      contextPrefix: 'Toxicity presentation:\n'    }
   },
   Palliative: {
     'triage': {
@@ -70,13 +69,13 @@ const PROMPT_TEMPLATES: Record<ModuleType, Partial<Record<PromptIntent, PromptTe
       instruction: 'Assess and manage radiation-related adverse effects.',
       contextPrefix: 'Side effects:\n'
     }
-  },
-  Tools: {
-    'general': {
-      instruction: 'Provide guidance on clinical calculations and tool usage.',
-      contextPrefix: 'Tool context:\n'
-    }
   }
+  // Tools: {  // Commented out as Tools is not a valid ModuleType
+  //   'general': {
+  //     instruction: 'Provide guidance on clinical calculations and tool usage.',
+  //     contextPrefix: 'Tool context:\n'
+  //   }
+  // }
 };
 
 /**
@@ -98,8 +97,7 @@ const DEFAULT_TEMPLATES: Record<PromptIntent, PromptTemplate> = {
   'rescue-agent': {
     instruction: 'Provide emergency management recommendations.',
     contextPrefix: 'Emergency details:\n'
-  },
-  'screening': {
+  },  'screening': {
     instruction: 'Evaluate cancer screening needs and recommendations.',
     contextPrefix: 'Patient factors:\n'
   },
@@ -111,7 +109,10 @@ const DEFAULT_TEMPLATES: Record<PromptIntent, PromptTemplate> = {
     instruction: 'Assess treatment-related toxicity and provide management guidance.',
     contextPrefix: 'Toxicity details:\n'
   },
-  'pathway': {
+  'evaluation': {
+    instruction: 'Provide comprehensive clinical evaluation and assessment.',
+    contextPrefix: 'Evaluation context:\n'
+  },  'pathway': {
     instruction: 'Guide clinical decision-making based on established pathways.',
     contextPrefix: 'Clinical scenario:\n'
   }

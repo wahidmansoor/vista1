@@ -1,0 +1,1274 @@
+[96msrc/components/ai-agent/AIChatAssistant.tsx[0m:[93m153[0m:[93m26[0m - [91merror[0m[90m TS2339: [0mProperty 'type' does not exist on type 'AIResponse'.
+
+[7m153[0m                     {msg.type === 'assistant' ? 'AI Assistant' : 'You'}
+[7m   [0m [91m                         ~~~~[0m
+
+[96msrc/components/ai-agent/AIChatAssistant.tsx[0m:[93m157[0m:[93m22[0m - [91merror[0m[90m TS2339: [0mProperty 'type' does not exist on type 'AIResponse'.
+
+[7m157[0m                 {msg.type === 'assistant' && (
+[7m   [0m [91m                     ~~~~[0m
+
+[96msrc/components/ai-agent/AIChatAssistant.tsx[0m:[93m178[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'type' does not exist on type 'AIResponse'.
+
+[7m178[0m               {idx === 0 && msg.type === 'assistant' && (
+[7m   [0m [91m                                ~~~~[0m
+
+[96msrc/components/ai-agent/mockResponses.ts[0m:[93m14[0m:[93m3[0m - [91merror[0m[90m TS2739: [0mType '{ screening: { response: string; timestamp: string; }; triage: { response: string; timestamp: string; }; 'follow-up': { response: string; timestamp: string; }; evaluation: { response: string; timestamp: string; }; toxicity: { ...; }; }' is missing the following properties from type 'Record<PromptIntent, MockResponse>': general, "dose-check", pathway, "rescue-agent"
+
+[7m14[0m   OPD: {
+[7m  [0m [91m  ~~~[0m
+
+[96msrc/components/ai-agent/mockResponses.ts[0m:[93m75[0m:[93m3[0m - [91merror[0m[90m TS2739: [0mType '{ toxicity: { response: string; timestamp: string; }; screening: { response: string; timestamp: string; }; triage: { response: string; timestamp: string; }; 'follow-up': { response: string; timestamp: string; }; evaluation: { ...; }; }' is missing the following properties from type 'Record<PromptIntent, MockResponse>': general, "dose-check", pathway, "rescue-agent"
+
+[7m75[0m   CDU: {
+[7m  [0m [91m  ~~~[0m
+
+[96msrc/components/ai-agent/mockResponses.ts[0m:[93m95[0m:[93m3[0m - [91merror[0m[90m TS2739: [0mType '{ evaluation: { response: string; timestamp: string; }; toxicity: { response: string; timestamp: string; }; screening: { response: string; timestamp: string; }; triage: { response: string; timestamp: string; }; 'follow-up': { ...; }; }' is missing the following properties from type 'Record<PromptIntent, MockResponse>': general, "dose-check", pathway, "rescue-agent"
+
+[7m95[0m   Inpatient: {
+[7m  [0m [91m  ~~~~~~~~~[0m
+
+[96msrc/components/ai-agent/mockResponses.ts[0m:[93m128[0m:[93m3[0m - [91merror[0m[90m TS2739: [0mType '{ evaluation: { response: string; timestamp: string; }; 'follow-up': { response: string; timestamp: string; }; screening: { response: string; timestamp: string; }; triage: { response: string; timestamp: string; }; toxicity: { ...; }; }' is missing the following properties from type 'Record<PromptIntent, MockResponse>': general, "dose-check", pathway, "rescue-agent"
+
+[7m128[0m   Palliative: {
+[7m   [0m [91m  ~~~~~~~~~~[0m
+
+[96msrc/components/ai-agent/mockResponses.ts[0m:[93m161[0m:[93m3[0m - [91merror[0m[90m TS2739: [0mType '{ evaluation: { response: string; timestamp: string; }; toxicity: { response: string; timestamp: string; }; 'follow-up': { response: string; timestamp: string; }; screening: { response: string; timestamp: string; }; triage: { ...; }; }' is missing the following properties from type 'Record<PromptIntent, MockResponse>': general, "dose-check", pathway, "rescue-agent"
+
+[7m161[0m   RadOnc: {
+[7m   [0m [91m  ~~~~~~[0m
+
+[96msrc/components/ai-agent/promptBuilder.ts[0m:[93m74[0m:[93m3[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'Tools' does not exist in type 'Record<ModuleType, Partial<Record<PromptIntent, PromptTemplate>>>'.
+
+[7m74[0m   Tools: {
+[7m  [0m [91m  ~~~~~[0m
+
+[96msrc/components/ai-agent/promptBuilder.ts[0m:[93m85[0m:[93m7[0m - [91merror[0m[90m TS2741: [0mProperty 'evaluation' is missing in type '{ general: { instruction: string; contextPrefix: string; }; triage: { instruction: string; contextPrefix: string; }; 'dose-check': { instruction: string; contextPrefix: string; }; 'rescue-agent': { instruction: string; contextPrefix: string; }; screening: { ...; }; 'follow-up': { ...; }; toxicity: { ...; }; pathway:...' but required in type 'Record<PromptIntent, PromptTemplate>'.
+
+[7m85[0m const DEFAULT_TEMPLATES: Record<PromptIntent, PromptTemplate> = {
+[7m  [0m [91m      ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/charts/IPSChart.tsx[0m:[93m29[0m:[93m68[0m - [91merror[0m[90m TS7006: [0mParameter 'val' implicitly has an 'any' type.
+
+[7m29[0m               <LabelList dataKey="os" position="right" formatter={(val) => `${val}%`} />
+[7m  [0m [91m                                                                   ~~~[0m
+
+[96msrc/components/shared/protocolTabs/AiSummaryTab.tsx[0m:[93m4[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/AiSummaryTab.tsx[0m:[93m4[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/DoseModificationsTab.tsx[0m:[93m4[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/DoseModificationsTab.tsx[0m:[93m4[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/DrugListTab.tsx[0m:[93m4[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/DrugListTab.tsx[0m:[93m4[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/EligibilityTab.tsx[0m:[93m4[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/EligibilityTab.tsx[0m:[93m4[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/EligibilityTab.tsx[0m:[93m31[0m:[93m73[0m - [91merror[0m[90m TS2345: [0mArgument of type '{}' is not assignable to parameter of type 'Eligibility'.
+  Type '{}' is missing the following properties from type 'Eligibility': inclusion_criteria, exclusion_criteria
+
+[7m31[0m       const parsedEligibility = safeJsonParse<Eligibility>(eligibility, {});
+[7m  [0m [91m                                                                        ~~[0m
+
+[96msrc/components/shared/protocolTabs/RescueAgentsTab.tsx[0m:[93m4[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/RescueAgentsTab.tsx[0m:[93m4[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/SupportiveCareTab.tsx[0m:[93m4[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/components/shared/protocolTabs/SupportiveCareTab.tsx[0m:[93m4[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/components/ui/data-card.tsx[0m:[93m2[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/components/ui/data-card.tsx[0m:[93m2[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/components/ui/data-card.tsx[0m:[93m2[0m:[93m52[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardDescription'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+[7m [0m [91m                                                   ~~~~~~~~~~~~~~~[0m
+
+[96msrc/devtools/medications/MedicationDebugPanel.tsx[0m:[93m5[0m:[93m13[0m - [91merror[0m[90m TS2304: [0mCannot find name 'Protocol'.
+
+[7m5[0m   protocol: Protocol;
+[7m [0m [91m            ~~~~~~~~[0m
+
+[96msrc/HandbookPage.tsx[0m:[93m6[0m:[93m8[0m - [91merror[0m[90m TS2613: [0mModule '"D:/Mansoor/mwoncovista/vista1/src/modules/handbook/ContentRenderer"' has no default export. Did you mean to use 'import { ContentRenderer } from "D:/Mansoor/mwoncovista/vista1/src/modules/handbook/ContentRenderer"' instead?
+
+[7m6[0m import ContentRenderer from '@/modules/handbook/ContentRenderer';
+[7m [0m [91m       ~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/components/MedicationDetailView.tsx[0m:[93m51[0m:[93m32[0m - [91merror[0m[90m TS2322: [0mType 'string | { [key: string]: string | undefined; half_life?: string | undefined; metabolism?: string | undefined; excretion?: string | undefined; bioavailability?: string | undefined; protein_binding?: string | undefined; }' is not assignable to type 'string'.
+  Type '{ [key: string]: string | undefined; half_life?: string | undefined; metabolism?: string | undefined; excretion?: string | undefined; bioavailability?: string | undefined; protein_binding?: string | undefined; }' is not assignable to type 'string'.
+
+[7m51[0m                 <RichTextBlock content={medication.pharmacokinetics} />
+[7m  [0m [91m                               ~~~~~~~[0m
+
+  [96msrc/modules/cdu/components/medicationComponents.tsx[0m:[93m28[0m:[93m46[0m
+    [7m28[0m export const RichTextBlock = ({ content }: { content: string }) => (
+    [7m  [0m [96m                                             ~~~~~~~[0m
+    The expected type comes from property 'content' which is declared here on type 'IntrinsicAttributes & { content: string; }'
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m4[0m:[93m14[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m4[0m             {medication.pharmacokinetics && (
+[7m [0m [91m             ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m5[0m:[93m16[0m - [91merror[0m[90m TS2552: [0mCannot find name 'Section'. Did you mean 'Selection'?
+
+[7m5[0m               <Section title="Pharmacokinetics" icon={<Clock className="h-5 w-5 text-purple-500" />}>
+[7m [0m [91m               ~~~~~~~[0m
+
+  [96mnode_modules/typescript/lib/lib.dom.d.ts[0m:[93m20892[0m:[93m13[0m
+    [7m20892[0m declare var Selection: {
+    [7m     [0m [96m            ~~~~~~~~~[0m
+    'Selection' is declared here.
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m5[0m:[93m56[0m - [91merror[0m[90m TS2552: [0mCannot find name 'Clock'. Did you mean 'Lock'?
+
+[7m5[0m               <Section title="Pharmacokinetics" icon={<Clock className="h-5 w-5 text-purple-500" />}>
+[7m [0m [91m                                                       ~~~~~[0m
+
+  [96mnode_modules/typescript/lib/lib.dom.d.ts[0m:[93m14346[0m:[93m13[0m
+    [7m14346[0m declare var Lock: {
+    [7m     [0m [96m            ~~~~[0m
+    'Lock' is declared here.
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m7[0m:[93m27[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m7[0m                   {typeof medication.pharmacokinetics === 'string' ? (
+[7m [0m [91m                          ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m8[0m:[93m22[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m8[0m                     <SubSection title="Details">
+[7m [0m [91m                     ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m10[0m:[93m26[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m10[0m                         {medication.pharmacokinetics}
+[7m  [0m [91m                         ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m12[0m:[93m23[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m12[0m                     </SubSection>
+[7m  [0m [91m                      ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m15[0m:[93m24[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m15[0m                       {medication.pharmacokinetics.half_life && (
+[7m  [0m [91m                       ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m16[0m:[93m26[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m16[0m                         <SubSection title="Half-Life">
+[7m  [0m [91m                         ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m18[0m:[93m30[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m18[0m                             {medication.pharmacokinetics.half_life}
+[7m  [0m [91m                             ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m20[0m:[93m27[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m20[0m                         </SubSection>
+[7m  [0m [91m                          ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m22[0m:[93m24[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m22[0m                       {medication.pharmacokinetics.metabolism && (
+[7m  [0m [91m                       ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m23[0m:[93m26[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m23[0m                         <SubSection title="Metabolism">
+[7m  [0m [91m                         ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m25[0m:[93m30[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m25[0m                             {medication.pharmacokinetics.metabolism}
+[7m  [0m [91m                             ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m27[0m:[93m27[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m27[0m                         </SubSection>
+[7m  [0m [91m                          ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m29[0m:[93m24[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m29[0m                       {medication.pharmacokinetics.excretion && (
+[7m  [0m [91m                       ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m30[0m:[93m26[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m30[0m                         <SubSection title="Excretion">
+[7m  [0m [91m                         ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m32[0m:[93m30[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m32[0m                             {medication.pharmacokinetics.excretion}
+[7m  [0m [91m                             ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m34[0m:[93m27[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m34[0m                         </SubSection>
+[7m  [0m [91m                          ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m36[0m:[93m24[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m36[0m                       {medication.pharmacokinetics.bioavailability && (
+[7m  [0m [91m                       ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m37[0m:[93m26[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m37[0m                         <SubSection title="Bioavailability">
+[7m  [0m [91m                         ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m39[0m:[93m30[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m39[0m                             {medication.pharmacokinetics.bioavailability}
+[7m  [0m [91m                             ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m41[0m:[93m27[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m41[0m                         </SubSection>
+[7m  [0m [91m                          ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m43[0m:[93m24[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m43[0m                       {medication.pharmacokinetics.protein_binding && (
+[7m  [0m [91m                       ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m44[0m:[93m26[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m44[0m                         <SubSection title="Protein Binding">
+[7m  [0m [91m                         ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m46[0m:[93m30[0m - [91merror[0m[90m TS2304: [0mCannot find name 'medication'.
+
+[7m46[0m                             {medication.pharmacokinetics.protein_binding}
+[7m  [0m [91m                             ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m48[0m:[93m27[0m - [91merror[0m[90m TS2304: [0mCannot find name 'SubSection'.
+
+[7m48[0m                         </SubSection>
+[7m  [0m [91m                          ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/medications/MedicationDetailModal.tsx[0m:[93m53[0m:[93m17[0m - [91merror[0m[90m TS2552: [0mCannot find name 'Section'. Did you mean 'Selection'?
+
+[7m53[0m               </Section>
+[7m  [0m [91m                ~~~~~~~[0m
+
+  [96mnode_modules/typescript/lib/lib.dom.d.ts[0m:[93m20892[0m:[93m13[0m
+    [7m20892[0m declare var Selection: {
+    [7m     [0m [96m            ~~~~~~~~~[0m
+    'Selection' is declared here.
+
+[96msrc/modules/cdu/medications/MedicationsView.tsx[0m:[93m4[0m:[93m8[0m - [91merror[0m[90m TS1192: [0mModule '"D:/Mansoor/mwoncovista/vista1/src/modules/cdu/medications/MedicationDetailModal"' has no default export.
+
+[7m4[0m import MedicationDetailModal from './MedicationDetailModal';
+[7m [0m [91m       ~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/safe/treatmentProtocols/TreatmentProtocols.tsx[0m:[93m349[0m:[93m39[0m - [91merror[0m[90m TS2339: [0mProperty 'baseline' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'baseline' does not exist on type 'Test[]'.
+
+[7m349[0m           {renderList(protocol.tests?.baseline)}
+[7m   [0m [91m                                      ~~~~~~~~[0m
+
+[96msrc/modules/cdu/safe/treatmentProtocols/TreatmentProtocols.tsx[0m:[93m353[0m:[93m39[0m - [91merror[0m[90m TS2339: [0mProperty 'monitoring' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'monitoring' does not exist on type 'Test[]'.
+
+[7m353[0m           {renderList(protocol.tests?.monitoring)}
+[7m   [0m [91m                                      ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/safe/treatmentProtocols/TreatmentProtocols.tsx[0m:[93m389[0m:[93m28[0m - [91merror[0m[90m TS2769: [0mNo overload matches this call.
+  Overload 1 of 2, '(o: {}): string[]', gave the following error.
+    Argument of type 'Record<string, string> | undefined' is not assignable to parameter of type '{}'.
+      Type 'undefined' is not assignable to type '{}'.
+  Overload 2 of 2, '(o: object): string[]', gave the following error.
+    Argument of type 'Record<string, string> | undefined' is not assignable to parameter of type 'object'.
+      Type 'undefined' is not assignable to type 'object'.
+
+[7m389[0m               {Object.keys(protocol.toxicity_monitoring.thresholds).length > 0 && (
+[7m   [0m [91m                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[96msrc/modules/cdu/toxicity/Toxicity.tsx[0m:[93m20[0m:[93m74[0m - [91merror[0m[90m TS2740: [0mType '{ id: string; name: string; severity: string; recognition: string; management: string[]; dose_guidance: string[]; culprit_drugs: string[]; }' is missing the following properties from type 'ToxicityData': grading_scale, symptoms, signs, imaging, and 24 more.
+
+[7m 20[0m const sanitizeToxicity = (data: Partial<ToxicityData>): ToxicityData => ({
+[7m   [0m [91m                                                                         ~[0m
+[7m 21[0m   id: data.id || crypto.randomUUID(),
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m...[0m 
+[7m 26[0m   culprit_drugs: Array.isArray(data.culprit_drugs) ? data.culprit_drugs : []
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m 27[0m });
+[7m   [0m [91m~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/components/ProtocolDetailsDialog.tsx[0m:[93m4[0m:[93m16[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m4[0m import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+[7m [0m [91m               ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/components/ProtocolDetailsDialog.tsx[0m:[93m4[0m:[93m28[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m4[0m import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+[7m [0m [91m                           ~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/components/ProtocolDetailsDialog.tsx[0m:[93m7[0m:[93m8[0m - [91merror[0m[90m TS2613: [0mModule '"D:/Mansoor/mwoncovista/vista1/src/modules/cdu/treatmentProtocols/tabs/TreatmentTab"' has no default export. Did you mean to use 'import { TreatmentTab } from "D:/Mansoor/mwoncovista/vista1/src/modules/cdu/treatmentProtocols/tabs/TreatmentTab"' instead?
+
+[7m7[0m import TreatmentTab from "../tabs/TreatmentTab";
+[7m [0m [91m       ~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/components/ProtocolDetailsDialog.tsx[0m:[93m8[0m:[93m8[0m - [91merror[0m[90m TS2613: [0mModule '"D:/Mansoor/mwoncovista/vista1/src/modules/cdu/treatmentProtocols/tabs/TestsSectionTab"' has no default export. Did you mean to use 'import { TestsSectionTab } from "D:/Mansoor/mwoncovista/vista1/src/modules/cdu/treatmentProtocols/tabs/TestsSectionTab"' instead?
+
+[7m8[0m import TestsSectionTab from "../tabs/TestsSectionTab";
+[7m [0m [91m       ~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/components/ProtocolDetailsDialog.tsx[0m:[93m178[0m:[93m71[0m - [91merror[0m[90m TS2345: [0mArgument of type '(item: { criterion: string; }, idx: number) => JSX.Element' is not assignable to parameter of type '(value: string | { criterion: string; }, index: number, array: (string | { criterion: string; })[]) => Element'.
+  Types of parameters 'item' and 'value' are incompatible.
+    Type 'string | { criterion: string; }' is not assignable to type '{ criterion: string; }'.
+      Type 'string' is not assignable to type '{ criterion: string; }'.
+
+[7m178[0m                         {protocol.eligibility.inclusion_criteria?.map((item: { criterion: string }, idx: number) => (
+[7m   [0m [91m                                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m179[0m                           <li key={idx}>{item.criterion}</li>
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m180[0m                         ))}
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/components/ProtocolDetailsDialog.tsx[0m:[93m184[0m:[93m71[0m - [91merror[0m[90m TS2345: [0mArgument of type '(item: { criterion: string; }, idx: number) => JSX.Element' is not assignable to parameter of type '(value: string | { criterion: string; }, index: number, array: (string | { criterion: string; })[]) => Element'.
+  Types of parameters 'item' and 'value' are incompatible.
+    Type 'string | { criterion: string; }' is not assignable to type '{ criterion: string; }'.
+      Type 'string' is not assignable to type '{ criterion: string; }'.
+
+[7m184[0m                         {protocol.eligibility.exclusion_criteria?.map((item: { criterion: string }, idx: number) => (
+[7m   [0m [91m                                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m185[0m                           <li key={idx}>{item.criterion}</li>
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m186[0m                         ))}
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/components/ProtocolDetailsDialog.tsx[0m:[93m498[0m:[93m87[0m - [91merror[0m[90m TS2345: [0mArgument of type '([condition, action]: [string, string], idx: number) => JSX.Element' is not assignable to parameter of type '(value: [string, unknown], index: number, array: [string, unknown][]) => Element'.
+  Types of parameters '__0' and 'value' are incompatible.
+    Type '[string, unknown]' is not assignable to type '[string, string]'.
+      Type at position 1 in source is not compatible with type at position 1 in target.
+        Type 'unknown' is not assignable to type 'string'.
+
+[7m498[0m                         {Object.entries(toxicityMonitoring.thresholds_for_action).map(([condition, action]: [string, string], idx: number) => (
+[7m   [0m [91m                                                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m499[0m                           <div key={idx} className="bg-white p-2 rounded border border-orange-200">
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m...[0m 
+[7m502[0m                           </div>
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m503[0m                         ))}
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/components/ProtocolDetailsDialog.tsx[0m:[93m637[0m:[93m83[0m - [91merror[0m[90m TS2345: [0mArgument of type '([condition, action]: [string, string], idx: number) => JSX.Element' is not assignable to parameter of type '(value: [string, unknown], index: number, array: [string, unknown][]) => Element'.
+  Types of parameters '__0' and 'value' are incompatible.
+    Type '[string, unknown]' is not assignable to type '[string, string]'.
+      Type at position 1 in source is not compatible with type at position 1 in target.
+        Type 'unknown' is not assignable to type 'string'.
+
+[7m637[0m                     {Object.entries(toxicityMonitoring.thresholds_for_action).map(([condition, action]: [string, string], idx: number) => (
+[7m   [0m [91m                                                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m638[0m                       <div key={idx} className="bg-muted p-2 rounded-md">
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m...[0m 
+[7m640[0m                       </div>
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[7m641[0m                     ))}
+[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/DrawerOverlay.tsx[0m:[93m187[0m:[93m34[0m - [91merror[0m[90m TS2322: [0mType 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; } | undefined' is not assignable to type 'Test[] | { baseline?: string[] | undefined; monitoring?: string[] | undefined; } | undefined'.
+  Type '{ baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }' is not assignable to type 'Test[] | { baseline?: string[] | undefined; monitoring?: string[] | undefined; } | undefined'.
+    Type '{ baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }' is not assignable to type '{ baseline?: string[] | undefined; monitoring?: string[] | undefined; }'.
+      Types of property 'baseline' are incompatible.
+        Type 'string[] | Test[] | undefined' is not assignable to type 'string[] | undefined'.
+          Type 'Test[]' is not assignable to type 'string[]'.
+            Type 'Test' is not assignable to type 'string'.
+
+[7m187[0m                 <TestsSectionTab tests={protocol.tests} />
+[7m   [0m [91m                                 ~~~~~[0m
+
+  [96msrc/modules/cdu/treatmentProtocols/TestsSectionTab.tsx[0m:[93m10[0m:[93m3[0m
+    [7m10[0m   tests?: Array<Test> | { baseline?: string[]; monitoring?: string[] };
+    [7m  [0m [96m  ~~~~~[0m
+    The expected type comes from property 'tests' which is declared here on type 'IntrinsicAttributes & TestsSectionTabProps'
+
+[96msrc/modules/cdu/treatmentProtocols/DrawerOverlay.tsx[0m:[93m191[0m:[93m33[0m - [91merror[0m[90m TS2322: [0mType 'ProtocolNote[]' is not assignable to type 'string[]'.
+  Type 'ProtocolNote' is not assignable to type 'string'.
+
+[7m191[0m                 <PrecautionsTab precautions={protocol.precautions} />
+[7m   [0m [91m                                ~~~~~~~~~~~[0m
+
+  [96msrc/modules/cdu/treatmentProtocols/DrawerOverlay.tsx[0m:[93m70[0m:[93m44[0m
+    [7m70[0m const PrecautionsTab = ({ precautions }: { precautions?: string[] }) => (
+    [7m  [0m [96m                                           ~~~~~~~~~~~[0m
+    The expected type comes from property 'precautions' which is declared here on type 'IntrinsicAttributes & { precautions?: string[] | undefined; }'
+
+[96msrc/modules/cdu/treatmentProtocols/RegimensLibrary.tsx[0m:[93m22[0m:[93m10[0m - [91merror[0m[90m TS2305: [0mModule '"../../../types/protocol"' has no exported member 'cleanProtocol'.
+
+[7m22[0m import { cleanProtocol, safeJsonParse, isValidDrugList } from '../../../types/protocol';
+[7m  [0m [91m         ~~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/RegimensLibrary.tsx[0m:[93m695[0m:[93m49[0m - [91merror[0m[90m TS2322: [0mType '{ drug: Drug; onBack: () => void; }' is not assignable to type 'IntrinsicAttributes & DrugDetailViewProps'.
+  Property 'onBack' does not exist on type 'IntrinsicAttributes & DrugDetailViewProps'.
+
+[7m695[0m             <DrugDetailView drug={selectedDrug} onBack={handleBack} />
+[7m   [0m [91m                                                ~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/tabs/DoseModificationsTab.tsx[0m:[93m2[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/tabs/DoseModificationsTab.tsx[0m:[93m2[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/tabs/DoseModificationsTab.tsx[0m:[93m55[0m:[93m87[0m - [91merror[0m[90m TS2339: [0mProperty 'hematological' does not exist on type '{}'.
+
+[7m55[0m           {renderModificationSection('Hematological Modifications', doseModifications.hematological)}
+[7m  [0m [91m                                                                                      ~~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/tabs/DoseModificationsTab.tsx[0m:[93m56[0m:[93m91[0m - [91merror[0m[90m TS2339: [0mProperty 'nonHematological' does not exist on type '{}'.
+
+[7m56[0m           {renderModificationSection('Non-Hematological Modifications', doseModifications.nonHematological)}
+[7m  [0m [91m                                                                                          ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/tabs/DoseModificationsTab.tsx[0m:[93m57[0m:[93m79[0m - [91merror[0m[90m TS2339: [0mProperty 'renal' does not exist on type '{}'.
+
+[7m57[0m           {renderModificationSection('Renal Modifications', doseModifications.renal)}
+[7m  [0m [91m                                                                              ~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/tabs/DoseModificationsTab.tsx[0m:[93m58[0m:[93m81[0m - [91merror[0m[90m TS2339: [0mProperty 'hepatic' does not exist on type '{}'.
+
+[7m58[0m           {renderModificationSection('Hepatic Modifications', doseModifications.hepatic)}
+[7m  [0m [91m                                                                                ~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/tabs/SupportiveCareTab.tsx[0m:[93m69[0m:[93m43[0m - [91merror[0m[90m TS2339: [0mProperty 'purpose' does not exist on type 'Drug'.
+
+[7m69[0m                           <TableCell>{med.purpose || '-'}</TableCell>
+[7m  [0m [91m                                          ~~~~~~~[0m
+
+[96msrc/modules/cdu/treatmentProtocols/tabs/SupportiveCareTab.tsx[0m:[93m102[0m:[93m43[0m - [91merror[0m[90m TS2339: [0mProperty 'purpose' does not exist on type 'Drug'.
+
+[7m102[0m                           <TableCell>{med.purpose || '-'}</TableCell>
+[7m   [0m [91m                                          ~~~~~~~[0m
+
+[96msrc/modules/handbook/components/SearchResults.tsx[0m:[93m3[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/handbook/components/SearchResults.tsx[0m:[93m3[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/handbook/components/SearchResults.tsx[0m:[93m3[0m:[93m52[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardDescription'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+[7m [0m [91m                                                   ~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/handbook/components/SearchResults.tsx[0m:[93m3[0m:[93m69[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardFooter'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+[7m [0m [91m                                                                    ~~~~~~~~~~[0m
+
+[96msrc/modules/handbook/ContentRenderer.tsx[0m:[93m360[0m:[93m15[0m - [91merror[0m[90m TS2322: [0mType '{ language: string | undefined; value: string; showLineNumbers: boolean; }' is not assignable to type 'IntrinsicAttributes & CodeBlockProps'.
+  Property 'showLineNumbers' does not exist on type 'IntrinsicAttributes & CodeBlockProps'.
+
+[7m360[0m               showLineNumbers={true}
+[7m   [0m [91m              ~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/handbook/HandbookSearch.tsx[0m:[93m7[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m7[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/handbook/HandbookSearch.tsx[0m:[93m7[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m7[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/handbook/HandbookSearch.tsx[0m:[93m7[0m:[93m52[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardDescription'.
+
+[7m7[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+[7m [0m [91m                                                   ~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/handbook/HandbookSearch.tsx[0m:[93m7[0m:[93m69[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardFooter'.
+
+[7m7[0m import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+[7m [0m [91m                                                                    ~~~~~~~~~~[0m
+
+[96msrc/modules/handbook/HandbookSearch.tsx[0m:[93m429[0m:[93m28[0m - [91merror[0m[90m TS2304: [0mCannot find name 'Badge'.
+
+[7m429[0m                           <Badge variant="secondary">
+[7m   [0m [91m                           ~~~~~[0m
+
+[96msrc/modules/handbook/HandbookSearch.tsx[0m:[93m431[0m:[93m29[0m - [91merror[0m[90m TS2304: [0mCannot find name 'Badge'.
+
+[7m431[0m                           </Badge>
+[7m   [0m [91m                            ~~~~~[0m
+
+[96msrc/modules/inpatient/sections/admission/AdmissionAlertTriggers.tsx[0m:[93m2[0m:[93m10[0m - [91merror[0m[90m TS2305: [0mModule '"./admissionTemplates"' has no exported member 'getAdmissionAlerts'.
+
+[7m2[0m import { getAdmissionAlerts } from './admissionTemplates';
+[7m [0m [91m         ~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/inpatient/sections/admission/AdmissionAlertTriggers.tsx[0m:[93m30[0m:[93m24[0m - [91merror[0m[90m TS7006: [0mParameter 'alert' implicitly has an 'any' type.
+
+[7m30[0m           {alerts.map((alert, i) => (
+[7m  [0m [91m                       ~~~~~[0m
+
+[96msrc/modules/inpatient/sections/admission/AdmissionAlertTriggers.tsx[0m:[93m30[0m:[93m31[0m - [91merror[0m[90m TS7006: [0mParameter 'i' implicitly has an 'any' type.
+
+[7m30[0m           {alerts.map((alert, i) => (
+[7m  [0m [91m                              ~[0m
+
+[96msrc/modules/inpatient/sections/admission/AdmissionGuidelines.tsx[0m:[93m8[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m8[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/inpatient/sections/admission/AdmissionGuidelines.tsx[0m:[93m8[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m8[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/inpatient/sections/admission/AdmissionProcessSteps.tsx[0m:[93m2[0m:[93m10[0m - [91merror[0m[90m TS2305: [0mModule '"./admissionTemplates"' has no exported member 'getAdmissionProcessSteps'.
+
+[7m2[0m import { getAdmissionProcessSteps } from './admissionTemplates';
+[7m [0m [91m         ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/inpatient/sections/admission/AdmissionProcessSteps.tsx[0m:[93m30[0m:[93m23[0m - [91merror[0m[90m TS7006: [0mParameter 'step' implicitly has an 'any' type.
+
+[7m30[0m           {steps.map((step, i) => (
+[7m  [0m [91m                      ~~~~[0m
+
+[96msrc/modules/inpatient/sections/admission/AdmissionProcessSteps.tsx[0m:[93m30[0m:[93m29[0m - [91merror[0m[90m TS7006: [0mParameter 'i' implicitly has an 'any' type.
+
+[7m30[0m           {steps.map((step, i) => (
+[7m  [0m [91m                            ~[0m
+
+[96msrc/modules/inpatient/sections/admission/admissionUtils.ts[0m:[93m1[0m:[93m23[0m - [91merror[0m[90m TS2305: [0mModule '"./admissionTemplates"' has no exported member 'getSummaryTemplate'.
+
+[7m1[0m import { cancerTypes, getSummaryTemplate } from './admissionTemplates';
+[7m [0m [91m                      ~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/inpatient/sections/discharge/DischargeGuidelines.tsx[0m:[93m2[0m:[93m16[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m2[0m import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+[7m [0m [91m               ~~~~~~~~~~[0m
+
+[96msrc/modules/inpatient/sections/discharge/DischargeGuidelines.tsx[0m:[93m2[0m:[93m28[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m2[0m import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+[7m [0m [91m                           ~~~~~~~~~[0m
+
+[96msrc/modules/inpatient/sections/emergencies/components/EmergencyDetailModal.tsx[0m:[93m16[0m:[93m5[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'content' does not exist in type 'UseReactToPrintOptions'.
+
+[7m16[0m     content: () => contentRef.current,
+[7m  [0m [91m    ~~~~~~~[0m
+
+[96msrc/modules/opd/components/EvaluationSummary.tsx[0m:[93m61[0m:[93m12[0m - [91merror[0m[90m TS18048: [0m'template.redFlags' is possibly 'undefined'.
+
+[7m61[0m           {template.redFlags.map((flag, index) => (
+[7m  [0m [91m           ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/opd/components/OPDModule.tsx[0m:[93m4[0m:[93m3[0m - [91merror[0m[90m TS2305: [0mModule '"lucide-react"' has no exported member 'UserCheck'.
+
+[7m4[0m   UserCheck,
+[7m [0m [91m  ~~~~~~~~~[0m
+
+[96msrc/modules/opd/components/OPDModule.tsx[0m:[93m5[0m:[93m3[0m - [91merror[0m[90m TS2305: [0mModule '"lucide-react"' has no exported member 'ScanLine'.
+
+[7m5[0m   ScanLine,
+[7m [0m [91m  ~~~~~~~~[0m
+
+[96msrc/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[0m:[93m4[0m:[93m30[0m - [91merror[0m[90m TS2307: [0mCannot find module '../../types/pathways' or its corresponding type declarations.
+
+[7m4[0m import { DetailedInfo } from '../../types/pathways';
+[7m [0m [91m                             ~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[0m:[93m6[0m:[93m36[0m - [91merror[0m[90m TS2307: [0mCannot find module '../../data/cancer-pathways' or its corresponding type declarations.
+
+[7m6[0m import { cancerPathwaysData } from '../../data/cancer-pathways';
+[7m [0m [91m                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[0m:[93m7[0m:[93m35[0m - [91merror[0m[90m TS2307: [0mCannot find module '../../data/diagnostic-pathways' or its corresponding type declarations.
+
+[7m7[0m import { lungCancerPathway } from '../../data/diagnostic-pathways';
+[7m [0m [91m                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[0m:[93m344[0m:[93m39[0m - [91merror[0m[90m TS2322: [0mType '{ tree: any; }' is not assignable to type 'IntrinsicAttributes & Props'.
+  Property 'tree' does not exist on type 'IntrinsicAttributes & Props'.
+
+[7m344[0m                         <DecisionTree tree={pathway.decisionTree} />
+[7m   [0m [91m                                      ~~~~[0m
+
+[96msrc/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[0m:[93m408[0m:[93m80[0m - [91merror[0m[90m TS7006: [0mParameter 'item' implicitly has an 'any' type.
+
+[7m408[0m                                                   {details.considerations.map((item, idx) => (
+[7m   [0m [91m                                                                               ~~~~[0m
+
+[96msrc/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[0m:[93m408[0m:[93m86[0m - [91merror[0m[90m TS7006: [0mParameter 'idx' implicitly has an 'any' type.
+
+[7m408[0m                                                   {details.considerations.map((item, idx) => (
+[7m   [0m [91m                                                                                     ~~~[0m
+
+[96msrc/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[0m:[93m416[0m:[93m74[0m - [91merror[0m[90m TS7006: [0mParameter 'item' implicitly has an 'any' type.
+
+[7m416[0m                                                   {details.outcomes.map((item, idx) => (
+[7m   [0m [91m                                                                         ~~~~[0m
+
+[96msrc/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[0m:[93m416[0m:[93m80[0m - [91merror[0m[90m TS7006: [0mParameter 'idx' implicitly has an 'any' type.
+
+[7m416[0m                                                   {details.outcomes.map((item, idx) => (
+[7m   [0m [91m                                                                               ~~~[0m
+
+[96msrc/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[0m:[93m424[0m:[93m74[0m - [91merror[0m[90m TS7006: [0mParameter 'item' implicitly has an 'any' type.
+
+[7m424[0m                                                   {details.followUp.map((item, idx) => (
+[7m   [0m [91m                                                                         ~~~~[0m
+
+[96msrc/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[0m:[93m424[0m:[93m80[0m - [91merror[0m[90m TS7006: [0mParameter 'idx' implicitly has an 'any' type.
+
+[7m424[0m                                                   {details.followUp.map((item, idx) => (
+[7m   [0m [91m                                                                               ~~~[0m
+
+[96msrc/modules/opd/follow-up-oncology/FollowUpOncology.tsx[0m:[93m14[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m14[0m import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+[7m  [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/opd/follow-up-oncology/FollowUpOncology.tsx[0m:[93m14[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m14[0m import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+[7m  [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/opd/follow-up-oncology/utils/templateIO.ts[0m:[93m29[0m:[93m51[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m29[0m     throw new Error(`Failed to import template: ${error.message}`);
+[7m  [0m [91m                                                  ~~~~~[0m
+
+[96msrc/modules/opd/follow-up-oncology/utils/templateValidation.ts[0m:[93m27[0m:[93m10[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'string' can't be used to index type 'FollowUpTemplate'.
+  No index signature with a parameter of type 'string' was found on type 'FollowUpTemplate'.
+
+[7m27[0m     if (!template[section]) {
+[7m  [0m [91m         ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/opd/follow-up-oncology/utils/templateValidation.ts[0m:[93m79[0m:[93m10[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ '3m': string; '6m': string; '1y': string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ '3m': string; '6m': string; '1y': string; }'.
+
+[7m79[0m   return patterns[frequency] || frequency;
+[7m  [0m [91m         ~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/opd/patient-evaluation/PatientEvaluationForm.tsx[0m:[93m369[0m:[93m16[0m - [91merror[0m[90m TS18048: [0m'currentTemplate.notes' is possibly 'undefined'.
+
+[7m369[0m               {currentTemplate.notes.map((note, index) => (
+[7m   [0m [91m               ~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/opd/patient-evaluation/PatientEvaluationForm.tsx[0m:[93m382[0m:[93m16[0m - [91merror[0m[90m TS18048: [0m'currentTemplate.redFlags' is possibly 'undefined'.
+
+[7m382[0m               {currentTemplate.redFlags.map((flag, index) => (
+[7m   [0m [91m               ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/advance_directives/components/DirectiveCard.tsx[0m:[93m3[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/advance_directives/components/DirectiveCard.tsx[0m:[93m3[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/delirium/DeliriumAssessment.tsx[0m:[93m2[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/delirium/DeliriumAssessment.tsx[0m:[93m2[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/end_of_life/AdvanceDirectives.tsx[0m:[93m3[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/end_of_life/AdvanceDirectives.tsx[0m:[93m3[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/end_of_life/FamilySupport.tsx[0m:[93m3[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/end_of_life/FamilySupport.tsx[0m:[93m3[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/pain_management/PainManagement.tsx[0m:[93m4[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming ShadCN UI path
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/pain_management/PainManagement.tsx[0m:[93m4[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m4[0m import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming ShadCN UI path
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/pain_management/PainManagement.tsx[0m:[93m493[0m:[93m17[0m - [91merror[0m[90m TS2322: [0mType '(value: PainCharacteristics["type"]) => void' is not assignable to type '(value: string) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string' is not assignable to type '"mixed" | "somatic" | "visceral" | "neuropathic" | undefined'.
+
+[7m493[0m                 onValueChange={handlePainTypeChange}
+[7m   [0m [91m                ~~~~~~~~~~~~~[0m
+
+  [96mnode_modules/@radix-ui/react-radio-group/dist/index.d.mts[0m:[93m42[0m:[93m5[0m
+    [7m42[0m     onValueChange?: RadioGroupContextValue['onValueChange'];
+    [7m  [0m [96m    ~~~~~~~~~~~~~[0m
+    The expected type comes from property 'onValueChange' which is declared here on type 'IntrinsicAttributes & Omit<RadioGroupProps & RefAttributes<HTMLDivElement>, "ref"> & RefAttributes<...>'
+
+[96msrc/modules/palliative/sections/pain_management/PainManagement.tsx[0m:[93m519[0m:[93m17[0m - [91merror[0m[90m TS2322: [0mType '(value: PainCharacteristics["pattern"]) => void' is not assignable to type '(value: string) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string' is not assignable to type '"constant" | "intermittent" | "breakthrough" | undefined'.
+
+[7m519[0m                 onValueChange={handlePainPatternChange}
+[7m   [0m [91m                ~~~~~~~~~~~~~[0m
+
+  [96mnode_modules/@radix-ui/react-radio-group/dist/index.d.mts[0m:[93m42[0m:[93m5[0m
+    [7m42[0m     onValueChange?: RadioGroupContextValue['onValueChange'];
+    [7m  [0m [96m    ~~~~~~~~~~~~~[0m
+    The expected type comes from property 'onValueChange' which is declared here on type 'IntrinsicAttributes & Omit<RadioGroupProps & RefAttributes<HTMLDivElement>, "ref"> & RefAttributes<...>'
+
+[96msrc/modules/palliative/sections/pain_management/PainManagement.tsx[0m:[93m541[0m:[93m17[0m - [91merror[0m[90m TS2322: [0mType '(value: PainCharacteristics["duration"]) => void' is not assignable to type '(value: string) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string' is not assignable to type '"acute" | "chronic" | undefined'.
+
+[7m541[0m                 onValueChange={handlePainDurationChange}
+[7m   [0m [91m                ~~~~~~~~~~~~~[0m
+
+  [96mnode_modules/@radix-ui/react-radio-group/dist/index.d.mts[0m:[93m42[0m:[93m5[0m
+    [7m42[0m     onValueChange?: RadioGroupContextValue['onValueChange'];
+    [7m  [0m [96m    ~~~~~~~~~~~~~[0m
+    The expected type comes from property 'onValueChange' which is declared here on type 'IntrinsicAttributes & Omit<RadioGroupProps & RefAttributes<HTMLDivElement>, "ref"> & RefAttributes<...>'
+
+[96msrc/modules/palliative/sections/psychosocial_support/components/AssessmentTrends.tsx[0m:[93m2[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/psychosocial_support/components/AssessmentTrends.tsx[0m:[93m2[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/psychosocial_support/components/SupportCard.tsx[0m:[93m2[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardDescription'.
+
+[7m2[0m import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/psychosocial_support/components/SupportCard.tsx[0m:[93m2[0m:[93m46[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m2[0m import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                             ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/psychosocial_support/components/SupportCard.tsx[0m:[93m2[0m:[93m58[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m2[0m import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                                         ~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[0m:[93m2[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[0m:[93m2[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[0m:[93m15[0m:[93m42[0m - [91merror[0m[90m TS2322: [0mType 'LucideIcon' is not assignable to type 'FC<{}>'.
+  Type 'ComponentClass<LucideProps, any>' is not assignable to type 'FunctionComponent<{}>'.
+    Type 'ComponentClass<LucideProps, any>' provides no match for the signature '(props: {}, deprecatedLegacyContext?: any): ReactNode'.
+
+[7m15[0m   { type: 'distress', label: 'Distress', icon: Brain },
+[7m  [0m [91m                                         ~~~~[0m
+
+  [96msrc/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[0m:[93m14[0m:[93m63[0m
+    [7m14[0m const assessmentTypes: { type: AssessmentType; label: string; icon: React.FC }[] = [
+    [7m  [0m [96m                                                              ~~~~[0m
+    The expected type comes from property 'icon' which is declared here on type '{ type: AssessmentType; label: string; icon: FC<{}>; }'
+
+[96msrc/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[0m:[93m16[0m:[93m40[0m - [91merror[0m[90m TS2322: [0mType 'LucideIcon' is not assignable to type 'FC<{}>'.
+  Type 'ComponentClass<LucideProps, any>' is not assignable to type 'FunctionComponent<{}>'.
+    Type 'ComponentClass<LucideProps, any>' provides no match for the signature '(props: {}, deprecatedLegacyContext?: any): ReactNode'.
+
+[7m16[0m   { type: 'anxiety', label: 'Anxiety', icon: Brain },
+[7m  [0m [91m                                       ~~~~[0m
+
+  [96msrc/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[0m:[93m14[0m:[93m63[0m
+    [7m14[0m const assessmentTypes: { type: AssessmentType; label: string; icon: React.FC }[] = [
+    [7m  [0m [96m                                                              ~~~~[0m
+    The expected type comes from property 'icon' which is declared here on type '{ type: AssessmentType; label: string; icon: FC<{}>; }'
+
+[96msrc/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[0m:[93m17[0m:[93m46[0m - [91merror[0m[90m TS2322: [0mType 'LucideIcon' is not assignable to type 'FC<{}>'.
+  Type 'ComponentClass<LucideProps, any>' is not assignable to type 'FunctionComponent<{}>'.
+    Type 'ComponentClass<LucideProps, any>' provides no match for the signature '(props: {}, deprecatedLegacyContext?: any): ReactNode'.
+
+[7m17[0m   { type: 'depression', label: 'Depression', icon: Brain },
+[7m  [0m [91m                                             ~~~~[0m
+
+  [96msrc/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[0m:[93m14[0m:[93m63[0m
+    [7m14[0m const assessmentTypes: { type: AssessmentType; label: string; icon: React.FC }[] = [
+    [7m  [0m [96m                                                              ~~~~[0m
+    The expected type comes from property 'icon' which is declared here on type '{ type: AssessmentType; label: string; icon: FC<{}>; }'
+
+[96msrc/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[0m:[93m18[0m:[93m46[0m - [91merror[0m[90m TS2322: [0mType 'LucideIcon' is not assignable to type 'FC<{}>'.
+  Type 'ComponentClass<LucideProps, any>' is not assignable to type 'FunctionComponent<{}>'.
+    Type 'ComponentClass<LucideProps, any>' provides no match for the signature '(props: {}, deprecatedLegacyContext?: any): ReactNode'.
+
+[7m18[0m   { type: 'social', label: 'Social Support', icon: HeartHandshake },
+[7m  [0m [91m                                             ~~~~[0m
+
+  [96msrc/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[0m:[93m14[0m:[93m63[0m
+    [7m14[0m const assessmentTypes: { type: AssessmentType; label: string; icon: React.FC }[] = [
+    [7m  [0m [96m                                                              ~~~~[0m
+    The expected type comes from property 'icon' which is declared here on type '{ type: AssessmentType; label: string; icon: FC<{}>; }'
+
+[96msrc/modules/palliative/sections/symptom_control/components/DeliriumAssessment.tsx[0m:[93m2[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/symptom_control/components/DeliriumAssessment.tsx[0m:[93m2[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/symptom_control/components/SeverityCard.tsx[0m:[93m2[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/symptom_control/components/SeverityCard.tsx[0m:[93m2[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m2[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx[0m:[93m141[0m:[93m24[0m - [91merror[0m[90m TS2322: [0mType '(value: any, data: any) => "" | "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800" | "bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-800" | "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30...' is not assignable to type 'string'.
+
+[7m141[0m             className: (value, data) => {
+[7m   [0m [91m                       ~~~~~~~~~~~~~~~~~~[0m
+
+  [96msrc/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx[0m:[93m141[0m:[93m24[0m
+    [7m141[0m             className: (value, data) => {
+    [7m   [0m [96m                       ~~~~~~~~~~~~~~~~~~[0m
+    Did you mean to call this expression?
+
+[96msrc/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx[0m:[93m141[0m:[93m25[0m - [91merror[0m[90m TS7006: [0mParameter 'value' implicitly has an 'any' type.
+
+[7m141[0m             className: (value, data) => {
+[7m   [0m [91m                        ~~~~~[0m
+
+[96msrc/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx[0m:[93m141[0m:[93m32[0m - [91merror[0m[90m TS7006: [0mParameter 'data' implicitly has an 'any' type.
+
+[7m141[0m             className: (value, data) => {
+[7m   [0m [91m                               ~~~~[0m
+
+[96msrc/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx[0m:[93m181[0m:[93m22[0m - [91merror[0m[90m TS2322: [0mType '(_: any, data: Symptom) => boolean | undefined' is not assignable to type 'boolean | ((value: any, data: Symptom) => boolean) | undefined'.
+  Type '(_: any, data: Symptom) => boolean | undefined' is not assignable to type '(value: any, data: Symptom) => boolean'.
+    Type 'boolean | undefined' is not assignable to type 'boolean'.
+      Type 'undefined' is not assignable to type 'boolean'.
+
+[7m181[0m             visible: (_, data) => data.redFlags && data.redFlags.length > 0,
+[7m   [0m [91m                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  [96msrc/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx[0m:[93m181[0m:[93m22[0m
+    [7m181[0m             visible: (_, data) => data.redFlags && data.redFlags.length > 0,
+    [7m   [0m [96m                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    Did you mean to call this expression?
+
+[96msrc/modules/palliative/sections/symptom_control/SymptomControl.tsx[0m:[93m3[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/modules/palliative/sections/symptom_control/SymptomControl.tsx[0m:[93m3[0m:[93m41[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m3[0m import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+[7m [0m [91m                                        ~~~~~~~~~[0m
+
+[96msrc/pages/AutoLogoutTest.tsx[0m:[93m11[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'showWarning' does not exist on type 'AutoLogoutContextType'.
+
+[7m11[0m     showWarning,
+[7m  [0m [91m    ~~~~~~~~~~~[0m
+
+[96msrc/pages/AutoLogoutTest.tsx[0m:[93m14[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'isActive' does not exist on type 'AutoLogoutContextType'.
+
+[7m14[0m     isActive
+[7m  [0m [91m    ~~~~~~~~[0m
+
+[96msrc/pages/ErrorTestPage.tsx[0m:[93m3[0m:[93m29[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardDescription'.
+
+[7m3[0m import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+[7m [0m [91m                            ~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/ErrorTestPage.tsx[0m:[93m3[0m:[93m46[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardHeader'.
+
+[7m3[0m import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+[7m [0m [91m                                             ~~~~~~~~~~[0m
+
+[96msrc/pages/ErrorTestPage.tsx[0m:[93m3[0m:[93m58[0m - [91merror[0m[90m TS2305: [0mModule '"@/components/ui/card"' has no exported member 'CardTitle'.
+
+[7m3[0m import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+[7m [0m [91m                                                         ~~~~~~~~~[0m
+
+[96msrc/routes/cduRoutes.tsx[0m:[93m6[0m:[93m41[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/modules/cdu/treatmentProtocols/ProtocolDetailPageContainer' or its corresponding type declarations.
+
+[7m6[0m import ProtocolDetailPageContainer from '@/modules/cdu/treatmentProtocols/ProtocolDetailPageContainer';
+[7m [0m [91m                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/routes/index.tsx[0m:[93m16[0m:[93m15[0m - [91merror[0m[90m TS2304: [0mCannot find name 'RootLayout'.
+
+[7m16[0m     element: <RootLayout />,
+[7m  [0m [91m              ~~~~~~~~~~[0m
+
+[96msrc/routes/index.tsx[0m:[93m22[0m:[93m23[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'redirect' does not exist in type 'RouteObject'.
+
+[7m22[0m           { path: '', redirect: 'overview' },
+[7m  [0m [91m                      ~~~~~~~~[0m
+
+[96msrc/routes/index.tsx[0m:[93m23[0m:[93m41[0m - [91merror[0m[90m TS2304: [0mCannot find name 'InpatientOverview'.
+
+[7m23[0m           { path: 'overview', element: <InpatientOverview /> },
+[7m  [0m [91m                                        ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/routes/index.tsx[0m:[93m25[0m:[93m39[0m - [91merror[0m[90m TS2304: [0mCannot find name 'InpatientOrders'.
+
+[7m25[0m           { path: 'orders', element: <InpatientOrders /> }
+[7m  [0m [91m                                      ~~~~~~~~~~~~~~~[0m
+
+[96msrc/routes/routes.tsx[0m:[93m9[0m:[93m32[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/pages/handbook/MedicalHandbookTOC' or its corresponding type declarations.
+
+[7m9[0m import MedicalHandbookTOC from '@/pages/handbook/MedicalHandbookTOC';
+[7m [0m [91m                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/routes/routes.tsx[0m:[93m10[0m:[93m34[0m - [91merror[0m[90m TS2306: [0mFile 'D:/Mansoor/mwoncovista/vista1/src/pages/handbook/RadiationHandbookTOC.tsx' is not a module.
+
+[7m10[0m import RadiationHandbookTOC from '@/pages/handbook/RadiationHandbookTOC';
+[7m  [0m [91m                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/routes/routes.tsx[0m:[93m11[0m:[93m35[0m - [91merror[0m[90m TS2306: [0mFile 'D:/Mansoor/mwoncovista/vista1/src/pages/handbook/PalliativeHandbookTOC.tsx' is not a module.
+
+[7m11[0m import PalliativeHandbookTOC from '@/pages/handbook/PalliativeHandbookTOC';
+[7m  [0m [91m                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/services/handbookEnhancedSearch.ts[0m:[93m80[0m:[93m29[0m - [91merror[0m[90m TS2702: [0m'Fuse' only refers to a type, but is being used as a namespace here.
+
+[7m80[0m const defaultSearchOptions: Fuse.IFuseOptions<ContentIndex> = {
+[7m  [0m [91m                            ~~~~[0m
+
+[96msrc/services/handbookEnhancedSearch.ts[0m:[93m188[0m:[93m50[0m - [91merror[0m[90m TS2339: [0mProperty 'clinicalLevel' does not exist on type '{ version?: string | undefined; lastUpdated?: string | undefined; author?: string | undefined; license?: string | undefined; tags?: string[] | undefined; }'.
+
+[7m188[0m             clinicalLevel: contentData.metadata?.clinicalLevel as any
+[7m   [0m [91m                                                 ~~~~~~~~~~~~~[0m
+
+[96msrc/services/handbookEnhancedSearch.ts[0m:[93m310[0m:[93m12[0m - [91merror[0m[90m TS2339: [0mProperty 'options' does not exist on type 'Fuse<ContentIndex>'.
+
+[7m310[0m       fuse.options.threshold = threshold;
+[7m   [0m [91m           ~~~~~~~[0m
+
+[96msrc/services/handbookEnhancedSearch.ts[0m:[93m327[0m:[93m11[0m - [91merror[0m[90m TS4104: [0mThe type 'readonly RangeTuple[]' is 'readonly' and cannot be assigned to the mutable type '[number, number][]'.
+
+[7m327[0m           contentMatches = match.indices;
+[7m   [0m [91m          ~~~~~~~~~~~~~~[0m
+
+[96msrc/services/handbookEnhancedSearch.ts[0m:[93m350[0m:[93m21[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: string; title: string; section: "medical-oncology" | "radiation-oncology" | "palliative-care"; path: string; matches: readonly FuseResultMatch[]; score: number; metadata: { ...; }; summary: string; excerpt: string; contentBlocks: HandbookContentBlock[]; }' is not assignable to parameter of type 'EnhancedSearchResult'.
+  Types of property 'matches' are incompatible.
+    The type 'readonly FuseResultMatch[]' is 'readonly' and cannot be assigned to the mutable type '{ field: string; value: string; indices: [number, number][]; }[]'.
+
+[7m350[0m     allResults.push(...mappedResults);
+[7m   [0m [91m                    ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/services/medications.ts[0m:[93m162[0m:[93m7[0m - [91merror[0m[90m TS2769: [0mNo overload matches this call.
+  Overload 1 of 2, '(input: string | URL | Request, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Type '{ apikey: string | undefined; Authorization: string; }' is not assignable to type 'HeadersInit | undefined'.
+      Type '{ apikey: string | undefined; Authorization: string; }' is not assignable to type 'undefined'.
+  Overload 2 of 2, '(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Type '{ apikey: string | undefined; Authorization: string; }' is not assignable to type 'HeadersInit | undefined'.
+      Type '{ apikey: string | undefined; Authorization: string; }' is not assignable to type 'undefined'.
+
+[7m162[0m       headers: {
+[7m   [0m [91m      ~~~~~~~[0m
+
+
+[96msrc/types/protocolHelpers.ts[0m:[93m114[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'baseline' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'baseline' does not exist on type 'Test[]'.
+
+[7m114[0m   if (protocol.tests?.baseline && Array.isArray(protocol.tests.baseline)) {
+[7m   [0m [91m                      ~~~~~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m114[0m:[93m64[0m - [91merror[0m[90m TS2339: [0mProperty 'baseline' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'baseline' does not exist on type 'Test[]'.
+
+[7m114[0m   if (protocol.tests?.baseline && Array.isArray(protocol.tests.baseline)) {
+[7m   [0m [91m                                                               ~~~~~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m115[0m:[93m39[0m - [91merror[0m[90m TS2339: [0mProperty 'baseline' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'baseline' does not exist on type 'Test[]'.
+
+[7m115[0m     parameters.push(...protocol.tests.baseline.map(test => test.name || String(test)));
+[7m   [0m [91m                                      ~~~~~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m115[0m:[93m52[0m - [91merror[0m[90m TS7006: [0mParameter 'test' implicitly has an 'any' type.
+
+[7m115[0m     parameters.push(...protocol.tests.baseline.map(test => test.name || String(test)));
+[7m   [0m [91m                                                   ~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m119[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'monitoring' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'monitoring' does not exist on type 'Test[]'.
+
+[7m119[0m   if (protocol.tests?.monitoring && Array.isArray(protocol.tests.monitoring)) {
+[7m   [0m [91m                      ~~~~~~~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m119[0m:[93m66[0m - [91merror[0m[90m TS2339: [0mProperty 'monitoring' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'monitoring' does not exist on type 'Test[]'.
+
+[7m119[0m   if (protocol.tests?.monitoring && Array.isArray(protocol.tests.monitoring)) {
+[7m   [0m [91m                                                                 ~~~~~~~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m120[0m:[93m39[0m - [91merror[0m[90m TS2339: [0mProperty 'monitoring' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'monitoring' does not exist on type 'Test[]'.
+
+[7m120[0m     parameters.push(...protocol.tests.monitoring.map(test => test.name || String(test)));
+[7m   [0m [91m                                      ~~~~~~~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m120[0m:[93m54[0m - [91merror[0m[90m TS7006: [0mParameter 'test' implicitly has an 'any' type.
+
+[7m120[0m     parameters.push(...protocol.tests.monitoring.map(test => test.name || String(test)));
+[7m   [0m [91m                                                     ~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m125[0m:[93m83[0m - [91merror[0m[90m TS2339: [0mProperty 'name' does not exist on type 'string'.
+
+[7m125[0m     parameters.push(...protocol.toxicity_monitoring.parameters.map(param => param.name || String(param)));
+[7m   [0m [91m                                                                                  ~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m130[0m:[93m57[0m - [91merror[0m[90m TS7006: [0mParameter 'monitor' implicitly has an 'any' type.
+
+[7m130[0m     parameters.push(...protocol.monitoring.baseline.map(monitor => monitor.name || String(monitor)));
+[7m   [0m [91m                                                        ~~~~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m135[0m:[93m56[0m - [91merror[0m[90m TS7006: [0mParameter 'monitor' implicitly has an 'any' type.
+
+[7m135[0m     parameters.push(...protocol.monitoring.ongoing.map(monitor => monitor.name || String(monitor)));
+[7m   [0m [91m                                                       ~~~~~~~[0m
+
+[96msrc/types/protocolHelpers.ts[0m:[93m183[0m:[93m22[0m - [91merror[0m[90m TS2345: [0mArgument of type 'ProtocolNote' is not assignable to parameter of type 'string'.
+
+[7m183[0m     precautions.push(...protocol.precautions);
+[7m   [0m [91m                     ~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/confirmContinue.ts[0m:[93m7[0m:[93m10[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ en: string; de: string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ en: string; de: string; }'.
+
+[7m7[0m   return translations[language] || translations['en'];
+[7m [0m [91m         ~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/iconUtils.ts[0m:[93m198[0m:[93m7[0m - [91merror[0m[90m TS2769: [0mNo overload matches this call.
+  The last overload gave the following error.
+    Object literal may only specify known properties, and 'title' does not exist in type 'Attributes & LucideProps'.
+
+[7m198[0m       title: `Icon "${iconName}" not found`
+[7m   [0m [91m      ~~~~~[0m
+
+  [96mnode_modules/@types/react/index.d.ts[0m:[93m562[0m:[93m14[0m
+    [7m562[0m     function createElement<P extends {}>(
+    [7m   [0m [96m             ~~~~~~~~~~~~~[0m
+    The last overload is declared here.
+
+[96msrc/utils/protocolHelpers.ts[0m:[93m139[0m:[93m7[0m - [91merror[0m[90m TS2322: [0mType '(string | { criterion: string; })[]' is not assignable to type 'string[]'.
+  Type 'string | { criterion: string; }' is not assignable to type 'string'.
+    Type '{ criterion: string; }' is not assignable to type 'string'.
+
+[7m139[0m       return eligibility.inclusion_criteria || [];
+[7m   [0m [91m      ~~~~~~[0m
+
+[96msrc/utils/protocolHelpers.ts[0m:[93m143[0m:[93m7[0m - [91merror[0m[90m TS2322: [0mType '(string | { criterion: string; })[]' is not assignable to type 'string[]'.
+  Type 'string | { criterion: string; }' is not assignable to type 'string'.
+    Type '{ criterion: string; }' is not assignable to type 'string'.
+
+[7m143[0m       return eligibility.exclusion_criteria || [];
+[7m   [0m [91m      ~~~~~~[0m
+
+[96msrc/utils/protocolHelpers.ts[0m:[93m147[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType '(string | { criterion: string; })[]' is not assignable to type 'string[]'.
+  Type 'string | { criterion: string; }' is not assignable to type 'string'.
+    Type '{ criterion: string; }' is not assignable to type 'string'.
+
+[7m147[0m     return [
+[7m   [0m [91m    ~~~~~~[0m
+
+[96msrc/utils/protocolHelpers.ts[0m:[93m663[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'baseline' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'baseline' does not exist on type 'Test[]'.
+
+[7m663[0m   if (protocol.tests?.baseline && Array.isArray(protocol.tests.baseline)) {
+[7m   [0m [91m                      ~~~~~~~~[0m
+
+[96msrc/utils/protocolHelpers.ts[0m:[93m663[0m:[93m64[0m - [91merror[0m[90m TS2339: [0mProperty 'baseline' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'baseline' does not exist on type 'Test[]'.
+
+[7m663[0m   if (protocol.tests?.baseline && Array.isArray(protocol.tests.baseline)) {
+[7m   [0m [91m                                                               ~~~~~~~~[0m
+
+[96msrc/utils/protocolHelpers.ts[0m:[93m664[0m:[93m39[0m - [91merror[0m[90m TS2339: [0mProperty 'baseline' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'baseline' does not exist on type 'Test[]'.
+
+[7m664[0m     parameters.push(...protocol.tests.baseline);
+[7m   [0m [91m                                      ~~~~~~~~[0m
+
+[96msrc/utils/protocolHelpers.ts[0m:[93m668[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'monitoring' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'monitoring' does not exist on type 'Test[]'.
+
+[7m668[0m   if (protocol.tests?.monitoring && Array.isArray(protocol.tests.monitoring)) {
+[7m   [0m [91m                      ~~~~~~~~~~[0m
+
+[96msrc/utils/protocolHelpers.ts[0m:[93m668[0m:[93m66[0m - [91merror[0m[90m TS2339: [0mProperty 'monitoring' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'monitoring' does not exist on type 'Test[]'.
+
+[7m668[0m   if (protocol.tests?.monitoring && Array.isArray(protocol.tests.monitoring)) {
+[7m   [0m [91m                                                                 ~~~~~~~~~~[0m
+
+[96msrc/utils/protocolHelpers.ts[0m:[93m669[0m:[93m39[0m - [91merror[0m[90m TS2339: [0mProperty 'monitoring' does not exist on type 'Test[] | { baseline?: string[] | Test[] | undefined; monitoring?: string[] | Test[] | undefined; frequency?: string | undefined; }'.
+  Property 'monitoring' does not exist on type 'Test[]'.
+
+[7m669[0m     parameters.push(...protocol.tests.monitoring);
+[7m   [0m [91m                                      ~~~~~~~~~~[0m
+
+[96msrc/utils/protocolHelpers.ts[0m:[93m732[0m:[93m22[0m - [91merror[0m[90m TS2345: [0mArgument of type 'ProtocolNote' is not assignable to parameter of type 'string'.
+
+[7m732[0m     precautions.push(...protocol.precautions);
+[7m   [0m [91m                     ~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+Found 203 errors in 62 files.
+
+Errors  Files
+     3  src/components/ai-agent/AIChatAssistant.tsx[90m:153[0m
+     5  src/components/ai-agent/mockResponses.ts[90m:14[0m
+     2  src/components/ai-agent/promptBuilder.ts[90m:74[0m
+     1  src/components/charts/IPSChart.tsx[90m:29[0m
+     2  src/components/shared/protocolTabs/AiSummaryTab.tsx[90m:4[0m
+     2  src/components/shared/protocolTabs/DoseModificationsTab.tsx[90m:4[0m
+     2  src/components/shared/protocolTabs/DrugListTab.tsx[90m:4[0m
+     3  src/components/shared/protocolTabs/EligibilityTab.tsx[90m:4[0m
+     2  src/components/shared/protocolTabs/RescueAgentsTab.tsx[90m:4[0m
+     2  src/components/shared/protocolTabs/SupportiveCareTab.tsx[90m:4[0m
+     3  src/components/ui/data-card.tsx[90m:2[0m
+     1  src/devtools/medications/MedicationDebugPanel.tsx[90m:5[0m
+     1  src/HandbookPage.tsx[90m:6[0m
+     1  src/modules/cdu/components/MedicationDetailView.tsx[90m:51[0m
+    28  src/modules/cdu/medications/MedicationDetailModal.tsx[90m:4[0m
+     1  src/modules/cdu/medications/MedicationsView.tsx[90m:4[0m
+     3  src/modules/cdu/safe/treatmentProtocols/TreatmentProtocols.tsx[90m:349[0m
+     1  src/modules/cdu/toxicity/Toxicity.tsx[90m:20[0m
+     8  src/modules/cdu/treatmentProtocols/components/ProtocolDetailsDialog.tsx[90m:4[0m
+     2  src/modules/cdu/treatmentProtocols/DrawerOverlay.tsx[90m:187[0m
+     2  src/modules/cdu/treatmentProtocols/RegimensLibrary.tsx[90m:22[0m
+     6  src/modules/cdu/treatmentProtocols/tabs/DoseModificationsTab.tsx[90m:2[0m
+     2  src/modules/cdu/treatmentProtocols/tabs/SupportiveCareTab.tsx[90m:69[0m
+     4  src/modules/handbook/components/SearchResults.tsx[90m:3[0m
+     1  src/modules/handbook/ContentRenderer.tsx[90m:360[0m
+     6  src/modules/handbook/HandbookSearch.tsx[90m:7[0m
+     3  src/modules/inpatient/sections/admission/AdmissionAlertTriggers.tsx[90m:2[0m
+     2  src/modules/inpatient/sections/admission/AdmissionGuidelines.tsx[90m:8[0m
+     3  src/modules/inpatient/sections/admission/AdmissionProcessSteps.tsx[90m:2[0m
+     1  src/modules/inpatient/sections/admission/admissionUtils.ts[90m:1[0m
+     2  src/modules/inpatient/sections/discharge/DischargeGuidelines.tsx[90m:2[0m
+     1  src/modules/inpatient/sections/emergencies/components/EmergencyDetailModal.tsx[90m:16[0m
+     1  src/modules/opd/components/EvaluationSummary.tsx[90m:61[0m
+     2  src/modules/opd/components/OPDModule.tsx[90m:4[0m
+    10  src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx[90m:4[0m
+     2  src/modules/opd/follow-up-oncology/FollowUpOncology.tsx[90m:14[0m
+     1  src/modules/opd/follow-up-oncology/utils/templateIO.ts[90m:29[0m
+     2  src/modules/opd/follow-up-oncology/utils/templateValidation.ts[90m:27[0m
+     2  src/modules/opd/patient-evaluation/PatientEvaluationForm.tsx[90m:369[0m
+     2  src/modules/palliative/sections/advance_directives/components/DirectiveCard.tsx[90m:3[0m
+     2  src/modules/palliative/sections/delirium/DeliriumAssessment.tsx[90m:2[0m
+     2  src/modules/palliative/sections/end_of_life/AdvanceDirectives.tsx[90m:3[0m
+     2  src/modules/palliative/sections/end_of_life/FamilySupport.tsx[90m:3[0m
+     5  src/modules/palliative/sections/pain_management/PainManagement.tsx[90m:4[0m
+     2  src/modules/palliative/sections/psychosocial_support/components/AssessmentTrends.tsx[90m:2[0m
+     3  src/modules/palliative/sections/psychosocial_support/components/SupportCard.tsx[90m:2[0m
+     6  src/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx[90m:2[0m
+     2  src/modules/palliative/sections/symptom_control/components/DeliriumAssessment.tsx[90m:2[0m
+     2  src/modules/palliative/sections/symptom_control/components/SeverityCard.tsx[90m:2[0m
+     4  src/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx[90m:141[0m
+     2  src/modules/palliative/sections/symptom_control/SymptomControl.tsx[90m:3[0m
+     2  src/pages/AutoLogoutTest.tsx[90m:11[0m
+     3  src/pages/ErrorTestPage.tsx[90m:3[0m
+     1  src/routes/cduRoutes.tsx[90m:6[0m
+     4  src/routes/index.tsx[90m:16[0m
+     3  src/routes/routes.tsx[90m:9[0m
+     5  src/services/handbookEnhancedSearch.ts[90m:80[0m
+     1  src/services/medications.ts[90m:162[0m
+    12  src/types/protocolHelpers.ts[90m:114[0m
+     1  src/utils/confirmContinue.ts[90m:7[0m
+     1  src/utils/iconUtils.ts[90m:198[0m
+    10  src/utils/protocolHelpers.ts[90m:139[0m

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Activity, Clock, Stethoscope, PieChart, Pill, AlertCircle, BookOpen, ChevronDown, ChevronUp, LucideProps, LucideIcon, Brain } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'; // Assuming ShadCN UI path
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming ShadCN UI path
+import { Card, CardContent, CardHeader, CardTitle } from '../../../../components/ui/card'; // Assuming ShadCN UI path
 import { Button } from '@/components/ui/button'; // Assuming ShadCN UI path
 import { cn } from '@/lib/utils'; // Assuming utility function exists
 import { Disclosure } from '@headlessui/react'; // Assuming headlessui is installed
@@ -207,25 +207,24 @@ const PainManagement = () => {
     // Optionally collapse the previously highlighted card or all cards
     // setOpenItems([]); // Uncomment to collapse all on reset
   };
-
-  const handlePainTypeChange = (value: PainCharacteristics['type']) => {
+  const handlePainTypeChange = (value: string) => {
     setCharacteristics(prev => ({
       ...prev,
-      type: value
+      type: value as PainCharacteristics['type']
     }));
   };
 
-  const handlePainPatternChange = (value: PainCharacteristics['pattern']) => {
+  const handlePainPatternChange = (value: string) => {
     setCharacteristics(prev => ({
       ...prev,
-      pattern: value
+      pattern: value as PainCharacteristics['pattern']
     }));
   };
 
-  const handlePainDurationChange = (value: PainCharacteristics['duration']) => {
+  const handlePainDurationChange = (value: string) => {
     setCharacteristics(prev => ({
       ...prev,
-      duration: value
+      duration: value as PainCharacteristics['duration']
     }));
   };
 

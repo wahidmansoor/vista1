@@ -64,7 +64,6 @@ const ProtocolDetail: React.FC<ProtocolDetailProps> = ({ protocol }) => {
         <TabsList className="w-full bg-white dark:bg-gray-800">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="drugs">Medications</TabsTrigger>
-          <TabsTrigger value="monitoring">Monitoring</TabsTrigger>
           <TabsTrigger value="nursing">Nursing</TabsTrigger>
           <TabsTrigger value="patient">Patient Info</TabsTrigger>
         </TabsList>
@@ -137,40 +136,6 @@ const ProtocolDetail: React.FC<ProtocolDetailProps> = ({ protocol }) => {
               <p className="text-gray-500 dark:text-gray-400 text-center p-4">No medication details available</p>
             )}
           </div>
-        </TabsContent>
-
-        {/* Monitoring Tab */}
-        <TabsContent value="monitoring" className="pt-4">
-          <Card className="p-4">
-            <div className="space-y-4">
-              {protocol.monitoring && protocol.monitoring.length > 0 && (
-                <div>
-                  <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">Monitoring Parameters</h3>
-                  <ul className="list-disc ml-5">
-                    {protocol.monitoring.map((item, index) => (
-                      <li key={index} className="text-gray-600 dark:text-gray-400">{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              
-              {protocol.evaluation && protocol.evaluation.length > 0 && (
-                <div>
-                  <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">Evaluation Criteria</h3>
-                  <ul className="list-disc ml-5">
-                    {protocol.evaluation.map((item, index) => (
-                      <li key={index} className="text-gray-600 dark:text-gray-400">{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              
-              {(!protocol.monitoring || protocol.monitoring.length === 0) && 
-               (!protocol.evaluation || protocol.evaluation.length === 0) && (
-                <p className="text-gray-500 dark:text-gray-400 text-center">No monitoring information available</p>
-              )}
-            </div>
-          </Card>
         </TabsContent>
 
         {/* Nursing Tab */}

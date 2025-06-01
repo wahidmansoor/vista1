@@ -4,17 +4,16 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import ProtocolDashboard from "../components/ProtocolDashboard";
 import TreatmentProtocols from "./treatmentProtocols/TreatmentProtocols";
 import Toxicity from "./toxicity/Toxicity";
-import DiseaseProgressTracker from "../sections/DiseaseProgressTracker";
+import TreatmentGuidanceTool from "../sections/TreatmentGuidanceTool";
 import MedicationsView from "../medications/MedicationsView";
 
 const CDU = () => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const sections = [
+  const [selectedIndex, setSelectedIndex] = useState(0);  const sections = [
     { id: 'dashboard', label: 'Dashboard', component: <ProtocolDashboard /> },
     { id: 'protocols', label: 'Treatment Protocols', component: <TreatmentProtocols /> },
     { id: 'medications', label: 'Medications', component: <MedicationsView /> },
     { id: 'toxicity', label: 'Toxicity', component: <Toxicity /> },
-    { id: 'disease-progress', label: 'Disease Progress', component: <DiseaseProgressTracker /> },
+    { id: 'treatment-guidance', label: 'Treatment Guidance', component: <TreatmentGuidanceTool /> },
   ];
 
   return (

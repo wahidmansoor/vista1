@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../../../../components/ui/card";
 import { cn } from "@/lib/utils";
 import { AlertTriangle, ArrowRight, Star, ChevronDown } from 'lucide-react';
 import {

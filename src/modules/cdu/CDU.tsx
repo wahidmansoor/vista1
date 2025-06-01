@@ -5,18 +5,17 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import TreatmentProtocols from "./treatmentProtocols/TreatmentProtocols";
 import ProtocolDetailPageContainer from "./safe/treatmentProtocols/TreatmentProtocols";
 import Toxicity from "./toxicity/Toxicity";
-import DiseaseProgressTracker from "./sections/DiseaseProgressTracker";
+import TreatmentGuidanceTool from "./sections/TreatmentGuidanceTool";
 import MedicationsView from "./medications/MedicationsView";
 
 /**
  * CDU (Chemotherapy Day Unit) Module
  * 
  * Main container component for the CDU module that provides
- * tabbed navigation between various chemotherapy management features:
- * - Treatment Protocols: Standardized treatment regimens
+ * tabbed navigation between various chemotherapy management features: * - Treatment Protocols: Standardized treatment regimens
  * - Medications: Medication database and interactions
  * - Toxicity: Side effect management and protocols
- * - Disease Progress: Patient disease tracking
+ * - Treatment Guidance: Clinical decision support tool
  */
 const CDU = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -25,7 +24,7 @@ const CDU = () => {
     { id: 'treatment-protocols', label: 'Treatment Protocols', component: <TreatmentProtocols /> },
     { id: 'medications', label: 'Medications', component: <MedicationsView /> },
     { id: 'toxicity', label: 'Toxicity', component: <Toxicity /> },
-    { id: 'disease-progress', label: 'Disease Progress', component: <DiseaseProgressTracker /> },
+    { id: 'treatment-guidance', label: 'Treatment Guidance', component: <TreatmentGuidanceTool /> },
   ];
 
   return (

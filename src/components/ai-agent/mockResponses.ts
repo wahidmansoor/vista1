@@ -67,10 +67,13 @@ Suggested Workup:
 - Genetic counseling referral
 - Consider early intervention`,
       timestamp: new Date().toISOString()
-    },
-    toxicity: {
+    },    toxicity: {
       ...defaultResponse
-    }
+    },
+    general: { ...defaultResponse },
+    'dose-check': { ...defaultResponse },
+    pathway: { ...defaultResponse },
+    'rescue-agent': { ...defaultResponse }
   },
   CDU: {
     toxicity: {
@@ -90,7 +93,11 @@ Suggested Workup:
     screening: { ...defaultResponse },
     triage: { ...defaultResponse },
     'follow-up': { ...defaultResponse },
-    evaluation: { ...defaultResponse }
+    evaluation: { ...defaultResponse },
+    general: { ...defaultResponse },
+    'dose-check': { ...defaultResponse },
+    pathway: { ...defaultResponse },
+    'rescue-agent': { ...defaultResponse }
   },
   Inpatient: {
     evaluation: {
@@ -120,10 +127,13 @@ Suggested Workup:
 - Monitor blood counts
 - Adjust medications as needed`,
       timestamp: new Date().toISOString()
-    },
-    screening: { ...defaultResponse },
+    },    screening: { ...defaultResponse },
     triage: { ...defaultResponse },
-    'follow-up': { ...defaultResponse }
+    'follow-up': { ...defaultResponse },
+    general: { ...defaultResponse },
+    'dose-check': { ...defaultResponse },
+    pathway: { ...defaultResponse },
+    'rescue-agent': { ...defaultResponse }
   },
   Palliative: {
     evaluation: {
@@ -153,10 +163,13 @@ Suggested Workup:
 - Maintain family support
 - Regular social work input`,
       timestamp: new Date().toISOString()
-    },
-    screening: { ...defaultResponse },
+    },    screening: { ...defaultResponse },
     triage: { ...defaultResponse },
-    toxicity: { ...defaultResponse }
+    toxicity: { ...defaultResponse },
+    general: { ...defaultResponse },
+    'dose-check': { ...defaultResponse },
+    pathway: { ...defaultResponse },
+    'rescue-agent': { ...defaultResponse }
   },
   RadOnc: {
     evaluation: {
@@ -200,9 +213,12 @@ Suggested Workup:
 - Late effects
 - Quality of life`,
       timestamp: new Date().toISOString()
-    },
-    screening: { ...defaultResponse },
-    triage: { ...defaultResponse }
+    },    screening: { ...defaultResponse },
+    triage: { ...defaultResponse },
+    general: { ...defaultResponse },
+    'dose-check': { ...defaultResponse },
+    pathway: { ...defaultResponse },
+    'rescue-agent': { ...defaultResponse }
   }
 };
 

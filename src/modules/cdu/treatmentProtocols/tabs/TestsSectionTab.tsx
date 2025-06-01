@@ -12,8 +12,18 @@ import { Beaker, AlertCircle } from 'lucide-react';
 import type { Protocol, Test } from '@/types/protocol';
 
 interface TestsSectionTabProps {
-  tests?: Array<Test> | { baseline?: string[]; monitoring?: string[] };
+  tests?: Array<Test> | { 
+    baseline?: Test[] | string[]; 
+    monitoring?: Test[] | string[]; 
+    frequency?: string 
+  };
   protocol?: Protocol;
+}
+
+interface TestTableData {
+  baseline: Test[] | string[];
+  monitoring: Test[] | string[];
+  frequency?: string;
 }
 
 const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests, protocol }) => {
@@ -23,25 +33,36 @@ const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests, protocol }) =>
   let frequencyDetails = "";
   
   // If tests prop is provided directly, use that
+  // Helper type guard
+  const isTestsStructure = (obj: unknown): obj is TestsSectionTabProps['tests'] => {
+    if (typeof obj !== 'object' || obj === null) return false;
+    const test = obj as { baseline?: unknown; monitoring?: unknown; frequency?: unknown };
+    return (
+      (!('baseline' in test) || Array.isArray(test.baseline)) &&
+      (!('monitoring' in test) || Array.isArray(test.monitoring)) &&
+      (!('frequency' in test) || typeof test.frequency === 'string')
+    );
+  };
+
+  /**
+   * Process and normalize test data from either direct tests prop or protocol.tests
+   * @param data - Test data from either source
+   */
+  const processTestData = (data: typeof tests | Protocol['tests']): void => {
+    if (Array.isArray(data)) {
+      baselineTests = data;
+    } else if (isTestsStructure(data)) {
+      const testData = data as { baseline?: Test[] | string[]; monitoring?: Test[] | string[]; frequency?: string };
+      baselineTests = testData.baseline ?? [];
+      ongoingTests = testData.monitoring ?? [];
+      frequencyDetails = testData.frequency ?? "";
+    }
+  };
+
   if (tests) {
-    if (Array.isArray(tests)) {
-      // If it's a plain array, treat as baseline tests
-      baselineTests = tests;
-    } else {
-      // If it has baseline/monitoring structure
-      baselineTests = tests.baseline || [];
-      ongoingTests = tests.monitoring || [];
-    }
-  } 
-  // Otherwise fall back to protocol.tests if available
-  else if (protocol?.tests) {
-    if (Array.isArray(protocol.tests)) {
-      baselineTests = protocol.tests;
-    } else {
-      baselineTests = protocol.tests.baseline || [];
-      ongoingTests = protocol.tests.monitoring || [];
-      frequencyDetails = typeof protocol.tests.frequency === 'string' ? protocol.tests.frequency : "";
-    }
+    processTestData(tests);
+  } else if (protocol?.tests) {
+    processTestData(protocol.tests);
   }
   
   // Check if we have any test data
@@ -64,7 +85,7 @@ const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests, protocol }) =>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {tests.map((test, index) => {
+            {tests.map((test: Test | string, index: number) => {
               // Handle both string and object test items
               if (typeof test === 'string') {
                 return (
@@ -83,7 +104,7 @@ const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests, protocol }) =>
                       {test.parameters ? (
                         <ul className="list-disc list-inside">
                           {Array.isArray(test.parameters) ? 
-                            test.parameters.map((param, idx) => <li key={idx}>{param}</li>) :
+                            test.parameters.map((param: string, idx: number) => <li key={idx}>{param}</li>) :
                             <li>{test.parameters}</li>
                           }
                         </ul>
@@ -130,37 +151,50 @@ const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests, protocol }) =>
           )}
           
           {/* Render monitoring instructions if available */}
-          {protocol.monitoring && (
+          {protocol?.monitoring && (
             <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-800">
               <h3 className="text-xl font-semibold mb-3">Monitoring Instructions</h3>
-              {protocol.monitoring.baseline && protocol.monitoring.baseline.length > 0 && (
-                <div className="mb-4">
-                  <h4 className="text-lg font-medium mb-2">Baseline Monitoring</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    {protocol.monitoring.baseline.map((item, idx) => (
-                      <li key={idx} className="text-gray-700 dark:text-gray-300">{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              
-              {protocol.monitoring.ongoing && protocol.monitoring.ongoing.length > 0 && (
-                <div className="mb-4">
-                  <h4 className="text-lg font-medium mb-2">Ongoing Monitoring</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    {protocol.monitoring.ongoing.map((item, idx) => (
-                      <li key={idx} className="text-gray-700 dark:text-gray-300">{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              
-              {protocol.monitoring.frequency && (
-                <div>
-                  <h4 className="text-lg font-medium mb-2">Monitoring Frequency</h4>
-                  <p className="text-gray-700 dark:text-gray-300">{protocol.monitoring.frequency}</p>
-                </div>
-              )}
+              {(() => {
+                const monitoring = protocol.monitoring;
+                if (!monitoring) return null;
+
+                return (
+                  <>
+                    {monitoring.baseline?.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="text-lg font-medium mb-2">Baseline Monitoring</h4>
+                        <ul className="list-disc pl-5 space-y-1">
+                          {monitoring.baseline.map((item: string, idx: number) => (
+                            <li key={idx} data-testid={`baseline-monitoring-${idx}`} className="text-gray-700 dark:text-gray-300">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {monitoring.ongoing?.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="text-lg font-medium mb-2">Ongoing Monitoring</h4>
+                        <ul className="list-disc pl-5 space-y-1">
+                          {monitoring.ongoing.map((item: string, idx: number) => (
+                            <li key={idx} data-testid={`ongoing-monitoring-${idx}`} className="text-gray-700 dark:text-gray-300">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {monitoring.frequency && (
+                      <div>
+                        <h4 className="text-lg font-medium mb-2">Monitoring Frequency</h4>
+                        <p className="text-gray-700 dark:text-gray-300">{monitoring.frequency}</p>
+                      </div>
+                    )}
+                  </>
+                );
+              })()}
             </div>
           )}
         </>
@@ -169,4 +203,5 @@ const TestsSectionTab: React.FC<TestsSectionTabProps> = ({ tests, protocol }) =>
   );
 };
 
+export { TestsSectionTab };
 export default TestsSectionTab;

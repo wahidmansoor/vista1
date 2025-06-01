@@ -8,7 +8,7 @@ interface Props {
 
 export const AdmissionAlertTriggers: React.FC<Props> = ({ cancerType }) => {
   const [open, setOpen] = useState(true);
-  const alerts = getAdmissionAlerts(cancerType);
+  const alerts = getAdmissionAlerts(cancerType, 'general');
   return (
     <motion.div
       className="p-3 bg-red-50 border border-red-200 rounded-lg"
@@ -26,9 +26,10 @@ export const AdmissionAlertTriggers: React.FC<Props> = ({ cancerType }) => {
         </button>
       </div>
       {open && (
-        <ul className="list-disc pl-5 text-red-700 text-sm leading-tight space-y-0.5">
-          {alerts.map((alert, i) => (
-            <li key={i}>{alert}</li>
+        <ul className="list-disc pl-5 text-red-700 text-sm leading-tight space-y-0.5">        {alerts.map((alert, i) => (
+            <li key={i}>
+              <strong>{alert.title}:</strong> {alert.message}
+            </li>
           ))}
         </ul>
       )}

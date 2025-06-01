@@ -11,7 +11,7 @@ import { Skeleton } from "../../../components/ui/skeleton";
 import { ScrollArea } from "../../../components/ui/scroll-area";
 import debounce from 'lodash.debounce';
 import { getProtocols, ProtocolFilters } from '../../../services/protocols';
-import type { Protocol, Drug, SupportiveCareItem } from '../../../types/protocol';
+import type { Protocol, Drug, SupportiveCareItem } from '../../../types/protocolUpdated';
 import ProtocolCard from "./ProtocolCard";
 import { SupabaseTester } from "../../../components/SupabaseTester";
 import { DrugCard, TagList, RichTextBlock } from '../components/medicationComponents';
@@ -19,7 +19,8 @@ import { MedicationDetailView } from '../components/MedicationDetailView';
 import type { Medication } from '../../../types/medications';
 import * as MedicationService from '../../../services/medications';
 import { Link, useNavigate } from 'react-router-dom'; // Added for navigation
-import { cleanProtocol, safeJsonParse, isValidDrugList } from '../../../types/protocol';
+import { cleanProtocol, safeJsonParse } from '../../../types/protocolUpdated';
+import { isValidDrugList } from '../../../utils/protocolHelpers';
 
 // Lazy load heavy components
 const DrugDetailView = React.lazy(() => import('./DrugDetailView'));

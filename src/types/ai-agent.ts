@@ -7,7 +7,11 @@ export type PromptIntent =
   | 'medication'
   | 'protocol'
   | 'emergency'
-  | 'general';
+  | 'general'
+  | 'evaluation'
+  | 'dose-check'
+  | 'toxicity'
+  | 'supportive-care';
 
 export interface AIRequestBody {
   module: ModuleType;

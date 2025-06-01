@@ -5,9 +5,10 @@ interface CodeBlockProps {
   language?: string;
   value: string;
   className?: string;
+  showLineNumbers?: boolean;
 }
 
-const CodeBlock: React.FC<CodeBlockProps> = ({ language, value, className }) => {
+const CodeBlock: React.FC<CodeBlockProps> = ({ language, value, className, showLineNumbers = false }) => {
   // Determine language display name
   const displayLanguage = language || 'text';
   const formattedLanguage = displayLanguage === 'js' ? 'javascript' : displayLanguage;

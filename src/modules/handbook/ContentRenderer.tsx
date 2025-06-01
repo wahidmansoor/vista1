@@ -1,7 +1,9 @@
-import React from 'react';
-import { HandbookContentBlock } from './types/handbook';
+import { FC, HTMLAttributes, Fragment } from 'react';
+import type { HandbookContentBlock } from './types/handbook';
 import ReactMarkdown from 'react-markdown';
+// @ts-ignore
 import rehypeRaw from 'rehype-raw';
+// @ts-ignore
 import remarkGfm from 'remark-gfm';
 import { AlertCircle, AlertTriangle, Info, FileText, Book } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -10,7 +12,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import CodeBlock from '@/components/ui/CodeBlock';
 
 // Create simple UI components to avoid external dependencies
-const Separator: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) => (
+const Separator: FC<HTMLAttributes<HTMLDivElement>> = (props) => (
   <div {...props} className={cn("h-px bg-gray-200 dark:bg-gray-700", props.className)} />
 );
 
@@ -21,7 +23,8 @@ interface ContentRendererProps {
 }
 
 // Enhanced markdown rendering with better prose styling
-const renderMarkdown = (text: string) => {
+  const renderMarkdown = (text: string | unknown) => {
+    if (typeof text !== 'string') return null;
   if (!text) return null;
   
   return (
@@ -61,7 +64,7 @@ const getBlockContent = (block: HandbookContentBlock): string => {
 
 // Recursive function to render nested lists
 const renderNestedList = (
-  items: any[], 
+  items: Array<string | { text?: string; sublist?: unknown[]; } | unknown>, 
   parentKey: string, 
   ordered: boolean = false, 
   level: number = 0
@@ -144,10 +147,10 @@ export function ContentRenderer({ content, className }: ContentRendererProps) {
         // Show section separators for headings
         if (shouldShowSeparator(block, index)) {
           return (
-            <React.Fragment key={getKey(block, index)}>
+            <Fragment key={getKey(block, index)}>
               <Separator className="my-6" />
               {renderBlock(block, index)}
-            </React.Fragment>
+            </Fragment>
           );
         }
         return renderBlock(block, index);

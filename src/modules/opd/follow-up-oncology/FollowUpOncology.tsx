@@ -11,7 +11,7 @@ import { CancerType } from './data/followUpTemplates';
 import { generateFollowUpPlan, Stage } from './logic/generateFollowUpPlan';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { callAIAgent } from '@/lib/api/aiAgentAPI';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import AIFollowUpAssistant from './components/AIFollowUpAssistant';
 
