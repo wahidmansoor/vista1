@@ -1,4 +1,4 @@
-// Jest globals used: describe, it, expect, vi, beforeEach, afterEach;
+// Jest globals used: describe, it, expect, beforeEach, afterEach;
 import { generateGeminiResponse } from '../lib/gemini';
 
 jest.mock('@google/generative-ai', () => {
@@ -46,10 +46,8 @@ describe('generateGeminiResponse', () => {
     }, writable: true });
     jest.clearAllMocks();
   });
-
   afterEach(() => {
-    vi.unstubAllGlobals();
-    vi.resetModules();
+    jest.resetModules();
   });
 
   it('throws error when API key is not configured', async () => {

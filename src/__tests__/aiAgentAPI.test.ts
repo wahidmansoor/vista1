@@ -1,12 +1,11 @@
-// Jest globals used: describe, it, expect, vi, beforeEach, afterEach;
+// Jest globals used: describe, it, expect, beforeEach, afterEach;
 import express from 'express';
 import request from 'supertest';
 import router from '../server/api/ai-agent';
 
-jest.mock('@google/generative-ai', async () => {
-  const actual = await vi.importActual('@google/generative-ai');
+jest.mock('@google/generative-ai', () => {
+  // Simple mock instead of using importActual
   return {
-    ...actual,
     GoogleGenerativeAI: jest.fn((apiKey) => {
       if (!apiKey || apiKey === 'undefined') {
         throw new Error('Gemini API key not configured');
@@ -50,10 +49,8 @@ describe('AI Agent API', () => {
     app.use('/api/ai-agent', router);
     jest.clearAllMocks();
   });
-
   afterEach(() => {
-    vi.unstubAllGlobals();
-    vi.resetModules();
+    jest.resetModules();
   });
 
   it('makes correct API call with proper params', async () => {

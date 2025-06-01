@@ -1,4 +1,4 @@
-// Jest globals used: describe, it, expect, vi, beforeEach;
+// Jest globals used: describe, it, expect, beforeEach;
 
 // Mock the protocols service since we don't have it implemented yet
 describe('Protocols Service', () => {
