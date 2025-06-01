@@ -15,8 +15,7 @@
     "type-check": "tsc --noEmit",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
-    "clean": "rm -rf dist node_modules/.vite",
-    "postinstall": "npm run type-check"
+    "clean": "rm -rf dist node_modules/.vite"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
