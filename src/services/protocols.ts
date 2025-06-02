@@ -14,6 +14,28 @@ export interface ProtocolFilters {
   treatmentIntent?: string | null; // For backward compatibility
 }
 
+// Add this helper function
+const parseProtocolPremedications = (protocol: any): Protocol => {
+  let premeds = protocol.premedications;
+
+  try {
+    if (typeof premeds === 'string') {
+      premeds = JSON.parse(premeds); // handle single stringified object
+    } else if (Array.isArray(premeds)) {
+      premeds = premeds.map((item) =>
+        typeof item === 'string' ? JSON.parse(item) : item
+      );
+    }
+  } catch (e) {
+    console.warn('Failed to parse premedications:', e);
+  }
+
+  return {
+    ...protocol,
+    premedications: premeds
+  } as Protocol;
+};
+
 // ✅ Get unique tumour supergroups (top-level filter)
 export const getSupergroups = async (): Promise<string[]> => {
   const { data, error } = await supabase
@@ -89,7 +111,7 @@ export const getProtocols = async (filters: ProtocolFilters = {}): Promise<Proto
     if (error) throw error;
     if (!data?.length) return [];
 
-    return data as Protocol[];
+    return data.map(parseProtocolPremedications);
   } catch (error) {
     console.error('Error fetching filtered protocols:', error);
     throw new Error(`Failed to fetch protocols: ${error instanceof Error ? error.message : String(error)}`);
@@ -109,7 +131,7 @@ export const getProtocolsByTumorGroup = async (tumorGroup: string): Promise<Prot
     throw new Error('Failed to fetch protocols');
   }
 
-  return data as Protocol[];
+  return data.map(parseProtocolPremedications);
 };
 
 // ✅ Get a single protocol by ID
@@ -125,7 +147,7 @@ export const getProtocolById = async (id: string): Promise<Protocol | null> => {
     return null;
   }
 
-  return data as Protocol;
+  return data ? parseProtocolPremedications(data) : null;
 }
 
 // ✅ Get all group options (tumour group and supergroup combinations)

@@ -248,6 +248,22 @@ export const cleanProtocol = (raw: any): Protocol | null => {
     cleaned.treatment.drugs = [];
   }
 
+  // Add or update the cleanProtocol function to include proper premedication parsing
+  if (cleaned.premedications) {
+    if (typeof cleaned.premedications === 'string') {
+      try {
+        cleaned.premedications = JSON.parse(cleaned.premedications);
+      } catch (e) {
+        console.warn('Failed to parse premedications string:', e);
+      }
+    } else if (Array.isArray(cleaned.premedications)) {
+      // Handle array of possibly stringified items
+      cleaned.premedications = cleaned.premedications.map(item => 
+        typeof item === 'string' ? JSON.parse(item) : item
+      );
+    }
+  }
+  
   return cleaned;
 };
 
