@@ -1,35 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const CallbackPage: React.FC = () => {
-  const { handleRedirectCallback, isAuthenticated, error } = useAuth0();
+  const { handleRedirectCallback, isAuthenticated, error, isLoading } = useAuth0();
   const [processing, setProcessing] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleAuthRedirect = useCallback(async () => {
+    try {
+      const query = location.search;
+      // Check for auth code and state parameters
+      if (query.includes('code=') && query.includes('state=')) {
+        const result = await handleRedirectCallback();
+        const returnTo = result?.appState?.returnTo || '/dashboard';
+        navigate(returnTo, { replace: true });
+      } else if (isAuthenticated && !isLoading) {
+        // Already authenticated, redirect to dashboard
+        navigate('/dashboard', { replace: true });
+      } else if (!isLoading) {
+        // No auth parameters and not authenticated, return to home
+        navigate('/', { replace: true });
+      }
+    } catch (err) {
+      console.error('Auth0 callback error:', err);
+      // On error, redirect to home with error state
+      navigate('/?error=auth_callback_failed', { replace: true });
+    } finally {
+      setProcessing(false);
+    }
+  }, [handleRedirectCallback, navigate, isAuthenticated, isLoading, location]);
 
   useEffect(() => {
-    const handleAuthRedirect = async () => {
-      try {
-        const query = window.location.search;
-        if (query.includes('code=') && query.includes('state=')) {
-          const result = await handleRedirectCallback();
-          const returnTo = result?.appState?.returnTo || '/dashboard';
-          navigate(returnTo, { replace: true });
-        } else if (isAuthenticated) {
-          navigate('/dashboard', { replace: true });
-        } else {
-          navigate('/', { replace: true });
-        }
-      } catch (err) {
-        console.error('Auth0 callback error:', err);
-        navigate('/', { replace: true });
-      } finally {
-        setProcessing(false);
-      }
-    };
-
-    handleAuthRedirect();
-  }, [handleRedirectCallback, navigate, isAuthenticated]);
+    // Only process if we're not still loading the auth state
+    if (!isLoading) {
+      handleAuthRedirect();
+    }
+  }, [handleAuthRedirect, isLoading]);
 
   if (processing) {
     return (
@@ -64,4 +72,3 @@ const CallbackPage: React.FC = () => {
 };
 
 export default CallbackPage;
-
