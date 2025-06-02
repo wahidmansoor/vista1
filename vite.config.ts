@@ -1,19 +1,29 @@
-import { defineConfig, loadEnv } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig(({ command, mode }) => {
   // Load env file based on `mode` in the current working directory.
-  const env = loadEnv(mode, process.cwd(), '')
+  const env = loadEnv(mode, process.cwd(), '');
 
   return {
     base: '/',
     plugins: [
       react({
-        jsxRuntime: 'automatic', // Changed from 'classic' to match tsconfig
+        jsxRuntime: 'automatic',
         include: "**/*.{jsx,tsx}"
+      }),
+      viteStaticCopy({
+        targets: [
+          {
+            src: 'public/_headers', // 👈 this ensures CSP and cache rules are deployed
+            dest: '.'               // copied to dist/_headers
+          }
+        ]
       })
-    ],    resolve: {
+    ],
+    resolve: {
       alias: {
         '@': path.resolve(__dirname, './src')
       }
@@ -44,5 +54,5 @@ export default defineConfig(({ command, mode }) => {
     optimizeDeps: {
       include: ['react', 'react-dom', 'react-router-dom']
     }
-  }
-})
+  };
+});
