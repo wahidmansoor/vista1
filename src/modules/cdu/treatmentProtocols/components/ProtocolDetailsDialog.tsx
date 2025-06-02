@@ -84,6 +84,20 @@ const InfoTab: React.FC<InfoTabProps> = ({
   </div>
 );
 
+// Add this helper function after the interface declarations
+const getTagColor = (tag: string) => {
+  const t = tag.toLowerCase();
+
+  if (t.includes('her2')) return 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200';
+  if (t.includes('triple')) return 'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200';
+  if (t.includes('immuno')) return 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200';
+  if (t.includes('checkpoint')) return 'bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200';
+  if (t.includes('platinum')) return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+  if (t.includes('metastatic')) return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+
+  return 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200';
+};
+
 const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol, open, onOpenChange }) => {
   // Set up data with fallbacks for each section
   const monitoring = React.useMemo(() => protocol.monitoring || { baseline: [], ongoing: [] }, [protocol.monitoring]);
@@ -169,26 +183,77 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
             <TabsTrigger value="info">Info</TabsTrigger>
           </TabsList>
           <TabsContent value="overview">
-            <div className="space-y-6">
-              <OverviewSection overview={protocol.summary} />
-              {protocol.eligibility && (
-                <div className="mt-4">
-                  <h3 className="font-semibold text-lg mb-2">Eligibility Criteria</h3>
+            <Tabs defaultValue="summary" className="w-full mt-4">
+              <TabsList className="mb-4 bg-muted p-1 rounded-md grid grid-cols-3 w-full">
+                <TabsTrigger value="summary">Summary</TabsTrigger>
+                <TabsTrigger value="cycle">Cycle + Tags</TabsTrigger>
+                <TabsTrigger value="eligibility">Eligibility</TabsTrigger>
+              </TabsList>
+
+              {/* Summary Panel */}
+              <TabsContent value="summary" className="space-y-4">
+                <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-md shadow">
+                  <h3 className="font-semibold text-blue-900 dark:text-blue-200 text-lg mb-1">Tumour Classification</h3>
+                  <p className="text-sm text-blue-800 dark:text-blue-300">
+                    Group: <strong>{protocol.tumour_group}</strong><br />
+                    Supergroup: <strong>{protocol.tumour_supergroup || 'N/A'}</strong>
+                  </p>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-4 rounded-md shadow border">
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-lg mb-1">Protocol Summary</h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">
+                    {protocol.summary || 'No summary provided.'}
+                  </p>
+                </div>
+              </TabsContent>
+
+              {/* Cycle Info + Tags Panel */}
+              <TabsContent value="cycle" className="space-y-4">
+                {protocol.cycle_info && (
+                  <div className="bg-indigo-50 dark:bg-indigo-900 p-4 rounded-md shadow">
+                    <h3 className="font-semibold text-indigo-900 dark:text-indigo-200 text-lg mb-1">Cycle Information</h3>
+                    <p className="text-sm text-indigo-800 dark:text-indigo-300 whitespace-pre-line">
+                      {protocol.cycle_info}
+                    </p>
+                  </div>
+                )}
+
+                {protocol.tags?.length > 0 && (
+                  <div className="bg-violet-50 dark:bg-violet-900 p-4 rounded-md shadow">
+                    <h3 className="font-semibold text-violet-900 dark:text-violet-200 text-lg mb-2">Tags</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {protocol.tags.map((tag, idx) => (
+                        <span key={idx} className={`px-2 py-1 text-xs rounded-full font-medium ${getTagColor(tag)}`}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </TabsContent>
+
+              {/* Eligibility Panel */}
+              <TabsContent value="eligibility" className="space-y-4">
+                <div className="bg-green-50 dark:bg-green-900 p-4 rounded-md shadow">
+                  <h3 className="font-semibold text-green-900 dark:text-green-200 text-lg mb-2">Eligibility Criteria</h3>
                   {Array.isArray(protocol.eligibility) ? (
-                    <ul className="list-disc list-inside">
+                    <ul className="list-disc list-inside text-sm text-green-800 dark:text-green-300">
                       {protocol.eligibility.map((item: string, idx: number) => (
                         <li key={idx}>{item}</li>
                       ))}
                     </ul>
                   ) : (
-                    <>                      <h4 className="font-medium mb-1">Inclusion Criteria</h4>
-                      <ul className="list-disc list-inside mb-2">
+                    <>
+                      <h4 className="font-semibold text-sm mb-1">Inclusion</h4>
+                      <ul className="list-disc list-inside text-sm text-green-800 dark:text-green-300">
                         {protocol.eligibility.inclusion_criteria?.map((item: { criterion: string }, idx: number) => (
                           <li key={idx}>{item.criterion}</li>
                         ))}
                       </ul>
-                      <h4 className="font-medium mb-1">Exclusion Criteria</h4>
-                      <ul className="list-disc list-inside">
+
+                      <h4 className="font-semibold text-sm mt-2 mb-1">Exclusion</h4>
+                      <ul className="list-disc list-inside text-sm text-green-800 dark:text-green-300">
                         {protocol.eligibility.exclusion_criteria?.map((item: { criterion: string }, idx: number) => (
                           <li key={idx}>{item.criterion}</li>
                         ))}
@@ -196,12 +261,64 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                     </>
                   )}
                 </div>
-              )}
-            </div>
+              </TabsContent>
+            </Tabs>
           </TabsContent>
-          <TabsContent value="treatment">
-            <TreatmentTab treatment={treatment} />
-          </TabsContent>          <TabsContent value="tests">
+          <TabsContent value="treatment" className="space-y-4">
+  <h3 className="text-xl font-bold text-indigo-800 dark:text-indigo-300">Treatment Drugs</h3>
+  {treatment?.drugs?.length > 0 ? (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {treatment.drugs.map((drug: any, idx: number) => (
+        <div
+          key={idx}
+          className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-md hover:shadow-lg transition"
+        >
+          <div className="flex items-center justify-between mb-2">
+            <h4 className="text-lg font-semibold text-indigo-900 dark:text-indigo-100">
+              {drug.name || 'Unnamed Drug'}
+            </h4>
+            {drug.drug_class && (
+              <span className="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-100 rounded-full">
+                {drug.drug_class}
+              </span>
+            )}
+          </div>
+
+          <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
+            {drug.dose && (
+              <li>
+                <span className="font-medium text-gray-900 dark:text-white">Dose:</span> {drug.dose}
+              </li>
+            )}
+            {drug.administration && (
+              <li>
+                <span className="font-medium text-gray-900 dark:text-white">Administration:</span> {drug.administration}
+              </li>
+            )}
+            {drug.timing && (
+              <li>
+                <span className="font-medium text-gray-900 dark:text-white">Schedule:</span> {drug.timing}
+              </li>
+            )}
+          </ul>
+
+          {drug.special_notes && drug.special_notes.length > 0 && (
+            <div className="mt-3 bg-indigo-50 dark:bg-indigo-800/20 border-l-4 border-indigo-500 pl-3 pr-2 py-2 rounded">
+              <h5 className="text-sm font-semibold text-indigo-700 dark:text-indigo-300 mb-1">Special Notes</h5>
+              <ul className="list-disc list-inside text-sm text-indigo-900 dark:text-indigo-100 space-y-1">
+                {drug.special_notes.map((note: string, i: number) => (
+                  <li key={i}>{note}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className="text-muted-foreground">No treatment drugs specified.</p>
+  )}
+</TabsContent>          <TabsContent value="tests">
             <div className="space-y-6">
               <div>
                 <h3 className="font-semibold text-lg mb-2">Baseline Tests</h3>                {tests?.baseline && tests.baseline.length > 0 ? (

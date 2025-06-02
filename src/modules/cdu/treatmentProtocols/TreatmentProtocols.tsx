@@ -2,67 +2,54 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import UnifiedProtocolCard from './UnifiedProtocolCard';
 import ProtocolDetailsDialog from './components/ProtocolDetailsDialog';
-import { Protocol } from '@/types/protocol';
-import { getSupergroups, getTumorGroups, getProtocolsByTumorGroup } from '@/services/protocols';
-import ProtocolErrorState from './ProtocolErrorState';
 import ProtocolLoadingSkeleton from './ProtocolLoadingSkeleton';
+import ProtocolErrorState from './ProtocolErrorState';
+
+import { Protocol } from '@/types/protocol';
+import {
+  getAllGroupOptions,
+  getProtocolsByTumorGroup,
+} from '@/services/protocols';
 
 export default function TreatmentProtocols() {
-  const [supergroups, setSupergroups] = useState<string[]>([]);
-  const [selectedSupergroup, setSelectedSupergroup] = useState<string | null>(null);
-  const [groups, setGroups] = useState<string[]>([]);
+  const [groupOptions, setGroupOptions] = useState<
+    { label: string; group: string; supergroup: string }[]
+  >([]);
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
+  const [selectedSupergroup, setSelectedSupergroup] = useState<string | null>(null);
   const [protocols, setProtocols] = useState<Protocol[]>([]);
   const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch supergroups on mount
+  // Load combo box options
   useEffect(() => {
-    const fetchSupergroups = async () => {
+    const fetchOptions = async () => {
       try {
         setLoading(true);
-        setError(null);
-        const data = await getSupergroups();
-        setSupergroups(data);
+        const options = await getAllGroupOptions();
+        setGroupOptions(options);
       } catch (err) {
-        setError('Failed to load tumour supergroups.');
+        setError('Failed to load tumour group options.');
       } finally {
         setLoading(false);
       }
     };
-    fetchSupergroups();
+    fetchOptions();
   }, []);
 
-  // Fetch groups for selected supergroup
-  useEffect(() => {
-    if (selectedSupergroup) {
-      setLoading(true);
-      setSelectedGroup(null);
-      setProtocols([]);
-      getTumorGroups(selectedSupergroup)
-        .then((data) => {
-          setGroups(data);
-          setLoading(false);
-        })
-        .catch(() => {
-          setError('Failed to load tumour groups.');
-          setLoading(false);
-        });
-    }
-  }, [selectedSupergroup]);
-
-  // Fetch protocols for selected group
+  // Load protocols when group is selected
   useEffect(() => {
     if (selectedGroup) {
       setLoading(true);
       getProtocolsByTumorGroup(selectedGroup)
         .then((data) => {
           setProtocols(data);
-          setLoading(false);
         })
         .catch(() => {
           setError('Failed to load protocols for this group.');
+        })
+        .finally(() => {
           setLoading(false);
         });
     }
@@ -71,103 +58,76 @@ export default function TreatmentProtocols() {
   if (loading) return <ProtocolLoadingSkeleton />;
   if (error) return <ProtocolErrorState error={error} type="error" />;
 
-  // Step 1: Show supergroups
-  if (!selectedSupergroup) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 p-4"
-      >
-        <h1 className="text-3xl font-bold text-indigo-900 mb-8">Select Tumour Supergroup</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {supergroups.map((sg) => (
-            <div
-              key={sg}
-              className="cursor-pointer p-6 rounded-xl shadow-md bg-gradient-to-br from-indigo-50 to-indigo-100 hover:bg-indigo-200 transition"
-              onClick={() => setSelectedSupergroup(sg)}
-            >
-              <h2 className="text-xl font-bold text-indigo-900">{sg}</h2>
-            </div>
-          ))}
-        </div>
-      </motion.div>
-    );
-  }
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 p-4"
+    >
+      <h1 className="text-3xl font-bold text-indigo-900 mb-6">
+        Select a Cancer Type
+      </h1>
 
-  // Step 2: Show tumour groups for selected supergroup
-  if (selectedSupergroup && !selectedGroup) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 p-4"
-      >
-        <button
-          onClick={() => setSelectedSupergroup(null)}
-          className="mb-4 px-4 py-2 text-gray-600 hover:text-gray-800"
+      {/* Combo Box */}
+      <div className="max-w-xl mb-8">
+        <select
+          className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          defaultValue=""
+          onChange={(e) => {
+            const selected = groupOptions.find((opt) => opt.label === e.target.value);
+            if (selected) {
+              setSelectedGroup(selected.group);
+              setSelectedSupergroup(selected.supergroup);
+            }
+          }}
         >
-          ← Back to Supergroups
-        </button>
-        <h1 className="text-3xl font-bold text-indigo-900 mb-8">Select Tumour Group</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {groups.map((g) => (
-            <div
-              key={g}
-              className="cursor-pointer p-6 rounded-xl shadow-md bg-gradient-to-br from-blue-50 to-blue-100 hover:bg-blue-200 transition"
-              onClick={() => setSelectedGroup(g)}
-            >
-              <h2 className="text-xl font-bold text-blue-900">{g}</h2>
-            </div>
+          <option value="" disabled>
+            -- Select Tumour Group --
+          </option>
+          {groupOptions.map((opt) => (
+            <option key={opt.label} value={opt.label}>
+              {opt.label}
+            </option>
           ))}
-        </div>
-      </motion.div>
-    );
-  }
+        </select>
+      </div>
 
-  // Step 3: Show protocols for selected group
-  if (selectedGroup) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 p-4"
-      >
-        <button
-          onClick={() => setSelectedGroup(null)}
-          className="mb-4 px-4 py-2 text-gray-600 hover:text-gray-800"
-        >
-          ← Back to Groups
-        </button>
-        <h1 className="text-3xl font-bold text-indigo-900 mb-8">Protocols in {selectedGroup}</h1>
-        {protocols.length === 0 ? (
-          <div className="text-center text-gray-500 dark:text-gray-400 mt-8">
-            No protocols found.
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {protocols.map((protocol) => (
-              <div key={protocol.code} onClick={() => setSelectedProtocol(protocol)}>
-                <UnifiedProtocolCard protocol={protocol} />
-              </div>
-            ))}
-          </div>        )}
-        {/* Protocol detail dialog */}
-        {selectedProtocol && (
-          <ProtocolDetailsDialog
-            protocol={selectedProtocol}
-            open={!!selectedProtocol}
-            onOpenChange={(open) => {
-              if (!open) setSelectedProtocol(null);
-            }}
-          />
-        )}
-      </motion.div>
-    );
-  }
+      {/* Protocol Cards */}
+      {selectedGroup && (
+        <>
+          <h2 className="text-2xl font-semibold text-indigo-800 mb-4">
+            Protocols for {selectedGroup}
+          </h2>
+          {protocols.length === 0 ? (
+            <div className="text-center text-gray-500 dark:text-gray-400 mt-8">
+              No protocols found.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {protocols.map((protocol) => (
+                <div
+                  key={protocol.code}
+                  onClick={() => setSelectedProtocol(protocol)}
+                >
+                  <UnifiedProtocolCard protocol={protocol} />
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
 
-  return null;
+      {/* Protocol Dialog */}
+      {selectedProtocol && (
+        <ProtocolDetailsDialog
+          protocol={selectedProtocol}
+          open={!!selectedProtocol}
+          onOpenChange={(open) => {
+            if (!open) setSelectedProtocol(null);
+          }}
+        />
+      )}
+    </motion.div>
+  );
 }

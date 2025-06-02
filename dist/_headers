@@ -1,0 +1,25 @@
+# Cache static assets for performance
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Cache fonts for 1 year and allow cross-origin
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Favicon and manifest caching
+/favicon.ico
+  Cache-Control: public, max-age=86400
+
+/manifest.json
+  Cache-Control: public, max-age=86400
+  Content-Type: application/json
+
+# Service worker (no cache)
+#/sw.js
+#  Cache-Control: no-cache, no-store, must-revalidate
+
+# Optional: disable caching for API routes
+#/api/*
+#  Cache-Control: no-cache, no-store, must-revalidate

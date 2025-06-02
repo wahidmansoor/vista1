@@ -7,6 +7,7 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   return {
+    base: '/',
     plugins: [
       react({
         jsxRuntime: 'automatic', // Changed from 'classic' to match tsconfig
