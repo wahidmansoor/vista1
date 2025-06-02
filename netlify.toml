@@ -11,9 +11,9 @@
   COREPACK_ENABLE_STRICT = "0"
   GENERATE_SOURCEMAP = "false"
 
-  # Secret scanning exclusions
-  SECRETS_SCAN_OMIT_PATHS = "dist/**,src/**/*.js,src/**/*.ts,.env,public/_headers"
-  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_AUTH0_CLIENT_ID,VITE_AUTH0_DOMAIN,AUTH0_DOMAIN,AUTH0_CLIENT_ID"
+  # Secrets scanning: allow non-sensitive public keys and omit generated files
+  SECRETS_SCAN_OMIT_KEYS = "VITE_AUTH0_CLIENT_ID,VITE_AUTH0_DOMAIN,VITE_SUPABASE_ANON_KEY,AUTH0_CLIENT_ID,AUTH0_DOMAIN"
+  SECRETS_SCAN_OMIT_PATHS = "dist/**,public/_headers"
 
 [build.processing]
   skip_processing = false
@@ -32,13 +32,13 @@
 [build.processing.images]
   compress = true
 
-# SPA fallback routing
+# SPA fallback routing for React Router
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Global Security Headers
+# Security headers (global)
 [[headers]]
   for = "/*"
   [headers.values]
@@ -47,6 +47,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "same-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
     Content-Security-Policy = '''
       default-src 'self';
       script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.auth0.com;
@@ -59,36 +60,43 @@
         https://*.supabase.co
         https://mvoncovista.us.auth0.com
         https://cdn.auth0.com;
+      frame-ancestors 'none';
+      manifest-src 'self';
     '''
 
-# Asset Caching
+# Cache assets for 1 year (immutable)
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
     Access-Control-Allow-Origin = "*"
 
+# Cache HTML moderately
 [[headers]]
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=300, must-revalidate"
 
+# Service worker (if added)
 [[headers]]
   for = "/sw.js"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
 
+# API endpoints (no caching)
 [[headers]]
   for = "/api/*"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
 
+# Fonts caching
 [[headers]]
   for = "/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
     Access-Control-Allow-Origin = "*"
 
+# Favicon + Manifest
 [[headers]]
   for = "/favicon.ico"
   [headers.values]
@@ -100,19 +108,19 @@
     Cache-Control = "public, max-age=86400"
     Content-Type = "application/json"
 
-# Context: Production (main branch)
+# Environment for main production deploy
 [context.production.environment]
   NODE_ENV = "production"
   GENERATE_SOURCEMAP = "false"
   VITE_AUTH0_REDIRECT_URI = "https://mvoncovista.com/callback"
 
-# Context: Deploy Preview (PRs)
+# Deploy previews (PRs)
 [context.deploy-preview.environment]
   NODE_ENV = "production"
   GENERATE_SOURCEMAP = "true"
   VITE_AUTH0_REDIRECT_URI = "https://deploy-preview-${REVIEW_ID}--mvoncovista.com/callback"
 
-# Context: Branch Deploys (non-main)
+# Branch deploys (non-main)
 [context.branch-deploy.environment]
   NODE_ENV = "development"
   GENERATE_SOURCEMAP = "true"
