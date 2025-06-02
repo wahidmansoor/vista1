@@ -110,7 +110,7 @@
 
 # Environment for main production deploy
 [context.production.environment]
-  NODE_ENV = "production"
+  NODE_ENV = "development"
   GENERATE_SOURCEMAP = "false"
   VITE_AUTH0_REDIRECT_URI = "https://mvoncovista.com/callback"
 
