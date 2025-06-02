@@ -1,25 +1,25 @@
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: accelerator=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
-  Content-Security-Policy:
-    default-src 'self';
-    connect-src 'self'
-      https://*.supabase.co
-      https://api.openai.com
-      https://cdn.auth0.com
-      https://dev-bqgm5fdnyx1sdqja.us.auth0.com;
-    font-src 'self' data: https://fonts.gstatic.com https://rsms.me;
-    script-src 'self' 'unsafe-inline' 'unsafe-eval'
-      https://cdn.auth0.com
-      https://cdn.lrkt-in.com;
-    style-src 'self' 'unsafe-inline'
-      https://fonts.googleapis.com
-      https://rsms.me;
-    img-src 'self' data:
-      https://*.supabase.co
-      https://cdn.auth0.com;
-    frame-ancestors 'none';
-    manifest-src 'self';
+# Cache static assets for performance
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
 
+# Cache fonts for 1 year and allow cross-origin
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Favicon and manifest caching
+/favicon.ico
+  Cache-Control: public, max-age=86400
+
+/manifest.json
+  Cache-Control: public, max-age=86400
+  Content-Type: application/json
+
+# Service worker (no cache)
+#/sw.js
+#  Cache-Control: no-cache, no-store, must-revalidate
+
+# Optional: disable caching for API routes
+#/api/*
+#  Cache-Control: no-cache, no-store, must-revalidate

@@ -14,5 +14,9 @@
   "github.copilot.chat.completionContext.typescript.mode": "on",
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "github.copilot.chat.languageContext.fix.typescript.enabled": true,
-  "github.copilot.chat.languageContext.typescript.enabled": true
+  "github.copilot.chat.languageContext.typescript.enabled": true,
+
+  "files.associations": {
+    "_headers": "plaintext"
+  }
 }
