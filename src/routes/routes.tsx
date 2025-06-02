@@ -10,8 +10,18 @@ import MedicalHandbookTOC from '@/pages/handbook/MedicalHandbookTOC';
 import RadiationHandbookTOC from '@/pages/handbook/RadiationHandbookTOC';
 import PalliativeHandbookTOC from '@/pages/handbook/PalliativeHandbookTOC';
 import TestMarkdownViewer from '../components/TestMarkdownViewer';
+import CallbackPage from '@/pages/CallbackPage';
 
 export const routes = [
+  {
+    path: '/callback',
+    element: (
+      <ErrorBoundary moduleName="Auth Callback">
+        <CallbackPage key="auth-callback" />
+      </ErrorBoundary>
+    ),
+    errorElement: <ErrorBoundary moduleName="Auth Callback" />
+  },
   {
     path: '/opd',
     element: (
