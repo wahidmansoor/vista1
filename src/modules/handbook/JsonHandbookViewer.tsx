@@ -56,6 +56,195 @@ function StickyHeader({ metadata, totalBlocks, currentBlock }: {
   );
 }
 
+// Helper function to convert markdown content to content blocks
+function processMarkdownContent(markdown: string): HandbookContentBlock[] {
+  const blocks: HandbookContentBlock[] = [];
+  const lines = markdown.split('\n');
+  
+  let currentTextBlock: string[] = [];
+  let currentListItems: string[] = [];
+  let tableLines: string[] = [];
+  let inCodeBlock = false;
+  let blockId = 1;
+  
+  const generateId = (type: string) => `${type}-${blockId++}`;
+  
+  const flushTextBlock = () => {
+    if (currentTextBlock.length > 0) {
+      blocks.push({
+        type: 'paragraph',
+        text: currentTextBlock.join('\n'),
+        id: generateId('p')
+      });
+      currentTextBlock = [];
+    }
+  };
+  
+  const flushListItems = () => {
+    if (currentListItems.length > 0) {
+      blocks.push({
+        type: 'list',
+        items: currentListItems,
+        id: generateId('list')
+      });
+      currentListItems = [];
+    }
+  };
+  
+  const flushTableLines = () => {
+    if (tableLines.length > 0) {
+      blocks.push({
+        type: 'table',
+        text: tableLines.join('\n'),
+        id: generateId('table')
+      });
+      tableLines = [];
+    }
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    
+    // Handle code blocks
+    if (line.trim().startsWith('```')) {
+      if (inCodeBlock) {
+        inCodeBlock = false;
+        continue;
+      } else {
+        flushTextBlock();
+        flushListItems();
+        inCodeBlock = true;
+        const language = line.trim().slice(3);
+        const codeLines = [];
+        i++;
+        
+        while (i < lines.length && !lines[i].trim().startsWith('```')) {
+          codeLines.push(lines[i]);
+          i++;
+        }
+        
+        blocks.push({
+          type: 'code',
+          language: language || 'plaintext',
+          text: codeLines.join('\n'),
+          id: generateId('code')
+        });
+        continue;
+      }
+    }
+    
+    if (inCodeBlock) continue;
+    
+    // Handle headings
+    if (line.startsWith('# ')) {
+      flushTextBlock();
+      flushListItems();
+      flushTableLines();
+      blocks.push({
+        type: 'heading',
+        level: 1,
+        text: line.substring(2),
+        id: generateId('h1')
+      });
+    } else if (line.startsWith('## ')) {
+      flushTextBlock();
+      flushListItems();
+      flushTableLines();
+      blocks.push({
+        type: 'heading',
+        level: 2,
+        text: line.substring(3),
+        id: generateId('h2')
+      });
+    } else if (line.startsWith('### ')) {
+      flushTextBlock();
+      flushListItems();
+      flushTableLines();
+      blocks.push({
+        type: 'heading',
+        level: 3,
+        text: line.substring(4),
+        id: generateId('h3')
+      });
+    } else if (line.startsWith('#### ')) {
+      flushTextBlock();
+      flushListItems();
+      flushTableLines();
+      blocks.push({
+        type: 'heading',
+        level: 4,
+        text: line.substring(5),
+        id: generateId('h4')
+      });
+    }
+    // Handle blockquotes (Clinical Pearl)
+    else if (line.startsWith('> ')) {
+      flushTextBlock();
+      flushListItems();
+      flushTableLines();
+      const quoteLines = [line.substring(2)];
+      i++;
+      
+      while (i < lines.length && lines[i].startsWith('> ')) {
+        quoteLines.push(lines[i].substring(2));
+        i++;
+      }
+      i--; // Move back one to process this line next time
+      
+      blocks.push({
+        type: 'clinical_pearl',
+        text: quoteLines.join('\n'),
+        id: generateId('pearl')
+      });
+    }
+    // Handle lists
+    else if (line.trim().match(/^[\*\-\•]\s/)) {
+      flushTextBlock();
+      flushTableLines();
+      currentListItems.push(line.trim().substring(2));
+    }
+    // Handle tables
+    else if (line.includes('|') && (line.trim().startsWith('|') || line.trim().endsWith('|'))) {
+      flushTextBlock();
+      flushListItems();
+      tableLines.push(line);
+      
+      // Collect all table rows
+      while (i + 1 < lines.length && lines[i + 1].includes('|') && 
+            (lines[i + 1].trim().startsWith('|') || lines[i + 1].trim().endsWith('|'))) {
+        i++;
+        tableLines.push(lines[i]);
+      }
+    }
+    // Handle horizontal rules
+    else if (line.trim() === '---' || line.trim() === '***' || line.trim() === '___') {
+      flushTextBlock();
+      flushListItems();
+      flushTableLines();
+      blocks.push({
+        type: 'divider',
+        id: generateId('divider')
+      });
+    }
+    // Handle regular paragraphs
+    else if (line.trim() !== '') {
+      flushListItems();
+      flushTableLines();
+      currentTextBlock.push(line);
+    } else if (line.trim() === '' && currentTextBlock.length > 0) {
+      // Empty line after text content
+      flushTextBlock();
+    }
+  }
+  
+  // Flush any remaining content
+  flushTextBlock();
+  flushListItems();
+  flushTableLines();
+  
+  return blocks;
+}
+
 export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
   const [content, setContent] = useState<HandbookContentBlock[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -69,324 +258,300 @@ export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
       setIsLoading(true);
       setError(null);
       setContent(null);
-      setMetadata(null);
-
-      try {
+      setMetadata(null);      try {
         const response = await fetch(filePath);
         console.log('📄 Content response:', {
           status: response.status,
           ok: response.ok,
-          contentType: response.headers.get('content-type')
+          contentType: response.headers.get('content-type'),
+          filePath
         });
 
         if (!response.ok) {
-          throw new Error(`Failed to load content: ${response.statusText}`);
+          // Show more detailed error information
+          throw new Error(`Failed to load content (${response.status}): ${response.statusText}\nFile path: ${filePath}`);
+        }
+        
+        // Check if the content type is HTML which indicates an error page was returned
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('text/html') && !filePath.toLowerCase().endsWith('.html')) {
+          throw new Error(`Invalid content received: The server returned HTML instead of the expected format.\nFile path: ${filePath}\n\nThis usually happens when the file doesn't exist or there's a server configuration issue.`);
         }
 
-        const json = await response.json();
-        
-        // Log more detailed information about the content structure
-        console.log('📄 Content structure:', {
-          hasContent: !!json.content,
-          contentIsArray: Array.isArray(json.content),
-          contentLength: json.content?.length || 0,
-          hasDefaultSections: !!json.sections && Array.isArray(json.sections),
-          keys: Object.keys(json)
-        });
-        
-        // Handle different content formats
-        let processedContent: HandbookContentBlock[] = [];
-        let metaData = {};
-        
-        // Function to normalize block types and ensure proper structure
-        const normalizeContentBlock = (block: any): HandbookContentBlock => {
-          // If block is a string, convert to paragraph
-          if (typeof block === 'string') {
-            return {
-              type: 'paragraph',
-              text: block,
-              id: `block-${Math.random().toString(36).substring(2, 11)}`
-            };
+        // Check if the file is Markdown or JSON based on extension
+        if (filePath.toLowerCase().endsWith('.md')) {
+          const markdownText = await response.text();
+          console.log('📝 Processing markdown content...');
+          
+          // Process markdown into content blocks
+          const processedContent = processMarkdownContent(markdownText);
+          
+          // Extract metadata (simple frontmatter implementation)
+          const metadataMatch = markdownText.match(/^---\n([\s\S]*?)\n---/);
+          const metadata: Record<string, string> = {};
+          
+          if (metadataMatch && metadataMatch[1]) {
+            const frontMatter = metadataMatch[1];
+            const frontMatterLines = frontMatter.split('\n');
+            
+            frontMatterLines.forEach(line => {
+              const [key, value] = line.split(':').map(part => part.trim());
+              if (key && value) {
+                metadata[key] = value;
+              }
+            });
           }
           
-          // Clone the block to avoid mutating original
-          const normalizedBlock = { ...block };
+          setContent(processedContent);
+          setMetadata(metadata);
+        } else {
+          // Handle JSON content as before
+          const json = await response.json();
           
-          // Ensure all blocks have an ID (if missing)
-          if (!normalizedBlock.id) {
-            normalizedBlock.id = `block-${Math.random().toString(36).substring(2, 11)}`;
-          }
+          // Log more detailed information about the content structure
+          console.log('📄 Content structure:', {
+            hasContent: !!json.content,
+            contentIsArray: Array.isArray(json.content),
+            contentLength: json.content?.length || 0,
+            hasDefaultSections: !!json.sections && Array.isArray(json.sections),
+            keys: Object.keys(json)
+          });
           
-          // If normalizedBlock has a "list" property, convert it to a proper list block
-          if (normalizedBlock.list && Array.isArray(normalizedBlock.list)) {
-            normalizedBlock.type = normalizedBlock.type || 'list';
-            normalizedBlock.items = normalizedBlock.list;
-            delete normalizedBlock.list;
-          }
+          // Handle different content formats
+          let processedContent: HandbookContentBlock[] = [];
+          let metaData = {};
           
-          // Map alternative block types to standard ones
-          if (normalizedBlock.type === 'bullets') {
-            normalizedBlock.type = 'list';
-          } else if (normalizedBlock.type === 'numbers') {
-            normalizedBlock.type = 'numbers';
-          } else if (normalizedBlock.type === 'definitions') {
-            normalizedBlock.type = 'definitions';
-          }
-          
-          // Ensure blocks have proper content field
-          if (!normalizedBlock.text && !normalizedBlock.content) {
-            if (typeof normalizedBlock.value === 'string') {
-              normalizedBlock.text = normalizedBlock.value;
-            } else if (typeof normalizedBlock.body === 'string') {
-              normalizedBlock.text = normalizedBlock.body;
+          // Function to normalize block types and ensure proper structure
+          const normalizeContentBlock = (block: any): HandbookContentBlock => {
+            // If block is a string, convert to paragraph
+            if (typeof block === 'string') {
+              return {
+                type: 'paragraph',
+                text: block,
+                id: `p-${Math.random().toString(36).substring(2, 11)}`
+              };
             }
-          }
-          
-          // Ensure items are properly formatted (if present)
-          if (normalizedBlock.items && !Array.isArray(normalizedBlock.items)) {
-            // Handle case where items might be a string to be split
-            if (typeof normalizedBlock.items === 'string') {
-              normalizedBlock.items = normalizedBlock.items.split(/\r?\n/).filter(Boolean);
-            } else {
-              console.warn('Invalid items format:', normalizedBlock.items);
-              normalizedBlock.items = [];
+            
+            // Clone the block to avoid mutating original
+            const normalizedBlock = { ...block };
+            
+            // Ensure all blocks have an ID (if missing)
+            if (!normalizedBlock.id) {
+              normalizedBlock.id = `block-${Math.random().toString(36).substring(2, 11)}`;
             }
-          }
-          
-          return normalizedBlock as HandbookContentBlock;
-        };
+            
+            // If normalizedBlock has a "list" property, convert it to a proper list block
+            if (normalizedBlock.list && Array.isArray(normalizedBlock.list)) {
+              normalizedBlock.items = normalizedBlock.list;
+              normalizedBlock.type = 'list';
+              delete normalizedBlock.list;
+            }
+            
+            // Map alternative block types to standard ones
+            if (normalizedBlock.type === 'bullets') {
+              normalizedBlock.type = 'list';
+            } else if (normalizedBlock.type === 'numbers') {
+              normalizedBlock.type = 'list';
+              normalizedBlock.ordered = true;
+            } else if (normalizedBlock.type === 'definitions') {
+              normalizedBlock.type = 'definition_list';
+            }
+            
+            // Ensure blocks have proper content field
+            if (!normalizedBlock.text && normalizedBlock.content) {
+              normalizedBlock.text = normalizedBlock.content;
+            }
+            
+            // Ensure items are properly formatted (if present)
+            if (normalizedBlock.items && !Array.isArray(normalizedBlock.items)) {
+              normalizedBlock.items = [normalizedBlock.items.toString()];
+            }
+            
+            return normalizedBlock as HandbookContentBlock;
+          };
 
-        // Process nested content which may contain complex structures
-        const processNestedContent = (nestedContent: any): HandbookContentBlock[] => {
-          if (!nestedContent) return [];
-          
-          // If it's already an array, normalize each element
-          if (Array.isArray(nestedContent)) {
-            return nestedContent.map(item => normalizeContentBlock(item));
-          }
-          
-          // If it's a string, convert to a paragraph
-          if (typeof nestedContent === 'string') {
-            return [normalizeContentBlock({
-              type: 'paragraph',
-              text: nestedContent
-            })];
-          }
-          
-          // If it's an object, try to convert to appropriate block type
-          if (typeof nestedContent === 'object' && nestedContent !== null) {
-            // Check if it has a list property - common in Hallmarks-of-Cancer.json
-            if (nestedContent.list && Array.isArray(nestedContent.list)) {
+          // Process nested content which may contain complex structures
+          const processNestedContent = (nestedContent: any): HandbookContentBlock[] => {
+            if (!nestedContent) return [];
+            
+            // If it's already an array, normalize each element
+            if (Array.isArray(nestedContent)) {
+              return nestedContent.map(normalizeContentBlock);
+            }
+            
+            // If it's a string, convert to a paragraph
+            if (typeof nestedContent === 'string') {
               return [normalizeContentBlock({
-                type: 'list',
-                items: nestedContent.list
+                type: 'paragraph',
+                text: nestedContent
               })];
             }
             
-            // Check for other known structures
-            if (nestedContent.type && typeof nestedContent.type === 'string') {
+            // If it's an object, try to convert to appropriate block type
+            if (typeof nestedContent === 'object' && nestedContent !== null) {
               return [normalizeContentBlock(nestedContent)];
             }
             
-            // Handle other potential structures
-            const blocks: HandbookContentBlock[] = [];
-            for (const key in nestedContent) {
-              const value = nestedContent[key];
-              // Skip null values
-              if (value === null) continue;
-              
-              if (Array.isArray(value)) {
-                // If it's an array property, convert to list
-                blocks.push(normalizeContentBlock({
-                  type: key === 'numbers' ? 'numbers' : 'list',
-                  items: value
-                }));
-              } else if (typeof value === 'string') {
-                // String properties become paragraphs
-                blocks.push(normalizeContentBlock({
-                  type: 'paragraph',
-                  text: value
-                }));
-              } else if (typeof value === 'object') {
-                // Recursively process nested objects
-                blocks.push(...processNestedContent(value));
-              }
-            }
-            
-            if (blocks.length > 0) {
-              return blocks;
-            }
-          }
+            // Fallback - convert to JSON and display as code
+            return [normalizeContentBlock({
+              type: 'code',
+              text: JSON.stringify(nestedContent, null, 2)
+            })];
+          };
           
-          // Fallback - convert to JSON and display as code
-          return [normalizeContentBlock({
-            type: 'code',
-            text: JSON.stringify(nestedContent, null, 2)
-          })];
-        };
-        
-        // Handle standard format with "content" array
-        if (json.content && Array.isArray(json.content)) {
-          processedContent = json.content.map(normalizeContentBlock);
-          const { content, ...rest } = json;
-          metaData = rest;
-        } 
-        // Handle format with "sections" array
-        else if (json.sections && Array.isArray(json.sections)) {
-          // Create flat content from sections (to match the Introduction.json format)
-          json.sections.forEach((section: any, sectionIndex: number) => {
-            // Add section title as heading
-            processedContent.push(normalizeContentBlock({
-              type: 'heading',
-              level: 2,
-              text: section.title || 'Untitled Section',
-              id: `section-${sectionIndex}`
-            }));
+          // Handle standard format with "content" array
+          if (json.content && Array.isArray(json.content)) {
+            processedContent = json.content.map(normalizeContentBlock);
+            const { content, ...rest } = json;
+            metaData = rest;
+          } 
+          // Handle format with "sections" array
+          else if (json.sections && Array.isArray(json.sections)) {
+            // Create flat content from sections
+            processedContent = [];
             
-            // Add section content if available
-            if (section.content) {
-              // Handle array of content blocks
-              if (Array.isArray(section.content)) {
-                section.content.forEach((contentItem: any) => {
-                  // Process each content item, which might be a simple block or complex nested structure
-                  processedContent.push(...processNestedContent(contentItem));
+            json.sections.forEach((section: any, sectionIndex: number) => {
+              if (section.title) {
+                processedContent.push({
+                  type: 'heading',
+                  level: 2,
+                  text: section.title,
+                  id: `section-${sectionIndex}`
                 });
-              } 
-              // Handle string content
-              else if (typeof section.content === 'string') {
-                processedContent.push(normalizeContentBlock({
-                  type: 'paragraph',
-                  text: section.content,
-                  id: `paragraph-${sectionIndex}`
-                }));
-              }
-              // Handle object with nested content (common in Hallmarks-of-Cancer.json)
-              else if (typeof section.content === 'object' && section.content !== null) {
-                processedContent.push(...processNestedContent(section.content));
-              }
-            }
-          });
-          
-          const { sections, ...rest } = json;
-          metaData = rest;
-        }
-        // Handle list-based formats (bullets, definitions, numbers)
-        else if (json.bullets || json.numbers || json.definitions) {
-          const listTypes = [
-            { key: 'bullets', type: 'list' },
-            { key: 'numbers', type: 'numbers' },
-            { key: 'definitions', type: 'definitions' }
-          ];
-          
-          listTypes.forEach(({ key, type }) => {
-            if (json[key]) {
-              let items = json[key];
-              if (typeof items === 'string') {
-                items = items.split(/\r?\n/).filter(Boolean);
               }
               
-              if (Array.isArray(items) && items.length > 0) {
-                processedContent.push(normalizeContentBlock({
-                  type,
-                  items,
-                  id: `${key}-${Math.random().toString(36).substring(2, 9)}`
-                }));
-              }
-            }
-          });
-          
-          // Extract metadata
-          const { bullets, numbers, definitions, ...rest } = json;
-          metaData = rest;
-        }
-        // Handle content as direct properties
-        else if (Object.keys(json).length > 0) {
-          // Try to convert top-level properties into content blocks
-          const keys = Object.keys(json).filter(key => 
-            !['title', 'category', 'section', 'metadata', 'version', 'author'].includes(key)
-          );
-          
-          if (keys.length > 0) {
-            // Create a heading for each major property
-            keys.forEach(key => {
-              const value = json[key];
-              
-              // Add a section heading
-              processedContent.push(normalizeContentBlock({
-                type: 'heading',
-                level: 2,
-                text: key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' '),
-                id: `section-${key}`
-              }));
-              
-              // Handle different value types
-              if (typeof value === 'string') {
-                processedContent.push(normalizeContentBlock({
-                  type: 'paragraph',
-                  text: value,
-                  id: `${key}-text`
-                }));
-              } else if (Array.isArray(value)) {
-                // Determine if this should be bullets or numbers
-                const type = key.includes('number') || key.includes('steps') ? 'numbers' : 'list';
-                
-                processedContent.push(normalizeContentBlock({
-                  type,
-                  items: value.map(item => typeof item === 'string' ? item : JSON.stringify(item)),
-                  id: `${key}-list`
-                }));
-              } else if (typeof value === 'object' && value !== null) {
-                // Check if this is a definitions-like object
-                if (Object.keys(value).every(k => typeof value[k] === 'string')) {
-                  const items = Object.entries(value).map(([k, v]) => `${k}: ${v}`);
-                  processedContent.push(normalizeContentBlock({
-                    type: 'definitions',
-                    items,
-                    id: `${key}-definitions`
-                  }));
-                } else {
-                  // Convert object to markdown string representation
-                  const text = Object.entries(value)
-                    .map(([k, v]) => `**${k}**: ${v}`)
-                    .join('\n\n');
-                    
-                  processedContent.push(normalizeContentBlock({
-                    type: 'markdown',
-                    text,
-                    id: `${key}-obj`
-                  }));
-                }
+              if (section.content) {
+                const sectionContent = processNestedContent(section.content);
+                processedContent = [...processedContent, ...sectionContent];
               }
             });
             
-            // Extract potential metadata
-            const metadataProps = ['title', 'category', 'section', 'metadata', 'version', 'author'];
-            metaData = Object.fromEntries(
-              Object.entries(json).filter(([key]) => metadataProps.includes(key))
-            );
+            const { sections, ...rest } = json;
+            metaData = rest;
+          }
+          // Handle list-based formats (bullets, definitions, numbers)
+          else if (json.bullets || json.numbers || json.definitions) {
+            if (json.title) {
+              processedContent.push({
+                type: 'heading',
+                level: 1,
+                text: json.title,
+                id: 'title'
+              });
+            }
+            
+            if (json.bullets && Array.isArray(json.bullets)) {
+              processedContent.push({
+                type: 'list',
+                items: json.bullets,
+                id: 'bullets'
+              });
+            }
+            
+            if (json.numbers && Array.isArray(json.numbers)) {
+              processedContent.push({
+                type: 'list',
+                items: json.numbers,
+                ordered: true,
+                id: 'numbers'
+              });
+            }
+            
+            if (json.definitions && Array.isArray(json.definitions)) {
+              processedContent.push({
+                type: 'definition_list',
+                items: json.definitions,
+                id: 'definitions'
+              });
+            }
+            
+            const { bullets, numbers, definitions, ...rest } = json;
+            metaData = rest;
+          }
+          else if (Object.keys(json).length > 0) {
+            // For simple objects, convert directly to content blocks
+            processedContent = Object.entries(json).map(([key, value]) => {
+              // Skip metadata-like fields
+              if (['title', 'summary', 'author', 'version', 'category', 'section'].includes(key)) {
+                return null;
+              }
+              
+              if (key === 'text' || key === 'description') {
+                return {
+                  type: 'paragraph',
+                  text: value as string,
+                  id: key
+                };
+              }
+              
+              if (Array.isArray(value)) {
+                return {
+                  type: 'list',
+                  items: value.map(v => typeof v === 'string' ? v : JSON.stringify(v)),
+                  id: key
+                };
+              }
+              
+              return {
+                type: 'heading',
+                level: 3,
+                text: key,
+                id: `section-${key}`
+              };
+            }).filter(Boolean) as HandbookContentBlock[];
+            
+            metaData = {
+              title: json.title,
+              summary: json.summary,
+              author: json.author,
+              version: json.version,
+              category: json.category,
+              section: json.section
+            };
+          }
+          
+          // Fallback for completely unexpected formats
+          if (processedContent.length === 0) {
+            processedContent = [
+              {
+                type: 'heading',
+                level: 2,
+                text: 'Content',
+                id: 'content-heading'
+              },
+              {
+                type: 'code',
+                language: 'json',
+                text: JSON.stringify(json, null, 2),
+                id: 'raw-content'
+              }
+            ];
+          }
+          
+          console.log('✅ Content processed:', {
+            contentBlocks: processedContent.length,
+            metadata: metaData
+          });
+          
+          setContent(processedContent);
+          setMetadata(metaData);
+        }      } catch (err) {
+        console.error('❌ Error loading content:', err);
+        
+        // Provide more helpful error messages
+        let errorMessage = err instanceof Error ? err.message : 'Failed to load content';
+        
+        // Special case for common JSON parsing errors 
+        if (errorMessage.includes('Unexpected token')) {
+          errorMessage = `${errorMessage}\n\nThis is likely because the file is not valid JSON or is actually an HTML error page.`;
+          
+          // Add suggestions based on file path
+          if (filePath.includes('radiation_handbook') || filePath.includes('radiation-oncology')) {
+            errorMessage += `\n\nSuggestion: Check if the file exists at the correct path. The radiation handbook uses .md files in the 'sections' directory.`;
           }
         }
         
-        // Fallback for completely unexpected formats
-        if (processedContent.length === 0) {
-          // Convert the entire JSON to a code block as a last resort
-          processedContent = [normalizeContentBlock({
-            type: 'code',
-            text: JSON.stringify(json, null, 2),
-            id: 'raw-json'
-          })];
-        }
-        
-        console.log('✅ Content processed:', {
-          contentBlocks: processedContent.length,
-          metadata: metaData
-        });
-        
-        setContent(processedContent);
-        setMetadata(metaData);
-      } catch (err) {
-        console.error('❌ Error loading content:', err);
-        setError(err instanceof Error ? err.message : 'Failed to load content');
+        setError(errorMessage);
       } finally {
         setIsLoading(false);
       }
@@ -406,7 +571,8 @@ export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i] as HTMLElement;
         if (section.offsetTop <= viewportTop) {
-          setCurrentVisibleBlock(i + 1);
+          const blockIndex = parseInt(section.getAttribute('data-block-index') || '0', 10);
+          setCurrentVisibleBlock(blockIndex);
           break;
         }
       }
@@ -423,18 +589,38 @@ export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
       </div>
     );
   }
-
   if (error) {
+    // Split error message into lines for better formatting
+    const errorLines = error.split('\n');
+    const mainError = errorLines[0];
+    const detailLines = errorLines.slice(1);
+    
     return (
-      <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-700">
+      <div className="p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300">
         <div className="flex items-start">
           <AlertTriangle className="w-5 h-5 mr-2 flex-shrink-0" />
-          <div>
-            <p className="font-medium">Error Loading Content</p>
-            <p className="mt-1">{error}</p>
-            <p className="mt-4 text-sm">
-              File path: <code className="bg-red-100 px-1 py-0.5 rounded">{filePath}</code>
-            </p>
+          <div className="w-full">
+            <h3 className="font-medium text-red-800 dark:text-red-200">Error Loading Content</h3>
+            <p className="mt-1 font-semibold">{mainError}</p>
+            
+            {detailLines.length > 0 && (
+              <div className="mt-3 text-sm">
+                {detailLines.map((line, i) => (
+                  <p key={i} className={i === 0 ? "" : "mt-1"}>
+                    {line}
+                  </p>
+                ))}
+              </div>
+            )}
+            
+            <div className="mt-4 pt-3 border-t border-red-200 dark:border-red-800">
+              <details className="text-sm">
+                <summary className="cursor-pointer font-medium">Technical Details</summary>
+                <div className="mt-2 p-2 bg-red-100 dark:bg-red-900/40 rounded overflow-x-auto">
+                  <code className="whitespace-pre-wrap break-words">{filePath}</code>
+                </div>
+              </details>
+            </div>
           </div>
         </div>
       </div>
@@ -447,11 +633,8 @@ export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
         <div className="flex items-start">
           <AlertTriangle className="w-5 h-5 mr-2 flex-shrink-0" />
           <div>
-            <p className="font-medium">No Content Available</p>
-            <p className="mt-1">The document appears to be empty or incorrectly formatted.</p>
-            <p className="mt-4 text-sm">
-              File path: <code className="bg-yellow-100 px-1 py-0.5 rounded">{filePath}</code>
-            </p>
+            <h3 className="font-medium text-yellow-800">No Content Available</h3>
+            <p className="mt-1">This topic does not have any content yet.</p>
           </div>
         </div>
       </div>

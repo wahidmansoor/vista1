@@ -55,15 +55,43 @@ export function getContentPath(section: HandbookSection, topic?: string | null):
   const basePath = `${HANDBOOK_BASE_DIR}/${folderName}`;
 
   if (!topic) {
+    // For radiation handbook, use overview.md
+    if (section === 'radiation-oncology') {
+      return `${basePath}/sections/overview.md`;
+    }
     return `${basePath}/overview.json`;
   }
 
-  // Clean up the topic path and ensure it has .json extension
+  // Clean up the topic path and ensure it has the correct extension
   const cleanTopic = topic
     .replace(/^\/+|\/+$/g, '') // Remove leading/trailing slashes
     .replace(/\.json$|\.md$/, ''); // Remove any existing extensions
+    // Special handling for radiation handbook - it uses sections/*.md structure
+  if (section === 'radiation-oncology') {
+    // Handle specific cases - map 'overview/introduction' to 'sections/overview.md'
+    if (cleanTopic === 'overview/introduction') {
+      const path = `${basePath}/sections/overview.md`;
+      console.log(`📄 getContentPath mapped special case: ${path} from topic: ${topic}`);
+      return path;
+    }
+    
+    // If the path contains a slash, first check if it's "category/topic" format
+    if (cleanTopic.includes('/')) {
+      const parts = cleanTopic.split('/');
+      // Try the last part first (most likely the actual topic)
+      const topicName = parts[parts.length - 1];
+      const path = `${basePath}/sections/${topicName}.md`;
+      console.log(`📄 getContentPath generated (radiation nested): ${path} from topic: ${topic}`);
+      return path;
+    }
+    
+    // Standard case - direct mapping to sections folder
+    const path = `${basePath}/sections/${cleanTopic}.md`;
+    console.log(`📄 getContentPath generated (radiation): ${path} from topic: ${topic}`);
+    return path;
+  }
   
-  // Log the path being generated
+  // Standard path for other handbooks
   const path = `${basePath}/${cleanTopic}.json`;
   console.log(`📄 getContentPath generated: ${path} from topic: ${topic}`);
   

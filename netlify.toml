@@ -58,7 +58,7 @@
         https://api.openai.com
         https://generativelanguage.googleapis.com
         https://*.supabase.co
-        https://mvoncovista.us.auth0.com
+        https://mwoncovista.us.auth0.com
         https://cdn.auth0.com;
       frame-ancestors 'none';
       manifest-src 'self';
@@ -112,16 +112,16 @@
 [context.production.environment]
   NODE_ENV = "development"
   GENERATE_SOURCEMAP = "false"
-  VITE_AUTH0_REDIRECT_URI = "https://mvoncovista.com/callback"
+  VITE_AUTH0_REDIRECT_URI = "https://mwoncovista.com/callback"
 
 # Deploy previews (PRs)
 [context.deploy-preview.environment]
   NODE_ENV = "production"
   GENERATE_SOURCEMAP = "true"
-  VITE_AUTH0_REDIRECT_URI = "https://deploy-preview-${REVIEW_ID}--mvoncovista.com/callback"
+  VITE_AUTH0_REDIRECT_URI = "https://deploy-preview-${REVIEW_ID}--mwoncovista.com/callback"
 
 # Branch deploys (non-main)
 [context.branch-deploy.environment]
   NODE_ENV = "development"
   GENERATE_SOURCEMAP = "true"
-  VITE_AUTH0_REDIRECT_URI = "https://${BRANCH}--mvoncovista.com/callback"
+  VITE_AUTH0_REDIRECT_URI = "https://${BRANCH}--mwoncovista.com/callback"
