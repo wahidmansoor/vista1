@@ -112,11 +112,13 @@ export interface Protocol {
   created_at?: string;
   updated_at?: string;
   last_reviewed?: string;
-  version?: string;
+ version?: string;
   created_by?: string;
   updated_by?: string;
   name?: string;
-  
+  tags?: string[];
+  supportive_meds?: SupportiveCare;
+
   // JSONB fields
   treatment?: {
     drugs: Drug[];

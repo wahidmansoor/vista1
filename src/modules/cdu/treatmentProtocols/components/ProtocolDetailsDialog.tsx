@@ -2,7 +2,7 @@ import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { AlertTriangle, Package, Shield, BookOpen, Pill } from "lucide-react";
+import { AlertTriangle, Package2, Shield, BookOpen, Pill } from "lucide-react";
 import { Protocol, Test } from "@/types/protocol";
 import TreatmentTab from "../TreatmentTab";
 import TestsSectionTab from "../TestsSectionTab";
@@ -85,7 +85,7 @@ const InfoTab: React.FC<InfoTabProps> = ({
 );
 
 // Add this helper function after the interface declarations
-const getTagColor = (tag: string) => {
+const getTagColor = (tag: string, idx?: number) => {
   const t = tag.toLowerCase();
 
   if (t.includes('her2')) return 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200';
@@ -223,8 +223,8 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                   <div className="bg-violet-50 dark:bg-violet-900 p-4 rounded-md shadow">
                     <h3 className="font-semibold text-violet-900 dark:text-violet-200 text-lg mb-2">Tags</h3>
                     <div className="flex flex-wrap gap-2">
-                      {protocol.tags.map((tag, idx) => (
-                        <span key={idx} className={`px-2 py-1 text-xs rounded-full font-medium ${getTagColor(tag)}`}>
+                      {protocol.tags?.map((tag: string, idx: number) => (
+                        <span key={idx} className={`px-2 py-1 text-xs rounded-full font-medium ${getTagColor(tag, idx)}`}>
                           {tag}
                         </span>
                       ))}
@@ -577,21 +577,22 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {protocol.pre_medications && (
+                {protocol.pre_medications?.required?.length > 0 ? (
                   <div>
                     <h4 className="font-semibold mb-2 text-blue-600">Pre-medications</h4>
                     <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
-                      {typeof protocol.pre_medications === 'string' 
-                        ? protocol.pre_medications 
-                        : Array.isArray(protocol.pre_medications)
-                        ? protocol.pre_medications.length > 0 
-                          ? protocol.pre_medications.map((med: any, idx: number) => (
-                              <div key={idx} className="mb-2 last:mb-0">
-                                {typeof med === 'object' ? med.name || med.drug || JSON.stringify(med) : med}
-                              </div>
-                            ))
-                          : "No pre-medications specified"
-                        : JSON.stringify(protocol.pre_medications, null, 2)}
+                      <ul>
+                        {protocol.pre_medications.required.map((med, idx) => (
+                          <li key={idx}>{med.name} — {med.dose}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <h4 className="font-semibold mb-2 text-blue-600">Pre-medications</h4>
+                    <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
+                      <p>No pre-medications specified.</p>
                     </div>
                   </div>
                 )}

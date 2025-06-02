@@ -1,8 +1,9 @@
 import { supabase } from '@/lib/supabaseClient';
 // Import types from existing files
-import type { Protocol } from './protocolUpdated';
+export type { Protocol } from './protocolUpdated';
 import type { ProtocolFilters } from '@/services/protocols';
 import { cleanProtocol } from './protocolUpdated';
+export type { Test } from './protocolUpdated';
 
 // ✅ Get unique tumour supergroups (top-level filter)
 export const getSupergroups = async (): Promise<string[]> => {
