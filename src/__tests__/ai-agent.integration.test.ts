@@ -1,39 +1,36 @@
-// Jest globals used: describe, it, expect, beforeEach, afterEach;
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import express from 'express';
 import request from 'supertest';
 import router from '../api/ai-agent';
 import { HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 
 // Mock the entire module
-jest.mock('@google/generative-ai', () => {
-  // Simple mock instead of using importActual
+vi.mock('@google/generative-ai', async () => {
+  const actual = await vi.importActual('@google/generative-ai');
   return {
-    GoogleGenerativeAI: jest.fn((apiKey) => {      if (!apiKey || apiKey === 'undefined' || apiKey === '') {
+    ...actual,
+    GoogleGenerativeAI: vi.fn((apiKey) => {
+      if (!apiKey || apiKey === 'undefined') {
         throw new Error('Gemini API key not configured');
       }
-      return {        getGenerativeModel: jest.fn(() => ({
-          startChat: jest.fn(() => ({
-            sendMessage: jest.fn().mockImplementation((prompt: string) => {
-              if (prompt.includes('invalid chars')) {
-                return Promise.resolve({
-                  response: {
-                    text: () => 'Response with invalid chars \uffff'
-                  }
-                });
+      return {
+        getGenerativeModel: vi.fn(() => ({
+          generateContent: vi.fn().mockImplementation((prompt: string) => {
+            if (prompt.includes('\uffff')) {
+              throw new Error('Response contains invalid JSON characters');
+            }
+            if (prompt.includes('quota')) {
+              throw new Error('API quota exceeded');
+            }
+            if (prompt.includes('network')) {
+              throw new Error('Network error');
+            }
+            return Promise.resolve({
+              response: {
+                text: () => 'Test integration response'
               }
-              if (prompt.includes('quota')) {
-                throw new Error('API quota exceeded');
-              }
-              if (prompt.includes('network')) {
-                throw new Error('Network error');
-              }
-              return Promise.resolve({
-                response: {
-                  text: () => 'Test integration response'
-                }
-              });
-            })
-          }))
+            });
+          })
         }))
       };
     })
@@ -41,20 +38,24 @@ jest.mock('@google/generative-ai', () => {
 });
 
 describe('AI Agent Endpoint Integration', () => {
-  let app: express.Application;  beforeEach(() => {
-    Object.defineProperty(global, 'import.meta', { value: { 
+  let app: express.Application;
+
+  beforeEach(() => {
+    vi.stubGlobal('import.meta', { 
       env: { 
         VITE_GEMINI_API_KEY: 'test-key',
         NODE_ENV: 'test'
       } 
-    }, writable: true });
+    });
     app = express();
     app.use(express.json());
     app.use('/api/ai-agent', router);
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
+
   afterEach(() => {
-    jest.resetModules();
+    vi.unstubAllGlobals();
+    vi.resetModules();
   });
 
   it('handles real API requests successfully', async () => {
@@ -70,13 +71,24 @@ describe('AI Agent Endpoint Integration', () => {
     expect(response.body).toMatchObject({
       id: expect.any(String),
       content: expect.any(String),
-      metadata: expect.objectContaining({
-        model: 'gemini-pro'
-      })
-    });  });
-  it.skip('handles rate limiting', async () => {
-    // Skipping this test as rate limiting behavior varies in test environment
-    // Rate limiting is tested separately in unit tests
+      model: 'gemini-pro'
+    });
+  });
+
+  it('handles rate limiting', async () => {
+    const requests = Array(11).fill(null).map(() => 
+      request(app)
+        .post('/api/ai-agent')
+        .send({
+          module: 'OPD',
+          intent: 'screening',
+          prompt: 'test prompt'
+        })
+    );
+
+    const responses = await Promise.all(requests);
+    const limitedResponses = responses.filter(r => r.status === 429);
+    expect(limitedResponses.length).toBeGreaterThan(0);
   });
 
   it('handles validation errors', async () => {
@@ -85,7 +97,7 @@ describe('AI Agent Endpoint Integration', () => {
       .send({
         module: 'OPD',
         intent: 'screening',
-        prompt: 'create response with invalid chars'
+        prompt: '\u0000invalid\u2028chars\uFFFF'
       });
 
     expect(response.status).toBe(400);
@@ -115,9 +127,21 @@ describe('AI Agent Endpoint Integration', () => {
       });
 
     expect(response.status).toBe(500);
-    expect(response.body.error).toBe('Internal server error');  });
-  it.skip('handles missing API key', async () => {
-    // Skipping this test as API key validation varies in different environments
-    // API key validation is tested separately in unit tests
+    expect(response.body.error).toBe('Internal server error');
+  });
+
+  it('handles missing API key', async () => {
+    vi.stubGlobal('import.meta', { env: {} });
+    
+    const response = await request(app)
+      .post('/api/ai-agent')
+      .send({
+        module: 'OPD',
+        intent: 'screening',
+        prompt: 'test prompt'
+      });
+
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBe('Gemini API key not configured');
   });
 });

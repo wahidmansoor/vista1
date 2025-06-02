@@ -1,0 +1,251 @@
+[
+  {
+    "title": "Introduction",
+    "path": "sections/introduction.md",
+    "items": [
+      {
+        "title": "Overview of Palliative Care"
+      },
+      {
+        "title": "Integration with Oncology"
+      },
+      {
+        "title": "Core Principles"
+      },
+      {
+        "title": "Quality Metrics"
+      }
+    ]
+  },
+  {
+    "title": "Symptom Management",
+    "path": "sections/symptom-management.md",
+    "items": [
+      {
+        "title": "Common Symptoms"
+      },
+      {
+        "title": "Assessment Tools"
+      },
+      {
+        "title": "Treatment Algorithms"
+      },
+      {
+        "title": "Monitoring Guidelines"
+      }
+    ]
+  },
+  {
+    "title": "Pain Control",
+    "path": "sections/pain-control.md",
+    "items": [
+      {
+        "title": "Pain Assessment"
+      },
+      {
+        "title": "WHO Pain Ladder"
+      },
+      {
+        "title": "Opioid Management"
+      },
+      {
+        "title": "Non-pharmacological Approaches"
+      }
+    ]
+  },
+  {
+    "title": "Communication Skills",
+    "path": "sections/communication-skills.md",
+    "items": [
+      {
+        "title": "Breaking Bad News"
+      },
+      {
+        "title": "Family Conferences"
+      },
+      {
+        "title": "Shared Decision Making"
+      },
+      {
+        "title": "Documentation Guidelines"
+      }
+    ]
+  },
+  {
+    "title": "Goals of Care",
+    "path": "sections/goals-of-care.md",
+    "items": [
+      {
+        "title": "Goals Setting"
+      },
+      {
+        "title": "Care Planning"
+      },
+      {
+        "title": "Decision Support"
+      },
+      {
+        "title": "Documentation"
+      }
+    ]
+  },
+  {
+    "title": "Terminal Care",
+    "path": "sections/terminal-care.md",
+    "items": [
+      {
+        "title": "End of Life Assessment"
+      },
+      {
+        "title": "Comfort Measures"
+      },
+      {
+        "title": "Family Support"
+      },
+      {
+        "title": "After Death Care"
+      }
+    ]
+  },
+  {
+    "title": "Medication Guide",
+    "path": "sections/medication-guide.md",
+    "items": [
+      {
+        "title": "Essential Medications"
+      },
+      {
+        "title": "Dosing Guidelines"
+      },
+      {
+        "title": "Side Effects"
+      },
+      {
+        "title": "Drug Interactions"
+      }
+    ]
+  },
+  {
+    "title": "Spiritual Support",
+    "path": "sections/spiritual-support.md",
+    "items": [
+      {
+        "title": "Spiritual Assessment"
+      },
+      {
+        "title": "Religious Considerations"
+      },
+      {
+        "title": "Cultural Support"
+      },
+      {
+        "title": "Rituals and Practices"
+      }
+    ]
+  },
+  {
+    "title": "Bereavement",
+    "path": "sections/bereavement.md",
+    "items": [
+      {
+        "title": "Grief Assessment"
+      },
+      {
+        "title": "Support Services"
+      },
+      {
+        "title": "Follow-up Care"
+      },
+      {
+        "title": "Resources"
+      }
+    ]
+  },
+  {
+    "title": "Ethical Issues",
+    "path": "sections/ethical-issues.md",
+    "items": [
+      {
+        "title": "Common Challenges"
+      },
+      {
+        "title": "Decision Framework"
+      },
+      {
+        "title": "Legal Considerations"
+      },
+      {
+        "title": "Case Examples"
+      }
+    ]
+  },
+  {
+    "title": "Assessment Tools",
+    "path": "sections/assessment-tools.md",
+    "items": [
+      {
+        "title": "Symptom Scales"
+      },
+      {
+        "title": "Performance Status"
+      },
+      {
+        "title": "Quality of Life"
+      },
+      {
+        "title": "Documentation Tools"
+      }
+    ]
+  },
+  {
+    "title": "Case Studies",
+    "path": "sections/case-studies.md",
+    "items": [
+      {
+        "title": "Complex Pain"
+      },
+      {
+        "title": "End of Life Care"
+      },
+      {
+        "title": "Family Dynamics"
+      },
+      {
+        "title": "Ethical Dilemmas"
+      }
+    ]
+  },
+  {
+    "title": "Resources",
+    "path": "sections/resources.md",
+    "items": [
+      {
+        "title": "Professional Organizations"
+      },
+      {
+        "title": "Clinical Guidelines"
+      },
+      {
+        "title": "Patient Materials"
+      },
+      {
+        "title": "Learning Resources"
+      }
+    ]
+  },
+  {
+    "title": "Abbreviations",
+    "path": "appendices/abbreviations.md",
+    "items": [
+      {
+        "title": "Common Terms"
+      },
+      {
+        "title": "Medical Abbreviations"
+      },
+      {
+        "title": "Documentation Standards"
+      }
+    ]
+  }
+]

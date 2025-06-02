@@ -122,7 +122,7 @@ export default function EnhancedSymptomView() {
         {/* Tab Navigation */}
         <div className="border-b border-gray-200">
           <nav className="flex -mb-px">
-            {['overview', 'severity', 'timeline'].map((tab: string, index: number) => (
+            {['overview', 'severity', 'timeline'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab as 'overview' | 'severity' | 'timeline')}

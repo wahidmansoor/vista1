@@ -1,14 +1,14 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useAIResponseHistory } from '@/hooks/useAIResponseHistory';
 import { callAIAgent } from '@/lib/api/aiAgentAPI';
-import { ModuleType, PromptIntent, AIResponse } from '@/components/ai-agent/types';
+import { ModuleType, PromptIntent } from '@/types';
 import { toast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Loader2, ThumbsUp, ThumbsDown, CornerDownLeft, RefreshCcw, AlertTriangle } from 'lucide-react';
-import { agentLogger } from '@/components/ai-agent/agentLogger';
+import { agentLogger } from '@/lib/logger';
 import { cn } from '@/lib/utils';
 
 interface AIChatAssistantProps {
@@ -70,7 +70,7 @@ export function AIChatAssistant({ module, intent, initialContext = '', mockMode 
     try {
       const enhancedPrompt = enhancePrompt(feedbackType);
       
-      const response: AIResponse = await callAIAgent({
+      const response = await callAIAgent({
         module,
         intent,
         prompt: enhancedPrompt,

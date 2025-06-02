@@ -15,13 +15,14 @@ const useProtocolFilters = (protocols: Protocol[], filters: FilterCriteria) => {
 
     // Apply search filter
     if (filters.search) {
-      const searchLower = filters.search.toLowerCase();      filtered = filtered.filter(protocol => 
-        (protocol.code || '').toLowerCase().includes(searchLower) ||
-        (protocol.tumour_group || '').toLowerCase().includes(searchLower) ||
-        (protocol.treatment_intent || '').toLowerCase().includes(searchLower) ||
-        (protocol.summary || '').toLowerCase().includes(searchLower) ||
-        (protocol.treatment?.drugs || []).some(drug => 
-          (drug.name || '').toLowerCase().includes(searchLower)
+      const searchLower = filters.search.toLowerCase();
+      filtered = filtered.filter(protocol => 
+        protocol.code.toLowerCase().includes(searchLower) ||
+        protocol.tumour_group.toLowerCase().includes(searchLower) ||
+        protocol.treatment_intent?.toLowerCase().includes(searchLower) ||
+        protocol.summary?.toLowerCase().includes(searchLower) ||
+        protocol.treatment?.drugs.some(drug => 
+          drug.name.toLowerCase().includes(searchLower)
         )
       );
     }
@@ -74,15 +75,18 @@ const useProtocolFilters = (protocols: Protocol[], filters: FilterCriteria) => {
       ).length,
       byIntent: {} as Record<string, number>,
       byTumorGroup: {} as Record<string, number>
-    };    filtered.forEach(p => {
-      const tumorGroup = p.tumour_group || 'Uncategorized';
-      stats.byTumorGroup[tumorGroup] = (stats.byTumorGroup[tumorGroup] || 0) + 1;
+    };
+
+    filtered.forEach(p => {
+      stats.byTumorGroup[p.tumour_group] = (stats.byTumorGroup[p.tumour_group] || 0) + 1;
       if (p.treatment_intent) {
         stats.byIntent[p.treatment_intent] = (stats.byIntent[p.treatment_intent] || 0) + 1;
       }
-    });// Group protocols by tumor group
+    });
+
+    // Group protocols by tumor group
     const groupedProtocols = filtered.reduce((acc, protocol) => {
-      const group = protocol.tumour_group || 'Uncategorized';
+      const group = protocol.tumour_group;
       if (!acc[group]) acc[group] = [];
       acc[group].push(protocol);
       return acc;
@@ -90,7 +94,7 @@ const useProtocolFilters = (protocols: Protocol[], filters: FilterCriteria) => {
 
     // Sort groups and protocols within groups
     Object.values(groupedProtocols).forEach(protocols => {
-      protocols.sort((a, b) => (a.code || '').localeCompare(b.code || ''));
+      protocols.sort((a, b) => a.code.localeCompare(b.code));
     });
 
     return {

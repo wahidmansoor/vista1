@@ -1,14 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ErrorBoundary > matches snapshot for error UI 1`] = `
-<div>
-  <div
-    data-testid="recovered"
-  />
-</div>
-`;
-
-exports[`ErrorBoundary matches snapshot for error UI 1`] = `
 <div>
   <div
     data-testid="recovered"

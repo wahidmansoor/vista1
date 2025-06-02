@@ -4,7 +4,7 @@ import { setupServer } from 'msw/node';
 import { useHandbookData } from '../useHandbookData';
 import { HANDBOOK_BASE_DIR } from '@/utils/pathUtils';
 import { ToastProvider } from '@/components/ui/toast';
-// Jest globals used: describe, it, expect, beforeAll, afterEach, afterAll;
+import { describe, it, expect, beforeAll, afterEach, afterAll } from 'vitest';
 
 // Types for the TOC data
 interface TocItem {

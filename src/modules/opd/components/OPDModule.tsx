@@ -1,8 +1,8 @@
 import React from "react";
 import { Tab } from "@headlessui/react";
 import {
-  User as UserCheck,  // Using User as a fallback for UserCheck
-  Scan as ScanLine,   // Using Scan as a fallback for ScanLine
+  UserCheck,
+  ScanLine,
   ShieldCheck,
   Send,
   CalendarClock,

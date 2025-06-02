@@ -1,4 +1,4 @@
-// Jest globals used: describe, it, expect;
+import { describe, it, expect } from 'vitest';
 import request from 'supertest';
 import app from '../../server/app';
 

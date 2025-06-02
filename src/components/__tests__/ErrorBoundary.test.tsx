@@ -1,11 +1,12 @@
 import React from 'react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { logError } from '@/utils/log';
 import ErrorBoundary from '../ErrorBoundary';
 
 // Mock the log utility
-jest.mock('@/utils/log', () => ({
-  logError: jest.fn()
+vi.mock('@/utils/log', () => ({
+  logError: vi.fn()
 }));
 
 // Test component that throws an error
@@ -28,10 +29,10 @@ const isVisible = (element: HTMLElement) => {
 describe('ErrorBoundary', () => {
   // Clear mocks before each test
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // Reset console.error to prevent test noise
     const originalError = console.error;
-    console.error = jest.fn();
+    console.error = vi.fn();
     return () => {
       console.error = originalError;
     };
@@ -50,7 +51,7 @@ describe('ErrorBoundary', () => {
   it('renders error UI with correct module name when error occurs', () => {
     const moduleName = "Test Module";
     const consoleError = console.error;
-    console.error = jest.fn(); // Temporarily disable console.error
+    console.error = vi.fn(); // Temporarily disable console.error
 
     render(
       <ErrorBoundary moduleName={moduleName}>
@@ -130,10 +131,15 @@ describe('ErrorBoundary', () => {
 
     const recoveredElement = await screen.findByTestId('recovered');
     expectElementToBePresent(recoveredElement);
-  });  it('navigates home when clicking go home button', () => {
-    // Use jest.spyOn instead of trying to override window.location
-    const assignSpy = jest.spyOn(window.location, 'assign').mockImplementation(() => {});
-    
+  });
+
+  it('navigates home when clicking go home button', () => {
+    const mockLocation = { href: '' };
+    Object.defineProperty(window, 'location', {
+      value: mockLocation,
+      writable: true
+    });
+
     render(
       <ErrorBoundary>
         <ThrowError />
@@ -143,10 +149,7 @@ describe('ErrorBoundary', () => {
     const goHomeButton = screen.getByText('Go Home');
     fireEvent.click(goHomeButton);
 
-    expect(assignSpy).toHaveBeenCalledWith('/');
-    
-    // Restore original behavior
-    assignSpy.mockRestore();
+    expect(mockLocation.href).toBe('/');
   });
 
   it('uses custom fallback UI when provided', () => {
@@ -191,7 +194,7 @@ describe('ErrorBoundary', () => {
 
     // Second error should be logged with retryCount 1 or 0 depending on ErrorBoundary logic
     // Accept either 0 or 1 for robustness
-    const logErrorMock = jest.mocked(logError);
+    const logErrorMock = vi.mocked(logError);
     const lastCall = logErrorMock.mock.calls[logErrorMock.mock.calls.length - 1];
     expect(lastCall).toBeDefined();
     expect(lastCall?.[2]?.retryCount === 1 || lastCall?.[2]?.retryCount === 0).toBe(true);

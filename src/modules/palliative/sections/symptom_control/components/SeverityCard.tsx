@@ -122,7 +122,7 @@ const SeverityCard: React.FC<SeverityCardProps> = ({
                 <h4 className="font-medium text-red-800 dark:text-red-200">🚨 Red Flags</h4>
               </div>
               <ul className="list-disc list-inside space-y-1">
-                {symptom.redFlags.map((flag: string, index: number) => (
+                {symptom.redFlags.map((flag, index) => (
                   <li key={index} className="text-sm text-red-700 dark:text-red-300">
                     {flag}
                   </li>
@@ -174,7 +174,7 @@ const SeverityCard: React.FC<SeverityCardProps> = ({
                 </h4>
               </div>
               <ul className="list-disc list-inside space-y-1">
-                {symptom.redFlags.map((flag: string, index: number) => (
+                {symptom.redFlags.map((flag, index) => (
                   <li key={index} className="text-sm text-red-600 dark:text-red-300">
                     {flag}
                   </li>

@@ -6,37 +6,32 @@ import { useNavigate } from 'react-router-dom';
  * Callback page that handles Auth0 authentication redirect
  * Redirects to dashboard after successful authentication
  */
-const CallbackPage: React.FC = () => {
-  const { isLoading, error, isAuthenticated, handleRedirectCallback } = useAuth0();
+const CallbackPage: React.FC = () => {  const { isLoading, error, isAuthenticated, handleRedirectCallback } = useAuth0();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const processCallback = async () => {
-      try {
-        // Wait for Auth0 to process the callback
-        if (!isLoading && !error) {
-          // Get the return URL from session storage or default to dashboard
-          const returnTo = sessionStorage.getItem('auth_return_to') || '/dashboard';
-          sessionStorage.removeItem('auth_return_to');
-          
-          console.log('Auth0 callback successful, redirecting to:', returnTo);
-          
-          // Use replace to avoid adding to history stack
-          navigate(returnTo, { replace: true });
-        }
-      } catch (err) {
-        console.error('Auth0 callback processing error:', err);
+    if (!isLoading) {
+      if (error) {
+        console.error('Authentication error:', error);
+        // Redirect to home page on error
         navigate('/', { replace: true });
+        return;
       }
-    };
 
-    if (!isLoading && isAuthenticated) {
-      processCallback();
-    } else if (!isLoading && error) {
-      console.error('Auth0 callback error:', error);
-      navigate('/', { replace: true });
+      if (isAuthenticated) {
+        // Handle the callback to get the appState
+        handleRedirectCallback()
+          .then((result) => {
+            const returnTo = result?.appState?.returnTo || '/dashboard';
+            navigate(returnTo, { replace: true });
+          })
+          .catch((err) => {
+            console.error('Redirect callback error:', err);
+            navigate('/dashboard', { replace: true });
+          });
+      }
     }
-  }, [isLoading, isAuthenticated, error, navigate]);
+  }, [isLoading, error, isAuthenticated, navigate, handleRedirectCallback]);
 
   if (error) {
     return (

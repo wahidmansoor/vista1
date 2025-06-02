@@ -6,17 +6,16 @@
 
 /**
  * Base handbook directory within the public folder.
- * Note: In Vite, public files are served from root, not from /public/
  */
-export const HANDBOOK_BASE_DIR = '';
+export const HANDBOOK_BASE_DIR = '/public';
 
 /**
  * Maps section IDs to their corresponding handbook types
  */
 export const HANDBOOK_TYPES = {
   'medical-oncology': 'medical_oncology_handbook',
-  'radiation-oncology': 'radiation_oncology_handbook',
-  'palliative-care': 'palliative_care_handbook'
+  'radiation-oncology': 'radiation_handbook',
+  'palliative-care': 'palliative_handbook'
 } as const;
 
 export type HandbookSection = keyof typeof HANDBOOK_TYPES;
@@ -41,7 +40,7 @@ export function sectionToFolderName(section: HandbookSection): string {
  */
 export function getTocPath(section: HandbookSection): string {
   const folderName = sectionToFolderName(section);
-  return `/${folderName}/toc.json`;
+  return `${HANDBOOK_BASE_DIR}/${folderName}/toc.json`;
 }
 
 /**
@@ -53,7 +52,7 @@ export function getTocPath(section: HandbookSection): string {
  */
 export function getContentPath(section: HandbookSection, topic?: string | null): string {
   const folderName = sectionToFolderName(section);
-  const basePath = `/${folderName}`;
+  const basePath = `${HANDBOOK_BASE_DIR}/${folderName}`;
 
   if (!topic) {
     return `${basePath}/overview.json`;

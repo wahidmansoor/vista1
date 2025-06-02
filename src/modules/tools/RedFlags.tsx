@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AlertTriangle, Thermometer, ShieldAlert, Activity, HeartPulse, ChevronDown, ChevronUp } from 'lucide-react';
 
-export interface RedFlagItem {
+interface RedFlagItem {
   id: string;
   title: string;
   description: string;
@@ -73,7 +73,7 @@ const RedFlagsPage: React.FC = () => {
       <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">🚨 Red Flags & Emergencies</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {redFlags.map((flag: any, index: number) => (
+        {redFlags.map((flag) => (
           <div key={flag.id} className="flex flex-col items-center">
             <div
               onClick={() => toggleExpand(flag.id)}
@@ -103,4 +103,3 @@ const RedFlagsPage: React.FC = () => {
 };
 
 export default RedFlagsPage;
-export { redFlags };

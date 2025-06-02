@@ -30,9 +30,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
         </div>
       </div>
     );
-  }
-
-  if (!isAuthenticated) {
+  }  if (!isAuthenticated) {
     return fallback || (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-teal-500 via-indigo-600 to-purple-600">
         <div className="text-center bg-white/10 backdrop-blur-lg rounded-lg p-8 max-w-md">

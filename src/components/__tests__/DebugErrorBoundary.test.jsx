@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// Jest globals used: describe, it, expect, vi;
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 // Simple ErrorBoundary for testing

@@ -25,22 +25,9 @@ export const TagList = ({ items }: { items: string[] }) => (
   </div>
 );
 
-export const RichTextBlock = ({ content }: { content: string | { duration: string; total_cycles?: number; notes?: string[]; } }) => {
-  const renderContent = () => {
-    if (typeof content === 'string') {
-      return content;
-    }
-    return [
-      content.duration,
-      content.total_cycles ? `Total cycles: ${content.total_cycles}` : null,
-      ...(content.notes || [])
-    ].filter(Boolean).join('\n');
-  };
-
-  return (
-    <div className="whitespace-pre-wrap">{renderContent()}</div>
-  );
-};
+export const RichTextBlock = ({ content }: { content: string }) => (
+  <div className="prose dark:prose-invert max-w-none">{content}</div>
+);
 
 export const DrugCard = ({ medication, onClick }: { medication: Medication; onClick?: () => void }) => (
   <Card className={`p-4 hover:shadow-lg transition-shadow ${onClick ? 'cursor-pointer' : ''}`} onClick={onClick}>

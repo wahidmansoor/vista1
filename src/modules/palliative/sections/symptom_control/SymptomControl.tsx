@@ -84,7 +84,7 @@ const SymptomControl: React.FC = () => {
       <Tabs defaultValue={symptomNames[0] || "none"} className="w-full">
         <TabsList aria-label="Symptom groups">
           {symptomNames.length > 0 ? (
-            symptomNames.map((name: string, index: number) => (
+            symptomNames.map((name) => (
               <TabsTrigger key={name} value={name}>
                 {name}
               </TabsTrigger>

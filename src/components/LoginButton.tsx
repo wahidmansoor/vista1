@@ -13,17 +13,13 @@ const LoginButton: React.FC<LoginButtonProps> = ({
   className = "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors",
   children = "Log In"
 }) => {
-  const { loginWithRedirect, isLoading } = useAuth0();  const handleLogin = () => {
-    const returnTo = window.location.pathname === '/callback' 
-      ? '/dashboard' 
-      : window.location.pathname + window.location.search;
-    
-    // Store return URL in session storage for callback page
-    sessionStorage.setItem('auth_return_to', returnTo);
-    
+  const { loginWithRedirect, isLoading } = useAuth0();
+  const handleLogin = () => {
     loginWithRedirect({
       appState: {
-        returnTo,
+        returnTo: window.location.pathname === '/callback' 
+          ? '/dashboard' 
+          : window.location.pathname + window.location.search,
       },
     });
   };

@@ -56,7 +56,8 @@ export const routes = [
       </ErrorBoundary>
     ),
     errorElement: <ErrorBoundary moduleName="Tools" />
-  },  {
+  },
+  {
     path: '/handbook',
     element: (
       <ErrorBoundary moduleName="Oncology Handbook">
@@ -64,15 +65,6 @@ export const routes = [
       </ErrorBoundary>
     ),
     errorElement: <ErrorBoundary moduleName="Oncology Handbook" />
-  },
-  {
-    path: '/handbook/search',
-    element: (
-      <ErrorBoundary moduleName="Handbook Search">
-        <Handbook key="handbook-search" />
-      </ErrorBoundary>
-    ),
-    errorElement: <ErrorBoundary moduleName="Handbook Search" />
   },
   {
     path: '/handbook/medical',

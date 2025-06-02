@@ -338,7 +338,7 @@ export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
               } else if (typeof value === 'object' && value !== null) {
                 // Check if this is a definitions-like object
                 if (Object.keys(value).every(k => typeof value[k] === 'string')) {
-                  const items = Object.entries(value).map(([k, v]: [string, unknown]) => `${k}: ${typeof v === 'string' ? v : String(v)}`);
+                  const items = Object.entries(value).map(([k, v]) => `${k}: ${v}`);
                   processedContent.push(normalizeContentBlock({
                     type: 'definitions',
                     items,
@@ -347,7 +347,7 @@ export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
                 } else {
                   // Convert object to markdown string representation
                   const text = Object.entries(value)
-                    .map(([k, v]: [string, any]) => `**${k}**: ${String(v)}`)
+                    .map(([k, v]) => `**${k}**: ${v}`)
                     .join('\n\n');
                     
                   processedContent.push(normalizeContentBlock({
@@ -362,7 +362,7 @@ export function JsonHandbookViewer({ filePath }: JsonHandbookViewerProps) {
             // Extract potential metadata
             const metadataProps = ['title', 'category', 'section', 'metadata', 'version', 'author'];
             metaData = Object.fromEntries(
-              Object.entries(json).filter(([key]: [string, any]) => metadataProps.includes(key))
+              Object.entries(json).filter(([key]) => metadataProps.includes(key))
             );
           }
         }

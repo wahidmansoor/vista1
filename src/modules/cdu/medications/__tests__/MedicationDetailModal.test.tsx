@@ -1,15 +1,15 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { expect, describe, it, beforeEach } from '@jest/globals';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import MedicationDetailModal from '../MedicationDetailModal';
 import { createMockMedication } from './MedicationTestDataFactory';
 
 describe('MedicationDetailModal', () => {
   const mockMedication = createMockMedication();
-  const mockOnClose = jest.fn();
+  const mockOnClose = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders medication details correctly', () => {

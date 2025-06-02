@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 // Import from your existing RedFlags data structure or create a new one
-import { redFlags, RedFlagItem } from '@/modules/tools/RedFlags';
+import { redFlags } from '@/modules/tools/RedFlags';
 
 // Define color mapping based on importance or category
 const severityColorMapping: ColorMapping = {
@@ -55,8 +55,6 @@ const severityColorMapping: ColorMapping = {
   }
 };
 
-const redFlagsArray: RedFlagItem[] = redFlags;
-
 const OncologyEmergencyCards: React.FC = () => {
   const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
   const [searchTerm, setSearchTerm] = useState('');
@@ -69,7 +67,7 @@ const OncologyEmergencyCards: React.FC = () => {
     }));
   };
   
-  const filterItems = (items: RedFlagItem[]) => {
+  const filterItems = (items) => {
     if (!searchTerm) return items;
     
     return items.filter(item => 
@@ -79,10 +77,10 @@ const OncologyEmergencyCards: React.FC = () => {
     );
   };
   
-  const filteredItems = filterItems(redFlagsArray);
+  const filteredItems = filterItems(redFlags);
   
   // Get proper icon component
-  const getIconComponent = (item: RedFlagItem) => {
+  const getIconComponent = (item) => {
     const iconMap = {
       'Thermometer': Thermometer,
       'ShieldAlert': ShieldAlert,
@@ -92,8 +90,8 @@ const OncologyEmergencyCards: React.FC = () => {
     };
     
     // If the item.icon is a component name that exists in our map
-    if (typeof item.icon === 'string' && iconMap[item.icon as keyof typeof iconMap]) {
-      const IconComponent = iconMap[item.icon as keyof typeof iconMap];
+    if (typeof item.icon === 'string' && iconMap[item.icon]) {
+      const IconComponent = iconMap[item.icon];
       return <IconComponent className="h-5 w-5" />;
     }
     
@@ -120,7 +118,7 @@ const OncologyEmergencyCards: React.FC = () => {
             />
           </div>
           
-          <Tabs defaultValue="grid" onValueChange={(value: string) => setViewMode(value as 'grid' | 'list')}>
+          <Tabs defaultValue="grid" onValueChange={(value) => setViewMode(value as 'grid' | 'list')}>
             <TabsList className="grid w-[100px] grid-cols-2">
               <TabsTrigger value="grid" className="p-2">
                 <div className="grid grid-cols-2 gap-1 w-5 h-5">
@@ -150,7 +148,17 @@ const OncologyEmergencyCards: React.FC = () => {
           <DataCard
             key={item.id}
             data={item}
-            title={() => item.title}
+            title={() => (
+              <div className="flex items-center gap-2">
+                <span className={cn(
+                  "p-1.5 rounded-md flex-shrink-0",
+                  item.color.replace('bg-', 'bg-opacity-20 bg-')
+                )}>
+                  {getIconComponent(item)}
+                </span>
+                <span>{item.title}</span>
+              </div>
+            )}
             description={item.description}
             colorMapping={severityColorMapping}
             fields={[

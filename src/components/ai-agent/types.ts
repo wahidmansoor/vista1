@@ -22,8 +22,6 @@ export interface AIResponse {
   error?: string;
   /** Loading state of the response */
   loading?: boolean;
-  /** The type or role of the message (e.g., assistant, user, system, error) */
-  type?: 'assistant' | 'user' | 'system' | 'error' | 'function';
 }
 
 /**
@@ -32,18 +30,9 @@ export interface AIResponse {
 export type ModuleType = 'OPD' | 'CDU' | 'Inpatient' | 'Palliative' | 'RadOnc';
 
 /**
- * Represents different types of AI agent prompts/intents
+ * Represents different types of AI agent prompts
  */
-export type PromptIntent = 
-  | 'screening'
-  | 'general'
-  | 'dose-check'
-  | 'pathway'
-  | 'rescue-agent'
-  | 'triage'
-  | 'follow-up'
-  | 'evaluation'
-  | 'toxicity';
+export type PromptIntent = 'screening' | 'triage' | 'follow-up' | 'evaluation' | 'toxicity';
 
 /**
  * Represents the context provided to the AI agent

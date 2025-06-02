@@ -4,7 +4,6 @@ import type { Medication } from '../../../types/medications';
 import { Button } from '../../../components/ui/button';
 import { DrugCard, Section, TagList, RichTextBlock } from './medicationComponents';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
-import { formatMonitoring, formatSideEffects, formatInteractions } from '../../../utils/medicationDataUtils';
 
 interface DetailViewProps {
   medication: Medication;
@@ -12,11 +11,6 @@ interface DetailViewProps {
 }
 
 export const MedicationDetailView: React.FC<DetailViewProps> = ({ medication, onBack }) => {
-  // Format complex data structures
-  const sideEffectsData = formatSideEffects(medication.side_effects);
-  const interactionsData = formatInteractions(medication.interactions);
-  const monitoringData = formatMonitoring(medication.monitoring);
-
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -81,9 +75,25 @@ export const MedicationDetailView: React.FC<DetailViewProps> = ({ medication, on
         <TabsContent value="monitoring">
           <div className="space-y-6">
             {medication.monitoring && (
-              <Section title="Monitoring Parameters">
-                <TagList items={monitoringData} />
-              </Section>
+              <>
+                {medication.monitoring.labs && (
+                  <Section title="Laboratory Tests">
+                    <TagList items={medication.monitoring.labs} />
+                  </Section>
+                )}
+
+                {medication.monitoring.frequency && (
+                  <Section title="Monitoring Frequency">
+                    <RichTextBlock content={medication.monitoring.frequency} />
+                  </Section>
+                )}
+
+                {medication.monitoring.precautions && (
+                  <Section title="Monitoring Precautions">
+                    <TagList items={medication.monitoring.precautions} />
+                  </Section>
+                )}
+              </>
             )}
 
             {medication.routine_monitoring && (
@@ -109,23 +119,22 @@ export const MedicationDetailView: React.FC<DetailViewProps> = ({ medication, on
             )}
 
             <Section title="Side Effects">
-              <TagList items={sideEffectsData} />
+              <TagList items={medication.side_effects} />
             </Section>
 
+            {medication.contraindications && (
+              <Section title="Contraindications">
+                <TagList items={medication.contraindications} />
+              </Section>
+            )}
+
             <Section title="Drug Interactions">
-              <TagList items={interactionsData} />
+              <TagList items={medication.interactions} />
             </Section>
 
             {medication.special_considerations && (
               <Section title="Special Considerations">
-                <p className="text-sm text-gray-700 dark:text-gray-300">
-                  {typeof medication.special_considerations === 'string' 
-                    ? medication.special_considerations
-                    : Object.entries(medication.special_considerations)
-                        .filter(([_, value]) => value)
-                        .map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`)
-                        .join('\n')}
-                </p>
+                <RichTextBlock content={medication.special_considerations} />
               </Section>
             )}
           </div>

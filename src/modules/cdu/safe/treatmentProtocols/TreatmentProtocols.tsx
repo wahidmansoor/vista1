@@ -27,8 +27,7 @@ import {
   ScrollText
 } from 'lucide-react';
 import { getSupergroups, getProtocols } from '@/services/protocols';
-import type { Protocol, Drug, ProtocolNote } from '@/types/protocol';
-import UnifiedProtocolCard from './UnifiedProtocolCard';
+import type { Protocol, Drug } from '../../../../types/protocol';
 
 type TabType = 
   | 'overview' 
@@ -249,32 +248,37 @@ const DataTable: React.FC<{
 
 const TabContent: React.FC<{
   protocol: Protocol;
-  activeTab: string;
-}> = ({ protocol, activeTab }) => {  const renderList = (items: any[] | undefined, type?: string) => {
-    if (!items || items.length === 0) {
-      return <p className="text-gray-500">Not specified.</p>;
+  activeTab: TabType;
+}> = ({ protocol, activeTab }) => {
+  const renderList = (items: any[] | undefined | null) => {
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return <p className="text-gray-600">No information available</p>;
     }
 
     return (
-      <ul className="space-y-2 list-disc pl-5">
-        {items.map((item: any, index: number) => (
-          <li key={index} className="text-gray-700 dark:text-gray-300">
+      <ul className="list-disc list-inside space-y-2">
+        {items.map((item, index) => (
+          <li key={index} className="text-gray-700">
             {typeof item === 'string' ? (
               item
             ) : (
               <div>
-                {/* Eligibility Criteria (object with criterion) */}
-                {item.criterion && <span>{item.criterion}</span>}
-
-                {/* Tests (object with name, timing, etc.) */}
-                {item.test && <span><strong>{item.test}</strong></span>}
-                {item.name && !item.test && !item.indication && !item.criteria && !item.criterion && ( // Avoid conflict with other object types
+                {/* Tests */}
+                {item.test && (
+                  <span>
+                    <strong>{item.test}</strong>
+                    {item.purpose && <span> — {item.purpose}</span>}
+                    {item.frequency && <span> ({item.frequency})</span>}
+                  </span>
+                )}
+                
+                {/* Supportive Meds */}
+                {item.name && (
                   <span>
                     <strong>{item.name}</strong>
-                    {item.timing && <span> ({item.timing})</span>}
-                    {item.parameters && Array.isArray(item.parameters) && item.parameters.length > 0 && (
-                      <span className="text-xs text-gray-500"> - Params: {item.parameters.join(', ')}</span>
-                    )}
+                    {item.dose && <span> — {item.dose}</span>}
+                    {item.timing && <span> at {item.timing}</span>}
+                    {item.route && <span> via {item.route}</span>}
                   </span>
                 )}
 
@@ -342,11 +346,11 @@ const TabContent: React.FC<{
     tests: (
       <div className="space-y-6">
         <Accordion title="Baseline Tests" defaultOpen={true}>
-          {protocol.tests && !Array.isArray(protocol.tests) && protocol.tests.baseline ? renderList(protocol.tests.baseline) : Array.isArray(protocol.tests) ? renderList(protocol.tests) : <p className="text-gray-500">Not specified.</p>}
+          {renderList(protocol.tests?.baseline)}
         </Accordion>
         
         <Accordion title="Monitoring Tests">
-          {protocol.tests && !Array.isArray(protocol.tests) && protocol.tests.monitoring ? renderList(protocol.tests.monitoring) : <p className="text-gray-500">Not specified.</p>}
+          {renderList(protocol.tests?.monitoring)}
         </Accordion>
       </div>
     ),
@@ -382,7 +386,7 @@ const TabContent: React.FC<{
                   <span className="font-medium">Frequency:</span> {protocol.toxicity_monitoring.frequency}
                 </p>
               )}
-              {protocol.toxicity_monitoring.thresholds && Object.keys(protocol.toxicity_monitoring.thresholds).length > 0 && (
+              {Object.keys(protocol.toxicity_monitoring.thresholds).length > 0 && (
                 <div>
                   <h5 className="font-medium text-orange-800 mb-2">Threshold Values</h5>
                   <pre className="whitespace-pre-wrap text-sm text-orange-700">
@@ -583,12 +587,12 @@ const TabContent: React.FC<{
           <AlertBanner
             type="warning"
             title="Precautions"
-            message={protocol.precautions.map((p: ProtocolNote) => p.note).join(', ')}
+            message={protocol.precautions.join(', ')}
           />
         )}
         
         <Accordion title="Precautions" defaultOpen={true}>
-          {renderList(protocol.precautions ? protocol.precautions.map((p: ProtocolNote) => p.note) : [])}
+          {renderList(protocol.precautions)}
         </Accordion>
         
         <Accordion title="References">
@@ -657,6 +661,7 @@ const TabContent: React.FC<{
       </div>
     )
   };
+
   return (
     <motion.div
       key={activeTab}
@@ -666,7 +671,7 @@ const TabContent: React.FC<{
       transition={{ duration: 0.2 }}
       className="p-6"
     >
-      {content[activeTab as TabType] || <div>Tab content not available</div>}
+      {content[activeTab]}
     </motion.div>
   );
 };
@@ -711,8 +716,6 @@ const TreatmentProtocols: React.FC = () => {
   const [supergroups, setSupergroups] = useState<string[]>([]);
   const [selectedSupergroup, setSelectedSupergroup] = useState<string | null>(null);
   const [protocols, setProtocols] = useState<Protocol[]>([]);
-  const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null);
-  const [activeTab, setActiveTab] = useState<string>('treatment');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

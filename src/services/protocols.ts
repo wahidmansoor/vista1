@@ -33,12 +33,6 @@ interface DatabaseProtocol {
   rescue_agents?: any;
   created_at?: string;
   updated_at?: string;
-  summary?: string;
-  version?: string;
-  last_reviewed?: string;
-  cycle_info?: any;
-  clinical_scenario?: string;
-  status?: string;
 }
 
 // Type guard to check if an object matches DatabaseProtocol shape
@@ -76,54 +70,15 @@ const toProtocol = (dbProtocol: DatabaseProtocol): Protocol => {
 
   // Add debug logging
   console.log('Raw treatment data:', dbProtocol.treatment);
+
   const protocol: Protocol = {
     id: dbProtocol.id,
     code: dbProtocol.code,
     tumour_group: dbProtocol.tumour_group,
     treatment_intent: dbProtocol.treatment_intent || '',
-    summary: dbProtocol.summary || '',
     eligibility: safeJSONParse(dbProtocol.eligibility),
     treatment: safeJSONParse(dbProtocol.treatment),
-    monitoring: (() => {
-      // Parse tests and monitoring data for migration
-      const testsData = safeJSONParse(dbProtocol.tests);
-      const monitoringData = safeJSONParse(dbProtocol.monitoring);
-      
-      // Migrate and merge tests into monitoring
-      const migratedMonitoring: any = {
-        baseline: [],
-        ongoing: []
-      };
-      
-      // Merge tests.baseline + monitoring.baseline → monitoring.baseline
-      if (testsData?.baseline) {
-        migratedMonitoring.baseline = Array.isArray(testsData.baseline) ? testsData.baseline : [testsData.baseline];
-      }
-      if (monitoringData?.baseline) {
-        const existingBaseline = Array.isArray(monitoringData.baseline) ? monitoringData.baseline : [monitoringData.baseline];
-        migratedMonitoring.baseline = [...migratedMonitoring.baseline, ...existingBaseline];
-      }
-      
-      // Merge tests.monitoring + monitoring.ongoing → monitoring.ongoing
-      if (testsData?.monitoring) {
-        migratedMonitoring.ongoing = Array.isArray(testsData.monitoring) ? testsData.monitoring : [testsData.monitoring];
-      }
-      if (monitoringData?.ongoing) {
-        const existingOngoing = Array.isArray(monitoringData.ongoing) ? monitoringData.ongoing : [monitoringData.ongoing];
-        migratedMonitoring.ongoing = [...migratedMonitoring.ongoing, ...existingOngoing];
-      }
-      
-      // Preserve any other monitoring properties
-      if (monitoringData && typeof monitoringData === 'object') {
-        Object.keys(monitoringData).forEach(key => {
-          if (key !== 'baseline' && key !== 'ongoing') {
-            migratedMonitoring[key] = monitoringData[key];
-          }
-        });
-      }
-      
-      return migratedMonitoring;
-    })(),
+    tests: safeJSONParse(dbProtocol.tests),
     dose_modifications: safeJSONParse(dbProtocol.dose_modifications),
     precautions: safeJSONParse(dbProtocol.precautions),
     reference_list: safeJSONParse(dbProtocol.reference_list),
@@ -225,20 +180,7 @@ export const getProtocolsByTumorGroup = async (tumorGroup: string): Promise<Prot
   data.forEach((item, index) => {
     if (isDatabaseProtocol(item)) {
       try {
-        const protocol = toProtocol(item);
-        
-        // Add overview object with fields from the top-level protocol
-        protocol.overview = {
-          treatment_intent: protocol.treatment_intent,
-          version: protocol.version,
-          last_reviewed: protocol.last_reviewed,
-          summary: protocol.summary,
-          cycle_info: protocol.cycle_info,
-          clinical_scenario: protocol.clinical_scenario,
-          status: protocol.status
-        };
-        
-        validProtocols.push(protocol);
+        validProtocols.push(toProtocol(item));
       } catch (err) {
         console.warn(`Failed to process protocol at index ${index}:`, err);
       }
@@ -288,24 +230,14 @@ export const getProtocols = async (filters: ProtocolFilters): Promise<Protocol[]
           }
         });
       });
-    }    // Validate and transform the data
+    }
+
+    // Validate and transform the data
     const validProtocols: Protocol[] = [];
     data.forEach((item, index) => {
       if (isDatabaseProtocol(item)) {
         try {
           const protocol = toProtocol(item);
-          
-          // Add overview object with fields from the top-level protocol
-          protocol.overview = {
-            treatment_intent: protocol.treatment_intent,
-            version: protocol.version,
-            last_reviewed: protocol.last_reviewed,
-            summary: protocol.summary,
-            cycle_info: protocol.cycle_info,
-            clinical_scenario: protocol.clinical_scenario,
-            status: protocol.status
-          };
-          
           validProtocols.push(protocol);
         } catch (err) {
           console.warn(`Failed to process protocol at index ${index}:`, err);
@@ -378,25 +310,14 @@ export const getProtocolById = async (id: string): Promise<Protocol | null> => {
     if (!isDatabaseProtocol(data)) {
       console.warn('Invalid protocol data structure:', data);
       return null;
-    }    try {
+    }
+
+    try {
       const protocol = toProtocol(data);
-      
-      // Add overview object with fields from the top-level protocol
-      protocol.overview = {
-        treatment_intent: protocol.treatment_intent,
-        version: protocol.version,
-        last_reviewed: protocol.last_reviewed,
-        summary: protocol.summary,
-        cycle_info: protocol.cycle_info,
-        clinical_scenario: protocol.clinical_scenario,
-        status: protocol.status
-      };
-      
       console.log('Transformed protocol:', {
         id: protocol.id,
         code: protocol.code,
-        treatment: protocol.treatment,
-        overview: protocol.overview
+        treatment: protocol.treatment
       });
       return protocol;
     } catch (err) {

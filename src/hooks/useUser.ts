@@ -63,10 +63,11 @@ export const useUser = (useContext = false) => {
       },
     });
   };
+
   const logoutUser = () => {
     logout({
       logoutParams: {
-        returnTo: window.location.origin,
+        returnTo: 'https://mwoncovista.netlify.app',
       },
     });
   };
