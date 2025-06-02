@@ -1,37 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 
-/**
- * Callback page that handles Auth0 authentication redirect
- * Redirects to dashboard after successful authentication
- */
-const CallbackPage: React.FC = () => {  const { isLoading, error, isAuthenticated, handleRedirectCallback } = useAuth0();
+const CallbackPage: React.FC = () => {
+  const { handleRedirectCallback, isAuthenticated, error } = useAuth0();
+  const [processing, setProcessing] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoading) {
-      if (error) {
-        console.error('Authentication error:', error);
-        // Redirect to home page on error
+    const handleAuthRedirect = async () => {
+      try {
+        const query = window.location.search;
+        if (query.includes('code=') && query.includes('state=')) {
+          const result = await handleRedirectCallback();
+          const returnTo = result?.appState?.returnTo || '/dashboard';
+          navigate(returnTo, { replace: true });
+        } else if (isAuthenticated) {
+          navigate('/dashboard', { replace: true });
+        } else {
+          navigate('/', { replace: true });
+        }
+      } catch (err) {
+        console.error('Auth0 callback error:', err);
         navigate('/', { replace: true });
-        return;
+      } finally {
+        setProcessing(false);
       }
+    };
 
-      if (isAuthenticated) {
-        // Handle the callback to get the appState
-        handleRedirectCallback()
-          .then((result) => {
-            const returnTo = result?.appState?.returnTo || '/dashboard';
-            navigate(returnTo, { replace: true });
-          })
-          .catch((err) => {
-            console.error('Redirect callback error:', err);
-            navigate('/dashboard', { replace: true });
-          });
-      }
-    }
-  }, [isLoading, error, isAuthenticated, navigate, handleRedirectCallback]);
+    handleAuthRedirect();
+  }, [handleRedirectCallback, navigate, isAuthenticated]);
+
+  if (processing) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-500 via-indigo-600 to-purple-600">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white mb-4 mx-auto"></div>
+          <div className="text-white text-xl font-semibold">🧬 OncoVista</div>
+          <div className="text-white/80 text-sm mt-2">Completing authentication...</div>
+        </div>
+      </div>
+    );
+  }
 
   if (error) {
     return (
@@ -50,19 +60,8 @@ const CallbackPage: React.FC = () => {  const { isLoading, error, isAuthenticate
     );
   }
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-500 via-indigo-600 to-purple-600">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white mb-4 mx-auto"></div>
-        <div className="text-white text-xl font-semibold">
-          🧬 OncoVista
-        </div>
-        <div className="text-white/80 text-sm mt-2">
-          Completing authentication...
-        </div>
-      </div>
-    </div>
-  );
+  return null;
 };
 
 export default CallbackPage;
+
