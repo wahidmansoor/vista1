@@ -23,7 +23,6 @@ export const Auth0Provider: React.FC<Auth0ProviderProps> = ({ children }) => {
   const callbackUrl = import.meta.env.VITE_AUTH0_CALLBACK_URL || window.location.origin + '/callback';
   const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
 
-  // Check if required environment variables are set
   if (!domain || !clientId) {
     console.error('Auth0 configuration missing. Please set VITE_AUTH0_DOMAIN and VITE_AUTH0_CLIENT_ID environment variables.');
     return <>{children}</>;
@@ -40,8 +39,7 @@ export const Auth0Provider: React.FC<Auth0ProviderProps> = ({ children }) => {
       }}
       useRefreshTokens={true}
       useRefreshTokensFallback={true}
-      cacheLocation="cookie"
-      useCookiesForTransactions={true}
+      cacheLocation="localstorage" // ✅ FIXED: no more 'cookie'
       skipRedirectCallback={window.location.pathname === '/callback'}
       onRedirectCallback={(appState) => {
         window.history.replaceState(
