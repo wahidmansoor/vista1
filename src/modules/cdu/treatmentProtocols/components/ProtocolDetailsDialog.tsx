@@ -443,8 +443,7 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                   Safety Information
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {protocol.precautions && (
+              <CardContent className="space-y-4">                {protocol.precautions && (
                   <div>
                     <h4 className="font-semibold text-amber-600 mb-2">Precautions</h4>
                     <div className="bg-amber-50 p-3 rounded border-l-4 border-amber-400">
@@ -456,18 +455,69 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                               {typeof item === 'object' ? item.note || JSON.stringify(item) : item}
                             </div>
                           ))
-                        : JSON.stringify(protocol.precautions, null, 2)}
+                        : typeof protocol.precautions === 'object' && !Array.isArray(protocol.precautions) ? (
+                          Object.entries(protocol.precautions).map(([key, items]: [string, any], idx) => (
+                            <div key={idx} className="mb-3">
+                              <h5 className="font-semibold capitalize text-sm text-amber-700 mb-1">
+                                {key.replace(/_/g, ' ')}
+                              </h5>
+                              <ul className="list-disc list-inside text-sm text-amber-900">
+                                {Array.isArray(items) ? items.map((item: string, i: number) => (
+                                  <li key={i}>{item}</li>
+                                )) : (
+                                  <li>{String(items)}</li>
+                                )}
+                              </ul>
+                            </div>
+                          ))
+                        ) : (
+                          <p>No precautions specified.</p>
+                        )}
                     </div>
                   </div>
                 )}
-                
-                {protocol.contraindications && (
+                  {protocol.contraindications && (
                   <div>
                     <h4 className="font-semibold text-red-600 mb-2">Contraindications</h4>
                     <div className="bg-red-50 p-3 rounded border-l-4 border-red-400">
                       {typeof protocol.contraindications === 'string' 
                         ? protocol.contraindications 
-                        : JSON.stringify(protocol.contraindications, null, 2)}
+                        : typeof protocol.contraindications === 'object' && !Array.isArray(protocol.contraindications) ? (
+                          <>
+                            {protocol.contraindications.absolute?.length > 0 && (
+                              <div className="mb-3">
+                                <h5 className="font-semibold text-red-600 text-sm mb-1">Absolute</h5>
+                                <ul className="list-disc list-inside text-sm text-red-900">
+                                  {protocol.contraindications.absolute.map((item: string, i: number) => (
+                                    <li key={i}>{item}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {protocol.contraindications.relative?.length > 0 && (
+                              <div className="mb-3">
+                                <h5 className="font-semibold text-red-500 text-sm mb-1">Relative</h5>
+                                <ul className="list-disc list-inside text-sm text-red-800">
+                                  {protocol.contraindications.relative.map((item: string, i: number) => (
+                                    <li key={i}>{item}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {(!protocol.contraindications.absolute || protocol.contraindications.absolute.length === 0) && 
+                             (!protocol.contraindications.relative || protocol.contraindications.relative.length === 0) && (
+                              <p>No contraindications specified.</p>
+                            )}
+                          </>
+                        ) : Array.isArray(protocol.contraindications) ? (
+                          <ul className="list-disc list-inside text-sm text-red-900">
+                            {protocol.contraindications.map((item: string, i: number) => (
+                              <li key={i}>{item}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p>No contraindications specified.</p>
+                        )}
                     </div>
                   </div>
                 )}
