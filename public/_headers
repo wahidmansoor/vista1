@@ -1,6 +1,6 @@
 # ✅ Global Content Security Policy for the entire site
 /*
-  Content-Security-Policy: default-src 'self'; connect-src 'self' https://dev-bqgm5fdnyx1sdqja.us.auth0.com https://*.supabase.co https://api.openai.com https://cdn.auth0.com https://mwoncovista.com; script-src 'self' 'unsafe-inline' https://cdn.auth0.com; style-src 'self' 'unsafe-inline'; img-src * blob: data:; frame-src 'self'; font-src 'self'; object-src 'none';
+  Content-Security-Policy: default-src 'self'; connect-src 'self' https://*.auth0.com https://*.supabase.co https://api.openai.com https://mwoncovista.com; script-src 'self' 'unsafe-inline' https://*.auth0.com; style-src 'self' 'unsafe-inline'; img-src * blob: data:; frame-src 'self'; font-src 'self'; object-src 'none';
 
 # Cache static assets for performance
 /assets/*
