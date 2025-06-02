@@ -14,7 +14,7 @@ export interface Medication {
   summary?: string;
   black_box_warning?: string;
 
-  // Structured data (JSONB)
+  // Structured data
   indications: {
     cancer_types: string[];
     staging?: string[];
@@ -66,18 +66,17 @@ export interface Medication {
     protein_binding?: string;
   };
 
-  // Arrays
-  reference_sources: string[];
-  contraindications: string[];
-  routine_monitoring: string[];
-  pre_treatment_tests: string[];
-
   // Flags
   is_premedication?: boolean;
   is_chemotherapy?: boolean;
   is_immunotherapy?: boolean;
   is_targeted_therapy?: boolean;
   is_orphan_drug?: boolean;
+
+  // Reference fields
+  reference_sources: string[];
+  routine_monitoring?: string[];
+  pre_treatment_tests?: string[];
 
   // Timestamps
   created_at: string;

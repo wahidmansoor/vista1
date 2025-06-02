@@ -32,18 +32,18 @@ export interface AIResponse {
 export type ModuleType = 'OPD' | 'CDU' | 'Inpatient' | 'Palliative' | 'RadOnc';
 
 /**
- * Represents different types of AI agent prompts
+ * Represents different types of AI agent prompts/intents
  */
 export type PromptIntent = 
-  | 'screening' 
-  | 'triage' 
-  | 'follow-up' 
-  | 'evaluation' 
-  | 'toxicity'
+  | 'screening'
   | 'general'
   | 'dose-check'
   | 'pathway'
-  | 'rescue-agent';
+  | 'rescue-agent'
+  | 'triage'
+  | 'follow-up'
+  | 'evaluation'
+  | 'toxicity';
 
 /**
  * Represents the context provided to the AI agent

@@ -6,7 +6,24 @@ interface DrugDetailViewProps {
   onBack: () => void;
 }
 
+// Schedule and premedication are not part of ProtocolDrug type, but we'll handle them gracefully
+interface ExtendedProtocolDrug extends ProtocolDrug {
+  schedule?: string;
+  premedication?: string[];
+  pharmacology?: {
+    half_life?: string;
+    metabolism?: string;
+    protein_binding?: string;
+    bioavailability?: string;
+    excretion?: string;
+    [key: string]: string | undefined;
+  };
+}
+
 const DrugDetailView: React.FC<DrugDetailViewProps> = ({ drug, onBack }) => {
+  // Treat the drug as ExtendedProtocolDrug to handle potential extra properties
+  const extendedDrug = drug as ExtendedProtocolDrug;
+
   return (
     <div className="bg-white dark:bg-gray-900 rounded-md shadow p-4">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">{drug.name}</h3>
@@ -26,18 +43,18 @@ const DrugDetailView: React.FC<DrugDetailViewProps> = ({ drug, onBack }) => {
           </div>
         )}
         
-        {drug.schedule && (
+        {extendedDrug.schedule && (
           <div>
             <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Schedule</h4>
-            <p className="text-gray-600 dark:text-gray-400">{drug.schedule}</p>
+            <p className="text-gray-600 dark:text-gray-400">{extendedDrug.schedule}</p>
           </div>
         )}
         
-        {drug.premedication && drug.premedication.length > 0 && (
+        {extendedDrug.premedication && extendedDrug.premedication.length > 0 && (
           <div>
             <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Premedication</h4>
             <ul className="list-disc ml-5">
-              {drug.premedication.map((med, index) => (
+              {extendedDrug.premedication.map((med: string, index: number) => (
                 <li key={index} className="text-gray-600 dark:text-gray-400">{med}</li>
               ))}
             </ul>
@@ -55,26 +72,27 @@ const DrugDetailView: React.FC<DrugDetailViewProps> = ({ drug, onBack }) => {
           </div>
         )}
         
-        {drug.pharmacology && (
+        {extendedDrug.pharmacology && (
           <div className="border-t border-gray-200 dark:border-gray-700 pt-3 mt-3">
             <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Pharmacology</h4>
-            {drug.pharmacology.mechanism && (
+            {extendedDrug.pharmacology.mechanism && (
               <div className="mt-2">
                 <h5 className="text-xs font-medium text-gray-600 dark:text-gray-400">Mechanism</h5>
-                <p className="text-gray-600 dark:text-gray-400">{drug.pharmacology.mechanism}</p>
+                <p className="text-gray-600 dark:text-gray-400">{extendedDrug.pharmacology.mechanism}</p>
               </div>
             )}
-            {drug.pharmacology.classification && (
+            {extendedDrug.pharmacology.classification && (
               <div className="mt-2">
                 <h5 className="text-xs font-medium text-gray-600 dark:text-gray-400">Classification</h5>
-                <p className="text-gray-600 dark:text-gray-400">{drug.pharmacology.classification}</p>
+                <p className="text-gray-600 dark:text-gray-400">{extendedDrug.pharmacology.classification}</p>
               </div>
             )}
-            {drug.pharmacology.pharmacokinetics && drug.pharmacology.pharmacokinetics.length > 0 && (
+            {extendedDrug.pharmacology.pharmacokinetics && Array.isArray(extendedDrug.pharmacology.pharmacokinetics) && 
+             extendedDrug.pharmacology.pharmacokinetics.length > 0 && (
               <div className="mt-2">
                 <h5 className="text-xs font-medium text-gray-600 dark:text-gray-400">Pharmacokinetics</h5>
                 <ul className="list-disc ml-5">
-                  {drug.pharmacology.pharmacokinetics.map((pk, index) => (
+                  {extendedDrug.pharmacology.pharmacokinetics.map((pk: string, index: number) => (
                     <li key={index} className="text-gray-600 dark:text-gray-400">{pk}</li>
                   ))}
                 </ul>
@@ -83,6 +101,13 @@ const DrugDetailView: React.FC<DrugDetailViewProps> = ({ drug, onBack }) => {
           </div>
         )}
       </div>
+      
+      <button 
+        onClick={onBack}
+        className="mt-4 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
+      >
+        Back to Drug List
+      </button>
     </div>
   );
 };

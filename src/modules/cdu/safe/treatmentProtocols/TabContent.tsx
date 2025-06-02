@@ -1,12 +1,12 @@
 import React from 'react';
 import { Protocol } from '@/types/protocol';
 import TreatmentTab from '@/modules/cdu/treatmentProtocols/tabs/TreatmentTab';
-import DrugListTab from '@/modules/cdu/treatmentProtocols/tabs/DrugListTab';
-import DoseModificationsTab from '@/modules/cdu/treatmentProtocols/tabs/DoseModificationsTab';
-import EligibilityTab from '@/modules/cdu/treatmentProtocols/tabs/EligibilityTab';
+import { DrugListTab } from '@/modules/cdu/treatmentProtocols/tabs/DrugListTab';
+import { DoseModificationsTab } from '@/modules/cdu/treatmentProtocols/tabs/DoseModificationsTab';
+import { EligibilityTab } from '@/modules/cdu/treatmentProtocols/tabs/EligibilityTab';
 import TestsSectionTab from '@/modules/cdu/treatmentProtocols/tabs/TestsSectionTab';
-import RescueAgentsTab from '@/modules/cdu/treatmentProtocols/tabs/RescueAgentsTab';
-import SupportiveCareTab from '@/modules/cdu/treatmentProtocols/tabs/SupportiveCareTab';
+import { RescueAgentsTab } from '@/modules/cdu/treatmentProtocols/tabs/RescueAgentsTab';
+import { SupportiveCareTab } from '@/modules/cdu/treatmentProtocols/tabs/SupportiveCareTab';
 
 // Define the tab types
 export type TabType = 
@@ -23,14 +23,13 @@ interface TabContentProps {
   activeTab: string;
 }
 
-const TabContent: React.FC<TabContentProps> = ({ protocol, activeTab }) => {
-  // Map of tab content
+const TabContent: React.FC<TabContentProps> = ({ protocol, activeTab }) => {  // Map of tab content
   const content: Record<TabType, React.ReactNode> = {
     treatment: protocol.treatment ? <TreatmentTab treatment={protocol.treatment} /> : <div>No treatment information available</div>,
     drugs: <DrugListTab protocol={protocol} />,
     dose: <DoseModificationsTab protocol={protocol} />,
     eligibility: <EligibilityTab protocol={protocol} />,
-    tests: <TestsSectionTab protocol={protocol} />,
+    tests: <TestsSectionTab tests={protocol.tests} title="Protocol Tests" />,
     rescue: <RescueAgentsTab protocol={protocol} />,
     supportive: <SupportiveCareTab protocol={protocol} />
   };

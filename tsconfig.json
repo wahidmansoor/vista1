@@ -10,7 +10,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -18,12 +18,14 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",    "paths": {
+    "baseUrl": ".",
+    "paths": {
       "@/*": ["./src/*"]
     },
     "typeRoots": ["./node_modules/@types"],
-    "types": []
-  },  "include": [
+    "types": ["vite/client", "node"]
+  },
+  "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.js",
@@ -36,14 +38,15 @@
     "dist",
     "build", 
     "public",
+    "coverage",
     "*.config.js",
     "*.config.ts",
-    "coverage",
-    "src/server/**/*",
     "vite.config.ts",
-    "vitest.config.ts",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/__tests__/**/*"
+    "src/server/**/*",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/*.spec.tsx", 
+    "src/**/*.test.tsx",
+    "src/**/__tests__/**/*"
   ]
 }

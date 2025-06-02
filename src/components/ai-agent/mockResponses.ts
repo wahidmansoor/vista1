@@ -26,6 +26,12 @@ const mockResponses: Record<ModuleType, Record<PromptIntent, MockResponse>> = {
 - Genetic counseling may be beneficial`,
       timestamp: new Date().toISOString()
     },
+    general: defaultResponse,
+    "dose-check": defaultResponse,
+    pathway: defaultResponse,
+    "rescue-agent": defaultResponse,
+    evaluation: defaultResponse,
+    toxicity: defaultResponse,
     triage: {
       response: `Urgent Referral Recommended ⚠️
 
@@ -45,31 +51,14 @@ Suggested Workup:
 
 1. Surveillance Schedule
 - Clinical exam every 3 months for first 2 years
-- Annual imaging per protocol
-- Regular tumor marker assessment
+- Annual imaging studies
+- Regular lab monitoring
 
-2. Key Monitoring Points
-- Watch for specific recurrence patterns
+2. Survivorship Care
 - Quality of life assessment
-- Late treatment effects`,
+- Screening for late effects
+- Psychosocial support`,
       timestamp: new Date().toISOString()
-    },
-    evaluation: {
-      response: `Patient Evaluation Summary:
-
-1. Risk Assessment
-- Multiple high-risk features identified
-- Family history significant
-- Requires expedited workup
-
-2. Recommended Actions
-- Urgent imaging studies
-- Genetic counseling referral
-- Consider early intervention`,
-      timestamp: new Date().toISOString()
-    },
-    toxicity: {
-      ...defaultResponse
     }
   },
   CDU: {
@@ -87,6 +76,10 @@ Suggested Workup:
 - Follow-up in 48-72 hours`,
       timestamp: new Date().toISOString()
     },
+    general: defaultResponse,
+    "dose-check": defaultResponse,
+    pathway: defaultResponse,
+    "rescue-agent": defaultResponse,
     screening: { ...defaultResponse },
     triage: { ...defaultResponse },
     'follow-up': { ...defaultResponse },
@@ -107,6 +100,10 @@ Suggested Workup:
 - Discharge planning initiated`,
       timestamp: new Date().toISOString()
     },
+    general: defaultResponse,
+    "dose-check": defaultResponse,
+    pathway: defaultResponse,
+    "rescue-agent": defaultResponse,
     toxicity: {
       response: `Inpatient Toxicity Management:
 
@@ -126,6 +123,10 @@ Suggested Workup:
     'follow-up': { ...defaultResponse }
   },
   Palliative: {
+    general: defaultResponse,
+    "dose-check": defaultResponse,
+    pathway: defaultResponse,
+    "rescue-agent": defaultResponse,
     evaluation: {
       response: `Palliative Care Assessment:
 
@@ -159,6 +160,10 @@ Suggested Workup:
     toxicity: { ...defaultResponse }
   },
   RadOnc: {
+    general: defaultResponse,
+    "dose-check": defaultResponse,
+    pathway: defaultResponse,
+    "rescue-agent": defaultResponse,
     evaluation: {
       response: `Radiation Oncology Assessment:
 

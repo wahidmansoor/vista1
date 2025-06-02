@@ -102,11 +102,10 @@ export const DrugListTab: React.FC<DrugListTabProps> = ({ protocol }) => {
           <h4 className="font-semibold text-md mb-1">Administration Notes</h4>
           <DataRenderer data={protocol.administration_notes} title="Administration Notes" />
         </div>
-        <div>
-          <h4 className="font-semibold text-md mb-1">Pharmacokinetics</h4>
-          <DataRenderer data={protocol.pharmacokinetics} title="Pharmacokinetics" />
+        <div>          <h4 className="font-semibold text-md mb-1">Pharmacokinetics</h4>
+          <DataRenderer data={protocol.pharmacology?.pharmacokinetics} title="Pharmacokinetics" />
         </div>
-        {(!protocol.treatment || !protocol.drug_class || !protocol.administration_notes || !protocol.pharmacokinetics) && (
+        {(!protocol.treatment || !protocol.drug_class || !protocol.administration_notes || !protocol.pharmacology?.pharmacokinetics) && (
            <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded-md flex items-start">
             <AlertTriangle className="h-5 w-5 text-yellow-500 dark:text-yellow-400 mr-2 flex-shrink-0" />
             <p className="text-xs text-yellow-700 dark:text-yellow-300">Some drug information fields might be missing. Ensure the protocol data is complete.</p>

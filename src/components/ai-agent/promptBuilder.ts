@@ -69,14 +69,9 @@ const PROMPT_TEMPLATES: Record<ModuleType, Partial<Record<PromptIntent, PromptTe
     'toxicity': {
       instruction: 'Assess and manage radiation-related adverse effects.',
       contextPrefix: 'Side effects:\n'
-    }
-  },
-  Tools: {
-    'general': {
-      instruction: 'Provide guidance on clinical calculations and tool usage.',
-      contextPrefix: 'Tool context:\n'
-    }
-  }
+    }  }
+  // Tools was removed as it's not a valid ModuleType
+  // Add any new valid module types to the ModuleType type in types.ts
 };
 
 /**

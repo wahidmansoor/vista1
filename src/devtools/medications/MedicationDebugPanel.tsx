@@ -1,5 +1,6 @@
 // Moved from src/modules/cdu/treatmentProtocols/MedicationDebugPanel.tsx
 // Conditionally loaded in development environment
+import { Protocol } from '@/types/protocol';
 
 interface MedicationDebugPanelProps {
   protocol: Protocol;

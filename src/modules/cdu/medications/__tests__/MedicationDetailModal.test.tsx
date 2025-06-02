@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-// Jest globals used: describe, it, expect, vi, beforeEach;
+import { expect, describe, it, beforeEach } from '@jest/globals';
 import MedicationDetailModal from '../MedicationDetailModal';
 import { createMockMedication } from './MedicationTestDataFactory';
 

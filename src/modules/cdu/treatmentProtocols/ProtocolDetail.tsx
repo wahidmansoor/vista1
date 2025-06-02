@@ -128,10 +128,13 @@ const ProtocolDetail: React.FC<ProtocolDetailProps> = ({ protocol }) => {
 
         {/* Drugs Tab */}
         <TabsContent value="drugs" className="pt-4">
-          <div className="space-y-4">
-            {protocol.drugs && protocol.drugs.length > 0 ? (
+          <div className="space-y-4">            {protocol.drugs && protocol.drugs.length > 0 ? (
               protocol.drugs.map((drug, index) => (
-                <DrugDetailView key={index} drug={drug} />
+                <DrugDetailView 
+                  key={index} 
+                  drug={drug} 
+                  onBack={() => console.log('Back action from drug detail')} 
+                />
               ))
             ) : (
               <p className="text-gray-500 dark:text-gray-400 text-center p-4">No medication details available</p>

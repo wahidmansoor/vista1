@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Pill, AlertCircle } from 'lucide-react';
-import type { Protocol, ProtocolDrug, DrugClass } from '@/types/protocol';
+import type { Protocol, ProtocolDrug } from '@/types/protocol';
 
 interface DrugListTabProps {
   protocol: Protocol;

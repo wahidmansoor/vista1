@@ -1,14 +1,41 @@
 import '@testing-library/jest-dom';
 import { TextEncoder, TextDecoder } from 'util';
 
-// Set up test environment
-process.env.VITE_GEMINI_API_KEY = 'test-key';
-process.env.NODE_ENV = 'test';
-process.env.VITE_SUPABASE_URL = 'https://test.supabase.co';
-process.env.VITE_SUPABASE_ANON_KEY = 'test-key';
+// Set up test environment variables
+process.env = {
+  ...process.env,
+  VITE_GEMINI_API_KEY: 'test-key',
+  VITE_SUPABASE_URL: 'https://test.supabase.co',
+  VITE_SUPABASE_ANON_KEY: 'test-key',
+  NODE_ENV: 'test',
+  MODE: 'test',
+  DEV: 'true',
+  PROD: 'false'
+};
 
-// Mock console.error to avoid noise in test output
-console.error = jest.fn();
+// Mock objects that aren't available in JSDOM
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+
+// Mock console.error to avoid noise in test output but keep errors visible in CI
+const originalError = console.error;
+console.error = (...args) => {
+  if (process.env.CI) {
+    originalError(...args);
+  }
+  // In local tests, avoid console noise
+};
 
 // Mock rate limiter for tests
 jest.mock('@/lib/rate-limit', () => ({

@@ -3,9 +3,9 @@ import { Calendar, Info, Pill } from 'lucide-react';
 import type { Protocol } from '../../../types/protocol';
 import { 
   getProtocolMedications,
-  getAllPrecautions, // Added
   getProtocolReferences // Added
 } from '../../../utils/protocolHelpers';
+import { getAllPrecautions } from '../../../types/protocolHelpers';
 import { RichTextBlock, TagList } from '../components/medicationComponents';
 
 interface OverviewTabProps {
