@@ -1,762 +1,320 @@
-import React, { useState } from 'react';
-import { AlertTriangle, ChevronDown, ChevronUp, Download, MessageSquare } from 'lucide-react';
-import { toast } from 'react-toastify';
-import { callAIAgent } from '@/lib/api/aiAgentAPI';
+/**
+ * This is a clinical decision-support UI for oncology professionals to view population-level screening guidelines.
+ * Do not include any EHR features or patient data.
+ * 
+ * Supabase table: screening_guidelines
+ * CREATE TABLE screening_guidelines (
+ *   id UUID PRIMARY KEY,
+ *   cancer_type TEXT,
+ *   population TEXT,
+ *   starting_age TEXT,
+ *   modality TEXT,
+ *   frequency TEXT,
+ *   notes TEXT,
+ *   guideline_source TEXT
+ * );
+ */
 
-// Types
-type Gender = 'male' | 'female';
+import React, { useState, useEffect } from 'react';
+import { AlertTriangle, Clock, Database, ChevronDown } from 'lucide-react';
+import { getSupabase } from '@/lib/supabaseClient';
 
-interface GeneticRisk {
-  brcaPositive: boolean;
-  lynchSyndrome: boolean;
-  otherSyndrome?: string;
+// Strict TypeScript interface for screening guidelines
+interface ScreeningGuideline {
+  id: string;
+  cancer_type: string;
+  population: string;
+  starting_age: string;
+  modality: string;
+  frequency: string;
+  notes: string;
+  guideline_source: string;
 }
 
-interface RiskFactors {
-  priorCancer: boolean;
-  immunocompromised: boolean;
-  radiationExposure: boolean;
-  geneticRisk: GeneticRisk;
-}
-
-interface Symptoms {
-  weightLoss: boolean;
-  abdominalPain: boolean;
-  backPain: boolean;
-  jaundice: boolean;
-  bloating: boolean;
-  earlySatiety: boolean;
-  hoarseness: boolean;
-  dysphagia: boolean;
-  earPain: boolean;
-  vomiting: boolean;
-  bleeding: boolean;
-  fever: boolean;
-  nightSweats: boolean;
-}
-
-interface PatientData {
-  age: number;
-  gender: Gender;
-  smokingHistory: boolean;
-  packYears?: number;
-  isHighRisk: boolean;
-  riskFactors: RiskFactors;
-  familyHistory: {
-    breast: boolean;
-    colorectal: boolean;
-    prostate: boolean;
-    ovarian: boolean;
-  };
-  lastScreening: {
-    mammogram: string;
-    colonoscopy: string;
-    papSmear: string;
-    ldct: string;
-    psa: string;
-    breastMri: string;
-    endoscopy: string;
-    ctAbdomen: string;
-  };
-  activeSymptoms: Symptoms;
-}
-
-type CancerType = 
-  | 'breast' 
-  | 'cervical' 
-  | 'colorectal' 
-  | 'lung' 
-  | 'prostate'
-  | 'pancreatic'
-  | 'ovarian'
-  | 'gastric'
-  | 'headNeck'
-  | 'lymphoma';
-
-interface SymptomWarning {
-  severity: 'low' | 'moderate' | 'high';
-  description: string;
-  suggestedAction: string;
-}
-
-interface ScreeningRecommendation {
-  cancerType: CancerType;
-  status: 'due' | 'upcoming' | 'not-indicated';
-  reason: string;
-  nextDue?: string;
-  isOverdue?: boolean;
-}
-
-interface ScreeningResults {
-  breast?: ScreeningRecommendation;
-  cervical?: ScreeningRecommendation;
-  colorectal: ScreeningRecommendation;
-  lung: ScreeningRecommendation;
-  prostate?: ScreeningRecommendation;
-  pancreatic?: ScreeningRecommendation;
-  ovarian?: ScreeningRecommendation;
-  gastric?: ScreeningRecommendation;
-  headNeck?: ScreeningRecommendation;
-  lymphoma?: ScreeningRecommendation;
-  [key: string]: ScreeningRecommendation | undefined;
-}
-
-interface GenerateSummaryParams {
-  prompt: string;
-  context: string;
-}
-
-interface ToastParams {
-  title?: string;
-  description: string;
-  duration?: number;
-  variant?: 'default' | 'destructive';
-}
-
-const CancerScreening: React.FC = () => {
-  const [mockMode, setMockMode] = useState(false);
-  type LastScreeningKey = keyof PatientData['lastScreening'];
-
-  // State
-  const [patientData, setPatientData] = useState<PatientData>({
-    age: 0,
-    gender: 'female',
-    smokingHistory: false,
-    packYears: 0,
-    isHighRisk: false,
-    riskFactors: {
-      priorCancer: false,
-      immunocompromised: false,
-      radiationExposure: false,
-      geneticRisk: {
-        brcaPositive: false,
-        lynchSyndrome: false
-      }
-    },
-    familyHistory: {
-      breast: false,
-      colorectal: false,
-      prostate: false,
-      ovarian: false,
-    },
-    lastScreening: {
-      mammogram: '',
-      colonoscopy: '',
-      papSmear: '',
-      ldct: '',
-      psa: '',
-      breastMri: '',
-      endoscopy: '',
-      ctAbdomen: ''
-    },
-    activeSymptoms: {
-      weightLoss: false,
-      abdominalPain: false,
-      backPain: false,
-      jaundice: false,
-      bloating: false,
-      earlySatiety: false,
-      hoarseness: false,
-      dysphagia: false,
-      earPain: false,
-      vomiting: false,
-      bleeding: false,
-      fever: false,
-      nightSweats: false
-    }
-  });
-
-  const [expandedPanels, setExpandedPanels] = useState<{ [key: string]: boolean }>({
-    breast: true,
-    cervical: true,
-    colorectal: true,
-    lung: true,
-    prostate: true
-  });
-
-  const [loading, setLoading] = useState(false);
-
-  // Helper functions for type checking and event handling
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>): boolean => {
-    return e.target.checked;
-  };
-
-  const isValidDate = (date: string): boolean => {
-    return date !== undefined && date !== null && date.length > 0;
-  };
-
-  const getYearsSince = (date: string): number => {
-    return isValidDate(date) ? new Date().getFullYear() - new Date(date).getFullYear() : Infinity;
-  };
-
-  // Helper functions for risk assessment and symptoms
-  const getSymptomBasedCancers = (): CancerType[] => {
-    const symptoms = patientData.activeSymptoms;
-    const concerns: CancerType[] = [];
-
-    // Pancreatic cancer symptoms
-    if (symptoms.weightLoss && (symptoms.backPain || symptoms.jaundice)) {
-      concerns.push('pancreatic');
-    }
-
-    // Ovarian cancer symptoms
-    if (symptoms.bloating && symptoms.earlySatiety && patientData.gender === 'female') {
-      concerns.push('ovarian');
-    }
-
-    // Head & neck cancer symptoms
-    if (symptoms.hoarseness || symptoms.dysphagia || symptoms.earPain) {
-      concerns.push('headNeck');
-    }
-
-    // Gastric cancer symptoms
-    if (symptoms.vomiting || symptoms.bleeding) {
-      concerns.push('gastric');
-    }
-
-    // Lymphoma symptoms
-    if ((symptoms.fever || symptoms.nightSweats) && symptoms.weightLoss) {
-      concerns.push('lymphoma');
-    }
-
-    return concerns;
-  };
-
-  const getHighRiskInterval = (standardInterval: number): number => {
-    if (!patientData.isHighRisk) return standardInterval;
-
-    // Reduce intervals for high-risk patients
-    if (patientData.riskFactors.geneticRisk.brcaPositive) return Math.max(6, standardInterval / 2);
-    if (patientData.riskFactors.geneticRisk.lynchSyndrome) return Math.max(1, standardInterval / 2);
-    if (patientData.riskFactors.priorCancer) return Math.max(6, standardInterval * 0.75);
-    
-    return standardInterval;
-  };
-
-  // Helper function to calculate screening recommendations
-  const calculateRecommendations = (): ScreeningResults => {
-    const results: ScreeningResults = {
-      colorectal: { 
-        cancerType: 'colorectal',
-        status: 'not-indicated', 
-        reason: 'Age below screening threshold' 
-      },
-      lung: { 
-        cancerType: 'lung',
-        status: 'not-indicated', 
-        reason: 'Not meeting screening criteria' 
-      }
-    };
-
-    // Colorectal Cancer Screening
-    if (patientData.age >= 45) {
-      const lastColonoscopy = patientData.lastScreening.colonoscopy;
-      const yearsSinceColonoscopy = getYearsSince(lastColonoscopy);
-      if (!isValidDate(lastColonoscopy)) {
-        results.colorectal = {
-          cancerType: 'colorectal',
-          status: 'due',
-          reason: 'Initial screening colonoscopy needed',
-          isOverdue: patientData.age > 45
-        };
-      } else {
-        if (yearsSinceColonoscopy >= 10) {
-          results.colorectal = {
-            cancerType: 'colorectal',
-            status: 'due',
-            reason: 'Follow-up colonoscopy needed',
-            isOverdue: true
-          };
-        } else if (yearsSinceColonoscopy >= 8) {
-          results.colorectal = {
-            cancerType: 'colorectal',
-            status: 'upcoming',
-            reason: 'Colonoscopy due within 2 years',
-            nextDue: lastColonoscopy
-          };
-        }
-      }
-    }
-
-    // Add symptom-based warnings
-    const concernedCancers = getSymptomBasedCancers();
-    if (concernedCancers.length > 0) {
-      concernedCancers.forEach(cancerType => {
-        results[cancerType] = {
-          cancerType,
-          status: 'due',
-          reason: 'Concerning symptoms present - requires immediate evaluation',
-          isOverdue: true
-        };
-      });
-    }
-
-    // Gender-specific screenings
-    if (patientData.gender === 'female') {
-      // Breast Cancer Screening
-      if (patientData.age >= 40 && patientData.age <= 74) {
-        const lastMammogram = patientData.lastScreening.mammogram;
-        results.breast = {
-          cancerType: 'breast',
-          status: !isValidDate(lastMammogram) || getYearsSince(lastMammogram) >= 1 
-            ? 'due' 
-            : 'upcoming',
-          reason: patientData.familyHistory.breast 
-            ? 'High-risk patient requires more frequent screening'
-            : patientData.isHighRisk 
-              ? 'Modified screening interval due to risk factors'
-              : 'Regular annual screening recommended',
-          isOverdue: isValidDate(lastMammogram) && getYearsSince(lastMammogram) > 1
-        };
-      }
-
-      // Cervical Cancer Screening
-      if (patientData.age >= 21 && patientData.age <= 65) {
-        const lastPap = patientData.lastScreening.papSmear;
-        results.cervical = {
-          cancerType: 'cervical',
-          status: !isValidDate(lastPap) || getYearsSince(lastPap) >= 3
-            ? 'due'
-            : 'upcoming',
-          reason: patientData.age >= 30 
-            ? 'Co-testing with HPV recommended every 5 years'
-            : 'Pap smear recommended every 3 years',
-          isOverdue: isValidDate(lastPap) && getYearsSince(lastPap) > 3
-        };
-      }
-    }
-
-    // Prostate Cancer Screening
-    if (patientData.gender === 'male' && patientData.age >= 50) {
-      const lastPSA = patientData.lastScreening.psa;
-      results.prostate = {
-          cancerType: 'prostate',
-          status: !isValidDate(lastPSA) || getYearsSince(lastPSA) >= 1
-            ? 'due'
-            : 'upcoming',
-          reason: patientData.familyHistory.prostate
-            ? 'High-risk patient requires annual PSA screening'
-            : 'Consider PSA screening based on shared decision making',
-          isOverdue: isValidDate(lastPSA) && getYearsSince(lastPSA) > 1
-      };
-    }
-
-    // Lung Cancer Screening
-    if (patientData.age >= 50 && patientData.age <= 80 && patientData.smokingHistory && (patientData.packYears ?? 0) >= 20) {
-      const lastLDCT = patientData.lastScreening.ldct;
-      results.lung = {
-          cancerType: 'lung',
-          status: !isValidDate(lastLDCT) || getYearsSince(lastLDCT) >= 1
-            ? 'due'
-            : 'upcoming',
-          reason: 'Annual LDCT recommended for high-risk patients',
-          isOverdue: isValidDate(lastLDCT) && getYearsSince(lastLDCT) > 1
-      };
-    }
-
-    return results;
-  };
-
-  const generateSummary = async ({ prompt, context }: GenerateSummaryParams): Promise<string> => {
-    try {
-      const response = await callAIAgent({
-        module: 'OPD',
-        intent: 'screening',
-        prompt,
-        context,
-        mockMode
-      });
-      return response.content;
-    } catch (error: any) {
-      console.error('Generate Summary Error:', error);
-      
-      // Handle specific API errors
-      if (error.name === 'APIError') {
-        switch (error.code) {
-          case 'INVALID_JSON':
-          case 'INVALID_RESPONSE':
-            throw new Error('The AI service returned an invalid response. Please try again.');
-          case 'RATE_LIMIT':
-            throw new Error('Too many requests. Please wait a moment and try again.');
-          case 'CONNECTION_ERROR':
-            throw new Error('Unable to connect to the AI service. Please check your connection.');
-          default:
-            throw new Error(error.message || 'Failed to generate summary');
-        }
-      }
-
-      throw new Error('Failed to generate summary');
-    }
-  };
-
-  const recommendations = calculateRecommendations();
-
-  // Handle AI consultation
-  const showToast = ({ title, description, duration = 5000, variant = 'default' }: ToastParams) => {
-    toast(description, {
-      type: variant === 'destructive' ? 'error' : 'info',
-      autoClose: duration,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
-  };
-
-  const handleAIConsult = async (cancerType: string) => {
-    setLoading(true);
-    const recommendation = recommendations[cancerType.toLowerCase()];
-    if (!recommendation) return;
-
-    try {
-      const context = `
-Patient Information:
-- Age: ${patientData.age}
-- Gender: ${patientData.gender}
-- Smoking History: ${patientData.smokingHistory ? `Yes (${patientData.packYears} pack years)` : 'No'}
-- High Risk: ${patientData.isHighRisk ? 'Yes' : 'No'}
-- Family History: ${Object.entries(patientData.familyHistory)
-  .filter(([_, value]) => value)
-  .map(([cancer]) => cancer)
-  .join(', ')}
-
-Screening Status:
-Cancer Type: ${cancerType}
-Current Status: ${recommendation.status}
-Reason: ${recommendation.reason}
-Last Screening: ${patientData.lastScreening[cancerType.toLowerCase() as keyof typeof patientData.lastScreening] || 'Never'}
-${recommendation.isOverdue ? 'OVERDUE FOR SCREENING' : ''}
-`;
-
-      const response = await generateSummary({
-        prompt: "Analyze this patient's cancer screening status and provide personalized recommendations.",
-        context
-      });
-
-      showToast({
-        title: `${cancerType} Screening Analysis`,
-        description: response,
-        duration: 10000
-      });
-
-    } catch (error: any) {
-      console.error('AI Consultation Error:', error);
-      showToast({
-        title: "Consultation Failed",
-        description: error.message || "Unable to provide AI consultation at this time. Please try again later.",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Export recommendations as PDF
-  const exportRecommendations = () => {
-    // Implement PDF export logic
-    console.log('Exporting recommendations...');
-  };
-
-  const getStatusColor = (status: string, isOverdue?: boolean) => {
-    if (isOverdue) return 'text-red-600 bg-red-50';
-    switch (status) {
-      case 'due': return 'text-yellow-600 bg-yellow-50';
-      case 'upcoming': return 'text-blue-600 bg-blue-50';
-      case 'not-indicated': return 'text-gray-600 bg-gray-50';
-      default: return 'text-gray-600 bg-gray-50';
-    }
-  };
-
+// Component for expandable notes
+const ExpandableNotes: React.FC<{ notes: string; maxLength?: number }> = ({ 
+  notes, 
+  maxLength = 100 
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  if (!notes || notes.length <= maxLength) {
+    return <p className="text-sm text-gray-600 dark:text-gray-400">{notes || 'No additional notes'}</p>;
+  }
+  
   return (
-    <div className="space-y-6 max-w-4xl mx-auto p-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-800">Cancer Screening Assistant</h2>
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setMockMode(!mockMode)}
-            className={`px-3 py-1 rounded-full text-sm font-medium ${
-              mockMode ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
-            }`}
-          >
-            {mockMode ? '🧪 Mock Mode' : '🤖 Gemini Mode'}
-          </button>
-          <button
-            onClick={exportRecommendations}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
-            <Download size={16} />
-            Export PDF
-          </button>
-        </div>
+    <div>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        {isExpanded ? notes : `${notes.substring(0, maxLength)}...`}
+      </p>
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="mt-1 text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 
+                   flex items-center gap-1 transition-colors duration-150"
+        aria-label={isExpanded ? 'Show less' : 'Show more'}
+      >
+        {isExpanded ? 'Show less' : 'Show more'}
+        <ChevronDown 
+          className={`h-3 w-3 transition-transform duration-200 ${
+            isExpanded ? 'rotate-180' : ''
+          }`} 
+        />
+      </button>
+    </div>
+  );
+};
+
+// Individual screening guideline card component
+const GuidelineCard: React.FC<{ 
+  guideline: ScreeningGuideline; 
+  index: number;
+}> = ({ guideline, index }) => {
+  return (
+    <div
+      className={`
+        p-6 rounded-lg border transition-all duration-200 hover:shadow-md
+        ${index % 2 === 0 
+          ? 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700' 
+          : 'bg-gray-50 dark:bg-gray-750 border-gray-200 dark:border-gray-600'
+        }
+        hover:border-blue-300 dark:hover:border-blue-600
+      `}
+    >
+      {/* Cancer Type Header */}
+      <div className="mb-4">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white capitalize mb-1">
+          {guideline.cancer_type}
+        </h3>
+        <div className="h-1 w-12 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
       </div>
 
-      {/* Patient Input Panel */}
-      {/* High Risk Panel */}
-      <div className="bg-white rounded-lg shadow p-6 space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-800">High Risk Assessment</h3>
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              checked={patientData.isHighRisk}
-              onChange={(e) => setPatientData(prev => ({
-                ...prev,
-                isHighRisk: handleCheckboxChange(e)
-              }))}
-              className="sr-only peer"
-            />
-            <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-            <span className="ml-3 text-sm font-medium text-gray-700">High Risk Patient</span>
-          </label>
+      {/* Main Information Grid */}
+      <div className="space-y-4">
+        {/* Population */}
+        <div className="flex items-start space-x-3">
+          <div className="flex-shrink-0 w-5 h-5 mt-0.5 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+            <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
+          </div>
+          <div>
+            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+              Population
+            </span>
+            <p className="text-sm text-gray-900 dark:text-gray-100 font-medium">
+              {guideline.population}
+            </p>
+          </div>
         </div>
 
-        {patientData.isHighRisk && (
-          <div className="mt-4 space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  checked={patientData.riskFactors.geneticRisk.brcaPositive}
-                  onChange={(e) => setPatientData(prev => ({
-                    ...prev,
-                    riskFactors: {
-                      ...prev.riskFactors,
-                      geneticRisk: {
-                        ...prev.riskFactors.geneticRisk,
-                        brcaPositive: handleCheckboxChange(e)
-                      }
-                    }
-                  }))}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span>BRCA1/2 Positive</span>
-              </label>
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  checked={patientData.riskFactors.geneticRisk.lynchSyndrome}
-                  onChange={(e) => setPatientData(prev => ({
-                    ...prev,
-                    riskFactors: {
-                      ...prev.riskFactors,
-                      geneticRisk: {
-                        ...prev.riskFactors.geneticRisk,
-                        lynchSyndrome: handleCheckboxChange(e)
-                      }
-                    }
-                  }))}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span>Lynch Syndrome</span>
-              </label>
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  checked={patientData.riskFactors.priorCancer}
-                  onChange={(e) => setPatientData(prev => ({
-                    ...prev,
-                    riskFactors: {
-                      ...prev.riskFactors,
-                      priorCancer: handleCheckboxChange(e)
-                    }
-                  }))}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span>Prior Cancer History</span>
-              </label>
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  checked={patientData.riskFactors.immunocompromised}
-                  onChange={(e) => setPatientData(prev => ({
-                    ...prev,
-                    riskFactors: {
-                      ...prev.riskFactors,
-                      immunocompromised: handleCheckboxChange(e)
-                    }
-                  }))}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span>Immunocompromised</span>
-              </label>
+        {/* Starting Age */}
+        {guideline.starting_age && (
+          <div className="flex items-start space-x-3">
+            <div className="flex-shrink-0 w-5 h-5 mt-0.5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+              <div className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full"></div>
             </div>
+            <div>
+              <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                Starting Age
+              </span>
+              <p className="text-sm text-gray-900 dark:text-gray-100 font-medium">
+                {guideline.starting_age}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Modality */}
+        <div className="flex items-start space-x-3">
+          <div className="flex-shrink-0 w-5 h-5 mt-0.5 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+            <div className="w-2 h-2 bg-purple-600 dark:bg-purple-400 rounded-full"></div>
+          </div>
+          <div>
+            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+              Screening Modality
+            </span>
+            <p className="text-sm text-gray-900 dark:text-gray-100 font-medium">
+              {guideline.modality}
+            </p>
+          </div>
+        </div>
+
+        {/* Frequency */}
+        {guideline.frequency && (
+          <div className="flex items-start space-x-3">
+            <div className="flex-shrink-0 w-5 h-5 mt-0.5 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
+              <Clock className="w-3 h-3 text-orange-600 dark:text-orange-400" />
+            </div>
+            <div>
+              <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                Frequency
+              </span>
+              <p className="text-sm text-gray-900 dark:text-gray-100 font-medium">
+                {guideline.frequency}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Notes */}
+        {guideline.notes && (
+          <div className="pt-2 border-t border-gray-200 dark:border-gray-600">
+            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-2">
+              Clinical Notes
+            </span>
+            <ExpandableNotes notes={guideline.notes} maxLength={120} />
           </div>
         )}
       </div>
 
-      {/* Patient Information Panel */}
-      <div className="bg-white rounded-lg shadow p-6 space-y-4">
-        <h3 className="text-lg font-semibold text-gray-800">Patient Information</h3>
-        <div className="grid md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Age</label>
-            <input
-              type="number"
-              value={patientData.age || ''}
-              onChange={(e) => setPatientData(prev => ({ ...prev, age: parseInt(e.target.value) || 0 }))}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Gender</label>
-            <select
-              value={patientData.gender}
-              onChange={(e) => setPatientData(prev => ({ ...prev, gender: e.target.value as Gender }))}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            >
-              <option value="female">Female</option>
-              <option value="male">Male</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Smoking History</label>
-            <div className="mt-1 space-y-2">
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  checked={patientData.smokingHistory}
-                  onChange={(e) => setPatientData(prev => ({ ...prev, smokingHistory: handleCheckboxChange(e) }))}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="ml-2">Current or Former Smoker</span>
-              </label>
-              {patientData.smokingHistory && (
-                <input
-                  type="number"
-                  placeholder="Pack Years"
-                  value={patientData.packYears || ''}
-                  onChange={(e) => setPatientData(prev => ({ ...prev, packYears: parseInt(e.target.value) || 0 }))}
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-              )}
-            </div>
+      {/* Source Badge */}
+      {guideline.guideline_source && (
+        <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
+          <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium 
+                          bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+            <Database className="w-3 h-3 mr-1.5" />
+            {guideline.guideline_source}
           </div>
         </div>
+      )}
+    </div>
+  );
+};
 
-        {/* Family History Section */}
-        <div className="mt-4">
-          <h4 className="text-sm font-medium text-gray-700 mb-2">Family History</h4>
-          <div className="grid md:grid-cols-2 gap-4">
-            {(Object.keys(patientData.familyHistory) as Array<keyof typeof patientData.familyHistory>).map((cancer) => (
-              <label key={cancer} className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  checked={patientData.familyHistory[cancer]}
-                  onChange={(e) => setPatientData(prev => ({
-                    ...prev,
-                    familyHistory: {
-                      ...prev.familyHistory,
-                      [cancer]: handleCheckboxChange(e)
-                    }
-                  }))}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="ml-2 capitalize">{cancer} Cancer</span>
-              </label>
-            ))}
-          </div>
-        </div>
+const CancerScreening: React.FC = () => {
+  const [guidelines, setGuidelines] = useState<ScreeningGuideline[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-        {/* Symptoms Panel */}
-        <div className="mt-4 border-t pt-4">
-          <h4 className="text-sm font-medium text-gray-700 mb-2">Active Symptoms</h4>
-          <div className="grid md:grid-cols-3 gap-4">
-            {Object.entries(patientData.activeSymptoms).map(([symptom, isActive]) => (
-              <label key={symptom} className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  checked={isActive}
-                  onChange={(e) => setPatientData(prev => ({
-                    ...prev,
-                    activeSymptoms: {
-                      ...prev.activeSymptoms,
-                      [symptom]: handleCheckboxChange(e)
-                    }
-                  }))}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="ml-2 capitalize">{symptom.replace(/([A-Z])/g, ' $1').toLowerCase()}</span>
-              </label>
-            ))}
-          </div>
-        </div>
+  // Fetch screening guidelines from Supabase
+  useEffect(() => {
+    const fetchGuidelines = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const supabase = getSupabase();
+        const { data, error: fetchError } = await supabase
+          .from('screening_guidelines')
+          .select('*')
+          .order('cancer_type', { ascending: true });
 
-        {/* Last Screening Dates */}
-        <div className="mt-4 border-t pt-4">
-          <h4 className="text-sm font-medium text-gray-700 mb-2">Last Screening Dates</h4>
-          <div className="grid md:grid-cols-2 gap-4">
-            {(Object.keys(patientData.lastScreening) as LastScreeningKey[]).map((screening) => (
-              <div key={screening}>
-                <label className="block text-sm font-medium text-gray-700 capitalize">
-                  {screening.replace(/([A-Z])/g, ' $1').trim()}
-                </label>
-                <input
-                  type="date"
-                  value={patientData.lastScreening[screening as keyof typeof patientData.lastScreening] || ''}
-                  onChange={(e) => setPatientData(prev => ({
-                    ...prev,
-                    lastScreening: {
-                      ...prev.lastScreening,
-                      [screening]: e.target.value
-                    }
-                  }))}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
+        if (fetchError) {
+          throw new Error(`Failed to fetch screening guidelines: ${fetchError.message}`);
+        }
+
+        setGuidelines(data || []);
+      } catch (err) {
+        console.error('Error fetching screening guidelines:', err);
+        setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGuidelines();
+  }, []);
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8">
+            <div className="flex items-center justify-center">
+              <div className="flex items-center space-x-3">
+                <Clock className="animate-spin h-6 w-6 text-blue-600 dark:text-blue-400" />
+                <span className="text-lg text-gray-700 dark:text-gray-300">
+                  Loading screening guidelines...
+                </span>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
+    );
+  }
 
-      {/* Recommendations Panel */}
-      <div className="space-y-4">
-        {Object.entries(recommendations).map(([cancerType, recommendation]) => {
-          // Skip if recommendation is undefined or gender-specific recommendation doesn't apply
-          if (!recommendation) return null;
-          if ((cancerType === 'breast' || cancerType === 'cervical') && patientData.gender === 'male') return null;
-          if (cancerType === 'prostate' && patientData.gender === 'female') return null;
-
-          return (
-            <div key={cancerType} className="bg-white rounded-lg shadow">
-              <div
-                className="p-4 flex items-center justify-between cursor-pointer"
-                onClick={() => setExpandedPanels(prev => ({ ...prev, [cancerType]: !prev[cancerType] }))}
-              >
-                <div className="flex items-center gap-4">
-                  <h3 className="text-lg font-semibold text-gray-800 capitalize">
-                    {cancerType} Cancer Screening
-                  </h3>
-                  <span className={`px-2 py-1 rounded-full text-sm font-medium ${getStatusColor(recommendation.status, recommendation.isOverdue)}`}>
-                    {recommendation.status.toUpperCase()}
-                  </span>
-                  {recommendation.isOverdue && (
-                    <AlertTriangle className="text-red-500" size={20} />
-                  )}
-                </div>
-                {expandedPanels[cancerType] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+  // Error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8">
+            <div className="flex items-center space-x-3 text-red-600 dark:text-red-400">
+              <AlertTriangle className="h-6 w-6" />
+              <div>
+                <h3 className="text-lg font-semibold">Unable to Load Guidelines</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  {error}
+                </p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
+                >
+                  Retry
+                </button>
               </div>
-
-              {expandedPanels[cancerType] && (
-                <div className="p-4 border-t border-gray-200 space-y-4">
-                  <p className="text-gray-600">{recommendation.reason}</p>
-                  {recommendation?.nextDue && (
-                    <p className="text-sm text-gray-500">
-                      Next screening due: {new Date(recommendation.nextDue).toLocaleDateString()}
-                    </p>
-                  )}
-                  <button
-                    onClick={() => handleAIConsult(recommendation.cancerType)}
-                    className="flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
-                    disabled={loading}
-                  >
-                    <MessageSquare size={16} />
-                    Ask AI about {cancerType} screening
-                  </button>
-                </div>
-              )}
             </div>
-          );
-        })}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center space-x-3 mb-4">
+            <Database className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              Cancer Screening Guidelines
+            </h1>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400">
+            Evidence-based screening recommendations for cancer prevention and early detection.
+            This reference tool displays population-level guidelines for clinical decision support.
+          </p>
+        </div>        {/* Guidelines Cards */}
+        {guidelines.length === 0 ? (
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center">
+            <Database className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-600" />
+            <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-white">
+              No Guidelines Found
+            </h3>
+            <p className="mt-2 text-gray-600 dark:text-gray-400">
+              No screening guidelines are currently available in the database.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="mb-6">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow px-6 py-4">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Screening Guidelines ({guidelines.length} recommendations)
+                </h2>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {guidelines.map((guideline, index) => (
+                <GuidelineCard
+                  key={guideline.id}
+                  guideline={guideline}
+                  index={index}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Footer Info */}
+        <div className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+          <p>
+            Guidelines are for reference only and should be used in conjunction with clinical judgment.
+            Always consult current professional guidelines and institutional protocols.
+          </p>
+        </div>
       </div>
     </div>
   );

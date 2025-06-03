@@ -247,15 +247,15 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                     <>
                       <h4 className="font-semibold text-sm mb-1">Inclusion</h4>
                       <ul className="list-disc list-inside text-sm text-green-800 dark:text-green-300">
-                        {protocol.eligibility.inclusion_criteria?.map((item: { criterion: string }, idx: number) => (
-                          <li key={idx}>{item.criterion}</li>
+                        {protocol.eligibility.inclusion_criteria?.map((item: string, idx: number) => (
+                          <li key={idx}>{item}</li>
                         ))}
                       </ul>
 
                       <h4 className="font-semibold text-sm mt-2 mb-1">Exclusion</h4>
                       <ul className="list-disc list-inside text-sm text-green-800 dark:text-green-300">
-                        {protocol.eligibility.exclusion_criteria?.map((item: { criterion: string }, idx: number) => (
-                          <li key={idx}>{item.criterion}</li>
+                        {protocol.eligibility.exclusion_criteria?.map((item: string, idx: number) => (
+                          <li key={idx}>{item}</li>
                         ))}
                       </ul>
                     </>
