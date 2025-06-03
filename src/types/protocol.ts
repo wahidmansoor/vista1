@@ -1,9 +1,10 @@
 import { supabase } from '@/lib/supabaseClient';
 // Import types from existing files
-export type { Protocol } from './protocolUpdated';
+import { type Protocol } from './protocolUpdated'; // Changed to named import
+export type { Protocol }; // Re-export Protocol
+export type { Drug, Medication, PreMedication, PostMedication, Interactions, RescueAgent, Eligibility, SupportiveCareItem, DoseModification, CycleInfo, MonitoringItem, ToxicityMonitoring, SupportiveCare, Test } from './protocolUpdated'; // Added Test and other exports
 import type { ProtocolFilters } from '@/services/protocols';
 import { cleanProtocol } from './protocolUpdated';
-export type { Test } from './protocolUpdated';
 
 // ✅ Get unique tumour supergroups (top-level filter)
 export const getSupergroups = async (): Promise<string[]> => {
