@@ -40,9 +40,8 @@ const Header: React.FC = () => {
   const handleSearchClick = () => {
     navigate('/search');
   };
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-indigo-900 dark:to-blue-800 text-white shadow-lg transition-colors duration-200">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#004D61] via-[#005B8F] to-[#3B1D74] text-white shadow-lg transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Left side - Logo & Welcome message */}

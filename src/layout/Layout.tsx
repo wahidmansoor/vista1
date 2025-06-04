@@ -14,9 +14,8 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       toggleSidebar();
     }
   }, [windowWidth]);
-
   return (
-    <div className="flex flex-col min-h-screen bg-background text-gray-900 dark:text-white transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-[#004D61] via-[#005B8F] to-[#3B1D74] text-white transition-colors duration-300">
       <Header />
       <div className="flex flex-1">
         <Sidebar />
