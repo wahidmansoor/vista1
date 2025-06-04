@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, Suspense, startTransition, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, Filter, X, Search, AlertCircle, Pill, Calendar, Info, RefreshCw, Bug } from 'lucide-react';
+import { ChevronLeft, Filter, X, Search, AlertCircle, Pill, Calendar, Info, RefreshCw, AlertTriangle } from 'lucide-react';
 import { Button } from "../../../components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "../../../components/ui/card";
 import { Input } from "../../../components/ui/input";
@@ -290,7 +290,7 @@ const SearchAndFilter = ({
             onClick={onToggleDebugInfo}
             className="text-xs flex items-center gap-1"
           >
-            <Bug className="h-3 w-3" />
+            <AlertTriangle className="h-3 w-3" />
             {showDebugInfo ? 'Hide Debug' : 'Show Debug'}
           </Button>
           

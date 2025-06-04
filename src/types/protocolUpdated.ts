@@ -18,6 +18,7 @@ export interface Drug {
   frequency?: string;
   duration?: string;
   administration_notes?: string;
+  administration?: string;
   infusion_time?: string;
   special_notes?: string[];
 }
@@ -149,6 +150,10 @@ export interface Protocol {
   };
   toxicity_monitoring?: ToxicityMonitoring;
   interactions?: Interactions;
+    // Additional properties for AI and dose modifications
+  natural_language_prompt?: string;
+  dose_reductions?: DoseModification[];
+  administration?: string;
   contraindications?: string[];
   protocol_version?: string;
   approval_date?: string;
@@ -249,19 +254,17 @@ export const cleanProtocol = (raw: any): Protocol | null => {
   if (cleaned.treatment && !Array.isArray(cleaned.treatment.drugs)) {
     cleaned.treatment.drugs = [];
   }
-
-  // Add or update the cleanProtocol function to include proper premedication parsing
-  if (cleaned.premedications) {
-    if (typeof cleaned.premedications === 'string') {
+  // Add or update the cleanProtocol function to include proper pre_medication parsing
+  if (cleaned.pre_medications) {
+    if (typeof cleaned.pre_medications === 'string') {
       try {
-        cleaned.premedications = JSON.parse(cleaned.premedications);
+        cleaned.pre_medications = JSON.parse(cleaned.pre_medications);
       } catch (e) {
-        console.warn('Failed to parse premedications string:', e);
+        console.warn('Could not parse pre_medications:', e);
       }
-    } else if (Array.isArray(cleaned.premedications)) {
-      // Handle array of possibly stringified items
-      cleaned.premedications = cleaned.premedications.map(item => 
-        typeof item === 'string' ? JSON.parse(item) : item
+    } else if (Array.isArray(cleaned.pre_medications)) {
+      cleaned.pre_medications = cleaned.pre_medications.map((item: any) =>
+        typeof item === 'string' ? { name: item } : item
       );
     }
   }

@@ -7,14 +7,14 @@ interface PromptSuggestionsProps {
   onSelect: (prompt: string) => void;
 }
 
-const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {
+const modulePrompts: Record<ModuleType, Partial<Record<PromptIntent, string[]>>> = {
   OPD: {
     screening: [
       'Analyze cancer screening recommendations for this patient',
       'Suggest additional screening tests based on risk factors',
       'Review current screening schedule compliance'
     ],
-    follow_up: [
+    'follow-up': [
       'Review follow-up plan and suggest optimizations',
       'Analyze surveillance frequency based on guidelines',
       'Recommend quality of life monitoring points'
@@ -47,6 +47,30 @@ const modulePrompts: Record<ModuleType, Record<PromptIntent, string[]>> = {
       'Review inpatient care metrics',
       'Analyze complications and interventions',
       'Suggest discharge planning optimization'
+    ]
+  },
+  Palliative: {
+    evaluation: [
+      'Review symptom management strategies',
+      'Analyze pain control effectiveness',
+      'Suggest quality of life improvements'
+    ],
+    'follow-up': [
+      'Monitor symptom progression',
+      'Review care plan adjustments',
+      'Assess family support needs'
+    ]
+  },
+  RadOnc: {
+    evaluation: [
+      'Review radiation treatment response',
+      'Analyze side effect patterns',
+      'Suggest supportive interventions'
+    ],
+    'follow-up': [
+      'Monitor late effects',
+      'Review surveillance schedule',
+      'Assess functional outcomes'
     ]
   }
 };

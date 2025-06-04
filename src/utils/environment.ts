@@ -3,6 +3,9 @@
  * This file handles all environment variable access safely for browser environments
  */
 
+// Browser detection utility
+export const isBrowser = typeof window !== 'undefined';
+
 // Type definitions for environment variables
 export interface EnvironmentVariables {
   supabaseUrl: string;

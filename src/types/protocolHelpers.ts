@@ -8,6 +8,19 @@ import { Drug, Protocol, SupportiveCareItem } from './protocol';
  * including validation, extraction, and data manipulation helpers.
  */
 
+// Type guard functions
+function isSupportiveCareObject(item: any): item is { required: any[]; optional: any[] } {
+  return item && typeof item === 'object' && ('required' in item || 'optional' in item);
+}
+
+function isTestObject(item: any): item is { baseline: any[]; monitoring: any[] } {
+  return item && typeof item === 'object' && ('baseline' in item || 'monitoring' in item);
+}
+
+function hasToxicityParameters(item: any): item is { parameters: any[] } {
+  return item && typeof item === 'object' && 'parameters' in item && Array.isArray(item.parameters);
+}
+
 /**
  * Gets a list of all drug names from a protocol
  * @param protocol The protocol to extract drug names from
@@ -47,55 +60,44 @@ export const getSupportiveCareItems = (protocol: Protocol): SupportiveCareItem[]
   
   // Check supportive_care section
   if (protocol.supportive_care) {
-    // Add required supportive care
-    if (Array.isArray(protocol.supportive_care.required)) {
-      protocol.supportive_care.required.forEach(drug => {
-        items.push({
-          name: drug.name,
-          dose: drug.dose,
-          timing: drug.timing,
-          route: drug.route
+    if (isSupportiveCareObject(protocol.supportive_care)) {
+      // Add required supportive care
+      if (Array.isArray(protocol.supportive_care.required)) {
+        protocol.supportive_care.required.forEach((drug: any) => {
+          items.push({
+            name: drug.name,
+            dose: drug.dose,
+            timing: drug.timing,
+            route: drug.route
+          });
         });
-      });
-    }
-    
-    // Add optional supportive care
-    if (Array.isArray(protocol.supportive_care.optional)) {
-      protocol.supportive_care.optional.forEach(drug => {
-        items.push({
-          name: drug.name,
-          dose: drug.dose,
-          timing: drug.timing,
-          route: drug.route
+      }
+      
+      // Add optional supportive care
+      if (Array.isArray(protocol.supportive_care.optional)) {
+        protocol.supportive_care.optional.forEach((drug: any) => {
+          items.push({
+            name: drug.name,
+            dose: drug.dose,
+            timing: drug.timing,
+            route: drug.route
+          });
         });
-      });
+      }
+    } else if (Array.isArray(protocol.supportive_care)) {
+      items.push(...protocol.supportive_care.map((item: any) => item.name || String(item)));
     }
   }
   
   // Check supportive_meds array
   if (Array.isArray(protocol.supportive_meds)) {
-    protocol.supportive_meds.forEach(drug => {
+    protocol.supportive_meds.forEach((drug: any) => {
       items.push({
         name: drug.name,
         dose: drug.dose,
         timing: drug.timing,
         route: drug.route
       });
-    });
-  }
-  
-  // Check individual drugs for supportive care items
-  if (protocol.treatment?.drugs) {
-    protocol.treatment.drugs.forEach(drug => {
-      if (Array.isArray(drug.supportiveCare)) {
-        drug.supportiveCare.forEach(item => {
-          if (typeof item === 'string') {
-            items.push({ name: item });
-          } else if (typeof item === 'object' && item !== null) {
-            items.push(item);
-          }
-        });
-      }
     });
   }
   
@@ -111,28 +113,34 @@ export const getMonitoringParameters = (protocol: Protocol): string[] => {
   const parameters: string[] = [];
   
   // Get baseline tests
-  if (protocol.tests?.baseline && Array.isArray(protocol.tests.baseline)) {
-    parameters.push(...protocol.tests.baseline.map(test => test.name || String(test)));
-  }
-  
-  // Get monitoring tests
-  if (protocol.tests?.monitoring && Array.isArray(protocol.tests.monitoring)) {
-    parameters.push(...protocol.tests.monitoring.map(test => test.name || String(test)));
+  if (protocol.tests) {
+    if (isTestObject(protocol.tests)) {
+      if (Array.isArray(protocol.tests.baseline)) {
+        parameters.push(...protocol.tests.baseline.map((test: any) => test.name || String(test)));
+      }
+      
+      // Get monitoring tests
+      if (Array.isArray(protocol.tests.monitoring)) {
+        parameters.push(...protocol.tests.monitoring.map((test: any) => test.name || String(test)));
+      }
+    } else if (Array.isArray(protocol.tests)) {
+      parameters.push(...protocol.tests.map((item: any) => item.name || String(item)));
+    }
   }
   
   // Get monitoring parameters
-  if (protocol.toxicity_monitoring?.parameters && Array.isArray(protocol.toxicity_monitoring.parameters)) {
-    parameters.push(...protocol.toxicity_monitoring.parameters.map(param => param.name || String(param)));
+  if (protocol.toxicity_monitoring && hasToxicityParameters(protocol.toxicity_monitoring)) {
+    parameters.push(...protocol.toxicity_monitoring.parameters.map((param: any) => param.name || String(param)));
   }
   
   // Get baseline monitoring
   if (protocol.monitoring?.baseline && Array.isArray(protocol.monitoring.baseline)) {
-    parameters.push(...protocol.monitoring.baseline.map(monitor => monitor.name || String(monitor)));
+    parameters.push(...protocol.monitoring.baseline.map((monitor: any) => monitor.parameter || monitor.name || String(monitor)));
   }
   
   // Get ongoing monitoring
   if (protocol.monitoring?.ongoing && Array.isArray(protocol.monitoring.ongoing)) {
-    parameters.push(...protocol.monitoring.ongoing.map(monitor => monitor.name || String(monitor)));
+    parameters.push(...protocol.monitoring.ongoing.map((monitor: any) => monitor.parameter || monitor.name || String(monitor)));
   }
   
   // Return unique parameters

@@ -5,7 +5,7 @@
  * - Designed for HIPAA, GDPR, and international medical privacy standards
  */
 
-import { RiskScore, PatientDemographics, GeneticProfile, RiskFactorProfile, SymptomProfile, ScreeningHistory } from '../types/clinical';
+import { PatientDemographics, GeneticProfile, RiskFactorProfile, SymptomProfile, ScreeningHistory } from '../types/clinical';
 
 // -------------------- 1. Data Anonymization Pipeline --------------------
 
@@ -14,28 +14,38 @@ import { RiskScore, PatientDemographics, GeneticProfile, RiskFactorProfile, Symp
  * @param data Any patient-related object
  * @returns Anonymized object
  */
-export function anonymizePatientData<T extends object>(data: T): Partial<T> {
+export function anonymizePatientData<T extends Record<string, any>>(data: T): Record<string, any> {
   // Remove or generalize common PII fields
-  const anonymized = { ...data };
+  const anonymized = { ...data } as Record<string, any>;
+  
   if ('name' in anonymized) anonymized['name'] = undefined;
   if ('address' in anonymized) anonymized['address'] = undefined;
   if ('phone' in anonymized) anonymized['phone'] = undefined;
   if ('email' in anonymized) anonymized['email'] = undefined;
   if ('mrn' in anonymized) anonymized['mrn'] = undefined;
+  
   if ('dob' in anonymized && typeof anonymized['dob'] === 'string') {
     // Convert DOB to age range
     anonymized['age_range'] = getAgeRange(anonymized['dob']);
     anonymized['dob'] = undefined;
   }
+  
   if ('age' in anonymized && typeof anonymized['age'] === 'number') {
     anonymized['age_range'] = getAgeRange(anonymized['age']);
     anonymized['age'] = undefined;
   }
-  if ('location' in anonymized) anonymized['region'] = generalizeRegion(anonymized['location']);
-  delete anonymized['location'];
+  
+  if ('location' in anonymized && typeof anonymized['location'] === 'string') {
+    anonymized['region'] = generalizeRegion(anonymized['location']);
+    delete anonymized['location'];
+  }
+  
   // Risk profile abstraction
-  if ('absoluteRisk' in anonymized) anonymized['risk_category'] = riskCategory(anonymized['absoluteRisk']);
-  delete anonymized['absoluteRisk'];
+  if ('absoluteRisk' in anonymized && typeof anonymized['absoluteRisk'] === 'number') {
+    anonymized['risk_category'] = riskCategory(anonymized['absoluteRisk']);
+    delete anonymized['absoluteRisk'];
+  }
+  
   return anonymized;
 }
 

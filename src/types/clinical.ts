@@ -130,13 +130,25 @@ export interface PatientDemographics {
   /** Biological sex at birth */
   sex: BiologicalSex;
   /** Ethnicity */
-  ethnicity: Ethnicity;
-  /** Family history of cancer */
+  ethnicity: Ethnicity;  /** Family history of cancer */
   family_history: Array<{
     cancer_type: CancerType;
     relationship: string;
     age_at_diagnosis?: number;
   }>;
+  /** Insurance information */
+  insurance?: string;
+}
+
+/**
+ * RiskScore: Calculated risk scores for cancer types
+ */
+export interface RiskScore {
+  cancer_type: CancerType;
+  score: number; // 0-100
+  high_risk: boolean;
+  absolute_risk: number; // 0-1 for percentage
+  risk_level: string; // 'low', 'moderate', 'high', 'very high'
 }
 
 /**

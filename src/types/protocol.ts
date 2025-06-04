@@ -6,6 +6,27 @@ export type { Drug, Medication, PreMedication, PostMedication, Interactions, Res
 import type { ProtocolFilters } from '@/services/protocols';
 import { cleanProtocol } from './protocolUpdated';
 
+// Export the cleanProtocol function
+export { cleanProtocol };
+
+// Utility function for safe JSON parsing
+export const safeJsonParse = (jsonString: string | null | undefined): any => {
+  if (!jsonString) return null;
+  try {
+    return JSON.parse(jsonString);
+  } catch (error) {
+    console.error('JSON parse error:', error);
+    return null;
+  }
+};
+
+// Utility function to validate drug lists
+export const isValidDrugList = (drugs: any): boolean => {
+  return Array.isArray(drugs) && drugs.every(drug => 
+    drug && typeof drug === 'object' && typeof drug.name === 'string'
+  );
+};
+
 // ✅ Get unique tumour supergroups (top-level filter)
 export const getSupergroups = async (): Promise<string[]> => {
   const { data, error } = await supabase

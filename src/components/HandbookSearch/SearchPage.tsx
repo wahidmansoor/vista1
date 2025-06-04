@@ -408,10 +408,8 @@ export function SearchPage({ className }: SearchPageProps) {
             )}
           </div>
         </div>
-      </div>
-
-      {/* Custom styles for highlighted text */}
-      <style jsx>{`
+      </div>      {/* Custom styles for highlighted text */}
+      <style>{`
         mark {
           background-color: #fef08a;
           color: #1f2937;

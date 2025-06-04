@@ -25,7 +25,7 @@ export interface ColorMapping {
 
 interface DataCardProps {
   data: DataItem;
-  title?: string | ((data: DataItem) => string);
+  title?: string | ((data: DataItem) => string) | React.ReactNode;
   description?: string | ((data: DataItem) => string);
   colorMapping?: ColorMapping;
   fields?: {
@@ -79,18 +79,30 @@ export const DataCard: React.FC<DataCardProps> = ({
     }
     return field.visible !== false;
   }) || [];
-
   // Render the title
   const renderTitle = () => {
     if (!title) return null;
     
-    const titleContent = typeof title === 'function' 
-      ? title(data)
-      : title;
-      
+    if (typeof title === 'function') {
+      return (
+        <CardTitle className={cn("text-lg", colorStyles.text)}>
+          {title(data)}
+        </CardTitle>
+      );
+    }
+    
+    if (typeof title === 'string') {
+      return (
+        <CardTitle className={cn("text-lg", colorStyles.text)}>
+          {title}
+        </CardTitle>
+      );
+    }
+    
+    // React component/element
     return (
       <CardTitle className={cn("text-lg", colorStyles.text)}>
-        {titleContent}
+        {title}
       </CardTitle>
     );
   };

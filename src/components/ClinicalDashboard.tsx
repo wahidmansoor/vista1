@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import type {
-  PatientDemographics,
-  RiskFactorProfile,
-  SymptomProfile,
-  ScreeningHistory,
+import {
   BiologicalSex,
   Ethnicity,
   CancerType,
   SymptomSeverity,
   ScreeningTestType,
   ScreeningResultType
+} from "../types/clinical";
+import type {
+  PatientDemographics,
+  RiskFactorProfile,
+  SymptomProfile,
+  ScreeningHistory
 } from "../types/clinical";
 
 /**
@@ -155,10 +157,9 @@ const ClinicalDashboard: React.FC = () => {
   // Example state (replace with real data integration)
   const [demographics, setDemographics] = useState<PatientDemographics>({
     age: 50,
-    sex: "female",
-    ethnicity: "caucasian",
+    sex: BiologicalSex.FEMALE,
+    ethnicity: Ethnicity.CAUCASIAN,
     family_history: [],
-    // @ts-ignore
     insurance: ""
   });
   const [riskFactors, setRiskFactors] = useState<RiskFactorProfile>({

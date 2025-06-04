@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { generateGeminiResponse } from '../lib/gemini';
 import { getOfflineResponse } from '../components/ai-agent/mockResponses';
 import { v4 as uuidv4 } from 'uuid';
-import { ModuleType, PromptIntent, AIRequestBody, AIError } from '@/types/ai-agent';
+import { ModuleType, PromptIntent, AIRequestBody, AIError } from '../types/ai-agent';
 import { RateLimiter } from '../lib/rate-limit';
 import { z } from 'zod';
 
@@ -15,7 +15,9 @@ const rateLimiter = new RateLimiter(10, 60000); // 10 requests per minute
 class APIError implements AIError {
   name: string;
   code: string;
+  message: string;
   statusCode: number;
+  details?: any;
   
   constructor(message: string, code: string, statusCode: number = 500) {
     this.name = 'APIError';
@@ -82,15 +84,11 @@ export const promptSchema = z.string().max(500).regex(/^[\w\s.,?!-]+$/);
 // Main route handler
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const { prompt, mockMode, module, intent, context, history, iterationCount, previousResponse, feedbackType } = req.body as AIRequestBody;
-
-    // Zod prompt validation
+    const { prompt, mockMode, module, intent, context, history, iterationCount, previousResponse, feedbackType } = req.body as AIRequestBody;    // Zod prompt validation
     try {
       await promptSchema.parseAsync(prompt);
     } catch (validationError: any) {
-      if (typeof LogRocket !== 'undefined') {
-        LogRocket.error('Prompt validation failed', validationError);
-      }
+      console.error('Prompt validation failed', validationError);
       return res.status(400).json({
         error: 'Prompt validation failed',
         code: 'INVALID_PROMPT',
@@ -119,15 +117,12 @@ router.post('/', async (req: Request, res: Response) => {
     const API_KEY = import.meta?.env?.VITE_GEMINI_API_KEY ?? process?.env?.VITE_GEMINI_API_KEY ?? '';
     if (!API_KEY) {
       throw new APIError('Gemini API key not configured', 'API_KEY_MISSING', 400);
-    }
-
-    // Rate limiting check
-    if (!rateLimiter.check(req.ip)) {
+    }    // Rate limiting check
+    if (!rateLimiter.check(req.ip || 'unknown')) {
       throw new APIError('API quota exceeded', 'RATE_LIMIT_EXCEEDED', 429);
-    }
-
-    // Generate response
-    const response = await generateGeminiResponse(prompt, context, history);
+    }// Generate response
+    const historyStrings = history?.map(item => `${item.prompt}\n${item.response}`) || [];
+    const response = await generateGeminiResponse(prompt, context || '', historyStrings);
     
     // Validate response
     const validation = validateResponse(response.content);

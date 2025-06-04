@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 import { v4 as uuidv4 } from 'uuid';
-import { AIError } from '@/types/ai-agent';
+import { AIError } from '../types/ai-agent';
 
 const MODEL_NAME = 'gemini-pro';
 const MAX_RETRIES = 3;

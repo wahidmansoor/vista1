@@ -15,6 +15,19 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
+// Emergency item interface
+interface EmergencyItem {
+  id: string;
+  title: string;
+  description: string;
+  details: string;
+  icon: string | React.ElementType;
+  color: string;
+  category?: string;
+  content?: string; // Add this for compatibility
+  [key: string]: any;
+}
+
 // Import from your existing RedFlags data structure or create a new one
 import { redFlags } from '@/modules/tools/RedFlags';
 
@@ -65,39 +78,41 @@ const OncologyEmergencyCards: React.FC = () => {
       ...prev,
       [id]: !prev[id]
     }));
-  };
-  
-  const filterItems = (items) => {
+  };    const filterItems = (items: EmergencyItem[]) => {
     if (!searchTerm) return items;
-    
-    return items.filter(item => 
+    return items.filter((item: EmergencyItem) =>
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.details.toLowerCase().includes(searchTerm.toLowerCase())
+      item.details.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (item.content && item.content.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (item.category && item.category.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   };
   
   const filteredItems = filterItems(redFlags);
   
   // Get proper icon component
-  const getIconComponent = (item) => {
-    const iconMap = {
-      'Thermometer': Thermometer,
-      'ShieldAlert': ShieldAlert,
-      'Activity': Activity,
-      'HeartPulse': HeartPulse,
-      'AlertTriangle': AlertTriangle,
+  const getIconComponent = (item: EmergencyItem) => {
+    const iconMap: { [key: string]: any } = {
+      Thermometer,
+      ShieldAlert,
+      Activity,
+      HeartPulse,
+      AlertTriangle,
     };
-    
-    // If the item.icon is a component name that exists in our map
+
     if (typeof item.icon === 'string' && iconMap[item.icon]) {
       const IconComponent = iconMap[item.icon];
-      return <IconComponent className="h-5 w-5" />;
+      return <IconComponent className="w-6 h-6 text-red-600" />;
     }
     
     // If item.icon is a React component
-    const IconComponent = item.icon || AlertTriangle;
-    return <IconComponent className="h-5 w-5" />;
+    if (typeof item.icon === 'function') {
+      const IconComponent = item.icon;
+      return <IconComponent className="w-6 h-6 text-red-600" />;
+    }
+    
+    return <AlertTriangle className="w-6 h-6 text-red-600" />;
   };
 
   return (
@@ -143,12 +158,11 @@ const OncologyEmergencyCards: React.FC = () => {
       <div className={cn(
         "grid gap-4", 
         viewMode === 'grid' ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"
-      )}>
-        {filteredItems.map((item) => (
+      )}>        {filteredItems.map((item: EmergencyItem) => (
           <DataCard
             key={item.id}
             data={item}
-            title={() => (
+            title={(
               <div className="flex items-center gap-2">
                 <span className={cn(
                   "p-1.5 rounded-md flex-shrink-0",

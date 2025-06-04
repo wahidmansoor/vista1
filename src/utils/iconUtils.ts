@@ -190,17 +190,43 @@ export function renderIcon(
   } = {}
 ): React.ReactElement {
   const IconComponent = getIconComponent(iconName);
-  
-  if (!IconComponent) {
+    if (!IconComponent) {
     // Return a default help circle icon as fallback
-    return React.createElement(LucideIcons.HelpCircle, {
-      ...props,
-      title: `Icon "${iconName}" not found`
-    });
+    return React.createElement(LucideIcons.HelpCircle, props);
   }
-  
+
   return React.createElement(IconComponent, props);
 }
+
+/**
+ * Get dynamic icon with fallback (backward compatibility function)
+ * @param iconName - Name of the icon
+ * @param props - Props to pass to the icon component
+ * @returns React element
+ */
+export const getDynamicIcon = (iconName: string, props: any = {}) => {
+  try {
+    const IconComponent = (LucideIcons as any)[iconName] || LucideIcons.AlertTriangle;
+    return React.createElement(IconComponent, {
+      size: 16,
+      ...props
+    });
+  } catch (error) {
+    return React.createElement(LucideIcons.AlertTriangle, {
+      size: 16,
+      ...props
+    });
+  }
+};
+
+// Icon map for backward compatibility
+export const iconMap = {
+  Home: LucideIcons.Home,
+  User: LucideIcons.User,
+  Settings: LucideIcons.Settings,
+  // Add more as needed, or use AlertTriangle as fallback
+  AlertTriangle: LucideIcons.AlertTriangle,
+};
 
 /**
  * Check if an icon exists in the Lucide library

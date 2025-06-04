@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Gauge, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, LineChart, Line, CartesianGrid } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, LineChart, Line, CartesianGrid } from 'recharts';
 import { CancerType, RiskScore } from '../types/clinical';
 
 /**
@@ -26,9 +26,8 @@ export const RiskVisualization: React.FC<RiskVisualizationProps> = ({
   riskFactorContributions,
   screeningTimeline,
   riskHistory,
-}) => {
-  const [selectedCancer, setSelectedCancer] = useState<CancerType>(riskScores[0]?.cancerType || CancerType.BREAST);
-  const selectedScore = riskScores.find(r => r.cancerType === selectedCancer);
+}) => {  const [selectedCancer, setSelectedCancer] = useState<CancerType>(riskScores[0]?.cancer_type || CancerType.BREAST);
+  const selectedScore = riskScores.find(r => r.cancer_type === selectedCancer);
   const popAvg = populationAverages[selectedCancer] || 0.1;
   const contributions = riskFactorContributions[selectedCancer] || [];
 
@@ -50,27 +49,24 @@ export const RiskVisualization: React.FC<RiskVisualizationProps> = ({
           <div className="w-48 h-48 flex items-center justify-center">
             {/* Use a simple SVG gauge for accessibility */}
             <svg width="180" height="100" viewBox="0 0 180 100" aria-label="Risk Gauge">
-              <path d="M10,100 A90,90 0 0,1 170,100" fill="none" stroke="#eee" strokeWidth="20" />
-              <path d={`M10,100 A90,90 0 0,1 ${10 + 160 * (selectedScore?.absoluteRisk ?? 0)},100`} fill="none" stroke={riskLevelColor(selectedScore?.absoluteRisk ?? 0)} strokeWidth="20" />
-              <circle cx={10 + 160 * (selectedScore?.absoluteRisk ?? 0)} cy="100" r="10" fill={riskLevelColor(selectedScore?.absoluteRisk ?? 0)} />
+              <path d="M10,100 A90,90 0 0,1 170,100" fill="none" stroke="#eee" strokeWidth="20" />             <path d={`M10,100 A90,90 0 0,1 ${10 + 160 * (selectedScore?.absolute_risk ?? 0)},100`} fill="none" stroke={riskLevelColor(selectedScore?.absolute_risk ?? 0)} strokeWidth="20" />
+             <circle cx={10 + 160 * (selectedScore?.absolute_risk ?? 0)} cy="100" r="10" fill={riskLevelColor(selectedScore?.absolute_risk ?? 0)} />
             </svg>
           </div>
-          <div>
-            <div className="text-3xl font-bold" style={{ color: riskLevelColor(selectedScore?.absoluteRisk ?? 0) }}>{Math.round((selectedScore?.absoluteRisk ?? 0) * 100)}%</div>
+          <div>            <div className="text-3xl font-bold" style={{ color: riskLevelColor(selectedScore?.absolute_risk ?? 0) }}>{Math.round((selectedScore?.absolute_risk ?? 0) * 100)}%</div>
             <div className="text-gray-600">Population Avg: {Math.round(popAvg * 100)}%</div>
-            <div className="text-sm mt-2">Risk Level: <span className="font-semibold">{selectedScore?.riskLevel ?? 'N/A'}</span></div>
-            <div className="text-xs text-gray-500">Potential risk reduction with screening: <span className="font-bold">{selectedScore ? Math.max(0, Math.round((selectedScore.absoluteRisk - popAvg) * 100)) : 0}%</span></div>
+            <div className="text-sm mt-2">Risk Level: <span className="font-semibold">{selectedScore?.risk_level ?? 'N/A'}</span></div>
+            <div className="text-xs text-gray-500">Potential risk reduction with screening: <span className="font-bold">{selectedScore ? Math.max(0, Math.round((selectedScore.absolute_risk - popAvg) * 100)) : 0}%</span></div>
           </div>
         </div>
         <div className="mt-4 flex gap-2 flex-wrap">
-          {riskScores.map(r => (
-            <button
-              key={r.cancerType}
-              className={`px-3 py-1 rounded ${selectedCancer === r.cancerType ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
-              onClick={() => setSelectedCancer(r.cancerType)}
-              aria-pressed={selectedCancer === r.cancerType}
+          {riskScores.map(r => (            <button
+              key={r.cancer_type}
+              className={`px-3 py-1 rounded ${selectedCancer === r.cancer_type ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+              onClick={() => setSelectedCancer(r.cancer_type)}
+              aria-pressed={selectedCancer === r.cancer_type}
             >
-              {r.cancerType.charAt(0) + r.cancerType.slice(1).toLowerCase()}
+              {r.cancer_type.charAt(0) + r.cancer_type.slice(1).toLowerCase()}
             </button>
           ))}
         </div>

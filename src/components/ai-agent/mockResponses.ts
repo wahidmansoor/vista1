@@ -1,4 +1,4 @@
-import { ModuleType, PromptIntent } from './types';
+import { ModuleType, PromptIntent } from '../../types/ai-agent';
 
 interface MockResponse {
   response: string;
@@ -10,7 +10,7 @@ const defaultResponse: MockResponse = {
   timestamp: new Date().toISOString()
 };
 
-const mockResponses: Record<ModuleType, Record<PromptIntent, MockResponse>> = {
+const mockResponses: Partial<Record<ModuleType, Partial<Record<PromptIntent, MockResponse>>>> = {
   OPD: {
     screening: {
       response: `Based on the patient's profile and current guidelines:
@@ -222,7 +222,7 @@ export async function getOfflineResponse(
   }
   
   // Return mock response with current timestamp
-  const response = mockResponses[module][intent] || defaultResponse;
+  const response = mockResponses[module]?.[intent] || defaultResponse;
   return {
     ...response,
     timestamp: new Date().toISOString()

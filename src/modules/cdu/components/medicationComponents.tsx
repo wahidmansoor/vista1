@@ -1,5 +1,5 @@
 import React from 'react';
-import { BeakerIcon, ShieldIcon, TargetIcon, AlertTriangleIcon, PillIcon, SyringeIcon } from 'lucide-react';
+import { BeakerIcon, ShieldIcon, TargetIcon, AlertTriangle, PillIcon, SyringeIcon } from 'lucide-react';
 import { Badge } from '../../../components/ui/badge';
 import { Card } from '../../../components/ui/card';
 import type { Medication } from '../../../types/medications';
@@ -81,7 +81,7 @@ export const DrugCard = ({ medication, onClick }: { medication: Medication; onCl
       {medication.black_box_warning && (
         <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-3 my-2">
           <div className="flex items-center gap-2 text-red-700 dark:text-red-400">
-            <AlertTriangleIcon className="w-4 h-4" />
+            <AlertTriangle className="w-4 h-4" />
             <span className="font-semibold">Black Box Warning</span>
           </div>
           <p className="mt-1 text-sm text-red-600 dark:text-red-300">
