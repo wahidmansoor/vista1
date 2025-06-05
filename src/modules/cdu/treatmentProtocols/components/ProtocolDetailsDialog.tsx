@@ -235,33 +235,73 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
 
               {/* Eligibility Panel */}
               <TabsContent value="eligibility" className="space-y-4">
-                <div className="bg-green-50 dark:bg-green-900 p-4 rounded-md shadow">
-                  <h3 className="font-semibold text-green-900 dark:text-green-200 text-lg mb-2">Eligibility Criteria</h3>
-                  {Array.isArray(protocol.eligibility) ? (
-                    <ul className="list-disc list-inside text-sm text-green-800 dark:text-green-300">
-                      {protocol.eligibility.map((item: string, idx: number) => (
-                        <li key={idx}>{item}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <>
-                      <h4 className="font-semibold text-sm mb-1">Inclusion</h4>
-                      <ul className="list-disc list-inside text-sm text-green-800 dark:text-green-300">
-                        {protocol.eligibility.inclusion_criteria?.map((item: string, idx: number) => (
-                          <li key={idx}>{item}</li>
-                        ))}
-                      </ul>
+  <h3 className="font-semibold text-green-900 dark:text-green-200 text-lg mb-2">
+    Eligibility Criteria
+  </h3>
 
-                      <h4 className="font-semibold text-sm mt-2 mb-1">Exclusion</h4>
-                      <ul className="list-disc list-inside text-sm text-green-800 dark:text-green-300">
-                        {protocol.eligibility.exclusion_criteria?.map((item: string, idx: number) => (
-                          <li key={idx}>{item}</li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </div>
-              </TabsContent>
+  {(() => {
+    const normalizeEligibility = (eligibility: any) => {
+      if (!eligibility) return { inclusion_criteria: [], exclusion_criteria: [] };
+
+      if (Array.isArray(eligibility)) {
+        return { inclusion_criteria: eligibility, exclusion_criteria: [] };
+      }
+
+      if (typeof eligibility === 'object') {
+        return {
+          inclusion_criteria: eligibility.inclusion_criteria || [],
+          exclusion_criteria: eligibility.exclusion_criteria || [],
+        };
+      }
+
+      return { inclusion_criteria: [], exclusion_criteria: [] };
+    };
+
+    const { inclusion_criteria, exclusion_criteria } = normalizeEligibility(protocol.eligibility);
+
+    return (
+      <>
+        <div>
+          <h4 className="font-semibold text-sm mb-1 text-green-800 dark:text-green-300">
+            Inclusion Criteria
+          </h4>
+          {inclusion_criteria.length > 0 ? (
+            <ul className="list-disc list-inside space-y-1">
+              {inclusion_criteria.map((item: any, idx: number) => (
+                <li key={`incl-${idx}`} className="text-gray-700 dark:text-gray-300">
+                  {typeof item === 'string' ? item : item?.criterion ?? '[Invalid entry]'}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+              No inclusion criteria specified.
+            </p>
+          )}
+        </div>
+
+        <div>
+          <h4 className="font-semibold text-sm mt-4 mb-1 text-red-800 dark:text-red-300">
+            Exclusion Criteria
+          </h4>
+          {exclusion_criteria.length > 0 ? (
+            <ul className="list-disc list-inside space-y-1">
+              {exclusion_criteria.map((item: any, idx: number) => (
+                <li key={`excl-${idx}`} className="text-gray-700 dark:text-gray-300">
+                  {typeof item === 'string' ? item : item?.criterion ?? '[Invalid entry]'}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+              No exclusion criteria specified.
+            </p>
+          )}
+        </div>
+      </>
+    );
+  })()}
+</TabsContent>
             </Tabs>
           </TabsContent>
           <TabsContent value="treatment" className="space-y-4">
