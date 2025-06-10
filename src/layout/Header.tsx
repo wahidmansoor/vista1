@@ -7,7 +7,7 @@ import LoginButton from '@/components/LoginButton';
 import LogoutButton from '@/components/LogoutButton';
 
 /**
- * Global header component for OncoVista that appears on every page
+ * Global header component for MWONCOVISTA that appears on every page
  * Shows welcome message, live clock, dark mode toggle, and Auth0 authentication status
  */
 const Header: React.FC = () => {
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
           <div className="flex-shrink-0 flex items-center gap-2">
             <span className="text-white">🧬</span>
             <h1 className="text-xl font-semibold hidden sm:block">
-              Welcome to OncoVista
+              Welcome to MWONCOVISTA
             </h1>
           </div>
 
