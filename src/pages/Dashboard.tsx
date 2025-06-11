@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUser } from '../hooks/useUser';
 import LoginButton from '../components/LoginButton';
-import LogoutButton from '../components/LogoutButton';
+import GlowingLogoImage from '../components/GlowingLogoImage';
 import { callAIAgentWithRetry } from '@/lib/api/aiAgentAPI';
 import { toast } from '@/components/ui/use-toast';
 import {
@@ -304,27 +304,31 @@ const Dashboard: React.FC = () => {
             }}
           />
         ))}
-      </div>
-
-
-      {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-8 py-10 space-y-10">
-        {/* Welcome Section */}
+      </div>      {/* Main Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-8 py-10 space-y-10">        {/* Welcome Section */}
         <motion.div 
-          className="text-center"
+          className="text-center bg-gradient-to-br from-slate-900/50 via-purple-900/40 to-indigo-900/50 backdrop-blur-xl rounded-3xl py-16 px-8 border border-white/20 shadow-2xl relative overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
+          {/* Enhanced Background for Logo Integration */}
+          <div className="absolute inset-0 bg-[#0f0821] rounded-3xl opacity-40"></div>
+          
+          {/* Glowing Logo Image */}
+          <motion.div className="relative z-10 mb-10">
+            <GlowingLogoImage />
+          </motion.div>
+          
           <motion.h1 
-            className="text-5xl font-bold text-white mb-4 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+            className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-8 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
             animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
             transition={{ duration: 5, repeat: Infinity }}
           >
             Welcome, Dr. {user?.name?.split(' ')[0] || 'Doctor'}
           </motion.h1>
           <motion.p 
-            className="text-white/80 text-xl max-w-2xl mx-auto leading-relaxed"
+            className="relative z-10 text-white/85 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
