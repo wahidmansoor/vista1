@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { motion, AnimatePresence } from 'framer-motion';
-import App from './App.tsx';
+import App from './App';
 import './index.css';
 import ErrorBoundary from './components/ErrorBoundary';
 import { Auth0Provider } from './auth/auth-provider';
 import { UserProvider } from './context/UserContext';
 import { validateEnv } from './utils/validateEnv';
 import { Stethoscope, Brain, Activity } from 'lucide-react';
+import GlowingLogoImage from './components/GlowingLogoImage';
 
 validateEnv();
 
@@ -77,23 +78,14 @@ const SplashScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
           </div>
         </motion.div>
 
-        <motion.h1
-          className="text-4xl font-bold text-white mb-2"
-          initial={{ scale: 0.8 }}
-          animate={{ scale: 1 }}
+        <motion.div
+          className="mb-4 max-w-[180px] mx-auto"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
         >
-          OncoVista
-        </motion.h1>
-
-        <motion.p
-          className="text-white/80 text-lg mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-        >
-          Medical AI Platform
-        </motion.p>
+          <GlowingLogoImage />
+        </motion.div>
 
         <div className="space-y-4 min-h-[120px] flex flex-col justify-center">
           <AnimatePresence mode="wait">
@@ -172,4 +164,3 @@ const AppInitializer: React.FC = () => {
 };
 
 createRoot(document.getElementById('root')!).render(<AppInitializer />);
-

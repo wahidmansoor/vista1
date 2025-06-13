@@ -62,7 +62,8 @@ declare module 'lucide-react' {
   export const ChevronLeft: LucideIcon;
   export const ChevronRight: LucideIcon;
   export const MoreHorizontal: LucideIcon;
-  export const MoreVertical: LucideIcon;  export const AlertOctagon: LucideIcon;
+  export const MoreVertical: LucideIcon;
+  export const AlertOctagon: LucideIcon;
   export const Database: LucideIcon;
   export const LifeBuoy: LucideIcon;
   export const Loader2: LucideIcon;
@@ -72,7 +73,8 @@ declare module 'lucide-react' {
   export const ThumbsUp: LucideIcon;
   export const ThumbsDown: LucideIcon;
   export const BookOpen: LucideIcon;
-  export const Filter: LucideIcon;  export const Copy: LucideIcon;
+  export const Filter: LucideIcon;
+  export const Copy: LucideIcon;
   export const FileText: LucideIcon;
   export const Users: LucideIcon;
   export const CalendarIcon: LucideIcon;

@@ -5,6 +5,7 @@ import { HandbookSearch } from "@/components/HandbookSearch";
 import { CommonIcons } from "@/utils/iconUtils";
 import LoginButton from '@/components/LoginButton';
 import LogoutButton from '@/components/LogoutButton';
+import CompactGlowingLogo from '@/components/CompactGlowingLogo';
 
 /**
  * Global header component for MWONCOVISTA that appears on every page
@@ -44,12 +45,12 @@ const Header: React.FC = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#004D61] via-[#005B8F] to-[#3B1D74] text-white shadow-lg transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Left side - Logo & Welcome message */}
-          <div className="flex-shrink-0 flex items-center gap-2">
-            <span className="text-white">🧬</span>
-            <h1 className="text-xl font-semibold hidden sm:block">
-              Welcome to MWONCOVISTA
-            </h1>
+          {/* Left side - Compact Glowing Logo */}
+          <div className="flex flex-col items-start max-w-[140px]">
+            <CompactGlowingLogo />
+            <span className="text-xs text-white/60 font-light tracking-wide hidden sm:block">
+              Medical AI
+            </span>
           </div>
 
           {/* Center - Search and Live clock */}

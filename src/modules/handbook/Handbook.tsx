@@ -5,7 +5,7 @@ import ErrorWrapper from "@/components/ErrorWrapper";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import HandbookLanding from "./HandbookLanding";
 import { HandbookSidebarNew } from './HandbookSidebarNew';
-import { JsonHandbookViewer } from './JsonHandbookViewer';
+import { UniversalContentViewer } from './UniversalContentViewer';
 import { useHandbookData } from '@/hooks/useHandbookData';
 import { parseHandbookPath } from '@/utils/pathUtils';
 import { parseErrorDetails } from '@/utils/errorUtils';
@@ -27,6 +27,8 @@ const Handbook: FC = (): ReactElement => {
   const { 
     tocData,
     activeFile,
+    content,
+    format,
     isLoading,
     error,
     isValidSection
@@ -36,20 +38,26 @@ const Handbook: FC = (): ReactElement => {
   const currentSectionMeta = useMemo(() => {
     return section ? sectionsMeta.find(s => s.id === section) : undefined;
   }, [section]);
-
   // Handle topic selection and navigation
   const handleTopicClick = useCallback((selectedSection: string, selectedTopic: string) => {
     try {
       console.log('🔍 Navigation request:', { selectedSection, selectedTopic });
       
       // Clean up topic path
-      const cleanTopic = selectedTopic
+      let cleanTopic = selectedTopic
         .replace(/^\/+|\/+$/g, '') // Remove leading/trailing slashes
         .replace(/\.json$|\.md$/, ''); // Remove any extensions
+      
+      // Remove duplicate section prefix if it exists
+      if (cleanTopic.startsWith(`${selectedSection}/`)) {
+        cleanTopic = cleanTopic.replace(`${selectedSection}/`, '');
+        console.log('🔧 Removed duplicate section prefix:', { original: selectedTopic, cleaned: cleanTopic });
+      }
       
       // Build the target path, preserving nested structure
       const targetPath = `/handbook/${selectedSection}/${cleanTopic}`;
       
+      console.log('🎯 Final navigation path:', targetPath);
       navigate(targetPath);
     } catch (err) {
       console.error('❌ Navigation error:', err);
@@ -120,7 +128,13 @@ const Handbook: FC = (): ReactElement => {
               </div>
 
               <ErrorBoundary moduleName="AI Handbook">
-                <JsonHandbookViewer filePath={activeFile} />
+                <UniversalContentViewer 
+                  content={content}
+                  format={format}
+                  isLoading={isLoading}
+                  error={error}
+                  title={topic ? topic.split('/').pop()?.replace(/-/g, ' ')?.replace('.json', '') : currentSectionMeta?.title}
+                />
               </ErrorBoundary>
             </>
           ) : (

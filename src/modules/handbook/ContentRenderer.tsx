@@ -7,7 +7,8 @@ import { AlertCircle, AlertTriangle, Info, FileText, Book } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+// @ts-ignore
+import { dark } from 'react-syntax-highlighter/dist/styles/dark';
 
 // Create simple UI components to avoid external dependencies
 const Separator: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) => (
@@ -371,12 +372,14 @@ export function ContentRenderer({ content, className }: ContentRendererProps) {
             </Table>
           </div>
         );
-      }      case 'code':
+      }
+
+      case 'code':
         return (
           <div key={getKey(block, index)} className="my-4">
             <div className="bg-muted p-4 rounded-md overflow-x-auto">
               <SyntaxHighlighter
-                style={oneDark as any}
+                style={dark as any}
                 language={block.language || 'text'}
                 PreTag="div"
                 className="text-sm"

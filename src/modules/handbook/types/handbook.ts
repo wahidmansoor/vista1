@@ -63,3 +63,18 @@ export interface HandbookFullTOC {
   sections: HandbookSection[];
   structure: Record<string, HandbookTOCItem[]>;
 }
+
+// New types for Supabase-backed handbook data
+export interface TocItem {
+  id: string;
+  title: string;
+  path: string;
+  children?: TocItem[];
+}
+
+export interface UseHandbookDataReturn {
+  content: string | null;
+  format: 'markdown' | 'json' | null;
+  isLoading: boolean;
+  error: Error | null;
+}

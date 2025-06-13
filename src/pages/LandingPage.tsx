@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "@/components/LoginButton";
 import LogoutButton from "@/components/LogoutButton";
+import GlowingLogoImage from "@/components/GlowingLogoImage";
 import {
   Stethoscope,
   Brain,
@@ -176,21 +177,8 @@ const LandingPage = () => {
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          <motion.div
-            className="relative p-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20"
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          >
-            <Stethoscope className="w-8 h-8 text-cyan-400" />
-            <motion.div
-              className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"
-              animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </motion.div>
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">OncoVista</h1>
-            <div className="text-xs text-cyan-300 font-medium">Medical AI Platform</div>
+          <div className="max-w-[140px]">
+            <GlowingLogoImage />
           </div>
         </motion.div>
 
