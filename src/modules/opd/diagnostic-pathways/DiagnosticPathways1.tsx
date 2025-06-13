@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { GitBranch, ChevronDown, Info, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { DetailedInfo } from '../../types/pathways';
+import { DetailedInfo } from '../../../types/pathways';
 import DecisionTree from './DecisionTree';
-import { cancerPathwaysData } from '../../data/cancer-pathways';
-import { lungCancerPathway } from '../../data/diagnostic-pathways';
+import { pathways } from '../../../data/cancer-pathways';
+import { lungCancerPathway } from '../../../data/diagnostic-pathways';React, { useState } from 'react';
+import { GitBranch, ChevronDown, Info, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { DetailedInfo } from '../../../types/pathways';
+import DecisionTree from './DecisionTree';
+import { pathways } from '../../../data/cancer-pathways';
+import { lungCancerPathway } from '../../../data/diagnostic-pathways';
 
 // Example structure for additional info. You can customize this per cancer type.
 const additionalCancerInfo: Record<string, Array<{ title: string; items: string[] }>> = {
@@ -338,10 +344,9 @@ export default function DiagnosticPathways() {
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
                       className="px-6 pb-6"
-                    >
-                      {/* Conditionally render DecisionTree for Lung Cancer, otherwise render steps */}
-                      {isLungCancerPathway && pathway.decisionTree ? (
-                        <DecisionTree tree={pathway.decisionTree} />
+                    >                      {/* Conditionally render DecisionTree for Lung Cancer, otherwise render steps */}
+                      {isLungCancerPathway && typeof pathway.decisionTree === 'object' && 'id' in pathway.decisionTree ? (
+                        <DecisionTree pathway={pathway.decisionTree as any} />
                       ) : (
                         <>
                           {/* Steps List with subtle divider between items */}
@@ -403,9 +408,8 @@ export default function DiagnosticPathways() {
                                                 <p>{details.when}</p>
                                               </div>
                                               <div>
-                                                <h4 className="text-lg font-semibold text-gray-800">Key Considerations</h4>
-                                                <ul className="list-disc pl-4 space-y-1">
-                                                  {details.considerations.map((item, idx) => (
+                                                <h4 className="text-lg font-semibold text-gray-800">Key Considerations</h4>                                                <ul className="list-disc pl-4 space-y-1">
+                                                  {details.considerations.map((item: string, idx: number) => (
                                                     <li key={idx}>{item}</li>
                                                   ))}
                                                 </ul>
@@ -413,7 +417,7 @@ export default function DiagnosticPathways() {
                                               <div>
                                                 <h4 className="text-lg font-semibold text-gray-800">Expected Outcomes</h4>
                                                 <ul className="list-disc pl-4 space-y-1">
-                                                  {details.outcomes.map((item, idx) => (
+                                                  {details.outcomes.map((item: string, idx: number) => (
                                                     <li key={idx}>{item}</li>
                                                   ))}
                                                 </ul>
@@ -421,7 +425,7 @@ export default function DiagnosticPathways() {
                                               <div>
                                                 <h4 className="text-lg font-semibold text-gray-800">Follow-up Steps</h4>
                                                 <ul className="list-disc pl-4 space-y-1">
-                                                  {details.followUp.map((item, idx) => (
+                                                  {details.followUp.map((item: string, idx: number) => (
                                                     <li key={idx}>{item}</li>
                                                   ))}
                                                 </ul>

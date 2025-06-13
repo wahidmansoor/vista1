@@ -6,10 +6,37 @@ import remarkGfm from 'remark-gfm';
 import { AlertCircle, AlertTriangle, Info, FileText, Book } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // Create simple UI components to avoid external dependencies
 const Separator: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) => (
   <div {...props} className={cn("h-px bg-gray-200 dark:bg-gray-700", props.className)} />
+);
+
+// Simple table components
+const Table: React.FC<React.HTMLAttributes<HTMLTableElement>> = ({ className, ...props }) => (
+  <table className={cn("min-w-full border-collapse border rounded-md text-sm", className)} {...props} />
+);
+
+const TableHeader: React.FC<React.HTMLAttributes<HTMLTableSectionElement>> = ({ className, ...props }) => (
+  <thead className={cn("bg-muted/50", className)} {...props} />
+);
+
+const TableBody: React.FC<React.HTMLAttributes<HTMLTableSectionElement>> = ({ className, ...props }) => (
+  <tbody className={cn("divide-y divide-muted", className)} {...props} />
+);
+
+const TableRow: React.FC<React.HTMLAttributes<HTMLTableRowElement>> = ({ className, ...props }) => (
+  <tr className={cn("even:bg-muted/20", className)} {...props} />
+);
+
+const TableHead: React.FC<React.HTMLAttributes<HTMLTableCellElement>> = ({ className, ...props }) => (
+  <th className={cn("px-4 py-2 text-left font-medium", className)} {...props} />
+);
+
+const TableCell: React.FC<React.HTMLAttributes<HTMLTableCellElement>> = ({ className, ...props }) => (
+  <td className={cn("px-4 py-2", className)} {...props} />
 );
 
 interface ContentRendererProps {
@@ -344,16 +371,19 @@ export function ContentRenderer({ content, className }: ContentRendererProps) {
             </Table>
           </div>
         );
-      }
-
-      case 'code':
+      }      case 'code':
         return (
           <div key={getKey(block, index)} className="my-4">
-            <CodeBlock 
-              language={block.language} 
-              value={content || ''} 
-              showLineNumbers={true}
-            />
+            <div className="bg-muted p-4 rounded-md overflow-x-auto">
+              <SyntaxHighlighter
+                style={oneDark as any}
+                language={block.language || 'text'}
+                PreTag="div"
+                className="text-sm"
+              >
+                {content || ''}
+              </SyntaxHighlighter>
+            </div>
           </div>
         );
 

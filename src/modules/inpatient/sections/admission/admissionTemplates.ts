@@ -79,3 +79,66 @@ export function getInitialOrders(cancerType: string, issue: string): string[] {
   }
   return orders;
 }
+
+export const getAdmissionAlerts = (cancerType: string): string[] => {
+  const alerts: Record<string, string[]> = {
+    breast: [
+      'Monitor for febrile neutropenia',
+      'Check for signs of tumor lysis syndrome',
+      'Assess pain control adequacy',
+      'Monitor for hypercalcemia symptoms'
+    ],
+    lung: [
+      'Monitor respiratory status closely',
+      'Watch for signs of SVCS',
+      'Check for hemoptysis',
+      'Assess pneumonitis risk'
+    ],
+    default: [
+      'Monitor vital signs',
+      'Assess pain levels',
+      'Watch for infection signs',
+      'Monitor fluid balance'
+    ]
+  };
+  
+  return alerts[cancerType] || alerts.default;
+};
+
+export const getAdmissionProcessSteps = (cancerType: string): string[] => {
+  const steps: Record<string, string[]> = {
+    breast: [
+      'Complete initial assessment',
+      'Review current treatment plan',
+      'Check laboratory values',
+      'Assess performance status',
+      'Document current symptoms'
+    ],
+    lung: [
+      'Assess respiratory function',
+      'Review imaging studies',
+      'Check oxygen saturation',
+      'Evaluate pain management',
+      'Document disease progression'
+    ],
+    default: [
+      'Complete admission assessment',
+      'Review medical history',
+      'Order necessary investigations',
+      'Plan treatment approach',
+      'Communicate with team'
+    ]
+  };
+  
+  return steps[cancerType] || steps.default;
+};
+
+export const getSummaryTemplate = (cancerType: string): string => {
+  const templates: Record<string, string> = {
+    breast: 'Patient with breast cancer admitted for [reason]. Current treatment: [treatment]. Performance status: [PS]. Plan: [plan].',
+    lung: 'Patient with lung cancer admitted for [reason]. Respiratory status: [status]. Current therapy: [therapy]. Plan: [plan].',
+    default: 'Patient with [cancer type] admitted for [reason]. Current status: [status]. Plan: [plan].'
+  };
+  
+  return templates[cancerType] || templates.default;
+};
