@@ -13,6 +13,7 @@ vi.mock('@/utils/audioFeedback', () => ({
 
 describe('MedicationsView', () => {
   const mockMedications = createMockMedications(3);
+  
   beforeEach(() => {
     // Clear mocks before each test
     vi.clearAllMocks();
@@ -26,19 +27,18 @@ describe('MedicationsView', () => {
       expect(screen.getByText(med.brand_names[0])).toBeInTheDocument();
     });
   });
-
   it('opens detail modal when clicking a medication card', async () => {
     render(<MedicationsView initialData={mockMedications} />);
     
     const firstMedCard = screen.getByRole('button', { name: new RegExp(mockMedications[0].name) });
     await userEvent.click(firstMedCard);
 
-    screen.debug(); // Debug after click
-
     await waitFor(() => {
       expect(screen.getByRole('dialog')).toBeInTheDocument();
-      expect(screen.getByText(mockMedications[0].classification)).toBeInTheDocument();
-    }, { timeout: 20000 });
+      // Look for the classification text within the dialog only
+      const modal = screen.getByRole('dialog');
+      expect(modal).toHaveTextContent(mockMedications[0].classification);
+    });
   });
 
   it('closes modal via close button', async () => {
@@ -51,14 +51,13 @@ describe('MedicationsView', () => {
     // Close modal
     const closeButton = screen.getByRole('button', { name: /close medication details/i });
     await userEvent.click(closeButton);
-
-    screen.debug(); // Debug after close
-
+    
     await waitFor(() => {
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-    }, { timeout: 20000 });
+    });
   });
-  it('handles search functionality', async () => {
+
+  it('filters medications by search', async () => {
     render(<MedicationsView initialData={mockMedications} />);
     
     const searchInput = screen.getByPlaceholderText(/search medications/i);
@@ -67,18 +66,27 @@ describe('MedicationsView', () => {
     await waitFor(() => {
       expect(screen.getByText(mockMedications[0].name)).toBeInTheDocument();
       expect(screen.queryByText(mockMedications[1].name)).not.toBeInTheDocument();
-    }, { timeout: 5000 });
+    });
   });
   it('handles classification filter', async () => {
-    render(<MedicationsView initialData={mockMedications} />);
+    // Update mock data to use a classification that exists in the dropdown
+    const testMedications = mockMedications.map(med => ({
+      ...med,
+      classification: 'CDK4/6 Inhibitor'
+    }));
+    
+    render(<MedicationsView initialData={testMedications} />);
     
     const filterSelect = screen.getByRole('combobox', { name: /filter by classification/i });
-    await userEvent.selectOptions(filterSelect, mockMedications[0].classification);
+    await userEvent.selectOptions(filterSelect, 'CDK4/6 Inhibitor');
 
     await waitFor(() => {
-      expect(screen.getByText(mockMedications[0].classification)).toBeInTheDocument();
-    }, { timeout: 5000 });
+      // Look for the classification in medication cards, not in the dropdown
+      const medicationCards = screen.getByText(testMedications[0].name).closest('[role="button"]');
+      expect(medicationCards).toHaveTextContent('CDK4/6 Inhibitor');
+    });
   });
+  
   it('handles keyboard navigation', () => {
     render(<MedicationsView initialData={mockMedications} />);
     
@@ -87,6 +95,7 @@ describe('MedicationsView', () => {
     expect(firstMedCard).toBeInTheDocument();
     expect(firstMedCard).toHaveAttribute('tabIndex', '0');
   });
+  
   it('shows empty state when no medications match filters', async () => {
     render(<MedicationsView initialData={mockMedications} />);
     
@@ -95,6 +104,6 @@ describe('MedicationsView', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/no medications found/i)).toBeInTheDocument();
-    }, { timeout: 5000 });
+    });
   });
 });
