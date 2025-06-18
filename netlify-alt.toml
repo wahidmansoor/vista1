@@ -1,0 +1,54 @@
+# Alternative Netlify Configuration Options
+# Use these if the main build continues to fail
+
+# Option 1: Ultra-safe build with maximum compatibility
+[build]
+  command = "npm install --legacy-peer-deps --no-optional && npm run build:safe"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_CONFIG_LEGACY_PEER_DEPS = "true"
+  NPM_CONFIG_AUDIT = "false"
+  NPM_CONFIG_FUND = "false"
+  NODE_OPTIONS = "--max-old-space-size=4096"
+
+# Option 2: Yarn-based build (if npm continues to fail)
+# [build]
+#   command = "yarn install --frozen-lockfile && yarn build:simple"
+#   publish = "dist"
+
+# Option 3: Minimal build without type checking
+# [build]
+#   command = "npm install --production=false && npm run build:simple"
+#   publish = "dist"
+
+# Option 4: Clean build with cache clearing
+# [build]
+#   command = "npm cache clean --force && npm install && npm run build:netlify"
+#   publish = "dist"
+
+# Headers and redirects (same for all options)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.auth0.com https://cdn.lrkt-in.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://rsms.me;
+      img-src 'self' data: https:;
+      font-src 'self' data: https://fonts.gstatic.com https://rsms.me;
+      connect-src 'self' https://api.openai.com https://generativelanguage.googleapis.com https://*.supabase.co https://*.auth0.com https://cdn.auth0.com;
+      frame-ancestors 'none';
+      manifest-src 'self';
+    """
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Referrer-Policy = "same-origin"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -1,8 +1,14 @@
 [build]
-  command = "npm ci && npm run build:simple"
+  command = "node netlify-build.js"
   publish = "dist"
 
 [build.environment]
+  # Node.js configuration
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--prefer-offline --no-audit --progress=false"
+  # Increase Node.js memory limit for builds
+  NODE_OPTIONS = "--max-old-space-size=4096"
+  
   # Set default environment variables for build
   VITE_GEMINI_API_KEY = "build_default"
   VITE_SUPABASE_URL = "https://build-default.supabase.co"
