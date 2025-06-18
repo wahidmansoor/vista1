@@ -1,1 +1,0 @@
-# Diagnostic Workup (Colonoscopy, Imaging)

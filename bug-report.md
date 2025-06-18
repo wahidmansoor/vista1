@@ -13,7 +13,7 @@
    
    **Before:**
    ```env
-   GEMINI_API_KEY=AIzaSyBMbuv9SC-5j2BUuCDskrROlw_ETk213Yc
+   GEMINI_API_KEY=your-gemini-api-key-here
    ```
    **After:**
    ```env

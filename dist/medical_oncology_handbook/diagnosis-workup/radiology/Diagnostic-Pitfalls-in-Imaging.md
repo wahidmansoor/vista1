@@ -1,1 +1,0 @@
-# Diagnostic Pitfalls in Imaging

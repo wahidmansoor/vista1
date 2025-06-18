@@ -1,1 +1,0 @@
-# Localized Disease Management

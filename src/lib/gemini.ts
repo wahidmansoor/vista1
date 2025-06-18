@@ -38,9 +38,11 @@ class GeminiError extends Error implements AIError {
 }
 
 function validateApiKey(): string {
-  const API_KEY = import.meta?.env?.VITE_GEMINI_API_KEY ?? process?.env?.VITE_GEMINI_API_KEY ?? '';
+  // For production, API keys should never be accessible on client-side
+  // All requests should go through Netlify functions
+  const API_KEY = '';
   if (!API_KEY) {
-    throw new GeminiError('Gemini API key not configured', 'API_KEY_MISSING', 400);
+    throw new GeminiError('Gemini API calls must use Netlify functions for security', 'API_KEY_SECURED', 400);
   }
   return API_KEY;
 }

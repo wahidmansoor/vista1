@@ -1,1 +1,0 @@
-# Histologic Diagnosis Workflow

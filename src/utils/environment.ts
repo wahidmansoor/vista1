@@ -6,23 +6,20 @@
 // Browser detection utility
 export const isBrowser = typeof window !== 'undefined';
 
-// Type definitions for environment variables
+// Type definitions for environment variables (client-safe only)
 export interface EnvironmentVariables {
   supabaseUrl: string;
   supabaseAnonKey: string;
-  openaiApiKey: string;
-  geminiApiKey: string;
+  // Note: API keys removed for security - use Netlify functions instead
 }
 
 // Environment variable keys
 export type EnvVarKey = 'SUPABASE_URL' | 'SUPABASE_ANON_KEY' | 'OPENAI_API_KEY' | 'GEMINI_API_KEY' | 'AUTH0_DOMAIN' | 'AUTH0_CLIENT_ID';
 
-// List of required environment variables
+// List of required environment variables (client-safe only)
 const REQUIRED_ENV_VARS: string[] = [
   'VITE_SUPABASE_URL',
-  'VITE_SUPABASE_ANON_KEY', 
-  'VITE_OPENAI_API_KEY',
-  'VITE_GEMINI_API_KEY'
+  'VITE_SUPABASE_ANON_KEY'
 ];
 
 // List of optional environment variables (Auth0 is optional)
@@ -31,6 +28,8 @@ const OPTIONAL_ENV_VARS: string[] = [
   'VITE_AUTH0_CLIENT_ID',
   'VITE_AUTH0_CALLBACK_URL'
 ];
+
+// Security note: API keys are NOT included here as they should never be client-side
 
 /**
  * Get a single environment variable by key
@@ -65,8 +64,7 @@ export function getEnvVars(): EnvironmentVariables {
   return {
     supabaseUrl: getTypedEnvVar('SUPABASE_URL'),
     supabaseAnonKey: getTypedEnvVar('SUPABASE_ANON_KEY'),
-    openaiApiKey: getTypedEnvVar('OPENAI_API_KEY'),
-    geminiApiKey: getTypedEnvVar('GEMINI_API_KEY'),
+    // Note: API keys removed for security - use Netlify functions instead
   };
 }
 

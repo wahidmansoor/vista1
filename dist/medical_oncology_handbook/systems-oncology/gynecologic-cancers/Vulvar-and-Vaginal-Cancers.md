@@ -1,1 +1,0 @@
-# Vulvar and Vaginal Cancers

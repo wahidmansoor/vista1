@@ -1,1 +1,0 @@
-# Endocrine Syndromes and Management

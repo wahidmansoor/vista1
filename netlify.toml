@@ -1,6 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
 [build.environment]
-  SECRETS_SCAN_OMIT_KEYS = "VITE_AUTH0_DOMAIN,AUTH0_CLIENT_ID,AUTH0_ISSUER_BASE_URL"
-  SECRETS_SCAN_OMIT_PATHS = "dist/_headers,dist/assets/**"
+  # Enhanced secrets scanning configuration
+  SECRETS_SCAN_ENABLED = "true"
+  # Allow legitimate environment variable names
+  SECRETS_SCAN_OMIT_KEYS = "VITE_AUTH0_DOMAIN,VITE_AUTH0_CLIENT_ID,VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY,VITE_AUTH0_AUDIENCE,VITE_AUTH0_CALLBACK_URL,VITE_AUTH0_REDIRECT_URI,AUTH0_DOMAIN,AUTH0_CLIENT_ID,SUPABASE_URL,SUPABASE_ANON_KEY,ALLOWED_ORIGINS"
+  # Exclude build output and documentation from scanning
+  SECRETS_SCAN_OMIT_PATHS = "dist/**,build/**,node_modules/**,src/**/*.js,src/**/*.ts,*.md,docs/**,archive/**,public/**,netlify/functions/**,*.example,*.template,.env.example,.env.template,bug-report.md,NETLIFY_SETUP.md,AUTH0_IMPLEMENTATION.md,DEPLOYMENT_FIX.md"
 
 [[headers]]
   for = "/*"

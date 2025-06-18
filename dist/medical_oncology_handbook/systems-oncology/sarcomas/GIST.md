@@ -1,1 +1,0 @@
-# Gastrointestinal Stromal Tumors (GIST)

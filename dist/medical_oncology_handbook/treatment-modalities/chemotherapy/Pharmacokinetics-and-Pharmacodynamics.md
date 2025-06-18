@@ -1,1 +1,0 @@
-# Pharmacokinetics and Pharmacodynamics
