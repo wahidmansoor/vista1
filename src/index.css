@@ -1,9 +1,17 @@
+/* ================================
+   OncoVista Unified Styles
+   ================================ */
+
+/* Import Design Token System */
+@import './styles/design-tokens.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
  
 @layer base {
   :root {
+    /* Shadcn/ui Variables - Updated to use unified primary color */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -13,7 +21,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
  
-    --primary: 262.1 83.3% 57.8%;
+    /* Updated to use unified primary color */
+    --primary: 213 94% 68%;  /* var(--color-primary-500) */
     --primary-foreground: 210 40% 98%;
  
     --secondary: 210 40% 96.1%;
@@ -30,26 +39,9 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 262.1 83.3% 57.8%;
+    --ring: 213 94% 68%;  /* var(--color-primary-500) */
  
     --radius: 0.5rem;
-
-    /* CDU Module Color Scheme */
-    --cdu-primary-dark: #004D61;
-    --cdu-primary: #005B8F;
-    --cdu-primary-light: #2074A6;
-    --cdu-secondary: #3B1D74;
-    
-    /* Accent Colors (Medical Teal) */
-    --cdu-accent: #1D9B9E;
-    --cdu-accent-light: #4DB6B8;
-    --cdu-accent-lighter: #7ECACB;
-    
-    /* Status Colors */
-    --cdu-success: #10B981;
-    --cdu-warning: #F59E0B;
-    --cdu-error: #EF4444;
-    --cdu-info: #2074A6;
   }
  
   .dark {
@@ -62,7 +54,8 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
  
-    --primary: 263.4 70% 50.4%;
+    /* Updated to use unified primary color */
+    --primary: 213 94% 68%;
     --primary-foreground: 210 40% 98%;
  
     --secondary: 217.2 32.6% 17.5%;
@@ -79,7 +72,7 @@
  
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 263.4 70% 50.4%;
+    --ring: 213 94% 68%;
   }
 }
 
@@ -182,12 +175,19 @@
   }
 }
 
-/* Palliative Care Module Styles */
+/* Palliative Care Module Styles - Glass Morphism */
 .palliative-card {
-  @apply bg-white dark:bg-slate-800 
-         rounded-lg shadow-md 
-         border border-gray-200/40 dark:border-slate-700/50
-         p-6 transition-all duration-300;
+  background-color: var(--card-bg);
+  backdrop-filter: blur(var(--card-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+  border: 1px solid var(--card-border);
+  @apply rounded-lg shadow-md p-6 transition-all duration-300;
+}
+
+.palliative-card:hover {
+  background-color: var(--card-bg-hover);
+  border-color: var(--card-border-hover);
+  transform: translateY(-2px);
 }
 
 .palliative-heading {
@@ -393,10 +393,10 @@
     @apply text-gray-700 dark:text-gray-300 font-medium;
   }
   
-  /* CDU Specific Component Styles */
+  /* CDU Specific Component Styles - Updated for better visibility */
   .cdu-container {
     @apply min-h-screen relative;
-    background: linear-gradient(135deg, var(--cdu-primary-dark) 0%, var(--cdu-primary) 35%, var(--cdu-secondary) 100%);
+    background: linear-gradient(135deg, var(--color-primary-800) 0%, var(--color-primary-600) 35%, var(--color-primary-700) 100%);
   }
 
   .cdu-header {
@@ -404,51 +404,489 @@
   }
 
   .cdu-tab-selected {
-    @apply bg-white shadow-lg;
-    color: var(--cdu-primary-dark);
+    @apply bg-white shadow-lg font-semibold;
+    color: var(--color-primary-700) !important;
+    border: 2px solid var(--color-primary-200);
+    transform: translateY(-1px);
   }
 
   .cdu-tab-unselected {
-    @apply text-white/80 hover:text-white hover:bg-white/10;
+    @apply text-white/90 hover:text-white hover:bg-white/15 font-medium;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .cdu-tab-unselected:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-0.5px);
   }
 
   .cdu-content-panel {
-    @apply bg-white/95 backdrop-blur-sm rounded-lg shadow-xl;
+    background-color: var(--card-bg);
+    backdrop-filter: blur(var(--card-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+    border: 1px solid var(--card-border);
+    @apply rounded-lg shadow-xl;
   }
 
   .cdu-card {
-    @apply bg-white rounded-lg shadow-md border border-gray-200/40 
-           transition-all duration-300 hover:shadow-lg;
-    border-color: var(--cdu-accent);
-    border-opacity: 0.3;
+    background-color: var(--card-bg);
+    backdrop-filter: blur(var(--card-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+    border: 1px solid var(--card-border);
+    @apply rounded-lg shadow-md transition-all duration-300 hover:shadow-lg;
   }
 
   .cdu-card:hover {
-    border-color: var(--cdu-accent);
-    border-opacity: 0.5;
+    background-color: var(--card-bg-hover);
+    border-color: var(--card-border-hover);
+    transform: translateY(-2px);
   }
 
   .cdu-button-primary {
-    background-color: var(--cdu-primary);
+    background-color: var(--color-primary-600);
     @apply text-white font-medium px-4 py-2 rounded-md 
            transition-colors duration-200 focus:outline-none focus:ring-2;
-    focus-ring-color: var(--cdu-accent);
+    focus-ring-color: var(--color-primary-300);
     focus-ring-opacity: 0.5;
   }
 
   .cdu-button-primary:hover {
-    background-color: var(--cdu-primary-light);
+    background-color: var(--color-primary-700);
   }
 
   .cdu-button-secondary {
-    background-color: var(--cdu-accent);
+    background-color: var(--color-primary-500);
     @apply text-white font-medium px-4 py-2 rounded-md 
            transition-colors duration-200 focus:outline-none focus:ring-2;
-    focus-ring-color: var(--cdu-primary);
+    focus-ring-color: var(--color-primary-300);
     focus-ring-opacity: 0.5;
   }
 
   .cdu-button-secondary:hover {
-    background-color: var(--cdu-accent-light);
+    background-color: var(--color-primary-600);
   }
-}
+
+  /* Inpatient Module Styles - Glass Morphism */
+  .inpatient-container {
+    @apply min-h-screen relative;
+    background: linear-gradient(135deg, var(--color-primary-800) 0%, var(--color-primary-600) 35%, var(--color-primary-700) 100%);
+  }
+
+  .inpatient-tab-selected {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(var(--card-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+    border: 1px solid var(--card-border);
+    @apply text-white shadow-lg font-semibold;
+    transform: translateY(-1px);
+  }
+
+  .inpatient-tab-unselected {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(var(--card-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    @apply text-white/80 hover:text-white font-medium;
+    transition: all 0.2s ease;
+  }
+
+  .inpatient-tab-unselected:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-0.5px);
+  }
+
+  .inpatient-content-panel {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(var(--card-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+    border: 1px solid var(--card-border);
+    @apply rounded-lg shadow-xl;
+  }
+
+  .inpatient-card {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(var(--card-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+    border: 1px solid var(--card-border);
+    @apply rounded-lg shadow-md transition-all duration-300 hover:shadow-lg;
+  }
+
+  .inpatient-card:hover {
+    background-color: var(--card-bg-hover);
+    border-color: var(--card-border-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Global CDU Glass Morphism Overrides */
+  .cdu-container .bg-white,
+  .cdu-container .bg-gray-50,
+  .cdu-container .bg-blue-50,
+  .cdu-container .bg-indigo-50,
+  .cdu-container .bg-green-50,
+  .cdu-container .bg-amber-50,
+  .cdu-container .bg-red-50,
+  .cdu-container .bg-purple-50 {
+    background-color: var(--card-bg) !important;
+    backdrop-filter: blur(var(--card-backdrop-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur)) !important;
+    border-color: var(--card-border) !important;
+  }
+
+  .cdu-container input,
+  .cdu-container textarea {
+    background-color: var(--card-bg) !important;
+    backdrop-filter: blur(var(--card-backdrop-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur)) !important;
+    border-color: var(--card-border) !important;
+    color: white !important;
+  }
+
+  .cdu-container select {
+    background-color: #1e40af !important;
+    border: 2px solid #3b82f6 !important;
+    color: white !important;
+    font-weight: 500 !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+  }
+
+  .cdu-container select:focus {
+    background-color: #1d4ed8 !important;
+    border-color: #60a5fa !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3) !important;
+  }
+
+  .cdu-container input::placeholder,
+  .cdu-container textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+  /* Ultra-specific dropdown styling to override everything */
+  .cdu-container select,
+  .cdu-container form select,
+  .cdu-container div select {
+    background: #1e40af !important;
+    background-color: #1e40af !important;
+    border: 2px solid #3b82f6 !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 40px !important;
+    z-index: 1000 !important;
+    position: relative !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* OVERRIDE: Treatment Protocols Dropdown - More specific than CDU container rules */
+  .cdu-container .treatment-protocols-dropdown,
+  .cdu-container form .treatment-protocols-dropdown,
+  .cdu-container div .treatment-protocols-dropdown {
+    background: white !important;
+    background-color: white !important;
+    border: 2px solid #a5b4fc !important;
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+    padding: 16px !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .cdu-container .treatment-protocols-dropdown:focus,
+  .cdu-container form .treatment-protocols-dropdown:focus,
+  .cdu-container div .treatment-protocols-dropdown:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3) !important;
+    background-color: white !important;
+    color: #1f2937 !important;
+  }
+  .cdu-container .treatment-protocols-dropdown option,
+  .cdu-container form .treatment-protocols-dropdown option,
+  .cdu-container div .treatment-protocols-dropdown option {
+    background: white !important;
+    background-color: white !important;
+    color: #1f2937 !important;
+    padding: 8px 12px !important;
+  }
+  /* OVERRIDE: Fix medication/drug name visibility in tables and lists */
+  .cdu-container table td,
+  .cdu-container table th,
+  .cdu-container .drug-name,
+  .cdu-container .medication-name,
+  .cdu-container h4,
+  .cdu-container h3,
+  .cdu-container h2,
+  .cdu-container h1,
+  .cdu-container p,
+  .cdu-container span,
+  .cdu-container li,
+  .cdu-container .text-lg,
+  .cdu-container .text-xl,
+  .cdu-container .text-sm,
+  .cdu-container .text-xs,
+  .cdu-container .font-semibold,
+  .cdu-container .font-bold,
+  .cdu-container tbody td,
+  .cdu-container thead th {
+    color: #1f2937 !important;
+  }
+  /* OVERRIDE: Fix gradient text drug names in medication cards */
+  .cdu-container .bg-gradient-to-r.from-indigo-600.to-purple-600.bg-clip-text.text-transparent {
+    background: linear-gradient(to right, #4f46e5, #9333ea) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+    /* Ultra-specific targeting for medication drug names */
+  .cdu-container .medication-card .medication-drug-name,
+  .cdu-container .medication-drug-name {
+    background: linear-gradient(to right, #4f46e5, #9333ea) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    display: inline-block !important;
+  }
+    /* Fix brand names visibility */
+  .cdu-container .medication-brand-names,
+  .cdu-container .medication-card .medication-brand-names {
+    color: #6b7280 !important;
+    -webkit-text-fill-color: #6b7280 !important;
+    background: none !important;
+  }
+  /* Fix classification badge visibility */
+  .cdu-container .medication-classification-badge,
+  .cdu-container .medication-card .medication-classification-badge {
+    background-color: initial !important;
+    color: initial !important;
+    border: initial !important;
+  }
+  
+  /* Fix cancer type tags visibility */
+  .cdu-container .medication-cancer-type,
+  .cdu-container .medication-card .medication-cancer-type {
+    background-color: #f3f4f6 !important;
+    color: #1f2937 !important;
+    border: 1px solid #d1d5db !important;
+  }
+  
+  .cdu-container .medication-cancer-type:hover,
+  .cdu-container .medication-card .medication-cancer-type:hover {
+    background-color: #e5e7eb !important;
+  }
+  
+  /* Fallback for medication names if gradient fails */
+  .cdu-container h3.text-lg.font-semibold,
+  .cdu-container .medication-card h3,
+  .cdu-container [class*="medication"] h3 {
+    color: #4f46e5 !important;
+    background: linear-gradient(to right, #4f46e5, #9333ea) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  /* Dark mode text overrides for CDU container */
+  .dark .cdu-container table td,
+  .dark .cdu-container table th,
+  .dark .cdu-container .drug-name,
+  .dark .cdu-container .medication-name,
+  .dark .cdu-container h4,
+  .dark .cdu-container h3,
+  .dark .cdu-container h2,
+  .dark .cdu-container h1,
+  .dark .cdu-container p,
+  .dark .cdu-container span,
+  .dark .cdu-container li,
+  .dark .cdu-container .text-lg,
+  .dark .cdu-container .text-xl,
+  .dark .cdu-container .text-sm,
+  .dark .cdu-container .text-xs,
+  .dark .cdu-container .font-semibold,
+  .dark .cdu-container .font-bold,
+  .dark .cdu-container tbody td,
+  .dark .cdu-container thead th {
+    color: #f9fafb !important;
+  }
+
+  /* Specific overrides for drug/medication cards and content */
+  .cdu-container .bg-white [class*="text-indigo"],
+  .cdu-container .bg-white [class*="text-gray"],
+  .cdu-container .drug-card h4,
+  .cdu-container .drug-card p,
+  .cdu-container .drug-card li,
+  .cdu-container .drug-card span {
+    color: #1f2937 !important;
+  }
+  /* Dark mode specific overrides for drug/medication cards */
+  .dark .cdu-container .bg-gray-900 [class*="text-indigo"],
+  .dark .cdu-container .bg-gray-900 [class*="text-gray"],
+  .dark .cdu-container .bg-gray-900 [class*="text-white"],
+  .dark .cdu-container .drug-card h4,
+  .dark .cdu-container .drug-card p,
+  .dark .cdu-container .drug-card li,
+  .dark .cdu-container .drug-card span {
+    color: #f9fafb !important;
+  }
+
+  /* Additional specific overrides for all text content within CDU */
+  .cdu-container div,
+  .cdu-container .whitespace-nowrap,
+  .cdu-container .whitespace-pre-line,
+  .cdu-container .text-muted-foreground,
+  .cdu-container .text-gray-700,
+  .cdu-container .text-gray-900,
+  .cdu-container .text-indigo-900,
+  .cdu-container .text-indigo-800,
+  .cdu-container .text-indigo-700,
+  .cdu-container ul li,
+  .cdu-container ol li,
+  .cdu-container .card-content,
+  .cdu-container .dialog-content {
+    color: #1f2937 !important;
+  }
+
+  /* Dark mode additional overrides */
+  .dark .cdu-container div,
+  .dark .cdu-container .whitespace-nowrap,
+  .dark .cdu-container .whitespace-pre-line,
+  .dark .cdu-container .text-muted-foreground,
+  .dark .cdu-container .text-gray-300,
+  .dark .cdu-container .text-white,
+  .dark .cdu-container .text-indigo-100,
+  .dark .cdu-container .text-indigo-200,
+  .dark .cdu-container .text-indigo-300,
+  .dark .cdu-container ul li,
+  .dark .cdu-container ol li,
+  .dark .cdu-container .card-content,
+  .dark .cdu-container .dialog-content {
+    color: #f9fafb !important;
+  }
+
+  /* Ensure input and textarea exclusions for the text overrides */
+  .cdu-container input,
+  .cdu-container textarea,
+  .cdu-container select:not(.treatment-protocols-dropdown) {
+    color: white !important;
+  }
+    font-weight: 500 !important;
+  }
+
+  .cdu-container .treatment-protocols-dropdown option:hover,
+  .cdu-container .treatment-protocols-dropdown option:focus {
+    background: #f3f4f6 !important;
+    background-color: #f3f4f6 !important;
+    color: #1f2937 !important;
+  }
+
+  /* Ensure placeholder/default option text is visible */
+  .cdu-container select option[value=""],
+  .cdu-container form select option[value=""],
+  .cdu-container div select option[value=""] {
+    background: #1e40af !important;
+    background-color: #1e40af !important;
+    color: #ffffff !important;
+    padding: 8px 12px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    font-style: italic !important;
+  }
+
+  /* Force dropdown options to be visible */
+  .cdu-container select option,
+  .cdu-container form select option,
+  .cdu-container div select option {
+    background: #1e3a8a !important;
+    background-color: #1e3a8a !important;
+    color: #ffffff !important;
+    padding: 8px 12px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  .cdu-container select option:hover,
+  .cdu-container select option:focus {
+    background: #1d4ed8 !important;
+    background-color: #1d4ed8 !important;
+    color: #ffffff !important;
+  }
+
+  .cdu-container select option:checked {
+    background: #2563eb !important;
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+  }
+
+  .cdu-container .bg-gradient-to-r {
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(var(--card-backdrop-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur)) !important;
+    border: 1px solid var(--card-border) !important;
+  }
+
+  /* CDU Text Color Overrides for Glass Morphism - More Selective */
+  .cdu-container form label,
+  .cdu-container form .text-gray-700,
+  .cdu-container form .text-gray-600,
+  .cdu-container form .text-gray-800,
+  .cdu-container form .text-gray-900 {
+    color: white !important;
+  }
+
+  .cdu-container form .text-gray-500,
+  .cdu-container form .text-gray-400 {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  /* Ensure ALL content areas are visible */
+  .cdu-container .space-y-6,
+  .cdu-container .grid,
+  .cdu-container .md\\:col-span-2,
+  .cdu-container > div,
+  .cdu-container form > div {
+    position: relative;
+  }
+
+  .cdu-container .space-y-6 > div,
+  .cdu-container .grid > div {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(var(--card-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 8px;
+  }
+
+  .cdu-container .border-gray-200,
+  .cdu-container .border-gray-300 {
+    border-color: var(--card-border) !important;
+  }
+
+  /* Ensure protocol cards are visible */
+  .cdu-card h2,
+  .cdu-card h3,
+  .cdu-card p,
+  .cdu-card span {
+    color: white !important;
+  }
+  .cdu-card .text-blue-200 {
+    color: #bfdbfe !important;
+  }
+
+  .cdu-card .text-white\/80 {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
