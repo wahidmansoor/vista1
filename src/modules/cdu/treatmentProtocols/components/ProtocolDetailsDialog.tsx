@@ -308,13 +308,12 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
   <h3 className="text-xl font-bold text-indigo-800 dark:text-indigo-300">Treatment Drugs</h3>
   {treatment?.drugs?.length > 0 ? (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {treatment.drugs.map((drug: any, idx: number) => (
-        <div
+      {treatment.drugs.map((drug: any, idx: number) => (        <div
           key={idx}
-          className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-md hover:shadow-lg transition"
+          className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-md hover:shadow-lg transition drug-card"
         >
           <div className="flex items-center justify-between mb-2">
-            <h4 className="text-lg font-semibold text-indigo-900 dark:text-indigo-100">
+            <h4 className="text-lg font-semibold text-indigo-900 dark:text-indigo-100 drug-name">
               {drug.name || 'Unnamed Drug'}
             </h4>
             {drug.drug_class && (
@@ -621,9 +620,8 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                   <div>
                     <h4 className="font-semibold mb-2 text-blue-600">Pre-medications</h4>
                     <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
-                      <ul>
-                        {protocol.pre_medications.required.map((med, idx) => (
-                          <li key={idx}>{med.name} — {med.dose}</li>
+                      <ul>                        {protocol.pre_medications.required.map((med, idx) => (
+                          <li key={idx} className="medication-name">{med.name} — {med.dose}</li>
                         ))}
                       </ul>
                     </div>

@@ -67,12 +67,10 @@ export default function TreatmentProtocols() {
     >
       <h1 className="text-3xl font-bold text-indigo-900 mb-6">
         Select a Cancer Type
-      </h1>
-
-      {/* Combo Box */}
+      </h1>      {/* Combo Box */}
       <div className="max-w-xl mb-8">
         <select
-          className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="treatment-protocols-dropdown w-full p-4 rounded-lg border-2 border-indigo-300 bg-white text-gray-900 shadow-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 appearance-none cursor-pointer"
           defaultValue=""
           onChange={(e) => {
             const selected = groupOptions.find((opt) => opt.label === e.target.value);
@@ -80,6 +78,13 @@ export default function TreatmentProtocols() {
               setSelectedGroup(selected.group);
               setSelectedSupergroup(selected.supergroup);
             }
+          }}
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23374151' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+            backgroundPosition: 'right 0.5rem center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '1.5em 1.5em',
+            paddingRight: '2.5rem'
           }}
         >
           <option value="" disabled>

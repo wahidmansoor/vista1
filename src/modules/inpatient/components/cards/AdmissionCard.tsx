@@ -2,9 +2,9 @@ import React from 'react';
 
 const AdmissionCard = () => {
   return (
-    <div className="p-4 bg-white rounded shadow">
-      <h2 className="text-lg font-semibold">Placeholder for AdmissionCard</h2>
-      <p>This is a placeholder. Replace with actual content.</p>
+    <div className="inpatient-card p-6">
+      <h2 className="text-lg font-semibold text-white mb-3">Admission Guidelines</h2>
+      <p className="text-white/90">Patient admission protocols and procedures for oncology inpatients.</p>
     </div>
   );
 };

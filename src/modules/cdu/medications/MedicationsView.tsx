@@ -809,11 +809,10 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
               No medications found. {searchQuery || selectedClass ? 'Try adjusting your filters.' : ''}
             </div>
           ) : (
-            filteredMedications.map((medication, index) => (
-              <div
+            filteredMedications.map((medication, index) => (              <div
                 key={medication.id}
                 id={`medication-${index}`}
-                className={`group bg-white/30 backdrop-blur-md border ${
+                className={`medication-card group bg-white/30 backdrop-blur-md border ${
                   focusedIndex === index
                     ? 'border-indigo-500 ring-2 ring-indigo-500 ring-opacity-50 shadow-xl scale-[1.02]'
                     : 'border-white/20 hover:shadow-2xl hover:scale-[1.02]'
@@ -835,8 +834,7 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-lg font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    <div className="flex items-center gap-2">                      <h3 className="medication-drug-name text-lg font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                         {medication.name || 'Untitled Medication'}
                       </h3>
                       {medication.is_premedication && (
@@ -844,22 +842,19 @@ export default function MedicationsView({ initialData }: MedicationsViewProps) {
                           Pre-Med
                         </span>
                       )}
-                    </div>
-                    {medication.brand_names?.length > 0 && (
-                      <p className="mt-1 text-sm text-gray-600">
+                    </div>                    {medication.brand_names?.length > 0 && (
+                      <p className="medication-brand-names mt-1 text-sm text-gray-600">
                         {medication.brand_names.join(', ')}
                       </p>
                     )}
-                  </div>
-                  <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${getClassificationStyle(medication.classification || '')}`}>
+                  </div>                  <span className={`medication-classification-badge px-2.5 py-0.5 rounded-full text-xs font-medium ${getClassificationStyle(medication.classification || '')}`}>
                     {getShortClassification(medication.classification || '')}
                   </span>
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1">
-                  {medication.indications?.cancer_types?.map((cancer, index) => (
-                    <span 
+                  {medication.indications?.cancer_types?.map((cancer, index) => (                    <span 
                       key={index}
-                      className="inline-flex items-center px-2 py-0.5 rounded-md text-xs bg-gray-100 text-gray-800 border border-gray-200 hover:bg-gray-200 transition-colors duration-200 cursor-help"
+                      className="medication-cancer-type inline-flex items-center px-2 py-0.5 rounded-md text-xs bg-gray-100 text-gray-800 border border-gray-200 hover:bg-gray-200 transition-colors duration-200 cursor-help"
                       title={`Search for medications indicated for ${cancer}`}
                       onClick={(e) => {
                         e.stopPropagation();

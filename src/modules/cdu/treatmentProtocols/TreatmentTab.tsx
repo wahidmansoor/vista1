@@ -22,11 +22,10 @@ const TreatmentTab: React.FC<TreatmentTabProps> = ({ treatment }) => {
               <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Administration</th>
               <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Special Notes</th>
             </tr>
-          </thead>
-          <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+          </thead>          <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
             {treatment.drugs.map((drug, idx) => (
               <tr key={idx}>
-                <td className="px-4 py-2 whitespace-nowrap">{drug.name}</td>
+                <td className="px-4 py-2 whitespace-nowrap drug-name">{drug.name}</td>
                 <td className="px-4 py-2 whitespace-nowrap">{drug.dose || "-"}</td>
                 <td className="px-4 py-2 whitespace-nowrap">{drug.administration || "-"}</td>
                 <td className="px-4 py-2 whitespace-pre-line">{drug.special_notes && drug.special_notes.length > 0 ? drug.special_notes.join("; ") : "-"}</td>
