@@ -9,15 +9,23 @@ import { generateScreeningPlan, ScreeningPlan } from '../../logic/screeningEngin
 import { generateClinicalReport } from '../../export/clinicalReports';
 import { verifyGuidelineCompliance, checkLogicConsistency, assessEvidenceQuality, ClinicalAuditTrail } from '../../quality/clinicalValidation';
 import { exportToPDF, exportToFHIR, exportToCDA, exportToCSV, exportToJSON } from '../../export/documentGeneration';
-import { ClinicalRecommendation, CancerType, RecommendationUrgency, ScreeningTestType } from '../../types/clinical';
+import { 
+  ClinicalRecommendation, 
+  CancerType, 
+  RecommendationUrgency, 
+  ScreeningTestType,
+  GeneticMutation,
+  BiologicalSex,
+  Ethnicity
+} from '../../types/clinical';
 
 // 1. Clinical Accuracy Testing
 
 describe('Clinical Accuracy', () => {
   it('validates known high-risk BRCA1 case for breast cancer', () => {
     const patient: PatientProfile = {
-      demographics: { age: 35, sex: 'female', ethnicity: 'caucasian', family_history: [] },
-      genetics: { mutations: [{ mutation: 'BRCA1', confirmed: true }], variants: [], penetrance_scores: [] },
+      demographics: { age: 35, sex: BiologicalSex.FEMALE, ethnicity: Ethnicity.CAUCASIAN, family_history: [] },
+      genetics: { mutations: [{ mutation: GeneticMutation.BRCA1, confirmed: true }], variants: [], penetrance_scores: [] },
       riskFactors: { lifestyle: { current_smoker: false }, environmental: {}, medical_history: {} },
       symptoms: { current_symptoms: [], assessment_date: new Date() },
     };
@@ -27,11 +35,10 @@ describe('Clinical Accuracy', () => {
     expect(breastRisk!.riskLevel).toMatch(/high|very_high/);
     expect(breastRisk!.absoluteRisk).toBeGreaterThan(0.4);
   });
-
   it('handles multi-cancer syndrome (Lynch) correctly', () => {
     const patient: PatientProfile = {
-      demographics: { age: 28, sex: 'female', ethnicity: 'caucasian', family_history: [] },
-      genetics: { mutations: [{ mutation: 'Lynch', confirmed: true }], variants: [], penetrance_scores: [] },
+      demographics: { age: 28, sex: BiologicalSex.FEMALE, ethnicity: Ethnicity.CAUCASIAN, family_history: [] },
+      genetics: { mutations: [{ mutation: GeneticMutation.LYNCH, confirmed: true }], variants: [], penetrance_scores: [] },
       riskFactors: { lifestyle: { current_smoker: false }, environmental: {}, medical_history: {} },
       symptoms: { current_symptoms: [], assessment_date: new Date() },
     };
@@ -71,7 +78,9 @@ describe('User Interface', () => {
 describe('Integration', () => {
   it('validates EMR export formats', () => {
     const plan: ScreeningPlan = {
+      cancerType: CancerType.BREAST,
       recommendations: [],
+      rationale: [],
       riskSummary: 'average',
       timeline: [],
       actionItems: [],
@@ -84,7 +93,9 @@ describe('Integration', () => {
 
   it('generates a professional PDF report', async () => {
     const plan: ScreeningPlan = {
+      cancerType: CancerType.BREAST,
       recommendations: [],
+      rationale: [],
       riskSummary: 'average',
       timeline: [],
       actionItems: [],

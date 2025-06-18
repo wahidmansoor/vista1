@@ -451,11 +451,10 @@ export class AIService {
     cacheSize: number;
     cacheHitRate: number;
     uptime: number;
-  } {
-    return {
+  } {    return {
       cacheSize: this.responseCache.size,
       cacheHitRate: 0, // Would need to track hits vs misses
-      uptime: typeof process !== 'undefined' && process.uptime ? process.uptime() : 0
+      uptime: 0 // Browser environment doesn't have process.uptime()
     };
   }
 }

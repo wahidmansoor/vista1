@@ -282,7 +282,7 @@ const SearchAndFilter = ({
         ))}
       </div>
       
-      {process.env.NODE_ENV === 'development' && onToggleDebugInfo && (
+      {import.meta.env.DEV && onToggleDebugInfo && (
         <div className="flex gap-2">
           <Button
             variant={showDebugInfo ? "default" : "outline"}
@@ -377,7 +377,7 @@ const RegimensLibraryContent: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGroups, setSelectedGroups] = useState<string[]>([]);
   const [selectedIntent, setSelectedIntent] = useState<'Curative' | 'Adjuvant' | 'Neoadjuvant' | 'Palliative'>();
-  const [showDebugInfo, setShowDebugInfo] = useState(process.env.NODE_ENV === 'development');
+  const [showDebugInfo, setShowDebugInfo] = useState(import.meta.env.DEV);
   const [showFullProtocolData, setShowFullProtocolData] = useState(false);
 
   // Add a button to test fetching all protocols

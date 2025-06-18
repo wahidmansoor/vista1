@@ -706,42 +706,38 @@ const CancerScreening: React.FC = () => {
       </div>
     );
   }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900 p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center space-x-3 mb-4">
-            <Database className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              Cancer Screening Guidelines
-            </h1>
-          </div>
-          <p className="text-gray-600 dark:text-gray-400 max-w-3xl">
-            Evidence-based screening recommendations for cancer prevention and early detection.
-            This comprehensive reference tool displays population-level guidelines for clinical decision support.
-          </p>
+    <div className="space-y-6">
+      <div className="mb-8">
+        <div className="flex items-center space-x-3 mb-4">
+          <Database className="h-8 w-8 text-white" />
+          <h1 className="text-3xl font-bold text-white">
+            Cancer Screening Guidelines
+          </h1>
         </div>
+        <p className="text-white/80 max-w-3xl">
+          Evidence-based screening recommendations for cancer prevention and early detection.
+          This comprehensive reference tool displays population-level guidelines for clinical decision support.
+        </p>
+      </div>
 
-        {/* Search and Filter Controls */}
-        <div className="mb-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-          <div className="flex flex-col md:flex-row gap-4">
-            {/* Search Input */}
+      {/* Search and Filter Controls */}
+      <div className="mb-8 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-6">
+        <div className="flex flex-col md:flex-row gap-4">
+          {/* Search Input */}
             <div className="flex-1">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <AlertOctagon className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
-                  type="text"
-                  placeholder="Search cancer types, populations, or modalities..."
+                  type="text"                  placeholder="Search cancer types, populations, or modalities..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 
-                           rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-                           bg-white dark:bg-gray-700 text-gray-900 dark:text-white
-                           placeholder-gray-500 dark:placeholder-gray-400"
+                  className="block w-full pl-10 pr-3 py-3 border border-white/30 
+                           rounded-lg focus:ring-2 focus:ring-white/50 focus:border-white/50 
+                           bg-white/10 backdrop-blur-sm text-white
+                           placeholder-white/60"
                 />
               </div>
             </div>
@@ -751,14 +747,14 @@ const CancerScreening: React.FC = () => {
               <select
                 value={filterRisk}
                 onChange={(e) => setFilterRisk(e.target.value)}
-                className="block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 
-                         rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                         bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="block w-full px-3 py-3 border border-white/30 
+                         rounded-lg focus:ring-2 focus:ring-white/50 focus:border-white/50
+                         bg-white/10 backdrop-blur-sm text-white"
               >
-                <option value="all">All Risk Levels</option>
-                <option value="low">Low Risk</option>
-                <option value="moderate">Moderate Risk</option>
-                <option value="high">High Risk</option>
+                <option value="all" className="text-gray-900">All Risk Levels</option>
+                <option value="low" className="text-gray-900">Low Risk</option>
+                <option value="moderate" className="text-gray-900">Moderate Risk</option>
+                <option value="high" className="text-gray-900">High Risk</option>
               </select>
             </div>
           </div>
@@ -824,14 +820,12 @@ const CancerScreening: React.FC = () => {
           </div>
         </div>
 
-        {/* Dialog Modal */}
-        <GuidelineDialog
+        {/* Dialog Modal */}        <GuidelineDialog
           guideline={selectedGuideline}
           isOpen={!!selectedGuideline}
           onClose={() => setSelectedGuideline(null)}
         />
       </div>
-    </div>
   );
 };
 

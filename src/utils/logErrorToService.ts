@@ -10,7 +10,7 @@ export function logErrorToService(error: unknown, { module, context, extra }: Er
   const errorObj = error instanceof Error ? error : new Error(String(error));
 
   // Development logging
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.MODE === 'development') {
     console.group('OncoVista Error:');
     console.error('Error:', errorObj);
     console.error('Module:', module || 'unknown');
@@ -31,7 +31,7 @@ export function logErrorToService(error: unknown, { module, context, extra }: Er
       message: errorObj.message,
       stack: errorObj.stack,
       timestamp: new Date().toISOString(),
-      environment: process.env.NODE_ENV,
+      environment: import.meta.env.MODE,
     },
   });
 }

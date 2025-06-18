@@ -9,6 +9,7 @@ import { ClinicalRecommendation, CancerType, RecommendationUrgency } from '../ty
 
 export interface ValidationResult {
   passed: boolean;
+  compliant: boolean; // Added for backward compatibility
   errors: string[];
   warnings: string[];
   auditTrail: string[];
@@ -31,7 +32,8 @@ export function verifyGuidelineCompliance(recommendation: ClinicalRecommendation
     warnings.push('No recommendation grade provided.');
   }
   auditTrail.push(`Checked guideline source: ${recommendation.rationale.guideline_source}`);
-  return { passed: errors.length === 0, errors, warnings, auditTrail };
+  const passed = errors.length === 0;
+  return { passed, compliant: passed, errors, warnings, auditTrail };
 }
 
 /**
@@ -51,7 +53,8 @@ export function checkLogicConsistency(recommendation: ClinicalRecommendation, ca
     warnings.push('Low risk but recommendation given.');
   }
   auditTrail.push(`Checked logic for risk: ${calculatedRisk}, urgency: ${recommendation.urgency}`);
-  return { passed: errors.length === 0, errors, warnings, auditTrail };
+  const passed = errors.length === 0;
+  return { passed, compliant: passed, errors, warnings, auditTrail };
 }
 
 /**
@@ -69,7 +72,8 @@ export function assessEvidenceQuality(recommendation: ClinicalRecommendation): V
     errors.push('Invalid evidence quality: ' + recommendation.rationale.evidence_quality);
   }
   auditTrail.push(`Assessed evidence quality: ${recommendation.rationale.evidence_quality}`);
-  return { passed: errors.length === 0, errors, warnings, auditTrail };
+  const passed = errors.length === 0;
+  return { passed, compliant: passed, errors, warnings, auditTrail };
 }
 
 /**
@@ -102,6 +106,10 @@ export class ClinicalAuditTrail {
       metrics: this.metrics,
     };
   }
+  getTrail() {
+    // Added for backward compatibility with tests
+    return this.logs;
+  }
 }
 
 /**
@@ -122,7 +130,7 @@ export function validateClinicalRecommendations(
     const errors = [...guideline.errors, ...logic.errors, ...evidence.errors];
     const warnings = [...guideline.warnings, ...logic.warnings, ...evidence.warnings];
     const auditTrail = [...guideline.auditTrail, ...logic.auditTrail, ...evidence.auditTrail];
-    results.push({ passed, errors, warnings, auditTrail });
+    results.push({ passed, compliant: passed, errors, warnings, auditTrail });
   }
   return results;
 }

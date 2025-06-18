@@ -240,8 +240,7 @@ export class AIErrorHandler {
     return {
       error: this.getUserMessage(error),
       code: error.code || error.type,
-      retryable: error.retryable || false,
-      details: process.env.NODE_ENV === 'development' ? {
+      retryable: error.retryable || false,      details: import.meta.env.DEV ? {
         originalMessage: error.message,
         metadata: error.metadata
       } : undefined

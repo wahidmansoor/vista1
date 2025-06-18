@@ -24,7 +24,7 @@ function StickyHeader({ metadata, totalBlocks, currentBlock }: {
   const progress = totalBlocks > 0 ? (currentBlock / totalBlocks) * 100 : 0;
   
   return (
-    <div className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 print:hidden">
+    <div className="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 print:hidden">
       <div className="px-6 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">

@@ -10,7 +10,7 @@ interface MedicationDebugPanelProps {
  * Helps diagnose issues with pre_medications and post_medications
  */
 const MedicationDebugPanel: React.FC<MedicationDebugPanelProps> = ({ protocol }) => {
-  if (process.env.NODE_ENV !== 'development') {
+  if (!import.meta.env.DEV) {
     return null; // Only show in development
   }
 

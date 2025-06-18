@@ -30,13 +30,12 @@ const Button: React.FC<ButtonProps> = ({
     md: 'px-4 py-2',
     lg: 'px-6 py-3 text-lg'
   };
-
   // Variant classes
   const variantClasses = {
-    primary: 'bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-sm',
-    secondary: 'bg-gray-100 text-gray-700 hover:bg-gray-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',
-    outline: 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',
-    danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 shadow-sm'
+    primary: 'bg-gradient-to-r from-[#004D61] to-[#005B8F] text-white hover:from-[#005B8F] hover:to-[#3B1D74] focus:ring-2 focus:ring-white/50 focus:ring-offset-2 shadow-lg',
+    secondary: 'bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/30 focus:ring-2 focus:ring-white/50 focus:ring-offset-2',
+    outline: 'bg-transparent border border-white/30 text-white hover:bg-white/10 hover:border-white/50 focus:ring-2 focus:ring-white/50 focus:ring-offset-2',
+    danger: 'bg-red-500/80 backdrop-blur-sm text-white hover:bg-red-600/80 focus:ring-2 focus:ring-red-400/50 focus:ring-offset-2 shadow-lg'
   };
 
   // State classes

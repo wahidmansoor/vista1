@@ -1,35 +1,25 @@
-/* Base module layout */
+/* Base module layout - removed conflicting background */
 .opd-module {
-  min-height: calc(100vh - 64px); /* account for header height */
-  background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
-  padding: 1.5rem;
-  @apply min-h-screen bg-gray-50;
+  @apply min-h-screen;
 }
 
 .opd-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  @apply p-6 max-w-7xl mx-auto;
+  /* Updated to glass morphism effect */
+  @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 max-w-7xl mx-auto;
 }
 
-/* Card components */
+/* Card components - glass morphism */
 .opd-card {
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  transition: box-shadow 0.2s ease-in-out;
+  @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl;
+  transition: all 0.2s ease-in-out;
 }
 
 .opd-card:hover {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  @apply bg-white/15 border-white/30;
 }
 
 .opd-card-content {
-  padding: 1.5rem;
+  @apply p-6;
 }
 
 /* Tab navigation */

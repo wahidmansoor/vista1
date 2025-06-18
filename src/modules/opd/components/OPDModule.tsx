@@ -64,22 +64,22 @@ const OPDModule: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-2">
+    <div className="min-h-screen p-6">
+      <h1 className="text-3xl font-bold text-white mb-8 flex items-center gap-2">
         🏥 Oncology OPD Module
       </h1>
 
       <Tab.Group>
-        <Tab.List className="flex space-x-2 mb-8">
+        <Tab.List className="flex space-x-2 mb-8 bg-white/5 backdrop-blur-sm rounded-lg p-2">
           {tabs.map(({ label, icon: Icon }) => (
             <Tab
               key={label}
               className={({ selected }) => `
-                opd-tab flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all
+                flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all
                 ${
                   selected
-                    ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md scale-[1.02]"
-                    : "bg-white text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                    ? "bg-gradient-to-r from-[#004D61] to-[#005B8F] text-white shadow-lg scale-[1.02]"
+                    : "text-white/70 hover:bg-white/10 hover:text-white"
                 }
               `}
             >
@@ -92,10 +92,10 @@ const OPDModule: React.FC = () => {
         <Tab.Panels>
           {tabs.map(({ label, component: Component, card: Card }) => (
             <Tab.Panel key={label}>
-              <Card>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6">
                 <Component />
                 <AISummary patientData={mockPatientData} isEnabled={true} />
-              </Card>
+              </div>
             </Tab.Panel>
           ))}
         </Tab.Panels>

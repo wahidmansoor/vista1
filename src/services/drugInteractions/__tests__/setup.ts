@@ -2,14 +2,15 @@ import { DrugSafetySystem } from '../DrugSafetySystem';
 import { MedicalAuditLogger } from '../../utils/MedicalAuditLogger';
 import { ConfidenceService } from '../../confidence/ConfidenceService';
 import type { SafetyValidation } from '../../safety/types';
+import { vi } from 'vitest';
 
 export const createMockAuditLogger = () => {
   const mock = {
-    logAssessmentStart: jest.fn().mockResolvedValue(undefined),
-    logAssessmentComplete: jest.fn().mockResolvedValue(undefined),
-    logError: jest.fn().mockResolvedValue(undefined)
+    logAssessmentStart: vi.fn().mockResolvedValue(undefined),
+    logAssessmentComplete: vi.fn().mockResolvedValue(undefined),
+    logError: vi.fn().mockResolvedValue(undefined)
   };
-  return mock as unknown as jest.Mocked<MedicalAuditLogger>;
+  return mock as unknown as MedicalAuditLogger;
 };
 
 export const createMockSafetySystem = () => {
@@ -20,18 +21,18 @@ export const createMockSafetySystem = () => {
   };
 
   const mock = {
-    validateDrugAssessment: jest.fn().mockResolvedValue(defaultValidation)
+    validateDrugAssessment: vi.fn().mockResolvedValue(defaultValidation)
   };
 
-  return mock as unknown as jest.Mocked<DrugSafetySystem>;
+  return mock as unknown as DrugSafetySystem;
 };
 
 export const createMockConfidenceService = () => {
   const mock = {
-    calculateConfidence: jest.fn().mockResolvedValue(1.0),
-    validateConfidence: jest.fn().mockResolvedValue(true)
+    calculateConfidence: vi.fn().mockResolvedValue(1.0),
+    validateConfidence: vi.fn().mockResolvedValue(true)
   };
-  return mock as unknown as jest.Mocked<ConfidenceService>;
+  return mock as unknown as ConfidenceService;
 };
 
 export const createTestDrugInfo = (overrides = {}) => ({

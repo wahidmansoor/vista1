@@ -3,7 +3,7 @@ import { useSymptomData } from "../../hooks/useSymptomData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AlertTriangle, Loader2 } from "lucide-react";
+import { AlertTriangle, Loader2, Search } from "lucide-react";
 import { marked } from "marked";
 import clsx from "clsx";
 
@@ -17,19 +17,113 @@ function groupBy<T, K extends keyof any>(arr: T[], key: (item: T) => K) {
   }, {} as Record<K, T[]>);
 }
 
+// Define explicit TypeScript interface for Symptom
+interface Symptom {
+  id: string;
+  symptom_name: string;
+  severity_level: 'Mild' | 'Moderate' | 'Severe';
+  management: string;
+  category_tag?: string;
+  evidence_grade?: string;
+  source_reference?: string;
+  is_red_flag?: boolean;
+  preferred_route?: string;
+  route_note?: string;
+  created_at: string;
+  updated_at: string;
+  version: number;
+  status: 'active' | 'archived' | 'draft';
+}
+
+// Performance optimized SymptomCard component with memoized markdown rendering
+interface SymptomCardProps {
+  symptom: Symptom;
+}
+
+const SymptomCard: React.FC<SymptomCardProps> = ({ symptom }) => {
+  // Memoize markdown parsing for performance
+  const parsedManagement = useMemo(() => {
+    return marked.parse(symptom.management || "");
+  }, [symptom.management]);
+
+  return (
+    <Card className="border shadow-sm h-full flex flex-col">
+      <CardHeader className="pb-4">
+        <div className="flex items-start justify-between gap-3">
+          <CardTitle className="text-lg leading-tight flex-1 min-w-0">{symptom.symptom_name}</CardTitle>
+          <span
+            className={clsx(
+              "px-2 py-1 rounded text-xs font-semibold whitespace-nowrap shrink-0 mt-0.5",
+              symptom.severity_level === "Mild" && "bg-green-100 text-green-700",
+              symptom.severity_level === "Moderate" && "bg-yellow-100 text-yellow-700",
+              symptom.severity_level === "Severe" && "bg-red-100 text-red-700"
+            )}
+          >
+            {symptom.severity_level}
+          </span>
+        </div>
+      </CardHeader>
+      <CardContent className="flex-1 pt-0 flex flex-col">
+        <div className="prose prose-sm max-w-none flex-1 mb-4">
+          <div
+            className="text-sm leading-relaxed"
+            dangerouslySetInnerHTML={{
+              __html: parsedManagement,
+            }}
+          />
+        </div>
+        
+        <div className="space-y-2 mt-auto pt-2 border-t border-gray-100">
+          {symptom.is_red_flag && (
+            <div className="flex items-center gap-2 text-red-600 bg-red-50 px-2 py-1 rounded">
+              <AlertTriangle className="w-4 h-4 shrink-0" />
+              <span className="font-medium text-sm">Red Flag</span>
+            </div>
+          )}
+          
+          {symptom.preferred_route && (
+            <div className="text-xs text-gray-600 bg-gray-50 px-2 py-1 rounded">
+              <span className="font-semibold">Route:</span> {symptom.preferred_route}
+              {symptom.route_note && (
+                <div className="mt-1 italic text-gray-500">{symptom.route_note}</div>
+              )}
+            </div>
+          )}
+          
+          {symptom.evidence_grade && (
+            <div className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded">
+              <span className="font-semibold">Evidence:</span> {symptom.evidence_grade}
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
 const SymptomControl: React.FC = () => {
   const [search, setSearch] = useState("");
+  const [selectedTab, setSelectedTab] = useState<string>(""); // State-based dynamic tab selection
   const { data, loading, error } = useSymptomData({
     search: search.trim() ? search : undefined,
   });
 
-  // Defensive: Always define these hooks before any return
-  const activeData = Array.isArray(data) ? data.filter((s) => s.status === "active") : [];
+  // Type-safe data handling with explicit Symptom interface
+  const activeData: Symptom[] = Array.isArray(data) ? data.filter((s) => s.status === "active") : [];
   const grouped = useMemo(
     () => groupBy(activeData, (s) => s.symptom_name),
     [activeData]
   );
-  const symptomNames = Object.keys(grouped);
+  const symptomNames: string[] = Object.keys(grouped);
+
+  // Dynamic tab selection based on loaded data
+  useEffect(() => {
+    if (symptomNames.length > 0 && !selectedTab) {
+      setSelectedTab(symptomNames[0]);
+    } else if (symptomNames.length === 0) {
+      setSelectedTab("");
+    }
+  }, [symptomNames, selectedTab]);
 
   // Debug log for Supabase data
   useEffect(() => {
@@ -64,95 +158,77 @@ const SymptomControl: React.FC = () => {
   }
 
   return (
-    <div className="palliative-section max-w-5xl mx-auto">
-      <div className="flex flex-col sm:flex-row gap-4 mb-6">
-        <div className="relative flex-1">
+    <div className="w-full">
+      {/* Search Section */}
+      <div className="mb-8">
+        <div className="relative max-w-md">
           <Input
             type="text"
             placeholder="Search symptoms..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10"
+            className="pl-10 pr-4"
             aria-label="Search symptoms"
           />
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-            <Loader2 className={clsx("w-4 h-4", loading && "animate-spin")} />
+            {loading ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Search className="w-4 h-4" />
+            )}
           </span>
         </div>
       </div>
 
-      <Tabs defaultValue={symptomNames[0] || "none"} className="w-full">
-        <TabsList aria-label="Symptom groups">
-          {symptomNames.length > 0 ? (
-            symptomNames.map((name) => (
-              <TabsTrigger key={name} value={name}>
-                {name}
+      {/* Tabs Section */}
+      <Tabs value={selectedTab} onValueChange={setSelectedTab} className="w-full">
+        {/* Multi-line TabsList to prevent horizontal overflow */}
+        <div className="mb-6">
+          <TabsList 
+            aria-label="Symptom groups"
+            className="flex flex-wrap h-auto p-1 bg-gray-100 rounded-lg gap-1"
+          >
+            {symptomNames.length > 0 ? (
+              symptomNames.map((name) => (
+                <TabsTrigger 
+                  key={name} 
+                  value={name}
+                  className="px-3 py-2 text-sm font-medium rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm flex-shrink-0"
+                >
+                  {name}
+                </TabsTrigger>
+              ))
+            ) : (
+              <TabsTrigger 
+                value="none" 
+                disabled 
+                className="px-3 py-2 text-sm font-medium text-gray-400"
+              >
+                No Symptoms
               </TabsTrigger>
-            ))
-          ) : (
-            <TabsTrigger value="none" disabled>
-              No Symptoms
-            </TabsTrigger>
-          )}
-        </TabsList>
+            )}
+          </TabsList>
+        </div>
 
+        {/* Content Section */}
         {symptomNames.length === 0 && (
-          <TabsContent value="none">
+          <TabsContent value="none" className="mt-6">
             <div className="text-center py-16 text-gray-500">
-              No active symptoms recorded
+              <div className="max-w-sm mx-auto">
+                <AlertTriangle className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No Symptoms Found</h3>
+                <p className="text-gray-500">No active symptoms are currently recorded in the system.</p>
+              </div>
             </div>
           </TabsContent>
         )}
 
         {symptomNames.map((name) => (
-          <TabsContent key={name} value={name}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {grouped[name].map((symptom) => (
-                <Card key={symptom.id} className="border shadow-sm">
-                  <CardHeader>
-                    <div className="flex items-center gap-2">
-                      <CardTitle className="text-lg">{symptom.symptom_name}</CardTitle>
-                      <span
-                        className={clsx(
-                          "px-2 py-1 rounded text-xs font-semibold",
-                          symptom.severity_level === "Mild" && "bg-green-100 text-green-700",
-                          symptom.severity_level === "Moderate" && "bg-yellow-100 text-yellow-700",
-                          symptom.severity_level === "Severe" && "bg-red-100 text-red-700"
-                        )}
-                      >
-                        {symptom.severity_level}
-                      </span>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="prose prose-sm max-w-none mb-2">
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: marked.parse(symptom.management || ""),
-                        }}
-                      />
-                    </div>
-                    {symptom.is_red_flag && (
-                      <div className="flex items-center gap-2 mt-2 text-red-600">
-                        <AlertTriangle className="w-4 h-4" />
-                        <span className="font-medium">Red Flag</span>
-                      </div>
-                    )}
-                    {symptom.preferred_route && (
-                      <div className="mt-2 text-xs text-gray-500">
-                        <span className="font-semibold">Preferred Route:</span> {symptom.preferred_route}
-                        {symptom.route_note && (
-                          <span className="ml-2 italic">{symptom.route_note}</span>
-                        )}
-                      </div>
-                    )}
-                    {symptom.evidence_grade && (
-                      <div className="mt-2 text-xs text-blue-500">
-                        <span className="font-semibold">Evidence:</span> {symptom.evidence_grade}
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
+          <TabsContent key={name} value={name} className="mt-6">
+            {/* Improved grid with consistent card heights and better alignment */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 auto-rows-fr">
+              {grouped[name].map((symptom: Symptom) => (
+                <SymptomCard key={symptom.id} symptom={symptom} />
               ))}
             </div>
           </TabsContent>

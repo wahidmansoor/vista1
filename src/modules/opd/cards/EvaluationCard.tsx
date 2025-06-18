@@ -6,7 +6,7 @@ interface EvaluationCardProps {
 
 const EvaluationCard: React.FC<EvaluationCardProps> = ({ children }) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg">
+    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
       <div className="p-6">
         <div className="space-y-6">
           {children}

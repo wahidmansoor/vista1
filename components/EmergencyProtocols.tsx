@@ -36,7 +36,7 @@ type EmergencyProtocolsProps = {
   // ...existing props...
 };
 
-const isDev = process.env.NODE_ENV !== "production";
+const isDev = import.meta.env.MODE !== "production";
 
 export default function EmergencyProtocols({ protocols }: EmergencyProtocolsProps) {
   // Pin state (persisted)

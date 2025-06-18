@@ -89,9 +89,8 @@ const SupabaseDataCardExample: React.FC = () => {
       } catch (err) {
         console.error('Error fetching data:', err);
         setError(err instanceof Error ? err.message : 'An unknown error occurred');
-        
-        // In development mode, use sample data when there's an error
-        if (process.env.NODE_ENV === 'development') {
+          // In development mode, use sample data when there's an error
+        if (import.meta.env.DEV) {
           setData(sampleData);
         }
       } finally {

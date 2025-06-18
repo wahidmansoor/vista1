@@ -29,56 +29,62 @@ export interface RiskScore {
  * @param patientData PatientProfile
  * @returns Array of RiskScore (one per relevant cancer type)
  */
-export function calculateCancerRisk(patientData: PatientProfile): RiskScore[] {
-  const results: RiskScore[] = [];
-  // Example: Breast, Colorectal, Lung, Prostate
-  const cancers: CancerType[] = [CancerType.BREAST, CancerType.COLORECTAL, CancerType.LUNG, CancerType.PROSTATE];
+export function calculateCancerRisk(patientData: PatientProfile): RiskScore[] {  const results: RiskScore[] = [];
+  // Example: Breast, Colorectal, Lung, Prostate, Endometrial, Ovarian
+  const cancers: CancerType[] = [
+    CancerType.BREAST, 
+    CancerType.COLORECTAL, 
+    CancerType.LUNG, 
+    CancerType.PROSTATE,
+    CancerType.ENDOMETRIAL,
+    CancerType.OVARIAN
+  ];
 
   for (const cancer of cancers) {
     let risk = 0;
     let rationale: string[] = [];
-    let ci: [number, number] = [0, 0];
-
-    // 1. Genetic Predisposition (40%)
+    let ci: [number, number] = [0, 0];    // 1. Genetic Predisposition (60% - increased weight for high-penetrance mutations)
     let geneticWeight = 0;
     if (patientData.genetics.mutations) {
       for (const m of patientData.genetics.mutations) {
         if (cancer === CancerType.BREAST && (m.mutation === GeneticMutation.BRCA1 || m.mutation === GeneticMutation.BRCA2)) {
-          geneticWeight += 0.4 * 1.0; // 10x risk
-          rationale.push('BRCA mutation: 10x baseline risk for breast cancer');
+          geneticWeight += 0.6; // Very high weight for BRCA mutations - enough to reach high risk alone
+          rationale.push('BRCA mutation: 10-20x baseline risk for breast cancer');
         }
         if (cancer === CancerType.OVARIAN && (m.mutation === GeneticMutation.BRCA1 || m.mutation === GeneticMutation.BRCA2)) {
-          geneticWeight += 0.4 * 0.5; // 5x risk
-          rationale.push('BRCA mutation: 5x baseline risk for ovarian cancer');
+          geneticWeight += 0.5; // High risk for ovarian cancer
+          rationale.push('BRCA mutation: 10-40x baseline risk for ovarian cancer');
         }
         if (cancer === CancerType.COLORECTAL && m.mutation === GeneticMutation.LYNCH) {
-          geneticWeight += 0.4 * 0.5; // 5x risk
-          rationale.push('Lynch syndrome: 5x baseline risk for colorectal cancer');
+          geneticWeight += 0.6; // Very high weight for Lynch syndrome
+          rationale.push('Lynch syndrome: 10-80x baseline risk for colorectal cancer');
+        }
+        if (cancer === CancerType.ENDOMETRIAL && m.mutation === GeneticMutation.LYNCH) {
+          geneticWeight += 0.5; // High risk for endometrial cancer with Lynch
+          rationale.push('Lynch syndrome: 10-70x baseline risk for endometrial cancer');
         }
         if (cancer === CancerType.PANCREATIC && (m.mutation === GeneticMutation.BRCA1 || m.mutation === GeneticMutation.BRCA2)) {
-          geneticWeight += 0.4 * 0.1;
-          rationale.push('BRCA mutation: increased pancreatic cancer risk');
+          geneticWeight += 0.3; // Moderate increase for pancreatic
+          rationale.push('BRCA mutation: 2-3x baseline risk for pancreatic cancer');
         }
         // Add more gene-cancer associations as needed
       }
     }
     // Polygenic risk score placeholder
     // geneticWeight += ...
-    risk += geneticWeight;
-
-    // 2. Family History (25%)
+    risk += geneticWeight;    // 2. Family History (20% - reduced weight as genetics are more important)
     let famWeight = 0;
     if (patientData.demographics.family_history) {
       let firstDegree = patientData.demographics.family_history.filter(fh => fh.cancer_type === cancer);
       if (firstDegree.length > 0) {
-        famWeight += 0.25 * 0.5; // 2x risk
+        famWeight += 0.2; // Base family history risk
         rationale.push('First-degree relative: 2x risk');
         if (firstDegree.some(fh => fh.age_at_diagnosis && fh.age_at_diagnosis < 50)) {
-          famWeight += 0.25 * 0.25; // additional risk
+          famWeight += 0.15; // Additional risk for early onset
           rationale.push('Early-onset in family: higher risk');
         }
         if (firstDegree.length > 1) {
-          famWeight += 0.25 * 0.25; // exponential increase
+          famWeight += 0.15; // Multiple relatives
           rationale.push('Multiple affected relatives: exponential risk increase');
         }
       }
@@ -137,14 +143,12 @@ export function calculateCancerRisk(patientData: PatientProfile): RiskScore[] {
         }
       }
     }
-    risk += symptomWeight;
-
-    // Normalize and assign risk level
+    risk += symptomWeight;    // Normalize and assign risk level (adjusted thresholds for high-penetrance genes)
     let absoluteRisk = Math.min(1, risk);
     let riskLevel: RiskScore['riskLevel'] = 'average';
-    if (absoluteRisk > 0.7) riskLevel = 'very_high';
-    else if (absoluteRisk > 0.4) riskLevel = 'high';
-    else if (absoluteRisk > 0.2) riskLevel = 'elevated';
+    if (absoluteRisk >= 0.5) riskLevel = 'very_high';  // Lowered from 0.6 for high-penetrance genes
+    else if (absoluteRisk >= 0.35) riskLevel = 'high'; // Lowered from 0.4 for high-penetrance genes  
+    else if (absoluteRisk > 0.15) riskLevel = 'elevated';
     // Confidence interval (placeholder, should use model-based CI)
     ci = [Math.max(0, absoluteRisk - 0.1), Math.min(1, absoluteRisk + 0.1)];
 

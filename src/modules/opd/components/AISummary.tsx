@@ -8,7 +8,7 @@ interface AISummaryProps {
 
 const AISummary: React.FC<AISummaryProps> = ({ 
   patientData,
-  isEnabled = process.env.NODE_ENV === 'production' 
+  isEnabled = import.meta.env.PROD 
 }) => {
   const [summaryState, setSummaryState] = useState<'loading' | 'generated' | 'error' | 'disabled'>('loading');
   const [summary, setSummary] = useState<string | null>(null);

@@ -298,16 +298,16 @@ const PatientEvaluationForm: React.FC = () => {
       });
     }
   };
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      {/* AI Assistant Button */}
-      <div className="fixed right-4 top-4 z-50">
-        <button
-          type="button"
-          onClick={() => setIsAISidebarOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 transition-colors"
-        >
+    <div className="min-h-screen p-6">
+      <form onSubmit={handleSubmit} className="space-y-8">
+        {/* AI Assistant Button */}
+        <div className="fixed right-4 top-4 z-50">
+          <button
+            type="button"
+            onClick={() => setIsAISidebarOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#004D61] to-[#005B8F] text-white rounded-full shadow-lg hover:from-[#005B8F] hover:to-[#3B1D74] transition-all"
+          >
           <Brain className="w-5 h-5" />
           <span>AI Assistant</span>
         </button>
@@ -326,13 +326,11 @@ const PatientEvaluationForm: React.FC = () => {
           steps={steps}
           currentStep={steps.findIndex(step => step.status === 'current')}
         />
-      )}
-
-      {/* Cancer Type Selector */}
-      <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+      )}      {/* Cancer Type Selector */}
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-sm">
         <label 
           htmlFor="cancer-type-select" 
-          className="block text-lg font-semibold text-gray-900 mb-4"
+          className="block text-lg font-semibold text-white mb-4"
         >
           Select Cancer Type
         </label>
@@ -341,31 +339,29 @@ const PatientEvaluationForm: React.FC = () => {
           aria-label="Cancer Type"
           value={selectedCancerType || ''}
           onChange={(e) => setSelectedCancerType(e.target.value as CancerType)}
-          className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500"
+          className="w-full p-2 border border-white/30 bg-white/10 backdrop-blur-sm text-white rounded-md focus:ring-2 focus:ring-white/50 focus:border-white/50"
         >
-          <option value="">Select cancer type...</option>
-          {cancerTypes.map(type => (
-            <option key={type.value} value={type.value}>
+          <option value="" className="text-gray-900">Select cancer type...</option>
+          {cancerTypes.map(type => (            <option key={type.value} value={type.value} className="text-gray-900">
               {type.label}
             </option>
           ))}
         </select>
       </div>
 
-      {currentTemplate && (
-        <>
-          <h2 className="text-xl font-bold text-gray-800">🩺 Oncologist's Comprehensive OPD Evaluation</h2>
-          <p className="text-sm text-gray-600">
+      {currentTemplate && (        <>
+          <h2 className="text-xl font-bold text-white">🩺 Oncologist's Comprehensive OPD Evaluation</h2>
+          <p className="text-sm text-white/80">
             Use this structured form to guide your clinical judgment and capture essential information during patient evaluation in oncology OPD.
           </p>
 
           {/* Notes and Guidance */}
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-            <h3 className="text-blue-800 font-semibold flex items-center gap-2 mb-2">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4">
+            <h3 className="text-white font-semibold flex items-center gap-2 mb-2">
               <CheckCircle className="w-5 h-5" />
               Clinical Guidance
             </h3>
-            <ul className="list-disc list-inside space-y-1 text-blue-700">
+            <ul className="list-disc list-inside space-y-1 text-white/80">
               {currentTemplate.notes.map((note, index) => (
                 <li key={index}>{note}</li>
               ))}
@@ -373,12 +369,12 @@ const PatientEvaluationForm: React.FC = () => {
           </div>
 
           {/* Red Flags Alert */}
-          <div className="bg-red-50 p-4 rounded-lg border border-red-200">
-            <h3 className="text-red-800 font-semibold flex items-center gap-2 mb-2">
+          <div className="bg-red-500/20 backdrop-blur-sm border border-red-400/30 rounded-xl p-4">
+            <h3 className="text-red-200 font-semibold flex items-center gap-2 mb-2">
               <AlertTriangle className="w-5 h-5" />
               Red Flags to Monitor
             </h3>
-            <ul className="list-disc list-inside space-y-1 text-red-700">
+            <ul className="list-disc list-inside space-y-1 text-red-200/80">
               {currentTemplate.redFlags.map((flag, index) => (
                 <li key={index}>{flag}</li>
               ))}
@@ -386,10 +382,10 @@ const PatientEvaluationForm: React.FC = () => {
           </div>
 
           {/* Staging Section */}
-          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm space-y-6">
-            <div className="border-b border-gray-200 pb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Disease Staging & Performance Status</h3>
-              <p className="mt-2 text-sm text-gray-600">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-sm space-y-6">
+            <div className="border-b border-white/20 pb-4">
+              <h3 className="text-lg font-semibold text-white">Disease Staging & Performance Status</h3>
+              <p className="mt-2 text-sm text-white/80">
                 Document current disease stage and patient's functional status
               </p>
             </div>
@@ -411,18 +407,16 @@ const PatientEvaluationForm: React.FC = () => {
                 />
               </div>
             </div>
-          </div>
-
-          {/* Evaluation Sections */}
+          </div>          {/* Evaluation Sections */}
           {currentTemplate.sections.map((section, sectionIndex) => (
-            <div key={sectionIndex} className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm space-y-6">
-              <div className="border-b border-gray-200 pb-4">
-                <h3 className="text-lg font-semibold text-gray-900">{section.title}</h3>
+            <div key={sectionIndex} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-sm space-y-6">
+              <div className="border-b border-white/20 pb-4">
+                <h3 className="text-lg font-semibold text-white">{section.title}</h3>
                 {section.cancerSpecificNotes && (
-                  <div className="mt-2 text-sm text-gray-600">
+                  <div className="mt-2 text-sm text-white/80">
                     {section.cancerSpecificNotes.map((note, index) => (
                       <div key={index} className="flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4 text-blue-500" />
+                        <AlertCircle className="w-4 h-4 text-blue-300" />
                         {note}
                       </div>
                     ))}
@@ -480,11 +474,9 @@ const PatientEvaluationForm: React.FC = () => {
               template={currentTemplate as EvaluationTemplate}
               formData={formData}
             />
-          </div>
-
-          {/* Error message */}
+          </div>          {/* Error message */}
           {formError && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-md text-red-700 flex items-center gap-2">
+            <div className="p-3 bg-red-500/20 backdrop-blur-sm border border-red-400/30 rounded-xl text-red-200 flex items-center gap-2">
               <AlertTriangle className="w-5 h-5" />
               {formError}
             </div>
@@ -492,13 +484,11 @@ const PatientEvaluationForm: React.FC = () => {
           
           {/* Success message */}
           {formSuccess && (
-            <div className="p-3 bg-green-50 border border-green-200 rounded-md text-green-700 flex items-center gap-2">
+            <div className="p-3 bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-xl text-green-200 flex items-center gap-2">
               <CheckCircle className="w-5 h-5" />
               Evaluation saved successfully! Redirecting...
             </div>
-          )}
-
-          <div className="flex justify-end gap-4 sticky bottom-0 bg-white p-4 border-t mt-6">
+          )}          <div className="flex justify-end gap-4 sticky bottom-0 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 mt-6">
             <Button
               type="button"
               variant="secondary"
@@ -526,8 +516,8 @@ const PatientEvaluationForm: React.FC = () => {
             </Button>
           </div>
         </>
-      )}
-    </form>
+      )}    </form>
+    </div>
   );
 };
 

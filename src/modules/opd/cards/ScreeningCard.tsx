@@ -6,8 +6,8 @@ interface ScreeningCardProps {
 
 const ScreeningCard: React.FC<ScreeningCardProps> = ({ children }) => {
   return (
-    <div className="opd-card">
-      <div className="opd-card-content">
+    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
+      <div className="p-6">
         <div className="space-y-6">
           {children}
         </div>

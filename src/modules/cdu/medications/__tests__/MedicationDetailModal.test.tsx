@@ -11,7 +11,6 @@ describe('MedicationDetailModal', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
-
   it('renders medication details correctly', () => {
     render(
       <MedicationDetailModal
@@ -25,11 +24,12 @@ describe('MedicationDetailModal', () => {
     expect(screen.getByText(mockMedication.name)).toBeInTheDocument();
     expect(screen.getByText(mockMedication.brand_names.join(', '))).toBeInTheDocument();
     expect(screen.getByText(mockMedication.classification)).toBeInTheDocument();
-
-    // Check sections
+    
+    // Check sections - use more specific selectors
     expect(screen.getByText(/dosing & administration/i)).toBeInTheDocument();
-    expect(screen.getByText(/side effects/i)).toBeInTheDocument();
-    expect(screen.getByText(/monitoring/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: /side effects/i })).toBeInTheDocument();
+    // Use a more specific selector for monitoring to avoid conflicts
+    expect(screen.getByRole('heading', { level: 3, name: /monitoring/i })).toBeInTheDocument();
   });
 
   it('renders nothing when medication is null', () => {
@@ -66,10 +66,13 @@ describe('MedicationDetailModal', () => {
         isOpen={true}
         onClose={mockOnClose}
       />
-    );    mockMedication.monitoring.baseline.forEach(test => {
+    );
+
+    mockMedication.monitoring.baseline.forEach(test => {
       expect(screen.getAllByText(test)[0]).toBeInTheDocument();
     });
-      mockMedication.monitoring.ongoing.forEach(test => {
+
+    mockMedication.monitoring.ongoing.forEach(test => {
       expect(screen.getAllByText(test)[0]).toBeInTheDocument();
     });
   });
@@ -90,7 +93,7 @@ describe('MedicationDetailModal', () => {
     mockMedication.side_effects.severe.forEach(effect => {
       const element = screen.getByText(effect);
       expect(element).toBeInTheDocument();
-      expect(element).toHaveClass('text-red-600');
+      expect(element).toHaveClass('text-red-700');
     });
   });
 

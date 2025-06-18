@@ -18,6 +18,15 @@ export interface ScreeningPlan {
   recommendations: ClinicalRecommendation[];
   rationale: string[];
   errors?: string[];
+  // Added for compatibility with clinicalReports
+  riskSummary: string;
+  timeline: Array<{
+    test: ScreeningTestType;
+    dueDate: Date;
+    status: 'completed' | 'due' | 'overdue' | 'planned';
+    result?: string;
+  }>;
+  actionItems: string[];
 }
 
 /**
@@ -49,7 +58,7 @@ export function generateScreeningPlan(riskProfile: RiskScore): ScreeningPlan {
               evidence_quality: 'High',
             },
             generated_date: new Date(),
-            review_date: new Date(new Date().setFullYear(new Date().getFullYear() + protocol.intervalYears)),
+            review_date: new Date(new Date().setFullYear(new Date().getFullYear() + (protocol.intervalYears || 1))),
           });
           rationale.push('USPSTF Grade A/B recommendation applied.');
         }
@@ -67,8 +76,8 @@ export function generateScreeningPlan(riskProfile: RiskScore): ScreeningPlan {
               evidence_quality: 'High',
             },
             generated_date: new Date(),
-            review_date: new Date(new Date().setFullYear(new Date().getFullYear() + protocol.intervalYears)),
-            special_considerations: [protocol.sharedDecisionNotes],
+            review_date: new Date(new Date().setFullYear(new Date().getFullYear() + (protocol.intervalYears || 1))),
+            special_considerations: [protocol.sharedDecisionNotes || 'High-risk screening protocol'],
           });
           rationale.push('High-risk protocol activated.');
         }
@@ -118,5 +127,8 @@ export function generateScreeningPlan(riskProfile: RiskScore): ScreeningPlan {
     recommendations,
     rationale,
     errors: errors.length ? errors : undefined,
+    riskSummary: riskProfile.riskLevel || 'average',
+    timeline: [],
+    actionItems: []
   };
 }

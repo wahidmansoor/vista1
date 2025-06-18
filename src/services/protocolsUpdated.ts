@@ -152,11 +152,9 @@ export const getProtocols = async (filters: ProtocolFilters): Promise<Protocol[]
         // Handle drug name search within JSONB
         query = query.contains('treatment->>drugs', filters.drugName);
       }
-    }
-
-    const { data, error } = await query;
+    }    const { data, error } = await query;
     
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.DEV) {
       console.log('[CDU] Raw protocols data:', data?.slice(0, 2));
     }
     

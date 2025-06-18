@@ -76,7 +76,7 @@ class ErrorBoundaryOPD extends Component<Props, State> {
             <p className="text-gray-600 mb-4">
               Please try refreshing the page. If the problem persists, contact support.
             </p>
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+            {import.meta.env.MODE === 'development' && this.state.error && (
               <div className="bg-gray-100 p-4 rounded mb-4 overflow-auto max-h-40">
                 <p className="font-mono text-sm text-red-700">{this.state.error.toString()}</p>
                 {this.state.errorInfo && (

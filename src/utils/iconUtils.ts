@@ -157,15 +157,14 @@ export function getIconComponent(iconName: string): LucideIconComponent | null {
     iconName.toLowerCase(),
     iconName.toUpperCase()
   ];
-  
-  for (const variation of variations) {
+    for (const variation of variations) {
     if (variation in iconLookup) {
       return iconLookup[variation];
     }
   }
   
   // Log warning for debugging in development
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.MODE === 'development') {
     console.warn(`Icon "${iconName}" (normalized: "${normalizedName}") not found in Lucide React.`);
     console.log('Available icons sample:', Object.keys(LucideIcons).slice(0, 20));
   }
