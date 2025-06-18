@@ -6,20 +6,22 @@ import InpatientModule from "../modules/inpatient";
 import PalliativeModule from "../modules/palliative";
 import Tools from "../modules/tools";
 import Handbook from "../modules/handbook";
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import InpatientLayout from '@/modules/inpatient/InpatientLayout';
+import InpatientOverview from '@/modules/inpatient/InpatientOverview';
+import InpatientOrders from '@/modules/inpatient/InpatientOrders';
 import DischargeGuidelines from '@/modules/inpatient/sections/discharge/DischargeGuidelines';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: <div>Root Layout</div>, // TODO: Import RootLayout properly
     children: [
       {
         path: 'inpatient',
         element: <InpatientLayout />,
         children: [
-          { path: '', redirect: 'overview' },
+          { path: '', element: <Navigate to="overview" replace /> },
           { path: 'overview', element: <InpatientOverview /> },
           { path: 'discharge', element: <DischargeGuidelines /> },
           { path: 'orders', element: <InpatientOrders /> }
