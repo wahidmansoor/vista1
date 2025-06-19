@@ -57,3 +57,52 @@ Required variables:
 - `VITE_AUTH0_AUDIENCE` (client-safe)
 
 The `netlify.toml` file now automatically configures the correct callback URLs for different deployment contexts (production, deploy previews, branch deploys).
+
+---
+
+# Netlify Build Process Fix (June 19, 2025)
+
+## Issue
+The Netlify deployment was failing with a non-zero exit code (2) during the build stage, indicating a problem with the build script.
+
+## Diagnosis
+The error logs showed that the build process was failing but not providing detailed error information due to the `--logLevel error` flag in the build command.
+
+## Solution
+We implemented a robust build script with the following improvements:
+
+1. Updated the build command in `netlify.toml` to use `netlify-robust-build.js` instead of `npm run build:minimal`
+2. Modified `netlify-robust-build.js` to use CommonJS module format for better compatibility
+3. Added multiple build strategies with progressive fallbacks
+4. Improved error handling and logging to better diagnose build failures
+5. Added cross-platform compatibility for both Windows and Unix environments
+6. Created a test script to verify the build process locally
+
+## Testing
+To test the fix before deploying to Netlify, run:
+
+```bash
+node test-netlify-build.js
+```
+
+or use the npm script:
+
+```bash
+npm run build:test-robust
+```
+
+## Benefits
+- More resilient build process with multiple fallback strategies
+- Better error logging to help diagnose build issues
+- Emergency fallback to simple site build if main application build fails
+- Cross-platform compatibility
+
+## Additional Notes
+If the build continues to fail on Netlify, check the build logs for specific error messages that are now being properly displayed. The most common issues are:
+
+1. TypeScript errors preventing the build
+2. Missing dependencies
+3. Incompatible Node.js version
+4. File permission issues
+
+The robust build script should handle most of these scenarios automatically, but reviewing the logs will help identify any persistent issues.

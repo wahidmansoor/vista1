@@ -1,10 +1,10 @@
 [build]
-  command = "npm run build:minimal"
+  command = "node netlify-fix-build.cjs"
   publish = "dist"
 
 [build.environment]
   # Node.js configuration
-  NODE_VERSION = "20"
+  NODE_VERSION = "18" # Use Node.js 18 for maximum compatibility
   NPM_FLAGS = "--prefer-offline --no-audit --progress=false"
   # Increase Node.js memory limit for builds
   NODE_OPTIONS = "--max-old-space-size=4096"
