@@ -116,9 +116,8 @@ function verifyFiles() {
 
 // Main app build with multiple fallback options
 function buildMainApp() {
-  console.log(`${colors.cyan}📦 Building main application...${colors.reset}`);
-  const buildCommands = [
-    // First try: Direct build without type checking or prebuild hooks
+  console.log(`${colors.cyan}📦 Building main application...${colors.reset}`);  const buildCommands = [
+    // First try: Direct build without type checking
     { 
       name: "Direct build without checks", 
       cmd: "npm run build:direct-no-check" 
@@ -130,10 +129,10 @@ function buildMainApp() {
       cmd: "npm run build:minimal" 
     },
     
-    // Third try: explicit reinstall of dependencies
+    // Third try: CI build (with type checking but error logging)
     { 
-      name: "Fresh dependencies build", 
-      cmd: "npm install --no-audit && npm run build:minimal" 
+      name: "CI build", 
+      cmd: "npm run build:ci" 
     },
     
     // Last try: emergency build
