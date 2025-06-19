@@ -29,7 +29,7 @@ interface SupabaseDataCardsProps<T extends Record<string, any>> {
     format?: (value: any, data: T) => React.ReactNode; // Custom formatter
     visible?: boolean | ((value: any, data: T) => boolean); // Whether field is visible
     badge?: boolean; // Display as a badge
-    className?: string; // Custom class for this field
+    className?: string | ((value: any, data: T) => string); // Custom class for this field
   }>;
   onCardClick?: (data: T) => void; // Callback when a card is clicked
   searchFields?: Array<keyof T>; // Fields to include in search

@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { rateLimit } from '@/lib/rate-limit';
-import { OpenAIStream } from '@/lib/openai-stream';
+// import { OpenAIStream } from '@/lib/openai-stream'; // TODO: Implement or restore this module
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 60 seconds
   uniqueTokenPerInterval: 500, // Max 500 users per interval
-  tokenInterval: 3, // 3 requests per interval
+  // tokenInterval: 3, // Removed: not a valid option
 });
 
 export default async function handler(
@@ -14,12 +14,7 @@ export default async function handler(
 ) {
   try {
     // Rate limit check
-    const { success } = await limiter.check(res, 3, 'CACHE_TOKEN');
-    if (!success) {
-      return res.status(429).json({ 
-        error: 'Rate limit exceeded. Please try again in 60 seconds.' 
-      });
-    }
+    await limiter.check(res, 3, 'CACHE_TOKEN');
 
     // Method validation
     if (req.method !== 'POST') {
@@ -35,8 +30,8 @@ export default async function handler(
     // Request body validation
     const { prompt, context } = req.body;
     if (!prompt || !context) {
-      return res.status(400).json({ 
-        error: 'Missing required fields: prompt and context' 
+      return res.status(400).json({
+        error: 'Missing required fields: prompt and context',
       });
     }
 
@@ -44,12 +39,13 @@ export default async function handler(
     const messages = [
       {
         role: 'system',
-        content: 'You are a medical AI assistant specializing in oncology. Generate concise, accurate summaries focusing on key clinical points.'
+        content:
+          'You are a medical AI assistant specializing in oncology. Generate concise, accurate summaries focusing on key clinical points.',
       },
       {
         role: 'user',
-        content: `${prompt}\n\nContent to summarize:\n${context}`
-      }
+        content: `${prompt}\n\nContent to summarize:\n${context}`,
+      },
     ];
 
     // Call OpenAI API with streaming
@@ -85,13 +81,13 @@ export default async function handler(
     return res.status(200).json({ summary });
   } catch (error: any) {
     console.error('AI Summary Generation Error:', error);
-    
+
     const status = error.response?.status || 500;
     const message = error.message || 'Internal server error';
-    
-    return res.status(status).json({ 
+
+    return res.status(status).json({
       error: 'Failed to generate summary',
-      details: process.env.NODE_ENV === 'development' ? message : undefined
+      details: process.env.NODE_ENV === 'development' ? message : undefined,
     });
   }
 }

@@ -3,21 +3,63 @@ import {
   SymptomAssessmentResult,
   SymptomTrend 
 } from './symptomAssessment/types';
-import { TreatmentProtocol } from '../modules/cdu/treatmentProtocols/types';
+import { TreatmentProtocol } from '@/types/medical';
+import { AIEnhancementInput } from './types/AIEnhancementInput';
 
-export interface AIEnhancementInput {
-  recommendations: ManagementRecommendation[];
-  symptoms: SymptomAssessmentResult['symptoms'];
-  trends: SymptomTrend[];
-  currentTreatments?: TreatmentProtocol[];
-}
+export abstract class AIService {
+  protected apiKey: string;
+  protected endpoint: string;
+  protected modelVersion: string;
 
-export class AIService {
   constructor(
-    private apiKey: string,
-    private endpoint: string,
-    private modelVersion: string
-  ) {}
+    apiKey: string,
+    endpoint: string,
+    modelVersion: string
+  );
+  constructor(config: AIModelConfig);
+  constructor(
+    apiKeyOrConfig: string | AIModelConfig,
+    endpoint?: string,
+    modelVersion?: string
+  ) {
+    if (typeof apiKeyOrConfig === 'string') {
+      this.apiKey = apiKeyOrConfig;
+      this.endpoint = endpoint!;
+      this.modelVersion = modelVersion!;
+    } else {
+      this.apiKey = apiKeyOrConfig.apiKey;
+      this.endpoint = apiKeyOrConfig.endpoint;
+      this.modelVersion = apiKeyOrConfig.modelVersion;
+    }
+  }
+
+  protected abstract validateInput<T>(request: AIRequest<T>): Promise<boolean>;
+  protected abstract formatResponse<T>(rawResponse: any, request?: AIRequest<T>): Promise<AIResponse<T>>;
+  protected abstract makeRequest<T>(request: AIRequest<T>): Promise<any>;
+  protected abstract makeStreamingRequest<T>(request: AIRequest<T>): AsyncGenerator<any>;
+
+  async processRequest<T>(request: AIRequest<T>): Promise<AIResponse<T>> {
+    if (!(await this.validateInput(request))) {
+      throw new MedicalAIError('Invalid request', 'INVALID_INPUT', 'medium');
+    }
+
+    const rawResponse = await this.makeRequest(request);
+    return this.formatResponse(rawResponse, request);
+  }
+
+  async *streamResponse<T>(request: AIRequest<T>): AsyncGenerator<AIResponse<T>> {
+    if (!(await this.validateInput(request))) {
+      throw new MedicalAIError('Invalid request', 'INVALID_INPUT', 'medium');
+    }
+
+    for await (const chunk of this.makeStreamingRequest(request)) {
+      yield await this.formatResponse(chunk, request);
+    }
+  }
+
+  protected handleError(error: any): void {
+    console.error('AI Service Error:', error);
+  }
 
   async enhanceRecommendations(input: AIEnhancementInput): Promise<ManagementRecommendation[]> {
     try {
@@ -69,5 +111,42 @@ export class AIService {
       console.error('AI Enhancement Error:', error);
       return input.recommendations; // Return original recommendations if enhancement fails
     }
+  }
+}
+
+export interface AIRequest<T = any> {
+  prompt: string;
+  context?: T;
+}
+
+export interface AIResponse<T = any> {
+  content: string;
+  tokens: {
+    prompt: number;
+    completion: number;
+    total: number;
+  };
+  metadata?: T;
+  provider: string;
+}
+
+export interface AIModelConfig {
+  apiKey: string;
+  endpoint: string;
+  modelVersion: string;
+  modelName: string;
+  maxTokens: number;
+  temperature: number;
+}
+
+export class MedicalAIError extends Error {
+  constructor(
+    message: string,
+    public code: string,
+    public severity: 'low' | 'medium' | 'high',
+    public details?: any
+  ) {
+    super(message);
+    this.name = 'MedicalAIError';
   }
 }

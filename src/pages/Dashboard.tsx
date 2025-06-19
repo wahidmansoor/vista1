@@ -112,10 +112,16 @@ const Dashboard: React.FC = () => {
       toast({
         title: "AI Response Generated",
         description: "MWONCOVISTA AI has analyzed your query successfully.",
+      });    } catch (error: any) {
+      // Log error first with context
+      console.error("AI Query Error:", error, {
+        context: {
+          component: 'Dashboard',
+          action: 'queryAI',
+          queryLength: query.length,
+          timestamp: new Date().toISOString()
+        }
       });
-
-    } catch (error: any) {
-      console.error("AI Query Error:", error);
       
       let errorTitle = "AI Agent Error";
       let errorDescription = "Something went wrong. Please try again.";
@@ -131,13 +137,15 @@ const Dashboard: React.FC = () => {
         errorDescription = "AI service is not properly configured. Contact administrator.";
       }
       
+      // Update component state
+      setAiResponse("I apologize, but I'm experiencing technical difficulties. Please try again later.");
+      
+      // Show user-friendly toast notification
       toast({
         title: errorTitle,
         description: errorDescription,
         variant: "destructive"
       });
-      
-      setAiResponse("I apologize, but I'm experiencing technical difficulties. Please try again later.");
     } finally {
       setLoading(false);
     }

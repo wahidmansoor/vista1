@@ -8,10 +8,47 @@ export interface AssessmentCompleteResult {
   [key: string]: unknown;
 }
 
+export enum LogLevel {
+  DEBUG = 'DEBUG',
+  INFO = 'INFO',
+  WARN = 'WARN',
+  ERROR = 'ERROR',
+  CRITICAL = 'CRITICAL'
+}
+
+export enum LogCategory {
+  SECURITY = 'SECURITY',
+  PERFORMANCE = 'PERFORMANCE',
+  AI_INTERACTION = 'AI_INTERACTION',
+  CLINICAL_DECISION = 'CLINICAL_DECISION',
+  SYSTEM = 'SYSTEM',
+  COMPLIANCE = 'COMPLIANCE'
+}
+
+export interface MedicalAuditLoggerConfig {
+  retentionDays: number;
+  logLevel: LogLevel;
+  enableAnonymization: boolean;
+}
+
 export class MedicalAuditLogger<
   TInput extends AssessmentStartInput = AssessmentStartInput,
   TResult extends AssessmentCompleteResult = AssessmentCompleteResult
 > {
+  private static instance: MedicalAuditLogger;
+  private config?: MedicalAuditLoggerConfig;
+
+  constructor(config?: MedicalAuditLoggerConfig) {
+    this.config = config;
+  }
+
+  static getInstance(config?: MedicalAuditLoggerConfig): MedicalAuditLogger {
+    if (!MedicalAuditLogger.instance) {
+      MedicalAuditLogger.instance = new MedicalAuditLogger(config);
+    }
+    return MedicalAuditLogger.instance;
+  }
+
   async logAssessmentStart(input: TInput): Promise<void> {
     const timestamp = new Date().toISOString();
     await this.log('Assessment Start', {
@@ -46,6 +83,40 @@ export class MedicalAuditLogger<
     });
   }
 
+  async logAiInteraction(
+    model: string,
+    prompt: string,
+    tokens: { prompt: number; completion: number; total: number },
+    responseTime: number,
+    metadata?: Record<string, unknown>
+  ): Promise<void> {
+    await this.log('AI Interaction', {
+      timestamp: new Date().toISOString(),
+      type: 'AI_INTERACTION',
+      model,
+      prompt: prompt.substring(0, 200) + (prompt.length > 200 ? '...' : ''),
+      tokens,
+      responseTime,
+      metadata
+    });
+  }
+
+  async logPerformance(
+    operation: string,
+    responseTime: number,
+    tokenUsage?: { prompt: number; completion: number; total: number },
+    metadata?: Record<string, unknown>
+  ): Promise<void> {
+    await this.log('Performance', {
+      timestamp: new Date().toISOString(),
+      type: 'PERFORMANCE',
+      operation,
+      responseTime,
+      tokenUsage,
+      metadata
+    });
+  }
+
   protected async log(action: string, data: Record<string, unknown>): Promise<void> {
     // Implement actual logging logic here (e.g., to a secure medical audit trail)
     console.log(`[Medical Audit] ${action}:`, JSON.stringify(data, null, 2));
@@ -54,16 +125,19 @@ export class MedicalAuditLogger<
 
 // Specialized performance logger for confidence service
 export class PerformanceAuditLogger extends MedicalAuditLogger {
-  async logPerformance(metric: {
-    operation: string;
-    duration: number;
-    success: boolean;
-    details?: Record<string, unknown>;
-  }): Promise<void> {
+  async logPerformance(
+    operation: string,
+    responseTime: number,
+    tokenUsage?: { prompt: number; completion: number; total: number },
+    metadata?: Record<string, unknown>
+  ): Promise<void> {
     await this.log('Performance', {
       timestamp: new Date().toISOString(),
       type: 'PERFORMANCE',
-      ...metric
+      operation,
+      responseTime,
+      tokenUsage,
+      metadata
     });
   }
 }

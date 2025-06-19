@@ -150,10 +150,17 @@ export function useHandbookData(
               console.log('📑 TOC loaded successfully with', transformedToc.length, 'entries');
               setTocData(transformedToc);
             }
-          }
-        } catch (tocErr) {
-          console.error('❌ Error loading TOC:', tocErr);
-          throw new Error(`Failed to load handbook navigation: ${tocErr instanceof Error ? tocErr.message : 'Unknown error'}`);
+          }        } catch (tocErr) {
+          console.error('❌ Error loading TOC:', tocErr, {
+            context: {
+              component: 'useHandbookData',
+              action: 'loadTOC',
+              section
+            }
+          });
+          setError(new Error(`Failed to load handbook navigation: ${tocErr instanceof Error ? tocErr.message : 'Unknown error'}`));
+          setIsLoading(false);
+          return;
         }
 
         // Get specific content if topic is provided
@@ -183,17 +190,30 @@ export function useHandbookData(
                 format: contentData.format, 
                 contentLength: contentData.content?.length 
               });
-            }
-          } catch (contentErr) {
-            console.error('❌ Error loading content:', contentErr);
-            throw contentErr;
+            }          } catch (contentErr) {
+            console.error('❌ Error loading content:', contentErr, {
+              context: {
+                component: 'useHandbookData',
+                action: 'loadContent',
+                section,
+                topic
+              }
+            });
+            setError(contentErr instanceof Error ? contentErr : new Error('Failed to load content'));
+            setIsLoading(false);
+            return;
           }
         } else {
           console.log('ℹ️ No topic provided, skipping content load');
-        }
-
-      } catch (err) {
-        console.error('❌ Error in useHandbookData:', err);
+        }      } catch (err) {
+        console.error('❌ Error in useHandbookData:', err, {
+          context: {
+            component: 'useHandbookData',
+            action: 'loadData',
+            section,
+            topic
+          }
+        });
         setError(err instanceof Error ? err : new Error('Failed to load handbook data'));
       } finally {
         setIsLoading(false);

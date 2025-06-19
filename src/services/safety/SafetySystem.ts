@@ -36,21 +36,21 @@ export class SafetySystem {
 
     // Check clinical rules
     const ruleViolations = await this.evaluateRules(clinicalData);
-    alerts.push(...ruleViolations.alerts);
-    maxSeverity = this.getHighestSeverity(maxSeverity, ruleViolations.severity);
+    alerts.push(...(ruleViolations.alerts ?? []));
+    maxSeverity = this.getHighestSeverity(maxSeverity, ruleViolations.severity ?? SafetySeverityLevel.LOW);
 
     // Check drug interactions
     if (clinicalData.medications) {
       const interactionResults = await this.checkDrugInteractions(clinicalData.medications);
-      alerts.push(...interactionResults.alerts);
-      maxSeverity = this.getHighestSeverity(maxSeverity, interactionResults.severity);
+      alerts.push(...(interactionResults.alerts ?? []));
+      maxSeverity = this.getHighestSeverity(maxSeverity, interactionResults.severity ?? SafetySeverityLevel.LOW);
     }
 
     // Check guideline compliance
     if (clinicalData.diagnosis) {
       const guidelineResults = await this.validateGuidelineCompliance(clinicalData);
-      alerts.push(...guidelineResults.alerts);
-      maxSeverity = this.getHighestSeverity(maxSeverity, guidelineResults.severity);
+      alerts.push(...(guidelineResults.alerts ?? []));
+      maxSeverity = this.getHighestSeverity(maxSeverity, guidelineResults.severity ?? SafetySeverityLevel.LOW);
     }
 
     // Compile recommendations and blocking issues
@@ -61,12 +61,9 @@ export class SafetySystem {
       if (alert.severity === SafetySeverityLevel.CRITICAL) {
         blockingIssues.push(alert.message);
       }
-    });
-
-    // Log safety check results
-    this.auditLogger.logError(
-      new Error(`Safety check completed with severity ${maxSeverity}`),
-      LogCategory.CLINICAL_DECISION,
+    });    // Log safety check results
+    await this.auditLogger.logError(
+      `Safety check completed with severity ${maxSeverity}`,
       {
         severity: maxSeverity,
         alertCount: alerts.length,
@@ -76,15 +73,17 @@ export class SafetySystem {
     );
 
     return {
+      isValid: blockingIssues.length === 0,
+      issues: [],
+      recommendations: [...new Set(recommendations)],
       passed: blockingIssues.length === 0,
       severity: maxSeverity,
       alerts,
       requiresEscalation: maxSeverity >= SafetySeverityLevel.HIGH,
-      recommendations: [...new Set(recommendations)],
-      blockingIssues
+      alertCount: alerts.length,
+      blockingIssueCount: blockingIssues.length
     };
   }
-
   /**
    * Evaluates all clinical rules against provided data
    */
@@ -93,9 +92,9 @@ export class SafetySystem {
     let maxSeverity = SafetySeverityLevel.LOW;
 
     for (const rule of this.rules) {
-      if (!rule.enabled) continue;
+      if (rule.enabled === false) continue;
 
-      const conditionsMet = rule.conditions.every(condition => 
+      const conditionsMet = rule.conditions.every((condition: RuleCondition) => 
         this.evaluateCondition(condition, data)
       );
 
@@ -104,30 +103,28 @@ export class SafetySystem {
           const alert: SafetyAlert = {
             id: crypto.randomUUID(),
             timestamp: new Date(),
-            severity: action.severity,
-            sourceModule: 'clinical_rules',
-            alertType: rule.category,
-            message: action.message,
-            details: { ruleId: rule.id, ...action.additionalData },
-            acknowledgementRequired: action.severity >= SafetySeverityLevel.HIGH
+            severity: rule.severity,
+            category: rule.category || 'clinical_rules',
+            message: action,
+            acknowledged: false
           };
 
           alerts.push(alert);
-          maxSeverity = this.getHighestSeverity(maxSeverity, action.severity);
+          maxSeverity = this.getHighestSeverity(maxSeverity, rule.severity);
         }
       }
     }
 
     return {
+      isValid: alerts.length === 0,
+      issues: [],
+      recommendations: [],
       passed: alerts.length === 0,
       severity: maxSeverity,
       alerts,
-      requiresEscalation: maxSeverity >= SafetySeverityLevel.HIGH,
-      recommendations: [],
-      blockingIssues: []
+      requiresEscalation: maxSeverity >= SafetySeverityLevel.HIGH
     };
   }
-
   /**
    * Checks for drug interactions in the provided medication list
    */
@@ -138,8 +135,8 @@ export class SafetySystem {
     for (let i = 0; i < medications.length; i++) {
       for (let j = i + 1; j < medications.length; j++) {
         const interaction = this.drugInteractions.find(
-          di => (di.drug1 === medications[i] && di.drug2 === medications[j]) ||
-               (di.drug1 === medications[j] && di.drug2 === medications[i])
+          di => (di.drugA === medications[i] && di.drugB === medications[j]) ||
+               (di.drugA === medications[j] && di.drugB === medications[i])
         );
 
         if (interaction) {
@@ -147,12 +144,10 @@ export class SafetySystem {
             id: crypto.randomUUID(),
             timestamp: new Date(),
             severity: interaction.severity,
-            sourceModule: 'drug_interactions',
-            alertType: 'interaction',
-            message: `Interaction detected between ${interaction.drug1} and ${interaction.drug2}: ${interaction.effect}`,
-            details: interaction,
-            recommendations: interaction.recommendations,
-            acknowledgementRequired: interaction.severity >= SafetySeverityLevel.HIGH
+            category: 'drug_interactions',
+            message: `Interaction detected between ${interaction.drugA} and ${interaction.drugB}: ${interaction.clinicalEffect}`,
+            acknowledged: false,
+            recommendations: [interaction.management]
           };
 
           alerts.push(alert);
@@ -162,15 +157,15 @@ export class SafetySystem {
     }
 
     return {
+      isValid: alerts.length === 0,
+      issues: [],
+      recommendations: alerts.flatMap(a => a.recommendations || []),
       passed: alerts.length === 0,
       severity: maxSeverity,
       alerts,
-      requiresEscalation: maxSeverity >= SafetySeverityLevel.HIGH,
-      recommendations: alerts.flatMap(a => a.recommendations || []),
-      blockingIssues: []
+      requiresEscalation: maxSeverity >= SafetySeverityLevel.HIGH
     };
   }
-
   /**
    * Validates clinical data against applicable guidelines
    */
@@ -179,15 +174,15 @@ export class SafetySystem {
     let maxSeverity = SafetySeverityLevel.LOW;
 
     const applicableGuidelines = this.guidelines.filter(g => 
-      g.applicableDiagnoses.includes(data.diagnosis)
+      g.applicableDiagnoses?.includes(data.diagnosis) || false
     );
 
     for (const guideline of applicableGuidelines) {
       // Evaluate guideline-specific validation rules
-      for (const rule of guideline.validationRules) {
-        if (!rule.enabled) continue;
+      for (const rule of guideline.validationRules || []) {
+        if (rule.enabled === false) continue;
 
-        const conditionsMet = rule.conditions.every(condition =>
+        const conditionsMet = rule.conditions.every((condition: RuleCondition) =>
           this.evaluateCondition(condition, data)
         );
 
@@ -196,32 +191,27 @@ export class SafetySystem {
             const alert: SafetyAlert = {
               id: crypto.randomUUID(),
               timestamp: new Date(),
-              severity: action.severity,
-              sourceModule: 'guideline_validation',
-              alertType: `${guideline.source}_compliance`,
-              message: action.message,
-              details: { 
-                guidelineId: guideline.id,
-                version: guideline.version,
-                ...action.additionalData 
-              },
-              acknowledgementRequired: action.severity >= SafetySeverityLevel.HIGH
+              severity: rule.severity,
+              category: `${guideline.source || 'guideline'}_compliance`,
+              message: action,
+              acknowledged: false
             };
 
             alerts.push(alert);
-            maxSeverity = this.getHighestSeverity(maxSeverity, action.severity);
+            maxSeverity = this.getHighestSeverity(maxSeverity, rule.severity);
           }
         }
       }
     }
 
     return {
+      isValid: alerts.length === 0,
+      issues: [],
+      recommendations: alerts.flatMap(a => a.recommendations || []),
       passed: alerts.length === 0,
       severity: maxSeverity,
       alerts,
-      requiresEscalation: maxSeverity >= SafetySeverityLevel.HIGH,
-      recommendations: alerts.flatMap(a => a.recommendations || []),
-      blockingIssues: []
+      requiresEscalation: maxSeverity >= SafetySeverityLevel.HIGH
     };
   }
 
@@ -229,7 +219,7 @@ export class SafetySystem {
    * Evaluates a single rule condition against provided data
    */
   private evaluateCondition(condition: RuleCondition, data: Record<string, any>): boolean {
-    const value = this.extractValue(condition.type, data, condition.parameters);
+    const value = this.extractValue(condition.type || '', data, condition.parameters);
     
     switch (condition.operator) {
       case 'equals':

@@ -138,7 +138,7 @@ const SymptomDataCards: React.FC = () => {
             key: 'severity',
             label: 'Severity',
             badge: true,
-            className: (value, data) => {
+            className: (value: any, data: Symptom) => {
               switch (data.severity) {
                 case 'mild':
                   return 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800';
@@ -178,7 +178,7 @@ const SymptomDataCards: React.FC = () => {
           },
           {
             key: 'hasRedFlags',
-            visible: (_, data) => data.redFlags && data.redFlags.length > 0,
+            visible: (_: any, data: Symptom): boolean => !!(data.redFlags && data.redFlags.length > 0),
             format: () => (
               <div className="flex items-center gap-1 mt-1 text-red-600 dark:text-red-400">
                 <AlertTriangle className="w-3.5 h-3.5" />

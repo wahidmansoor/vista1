@@ -163,6 +163,29 @@ export interface Protocol {
   cycle_duration?: string;
   total_cycles?: number;
   ai_notes?: any;
+
+  // Extended fields for TreatmentProtocol mapping
+  expected_outcomes?: Record<string, unknown>;
+  evidence_level?: string;
+  guideline_source?: string;
+  biomarker_requirements?: string[];
+  companion_diagnostics?: string[];
+  molecular_targets?: string[];
+  resistance_mechanisms?: string[];
+  decision_support_level?: string;
+  automated_eligibility_check?: boolean;
+  alert_conditions?: string[];
+  drug_interactions?: Record<string, unknown>[];
+  quality_metrics?: Record<string, unknown>[];
+  regulatory_approvals?: Record<string, unknown>[];
+  clinical_trial_data?: Record<string, unknown>[];
+  cost_effectiveness_data?: Record<string, unknown>;
+  implementation_complexity?: 'low' | 'medium' | 'high';
+  resource_requirements?: Record<string, unknown>[];
+  training_requirements?: string[];
+  deprecation_date?: string;
+  replacement_protocol_id?: string;
+  clinical_trial_eligible?: boolean;
 }
 
 /**

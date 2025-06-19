@@ -32,11 +32,71 @@ try {
   console.log(`${colors.yellow}Warning: Could not clean dist directory, continuing anyway: ${error.message}${colors.reset}`);
 }
 
+// Ensure design-tokens.css exists - it's required for the build
+try {
+  console.log(`${colors.blue}Checking for design-tokens.css...${colors.reset}`);
+  const designTokensPath = 'src/styles/design-tokens.css';
+  const designTokensDir = path.dirname(designTokensPath);
+  
+  if (!fs.existsSync(designTokensDir)) {
+    console.log(`Creating directory: ${designTokensDir}`);
+    fs.mkdirSync(designTokensDir, { recursive: true });
+  }
+  
+  if (!fs.existsSync(designTokensPath)) {
+    console.log(`${colors.yellow}design-tokens.css not found, creating it...${colors.reset}`);
+    const designTokensContent = `/* 
+ * OncoVista Design Token System
+ * Auto-generated during build
+ */
+
+:root {
+  /* Primary Colors */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-primary-950: #172554;
+
+  /* Semantic Colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+}`;
+    fs.writeFileSync(designTokensPath, designTokensContent);
+    console.log(`${colors.green}✅ Created design-tokens.css${colors.reset}`);
+  } else {
+    console.log(`${colors.green}✅ design-tokens.css exists${colors.reset}`);
+  }
+} catch (error) {
+  console.log(`${colors.yellow}Warning: Could not check/create design-tokens.css: ${error.message}${colors.reset}`);
+}
+
 // Verify critical files exist
 function verifyFiles() {
   console.log(`${colors.blue}Verifying critical files...${colors.reset}`);
   
-  const criticalFiles = ['src/main.tsx', 'src/App.tsx', 'vite.config.ts'];
+  const criticalFiles = [
+    'src/main.tsx', 
+    'src/App.tsx', 
+    'vite.config.ts',
+    'src/styles/design-tokens.css' // Verify design tokens exists
+  ];
   
   let missingFiles = [];
   

@@ -208,24 +208,24 @@ const PainManagement = () => {
     // setOpenItems([]); // Uncomment to collapse all on reset
   };
 
-  const handlePainTypeChange = (value: PainCharacteristics['type']) => {
+  const handlePainTypeChange = (value: string) => {
     setCharacteristics(prev => ({
       ...prev,
-      type: value
+      type: value as PainCharacteristics['type']
     }));
   };
 
-  const handlePainPatternChange = (value: PainCharacteristics['pattern']) => {
+  const handlePainPatternChange = (value: string) => {
     setCharacteristics(prev => ({
       ...prev,
-      pattern: value
+      pattern: value as PainCharacteristics['pattern']
     }));
   };
 
-  const handlePainDurationChange = (value: PainCharacteristics['duration']) => {
+  const handlePainDurationChange = (value: string) => {
     setCharacteristics(prev => ({
       ...prev,
-      duration: value
+      duration: value as PainCharacteristics['duration']
     }));
   };
 

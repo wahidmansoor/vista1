@@ -4,12 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { DetailedInfo } from '../../../types/pathways';
 import DecisionTree from './DecisionTree';
 import { pathways } from '../../../data/cancer-pathways';
-import { lungCancerPathway } from '../../../data/diagnostic-pathways';React, { useState } from 'react';
-import { GitBranch, ChevronDown, Info, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { DetailedInfo } from '../../../types/pathways';
-import DecisionTree from './DecisionTree';
-import { pathways } from '../../../data/cancer-pathways';
 import { lungCancerPathway } from '../../../data/diagnostic-pathways';
 
 // Example structure for additional info. You can customize this per cancer type.

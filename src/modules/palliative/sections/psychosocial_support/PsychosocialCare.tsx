@@ -5,13 +5,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
-import { Brain, HeartHandshake, Plus } from 'lucide-react';
+import { Brain, HeartHandshake, Plus, LucideIcon } from 'lucide-react';
 import { usePsychosocialData, AssessmentType } from './hooks/usePsychosocialData';
 import { sortByDate } from '../../utils/palliativeUtils';
 import { formatDate } from '@/utils/formatDate';
 import AssessmentTrends from './components/AssessmentTrends';
 
-const assessmentTypes: { type: AssessmentType; label: string; icon: React.FC }[] = [
+const assessmentTypes: { type: AssessmentType; label: string; icon: LucideIcon }[] = [
   { type: 'distress', label: 'Distress', icon: Brain },
   { type: 'anxiety', label: 'Anxiety', icon: Brain },
   { type: 'depression', label: 'Depression', icon: Brain },

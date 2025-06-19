@@ -1,7 +1,7 @@
 import { EmergencyService } from '../emergency/EmergencyService';
 import { MedicalAuditLogger } from '../utils/MedicalAuditLogger';
+import { LabPanel } from './types';
 import type {
-  LabPanel,
   LabResult,
   LabInterpretation,
   PatientContext,
@@ -40,11 +40,12 @@ export class LabInterpretationHandler {
       // Apply default options
       const fullOptions: LabInterpretationOptions = {
         includeTrends: true,
+        includeCriticalValues: true,
         includeCancerMarkers: true,
         includeTherapeuticLevels: true,
         includePatientEducation: true,
+        languageLevel: 'advanced',
         urgentNotificationThreshold: 'critical',
-        languageLevel: 'detailed',
         ...options
       };
 
@@ -142,7 +143,10 @@ export class LabInterpretationHandler {
         timestamp: r.timestamp,
         urgencyLevel: this.determineUrgencyLevel(r),
         recommendations: this.getCriticalValueRecommendations(r),
-        requiresEmergencyCare: this.requiresEmergencyCare(r)
+        requiresEmergencyCare: this.requiresEmergencyCare(r),
+        isCritical: r.isCritical,
+        criticalLevel: r.criticalLevel,
+        requiredActions: r.requiredActions
       }));
   }
 

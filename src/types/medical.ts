@@ -16,7 +16,7 @@
 
 // Base types and enums
 export type CancerCategory = 'solid_tumor' | 'hematologic' | 'rare_cancer' | 'pediatric' | 'adolescent_young_adult';
-export type EvidenceLevel = 'A' | 'B' | 'C' | 'D' | 'E'; // Added E for expert opinion
+export type EvidenceLevel = 'A' | 'B' | 'C' | 'D' | 'E';
 export type TriageLevel = 'immediate' | 'urgent' | 'routine' | 'deferred';
 export type TreatmentLine = 'first' | 'second' | 'third' | 'fourth_plus' | 'salvage' | 'maintenance' | 'bridging';
 export type TreatmentIntent = 'curative' | 'adjuvant' | 'neoadjuvant' | 'palliative' | 'supportive' | 'investigational';
@@ -30,7 +30,7 @@ export type KarnofskyScore = 100 | 90 | 80 | 70 | 60 | 50 | 40 | 30 | 20 | 10 | 
 // Enhanced Disease and Treatment Types
 export type DiseaseExtent = 'localized' | 'regional' | 'distant' | 'oligometastatic' | 'unknown';
 export type ToxicityGrade = 0 | 1 | 2 | 3 | 4 | 5; // Added grade 0 for no toxicity
-export type BiomarkerStatus = 'positive' | 'negative' | 'unknown' | 'pending' | 'indeterminate' | 'low' | 'high' | 'intermediate';
+export type BiomarkerStatus = 'positive' | 'negative' | 'unknown' | 'pending' | 'indeterminate' | 'low' | 'high' | 'intermediate' | 'mutated' | 'wild_type' | 'amplified' | 'deleted' | 'fusion';
 export type OrganFunctionStatus = 'adequate' | 'borderline' | 'inadequate' | 'unknown' | 'not_assessed';
 
 // Drug administration types - expanded for precision medicine
@@ -62,7 +62,7 @@ export type AdministrationRoute =
   | 'inhalation'
   | 'sublingual';
 
-// Treatment matching confidence levels
+// Treatment matching confidence levels - Enhanced to include all levels
 export type MatchConfidence = 'very_high' | 'high' | 'medium' | 'low' | 'very_low';
 
 // Clinical decision support levels
@@ -70,6 +70,28 @@ export type DecisionSupportLevel = 'automated' | 'suggested' | 'requires_review'
 
 // Quality metrics
 export type QualityMetric = 'excellent' | 'good' | 'acceptable' | 'needs_improvement' | 'poor';
+
+// Enhanced status types that include both formats
+export type EnhancedStatus = 'pending' | 'PENDING' | 'active' | 'ACTIVE' | 'completed' | 'COMPLETED' | 'cancelled' | 'CANCELLED';
+
+// UI and Component Types
+export type CategoryType = 'physical' | 'psychological' | 'social' | 'spiritual' | 'functional';
+
+// Test and monitoring types
+export interface Test {
+  name: string;
+  type?: string;
+  frequency?: string;
+  method?: string;
+}
+
+// Protocol note types
+export interface ProtocolNote {
+  id: string;
+  content: string;
+  type: 'warning' | 'info' | 'clinical_pearl';
+  priority: 'high' | 'medium' | 'low';
+}
 
 // Supporting interfaces for enhanced cancer management
 export interface StagingSystem {
@@ -441,7 +463,7 @@ export interface Biomarker {
   id: string;
   name: string;
   gene: string;
-  type: 'mutation' | 'expression' | 'fusion' | 'amplification' | 'deletion';
+  type: 'mutation' | 'expression' | 'fusion' | 'amplification' | 'deletion' | 'cnv' | 'msi' | 'tmb';
   clinical_significance: 'diagnostic' | 'prognostic' | 'predictive' | 'therapeutic';
   actionable: boolean;
   targeted_therapies: TargetedTherapy[];
@@ -534,6 +556,8 @@ export interface EligibilityCriteria {
   max_ecog_score?: number;
   min_age?: number;
   max_age?: number;
+  // Added for broader compatibility
+  inclusion_criteria?: string[];
 }
 
 export interface OrganFunction {
@@ -700,6 +724,8 @@ export interface PatientProfile {
   comorbidities: Comorbidity[];
   current_medications: PatientMedication[];
   preferences: PatientPreferences;
+  allergies?: string[];
+  social_history?: string;
   created_at: Date;
   updated_at: Date;
 }
@@ -724,6 +750,8 @@ export interface DiseaseStatus {
   metastatic_sites: string[];
   disease_burden: 'low' | 'medium' | 'high';
   current_status: 'newly_diagnosed' | 'treatment_naive' | 'on_treatment' | 'in_remission' | 'progressive' | 'recurrent';
+  cancer_type_id?: string;
+  disease_extent?: DiseaseExtent;
 }
 
 export interface BiomarkerResult {
@@ -762,6 +790,8 @@ export interface TreatmentHistory {
   toxicities_experienced: PatientToxicity[];
   // Added missing property for treatmentMatchingEngine.ts
   treatment_line?: TreatmentLine;
+  response?: ResponseType;
+  toxicities?: PatientToxicity[];
 }
 
 export interface PatientToxicity {
@@ -1322,3 +1352,109 @@ export interface RealTimeMetrics {
   system_status: 'operational' | 'degraded' | 'maintenance';
   last_updated: Date;
 }
+
+// Missing types that are referenced in errors
+export interface Protocol {
+  id: string;
+  name: string;
+  protocol_code?: string;
+  cancer_types: string[];
+  line_of_therapy: TreatmentLine;
+  treatment_intent: TreatmentIntent;
+  eligibility: string | Eligibility;
+  drugs?: ProtocolDrug[];
+  contraindications?: Contraindication[];
+  monitoring_requirements?: MonitoringPlan[];
+  supportive_care?: any;
+  supportive_meds?: any[];
+  tests?: any;
+  toxicity_monitoring?: any;
+  monitoring?: any;
+  // Metadata fields referenced in errors
+  author?: string;
+  next_review_date?: Date;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface Eligibility {
+  inclusion_criteria: string[];
+  exclusion_criteria: string[];
+}
+
+export interface SafetyConcern {
+  id: string;
+  type: 'absolute_contraindication' | 'relative_contraindication' | 'warning' | 'monitoring_required';
+  category: 'medical' | 'laboratory' | 'drug_interaction' | 'allergy' | 'organ_function';
+  description: string;
+  severity: 'critical' | 'major' | 'moderate' | 'minor';
+  clinical_significance: string;
+  management_strategy?: string;
+  monitoring_requirements?: string[];
+  override_conditions?: string[];
+}
+
+export interface ProtocolEffectivenessMetrics {
+  overall_response_rate: number;
+  complete_response_rate: number;
+  partial_response_rate: number;
+  stable_disease_rate: number;
+  progression_free_survival_months: number;
+  overall_survival_months: number;
+  quality_of_life_score: number;
+  toxicity_score: number;
+  cost_effectiveness_ratio: number;
+  evidence_quality: EvidenceLevel;
+}
+
+export interface TreatmentDatabaseService {
+  // Singleton pattern methods
+  getInstance(): TreatmentDatabaseService;
+  searchProtocols(criteria: any): Promise<Protocol[]>;
+  getProtocolById(id: string): Promise<Protocol | null>;
+  updateProtocol(id: string, updates: Partial<Protocol>): Promise<void>;
+}
+
+// AI Provider types referenced in errors
+export interface AIProvider {
+  id: string;
+  name: string;
+  type: 'openai' | 'anthropic' | 'azure' | 'local';
+  api_endpoint?: string;
+  model: string;
+  capabilities: AICapability[];
+  status: 'active' | 'inactive' | 'deprecated';
+}
+
+export interface AICapability {
+  type: 'text_generation' | 'code_completion' | 'translation' | 'analysis';
+  description: string;
+  supported_formats: string[];
+}
+
+// Missing properties for existing interfaces
+declare module './medical' {
+  interface PatientProfile {
+    allergies?: string[];
+    social_history?: string;
+  }
+  
+  interface DiseaseStatus {
+    cancer_type_id?: string;
+    disease_extent?: DiseaseExtent;
+  }
+  
+  interface TreatmentHistory {
+    response?: ResponseType;
+    toxicities?: PatientToxicity[];
+  }
+}
+
+// Badge component type for UI
+export interface Badge {
+  variant?: 'default' | 'secondary' | 'destructive' | 'outline';
+  children: React.ReactNode;
+}
+
+// Enhanced confidence levels to include 'very_high' and 'very_low'
+export type EnhancedMatchConfidence = 'very_high' | 'high' | 'medium' | 'low' | 'very_low';

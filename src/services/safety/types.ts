@@ -1,5 +1,83 @@
 import { SymptomAssessmentResult } from '../symptomAssessment/types';
 
+export enum SafetySeverityLevel {
+  LOW = 'low',
+  MEDIUM = 'medium',
+  HIGH = 'high',
+  CRITICAL = 'critical'
+}
+
+export interface SafetyAlert {
+  id: string;
+  severity: SafetySeverityLevel;
+  message: string;
+  timestamp: Date;
+  acknowledged: boolean;
+  category: string;
+  recommendations?: string[];
+}
+
+export interface ClinicalRule {
+  id: string;
+  name: string;
+  description: string;
+  conditions: RuleCondition[];
+  actions: string[];
+  severity: SafetySeverityLevel;
+  enabled?: boolean;
+  category?: string;
+}
+
+export interface RuleCondition {
+  parameter: string;
+  operator: '>' | '<' | '=' | '>=' | '<=' | '!=' | 'equals' | 'notEquals' | 'greaterThan' | 'lessThan' | 'contains' | 'notContains';
+  value: string | number;
+  unit?: string;
+  type?: string;
+  parameters?: any;
+}
+
+export interface DrugInteraction {
+  drugA: string;
+  drugB: string;
+  severity: SafetySeverityLevel;
+  mechanism: string;
+  clinicalEffect: string;
+  management: string;
+}
+
+export interface SafetyCheckResult {
+  isValid: boolean;
+  issues: SafetyIssue[];
+  recommendations: string[];
+  alerts?: SafetyAlert[];
+  severity?: SafetySeverityLevel;
+  passed?: boolean;
+  requiresEscalation?: boolean;
+  alertCount?: number;
+  blockingIssueCount?: number;
+}
+
+export interface ClinicalGuideline {
+  id: string;
+  name: string;
+  description: string;
+  rules: ClinicalRule[];
+  applicableDiagnoses?: string[];
+  validationRules?: ClinicalRule[];
+  source?: string;
+  version?: string;
+}
+
+export interface EmergencyContact {
+  id: string;
+  name: string;
+  phone: string;
+  email?: string;
+  department: string;
+  role: string;
+}
+
 export interface SafetyValidation {
   isValid: boolean;
   issues: SafetyIssue[];

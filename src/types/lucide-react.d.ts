@@ -127,13 +127,12 @@ declare module 'lucide-react' {
   export const Navigation: LucideIcon;
   export const Target: LucideIcon;
   export const Crosshair: LucideIcon;
-  export const Focus: LucideIcon;
-  export const ScanLine: LucideIcon;
-  export const Scan: LucideIcon;  export const QrCode: LucideIcon;
+  export const Focus: LucideIcon;  export const ScanLine: LucideIcon;
+  export const Scan: LucideIcon;
+  export const QrCode: LucideIcon;
   export const Barcode: LucideIcon;
-    // Additional icons for components
-  export const ThumbsUp: LucideIcon;
-  export const ThumbsDown: LucideIcon;
+  
+  // Additional icons for components
   export const CornerDownLeft: LucideIcon;
   export const TrendingUp: LucideIcon;
   

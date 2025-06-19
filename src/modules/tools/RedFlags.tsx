@@ -102,4 +102,5 @@ const RedFlagsPage: React.FC = () => {
   );
 };
 
+export { redFlags };
 export default RedFlagsPage;

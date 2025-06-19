@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabaseClient';
 // Import types from existing files
 import { type Protocol } from './protocolUpdated'; // Changed to named import
 export type { Protocol }; // Re-export Protocol
-export type { Drug, Medication, PreMedication, PostMedication, Interactions, RescueAgent, Eligibility, SupportiveCareItem, DoseModification, CycleInfo, MonitoringItem, ToxicityMonitoring, SupportiveCare, Test } from './protocolUpdated'; // Added Test and other exports
+export type { Drug, PreMedication, PostMedication, Interactions, RescueAgent, Eligibility, SupportiveCareItem, DoseModification, CycleInfo, MonitoringItem, ToxicityMonitoring, SupportiveCare, Test } from './protocolUpdated'; // Added Test and other exports
 import type { ProtocolFilters } from '@/services/protocols';
 import { cleanProtocol } from './protocolUpdated';
 
@@ -10,13 +10,13 @@ import { cleanProtocol } from './protocolUpdated';
 export { cleanProtocol };
 
 // Utility function for safe JSON parsing
-export const safeJsonParse = (jsonString: string | null | undefined): any => {
-  if (!jsonString) return null;
+export const safeJsonParse = <T = any>(jsonString: string | null | undefined, defaultValue: T): T => {
+  if (!jsonString) return defaultValue;
   try {
-    return JSON.parse(jsonString);
+    return JSON.parse(jsonString) as T;
   } catch (error) {
     console.error('JSON parse error:', error);
-    return null;
+    return defaultValue;
   }
 };
 

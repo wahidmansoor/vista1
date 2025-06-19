@@ -9,12 +9,15 @@ import {
 
 export class ClaudeService extends AIService {
   private client: Anthropic;
+  private config: AIModelConfig;
 
   constructor(config: AIModelConfig) {
-    super(config);
+    super(config.apiKey, config.endpoint, config.modelVersion);
     if (!config.apiKey) {
       throw new Error('Anthropic API key is required');
     }
+
+    this.config = config;
 
     this.client = new Anthropic({
       apiKey: config.apiKey
@@ -80,7 +83,6 @@ export class ClaudeService extends AIService {
       );
     }
   }
-
   protected async *makeStreamingRequest<T>(request: AIRequest<T>): AsyncGenerator<any> {
     try {
       const stream = await this.client.messages.create({
@@ -98,16 +100,19 @@ export class ClaudeService extends AIService {
 
       let accumulatedContent = '';
       for await (const chunk of stream) {
-        if (chunk.type === 'content_block_delta' && chunk.delta?.text) {
-          accumulatedContent += chunk.delta.text;
-          
-          yield {
-            content: [{ text: chunk.delta.text }],
-            usage: {
-              input_tokens: Math.ceil(request.prompt.length / 4), // Estimate
-              output_tokens: Math.ceil(accumulatedContent.length / 4), // Estimate
-            }
-          };
+        if (chunk.type === 'content_block_delta' && chunk.delta?.type === 'text_delta') {
+          const deltaText = (chunk.delta as any).text;
+          if (deltaText) {
+            accumulatedContent += deltaText;
+            
+            yield {
+              content: [{ text: deltaText }],
+              usage: {
+                input_tokens: Math.ceil(request.prompt.length / 4), // Estimate
+                output_tokens: Math.ceil(accumulatedContent.length / 4), // Estimate
+              }
+            };
+          }
         }
       }
     } catch (error: any) {

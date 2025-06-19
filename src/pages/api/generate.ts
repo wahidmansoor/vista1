@@ -14,8 +14,7 @@ import { ModuleType, PromptIntent } from '@/components/ai-agent/types';
 // Rate limiting configuration
 const limiter = rateLimit({
   interval: 60 * 1000, // 60 seconds
-  uniqueTokenPerInterval: 500, // Max 500 users per interval
-  tokenInterval: 10, // 10 requests per interval per user
+  uniqueTokenPerInterval: 500 // Max 500 users per interval
 });
 
 interface AIGenerateRequest {
@@ -37,12 +36,8 @@ export default async function handler(
 ) {
   try {
     // Rate limiting check
-    const { success } = await limiter.check(res, 10, 'CACHE_TOKEN');
-    if (!success) {
-      const error = AIErrorHandler.create(new Error('Rate limit exceeded'), 'Rate Limiting');
-      return res.status(429).json(AIErrorHandler.createAPIResponse(error));
-    }
-
+    await limiter.check(res, 10, 'CACHE_TOKEN');
+    
     // Method validation
     if (req.method !== 'POST') {
       const error = AIErrorHandler.create(new Error('Method not allowed'), 'HTTP Method');
@@ -107,14 +102,21 @@ export default async function handler(
       model = 'openai';
     }
 
+    // When constructing the AIServiceRequest, provide fallback values for module and intent
+    const aiRequest = {
+      ...sanitizedRequest,
+      module: sanitizedRequest.module ?? 'OPD', // fallback to 'OPD' or another default
+      intent: sanitizedRequest.intent ?? 'screening', // fallback to 'screening' or another default
+    };
+
     // Generate AI response
     try {
       const aiResponse = await AIService.generateResponse({
-        prompt: sanitizedRequest.prompt,
-        module: sanitizedRequest.module,
-        intent: sanitizedRequest.intent,
-        context: sanitizedRequest.context,
-        history: sanitizedRequest.history,
+        prompt: aiRequest.prompt,
+        module: aiRequest.module,
+        intent: aiRequest.intent,
+        context: aiRequest.context,
+        history: aiRequest.history,
         model
       });
 

@@ -41,6 +41,7 @@ export interface AIServiceRequest {
   feedbackType?: 'refine' | 'elaborate' | 'correct';
   userId?: string;
   sessionId?: string;
+  model?: 'openai' | 'gemini'; // <-- Added model property
 }
 
 export interface AIServiceResponse {

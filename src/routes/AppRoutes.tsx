@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary"; // ✅ updated to match filename
 import NotFoundRedirect from "@/components/NotFoundRedirect";
@@ -7,22 +8,38 @@ import Dashboard from "@/pages/Dashboard";
 import ProtectedPage from "@/pages/ProtectedPage";
 import CallbackPage from "@/pages/CallbackPage";
 import ProtectedRoute from "@/auth/ProtectedRoute";
-import Handbook from "@/modules/handbook/Handbook";
-import { SearchPage } from "@/components/HandbookSearch";
-import OPD from "@/modules/opd/OPD";
-import CDU from "@/modules/cdu/CDU";
-import ProtocolDashboard from "@/modules/cdu/components/ProtocolDashboard";
-import Inpatient from "@/modules/inpatient";
-import Palliative from "@/modules/palliative/Palliative";
-import Tools from "@/modules/tools";
-import Calculators from "@/modules/tools/Calculators";
-import RedFlagsPage from "@/modules/tools/RedFlags";
-import BSACalculator from "@/modules/tools/calculators/BSA";
-import CrClCalculator from "@/modules/tools/calculators/CrCl";
-import ANCCalculator from "@/modules/tools/calculators/ANC";
+
+// Lazy load heavy modules for better code splitting and performance
+const Handbook = lazy(() => import("@/modules/handbook/Handbook"));
+const SearchPage = lazy(() => import("@/components/HandbookSearch").then(module => ({ default: module.SearchPage })));
+const OPD = lazy(() => import("@/modules/opd/OPD"));
+const CDU = lazy(() => import("@/modules/cdu/CDU"));
+const ProtocolDashboard = lazy(() => import("@/modules/cdu/components/ProtocolDashboard"));
+const Inpatient = lazy(() => import("@/modules/inpatient"));
+const Palliative = lazy(() => import("@/modules/palliative/Palliative"));
+const Tools = lazy(() => import("@/modules/tools"));
+const Calculators = lazy(() => import("@/modules/tools/Calculators"));
+const RedFlagsPage = lazy(() => import("@/modules/tools/RedFlags"));
+const BSACalculator = lazy(() => import("@/modules/tools/calculators/BSA"));
+const CrClCalculator = lazy(() => import("@/modules/tools/calculators/CrCl"));
+const ANCCalculator = lazy(() => import("@/modules/tools/calculators/ANC"));
+
+// Additional lazy loading for large components to optimize bundle size
+const PsychosocialCare = lazy(() => import("@/modules/palliative/sections/psychosocial_support/PsychosocialCare"));
+const EnhancedDiseaseProgressTracker = lazy(() => import("@/components/EnhancedDiseaseProgressTracker").then(module => ({ default: module.EnhancedDiseaseProgressTracker })));
+const TreatmentProtocols = lazy(() => import("@/modules/cdu/treatmentProtocols/TreatmentProtocols"));
 
 import type { ReactElement } from 'react';
-import ProtocolDetailPageContainer from "@/modules/cdu/safe/treatmentProtocols/TreatmentProtocols";
+
+// Lazy load protocol components for better code splitting
+const ProtocolDetailPageContainer = lazy(() => import("@/modules/cdu/safe/treatmentProtocols/TreatmentProtocols"));
+
+// Loading component for lazy modules
+const ModuleLoader = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+  </div>
+);
 
 const AppRoutes: FC = () => {
   return (
@@ -55,12 +72,12 @@ const AppRoutes: FC = () => {
             <ProtectedPage />
           </ProtectedRoute>
         </ErrorBoundary>
-      } />
-
-      <Route path="/handbook/*" element={
+      } />      <Route path="/handbook/*" element={
         <ErrorBoundary moduleName="Handbook">
           <ProtectedRoute>
-            <Handbook />
+            <Suspense fallback={<ModuleLoader />}>
+              <Handbook />
+            </Suspense>
           </ProtectedRoute>
         </ErrorBoundary>
       } />
@@ -68,7 +85,9 @@ const AppRoutes: FC = () => {
       <Route path="/search" element={
         <ErrorBoundary moduleName="Handbook Search">
           <ProtectedRoute>
-            <SearchPage />
+            <Suspense fallback={<ModuleLoader />}>
+              <SearchPage />
+            </Suspense>
           </ProtectedRoute>
         </ErrorBoundary>
       } />

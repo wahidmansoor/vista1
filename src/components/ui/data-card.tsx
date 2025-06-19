@@ -34,7 +34,7 @@ interface DataCardProps {
     format?: (value: any, data: DataItem) => React.ReactNode;
     visible?: boolean | ((value: any, data: DataItem) => boolean);
     badge?: boolean;
-    className?: string;
+    className?: string | ((value: any, data: DataItem) => string);
   }[];
   className?: string;
   onClick?: (data: DataItem) => void;
@@ -134,13 +134,17 @@ export const DataCard: React.FC<DataCardProps> = ({
   // Render a single field
   const renderField = (field: typeof displayedFields[0], index: number) => {
     const formattedValue = formatFieldValue(field);
+    let fieldClassName = field.className;
+    if (typeof field.className === 'function') {
+      fieldClassName = field.className(data[field.key], data);
+    }
 
     if (field.badge) {
       return (
         <Badge 
           key={index} 
           variant="outline" 
-          className={cn("mr-2 mb-2", field.className)}
+          className={cn("mr-2 mb-2", fieldClassName)}
         >
           {field.label && <span className="font-medium mr-1">{field.label}:</span>}
           {formattedValue}
@@ -149,7 +153,7 @@ export const DataCard: React.FC<DataCardProps> = ({
     }
 
     return (
-      <div key={index} className={cn("mb-2", field.className)}>
+      <div key={index} className={cn("mb-2", fieldClassName)}>
         {field.label && <span className="font-medium text-sm mr-1">{field.label}:</span>}
         <span className="text-sm">{formattedValue}</span>
       </div>

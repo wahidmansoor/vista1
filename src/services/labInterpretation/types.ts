@@ -20,6 +20,8 @@ export interface LabResult {
   isAbnormal: boolean;
   isCritical: boolean;
   referenceRange: ReferenceRange;
+  criticalLevel: 'low' | 'normal' | 'high' | 'critical';
+  requiredActions: string[];
 }
 
 export interface ReferenceRange {
@@ -128,4 +130,34 @@ export interface LabAssessmentResult {
   panelId: string;
   timestamp: string;
   hasCriticalValues: boolean;
+}
+
+export interface PatientContext {
+  age: number;
+  gender: 'male' | 'female';
+  medicalHistory: string[];
+  previousLabs?: LabPanel[];
+}
+
+export interface LabInterpretationOptions {
+  includeTrends: boolean;
+  includeCriticalValues: boolean;
+  includeCancerMarkers: boolean;
+  includeTherapeuticLevels: boolean;
+  includePatientEducation: boolean;
+  languageLevel: string;
+  urgentNotificationThreshold: string;
+}
+
+export interface CriticalValue {
+  testName: string;
+  value: number;
+  unit: LabValueUnit;
+  isCritical: boolean;
+  requiresEmergencyCare: boolean;
+  urgencyLevel: 'urgent' | 'immediate' | 'routine';
+  timestamp: string;
+  recommendations: string[];
+  requiredActions: string[];
+  criticalLevel: 'low' | 'normal' | 'high' | 'critical';
 }

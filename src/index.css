@@ -2,8 +2,8 @@
    OncoVista Unified Styles
    ================================ */
 
-/* Import Design Token System */
-@import '@/styles/design-tokens.css';
+/* Import Design Token System - Simple relative path */
+@import './styles/design-tokens.css';
 
 @tailwind base;
 @tailwind components;

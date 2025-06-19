@@ -28,7 +28,10 @@ export const EligibilityTab: React.FC<EligibilityTabProps> = ({ protocol }) => {
   let parseError = false;
   if (typeof eligibility === 'string') {
     try {
-      const parsedEligibility = safeJsonParse<Eligibility>(eligibility, {});
+      const parsedEligibility = safeJsonParse<Eligibility>(eligibility, {
+        inclusion_criteria: [],
+        exclusion_criteria: []
+      });
       inclusion = parsedEligibility.inclusion_criteria;
       exclusion = parsedEligibility.exclusion_criteria;
     } catch (e) {

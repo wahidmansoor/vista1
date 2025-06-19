@@ -9,13 +9,15 @@ import {
 
 export class OpenAIService extends AIService {
   private client: OpenAI;
+  private config: AIModelConfig;
 
   constructor(config: AIModelConfig) {
-    super(config);
+    super(config.apiKey, config.endpoint, config.modelVersion);
     if (!config.apiKey) {
       throw new Error('OpenAI API key is required');
     }
     
+    this.config = config;
     this.client = new OpenAI({
       apiKey: config.apiKey
     });

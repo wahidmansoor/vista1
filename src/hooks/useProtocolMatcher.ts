@@ -116,11 +116,20 @@ export function useProtocolMatcher(options: UseProtocolMatcherOptions = {}) {
         variant: "default"
       });
 
-      return response.recommendations;
-
-    } catch (error) {
+      return response.recommendations;    } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Failed to generate recommendations';
       
+      // Log error with context first
+      console.error('Error generating treatment recommendations:', {
+        error,
+        context: {
+          component: 'useProtocolMatcher',
+          action: 'generateRecommendations',
+          patientId: patient.id,
+          cancerType: patient.disease_status.cancer_type_id
+        }
+      });
+
       setState(prev => ({
         ...prev,
         isGenerating: false,
@@ -133,6 +142,7 @@ export function useProtocolMatcher(options: UseProtocolMatcherOptions = {}) {
         variant: "destructive"
       });
 
+      // Re-throw to preserve original error context
       throw error;
     }
   }, [queryClient, toast]);

@@ -267,8 +267,7 @@ export default function MedicationDetailModal({ medication, isOpen, onClose }: P
                         ))}
                       </div>
                     </SubSection>
-                  )}
-                  {medication.indications?.biomarkers?.length > 0 && (
+                  )}                  {medication.indications?.biomarkers && medication.indications.biomarkers.length > 0 && (
                     <SubSection title="Biomarkers">
                       <div className="flex flex-wrap gap-2">
                         {medication.indications.biomarkers.map((marker, index) => (
@@ -277,7 +276,7 @@ export default function MedicationDetailModal({ medication, isOpen, onClose }: P
                       </div>
                     </SubSection>
                   )}
-                  {medication.indications?.staging?.length > 0 && (
+                  {medication.indications?.staging && medication.indications.staging.length > 0 && (
                     <SubSection title="Disease Stage">
                       <div className="flex flex-wrap gap-2">
                         {medication.indications.staging.map((stage, index) => (
@@ -286,7 +285,7 @@ export default function MedicationDetailModal({ medication, isOpen, onClose }: P
                       </div>
                     </SubSection>
                   )}
-                  {medication.indications?.line_of_therapy?.length > 0 && (
+                  {medication.indications?.line_of_therapy && medication.indications.line_of_therapy.length > 0 && (
                     <SubSection title="Line of Therapy">
                       <div className="flex flex-wrap gap-2">
                         {medication.indications.line_of_therapy.map((line, index) => (
@@ -331,8 +330,7 @@ export default function MedicationDetailModal({ medication, isOpen, onClose }: P
                         )}
                       </div>
                     </SubSection>
-                  )}
-                  {medication.dosing?.adjustments?.length > 0 && (
+                  )}                  {medication.dosing?.adjustments && medication.dosing.adjustments.length > 0 && (
                     <SubSection title="Dose Adjustments" variant="warning">
                       <ul className="list-disc list-inside space-y-1">
                         {medication.dosing.adjustments.map((adjustment, index) => (
@@ -375,8 +373,7 @@ export default function MedicationDetailModal({ medication, isOpen, onClose }: P
                         ))}
                       </ul>
                     </SubSection>
-                  )}
-                  {medication.side_effects.management?.length > 0 && (
+                  )}                  {medication.side_effects.management && medication.side_effects.management.length > 0 && (
                     <SubSection title="Management">
                       <ul className="list-disc list-inside space-y-1">
                         {medication.side_effects.management.map((item, index) => (
