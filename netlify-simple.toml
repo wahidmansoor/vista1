@@ -2,7 +2,7 @@
 # This configuration is optimized for building just the simple site
 
 [build]
-  command = "node build-simple-site.js"
+  command = "node netlify-robust-build.js"
   publish = "dist"
 
 [build.environment]

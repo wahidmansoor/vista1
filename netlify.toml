@@ -1,5 +1,5 @@
 [build]
-  command = "node netlify-build.js"
+  command = "npm run build:minimal"
   publish = "dist"
 
 [build.environment]
