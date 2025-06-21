@@ -1,0 +1,330 @@
+/* ================================
+   OncoVista Design Token System
+   ================================ */
+
+:root {
+  /* ==================== PRIMARY COLOR SYSTEM ==================== */
+  /* Use ONLY these primary colors across all modules */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-primary-950: #172554;
+
+  /* ==================== SPACING SCALE ==================== */
+  /* Use ONLY these spacing values across all modules */
+  --space-xs: 0.25rem;    /* 4px - space-1 */
+  --space-sm: 0.5rem;     /* 8px - space-2 */
+  --space-md: 1rem;       /* 16px - space-4 */
+  --space-lg: 1.5rem;     /* 24px - space-6 */
+  --space-xl: 2rem;       /* 32px - space-8 */
+  --space-2xl: 2.5rem;    /* 40px - space-10 */
+  --space-3xl: 3rem;      /* 48px - space-12 */
+
+  /* ==================== SHADOW SCALE ==================== */
+  /* Use ONLY these shadow values across all modules */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* ==================== BORDER RADIUS SCALE ==================== */
+  --radius-sm: 0.375rem;   /* 6px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+
+  /* ==================== TYPOGRAPHY SCALE ==================== */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+
+  /* ==================== SEMANTIC COLORS ==================== */
+  --color-success: #10b981;
+  --color-success-bg: #ecfdf5;
+  --color-warning: #f59e0b;
+  --color-warning-bg: #fffbeb;
+  --color-error: #ef4444;
+  --color-error-bg: #fef2f2;
+  --color-info: #3b82f6;
+  --color-info-bg: #eff6ff;
+
+  /* ==================== NEUTRAL COLORS ==================== */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+
+  /* ==================== COMPONENT SPECIFIC TOKENS ==================== */
+  
+  /* Card Component - Glass Morphism */
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --card-bg-hover: rgba(255, 255, 255, 0.15);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --card-border-hover: rgba(255, 255, 255, 0.3);
+  --card-shadow: var(--shadow-md);
+  --card-radius: var(--radius-lg);
+  --card-padding: var(--space-lg);
+  --card-backdrop-blur: 8px;
+
+  /* Button Component */
+  --button-radius: var(--radius-md);
+  --button-padding-x: var(--space-md);
+  --button-padding-y: var(--space-sm);
+  --button-font-weight: 500;
+
+  /* Input Component */
+  --input-border: var(--color-gray-300);
+  --input-border-focus: var(--color-primary-500);
+  --input-bg: #ffffff;
+  --input-radius: var(--radius-md);
+  --input-padding-x: var(--space-md);
+  --input-padding-y: var(--space-sm);
+
+  /* Layout Spacing */
+  --layout-padding-mobile: var(--space-md);
+  --layout-padding-tablet: var(--space-lg);
+  --layout-padding-desktop: var(--space-xl);
+  --layout-max-width: 80rem; /* 1280px */
+
+  /* Grid System */
+  --grid-gap: var(--space-lg);
+  --grid-cols-mobile: 1;
+  --grid-cols-tablet: 2;
+  --grid-cols-desktop: 3;
+
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+
+  /* Transition Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+}
+
+/* ==================== DARK MODE TOKENS ==================== */
+.dark {
+  --card-bg: var(--color-gray-800);
+  --card-border: var(--color-gray-700);
+  --input-bg: var(--color-gray-700);
+  --input-border: var(--color-gray-600);
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+
+/* Spacing Utilities */
+.space-xs { margin: var(--space-xs); }
+.space-sm { margin: var(--space-sm); }
+.space-md { margin: var(--space-md); }
+.space-lg { margin: var(--space-lg); }
+.space-xl { margin: var(--space-xl); }
+
+.p-xs { padding: var(--space-xs); }
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+.p-xl { padding: var(--space-xl); }
+
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }
+
+/* Color Utilities */
+.text-primary { color: var(--color-primary-600); }
+.text-primary-light { color: var(--color-primary-500); }
+.text-primary-dark { color: var(--color-primary-700); }
+
+.bg-primary { background-color: var(--color-primary-600); }
+.bg-primary-light { background-color: var(--color-primary-500); }
+.bg-primary-dark { background-color: var(--color-primary-700); }
+
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+.text-info { color: var(--color-info); }
+
+.bg-success { background-color: var(--color-success); }
+.bg-warning { background-color: var(--color-warning); }
+.bg-error { background-color: var(--color-error); }
+.bg-info { background-color: var(--color-info); }
+
+/* Shadow Utilities */
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+
+/* Border Radius Utilities */
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+
+/* Typography Utilities */
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+
+/* ==================== COMPONENT BASE CLASSES ==================== */
+
+/* Standard Card - Glass Morphism */
+.oncovista-card {
+  background-color: var(--card-bg);
+  backdrop-filter: blur(var(--card-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: var(--card-padding);
+  transition: all var(--duration-normal) ease;
+}
+
+.oncovista-card:hover {
+  background-color: var(--card-bg-hover);
+  border-color: var(--card-border-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Standard Button Primary */
+.oncovista-button-primary {
+  background-color: var(--color-primary-600);
+  color: white;
+  border: none;
+  border-radius: var(--button-radius);
+  padding: var(--button-padding-y) var(--button-padding-x);
+  font-weight: var(--button-font-weight);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background-color var(--duration-normal) ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.oncovista-button-primary:hover {
+  background-color: var(--color-primary-700);
+}
+
+.oncovista-button-primary:focus {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Standard Button Secondary */
+.oncovista-button-secondary {
+  background-color: white;
+  color: var(--color-gray-700);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--button-radius);
+  padding: var(--button-padding-y) var(--button-padding-x);
+  font-weight: var(--button-font-weight);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background-color var(--duration-normal) ease, border-color var(--duration-normal) ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.oncovista-button-secondary:hover {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-400);
+}
+
+/* Standard Input */
+.oncovista-input {
+  width: 100%;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  padding: var(--input-padding-y) var(--input-padding-x);
+  font-size: var(--text-sm);
+  color: var(--color-gray-900);
+  transition: border-color var(--duration-normal) ease, box-shadow var(--duration-normal) ease;
+}
+
+.oncovista-input:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+}
+
+.oncovista-input::placeholder {
+  color: var(--color-gray-400);
+}
+
+/* Standard Layout Grid */
+.oncovista-grid {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: repeat(var(--grid-cols-mobile), minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .oncovista-grid {
+    grid-template-columns: repeat(var(--grid-cols-tablet), minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .oncovista-grid {
+    grid-template-columns: repeat(var(--grid-cols-desktop), minmax(0, 1fr));
+  }
+}
+
+/* Standard Container */
+.oncovista-container {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--layout-padding-mobile);
+  padding-right: var(--layout-padding-mobile);
+}
+
+@media (min-width: 640px) {
+  .oncovista-container {
+    padding-left: var(--layout-padding-tablet);
+    padding-right: var(--layout-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .oncovista-container {
+    padding-left: var(--layout-padding-desktop);
+    padding-right: var(--layout-padding-desktop);
+  }
+}
