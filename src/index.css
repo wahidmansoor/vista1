@@ -3,7 +3,7 @@
    ================================ */
 
 /* Import Design Token System - Simple relative path */
-@import './styles/design-tokens.css';
+@import './styles/designTokens.css';
 
 @tailwind base;
 @tailwind components;
