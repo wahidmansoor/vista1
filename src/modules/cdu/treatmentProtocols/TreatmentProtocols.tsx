@@ -5,11 +5,11 @@ import ProtocolDetailsDialog from './components/ProtocolDetailsDialog';
 import ProtocolLoadingSkeleton from './ProtocolLoadingSkeleton';
 import ProtocolErrorState from './ProtocolErrorState';
 
-import { TreatmentProtocol, Protocol } from '@/types/medical';
+import { Protocol } from '@/types/protocol';
 import {
   getAllGroupOptions,
   getProtocolsByTumorGroup,
-} from '@/services/protocols';
+} from '@/types/protocol';
 
 export default function TreatmentProtocols() {
   const [groupOptions, setGroupOptions] = useState<
@@ -17,8 +17,8 @@ export default function TreatmentProtocols() {
   >([]);
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
   const [selectedSupergroup, setSelectedSupergroup] = useState<string | null>(null);
-  const [protocols, setProtocols] = useState<TreatmentProtocol[]>([]);
-  const [selectedProtocol, setSelectedProtocol] = useState<TreatmentProtocol | null>(null);
+  const [protocols, setProtocols] = useState<Protocol[]>([]);
+  const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,50 +44,7 @@ export default function TreatmentProtocols() {
       setLoading(true);
       getProtocolsByTumorGroup(selectedGroup)
         .then((data: Protocol[]) => {
-          const mappedProtocols: TreatmentProtocol[] = data.map((protocol) => ({
-            id: protocol.id,
-            name: protocol.name || '',
-            protocol_code: protocol.code,
-            short_name: protocol.name || '',
-            cancer_types: protocol.tumour_group ? [protocol.tumour_group] : [],
-            line_of_therapy: protocol.treatment_intent || 'unknown',
-            treatment_intent: protocol.treatment_intent || 'unknown',
-            eligibility_criteria: protocol.eligibility || { inclusion_criteria: [], exclusion_criteria: [] },
-            treatment_schedule: protocol.treatment?.schedule || {},
-            drugs: protocol.treatment?.drugs || [],
-            contraindications: protocol.precautions || [],
-            monitoring_requirements: protocol.monitoring?.ongoing || [],
-            expected_outcomes: protocol.expected_outcomes || {},
-            evidence_level: protocol.evidence_level || 'unknown',
-            guideline_source: protocol.guideline_source || '',
-            biomarker_requirements: protocol.biomarker_requirements || [],
-            companion_diagnostics: protocol.companion_diagnostics || [],
-            molecular_targets: protocol.molecular_targets || [],
-            resistance_mechanisms: protocol.resistance_mechanisms || [],
-            decision_support_level: protocol.decision_support_level || 'manual_only',
-            automated_eligibility_check: protocol.automated_eligibility_check || false,
-            alert_conditions: protocol.alert_conditions || [],
-            drug_interactions: protocol.drug_interactions || [],
-            quality_metrics: protocol.quality_metrics || [],
-            regulatory_approvals: protocol.regulatory_approvals || [],
-            clinical_trial_data: protocol.clinical_trial_data || [],
-            cost_effectiveness_data: protocol.cost_effectiveness_data || {},
-            implementation_complexity: protocol.implementation_complexity || 'low',
-            resource_requirements: protocol.resource_requirements || [],
-            training_requirements: protocol.training_requirements || [],
-            last_updated: protocol.updated_at ? new Date(protocol.updated_at) : new Date(),
-            version: protocol.version || '',
-            is_active: protocol.is_active !== undefined ? protocol.is_active : true,
-            deprecation_date: protocol.deprecation_date ? new Date(protocol.deprecation_date) : undefined,
-            replacement_protocol_id: protocol.replacement_protocol_id || undefined,
-            clinical_trial_eligible: protocol.clinical_trial_eligible || false,
-            created_by: protocol.created_by || '',
-            approved_by: protocol.approved_by || [],
-            approval_date: protocol.approval_date ? new Date(protocol.approval_date) : undefined,
-            review_cycle_months: protocol.review_cycle_months || 12,
-            next_review_date: protocol.next_review_date ? new Date(protocol.next_review_date) : undefined,
-          }));
-          setProtocols(mappedProtocols);
+          setProtocols(data);
         })
         .catch(() => {
           setError('Failed to load protocols for this group.');
@@ -155,7 +112,7 @@ export default function TreatmentProtocols() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {protocols.map((protocol) => (
                 <div
-                  key={protocol.protocol_code}
+                  key={protocol.code}
                   onClick={() => setSelectedProtocol(protocol)}
                 >
                   <UnifiedProtocolCard protocol={protocol} />

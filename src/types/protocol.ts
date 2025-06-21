@@ -1,8 +1,7 @@
-import { supabase } from '@/lib/supabaseClient';
+import supabase from '@/lib/supabaseClient';
 // Import types from existing files
-import { type Protocol } from './protocolUpdated'; // Changed to named import
-export type { Protocol }; // Re-export Protocol
-export type { Drug, PreMedication, PostMedication, Interactions, RescueAgent, Eligibility, SupportiveCareItem, DoseModification, CycleInfo, MonitoringItem, ToxicityMonitoring, SupportiveCare, Test } from './protocolUpdated'; // Added Test and other exports
+import type { Protocol, Drug, PreMedication, PostMedication, Interactions, RescueAgent, Eligibility, SupportiveCareItem, DoseModification, CycleInfo, MonitoringItem, ToxicityMonitoring, SupportiveCare, Test, Medication } from './protocolUpdated';
+export type { Protocol, Drug, PreMedication, PostMedication, Interactions, RescueAgent, Eligibility, SupportiveCareItem, DoseModification, CycleInfo, MonitoringItem, ToxicityMonitoring, SupportiveCare, Test, Medication };
 import type { ProtocolFilters } from '@/services/protocols';
 import { cleanProtocol } from './protocolUpdated';
 

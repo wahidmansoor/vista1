@@ -915,6 +915,14 @@ export interface PatientPreferences {
 }
 
 // Treatment matching and recommendation types
+export interface TreatmentMatchRequest {
+  patient_id: string;
+  cancer_type_id: string;
+  treatment_line?: TreatmentLine;
+  include_experimental?: boolean;
+  max_results?: number;
+}
+
 export interface TreatmentRecommendation {
   id: string;
   patient_id: string;
@@ -925,10 +933,13 @@ export interface TreatmentRecommendation {
   required_modifications: ProtocolModification[];
   alternative_options: AlternativeOption[];
   rationale: string;
-  confidence_level: 'high' | 'medium' | 'low';
+  confidence_level: 'very_high' | 'high' | 'medium' | 'low' | 'very_low';
   clinical_trial_options: ClinicalTrialOption[];
   generated_at: Date;
   generated_by: string; // algorithm version or clinician
+  evidence_summary?: string;
+  warnings: string[];
+  recommended_modifications: ProtocolModification[];
 }
 
 export interface DetailedEligibilityStatus {
@@ -947,10 +958,13 @@ export interface EligibilityViolation {
 
 export interface ProtocolModification {
   type: 'dose_reduction' | 'schedule_change' | 'drug_substitution' | 'additional_monitoring';
-  description: string;
-  rationale: string;
+  parameter: string; // The parameter being modified (e.g., 'dose', 'schedule')
+  modification: string; // The specific modification description
+  reason: string; // The reason for the modification
   safety_impact: string;
   efficacy_impact: string;
+  description: string; // Keep for backward compatibility
+  rationale: string; // Keep for backward compatibility
 }
 
 export interface AlternativeOption {
@@ -1118,14 +1132,7 @@ export interface ToxicityRisk {
   organ_specific_risks: Record<string, number>;
 }
 
-export interface ProtocolModification {
-  type: 'dose_reduction' | 'schedule_change' | 'drug_substitution' | 'additional_monitoring';
-  description: string;
-  rationale: string;
-  impact_on_efficacy: 'minimal' | 'moderate' | 'significant';
-  monitoring_changes: string[];
-}
-
+// Remove duplicate ProtocolModification interface
 // Database schema types for Supabase
 export interface DatabaseTables {
   cancer_types: CancerType;

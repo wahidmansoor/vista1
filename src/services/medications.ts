@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabaseClient';
+import supabase from '../lib/supabaseClient';
 import type { Medication, SortConfig } from '../modules/cdu/types';
 
 /**
@@ -158,11 +158,13 @@ export const fetchMedications = async (searchTerm?: string): Promise<Medication[
 
     const url = `${baseUrl}/select=*${filter ? `&${filter}` : ''}&order=name.asc.nullslast`;
 
+    const headers: HeadersInit = {
+      'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY!,
+      'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY!}`,
+    };
+
     const response = await fetch(url, {
-      headers: {
-        apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-      },
+      headers,
     });
 
     if (!response.ok) {

@@ -21,7 +21,7 @@ import {
   RefreshCw,
   Info
 } from 'lucide-react';
-import type { BiomarkerProfile, CancerType } from '../../../types/enhanced-evaluation';
+import type { BiomarkerProfile, CancerType, PartialBiomarkerResult, BiomarkerResult } from '../../../types/enhanced-evaluation';
 
 interface BiomarkerMatrixProps {
   cancerType: CancerType;
@@ -31,7 +31,12 @@ interface BiomarkerMatrixProps {
   showTrends?: boolean;
 }
 
-const BIOMARKER_DEFINITIONS = {
+const BIOMARKER_DEFINITIONS: Record<string, {
+  name: string;
+  normalRange: string;
+  cancers: string[];
+  significance: string;
+}> = {
   // General Biomarkers
   'CEA': {
     name: 'Carcinoembryonic Antigen',
@@ -139,7 +144,7 @@ const BIOMARKER_DEFINITIONS = {
   }
 };
 
-const CANCER_BIOMARKER_PANELS = {
+const CANCER_BIOMARKER_PANELS: Record<CancerType, string[]> = {
   breast: [
     'CEA', 'CA 15-3', 'CA 27.29', 'Estrogen Receptor', 'Progesterone Receptor', 
     'HER2', 'Ki-67', 'LDH'
@@ -164,6 +169,42 @@ const CANCER_BIOMARKER_PANELS = {
   ],
   testicular: [
     'AFP', 'β-hCG', 'LDH'
+  ],
+  gastric: [
+    'CA 19-9', 'CEA', 'HER2', 'LDH'
+  ],
+  head_neck: [
+    'SCC', 'CEA', 'LDH'
+  ],
+  bladder: [
+    'CEA', 'LDH'
+  ],
+  kidney: [
+    'LDH'
+  ],
+  cervical: [
+    'SCC', 'LDH'
+  ],
+  endometrial: [
+    'CA 125', 'LDH'
+  ],
+  leukemia: [
+    'LDH'
+  ],
+  sarcoma: [
+    'LDH'
+  ],
+  brain: [
+    'LDH'
+  ],
+  thyroid: [
+    'LDH'
+  ],
+  melanoma: [
+    'LDH'
+  ],
+  lymphoma: [
+    'LDH'
   ]
 };
 
@@ -464,7 +505,7 @@ export function BiomarkerMatrix({
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Biomarker Trends</h3>
                 {relevantBiomarkers
-                  .filter(biomarker => biomarkers.history?.[biomarker]?.length > 0)
+                  .filter((biomarker: string) => biomarkers.history?.[biomarker]?.length && biomarkers.history[biomarker]!.length > 0)
                   .map(renderTrendChart)}
                 {Object.keys(biomarkers.history || {}).length === 0 && (
                   <div className="text-center py-8">
@@ -495,8 +536,8 @@ export function BiomarkerMatrix({
                 </CardHeader>
                 <CardContent>
                   {relevantBiomarkers
-                    .filter(biomarker => getBiomarkerStatus(biomarker) === 'elevated')
-                    .map(biomarker => {
+                    .filter((biomarker: string) => getBiomarkerStatus(biomarker) === 'elevated')
+                    .map((biomarker: string) => {
                       const data = biomarkers.current?.[biomarker];
                       return (
                         <div key={biomarker} className="flex items-center justify-between p-3 border rounded-lg mb-2">
@@ -508,7 +549,7 @@ export function BiomarkerMatrix({
                           </div>
                           <div className="text-right">
                             <p className="text-sm font-medium">
-                              {data?.value} {data?.unit}
+                              {data?.value} {data?.unit || ''}
                             </p>
                             <Badge variant="destructive">Elevated</Badge>
                           </div>
@@ -527,8 +568,8 @@ export function BiomarkerMatrix({
                 </CardHeader>
                 <CardContent>
                   {relevantBiomarkers
-                    .filter(biomarker => calculateTrend(biomarker) === 'increasing')
-                    .map(biomarker => {
+                    .filter((biomarker: string) => calculateTrend(biomarker) === 'increasing')
+                    .map((biomarker: string) => {
                       const data = biomarkers.current?.[biomarker];
                       const trend = calculateTrend(biomarker);
                       return (
@@ -536,7 +577,7 @@ export function BiomarkerMatrix({
                           <div>
                             <h4 className="font-semibold">{biomarker}</h4>
                             <p className="text-sm text-muted-foreground">
-                              Current: {data?.value} {data?.unit}
+                              Current: {data?.value} {data?.unit || ''}
                             </p>
                           </div>
                           <div className="flex items-center space-x-2">

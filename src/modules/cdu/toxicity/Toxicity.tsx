@@ -22,9 +22,29 @@ const sanitizeToxicity = (data: Partial<ToxicityData>): ToxicityData => ({
   name: data.name || 'Not specified',
   severity: data.severity || 'Not specified',
   recognition: data.recognition || 'Not specified',
-  management: Array.isArray(data.management) ? data.management : [],
-  doseGuidance: Array.isArray(data.doseGuidance) ? data.doseGuidance : [],
-  culpritDrugs: Array.isArray(data.culpritDrugs) ? data.culpritDrugs : []
+  management: data.management || [],
+  dose_guidance: Array.isArray(data.dose_guidance) ? data.dose_guidance : [],
+  culprit_drugs: Array.isArray(data.culprit_drugs) ? data.culprit_drugs : [],
+  grading_scale: data.grading_scale || '',
+  symptoms: data.symptoms || [],
+  signs: data.signs || [],
+  imaging: data.imaging || [],
+  labs: data.labs || [],
+  risk_factors: data.risk_factors || [],
+  onset: data.onset || '',
+  duration: data.duration || '',
+  frequency: data.frequency || '',
+  reversibility: data.reversibility || '',
+  notes: data.notes || '',
+  references: data.references || [],
+  monitoring: data.monitoring || [],
+  interventions: data.interventions || [],
+  outcomes: data.outcomes || [],
+  ai_notes: data.ai_notes || '',
+  related_protocols: data.related_protocols || [],
+  last_reviewed: data.last_reviewed || '',
+  created_at: data.created_at || '',
+  updated_at: data.updated_at || ''
 });
 
 const AccordionItem = ({ toxicity, isOpen, onToggle }: {

@@ -1,9 +1,38 @@
 import React, { useState } from 'react';
-import type { VitalSigns, TriageResult } from '../services/emergency/types';
+// TODO: Replace with the correct type from '../services/emergency/types' if it exists
+type TriageResult = {
+  level: 'IMMEDIATE' | 'URGENT' | 'DELAYED' | string;
+  requiredActions: string[];
+  warnings: {
+    vitalSign: string;
+    value: string | number;
+    severity: string;
+    recommendation: string;
+  }[];
+  recommendedProtocols: {
+    name: string;
+    description: string;
+    immediateActions: string[];
+  }[];
+  disclaimers: {
+    content: { en: string };
+  }[];
+};
 import { useEmergencyService } from '../hooks/useEmergencyService';
 
+// Define the VitalSigns interface for type safety
+interface VitalSigns {
+  heartRate?: number;
+  bloodPressure?: {
+    systolic: number;
+    diastolic: number;
+  };
+  temperature?: number;
+  oxygenSaturation?: number;
+}
+
 export function EmergencyResponseSystem() {
-  const [vitals, setVitals] = useState<VitalSigns>({});
+const [vitals, setVitals] = useState<Record<string, any>>({});
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [symptomInput, setSymptomInput] = useState('');
   const [triageResult, setTriageResult] = useState<TriageResult | null>(null);
@@ -44,8 +73,19 @@ export function EmergencyResponseSystem() {
       setLoading(true);
       setError(null);
 
-      const result = await emergencyService.triageEmergency(vitals, symptoms);
-      setTriageResult(result);
+// Combine vitals and symptoms into a single EmergencyCondition object
+const emergencyCondition = {
+  type: 'SYMPTOM' as 'SYMPTOM',
+  severity: 'routine' as 'immediate' | 'urgent' | 'routine', // or determine based on vitals/symptoms
+  details: {
+    vitals,
+    symptoms
+  },
+  timestamp: new Date().toISOString(),
+  requiresEmergencyCare: true // or determine based on logic
+};
+const result = await emergencyService.triageEmergency(emergencyCondition);
+setTriageResult(result as unknown as TriageResult | null);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {

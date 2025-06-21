@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { AlertTriangle, Package2, Shield, BookOpen, Pill } from "lucide-react";
-import { Protocol, Test } from "@/types/protocol";
+import { Protocol, Test, DoseModification, PreMedication, SupportiveCare, SupportiveCareItem, Medication, MonitoringItem } from "@/types/protocolUpdated";
 import TreatmentTab from "../TreatmentTab";
 import TestsSectionTab from "../TestsSectionTab";
 import DoseModificationsTab from "../DoseModificationsTab";
@@ -108,15 +108,15 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
     return protocol.tests || { baseline: [], monitoring: [] };
   }, [protocol.tests]);
   
-  const doseModifications = React.useMemo(() => 
-    protocol.dose_modifications || {
-      hematological: [],
-      nonHematological: [],
-      renal: [],
-      hepatic: []
-    }, 
-    [protocol.dose_modifications]
-  );
+  const doseModifications = React.useMemo(() => {
+    const mods = protocol.dose_modifications || {};
+    return {
+      hematological: mods.hematological || [],
+      nonHematological: mods.nonHematological || [],
+      renal: mods.renal || [],
+      hepatic: mods.hepatic || []
+    };
+  }, [protocol.dose_modifications]);
 
   const toxicityMonitoring = React.useMemo(() => 
     protocol.toxicity_monitoring || {
@@ -214,12 +214,12 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                   <div className="bg-indigo-50 dark:bg-indigo-900 p-4 rounded-md shadow">
                     <h3 className="font-semibold text-indigo-900 dark:text-indigo-200 text-lg mb-1">Cycle Information</h3>
                     <p className="text-sm text-indigo-800 dark:text-indigo-300 whitespace-pre-line">
-                      {protocol.cycle_info}
+                      {Array.isArray(protocol.cycle_info) ? protocol.cycle_info.join(', ') : (protocol.cycle_info as any)?.schedule}
                     </p>
                   </div>
                 )}
 
-                {protocol.tags?.length > 0 && (
+                {protocol.tags && protocol.tags.length > 0 && (
                   <div className="bg-violet-50 dark:bg-violet-900 p-4 rounded-md shadow">
                     <h3 className="font-semibold text-violet-900 dark:text-violet-200 text-lg mb-2">Tags</h3>
                     <div className="flex flex-wrap gap-2">
@@ -390,8 +390,8 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 <h3 className="font-semibold text-lg mb-2">Baseline Monitoring</h3>
                 {monitoring.baseline?.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {monitoring.baseline.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
+                    {monitoring.baseline.map((item: MonitoringItem, idx: number) => (
+                      <li key={idx}>{item.parameter}</li>
                     ))}
                   </ul>
                 ) : (
@@ -403,8 +403,8 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 <h3 className="font-semibold text-lg mb-2">Ongoing Monitoring</h3>
                 {monitoring.ongoing?.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {monitoring.ongoing.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
+                    {monitoring.ongoing.map((item: MonitoringItem, idx: number) => (
+                      <li key={idx}>{item.parameter}</li>
                     ))}
                   </ul>
                 ) : (
@@ -423,10 +423,10 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
             <div className="space-y-6">
               <div>
                 <h3 className="font-semibold text-lg mb-2">Hematological Modifications</h3>
-                {doseModifications.hematological?.length > 0 ? (
+                {doseModifications.hematological.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.hematological.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
+                    {doseModifications.hematological.map((item: DoseModification, idx: number) => (
+                      <li key={idx}>{item.modification}</li>
                     ))}
                   </ul>
                 ) : (
@@ -436,10 +436,10 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Non-Hematological Modifications</h3>
-                {doseModifications.nonHematological?.length > 0 ? (
+                {doseModifications.nonHematological.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.nonHematological.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
+                    {doseModifications.nonHematological.map((item: DoseModification, idx: number) => (
+                      <li key={idx}>{item.modification}</li>
                     ))}
                   </ul>
                 ) : (
@@ -449,10 +449,10 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Renal Modifications</h3>
-                {doseModifications.renal?.length > 0 ? (
+                {doseModifications.renal.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.renal.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
+                    {doseModifications.renal.map((item: DoseModification, idx: number) => (
+                      <li key={idx}>{item.modification}</li>
                     ))}
                   </ul>
                 ) : (
@@ -462,10 +462,10 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Hepatic Modifications</h3>
-                {doseModifications.hepatic?.length > 0 ? (
+                {doseModifications.hepatic.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {doseModifications.hepatic.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
+                    {doseModifications.hepatic.map((item: DoseModification, idx: number) => (
+                      <li key={idx}>{item.modification}</li>
                     ))}
                   </ul>
                 ) : (
@@ -523,30 +523,30 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                         ? protocol.contraindications 
                         : typeof protocol.contraindications === 'object' && !Array.isArray(protocol.contraindications) ? (
                           <>
-                            {protocol.contraindications.absolute?.length > 0 && (
+                            {(protocol.contraindications as any).absolute?.length > 0 && (
                               <div className="mb-3">
                                 <h5 className="font-semibold text-red-600 text-sm mb-1">Absolute</h5>
                                 <ul className="list-disc list-inside text-sm text-red-900">
-                                  {protocol.contraindications.absolute.map((item: string, i: number) => (
+                                  {(protocol.contraindications as any).absolute.map((item: string, i: number) => (
                                     <li key={i}>{item}</li>
                                   ))}
                                 </ul>
                               </div>
                             )}
-                            {protocol.contraindications.relative?.length > 0 && (
+                            {(protocol.contraindications as any).relative?.length > 0 && (
                               <div className="mb-3">
                                 <h5 className="font-semibold text-red-500 text-sm mb-1">Relative</h5>
                                 <ul className="list-disc list-inside text-sm text-red-800">
-                                  {protocol.contraindications.relative.map((item: string, i: number) => (
+                                  {(protocol.contraindications as any).relative.map((item: string, i: number) => (
                                     <li key={i}>{item}</li>
                                   ))}
                                 </ul>
                               </div>
                             )}
-                            {(!protocol.contraindications.absolute || protocol.contraindications.absolute.length === 0) && 
-                             (!protocol.contraindications.relative || protocol.contraindications.relative.length === 0) && (
+                            (!(protocol.contraindications as any).absolute || (protocol.contraindications as any).absolute.length === 0) &&
+                             (!(protocol.contraindications as any).relative || (protocol.contraindications as any).relative.length === 0) && (
                               <p>No contraindications specified.</p>
-                            )}
+                            )
                           </>
                         ) : Array.isArray(protocol.contraindications) ? (
                           <ul className="list-disc list-inside text-sm text-red-900">
@@ -616,24 +616,31 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {protocol.pre_medications?.required?.length > 0 ? (
-                  <div>
-                    <h4 className="font-semibold mb-2 text-blue-600">Pre-medications</h4>
-                    <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
-                      <ul>                        {protocol.pre_medications.required.map((med, idx) => (
-                          <li key={idx} className="medication-name">{med.name} — {med.dose}</li>
-                        ))}
-                      </ul>
+                {(() => {
+                  const preMeds = protocol.pre_medications as PreMedication | Medication[];
+                  if (preMeds && 'required' in preMeds && preMeds.required && preMeds.required.length > 0) {
+                    return (
+                      <div>
+                        <h4 className="font-semibold mb-2 text-blue-600">Pre-medications</h4>
+                        <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
+                          <ul>
+                            {preMeds.required.map((med: Medication, idx: number) => (
+                              <li key={idx} className="medication-name">{med.name} — {med.dose}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    );
+                  }
+                  return (
+                    <div>
+                      <h4 className="font-semibold mb-2 text-blue-600">Pre-medications</h4>
+                      <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
+                        <p>No pre-medications specified.</p>
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div>
-                    <h4 className="font-semibold mb-2 text-blue-600">Pre-medications</h4>
-                    <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
-                      <p>No pre-medications specified.</p>
-                    </div>
-                  </div>
-                )}
+                  );
+                })()}
                 
                 {protocol.post_medications && (
                   <div>
@@ -900,9 +907,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
             <div className="space-y-6">
               <div>
                 <h3 className="font-semibold text-lg mb-2">Required Supportive Care</h3>
-                {supportiveCare?.required?.length > 0 ? (
+                {supportiveCare && 'required' in supportiveCare && supportiveCare.required && supportiveCare.required.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {supportiveCare.required.map((item: any, idx: number) => (
+                    {supportiveCare.required.map((item: SupportiveCareItem, idx: number) => (
                       <li key={idx}>{typeof item === 'object' ? item.name || JSON.stringify(item) : item}</li>
                     ))}
                   </ul>
@@ -913,9 +920,9 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Optional Supportive Care</h3>
-                {supportiveCare?.optional?.length > 0 ? (
+                {supportiveCare && 'optional' in supportiveCare && supportiveCare.optional && supportiveCare.optional.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {supportiveCare.optional.map((item: any, idx: number) => (
+                    {supportiveCare.optional.map((item: SupportiveCareItem, idx: number) => (
                       <li key={idx}>{typeof item === 'object' ? item.name || JSON.stringify(item) : item}</li>
                     ))}
                   </ul>
@@ -926,10 +933,10 @@ const ProtocolDetailsDialog: React.FC<ProtocolDetailsDialogProps> = ({ protocol,
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Monitoring Requirements</h3>
-                {supportiveCare?.monitoring?.length > 0 ? (
+                {supportiveCare && 'monitoring' in supportiveCare && supportiveCare.monitoring && supportiveCare.monitoring.length > 0 ? (
                   <ul className="list-disc list-inside">
-                    {supportiveCare.monitoring.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
+                    {supportiveCare.monitoring.map((item: SupportiveCareItem, idx: number) => (
+                      <li key={idx}>{item.name}</li>
                     ))}
                   </ul>
                 ) : (

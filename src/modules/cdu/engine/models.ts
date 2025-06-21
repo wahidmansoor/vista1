@@ -205,7 +205,7 @@ export interface NonTargetLesion {
 
 export interface AdverseEvent {
   event: string;
-  grade: 1 | 2 | 3 | 4 | 5;
+grade: number;
   startDate: string;
   endDate?: string;
   causality: 'definite' | 'probable' | 'possible' | 'unlikely' | 'unrelated';
@@ -222,7 +222,7 @@ export interface DosageModification {
 
 export interface Toxicity {
   type: string;
-  grade: 1 | 2 | 3 | 4 | 5;
+grade: number;
   onset: string;
   resolution?: string;
   management: string;

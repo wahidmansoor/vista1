@@ -31,7 +31,7 @@ export function AIChatAssistant({ module, intent, initialContext = '', mockMode 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [iterationCount, setIterationCount] = useState(0);
-  const { history, addResponse, clearHistory } = useAIResponseHistory();
+const { history, addResponse, clearHistory } = useAIResponseHistory();
   const chatEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -150,11 +150,11 @@ export function AIChatAssistant({ module, intent, initialContext = '', mockMode 
               <div className="flex items-start gap-2">
                 <div className="flex-1">
                   <div className="font-medium mb-1">
-                    {msg.type === 'assistant' ? 'AI Assistant' : 'You'}
+{'AI Assistant'}
                   </div>
                   <div className="whitespace-pre-wrap">{msg.content}</div>
                 </div>
-                {msg.type === 'assistant' && (
+{true && (
                   <div className="flex gap-2">
                     <Button
                       variant="ghost"
@@ -175,7 +175,7 @@ export function AIChatAssistant({ module, intent, initialContext = '', mockMode 
                   </div>
                 )}
               </div>
-              {idx === 0 && msg.type === 'assistant' && (
+{idx === 0 && true && (
                 <div className="flex gap-2 mt-2">
                   <Button
                     variant="outline"

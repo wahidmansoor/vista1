@@ -1,16 +1,62 @@
 /**
  * Enhanced localStorage service with data migration and error handling
- * Provides robust data persistence for Disease Progress Tracker
+ * Provides robust data persistence for Treatment Planner
  */
 
-import {
-  StorageData,
-  DataMigration,
-  ValidationError
-} from '../types/diseaseProgress.types';
 
-const STORAGE_KEY = "disease-progress-tracker-data";
-const BACKUP_KEY = "disease-progress-tracker-backup";
+// Define types locally if the import is missing
+export type StorageData = {
+  diseaseStatus: {
+    primaryDiagnosis: string;
+    otherPrimaryDiagnosis?: string;
+    stageAtDiagnosis: string;
+    histologyMutation?: string;
+    otherHistologyMutation?: string;
+    dateOfDiagnosis: string;
+    diseaseNotes?: string;
+  };
+  performanceStatus: {
+    assessmentDate: string;
+    performanceScale: string;
+    performanceScore: string;
+    performanceNotes?: string;
+  };
+  progression: {
+    reassessmentDate: string;
+    imagingType: string;
+    findingsSummary?: string;
+    markerType?: string;
+    markerValue?: string;
+    progressionNotes?: string;
+  };
+  linesOfTreatment: {
+    treatmentLine: string;
+    treatmentRegimen: string;
+    startDate: string;
+    endDate?: string;
+    treatmentResponse: string;
+    treatmentNotes?: string;
+  };
+  metadata: {
+    version: string;
+    lastSaved: string;
+  };
+};
+
+export type DataMigration = {
+  fromVersion: string;
+  toVersion: string;
+  migrate: (oldData: any) => StorageData;
+};
+
+export type ValidationError = {
+  field: string;
+  message: string;
+  severity: 'error' | 'warning';
+};
+
+const STORAGE_KEY = "treatment-planner-data";
+const BACKUP_KEY = "treatment-planner-backup";
 const CURRENT_VERSION = "2.0.0";
 
 // Data migration definitions
@@ -62,8 +108,8 @@ const migrations: DataMigration[] = [
 ];
 
 // Validation schema for data integrity
-const validateStorageData = (data: any): { isValid: boolean; errors: ValidationError[] } => {
-  const errors: ValidationError[] = [];
+const validateStorageData = (data: any): { isValid: boolean; errors: any[] } => {
+const errors: any[] = [];
   
   // Check required structure
   if (!data || typeof data !== 'object') {

@@ -1,84 +1,28 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import type { Protocol } from '@/types/protocol';
+/**
+ * Supabase Client Configuration
+ * Simple and clean Supabase client initialization
+ * 
+ * Environment Variables Required:
+ * - VITE_SUPABASE_URL: Supabase project URL
+ * - VITE_SUPABASE_ANON_KEY: Supabase anonymous key
+ * 
+ * @version 3.0.0
+ * @author OncoVista Treatment System
+ */
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+import { createClient } from '@supabase/supabase-js';
 
-let supabaseInstance: SupabaseClient | null = null;
+// Validate environment variables
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-export const getSupabase = () => {
-  if (!supabaseUrl || !supabaseKey) {
-    console.error('❌ Missing Supabase environment variables.');
-    throw new Error('Supabase credentials are not configured.');
-  }
-
-  if (!supabaseInstance) {
-    try {
-      supabaseInstance = createClient(supabaseUrl, supabaseKey, {
-        auth: {
-          detectSessionInUrl: true,
-          persistSession: true,
-          autoRefreshToken: true,
-        },
-      });
-      console.info('✅ Supabase client initialized');
-    } catch (err) {
-      console.error('❌ Failed to create Supabase client:', err);
-      throw new Error('Failed to initialize Supabase client');
-    }
-  }
-
-  return supabaseInstance;
-};
-
-// For backward compatibility with existing code
-export const supabase = getSupabase();
-
-// Helper to safely parse JSONB fields (handles string or object)
-function safeJsonParse<T>(data: any, fallback: T): T {
-  if (data == null) return fallback;
-  if (typeof data === 'object') return data as T;
-  if (typeof data === 'string') {
-    try {
-      return JSON.parse(data) as T;
-    } catch {
-      return fallback;
-    }
-  }
-  return fallback;
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('Missing required environment variables: VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY');
 }
 
-// Data transformation utility for Protocol
-export const toProtocol = (dbProtocol: any): Protocol => {
-  // Parse JSONB fields safely
-  const precautions = safeJsonParse(dbProtocol.precautions, []);
-  const eligibility = safeJsonParse(dbProtocol.eligibility, { inclusion_criteria: [], exclusion_criteria: [] });
-  const treatment = safeJsonParse(dbProtocol.treatment, { drugs: [] });
+// Initialize Supabase client using environment variables
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-  return {
-    ...dbProtocol,
-    precautions: (precautions || []).map((p: any) =>
-      typeof p === 'string' ? { note: p } : p
-    ),
-    eligibility: eligibility
-      ? {
-          inclusion_criteria: (eligibility.inclusion_criteria || []).map((c: any) =>
-            typeof c === 'string' ? { criterion: c } : c
-          ),
-          exclusion_criteria: (eligibility.exclusion_criteria || []).map((c: any) =>
-            typeof c === 'string' ? { criterion: c } : c
-          ),
-        }
-      : undefined,
-    treatment: treatment
-      ? {
-          drugs: (treatment.drugs || []).map((d: any) => ({
-            ...d,
-            special_notes: Array.isArray(d.special_notes)
-              ? d.special_notes.map((n: any) => (typeof n === 'string' ? n : n.note))
-              : [],
-          })),
-        }
-      : undefined,
-  };
-};
+// Export both named and default exports for compatibility
+export { supabase };
+export default supabase;

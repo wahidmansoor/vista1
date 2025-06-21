@@ -85,14 +85,21 @@ export class LabInterpretationHandler {
 
       const interpretation: LabInterpretation = {
         panel,
-        abnormalResults,
-        criticalValues,
+        criticalValues: criticalValues.map(cv => ({
+          testName: cv.testName,
+          value: cv.value,
+          unit: cv.unit,
+          timestamp: cv.timestamp,
+          criticalLevel: cv.criticalLevel,
+          recommendations: cv.recommendations,
+          requiredActions: cv.requiredActions
+        })),
         trends,
         cancerMarkers,
         therapeuticLevels,
         recommendations,
         patientEducation,
-        limitations: this.generateLimitations(panel, patientContext)
+        timestamp: new Date().toISOString()
       };
 
       await this.auditLogger.logAssessmentComplete({

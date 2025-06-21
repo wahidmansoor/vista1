@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabaseClient';
+import supabase from '@/lib/supabaseClient';
 import type { Protocol } from '@/types/protocol';
 
 // ✅ Interface for filters (used in RegimensLibrary.tsx etc.)

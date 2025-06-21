@@ -4,7 +4,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import ProtocolDashboard from "../components/ProtocolDashboard";
 import TreatmentProtocols from "./treatmentProtocols/TreatmentProtocols";
 import Toxicity from "./toxicity/Toxicity";
-import DiseaseProgressTracker from "../sections/DiseaseProgressTracker";
+import TreatmentPlanner from "../sections/TreatmentPlanner";
 import MedicationsView from "../medications/MedicationsView";
 
 const CDU = () => {
@@ -14,7 +14,7 @@ const CDU = () => {
     { id: 'protocols', label: 'Treatment Protocols', component: <TreatmentProtocols /> },
     { id: 'medications', label: 'Medications', component: <MedicationsView /> },
     { id: 'toxicity', label: 'Toxicity', component: <Toxicity /> },
-    { id: 'disease-progress', label: 'Disease Progress', component: <DiseaseProgressTracker /> },
+    { id: 'treatment-planner', label: 'Treatment Planner', component: <TreatmentPlanner /> },
   ];
 
   return (

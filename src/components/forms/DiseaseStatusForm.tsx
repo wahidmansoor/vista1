@@ -66,7 +66,7 @@ export const DiseaseStatusForm: React.FC<DiseaseStatusFormProps> = ({
   };
 
   const handleBiomarkerAdd = () => {
-    const newBiomarker: Biomarker = {
+const newBiomarker = {
       name: '',
       value: '',
       testDate: new Date().toISOString().split('T')[0],

@@ -20,7 +20,8 @@ export type CancerType =
   | 'sarcoma'
   | 'brain'
   | 'thyroid'
-  | 'melanoma';
+  | 'melanoma'
+  | 'testicular';
 
 export type RiskCategory = 'minimal' | 'low' | 'intermediate' | 'high' | 'very_high';
 export type EvaluationStatus = 'draft' | 'pending_review' | 'reviewed' | 'approved' | 'revised' | 'archived';
@@ -83,6 +84,58 @@ export interface MutationStatus {
     status: string;
     significance?: string;
   }>;
+  // Enhanced mutation status for molecular panels
+  tested?: Record<string, {
+    status: 'positive' | 'negative' | 'variant' | 'unknown' | 'failed' | 'pending';
+    variant?: string;
+    vaf?: number;
+    notes?: string;
+  }>;
+  sequencingDetails?: {
+    platform?: string;
+    coverage?: string;
+    qualityScore?: string;
+    date?: string;
+  };
+}
+
+export interface MutationProfile {
+  patientId: string;
+  testingDate: Date;
+  methodology: 'NGS' | 'PCR' | 'FISH' | 'IHC' | 'Other';
+  panelName?: string;
+  mutations: MutationStatus;
+  interpretation: string;
+  clinicalSignificance: 'pathogenic' | 'likely_pathogenic' | 'VUS' | 'likely_benign' | 'benign';
+  therapeuticImplications?: string[];
+  recommendations?: string[];
+}
+
+export interface BiomarkerResult {
+  value: number;
+  unit: string;
+  date: string;
+  method?: string;
+  laboratory?: string;
+  referenceRange?: string;
+  interpretation?: string;
+}
+
+export interface PartialBiomarkerResult {
+  value?: number;
+  unit?: string;
+  date?: string;
+  method?: string;
+  laboratory?: string;
+  referenceRange?: string;
+  interpretation?: string;
+}
+
+export interface BiomarkerProfile {
+  current?: Record<string, PartialBiomarkerResult>;
+  history?: Record<string, BiomarkerResult[]>;
+  interpretation?: string;
+  lastUpdated?: string;
 }
 
 export interface ComorbidityScore {
@@ -179,6 +232,11 @@ export interface AIRecommendation {
   sources?: string[];
   alternatives?: string[];
   contraindications?: string[];
+  priority?: 'low' | 'medium' | 'high';
+  title?: string;
+  description?: string;
+  evidence?: string;
+  actionItems?: string[];
 }
 
 export interface ValidationError {
@@ -257,6 +315,45 @@ export interface EnhancedPatientEvaluation {
   primary_site: string;
   histology: string;
   tumor_grade?: string;
+  
+  // Demographics
+  demographics?: {
+    age?: number;
+    gender?: 'male' | 'female' | 'other';
+    ethnicity?: string;
+    family_history?: Record<string, any>;
+  };
+  
+  // Pathology
+  pathology?: {
+    tumorSize?: number;
+    lymphNodes?: {
+      positive?: number;
+      total?: number;
+      sentinel?: boolean;
+    };
+    grade?: number | string;
+    stage?: string;
+    margins?: string;
+    histology?: string;
+    immunohistochemistry?: Record<string, any>;
+  };
+  
+  // Clinical Assessment
+  clinicalAssessment?: {
+    performanceStatus?: PerformanceStatus;
+    symptoms?: Record<string, any>;
+    physicalExam?: Record<string, any>;
+    comorbidities?: string[];
+  };
+  
+  // Molecular Profile
+  molecularProfile?: {
+    receptors?: ReceptorStatus;
+    mutations?: MutationStatus;
+    biomarkers?: Record<string, any>;
+    sequencing?: Record<string, any>;
+  };
   
   // Staging (JSONB fields)
   tnm_stage: TNMStage;

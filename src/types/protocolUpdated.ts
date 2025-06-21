@@ -21,6 +21,7 @@ export interface Drug {
   administration?: string;
   infusion_time?: string;
   special_notes?: string[];
+  contraindications?: string[]; // Added for protocolHelpers.ts
 }
 
 export interface DoseModification {
@@ -33,6 +34,7 @@ export interface Test {
   test?: string;
   purpose?: string;
   frequency?: string;
+  // Add other properties as needed to match usage in codebase
 }
 
 export interface CycleInfo {
@@ -113,7 +115,7 @@ export interface Protocol {
   created_at?: string;
   updated_at?: string;
   last_reviewed?: string;
- version?: string;
+  version?: string;
   created_by?: string;
   updated_by?: string;
   name?: string;
@@ -136,6 +138,7 @@ export interface Protocol {
     nonHematological?: DoseModification[];
     renal?: DoseModification[];
     hepatic?: DoseModification[];
+    levels?: DoseModification[]; // Added for protocolHelpers.ts
   };
   reference_list?: string[];
   cycle_info?: string[] | CycleInfo;
@@ -149,16 +152,19 @@ export interface Protocol {
     frequency?: string;
   };
   toxicity_monitoring?: ToxicityMonitoring;
-  interactions?: Interactions;
-    // Additional properties for AI and dose modifications
+  interactions?: Interactions & {
+    precautions?: string[]; // Added for protocolHelpers.ts
+  };
+  
+  // Additional properties for AI and dose modifications
   natural_language_prompt?: string;
   dose_reductions?: DoseModification[];
   administration?: string;
   contraindications?: string[];
   protocol_version?: string;
-  approval_date?: string;
+  approval_date?: Date | string;
   review_date?: string;
-  approved_by?: string;
+  approved_by?: string[];
   emesis_risk?: string;
   cycle_duration?: string;
   total_cycles?: number;
@@ -186,6 +192,15 @@ export interface Protocol {
   deprecation_date?: string;
   replacement_protocol_id?: string;
   clinical_trial_eligible?: boolean;
+  
+  // Missing properties referenced in errors
+  is_active?: boolean;
+  review_cycle_months?: number;
+  next_review_date?: Date;
+  
+  // Additional properties for compatibility
+  author?: string;
+  monitoring_requirements?: any[];
 }
 
 /**
@@ -324,3 +339,6 @@ export interface RegimenGroup {
   groupName: string;
   protocols: Protocol[];
 }
+
+// Add ProtocolDrug as an alias for Drug for backward compatibility
+export type ProtocolDrug = Drug;

@@ -10,7 +10,7 @@ import {
   StageType,
   PerformanceScoreType,
   TreatmentLineType
-} from '../types/diseaseProgress.types';
+} from '../../types';
 
 // Medical validation constants
 const VALID_DIAGNOSES = [

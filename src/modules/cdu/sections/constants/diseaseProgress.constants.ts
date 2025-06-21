@@ -1,8 +1,15 @@
 /**
- * Constants and configuration data for Disease Progress Tracker
+ * Constants and configuration data for Treatment Planner
  */
 
-import { TabConfig, TreatmentProtocol, StageType, PerformanceScoreType } from './types/diseaseProgress.types';
+// Define TabConfig type locally if needed
+export type TabConfig = {
+  id: string;
+  title: string;
+  icon: React.ElementType;
+  isEnabled: boolean;
+};
+
 import { 
   Activity, 
   FileText, 
@@ -12,7 +19,7 @@ import {
 } from 'lucide-react';
 
 // Local storage configuration
-export const STORAGE_KEY = 'disease-progress-tracker-data';
+export const STORAGE_KEY = 'treatment-planner-data';
 export const STORAGE_VERSION = '1.0.0';
 
 // Primary diagnosis options
@@ -99,7 +106,7 @@ export const tabs: TabConfig[] = [
 ];
 
 // Treatment protocols data
-export const TREATMENT_PROTOCOLS: TreatmentProtocol[] = [
+export const TREATMENT_PROTOCOLS = [
   { 
     diagnosis: "Breast Cancer", 
     stage: "I", 
@@ -237,7 +244,7 @@ export const DIAGNOSIS_PROTOCOL_MAP: Record<string, string[]> = {
 };
 
 // Performance score interpretations
-export const PERFORMANCE_SCORE_INTERPRETATIONS: Record<PerformanceScoreType, {
+export const PERFORMANCE_SCORE_INTERPRETATIONS: Record<string, {
   label: string;
   description: string;
   treatmentRecommendation: string;

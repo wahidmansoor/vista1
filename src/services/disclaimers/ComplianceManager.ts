@@ -37,9 +37,8 @@ export class ComplianceManager {
       );
     } catch (error) {
       await this.auditLogger.logError(
-        error as Error,
-        LogCategory.COMPLIANCE,
-        { disclaimerId, record }
+        'Failed to update compliance record',
+        error
       );
       throw error;
     }

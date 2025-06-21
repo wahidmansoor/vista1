@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { MessageSquare, Loader2 } from 'lucide-react';
 import type { AIResponse } from './types';
 
-export function ResponseRenderer({ response }: { response: AIResponse }): JSX.Element {
+export function ResponseRenderer({ response }: { response: AIResponse }): React.JSX.Element {
   if (response.loading) {
     return (
       <div className="flex items-center gap-2 text-gray-600 animate-pulse p-4">

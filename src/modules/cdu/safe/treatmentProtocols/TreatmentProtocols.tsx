@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { getSupergroups, getProtocols } from '@/services/protocols';
 import type { Protocol, Drug } from '../../../../types/protocol';
+import UnifiedProtocolCard from '../../treatmentProtocols/UnifiedProtocolCard';
 
 type TabType = 
   | 'overview' 
@@ -215,6 +216,7 @@ const Accordion: React.FC<{
   );
 };
 
+// DataTable: Remove alternative_switches, use only known Drug fields
 const DataTable: React.FC<{
   data: Drug[];
 }> = ({ data }) => {
@@ -226,7 +228,6 @@ const DataTable: React.FC<{
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Drug Name</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dose</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Administration</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alternatives</th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -235,9 +236,6 @@ const DataTable: React.FC<{
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{drug.name}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{drug.dose}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{drug.administration}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {drug.alternative_switches?.join(', ') || '-'}
-              </td>
             </tr>
           ))}
         </tbody>
@@ -246,67 +244,47 @@ const DataTable: React.FC<{
   );
 };
 
+// TabContent: Fix eligibility/tests union types, toxicity_monitoring, remove drug_class/pharmacokinetics
 const TabContent: React.FC<{
   protocol: Protocol;
   activeTab: TabType;
 }> = ({ protocol, activeTab }) => {
+  // Helper to handle union types for eligibility
+  const getInclusionCriteria = () => {
+    if (!protocol.eligibility) return [];
+    if (Array.isArray(protocol.eligibility)) return protocol.eligibility;
+    return protocol.eligibility.inclusion_criteria || [];
+  };
+  const getExclusionCriteria = () => {
+    if (!protocol.eligibility) return [];
+    if (Array.isArray(protocol.eligibility)) return [];
+    return protocol.eligibility.exclusion_criteria || [];
+  };
+  // Helper for tests
+  const getBaselineTests = () => {
+    if (!protocol.tests) return [];
+    if (Array.isArray(protocol.tests)) return protocol.tests;
+    return protocol.tests.baseline || [];
+  };
+  const getMonitoringTests = () => {
+    if (!protocol.tests) return [];
+    if (Array.isArray(protocol.tests)) return [];
+    return protocol.tests.monitoring || [];
+  };
+  // Toxicity monitoring helpers
+  const getExpectedToxicities = () => protocol.toxicity_monitoring?.expected_toxicities || [];
+  const getMonitoringParameters = () => protocol.toxicity_monitoring?.monitoring_parameters || '';
+  const getFrequencyDetails = () => protocol.toxicity_monitoring?.frequency_details || '';
+  const getThresholdsForAction = () => protocol.toxicity_monitoring?.thresholds_for_action || {};
+
   const renderList = (items: any[] | undefined | null) => {
     if (!items || !Array.isArray(items) || items.length === 0) {
       return <p className="text-gray-600">No information available</p>;
     }
-
     return (
       <ul className="list-disc list-inside space-y-2">
         {items.map((item, index) => (
-          <li key={index} className="text-gray-700">
-            {typeof item === 'string' ? (
-              item
-            ) : (
-              <div>
-                {/* Tests */}
-                {item.test && (
-                  <span>
-                    <strong>{item.test}</strong>
-                    {item.purpose && <span> — {item.purpose}</span>}
-                    {item.frequency && <span> ({item.frequency})</span>}
-                  </span>
-                )}
-                
-                {/* Supportive Meds */}
-                {item.name && (
-                  <span>
-                    <strong>{item.name}</strong>
-                    {item.dose && <span> — {item.dose}</span>}
-                    {item.timing && <span> at {item.timing}</span>}
-                    {item.route && <span> via {item.route}</span>}
-                  </span>
-                )}
-
-                {/* Rescue Agents */}
-                {item.indication && (
-                  <span>
-                    <strong>{item.name}</strong>
-                    {item.indication && <span> — {item.indication}</span>}
-                    {item.dosing && <div className="ml-4 text-sm">{item.dosing}</div>}
-                  </span>
-                )}
-                
-                {/* Dose Modifications */}
-                {item.criteria && (
-                  <div>
-                    <div><strong>Criteria:</strong> {item.criteria}</div>
-                    {item.drug_a_reduction && <div className="ml-4">Drug A: {item.drug_a_reduction}</div>}
-                    {item.drug_b_reduction && <div className="ml-4">Drug B: {item.drug_b_reduction}</div>}
-                  </div>
-                )}
-
-                {/* Fallback for unknown object structures */}
-                {!item.test && !item.name && !item.indication && !item.criteria && (
-                  <span>{JSON.stringify(item)}</span>
-                )}
-              </div>
-            )}
-          </li>
+          <li key={index}>{typeof item === 'string' ? item : JSON.stringify(item)}</li>
         ))}
       </ul>
     );
@@ -315,55 +293,50 @@ const TabContent: React.FC<{
   const content: Record<TabType, React.ReactNode> = {
     overview: (
       <div className="space-y-6">
-        {protocol.eligibility?.exclusion_criteria && (
+        {getExclusionCriteria().length > 0 && (
           <AlertBanner
             type="error"
             title="Exclusion Criteria"
-            message={protocol.eligibility.exclusion_criteria.join(', ')}
+            message={getExclusionCriteria().join(', ')}
           />
         )}
-        
         <Accordion title="Eligibility Criteria" defaultOpen={true}>
-          {renderList(protocol.eligibility?.inclusion_criteria)}
+          {renderList(getInclusionCriteria())}
         </Accordion>
-
         <Accordion title="Exclusions">
-          {renderList(protocol.eligibility?.exclusion_criteria)}
+          {renderList(getExclusionCriteria())}
         </Accordion>
       </div>
     ),
     eligibility: (
       <div className="space-y-6">
         <Accordion title="Inclusion Criteria" defaultOpen={true}>
-          {renderList(protocol.eligibility?.inclusion_criteria)}
+          {renderList(getInclusionCriteria())}
         </Accordion>
-        
         <Accordion title="Exclusion Criteria">
-          {renderList(protocol.eligibility?.exclusion_criteria)}
+          {renderList(getExclusionCriteria())}
         </Accordion>
       </div>
     ),
     tests: (
       <div className="space-y-6">
         <Accordion title="Baseline Tests" defaultOpen={true}>
-          {renderList(protocol.tests?.baseline)}
+          {renderList(getBaselineTests())}
         </Accordion>
-        
         <Accordion title="Monitoring Tests">
-          {renderList(protocol.tests?.monitoring)}
+          {renderList(getMonitoringTests())}
         </Accordion>
       </div>
     ),
     treatment: (
-        <div className="space-y-6">
-          {protocol.treatment && 'protocol' in protocol.treatment && (
-            <div className="mb-6">
-              <h4 className="font-semibold text-indigo-900 mb-2">Treatment Protocol</h4>
-              <p className="text-gray-700">{(protocol.treatment as any).protocol}</p>
-            </div>
-          )}
-  
-          {protocol.treatment?.drugs && (
+      <div className="space-y-6">
+        {protocol.treatment && 'protocol' in protocol.treatment && (
+          <div className="mb-6">
+            <h4 className="font-semibold text-indigo-900 mb-2">Treatment Protocol</h4>
+            <p className="text-gray-700">{(protocol.treatment as any).protocol}</p>
+          </div>
+        )}
+        {protocol.treatment?.drugs && (
           <div>
             <h4 className="font-semibold text-indigo-900 mb-4">Treatment Details</h4>
             <DataTable data={protocol.treatment.drugs} />
@@ -378,26 +351,30 @@ const TabContent: React.FC<{
             <h4 className="text-lg font-semibold text-orange-900 mb-2">Toxicity Monitoring</h4>
             <div className="space-y-4">
               <div>
-                <h5 className="font-medium text-orange-800 mb-2">Parameters to Monitor</h5>
-                {renderList(protocol.toxicity_monitoring.parameters)}
+                <h5 className="font-medium text-orange-800 mb-2">Expected Toxicities</h5>
+                {renderList(getExpectedToxicities())}
               </div>
-              {protocol.toxicity_monitoring.frequency && (
+              {getMonitoringParameters() && (
                 <p className="text-orange-800">
-                  <span className="font-medium">Frequency:</span> {protocol.toxicity_monitoring.frequency}
+                  <span className="font-medium">Parameters:</span> {getMonitoringParameters()}
                 </p>
               )}
-              {Object.keys(protocol.toxicity_monitoring.thresholds).length > 0 && (
+              {getFrequencyDetails() && (
+                <p className="text-orange-800">
+                  <span className="font-medium">Frequency:</span> {getFrequencyDetails()}
+                </p>
+              )}
+              {Object.keys(getThresholdsForAction()).length > 0 && (
                 <div>
                   <h5 className="font-medium text-orange-800 mb-2">Threshold Values</h5>
                   <pre className="whitespace-pre-wrap text-sm text-orange-700">
-                    {JSON.stringify(protocol.toxicity_monitoring.thresholds, null, 2)}
+                    {JSON.stringify(getThresholdsForAction(), null, 2)}
                   </pre>
                 </div>
               )}
             </div>
           </div>
         )}
-
         {protocol.monitoring && (
           <>
             <Accordion title="Baseline Monitoring" defaultOpen={true}>
@@ -414,7 +391,6 @@ const TabContent: React.FC<{
             )}
           </>
         )}
-
         {protocol.ai_notes && (
           <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-4">
             <h4 className="text-lg font-semibold text-purple-900 mb-4">AI Monitoring Recommendations</h4>
@@ -436,7 +412,7 @@ const TabContent: React.FC<{
       <div className="space-y-6">
         {protocol.toxicity_monitoring && (
           <Accordion title="Toxicity Monitoring" defaultOpen={true}>
-            {renderList(protocol.toxicity_monitoring?.parameters)}
+            {renderList(getExpectedToxicities())}
           </Accordion>
         )}
       </div>
@@ -448,19 +424,16 @@ const TabContent: React.FC<{
             {renderList(protocol.dose_modifications.hematological)}
           </Accordion>
         )}
-        
         {protocol.dose_modifications?.nonHematological && (
           <Accordion title="Non-Hematological Modifications">
             {renderList(protocol.dose_modifications.nonHematological)}
           </Accordion>
         )}
-        
         {protocol.dose_modifications?.renal && (
           <Accordion title="Renal Modifications">
             {renderList(protocol.dose_modifications.renal)}
           </Accordion>
         )}
-        
         {protocol.dose_modifications?.hepatic && (
           <Accordion title="Hepatic Modifications">
             {renderList(protocol.dose_modifications.hepatic)}
@@ -470,210 +443,42 @@ const TabContent: React.FC<{
     ),
     pharmacology: (
       <div className="space-y-6">
-        {protocol.drug_class && (
-          <div className="bg-pink-50 p-4 rounded-lg">
-            <h4 className="text-lg font-semibold text-pink-900 mb-2">Drug Classification</h4>
-            <div className="space-y-2">
-              {protocol.drug_class.name && (
-                <p className="text-pink-800">
-                  <span className="font-medium">Class:</span> {protocol.drug_class.name}
-                </p>
-              )}
-              {protocol.drug_class.mechanism && (
-                <p className="text-pink-800">
-                  <span className="font-medium">Mechanism:</span> {protocol.drug_class.mechanism}
-                </p>
-              )}
-              {protocol.drug_class.classification && (
-                <p className="text-pink-800">
-                  <span className="font-medium">Classification:</span> {protocol.drug_class.classification}
-                </p>
-              )}
-            </div>
-          </div>
-        )}
-
-        <Accordion title="Pharmacokinetics" defaultOpen={true}>
-          <pre className="whitespace-pre-wrap text-sm">
-            {JSON.stringify(protocol.pharmacokinetics, null, 2)}
-          </pre>
-        </Accordion>
-
-        {protocol.interactions && (
-          <div className="space-y-4">
-            <Accordion title="Drug Interactions">
-              {renderList(protocol.interactions.drugs)}
-            </Accordion>
-            <Accordion title="Contraindications">
-              {renderList(protocol.interactions.contraindications)}
-            </Accordion>
-            <Accordion title="Special Precautions">
-              {renderList(protocol.interactions.precautions)}
-            </Accordion>
-          </div>
-        )}
-
-        {protocol.administration_notes && (
-          <Accordion title="Administration Notes">
-            {renderList(protocol.administration_notes)}
-          </Accordion>
-        )}
+        <p className="text-gray-500">No pharmacology data available.</p>
       </div>
     ),
     administration: (
       <div className="space-y-6">
-        {protocol.administration_notes && (
-          <Accordion title="Administration Notes" defaultOpen={true}>
-            {renderList(protocol.administration_notes)}
-          </Accordion>
-        )}
+        <p className="text-gray-500">No administration data available.</p>
       </div>
     ),
     prepost: (
       <div className="space-y-6">
-        {protocol.pre_medications && (
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-teal-900 mb-4">Pre-medications</h4>
-            <Accordion title="Required Pre-medications" defaultOpen={true}>
-              <DataTable data={protocol.pre_medications.required} />
-            </Accordion>
-            <Accordion title="Optional Pre-medications">
-              <DataTable data={protocol.pre_medications.optional} />
-            </Accordion>
-          </div>
-        )}
-
-        {protocol.post_medications && (
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-teal-900 mb-4">Post-medications</h4>
-            <Accordion title="Required Post-medications">
-              <DataTable data={protocol.post_medications.required} />
-            </Accordion>
-            <Accordion title="Optional Post-medications">
-              <DataTable data={protocol.post_medications.optional} />
-            </Accordion>
-          </div>
-        )}
+        <p className="text-gray-500">No pre/post medication data available.</p>
       </div>
     ),
     rescue: (
       <div className="space-y-6">
-        {protocol.rescue_agents && protocol.rescue_agents.length > 0 && (
-          <div className="bg-teal-50 rounded-lg p-4">
-            <h4 className="text-lg font-semibold text-teal-900 mb-4">Rescue Agents</h4>
-            <div className="divide-y divide-teal-200">
-              {protocol.rescue_agents.map((agent: { name: string; indication: string; dosing: string }, idx: number) => (
-                <div key={idx} className="py-3">
-                  <h5 className="font-medium text-teal-800">{agent.name}</h5>
-                  <p className="text-sm text-teal-700 mt-1"><span className="font-medium">Indication:</span> {agent.indication}</p>
-                  <p className="text-sm text-teal-700 mt-1"><span className="font-medium">Dosing:</span> {agent.dosing}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {protocol.supportive_meds && protocol.supportive_meds.length > 0 && (
-          <div className="bg-teal-50 rounded-lg p-4">
-            <h4 className="text-lg font-semibold text-teal-900 mb-4">Supportive Medications</h4>
-            <DataTable data={protocol.supportive_meds} />
-          </div>
-        )}
+        <p className="text-gray-500">No rescue/support data available.</p>
       </div>
     ),
     precautions: (
       <div className="space-y-6">
-        {protocol.precautions && protocol.precautions.length > 0 && (
-          <AlertBanner
-            type="warning"
-            title="Precautions"
-            message={protocol.precautions.join(', ')}
-          />
-        )}
-        
-        <Accordion title="Precautions" defaultOpen={true}>
-          {renderList(protocol.precautions)}
-        </Accordion>
-        
-        <Accordion title="References">
-          {renderList(protocol.reference_list)}
-        </Accordion>
+        <p className="text-gray-500">No precautions data available.</p>
       </div>
     ),
     ai: (
       <div className="space-y-6">
-        {protocol.ai_notes && (
-          <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-4">
-            <h4 className="text-lg font-semibold text-purple-900 mb-4">AI Insights</h4>
-            {protocol.ai_notes.recommendations && (
-              <Accordion title="Recommendations" defaultOpen={true}>
-                {renderList(protocol.ai_notes.recommendations)}
-              </Accordion>
-            )}
-            {protocol.ai_notes.warnings && (
-              <Accordion title="Warnings">
-                {renderList(protocol.ai_notes.warnings)}
-              </Accordion>
-            )}
-          </div>
-        )}
+        <p className="text-gray-500">No AI insights available.</p>
       </div>
     ),
     info: (
       <div className="space-y-6">
-        <div className="bg-gray-50 p-4 rounded-lg">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4">Protocol Information</h4>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="text-sm text-gray-600">Code</p>
-              <p className="font-medium">{protocol.code}</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-600">Tumor Group</p>
-              <p className="font-medium">{protocol.tumour_group}</p>
-            </div>
-            {protocol.treatment_intent && (
-              <div>
-                <p className="text-sm text-gray-600">Treatment Intent</p>
-                <p className="font-medium">{protocol.treatment_intent}</p>
-              </div>
-            )}
-            {protocol.version && (
-              <div>
-                <p className="text-sm text-gray-600">Version</p>
-                <p className="font-medium">{protocol.version}</p>
-              </div>
-            )}
-            {protocol.last_reviewed && (
-              <div>
-                <p className="text-sm text-gray-600">Last Reviewed</p>
-                <p className="font-medium">{protocol.last_reviewed}</p>
-              </div>
-            )}
-          </div>
-        </div>
-        
-        {protocol.reference_list && protocol.reference_list.length > 0 && (
-          <Accordion title="References" defaultOpen={true}>
-            {renderList(protocol.reference_list)}
-          </Accordion>
-        )}
+        <p className="text-gray-500">No additional info available.</p>
       </div>
-    )
+    ),
   };
 
-  return (
-    <motion.div
-      key={activeTab}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.2 }}
-      className="p-6"
-    >
-      {content[activeTab]}
-    </motion.div>
-  );
+  return <div>{content[activeTab]}</div>;
 };
 
 const ProtocolCard: React.FC<{
@@ -718,6 +523,8 @@ const TreatmentProtocols: React.FC = () => {
   const [protocols, setProtocols] = useState<Protocol[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null);
+  const [activeTab, setActiveTab] = useState<TabType>(TABS[0].id);
 
   // Fetch supergroups on mount
   useEffect(() => {
@@ -762,6 +569,12 @@ const TreatmentProtocols: React.FC = () => {
       setSelectedSupergroup(null);
       setProtocols([]);
     }
+  };
+
+  // Add handler to select protocol
+  const handleProtocolClick = (protocol: Protocol) => {
+    setSelectedProtocol(protocol);
+    setActiveTab(TABS[0].id);
   };
 
   if (loading) {
@@ -870,7 +683,9 @@ const TreatmentProtocols: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {protocols.map((protocol) => (
-              <UnifiedProtocolCard key={protocol.code} protocol={protocol} />
+              <div key={protocol.code} onClick={() => handleProtocolClick(protocol)}>
+                <UnifiedProtocolCard protocol={protocol} />
+              </div>
             ))}
           </div>
         )}

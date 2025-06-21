@@ -32,7 +32,10 @@ import {
   PatientProfile,
   TreatmentRecommendation,
   ProtocolMatch,
-  TreatmentMatchRequest
+  TreatmentMatchRequest,
+  DetailedEligibilityStatus,
+  EligibilityViolation,
+  ProtocolModification
 } from '@/types/medical';
 import { useProtocolMatcher, useProtocolComparison } from '@/hooks/useProtocolMatcher';
 
@@ -82,8 +85,16 @@ const getConfidenceStyles = (level: string) => {
 /**
  * Eligibility status styling
  */
-const getEligibilityStyles = (status: string) => {
-  switch (status) {
+const getEligibilityStyles = (status: string | DetailedEligibilityStatus) => {
+  let statusString: string;
+  
+  if (typeof status === 'string') {
+    statusString = status;
+  } else {
+    statusString = status.eligible ? 'eligible' : 'ineligible';
+  }
+  
+  switch (statusString) {
     case 'eligible':
       return { 
         icon: CheckCircle, 
@@ -196,9 +207,8 @@ export const TreatmentRecommendationEngine: React.FC<TreatmentRecommendationEngi
                   {recommendation.confidence_level.replace('_', ' ')}
                 </Badge>
                 <div className={`flex items-center gap-1 ${eligibility.color}`}>
-                  <EligibilityIcon className="w-4 h-4" />
-                  <span className="text-sm font-medium">
-                    {recommendation.eligibility_status.replace('_', ' ')}
+                  <EligibilityIcon className="w-4 h-4" />                  <span className="text-sm font-medium">
+                    {recommendation.eligibility_status.eligible ? 'eligible' : 'ineligible'}
                   </span>
                 </div>
               </div>
@@ -271,8 +281,7 @@ export const TreatmentRecommendationEngine: React.FC<TreatmentRecommendationEngi
                 <h5 className="font-medium text-blue-900 dark:text-blue-100 mb-2">
                   Recommended Modifications:
                 </h5>
-                <div className="space-y-1">
-                  {recommendation.recommended_modifications.map((mod, index) => (
+                <div className="space-y-1">                  {recommendation.recommended_modifications.map((mod, index) => (
                     <div key={index} className="text-sm">
                       <span className="font-medium">{mod.parameter}:</span> {mod.modification}
                       <span className="text-gray-600 dark:text-gray-400 ml-2">
@@ -348,10 +357,9 @@ export const TreatmentRecommendationEngine: React.FC<TreatmentRecommendationEngi
 
             {match.eligibility_assessment.violations.length > 0 && (
               <div className="text-sm">
-                <strong>Issues:</strong>
-                <ul className="list-disc list-inside mt-1 text-gray-600 dark:text-gray-400">
+                <strong>Issues:</strong>                <ul className="list-disc list-inside mt-1 text-gray-600 dark:text-gray-400">
                   {match.eligibility_assessment.violations.map((violation, index) => (
-                    <li key={index}>{violation}</li>
+                    <li key={index}>{violation.criterion}: {violation.patient_value} (required: {violation.required_value})</li>
                   ))}
                 </ul>
               </div>

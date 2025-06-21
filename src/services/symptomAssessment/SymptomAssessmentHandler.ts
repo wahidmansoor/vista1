@@ -54,7 +54,7 @@ export class SymptomAssessmentHandler {
             symptoms: result.symptoms.filter(s => s.severity.requiresImmediate)
           },
           timestamp: result.timestamp,
-          status: 'PENDING',
+          status: 'pending',
           patientId: input.patientId,
           response: {
             status: 'PENDING',

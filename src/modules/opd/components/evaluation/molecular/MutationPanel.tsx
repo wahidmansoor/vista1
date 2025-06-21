@@ -32,7 +32,12 @@ interface MutationPanelProps {
   showTherapeuticImplications?: boolean;
 }
 
-const CANCER_MUTATION_PANELS = {
+const CANCER_MUTATION_PANELS: Record<CancerType, Array<{
+  gene: string;
+  significance: 'high' | 'medium' | 'low';
+  frequency: number;
+  actionable: boolean;
+}>> = {
   breast: [
     { gene: 'TP53', significance: 'high', frequency: 60, actionable: false },
     { gene: 'PIK3CA', significance: 'high', frequency: 45, actionable: true },
@@ -66,7 +71,24 @@ const CANCER_MUTATION_PANELS = {
     { gene: 'APC', significance: 'medium', frequency: 80, actionable: false },
     { gene: 'FBXW7', significance: 'low', frequency: 15, actionable: false },
     { gene: 'SMAD4', significance: 'low', frequency: 20, actionable: false }
-  ]
+  ],
+  prostate: [],
+  ovarian: [],
+  gastric: [],
+  pancreatic: [],
+  lymphoma: [],
+  head_neck: [],
+  bladder: [],
+  liver: [],
+  kidney: [],
+  cervical: [],
+  endometrial: [],
+  leukemia: [],
+  sarcoma: [],
+  brain: [],
+  thyroid: [],
+  melanoma: [],
+  testicular: []
 };
 
 const THERAPEUTIC_IMPLICATIONS = {
@@ -118,12 +140,14 @@ export function MutationPanel({
   const updateMutation = (gene: string, field: string, value: any) => {
     if (isReadOnly) return;
 
+    const currentGeneData = mutations.tested?.[gene] || { status: 'pending' as const };
+    
     const updatedMutations = {
       ...mutations,
       tested: {
         ...mutations.tested,
         [gene]: {
-          ...mutations.tested?.[gene],
+          ...currentGeneData,
           [field]: value
         }
       }

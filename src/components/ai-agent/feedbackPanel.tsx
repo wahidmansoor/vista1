@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ThumbsUp, ThumbsDown } from 'lucide-react';
 
-export function FeedbackPanel({ onFeedback }: { onFeedback: (isPositive: boolean) => void }): JSX.Element {
+export function FeedbackPanel({ onFeedback }: { onFeedback: (isPositive: boolean) => void }): React.JSX.Element {
   const [hasFeedback, setHasFeedback] = useState(false);
   const [feedbackValue, setFeedbackValue] = useState<boolean | null>(null);
 

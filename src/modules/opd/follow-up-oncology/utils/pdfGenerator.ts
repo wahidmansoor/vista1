@@ -5,15 +5,18 @@ export const generatePDF = async (
   options: { filename: string }
 ): Promise<void> => {
   try {
-    const { toPDF } = await import('html2canvas');
-    const pdf = await toPDF(element, {
-      margin: [10, 10, 10, 10],
-      filename: options.filename,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    });
-    return pdf;
+    const html2canvas = (await import('html2canvas')).default;
+    const jsPDF = (await import('jspdf')).default;
+    
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL('image/png');
+    
+    const pdf = new jsPDF('portrait', 'mm', 'a4');
+    const imgWidth = 210;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    
+    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    pdf.save(options.filename);
   } catch (error) {
     console.error('PDF generation failed:', error);
     throw new Error('Failed to generate PDF');

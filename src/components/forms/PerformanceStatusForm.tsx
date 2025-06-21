@@ -17,11 +17,11 @@ interface PerformanceStatusFormProps {
   errors?: Record<string, string>;
 }
 
-export const PerformanceStatusForm: React.FC<PerformanceStatusFormProps> = ({
+export const PerformanceStatusForm: React.FC<PerformanceStatusFormProps> = function PerformanceStatusForm({
   performanceStatus,
   onUpdate,
   errors = {}
-}) => {
+}) {
   const [localErrors, setLocalErrors] = useState<Record<string, string>>({});
 
   const validateField = (field: string, value: string) => {
@@ -56,22 +56,35 @@ export const PerformanceStatusForm: React.FC<PerformanceStatusFormProps> = ({
     onUpdate(updatedStatus);
   };
 
-  const handleFunctionalStatusChange = (field: keyof FunctionalStatus, value: boolean | number | string[]) => {
-    const updatedFunctionalStatus = {
-      ...performanceStatus.functionalStatus,
-      [field]: value
-    } as FunctionalStatus;
-    
-    onUpdate({ ...performanceStatus, functionalStatus: updatedFunctionalStatus });
+const handleFunctionalStatusChange = (field: keyof FunctionalStatus, value: boolean | number | string[]) => {
+  const prev = performanceStatus.functionalStatus || {
+    independentLiving: false,
+    workCapacity: 0,
+    socialFunction: 1,
+    physicalLimitations: [],
+  };
+  const updatedFunctionalStatus: FunctionalStatus = {
+    ...prev,
+    [field]: value,
   };
 
+  onUpdate({ ...performanceStatus, functionalStatus: updatedFunctionalStatus });
+};
+
   const handleQualityOfLifeChange = (field: keyof QualityOfLife, value: number | string[]) => {
-    const updatedQualityOfLife = {
-      ...performanceStatus.qualityOfLife,
-      [field]: value
-    } as QualityOfLife;
-    
-    onUpdate({ ...performanceStatus, qualityOfLife: updatedQualityOfLife });
+const prev = performanceStatus.qualityOfLife || {
+  overallScore: 1,
+  painLevel: 1,
+  fatigueLevel: 1,
+  emotionalWellbeing: 1,
+  concerns: [],
+};
+const updatedQualityOfLife: QualityOfLife = {
+  ...prev,
+  [field]: value,
+};
+
+onUpdate({ ...performanceStatus, qualityOfLife: updatedQualityOfLife });
   };
 
   const fieldError = (field: string) => errors[field] || localErrors[field];

@@ -26,7 +26,6 @@ const ANCCalculator = lazy(() => import("@/modules/tools/calculators/ANC"));
 
 // Additional lazy loading for large components to optimize bundle size
 const PsychosocialCare = lazy(() => import("@/modules/palliative/sections/psychosocial_support/PsychosocialCare"));
-const EnhancedDiseaseProgressTracker = lazy(() => import("@/components/EnhancedDiseaseProgressTracker").then(module => ({ default: module.EnhancedDiseaseProgressTracker })));
 const TreatmentProtocols = lazy(() => import("@/modules/cdu/treatmentProtocols/TreatmentProtocols"));
 
 import type { ReactElement } from 'react';

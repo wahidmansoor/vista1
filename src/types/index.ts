@@ -1,2 +1,3 @@
 export * from './protocol';
-export * from './medications'; // Add others as needed
+export * from './diseaseProgress.types';
+// export * from './medications'; // Remove to avoid duplicate Medication export

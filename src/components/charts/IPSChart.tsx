@@ -26,11 +26,10 @@ import {
             <YAxis type="category" dataKey="range" />
             <Tooltip formatter={(value) => `${value}%`} />
             <Bar dataKey="os" fill="#3b82f6">
-              <LabelList dataKey="os" position="right" formatter={(val) => `${val}%`} />
+<LabelList dataKey="os" position="right" formatter={(val: number) => `${val}%`} />
             </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
     );
   }
-  

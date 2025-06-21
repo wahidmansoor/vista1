@@ -1,5 +1,5 @@
 // src/services/protocols.ts
-import { supabase } from '@/lib/supabaseClient';
+import supabase from '@/lib/supabaseClient';
 import { Protocol, parseJsonSafe } from '@/types/protocolUpdated';
 
 interface DatabaseProtocol {

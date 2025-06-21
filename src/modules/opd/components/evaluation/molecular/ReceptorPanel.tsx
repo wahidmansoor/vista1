@@ -36,7 +36,7 @@ interface ReceptorInfo {
   };
 }
 
-const receptorConfigs: Record<CancerType, Record<string, ReceptorInfo>> = {
+const receptorConfigs: Partial<Record<CancerType, Record<string, ReceptorInfo>>> = {
   breast: {
     er: {
       name: 'ER',
@@ -92,9 +92,8 @@ const receptorConfigs: Record<CancerType, Record<string, ReceptorInfo>> = {
         negative: '<10% nuclear staining'
       }
     }
-  },
-  // Add more cancer types as needed
-} as Record<CancerType, Record<string, ReceptorInfo>>;
+  }
+};
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -177,7 +176,8 @@ export const ReceptorPanel: React.FC<ReceptorPanelProps> = ({
     const scores: Record<string, number> = {};
     receptorKeys.forEach(key => {
       const receptor = value[key as keyof ReceptorStatus];
-      if (receptor?.percentage && receptor?.intensity) {
+      if (receptor && 'percentage' in receptor && 'intensity' in receptor && 
+          receptor.percentage && receptor.intensity) {
         scores[key] = calculateHScore(receptor.percentage, receptor.intensity);
       }
     });
@@ -214,9 +214,15 @@ export const ReceptorPanel: React.FC<ReceptorPanelProps> = ({
   
   const renderReceptorCard = (receptorKey: string, receptorInfo: ReceptorInfo) => {
     const receptor = value[receptorKey as keyof ReceptorStatus] || {};
-    const statusConfig = getStatusColor(receptor.status || 'unknown');
+    const receptorStatus = 'status' in receptor ? receptor.status : undefined;
+    const statusConfig = getStatusColor(receptorStatus || 'unknown');
     const hScore = calculatedScores[receptorKey];
     const hScoreInterpretation = hScore ? interpretHScore(hScore) : null;
+    
+    // Type guards for different receptor types
+    const hasPercentage = 'percentage' in receptor;
+    const hasIntensity = 'intensity' in receptor;
+    const hasNotes = 'notes' in receptor;
     
     return (
       <Card key={receptorKey} className="w-full">
@@ -227,12 +233,12 @@ export const ReceptorPanel: React.FC<ReceptorPanelProps> = ({
               <span>{receptorInfo.fullName} ({receptorInfo.name})</span>
             </div>
             
-            {receptor.status && (
+            {receptorStatus && (
               <Badge 
                 variant="outline" 
                 className={cn('text-xs', statusConfig.color, statusConfig.bg)}
               >
-                {receptor.status}
+                {receptorStatus}
               </Badge>
             )}
           </CardTitle>
@@ -246,7 +252,7 @@ export const ReceptorPanel: React.FC<ReceptorPanelProps> = ({
           <div className="space-y-2">
             <label className="text-sm font-medium">Status</label>
             <Select
-              value={receptor.status || ''}
+              value={receptorStatus || ''}
               onValueChange={(val) => handleReceptorChange(receptorKey, 'status', val)}
               disabled={disabled}
             >
@@ -262,8 +268,8 @@ export const ReceptorPanel: React.FC<ReceptorPanelProps> = ({
             </Select>
           </div>
           
-          {/* Percentage and Intensity for positive cases */}
-          {receptor.status === 'positive' && (
+          {/* Percentage and Intensity for positive cases - only for ER/PR */}
+          {receptorStatus === 'positive' && hasPercentage && hasIntensity && (
             <>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -344,7 +350,7 @@ export const ReceptorPanel: React.FC<ReceptorPanelProps> = ({
           </div>
           
           {/* Treatment Implications */}
-          {showTreatmentImplications && receptor.status === 'positive' && (
+          {showTreatmentImplications && receptorStatus === 'positive' && (
             <div className="space-y-2">
               <h5 className="text-xs font-medium text-gray-900">Targeted Therapies</h5>
               <div className="flex flex-wrap gap-1">
@@ -361,7 +367,7 @@ export const ReceptorPanel: React.FC<ReceptorPanelProps> = ({
           <div className="space-y-2">
             <label className="text-sm font-medium">Notes</label>
             <Textarea
-              value={receptor.notes || ''}
+              value={hasNotes && typeof receptor.notes === 'string' ? receptor.notes : ''}
               onChange={(e) => handleNotesChange(receptorKey, e.target.value)}
               placeholder={`Additional findings for ${receptorInfo.name}...`}
               disabled={disabled}

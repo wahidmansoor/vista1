@@ -120,7 +120,7 @@ export const TreatmentHistoryForm: React.FC<TreatmentHistoryFormProps> = ({
   };
 
   const handleDosageModificationAdd = (treatmentIndex: number) => {
-    const newModification: DosageModification = {
+const newModification = {
       date: new Date().toISOString().split('T')[0],
       reason: '',
       oldDose: '',
@@ -146,7 +146,7 @@ export const TreatmentHistoryForm: React.FC<TreatmentHistoryFormProps> = ({
   };
 
   const handleToxicityAdd = (treatmentIndex: number) => {
-    const newToxicity: Toxicity = {
+const newToxicity = {
       type: '',
       grade: 1,
       onset: new Date().toISOString().split('T')[0],

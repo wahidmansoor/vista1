@@ -33,13 +33,10 @@ export class LabInterpreter implements ILabInterpreter {
     patientFactors?: PatientFactors
   ): Promise<LabInterpretation> {
     try {
-      const input: LabAssessmentInput = {
-        type: 'LAB_INTERPRETATION',
-        panelId: panel.id,
-        timestamp: new Date().toISOString()
-      };
-      
-      await this.auditLogger.logAssessmentStart(input);
+      await this.auditLogger.logAssessmentStart({
+        patientId: 'unknown',
+        symptoms: []
+      });
 
       // Core analysis steps
       const trends = await this.analyzeTrends(panel, patientFactors?.previousPanels || []);
@@ -58,14 +55,15 @@ export class LabInterpreter implements ILabInterpreter {
         timestamp: new Date().toISOString()
       };
 
-      const result: LabAssessmentResult = {
-        type: 'LAB_INTERPRETATION',
-        panelId: panel.id,
+      await this.auditLogger.logAssessmentComplete({
+        symptoms: [],
+        trends: [],
+        recommendations: [],
+        requiresMedicalAttention: criticalValues.length > 0,
         timestamp: interpretation.timestamp,
-        hasCriticalValues: criticalValues.length > 0
-      };
-
-      await this.auditLogger.logAssessmentComplete(result);
+        triageLevel: criticalValues.length > 0 ? 'urgent' : 'routine',
+        educationalResources: []
+      });
       return interpretation;
 
     } catch (error) {

@@ -1,5 +1,5 @@
 export const confirmContinue = (language: string = 'en'): string => {
-  const translations = {
+  const translations: { [key: string]: string; en: string; de: string } = {
     en: 'Continue to iterate?',
     de: 'Weiter iterieren?'
   };

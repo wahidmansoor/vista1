@@ -17,7 +17,7 @@ import {
   AlertOctagon,
   LifeBuoy
 } from 'lucide-react';
-import { getSupabase } from '@/lib/supabaseClient';
+import { supabase } from '../../../lib/supabaseClient';
 
 // Enhanced TypeScript interface for comprehensive screening guidelines
 interface ScreeningGuideline {
@@ -637,7 +637,7 @@ const CancerScreening: React.FC = () => {
         setLoading(true);
         setError(null);
         
-        const supabase = getSupabase();
+        // Use the imported supabase client directly
         const { data, error: fetchError } = await supabase
           .from('screening_guidelines')
           .select('*')

@@ -416,7 +416,7 @@ export default function MedicationDetailModal({ medication, isOpen, onClose }: P
                         ))}
                       </ul>
                     </SubSection>
-                  )}                  {medication.monitoring?.parameters?.length > 0 && (
+                  )}                  {Array.isArray(medication.monitoring?.parameters) && medication.monitoring.parameters.length > 0 && (
                     <SubSection title="Parameters">
                       <ul className="list-disc list-inside space-y-1">
                         {medication.monitoring.parameters.map((param, index) => (
@@ -458,10 +458,10 @@ export default function MedicationDetailModal({ medication, isOpen, onClose }: P
                       </div>
                     </SubSection>
                   )}
-                  {medication.interactions?.precautions?.length > 0 && (
+                  {Array.isArray(medication.interactions?.precautions) && medication.interactions.precautions.length > 0 && (
                     <SubSection title="Precautions" variant="warning">
                       <ul className="list-disc list-inside space-y-1">
-                        {medication.interactions?.precautions?.map((precaution, index) => (
+                        {medication.interactions.precautions.map((precaution, index) => (
                           <li key={index} className="text-amber-700 dark:text-amber-300">
                             {precaution}
                           </li>
@@ -504,10 +504,10 @@ export default function MedicationDetailModal({ medication, isOpen, onClose }: P
                         {medication.special_considerations.hepatic}
                       </p>
                     </SubSection>
-                  )}                  {medication.special_considerations?.other?.length > 0 && (
+                  )}                  {Array.isArray(medication.special_considerations?.other) && medication.special_considerations.other.length > 0 && (
                     <SubSection title="Other Considerations">
                       <ul className="list-disc list-inside space-y-1">
-                        {medication.special_considerations?.other?.map((item, index) => (
+                        {medication.special_considerations.other.map((item, index) => (
                           <li key={index} className="text-gray-700 dark:text-gray-300">{item}</li>
                         ))}
                       </ul>

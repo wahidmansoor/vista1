@@ -8,7 +8,7 @@ import CDULayout from "./components/CDULayout";
 const TreatmentProtocols = lazy(() => import("./treatmentProtocols/TreatmentProtocols"));
 const ProtocolDetailPageContainer = lazy(() => import("./safe/treatmentProtocols/TreatmentProtocols"));
 const Toxicity = lazy(() => import("./toxicity/Toxicity"));
-const EnhancedDiseaseProgressTracker = lazy(() => import("./sections/EnhancedDiseaseProgressTracker"));
+const TreatmentPlanner = lazy(() => import("./sections/TreatmentPlanner"));
 const MedicationsView = lazy(() => import("./medications/MedicationsView"));
 
 /**
@@ -28,15 +28,14 @@ const TabLoadingSpinner = () => (
  * - Treatment Protocols: Standardized treatment regimens
  * - Medications: Medication database and interactions
  * - Toxicity: Side effect management and protocols
- * - Disease Progress: Enhanced patient disease tracking with AI recommendations
+ * - Treatment Planner: Cancer treatment protocol matching and planning
  */
 const CDU = () => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const TABS = [
+  const [selectedIndex, setSelectedIndex] = useState(0);  const TABS = [
     { id: 'treatment-protocols', label: 'Treatment Protocols', component: <TreatmentProtocols /> },
     { id: 'medications', label: 'Medications', component: <MedicationsView /> },
     { id: 'toxicity', label: 'Toxicity', component: <Toxicity /> },
-    { id: 'disease-progress', label: 'Disease Progress', component: <EnhancedDiseaseProgressTracker /> },
+    { id: 'treatment-planner', label: 'Treatment Planner', component: <TreatmentPlanner /> },
   ];
 
   return (

@@ -69,7 +69,7 @@ export const ProgressionAssessmentForm: React.FC<ProgressionAssessmentFormProps>
   };
 
   const handleTargetLesionAdd = () => {
-    const newLesion: TargetLesion = {
+const newLesion = {
       id: `lesion_${Date.now()}`,
       location: '',
       size: 0,
@@ -104,7 +104,7 @@ export const ProgressionAssessmentForm: React.FC<ProgressionAssessmentFormProps>
     handleResponseAssessmentChange('targetLesions', updatedLesions);
   };
   const handleAdverseEventAdd = () => {
-    const newEvent: AdverseEvent = {
+const newEvent: AdverseEvent = {
       event: '',
       grade: 1,
       startDate: new Date().toISOString().split('T')[0],

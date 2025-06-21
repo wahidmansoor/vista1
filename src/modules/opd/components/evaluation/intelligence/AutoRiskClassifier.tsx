@@ -124,8 +124,8 @@ export function AutoRiskClassifier({
   const [confidence, setConfidence] = useState(0);
   const [lastCalculated, setLastCalculated] = useState<Date | null>(null);
 
-  const cancerType = evaluation.cancerType || 'lung';
-  const algorithm = RISK_ALGORITHMS[cancerType] || RISK_ALGORITHMS.lung;
+  const cancerType = evaluation.cancer_type || 'lung';
+  const algorithm = RISK_ALGORITHMS[cancerType as keyof typeof RISK_ALGORITHMS] || RISK_ALGORITHMS.lung;
 
   const riskCategory: RiskCategory = useMemo(() => {
     const score = riskScore.overall;
@@ -224,21 +224,21 @@ export function AutoRiskClassifier({
           break;
 
         case 'ER Status':
-          const er = evaluation.molecularProfile?.receptors?.ER?.status;
+          const er = evaluation.molecularProfile?.receptors?.er?.status;
           value = er || 'unknown';
           contribution = er === 'negative' ? 0.8 : er === 'positive' ? 0.2 : 0.5;
           confidence = er ? 1.0 : 0.0;
           break;
 
         case 'PR Status':
-          const pr = evaluation.molecularProfile?.receptors?.PR?.status;
+          const pr = evaluation.molecularProfile?.receptors?.pr?.status;
           value = pr || 'unknown';
           contribution = pr === 'negative' ? 0.6 : pr === 'positive' ? 0.1 : 0.3;
           confidence = pr ? 1.0 : 0.0;
           break;
 
         case 'HER2 Status':
-          const her2 = evaluation.molecularProfile?.receptors?.HER2?.status;
+          const her2 = evaluation.molecularProfile?.receptors?.her2?.status;
           value = her2 || 'unknown';
           contribution = her2 === 'positive' ? 0.7 : her2 === 'negative' ? 0.3 : 0.5;
           confidence = her2 ? 1.0 : 0.0;
@@ -292,11 +292,14 @@ export function AutoRiskClassifier({
       recommendations.push({
         id: 'high-risk-monitoring',
         type: 'monitoring',
+        category: 'risk_management',
+        recommendation: 'Intensive Monitoring Required',
+        reasoning: 'Multiple high-risk factors identified',
+        confidence: 90,
+        evidenceLevel: '1A',
         priority: 'high',
         title: 'Intensive Monitoring Required',
         description: 'High-risk classification requires more frequent follow-ups and imaging',
-        reasoning: 'Multiple high-risk factors identified',
-        confidence: 0.9,
         evidence: 'Based on validated risk stratification algorithms',
         actionItems: [
           'Schedule follow-up every 3 months',
@@ -314,12 +317,15 @@ export function AutoRiskClassifier({
             if (factor.value === 'positive') {
               recommendations.push({
                 id: 'her2-targeted-therapy',
-                type: 'treatment',
+                type: 'therapeutic',
+                category: 'targeted_therapy',
+                recommendation: 'HER2-Targeted Therapy Indicated',
+                reasoning: 'HER2-positive status with high expression',
+                confidence: 95,
+                evidenceLevel: '1A',
                 priority: 'high',
                 title: 'HER2-Targeted Therapy Indicated',
                 description: 'Consider trastuzumab-based therapy regimens',
-                reasoning: 'HER2-positive status with high expression',
-                confidence: 0.95,
                 evidence: 'NCCN Guidelines Category 1',
                 actionItems: [
                   'Evaluate cardiac function before treatment',
@@ -334,12 +340,15 @@ export function AutoRiskClassifier({
             if (typeof factor.value === 'string' && factor.value.includes('mutation')) {
               recommendations.push({
                 id: 'egfr-targeted-therapy',
-                type: 'treatment',
+                type: 'therapeutic',
+                category: 'targeted_therapy',
+                recommendation: 'EGFR-Targeted Therapy Recommended',
+                reasoning: 'Actionable EGFR mutation detected',
+                confidence: 95,
+                evidenceLevel: '1A',
                 priority: 'high',
                 title: 'EGFR-Targeted Therapy Recommended',
                 description: 'First-line osimertinib therapy indicated',
-                reasoning: 'Actionable EGFR mutation detected',
-                confidence: 0.95,
                 evidence: 'FDA-approved indication',
                 actionItems: [
                   'Order T790M testing if progression',

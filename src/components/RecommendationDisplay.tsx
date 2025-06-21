@@ -150,7 +150,11 @@ export const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
             </div>
             <div>
               <span className="text-sm font-medium text-gray-700">Expected Response Rate:</span>
-              <p className="text-gray-900">{recommendation?.primaryRecommendation.protocol.responseRate ? formatPercent(recommendation.primaryRecommendation.protocol.responseRate) : 'N/A'}</p>
+<p className="text-gray-900">
+  {recommendation?.primaryRecommendation.protocol?.expectedOutcomes?.responseRate
+    ? recommendation.primaryRecommendation.protocol.expectedOutcomes.responseRate
+    : 'N/A'}
+</p>
             </div>
             <div>
               <span className="text-sm font-medium text-gray-700">Priority Score:</span>

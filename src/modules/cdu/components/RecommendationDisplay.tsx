@@ -322,12 +322,11 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
       <div className="min-h-[400px]">
         {activeTab === 'primary' && (
           <div className="space-y-6">
-            {renderProtocolCard(recommendation.primaryRecommendation, true)}
-            
+            {recommendation && renderProtocolCard(recommendation.primaryRecommendation, true)}
             <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg">
               <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Clinical Rationale</h3>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                {recommendation.rationaleExplanation}
+                {recommendation ? recommendation.rationaleExplanation : ''}
               </p>
             </div>
           </div>
@@ -341,8 +340,7 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
                 Additional protocols ranked by evidence and suitability
               </p>
             </div>
-            
-            {recommendation.alternativeRecommendations.length > 0 ? (
+            {recommendation && recommendation.alternativeRecommendations.length > 0 ? (
               recommendation.alternativeRecommendations.map((altRec, index) => (
                 <div key={index}>
                   {renderProtocolCard(altRec)}
@@ -363,7 +361,7 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
               <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-lg">
                 <h3 className="text-lg font-semibold text-green-800 dark:text-green-200 mb-4">Pre-treatment</h3>
                 <div className="space-y-3">
-                  {recommendation.monitoringPlan.pretreatment.map((item, index) => (
+                  {recommendation?.monitoringPlan?.pretreatment?.map((item, index) => (
                     <div key={index} className="p-3 bg-white dark:bg-gray-800 rounded border">
                       <div className="font-medium text-gray-800 dark:text-gray-200">{item.test}</div>
                       <div className="text-sm text-gray-600 dark:text-gray-400">{item.frequency}</div>
@@ -379,7 +377,7 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
               <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                 <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-4">During Treatment</h3>
                 <div className="space-y-3">
-                  {recommendation.monitoringPlan.duringTreatment.map((item, index) => (
+                  {recommendation?.monitoringPlan?.duringTreatment?.map((item, index) => (
                     <div key={index} className="p-3 bg-white dark:bg-gray-800 rounded border">
                       <div className="font-medium text-gray-800 dark:text-gray-200">{item.test}</div>
                       <div className="text-sm text-gray-600 dark:text-gray-400">{item.frequency}</div>
@@ -393,14 +391,14 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
             </div>
 
             {/* Emergency Guidelines */}
-            {recommendation.emergencyGuidelines.length > 0 && (
+            {(recommendation?.emergencyGuidelines?.length ?? 0) > 0 && (
               <div className="p-6 bg-red-50 dark:bg-red-900/20 rounded-lg border-l-4 border-red-400">
                 <h3 className="text-lg font-semibold text-red-800 dark:text-red-200 mb-4 flex items-center gap-2">
                   <AlertCircle className="w-5 h-5" />
                   Emergency Guidelines
                 </h3>
                 <div className="space-y-4">
-                  {recommendation.emergencyGuidelines.map((guideline, index) => (
+                  {recommendation?.emergencyGuidelines?.map((guideline, index) => (
                     <div key={index} className="p-4 bg-white dark:bg-gray-800 rounded">
                       <div className="font-medium text-gray-800 dark:text-gray-200 mb-2">{guideline.scenario}</div>
                       <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
@@ -427,7 +425,7 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
             </div>
             
             <div className="grid gap-4">
-              {recommendation.supportiveCare.map((care, index) => (
+              {recommendation?.supportiveCare?.map((care, index) => (
                 <div key={index} className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg border border-purple-200 dark:border-purple-700">
                   <div className="flex items-start justify-between">
                     <div>
@@ -448,14 +446,14 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
             </div>
 
             {/* Follow-up Plan */}
-            {recommendation.followUpPlan.schedule.length > 0 && (
+            {(recommendation?.followUpPlan?.schedule?.length ?? 0) > 0 && (
               <div className="p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
                   <Users className="w-5 h-5" />
                   Follow-up Schedule
                 </h3>
                 <div className="space-y-3">
-                  {recommendation.followUpPlan.schedule.map((visit, index) => (
+                  {recommendation?.followUpPlan?.schedule?.map((visit, index) => (
                     <div key={index} className="flex items-center justify-between p-3 bg-white dark:bg-gray-700 rounded border">
                       <div>
                         <div className="font-medium text-gray-800 dark:text-gray-200">{visit.timepoint}</div>

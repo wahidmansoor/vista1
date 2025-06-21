@@ -85,9 +85,8 @@ export class DisclaimerService {
       return disclaimer;
     } catch (error) {
       await this.auditLogger.logError(
-        error as Error,
-        LogCategory.COMPLIANCE,
-        { config, language, context }
+        'Failed to generate disclaimer',
+        error
       );
       throw error;
     }
@@ -137,13 +136,12 @@ export class DisclaimerService {
         "Acknowledge Disclaimer",
         { prompt: 0, completion: 0, total: 0 },
         0,
-        acknowledgment
+        acknowledgment as unknown as Record<string, unknown>
       );
     } catch (error) {
       await this.auditLogger.logError(
-        error as Error, 
-        LogCategory.COMPLIANCE,
-        { userId, disclaimerId, version }
+        'Failed to record acknowledgment',
+        error
       );
       throw error;
     }

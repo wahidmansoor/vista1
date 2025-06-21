@@ -35,13 +35,14 @@ export interface EvaluationSection {
 }
 
 export interface EvaluationTemplate {
-  title: string;
+  title?: string;
   sections: Array<{
     title: string;
     items: Array<{
       text: string;
+      tooltip?: string;
       required?: boolean;
-      type: 'text' | 'number' | 'select' | 'staging' | 'performance';
+      type?: 'text' | 'number' | 'select' | 'staging' | 'performance';
       options?: string[];
       redFlags?: string[];
     }>;

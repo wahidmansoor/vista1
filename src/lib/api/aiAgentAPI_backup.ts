@@ -28,6 +28,8 @@ import { agentLogger } from '@/components/ai-agent/agentLogger';
 import { toast } from '@/components/ui/use-toast';
 import { v4 as uuidv4 } from 'uuid';
 import { getOfflineResponse } from '../../components/ai-agent/mockResponses';
+import { promptBuilder } from '@/components/ai-agent/promptBuilder';
+import { generateGeminiResponse } from '@/lib/gemini';
 
 // Mock responses for development
 const mockResponses: Record<ModuleType, Record<PromptIntent, string[]>> = {
@@ -179,45 +181,23 @@ export const aiAgentAPI = {
       // Generate specialized prompt using promptBuilder
       const enhancedPrompt = promptBuilder(module, intent, prompt);
 
-      // Call OpenAI API with retry logic
-      const openaiClient = getOpenAIClient();
-      
-      // Enhanced API call with timeout and retry logic
-      const completion = await Promise.race([
-        openaiClient.chat.completions.create({
-          model: "gpt-4-turbo-preview",
-          messages: [
-            {
-              role: "system",
-              content: "You are an expert oncology AI assistant. Provide evidence-based recommendations following current clinical guidelines."
-            },
-            {
-              role: "user",
-              content: enhancedPrompt
-            }
-          ],
-          temperature: 0.7,
-          max_tokens: 1000
-        }),
-        new Promise<never>((_, reject) => 
-          setTimeout(() => reject(new Error('OpenAI API timeout')), 15000)
-        )
-      ]);
+      // Use Gemini API for AI response
+      const response = await generateGeminiResponse(enhancedPrompt);
+      const content = response.content;
 
       // Validate response
-      const content = completion.choices[0]?.message?.content;
       if (!content) {
         throw new APIError("Empty response from AI", "EMPTY_RESPONSE");
       }
 
-      const response = {
+      const aiResponse = {
         id: uuidv4(),
         content,
         timestamp: new Date(),
         metadata: {
           module,
           intent,
-          model: 'gpt-4-turbo-preview',
+          model: response.metadata.model,
           responseTime: Date.now() - startTime
         }
       };
@@ -230,12 +210,12 @@ export const aiAgentAPI = {
         success: true,
         metadata: { 
           responseTime: Date.now() - startTime,
-          model: 'gpt-4-turbo-preview',
-          provider: 'openai'
+          model: response.metadata.model,
+          provider: 'gemini'
         }
       });
 
-      return response;
+      return aiResponse;
 
     } catch (error: any) {
       const errorMessage = getErrorMessage(error, 1);
@@ -250,7 +230,7 @@ export const aiAgentAPI = {
         metadata: {
           errorType: error?.name || 'Unknown',
           responseTime: Date.now() - startTime,
-          provider: 'openai'
+          provider: 'gemini'
         }
       });
 

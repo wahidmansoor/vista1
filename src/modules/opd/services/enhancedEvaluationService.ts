@@ -11,7 +11,7 @@ import {
   RiskCategory,
   RedFlag
 } from '../types/enhanced-evaluation';
-import { supabase } from '../../../lib/supabaseClient';
+import supabase from '../../../lib/supabaseClient';
 
 interface RiskAssessmentResult {
   category: RiskCategory;
@@ -46,7 +46,7 @@ export async function calculateRiskScore(
     
     // Age-related risk
     const ageRisk = calculateAgeRisk(formData.age);
-    if (ageRisk.impact > 0) {
+    if (ageRisk) {
       riskFactors.push(ageRisk);
       baseScore += ageRisk.impact === 'high' ? 20 : ageRisk.impact === 'medium' ? 10 : 5;
     }
@@ -500,26 +500,26 @@ export async function saveEnhancedEvaluation(evaluation: Partial<EnhancedPatient
     const { data, error } = await supabase
       .from('enhanced_patient_evaluations')
       .insert([{
-        cancer_type: evaluation.cancerType,
-        cancer_subtype: evaluation.cancerSubtype,
-        primary_site: evaluation.primarySite,
+        cancer_type: evaluation.cancer_type,
+        cancer_subtype: evaluation.cancer_subtype,
+        primary_site: evaluation.primary_site,
         histology: evaluation.histology,
-        tumor_grade: evaluation.tumorGrade,
-        tnm_stage: evaluation.tnmStage,
-        stage_clinical: evaluation.stageClinical,
-        stage_pathological: evaluation.stagePathological,
-        receptor_status: evaluation.receptorStatus,
-        mutation_status: evaluation.mutationStatus,
-        performance_status: evaluation.performanceStatus,
-        risk_category: evaluation.riskCategory,
-        risk_score: evaluation.riskScore,
-        risk_factors: evaluation.riskFactors,
-        recommended_plan: evaluation.recommendedPlan,
-        red_flags: evaluation.redFlags,
-        ai_recommendations: evaluation.aiRecommendations,
-        form_data: evaluation.formData,
+        tumor_grade: evaluation.tumor_grade,
+        tnm_stage: evaluation.tnm_stage,
+        stage_clinical: evaluation.stage_clinical,
+        stage_pathological: evaluation.stage_pathological,
+        receptor_status: evaluation.receptor_status,
+        mutation_status: evaluation.mutation_status,
+        performance_status: evaluation.performance_status,
+        risk_category: evaluation.risk_category,
+        risk_score: evaluation.risk_score,
+        risk_factors: evaluation.risk_factors,
+        recommended_plan: evaluation.recommended_plan,
+        red_flags: evaluation.red_flags,
+        ai_recommendations: evaluation.ai_recommendations,
+        form_data: evaluation.form_data,
         status: evaluation.status,
-        submitted_by: evaluation.submittedBy
+        submitted_by: evaluation.submitted_by
       }])
       .select('id')
       .single();
