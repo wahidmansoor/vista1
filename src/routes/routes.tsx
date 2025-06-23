@@ -86,6 +86,15 @@ export const routes = [
     errorElement: <ErrorBoundary moduleName="Medical Oncology Handbook" />
   },
   {
+    path: '/handbook/medical/:chapterId',
+    element: (
+      <ErrorBoundary moduleName="Medical Oncology Handbook">
+        <MedicalHandbookTOC key="medical-handbook-toc-chapter" />
+      </ErrorBoundary>
+    ),
+    errorElement: <ErrorBoundary moduleName="Medical Oncology Handbook" />
+  },
+  {
     path: '/handbook/medical-oncology',
     element: (
       <ErrorBoundary moduleName="Medical Oncology Handbook (Legacy)">
@@ -104,10 +113,28 @@ export const routes = [
     errorElement: <ErrorBoundary moduleName="Radiation Oncology Handbook" />
   },
   {
+    path: '/handbook/radiation/:chapterId',
+    element: (
+      <ErrorBoundary moduleName="Radiation Oncology Handbook">
+        <RadiationHandbookTOC key="radiation-handbook-toc-chapter" />
+      </ErrorBoundary>
+    ),
+    errorElement: <ErrorBoundary moduleName="Radiation Oncology Handbook" />
+  },
+  {
     path: '/handbook/palliative',
     element: (
       <ErrorBoundary moduleName="Palliative Handbook">
         <PalliativeHandbookTOC key="palliative-handbook-toc" />
+      </ErrorBoundary>
+    ),
+    errorElement: <ErrorBoundary moduleName="Palliative Handbook" />
+  },
+  {
+    path: '/handbook/palliative/:chapterId',
+    element: (
+      <ErrorBoundary moduleName="Palliative Handbook">
+        <PalliativeHandbookTOC key="palliative-handbook-toc-chapter" />
       </ErrorBoundary>
     ),
     errorElement: <ErrorBoundary moduleName="Palliative Handbook" />
