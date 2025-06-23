@@ -20,19 +20,21 @@ const MedicalHandbookTOC = () => {
     if (chapterId) {
       setLoading(true);
       setError(null);
-      import(`./medical/chapters/${chapterId}.md?raw`)
-        .then((mod) => {
-          setContent(mod.default || mod);
+      fetch(`/handbook/medical/chapters/${chapterId}.md`)
+        .then(async (res) => {
+          if (!res.ok) throw new Error('Chapter not found.');
+          return res.text();
+        })
+        .then((text) => {
+          setContent(text);
           setLoading(false);
         })
         .catch((err) => {
           setError(new Error('Chapter not found.'));
           setContent(null);
-          setLoading(false);
         });
     } else {
       setContent(null);
-      setError(null);
     }
   }, [chapterId]);
 
