@@ -11,6 +11,9 @@ import { parseHandbookPath } from '@/utils/pathUtils';
 import { parseErrorDetails } from '@/utils/errorUtils';
 import { sectionsMeta } from './constants';
 import type { FC, ReactElement } from 'react';
+import MedicalHandbookTOC from './MedicalHandbookTOC';
+import RadiationHandbookTOC from './RadiationHandbookTOC';
+import PalliativeHandbookTOC from './PalliativeHandbookTOC';
 
 const Handbook: FC = (): ReactElement => {
   const location = useLocation();
@@ -68,6 +71,11 @@ const Handbook: FC = (): ReactElement => {
   if (location.pathname === '/handbook') {
     return <HandbookLanding />;
   }
+
+  // Render explicit TOC components for known sections
+  if (section === 'medical-oncology') return <MedicalHandbookTOC />;
+  if (section === 'radiation-oncology') return <RadiationHandbookTOC />;
+  if (section === 'palliative-care') return <PalliativeHandbookTOC />;
 
   // If we have a section but it's invalid, show an error
   if (section && !isValidSection) {

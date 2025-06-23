@@ -1,4 +1,4 @@
-import{r as Se,g as we}from"./vendor-Cwgam5rc.js";import"./router-Bl3DfmHA.js";var _r={exports:{}},br={},Jr;function je(){if(Jr)return br;Jr=1;/**
+import{r as Se,g as we}from"./vendor-Cwgam5rc.js";import"./router-BOmJCcPj.js";var _r={exports:{}},br={},Jr;function je(){if(Jr)return br;Jr=1;/**
  * @license React
  * react-jsx-runtime.development.js
  *
