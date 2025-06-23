@@ -6,9 +6,9 @@ import Inpatient from '@/modules/inpatient';
 import Palliative from '@/modules/palliative';
 import Tools from '@/modules/tools';
 import Handbook from '@/modules/handbook';
-import MedicalHandbookTOC from '@/pages/handbook/MedicalHandbookTOC';
-import RadiationHandbookTOC from '@/pages/handbook/RadiationHandbookTOC';
-import PalliativeHandbookTOC from '@/pages/handbook/PalliativeHandbookTOC';
+import MedicalHandbookTOC from '@/modules/handbook/MedicalHandbookTOC';
+import RadiationHandbookTOC from '@/modules/handbook/RadiationHandbookTOC';
+import PalliativeHandbookTOC from '@/modules/handbook/PalliativeHandbookTOC';
 import TestMarkdownViewer from '../components/TestMarkdownViewer';
 import CallbackPage from '@/pages/CallbackPage';
 

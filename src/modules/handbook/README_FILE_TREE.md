@@ -1,0 +1,23 @@
+# Handbook Module File Tree (src/modules/handbook/)
+
+- components/
+- constants.ts
+- ContentRenderer.tsx
+- Handbook.tsx
+- HandbookLanding.tsx
+- HandbookLayout.tsx
+- HandbookSidebar.tsx
+- HandbookSidebarNew.tsx
+- HandbookViewer.tsx
+- index.ts
+- JsonHandbookViewer.tsx
+- MedicalHandbookTOC.tsx
+- PalliativeHandbookTOC.tsx
+- RadiationHandbookTOC.tsx
+- README.md
+- schema/
+- SidebarTOCNavigator.tsx
+- types/
+- UniversalContentViewer.tsx
+- UniversalHandbookViewer.tsx
+- utils/
