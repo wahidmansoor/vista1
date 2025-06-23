@@ -1,0 +1,281 @@
+{
+  "title": "Staging Systems: Alternative Staging Systems (Ann Arbor, FIGO, etc.)",
+  "category": "Clinical Assessment",
+  "section": "Cancer Staging",
+  "summary": "Comprehensive guide to non-TNM staging systems used in hematologic, gynecologic, and pediatric malignancies.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-10-20T00:00:00Z",
+  "version": "1.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 15,
+    "targetAudience": ["Oncologists", "Hematologists", "Gynecologists", "Pediatric Oncologists"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Staging Systems"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Topic 5: Alternative Staging Systems (Ann Arbor, FIGO, etc.)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Several malignancies—especially in hematology, gynecology, and pediatrics—require non-TNM staging systems due to distinct spread patterns and treatment strategies. These include:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Ann Arbor/Lugano (Lymphoma)",
+        "FIGO (Gynecologic cancers)",
+        "Durie-Salmon / ISS / R-ISS (Multiple myeloma)",
+        "INRG / INSS (Pediatric neuroblastoma)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2. Ann Arbor and Lugano – Lymphoma"
+    },
+    {
+      "type": "paragraph",
+      "text": "Used for Hodgkin and most non-Hodgkin lymphomas:"
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Description"],
+      "rows": [
+        ["I", "Single nodal region or single extranodal site (IE)"],
+        ["II", "≥2 regions on same side of diaphragm"],
+        ["III", "Nodes on both sides of diaphragm"],
+        ["IV", "Diffuse/disseminated extranodal involvement (e.g., marrow, liver)"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Modifiers:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "A/B: Absence/presence of systemic symptoms",
+        "E: Contiguous extranodal spread",
+        "X: Bulky disease (e.g., mediastinal mass ≥1/3 thoracic diameter)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Lugano Classification (2014):"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Recommends PET/CT for staging HL and aggressive NHL",
+        "Introduces Deauville score for response"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "See full details here: 🔗 [Non-Hodgkin Lymphomas](https://www.amboss.com/us/knowledge/non-hodgkin-lymphomas)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3. FIGO Staging – Gynecologic Cancers"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "A. Cervical Cancer (FIGO 2018)"
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Description"],
+      "rows": [
+        ["I", "Confined to cervix"],
+        ["• IA: Microscopic invasion ≤5 mm", ""],
+        ["• IB: Invasion >5 mm (IB1: ≤2 cm, IB2: 2–4 cm, IB3: >4 cm)", ""],
+        ["II", "Beyond uterus, not into pelvic wall"],
+        ["• IIA: Upper 2/3 vagina, no parametrial invasion", ""],
+        ["• IIB: Parametrial invasion", ""],
+        ["III", "Extends to pelvic wall, lower vagina, hydronephrosis, or nodal spread"],
+        ["• IIIA: Lower 1/3 vagina", ""],
+        ["• IIIB: Pelvic wall or hydronephrosis", ""],
+        ["• IIIC: Pelvic (IIIC1) or paraaortic (IIIC2) lymph nodes", ""],
+        ["IV", "Adjacent organ or distant metastases"],
+        ["• IVA: Bladder/rectal mucosa", ""],
+        ["• IVB: Distant organs", ""]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "See: 🔗 [Invasive Cervical Cancer](https://www.amboss.com/us/knowledge/invasive-cervical-cancer)"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "B. Ovarian, Fallopian Tube, and Primary Peritoneal Cancer (FIGO)"
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Description"],
+      "rows": [
+        ["I", "Limited to ovaries/fallopian tubes"],
+        ["• IA–IB: One/both ovaries, capsule intact", ""],
+        ["• IC1–3: Surgical spill, capsule rupture, or positive peritoneal cytology", ""],
+        ["II", "Pelvic extension"],
+        ["• IIA: Uterus or tubes", ""],
+        ["• IIB: Pelvic peritoneum", ""],
+        ["III", "Peritoneal spread outside pelvis or retroperitoneal nodes"],
+        ["• IIIA1(i/ii): LN ≤10 mm or >10 mm", ""],
+        ["• IIIA2: Microscopic spread to upper abdomen", ""],
+        ["• IIIB: Macroscopic ≤2 cm", ""],
+        ["• IIIC: Macroscopic >2 cm ± liver/spleen surface", ""],
+        ["IV", "Distant metastasis"],
+        ["• IVA: Pleural effusion (positive cytology)", ""],
+        ["• IVB: Liver parenchyma, distant nodes, extra-abdominal sites", ""]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "See: 🔗 [Ovarian Cancer Staging](https://www.amboss.com/us/knowledge/ovarian-cancer)"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "C. Endometrial Cancer (FIGO 2023)"
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Description"],
+      "rows": [
+        ["I", "Uterus/ovary only"],
+        ["• IA: Endometrium or superficial myometrium", ""],
+        ["• IB: ≥50% myometrial invasion", ""],
+        ["• IC: Aggressive histology confined to endometrium", ""],
+        ["II", "Cervical involvement"],
+        ["• IIA: Cervical stroma", ""],
+        ["• IIB: Lymphovascular invasion", ""],
+        ["• IIC: Aggressive histology with myometrial invasion", ""],
+        ["III", "Local spread"],
+        ["• IIIA: Serosa/adnexa", ""],
+        ["• IIIB: Vagina/parametria", ""],
+        ["• IIIC: Pelvic (IIIC1) or paraaortic (IIIC2) nodes", ""],
+        ["IV", "Invasion/distant spread"],
+        ["• IVA: Bladder/bowel", ""],
+        ["• IVB: Extra-pelvic peritoneum", ""],
+        ["• IVC: Distant metastases (e.g., lung)", ""]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "See: 🔗 [Endometrial Cancer](https://www.amboss.com/us/knowledge/endometrial-cancer)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4. Durie-Salmon and R-ISS – Multiple Myeloma"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Durie-Salmon (Historic)"
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Description"],
+      "rows": [
+        ["I", "Normal calcium, Hgb, no bone lesions, low M-protein"],
+        ["II", "Intermediate"],
+        ["III", "High tumor burden: anemia, hypercalcemia, ≥3 bone lesions"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Renal function subclass:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "A (Cr <2 mg/dL)",
+        "B (Cr ≥2 mg/dL)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "R-ISS (Revised International Staging)"
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Components"],
+      "rows": [
+        ["I", "ISS stage I + normal LDH + no high-risk cytogenetics"],
+        ["II", "Not stage I or III"],
+        ["III", "ISS III + elevated LDH or high-risk cytogenetics (e.g., del(17p), t(4;14))"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "See: 🔗 [Multiple Myeloma](https://www.amboss.com/us/knowledge/multiple-myeloma)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5. INRG – Neuroblastoma"
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Description"],
+      "rows": [
+        ["L1", "Localized tumor without image-defined risk factors (IDRFs)"],
+        ["L2", "Localized tumor with IDRFs"],
+        ["M", "Metastatic disease (excluding MS)"],
+        ["MS", "Metastatic in infants (<18 months), skin/liver/marrow only"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Risk also determined by MYCN amplification, age, histology, and chromosome 1p/11q loss"
+    },
+    {
+      "type": "paragraph",
+      "text": "See: 🔗 [Neuroblastoma](https://www.amboss.com/us/knowledge/neuroblastoma)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6. Other Specialized Systems"
+    },
+    {
+      "type": "table",
+      "headers": ["Tumor", "System", "Highlights"],
+      "rows": [
+        ["Retinoblastoma", "International Classification", "Globe salvage potential"],
+        ["Testicular cancer", "IGCCCG", "Combines TNM + serum markers (AFP, β-hCG, LDH)"],
+        ["GIST", "NIH/Miettinen", "Based on size, mitotic index, site"],
+        ["Sarcoma", "FNCLCC + AJCC", "Histologic grade and tumor depth drive risk"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "7. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Alternative staging systems provide crucial, site-specific insight where TNM is not applicable. Their use is fundamental in the care of hematologic, gynecologic, and pediatric malignancies. Familiarity with FIGO, Ann Arbor/Lugano, R-ISS, and INRG classifications ensures accurate prognosis, treatment selection, and trial eligibility."
+    }
+  ]
+}

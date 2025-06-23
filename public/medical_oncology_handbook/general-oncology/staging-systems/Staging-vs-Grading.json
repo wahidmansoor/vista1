@@ -1,0 +1,256 @@
+{
+  "title": "Staging vs Grading",
+  "category": "Staging Systems",
+  "section": "Cancer Classification",
+  "summary": "Comparative analysis of tumor staging and grading systems in oncology",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-11-15T10:30:00Z",
+  "version": "1.2.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 15,
+    "targetAudience": ["Oncologists", "Pathologists", "Trainees"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Staging vs Grading"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Staging and grading are distinct yet complementary concepts in oncology that guide diagnosis, prognosis, and treatment. While they are often mentioned together, they assess different dimensions of cancer:"
+    },
+    {
+      "type": "table",
+      "headers": ["Question", "Answered by"],
+      "rows": [
+        ["Where is the tumor, and how far has it spread?", "Staging"],
+        ["How abnormal are the tumor cells, and how aggressive is the cancer likely to be?", "Grading"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Understanding both is essential for tailored cancer care."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Tumor Staging – Defining Extent"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumor staging classifies cancer based on the anatomic spread and is crucial for:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Determining treatment intent (curative vs palliative)",
+        "Selecting modalities (surgery, radiation, systemic therapy)",
+        "Prognostic estimation",
+        "Enrolling in clinical trials"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Standard Systems:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "TNM (AJCC/UICC) – Most solid tumors",
+        "Ann Arbor / Lugano – Lymphomas",
+        "FIGO – Gynecologic malignancies",
+        "INRG – Pediatric tumors",
+        "Risk-based systems – Leukemias, Myeloma"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "TNM Overview:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "T (Tumor): Size and extent of the primary lesion",
+        "N (Nodes): Presence and extent of regional lymph node involvement",
+        "M (Metastasis): Presence of distant metastasis"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Staging groups patients into:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Stage 0: In situ",
+        "Stage I–III: Increasing local/regional spread",
+        "Stage IV: Distant metastasis"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Stage is the dominant prognostic factor in many solid tumors."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Tumor Grading – Defining Behavior"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumor grading assesses the differentiation and proliferation of malignant cells via histology."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Grading Features:"
+    },
+    {
+      "type": "table",
+      "headers": ["Feature", "Low Grade", "High Grade"],
+      "rows": [
+        ["Differentiation", "Well differentiated", "Poorly differentiated"],
+        ["Nuclear features", "Uniform nuclei", "Atypia, pleomorphism"],
+        ["Mitoses", "Low rate", "High rate"],
+        ["Architecture", "Resembles normal tissue", "Disorganized"],
+        ["Behavior", "Indolent", "Aggressive"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Poorly differentiated (high-grade) tumors tend to grow faster, metastasize earlier, and recur more frequently."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "AJCC Grading (Generic):"
+    },
+    {
+      "type": "table",
+      "headers": ["Grade", "Description"],
+      "rows": [
+        ["G1", "Well differentiated (low grade)"],
+        ["G2", "Moderately differentiated"],
+        ["G3", "Poorly differentiated (high grade)"],
+        ["G4", "Undifferentiated/anaplastic"],
+        ["GX", "Grade cannot be assessed"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Site-Specific Grading Systems"
+    },
+    {
+      "type": "table",
+      "headers": ["Tumor Type", "Grading System"],
+      "rows": [
+        ["Prostate", "Gleason score (ISUP Grade Group 1–5)"],
+        ["Breast", "Nottingham (Elston-Ellis) system"],
+        ["CNS tumors", "WHO Grades I–IV"],
+        ["Neuroendocrine tumors", "Based on mitotic count + Ki-67 index"],
+        ["Sarcoma", "FNCLCC grading"],
+        ["Endometrial", "FIGO architectural grade"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Comparative Example: Breast Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Staging (TNM): Based on tumor size, nodal status, metastasis",
+        "Grading (Nottingham): Based on tubule formation, nuclear pleomorphism, and mitotic index",
+        "Both used in AJCC prognostic staging along with ER/PR/HER2 status."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Clinical Implications of Stage vs Grade"
+    },
+    {
+      "type": "table",
+      "headers": ["Feature", "Staging", "Grading"],
+      "rows": [
+        ["Measures", "Extent of spread", "Cellular appearance"],
+        ["Determined by", "Imaging, pathology", "Histopathology"],
+        ["Timing", "Any point in disease", "Diagnosis or biopsy"],
+        ["Impact", "Drives treatment strategy", "Modifies risk and aggressiveness"],
+        ["Prognostic power", "Strong (especially TNM)", "Important (varies by cancer)"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Stage determines the extent, while grade defines the behavior."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. How They Interact"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Low stage, high grade: Early cancer with aggressive biology (e.g., Grade 3, Stage I breast cancer)",
+        "High stage, low grade: Advanced disease that may grow slowly (e.g., Stage III follicular lymphoma)",
+        "Combined staging systems (e.g., AJCC breast cancer prognostic stage) incorporate both."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. When Grade Changes Treatment"
+    },
+    {
+      "type": "table",
+      "headers": ["Tumor", "Clinical Impact"],
+      "rows": [
+        ["Endometrial", "Grade 3 prompts adjuvant therapy, even in early stage"],
+        ["Sarcoma", "High grade necessitates radiation or chemotherapy"],
+        ["Neuroendocrine", "High Ki-67 → switch from NET to NEC management"],
+        ["CNS tumors", "WHO Grade IV defines glioblastoma diagnosis"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Summary Table – Staging vs Grading"
+    },
+    {
+      "type": "table",
+      "headers": ["Parameter", "Staging", "Grading"],
+      "rows": [
+        ["Describes", "Extent of disease", "Degree of differentiation"],
+        ["Method", "Imaging, pathology", "Histology"],
+        ["Example System", "TNM", "AJCC, Gleason, Nottingham"],
+        ["Clinical Role", "Treatment selection", "Risk prediction"],
+        ["Change with time", "Yes (e.g., restaging)", "Rarely"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Final Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Staging and grading are complementary pillars in cancer classification. While stage predicts the reach of disease and guides treatment intensity, grade forecasts how biologically aggressive the tumor may behave."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Together, they support precise, risk-adapted cancer care."
+    }
+  ]
+}

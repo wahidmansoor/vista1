@@ -1,0 +1,195 @@
+{
+    "title": "Prognostic Scores in Oncology",
+    "category": "Clinical Oncology",
+    "section": "Patient Assessment",
+    "summary": "An introduction to prognostic scoring systems in oncology, their clinical utility, and key principles for application.",
+    "author": "OncoVISTA Team",
+    "lastUpdated": "2023-10-20T00:00:00Z",
+    "version": "1.0.0",
+    "metadata": {
+      "reviewStatus": "peer-reviewed",
+      "readingTimeMinutes": 10
+    },
+    "content": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Prognostic Scores in Oncology"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Topic 1: Introduction"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "1. What Are Prognostic Scores?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Prognostic scores are standardized clinical tools designed to estimate the likely outcome of a disease regardless of the treatment administered. These scores synthesize multiple variables into a quantifiable risk estimate, often presented as a numerical score or categorical risk level (e.g., low, intermediate, high). They play a central role in:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Estimating overall survival, relapse risk, or disease progression",
+          "Guiding treatment intensity and timing (e.g., transplantation, induction vs. watchful waiting)",
+          "Stratifying patients in clinical trials",
+          "Facilitating patient counseling about expected outcomes"
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "Unlike predictive biomarkers, which estimate how likely a patient is to respond to a particular therapy, prognostic tools reflect intrinsic disease aggressiveness and host factors."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "2. Why Prognostic Scores Matter in Oncology"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern oncology is increasingly individualized, yet many cancers are biologically heterogeneous even within the same histologic subtype. Prognostic scores allow clinicians to:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Define goals of therapy (curative, palliative, watchful waiting)",
+          "Identify candidates for novel therapies or early clinical trial enrollment",
+          "Allocate resources in limited or high-burden care settings (e.g., stem cell transplant units)",
+          "Integrate non-disease variables like frailty, age, organ function into therapeutic planning"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "3. Core Principles of Prognostic Scoring"
+      },
+      {
+        "type": "paragraph",
+        "text": "Effective prognostic scores share common features:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Multivariable structure: Integrate clinical, laboratory, imaging, and sometimes genomic data",
+          "Weighted contributions: Some variables (e.g., performance status, LDH) carry greater prognostic impact",
+          "Risk stratification: Most scores categorize patients into low, intermediate, or high-risk tiers",
+          "Evolving design: Modern tools incorporate next-generation biomarkers (e.g., cytogenetics, mutation panels), frailty indices, or AI models for improved precision"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "4. Clinical Examples of Prognostic Tools"
+      },
+      {
+        "type": "table",
+        "headers": ["Cancer Type", "Prognostic Score", "Clinical Utility"],
+        "rows": [
+          ["Diffuse large B-cell lymphoma", "International Prognostic Index (IPI)", "Guides treatment intensity, transplant consideration"],
+          ["Follicular lymphoma", "FLIPI", "Determines early intervention vs. surveillance"],
+          ["Multiple myeloma", "Revised International Staging System (R-ISS)", "Stratifies risk; influences induction and maintenance therapy"],
+          ["Myelodysplastic syndromes", "IPSS / IPSS-R", "Predicts survival, guides stem cell transplant eligibility"],
+          ["Advanced Hodgkin lymphoma", "International Prognostic Score (IPS)", "Predicts 5-year survival and freedom from progression"]
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "Note: Some cancers use disease-specific variants, e.g., A-HIPI for advanced Hodgkin lymphoma or frailty-adapted scores in elderly myeloma patients."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "5. Prognostic vs. Predictive Tools"
+      },
+      {
+        "type": "paragraph",
+        "text": "Understanding the distinction between these two tool types is essential for clinical application:"
+      },
+      {
+        "type": "table",
+        "headers": ["Aspect", "Prognostic", "Predictive"],
+        "rows": [
+          ["Purpose", "Estimate natural disease outcome", "Predict response to specific therapy"],
+          ["Example", "IPSS in myelodysplastic syndromes", "EGFR mutation in NSCLC"],
+          ["Impact", "Affects decisions about if/when to treat", "Affects what to treat with"],
+          ["Integration", "Used to stratify risk across care continuum", "Used to select treatment"]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "6. Expanding Concepts: Functional and Biological Integration"
+      },
+      {
+        "type": "paragraph",
+        "text": "Prognostic scoring is no longer limited to disease burden. Modern scores integrate:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Performance status (e.g., ECOG, KPS)",
+          "Organ reserve (e.g., creatinine, bilirubin, GFR)",
+          "Frailty (e.g., Clinical Frailty Scale, G8 screening)",
+          "Comorbidities (e.g., Charlson Index)",
+          "Molecular biomarkers (e.g., TP53, FLT3, del(17p), complex karyotype)"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "These multidimensional approaches enable personalized risk prediction and more nuanced treatment decisions."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "7. Prognostic Tools in Critical Care Oncology"
+      },
+      {
+        "type": "paragraph",
+        "text": "For oncologic patients admitted to ICU or with critical illness, general severity scores may supplement disease-specific tools:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "SOFA score: Estimates risk of multi-organ failure and mortality in sepsis or ICU settings",
+          "APACHE II score: Predicts hospital mortality in critically ill patients (including cancer patients)",
+          "MELD/Child-Pugh: Used in hepatobiliary cancers and liver dysfunction",
+          "Lille/MDF: Assess response and prognosis in alcohol-associated hepatitis, which can overlap with hepatic malignancies"
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "These tools help define ICU triage, level of care needs, and prognosis in oncologic emergencies."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "8. What's Next in This Series"
+      },
+      {
+        "type": "paragraph",
+        "text": "This series will walk through high-yield, validated prognostic scores for major cancer types:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Hematologic Malignancies: IPI, FLIPI, IPS, IPSS/R, R-ISS",
+          "Solid Tumors: Breast, lung, and GI-specific staging models with prognostic applications",
+          "Frailty-Adapted Indices: Balducci model, CGA integration",
+          "Multisystem and supportive care scores",
+          "Summary Table and Interpretation Tips"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "9. Conclusion"
+      },
+      {
+        "type": "paragraph",
+        "text": "Prognostic scores empower clinicians with a structured method to translate diverse clinical data into actionable insights. As oncology evolves toward precision medicine, these tools will be essential in balancing evidence-based decisions with individualized care."
+      }
+    ]
+  }

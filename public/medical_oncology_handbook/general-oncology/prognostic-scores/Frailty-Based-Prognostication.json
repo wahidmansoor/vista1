@@ -1,0 +1,384 @@
+{
+  "title": "Prognostic Scores: Frailty-Based Prognostication",
+  "category": "Geriatric Oncology",
+  "section": "Patient Assessment",
+  "summary": "Comprehensive guide to frailty assessment tools and their prognostic value in oncology, including implementation strategies and clinical applications.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-12-20T00:00:00Z",
+  "version": "2.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 15,
+    "relatedTopics": [
+      "Geriatric Assessment in Oncology",
+      "Treatment Tolerability Prediction",
+      "Personalized Therapy for Older Adults"
+    ],
+    "externalResources": [
+      {
+        "name": "ePrognosis Frailty Tools",
+        "url": "https://eprognosis.ucsf.edu"
+      }
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Prognostic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Topic 9: Frailty-Based Prognostication"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Frailty is increasingly recognized as a tumor-independent, systemic vulnerability that strongly predicts adverse outcomes in older adults with cancer. Unlike chronologic age or traditional performance status, frailty better reflects the physiologic reserve and resilience of the individual. Integrating frailty assessments into oncology practice enables clinicians to:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Predict treatment-related toxicity and complications",
+        "Optimize treatment intensity (e.g., de-escalation, omission, or modification)",
+        "Facilitate shared decision-making, especially for curative vs palliative approaches",
+        "Improve survivorship planning and end-of-life care"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Defining Frailty in Oncology"
+    },
+    {
+      "type": "paragraph",
+      "text": "Frailty is a multidimensional syndrome marked by loss of physiologic reserve, leaving patients vulnerable to stressors such as chemotherapy, surgery, or hospitalization. It includes but is not limited to:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Sarcopenia (loss of muscle mass and strength)",
+        "Declines in mobility, cognition, and nutrition",
+        "Social vulnerability (e.g., isolation, poverty)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Frailty is distinct from:"
+    },
+    {
+      "type": "table",
+      "headers": ["Comparison", "Frailty"],
+      "rows": [
+        ["Chronologic age", "Age alone does not predict outcomes reliably"],
+        ["ECOG/KPS Performance", "Misses cognitive, nutritional, and social domains"],
+        ["Comorbidity index", "Focuses on disease burden, not physiologic vulnerability"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Common Frailty Tools in Oncology"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Domains Assessed", "Time to Complete", "Primary Use"],
+      "rows": [
+        ["G8 Screening Tool", "Nutrition, function, polypharmacy, cognition", "3–5 minutes", "Triage to CGA"],
+        ["Clinical Frailty Scale", "Global visual scale (1–9)", "~1 minute", "Bedside stratification"],
+        ["VES-13", "Age, health, function, physical limitations", "5–7 minutes", "Predicts disability and decline"],
+        ["CGA (Comprehensive Geriatric Assessment)", "Multidomain: ADLs, cognition, comorbidities, polypharmacy, nutrition", "30–60 minutes", "Gold standard for frailty and oncology"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Frailty screening is recommended for all adults ≥65 starting systemic therapy."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. CGA as a Prognostic Tool"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Comprehensive Geriatric Assessment systematically evaluates:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Functional status (ADLs/IADLs)",
+        "Cognition (MoCA, MMSE)",
+        "Nutrition (weight loss, MNA)",
+        "Mood (PHQ-9, GDS)",
+        "Comorbidity burden (Charlson Comorbidity Index)",
+        "Polypharmacy",
+        "Falls and mobility",
+        "Social support"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "CGA Outcomes in Oncology:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Identifies unfit or vulnerable patients despite ECOG 0–1",
+        "Predicts grade 3–5 toxicity from chemotherapy",
+        "Guides individualized treatment planning",
+        "Improves OS, functional independence, and patient satisfaction"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Frailty vs Traditional Performance Status"
+    },
+    {
+      "type": "table",
+      "headers": ["Feature", "ECOG/KPS", "Frailty Assessment (CGA, G8)"],
+      "rows": [
+        ["Cognitive status", "Not assessed", "Included"],
+        ["Nutrition", "Not assessed", "Included"],
+        ["Comorbidity burden", "Not assessed", "Included"],
+        ["Predictive power (toxicity)", "Moderate", "High"],
+        ["Time/resource requirement", "Low", "Moderate to High"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Frailty-Based Prognostic Models by Cancer Type"
+    },
+    {
+      "type": "table",
+      "headers": ["Cancer Type", "Frailty Tool or Model", "Key Variables"],
+      "rows": [
+        ["Multiple Myeloma", "IMWG Frailty Score", "Age, comorbidities, ADLs/IADLs"],
+        ["Lymphoma (Elderly)", "Geriatric Prognostic Index", "Age, albumin, ECOG, IADLs"],
+        ["Breast (Older Adults)", "CGA-adapted Chemotherapy Tool", "G8, geriatric variables"],
+        ["GI Cancers", "CRASH, G8", "Regimen intensity, labs, function, cognition"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. IMWG Frailty Score – Multiple Myeloma"
+    },
+    {
+      "type": "paragraph",
+      "text": "Developed by the International Myeloma Working Group:"
+    },
+    {
+      "type": "table",
+      "headers": ["Component", "Assessment Tool"],
+      "rows": [
+        ["Age", ">75 years = 1 point"],
+        ["Comorbidities", "Charlson Index"],
+        ["Functional status", "Katz (ADLs), Lawton (IADLs)"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Frailty Categories:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Fit: Standard induction and transplant",
+        "Intermediate: Dose-adjusted therapy",
+        "Frail: Modified regimens, emphasize QoL"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. CRASH Score – Chemotherapy Risk Assessment Scale for High-Age Patients"
+    },
+    {
+      "type": "paragraph",
+      "text": "Designed to predict chemotherapy toxicity risk in elderly patients:"
+    },
+    {
+      "type": "table",
+      "headers": ["Domain", "Key Inputs"],
+      "rows": [
+        ["Functional", "IADLs, nutritional status"],
+        ["Cognitive", "Mini-Cog"],
+        ["Laboratory", "Hemoglobin, creatinine clearance"],
+        ["Chemo Factors", "GI toxicity potential, regimen intensity"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Validated AUC: ~0.72 for grade ≥3 toxicity"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Clinical Use of Frailty Scores"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Treatment Decision-Making"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Modify or delay chemotherapy in frail patients",
+        "Choose oral agents or monotherapy over combinations",
+        "Prioritize quality of life in incurable settings"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Surgical and Hospital Risk"
+    },
+    {
+      "type": "paragraph",
+      "text": "Predicts:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "30-day mortality",
+        "Postoperative delirium",
+        "Hospital-acquired complications"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Trial Relevance"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Frail older adults are often excluded from trials",
+        "Frailty data enhances real-world generalizability"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Key Trials Supporting Frailty Integration"
+    },
+    {
+      "type": "table",
+      "headers": ["Trial", "Population", "Findings"],
+      "rows": [
+        ["GAP70+", "Older adults with cancer", "CGA interventions ↓ chemo toxicity, improved QoL"],
+        ["EGeSOR", "Elderly head/neck CA", "CGA increased treatment tolerance and survival"],
+        ["Myeloma Frailty Validation", "Elderly MM patients", "Frailty predicted OS, PFS, toxicity independently"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Practical Implementation"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Stepwise Approach"
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Screen: Use G8 or CFS at baseline",
+        "Assess: Perform CGA for abnormal screen",
+        "Act: Adjust therapy, document frailty status",
+        "Monitor: Repeat assessments periodically"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Integration Tips"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Embed G8 in oncology EMRs",
+        "Train nurses or APPs for CGA data collection",
+        "Utilize digital tools: ePrognosis"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "12. Barriers and Solutions"
+    },
+    {
+      "type": "table",
+      "headers": ["Barrier", "Strategy"],
+      "rows": [
+        ["Time-consuming CGA", "Use screeners like G8 for triage"],
+        ["Limited geriatrics staff", "Train oncology team; use EMR prompts"],
+        ["Variability in tools", "Standardize to institutional preference"],
+        ["Underrecognition", "Promote awareness in tumor boards"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "13. Summary Table – Tool Comparison"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Domains Assessed", "Toxicity Prediction", "Time"],
+      "rows": [
+        ["ECOG/KPS", "Physical performance only", "Moderate", "<1 min"],
+        ["G8", "Nutrition, function, cognition", "Good", "~3–5 min"],
+        ["CFS", "Global function and reserve", "Moderate", "~1–2 min"],
+        ["CGA", "Full multidomain assessment", "Best", "30–60 min"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "14. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Frailty-based prognostic models are essential for the individualized care of older adults with cancer. These tools surpass traditional performance scores by revealing hidden deficits and predicting adverse outcomes. When systematically implemented, frailty assessments:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Improve toxicity risk prediction",
+        "Enable personalized treatment adaptation",
+        "Support shared decision-making",
+        "Enhance patient safety and quality of life"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Frailty is not just a geriatric concern—it is a universal, tumor-agnostic indicator of prognosis."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Practice Recommendations"
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Implement routine frailty screening for all older cancer patients",
+        "Use CGA for comprehensive assessment in abnormal screens",
+        "Adjust treatment intensity based on frailty status",
+        "Document frailty assessments in patient records",
+        "Include frailty measures in multidisciplinary discussions"
+      ]
+    }
+  ]
+}

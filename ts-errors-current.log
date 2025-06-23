@@ -1,0 +1,135 @@
+src/components/charts/IPSChart.tsx(29,68): error TS7006: Parameter 'val' implicitly has an 'any' type.
+src/components/shared/protocolTabs/EligibilityTab.tsx(31,73): error TS2345: Argument of type '{}' is not assignable to parameter of type 'Eligibility'.
+  Type '{}' is missing the following properties from type 'Eligibility': inclusion_criteria, exclusion_criteria
+src/devtools/medications/MedicationDebugPanel.tsx(5,13): error TS2304: Cannot find name 'Protocol'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(271,20): error TS18048: 'medication.indications.biomarkers.length' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(274,26): error TS18048: 'medication.indications.biomarkers' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(280,20): error TS18048: 'medication.indications.staging.length' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(283,26): error TS18048: 'medication.indications.staging' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(289,20): error TS18048: 'medication.indications.line_of_therapy.length' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(292,26): error TS18048: 'medication.indications.line_of_therapy' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(335,20): error TS18048: 'medication.dosing.adjustments.length' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(338,26): error TS18048: 'medication.dosing.adjustments' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(379,20): error TS18048: 'medication.side_effects.management.length' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(382,26): error TS18048: 'medication.side_effects.management' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(422,40): error TS18048: 'medication.monitoring.parameters.length' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(425,26): error TS18048: 'medication.monitoring.parameters' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(464,20): error TS18048: 'medication.interactions.precautions.length' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(467,26): error TS18048: 'medication.interactions.precautions' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(510,40): error TS18048: 'medication.special_considerations.other.length' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationDetailModal.tsx(513,26): error TS18048: 'medication.special_considerations.other' is possibly 'undefined'.
+src/modules/cdu/medications/MedicationsView.tsx(884,11): error TS2322: Type 'import("D:/Mansoor/mwoncovista/vista1/src/types/medications").Medication | null' is not assignable to type 'import("D:/Mansoor/mwoncovista/vista1/src/modules/cdu/types").Medication | null'.
+  Type 'import("D:/Mansoor/mwoncovista/vista1/src/types/medications").Medication' is not assignable to type 'import("D:/Mansoor/mwoncovista/vista1/src/modules/cdu/types").Medication'.
+    Types of property 'side_effects' are incompatible.
+      Type 'string[]' is missing the following properties from type '{ common: string[]; severe: string[]; monitoring: string[]; management?: string[] | undefined; }': common, severe, monitoring
+src/modules/cdu/toxicity/Toxicity.tsx(20,74): error TS2740: Type '{ id: string; name: string; severity: string; recognition: string; management: string[]; dose_guidance: string[]; culprit_drugs: string[]; }' is missing the following properties from type 'ToxicityData': grading_scale, symptoms, signs, imaging, and 24 more.
+src/modules/cdu/treatmentProtocols/OverviewTab.tsx(6,3): error TS2305: Module '"../../../utils/protocolHelpers"' has no exported member 'getAllPrecautions'.
+src/modules/cdu/treatmentProtocols/tabs/MetadataFooter.tsx(15,31): error TS2339: Property 'next_review_date' does not exist on type 'Protocol'.
+src/modules/cdu/treatmentProtocols/tabs/MetadataFooter.tsx(15,70): error TS2339: Property 'next_review_date' does not exist on type 'Protocol'.
+src/modules/cdu/treatmentProtocols/tabs/MetadataFooter.tsx(35,19): error TS2339: Property 'author' does not exist on type 'Protocol'.
+src/modules/cdu/treatmentProtocols/tabs/MetadataFooter.tsx(38,37): error TS2339: Property 'author' does not exist on type 'Protocol'.
+src/modules/handbook/ContentRenderer.tsx(357,15): error TS2322: Type '{ language: string | undefined; value: string; showLineNumbers: boolean; }' is not assignable to type 'IntrinsicAttributes & CodeBlockProps'.
+  Property 'showLineNumbers' does not exist on type 'IntrinsicAttributes & CodeBlockProps'.
+src/modules/handbook/HandbookSearch.tsx(429,28): error TS2304: Cannot find name 'Badge'.
+src/modules/handbook/HandbookSearch.tsx(431,29): error TS2304: Cannot find name 'Badge'.
+src/modules/inpatient/sections/admission/AdmissionAlertTriggers.tsx(2,10): error TS2305: Module '"./admissionTemplates"' has no exported member 'getAdmissionAlerts'.
+src/modules/inpatient/sections/admission/AdmissionAlertTriggers.tsx(30,24): error TS7006: Parameter 'alert' implicitly has an 'any' type.
+src/modules/inpatient/sections/admission/AdmissionAlertTriggers.tsx(30,31): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/modules/inpatient/sections/admission/AdmissionProcessSteps.tsx(2,10): error TS2305: Module '"./admissionTemplates"' has no exported member 'getAdmissionProcessSteps'.
+src/modules/inpatient/sections/admission/AdmissionProcessSteps.tsx(30,23): error TS7006: Parameter 'step' implicitly has an 'any' type.
+src/modules/inpatient/sections/admission/AdmissionProcessSteps.tsx(30,29): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/modules/inpatient/sections/admission/admissionUtils.ts(1,23): error TS2305: Module '"./admissionTemplates"' has no exported member 'getSummaryTemplate'.
+src/modules/inpatient/sections/emergencies/components/EmergencyDetailModal.tsx(16,5): error TS2353: Object literal may only specify known properties, and 'content' does not exist in type 'UseReactToPrintOptions'.
+src/modules/opd/components/EvaluationSummary.tsx(61,12): error TS18048: 'template.redFlags' is possibly 'undefined'.
+src/modules/opd/components/OPDModule.tsx(4,3): error TS2305: Module '"lucide-react"' has no exported member 'UserCheck'.
+src/modules/opd/components/OPDModule.tsx(5,3): error TS2305: Module '"lucide-react"' has no exported member 'ScanLine'.
+src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx(4,30): error TS2307: Cannot find module '../../types/pathways' or its corresponding type declarations.
+src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx(6,36): error TS2307: Cannot find module '../../data/cancer-pathways' or its corresponding type declarations.
+src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx(7,35): error TS2307: Cannot find module '../../data/diagnostic-pathways' or its corresponding type declarations.
+src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx(344,39): error TS2322: Type '{ tree: any; }' is not assignable to type 'IntrinsicAttributes & Props'.
+  Property 'tree' does not exist on type 'IntrinsicAttributes & Props'.
+src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx(408,80): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx(408,86): error TS7006: Parameter 'idx' implicitly has an 'any' type.
+src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx(416,74): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx(416,80): error TS7006: Parameter 'idx' implicitly has an 'any' type.
+src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx(424,74): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/modules/opd/diagnostic-pathways/DiagnosticPathways1.tsx(424,80): error TS7006: Parameter 'idx' implicitly has an 'any' type.
+src/modules/opd/follow-up-oncology/utils/templateIO.ts(29,51): error TS18046: 'error' is of type 'unknown'.
+src/modules/opd/follow-up-oncology/utils/templateValidation.ts(27,10): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'FollowUpTemplate'.
+  No index signature with a parameter of type 'string' was found on type 'FollowUpTemplate'.
+src/modules/opd/follow-up-oncology/utils/templateValidation.ts(79,10): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ '3m': string; '6m': string; '1y': string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ '3m': string; '6m': string; '1y': string; }'.
+src/modules/opd/patient-evaluation/PatientEvaluationForm.tsx(369,16): error TS18048: 'currentTemplate.notes' is possibly 'undefined'.
+src/modules/opd/patient-evaluation/PatientEvaluationForm.tsx(382,16): error TS18048: 'currentTemplate.redFlags' is possibly 'undefined'.
+src/modules/palliative/sections/pain_management/PainManagement.tsx(493,17): error TS2322: Type '(value: PainCharacteristics["type"]) => void' is not assignable to type '(value: string) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string' is not assignable to type '"mixed" | "somatic" | "visceral" | "neuropathic" | undefined'.
+src/modules/palliative/sections/pain_management/PainManagement.tsx(519,17): error TS2322: Type '(value: PainCharacteristics["pattern"]) => void' is not assignable to type '(value: string) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string' is not assignable to type '"constant" | "intermittent" | "breakthrough" | undefined'.
+src/modules/palliative/sections/pain_management/PainManagement.tsx(541,17): error TS2322: Type '(value: PainCharacteristics["duration"]) => void' is not assignable to type '(value: string) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string' is not assignable to type '"acute" | "chronic" | undefined'.
+src/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx(15,42): error TS2322: Type 'LucideIcon' is not assignable to type 'FC<{}>'.
+  Type 'ComponentClass<LucideProps, any>' is not assignable to type 'FunctionComponent<{}>'.
+    Type 'ComponentClass<LucideProps, any>' provides no match for the signature '(props: {}, deprecatedLegacyContext?: any): ReactNode'.
+src/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx(16,40): error TS2322: Type 'LucideIcon' is not assignable to type 'FC<{}>'.
+  Type 'ComponentClass<LucideProps, any>' is not assignable to type 'FunctionComponent<{}>'.
+    Type 'ComponentClass<LucideProps, any>' provides no match for the signature '(props: {}, deprecatedLegacyContext?: any): ReactNode'.
+src/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx(17,46): error TS2322: Type 'LucideIcon' is not assignable to type 'FC<{}>'.
+  Type 'ComponentClass<LucideProps, any>' is not assignable to type 'FunctionComponent<{}>'.
+    Type 'ComponentClass<LucideProps, any>' provides no match for the signature '(props: {}, deprecatedLegacyContext?: any): ReactNode'.
+src/modules/palliative/sections/psychosocial_support/PsychosocialCare.tsx(18,46): error TS2322: Type 'LucideIcon' is not assignable to type 'FC<{}>'.
+  Type 'ComponentClass<LucideProps, any>' is not assignable to type 'FunctionComponent<{}>'.
+    Type 'ComponentClass<LucideProps, any>' provides no match for the signature '(props: {}, deprecatedLegacyContext?: any): ReactNode'.
+src/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx(141,24): error TS2322: Type '(value: any, data: any) => "" | "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800" | "bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-800" | "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30...' is not assignable to type 'string'.
+src/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx(141,25): error TS7006: Parameter 'value' implicitly has an 'any' type.
+src/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx(141,32): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/modules/palliative/sections/symptom_control/components/SymptomDataCards.tsx(181,22): error TS2322: Type '(_: any, data: Symptom) => boolean | undefined' is not assignable to type 'boolean | ((value: any, data: Symptom) => boolean) | undefined'.
+  Type '(_: any, data: Symptom) => boolean | undefined' is not assignable to type '(value: any, data: Symptom) => boolean'.
+    Type 'boolean | undefined' is not assignable to type 'boolean'.
+      Type 'undefined' is not assignable to type 'boolean'.
+src/modules/palliative/sections/symptom_control/components/SymptomSearch.tsx(56,66): error TS2304: Cannot find name 'CategoryType'.
+src/pages/AutoLogoutTest.tsx(11,5): error TS2339: Property 'showWarning' does not exist on type 'AutoLogoutContextType'.
+src/pages/AutoLogoutTest.tsx(14,5): error TS2339: Property 'isActive' does not exist on type 'AutoLogoutContextType'.
+src/routes/cduRoutes.tsx(6,41): error TS2307: Cannot find module '@/modules/cdu/treatmentProtocols/ProtocolDetailPageContainer' or its corresponding type declarations.
+src/routes/index.tsx(16,15): error TS2304: Cannot find name 'RootLayout'.
+src/routes/index.tsx(22,23): error TS2353: Object literal may only specify known properties, and 'redirect' does not exist in type 'RouteObject'.
+src/routes/index.tsx(23,41): error TS2304: Cannot find name 'InpatientOverview'.
+src/routes/index.tsx(25,39): error TS2552: Cannot find name 'InpatientOrders'. Did you mean 'InpatientModule'?
+src/routes/routes.tsx(9,32): error TS2307: Cannot find module '@/pages/handbook/MedicalHandbookTOC' or its corresponding type declarations.
+src/routes/routes.tsx(10,34): error TS2306: File 'D:/Mansoor/mwoncovista/vista1/src/pages/handbook/RadiationHandbookTOC.tsx' is not a module.
+src/routes/routes.tsx(11,35): error TS2306: File 'D:/Mansoor/mwoncovista/vista1/src/pages/handbook/PalliativeHandbookTOC.tsx' is not a module.
+src/services/handbookEnhancedSearch.ts(80,29): error TS2702: 'Fuse' only refers to a type, but is being used as a namespace here.
+src/services/handbookEnhancedSearch.ts(188,50): error TS2339: Property 'clinicalLevel' does not exist on type '{ version?: string | undefined; lastUpdated?: string | undefined; author?: string | undefined; license?: string | undefined; tags?: string[] | undefined; }'.
+src/services/handbookEnhancedSearch.ts(310,12): error TS2339: Property 'options' does not exist on type 'Fuse<ContentIndex>'.
+src/services/handbookEnhancedSearch.ts(327,11): error TS4104: The type 'readonly RangeTuple[]' is 'readonly' and cannot be assigned to the mutable type '[number, number][]'.
+src/services/handbookEnhancedSearch.ts(350,21): error TS2345: Argument of type '{ id: string; title: string; section: "medical-oncology" | "radiation-oncology" | "palliative-care"; path: string; matches: readonly FuseResultMatch[]; score: number; metadata: { ...; }; summary: string; excerpt: string; contentBlocks: HandbookContentBlock[]; }' is not assignable to parameter of type 'EnhancedSearchResult'.
+  Types of property 'matches' are incompatible.
+    The type 'readonly FuseResultMatch[]' is 'readonly' and cannot be assigned to the mutable type '{ field: string; value: string; indices: [number, number][]; }[]'.
+src/services/medications.ts(162,7): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(input: string | URL | Request, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Type '{ apikey: string | undefined; Authorization: string; }' is not assignable to type 'HeadersInit | undefined'.
+      Type '{ apikey: string | undefined; Authorization: string; }' is not assignable to type 'undefined'.
+  Overload 2 of 2, '(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Type '{ apikey: string | undefined; Authorization: string; }' is not assignable to type 'HeadersInit | undefined'.
+      Type '{ apikey: string | undefined; Authorization: string; }' is not assignable to type 'undefined'.
+src/types/protocolHelpers.ts(115,65): error TS2339: Property 'name' does not exist on type 'string | Test'.
+  Property 'name' does not exist on type 'string'.
+src/types/protocolHelpers.ts(120,67): error TS2339: Property 'name' does not exist on type 'string | Test'.
+  Property 'name' does not exist on type 'string'.
+src/types/protocolHelpers.ts(125,83): error TS2339: Property 'name' does not exist on type 'string'.
+src/types/protocolHelpers.ts(130,57): error TS7006: Parameter 'monitor' implicitly has an 'any' type.
+src/types/protocolHelpers.ts(135,56): error TS7006: Parameter 'monitor' implicitly has an 'any' type.
+src/types/protocolHelpers.ts(183,22): error TS2345: Argument of type 'ProtocolNote' is not assignable to parameter of type 'string'.
+src/types/protocolHelpers.ts(236,3): error TS2322: Type '(string | { [key: string]: any; citation?: string | undefined; title?: string | undefined; })[]' is not assignable to type 'string[]'.
+  Type 'string | { [key: string]: any; citation?: string | undefined; title?: string | undefined; }' is not assignable to type 'string'.
+    Type '{ [key: string]: any; citation?: string | undefined; title?: string | undefined; }' is not assignable to type 'string'.
+src/utils/confirmContinue.ts(7,10): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ en: string; de: string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ en: string; de: string; }'.
+src/utils/iconUtils.ts(198,7): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Object literal may only specify known properties, and 'title' does not exist in type 'Attributes & LucideProps'.
+src/utils/protocolHelpers.ts(323,3): error TS2322: Type '(string | { [key: string]: any; citation?: string | undefined; title?: string | undefined; })[]' is not assignable to type 'string[]'.
+  Type 'string | { [key: string]: any; citation?: string | undefined; title?: string | undefined; }' is not assignable to type 'string'.
+    Type '{ [key: string]: any; citation?: string | undefined; title?: string | undefined; }' is not assignable to type 'string'.

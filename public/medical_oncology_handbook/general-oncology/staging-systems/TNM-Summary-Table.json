@@ -1,0 +1,188 @@
+{
+  "title": "Staging Systems: TNM by Cancer Type (Expanded Summary)",
+  "category": "Clinical Assessment",
+  "section": "Cancer Staging",
+  "summary": "Comparative summary of TNM classification across major tumor types with organ-specific definitions and staging nuances.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-10-20T00:00:00Z",
+  "version": "1.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 15,
+    "targetAudience": ["Oncologists", "Surgeons", "Pathologists", "Radiologists"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Staging Systems"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Topic 4: TNM by Cancer Type (Expanded Summary)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1. Purpose"
+    },
+    {
+      "type": "paragraph",
+      "text": "The TNM system provides a global framework for staging solid tumors, but its implementation is organ-specific, reflecting anatomical, histological, and biological behavior unique to each malignancy."
+    },
+    {
+      "type": "paragraph",
+      "text": "This chapter presents a high-utility comparative summary of TNM classification across major tumor types, enriched with formal AJCC/UICC definitions and staging nuances from AMBOSS."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2. Expanded Site-Specific TNM Table"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "A. Breast Cancer"
+    },
+    {
+      "type": "table",
+      "headers": ["Component", "Definition"],
+      "rows": [
+        ["Tis", "Carcinoma in situ (DCIS or Paget's without invasion)"],
+        ["T1", "≤2 cm\n- T1mi: ≤0.1 cm\n- T1a: >0.1–0.5 cm\n- T1b: >0.5–1 cm\n- T1c: >1–2 cm"],
+        ["T2–T3", "T2: >2–5 cm\nT3: >5 cm"],
+        ["T4", "Invasion of chest wall and/or skin\n- T4a: chest wall\n- T4b: skin changes\n- T4c: both\n- T4d: inflammatory carcinoma"],
+        ["N Staging", "N1: movable axillary nodes\nN2: fixed/infraclavicular/internal mammary\nN3: supraclavicular ± internal mammary"],
+        ["M1", "Any distant site (e.g., bone, liver, lung)"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "AJCC integrates receptor status (ER, PR, HER2) and grade into the prognostic stage. [Details →](https://www.amboss.com/us/knowledge/breast-cancer)"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "B. Gastric Cancer"
+    },
+    {
+      "type": "table",
+      "headers": ["T Staging", "Depth of Invasion"],
+      "rows": [
+        ["T1a/T1b", "Lamina propria or submucosa"],
+        ["T2", "Muscularis propria"],
+        ["T3", "Subserosa"],
+        ["T4a/T4b", "Serosa (T4a) or adjacent organs (T4b)"]
+      ]
+    },
+    {
+      "type": "table",
+      "headers": ["N Categories", "Involved Nodes"],
+      "rows": [
+        ["N1", "1–2 nodes"],
+        ["N2", "3–6 nodes"],
+        ["N3a", "7–15 nodes"],
+        ["N3b", "≥16 nodes"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Stage groupings range from 0 (Tis) to IV (any T/N + M1). [Details →](https://www.amboss.com/us/knowledge/gastric-cancer)"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "C. Lung Cancer (NSCLC)"
+    },
+    {
+      "type": "table",
+      "headers": ["T Staging", "Criteria"],
+      "rows": [
+        ["T1", "≤3 cm, surrounded by lung/pleura"],
+        ["T2", ">3–5 cm or involves bronchus, visceral pleura"],
+        ["T3", ">5–7 cm or chest wall, diaphragm"],
+        ["T4", ">7 cm or mediastinum, vertebra"]
+      ]
+    },
+    {
+      "type": "table",
+      "headers": ["N Categories", "Node Involvement"],
+      "rows": [
+        ["N1", "Ipsilateral peribronchial/hilar"],
+        ["N2", "Ipsilateral mediastinal/subcarinal"],
+        ["N3", "Contralateral or supraclavicular"]
+      ]
+    },
+    {
+      "type": "table",
+      "headers": ["M1", "Definition"],
+      "rows": [
+        ["M1a", "Separate tumor nodule or pleural effusion"],
+        ["M1b", "Single distant metastasis"],
+        ["M1c", "Multiple distant metastases"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "D. Esophageal Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "T1a: mucosa",
+        "T1b: submucosa",
+        "T2–T4: invasion of muscularis propria → adventitia → adjacent structures",
+        "N1–3: Based on number of involved regional nodes",
+        "M1: Distant sites (e.g., liver, lung)"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "AJCC 8th edition separates squamous cell vs adenocarcinoma staging. [Details →](https://www.amboss.com/us/knowledge/esophageal-cancer)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3. Summary Table – Comparative TNM Snapshots"
+    },
+    {
+      "type": "table",
+      "headers": ["Cancer", "T Staging Focus", "N Classification", "M", "Notable Notes"],
+      "rows": [
+        ["Breast", "Tumor size, skin/chest invasion", "Level I–III axillary & internal mammary", "M1 = any distant", "Prognostic stage includes ER/PR/HER2"],
+        ["Lung", "Size, location, invasion", "N1–3 by anatomical zone", "M1a–c = pleural to systemic", "PET/CT essential for staging"],
+        ["Stomach", "Depth of wall invasion", "N1–3b by # of nodes", "M1 = any distant", "≥16 nodes for N3b"],
+        ["Esophagus", "Wall layer depth", "N1–3 = # of nodes", "M1 = distant", "Histology-specific staging"],
+        ["Melanoma", "Thickness & ulceration", "In-transit, satellite, # nodes", "M1a–d = skin to CNS", "Stage also includes mitotic rate"],
+        ["Colorectal", "Layer of bowel wall", "N1 = 1–3, N2 = ≥4 nodes", "M1a–c by site", "≥12 nodes recommended"],
+        ["Prostate", "Organ-confined vs extracapsular", "N1 = pelvic nodes", "M1a–c = node → viscera", "Gleason & PSA included in staging"],
+        ["Cervix", "Anatomical spread (FIGO)", "N1/N2 pelvic vs para-aortic", "M1 = distant", "Surgical and imaging-based"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4. Key Concepts and Takeaways"
+    },
+    {
+      "type": "list",
+      "items": [
+        "T staging reflects tumor size or depth of invasion.",
+        "N staging varies by site: count (e.g., gastric), location (e.g., breast, lung), or both.",
+        "M staging is increasingly granular (e.g., lung M1a–c, melanoma M1a–d).",
+        "Some systems incorporate biology (e.g., breast, prostate) into TNM-based prognostic staging."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "The site-specific application of TNM staging is critical for appropriate diagnosis, risk stratification, and management. While the TNM framework is consistent, its definitions and implications are uniquely adapted per tumor type. Up-to-date knowledge of these variations is essential for clinical accuracy and exam readiness."
+    }
+  ]
+}

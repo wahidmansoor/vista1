@@ -1,0 +1,252 @@
+{
+  "title": "Viral Oncogenesis",
+  "category": "Cancer Biology",
+  "section": "Infectious Causes of Cancer",
+  "summary": "Comprehensive overview of oncogenic viruses, their mechanisms of carcinogenesis, associated malignancies, and preventive strategies.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-12-30T00:00:00Z",
+  "version": "1.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 40,
+    "complexityLevel": "Advanced"
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Viral Oncogenesis"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Viral oncogenesis is the process by which viruses contribute to cancer development. Approximately 15–20% of human cancers are linked to oncogenic viruses, which act through various mechanisms including genomic integration, expression of viral oncoproteins, immune evasion, and chronic inflammation. These interactions disrupt normal cell cycle control, promote genetic instability, and enhance malignant transformation."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Classification of Oncogenic Viruses"
+    },
+    {
+      "type": "table",
+      "headers": ["Virus", "Type", "Associated Malignancies"],
+      "rows": [
+        ["Human papillomavirus (HPV)", "DNA", "Squamous cell carcinoma of the cervix, vulva, vagina, anus, penis, oropharynx, larynx"],
+        ["Epstein–Barr virus (EBV)", "DNA", "Burkitt lymphoma, Hodgkin lymphoma, nasopharyngeal carcinoma, gastric carcinoma, primary CNS lymphoma (immunocompromised)"],
+        ["Hepatitis B virus (HBV)", "DNA", "Hepatocellular carcinoma (HCC)"],
+        ["Human herpesvirus 8 (HHV-8)", "DNA", "Kaposi sarcoma"],
+        ["Hepatitis C virus (HCV)", "RNA", "Hepatocellular carcinoma"],
+        ["Human T-cell leukemia virus 1 (HTLV-1)", "RNA", "Adult T-cell leukemia"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Non-viral pathogens also implicated in cancer include: H. pylori (Gastric adenocarcinoma, MALT lymphoma), Schistosoma haematobium (Bladder squamous cell carcinoma), Clonorchis sinensis (Cholangiocarcinoma), Streptococcus bovis (Colorectal cancer)"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Mechanisms of Viral Oncogenesis"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.1 Insertional Mutagenesis"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Integration of viral DNA into host genome can: Disrupt tumor suppressor genes, Activate proto-oncogenes"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.2 Viral Oncoproteins"
+    },
+    {
+      "type": "list",
+      "items": [
+        "HPV: E6: inhibits p53, E7: inhibits RB1",
+        "EBV: LMP1: mimics CD40 → activates NF-κB, JAK/STAT, Leads to DNA hypermethylation and oncogene amplification",
+        "HBV: HBx protein promotes transcriptional deregulation and inhibits p53"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.3 Chronic Inflammation"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Persistent infection (e.g., HCV, H. pylori) leads to: Cytokine-mediated damage, Increased ROS production, Tissue remodeling and mutagenesis"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.4 Immune Evasion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Viruses may reduce MHC I expression",
+        "Promote regulatory T cells or suppress dendritic cell maturation"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Virus-Specific Insights"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "HPV (Human Papillomavirus)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Types 16, 18: high-risk",
+        "Oncoproteins E6/E7 inactivate tumor suppressors",
+        "Associated with cervical and oropharyngeal cancers",
+        "Prevention: HPV vaccine, Pap smear, DNA testing"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "EBV (Epstein–Barr Virus)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Infects B cells and epithelial cells",
+        "LMP1 activates survival and proliferation pathways",
+        "Cancers: Burkitt, Hodgkin, nasopharyngeal carcinoma, gastric cancer, CNS lymphoma (in AIDS)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "HBV (Hepatitis B Virus)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Integrates into hepatocyte genome",
+        "Promotes hepatocellular carcinoma (HCC)",
+        "Prevention: HBV vaccination, antivirals"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "HCV (Hepatitis C Virus)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "RNA virus, non-integrating",
+        "Oncogenesis via chronic liver injury, fibrosis, oxidative stress",
+        "Can lead to HCC, marginal zone lymphoma",
+        "Treatment: Direct-acting antivirals (DAAs)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "HHV-8 (Kaposi Sarcoma Herpesvirus)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Encodes viral cytokines and cyclins",
+        "Causes Kaposi sarcoma, primary effusion lymphoma"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "HTLV-1 (Human T-cell Leukemia Virus)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Infects CD4+ T cells",
+        "TAX gene drives transformation",
+        "Causes Adult T-cell leukemia/lymphoma",
+        "Transmission: breast milk, sexual contact, blood"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Immunosuppression and Viral Cancer Risk"
+    },
+    {
+      "type": "list",
+      "items": [
+        "HIV/AIDS and transplant patients are at higher risk for: Kaposi sarcoma (HHV-8), EBV-related lymphomas, HPV-associated cancers",
+        "EBV can cause post-transplant lymphoproliferative disorder (PTLD)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Prevention and Diagnostic Strategies"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Vaccines"
+    },
+    {
+      "type": "list",
+      "items": [
+        "HPV (Gardasil, Cervarix)",
+        "HBV (part of routine immunization)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Antiviral Therapy"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Reduces risk of viral persistence and oncogenesis: HBV: nucleoside analogs, HCV: DAAs"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Diagnostics"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Application"],
+      "rows": [
+        ["PCR", "Detect viral nucleic acids"],
+        ["In situ hybridization", "EBV detection in tissues (e.g., EBER)"],
+        ["Immunohistochemistry", "Detect viral proteins (e.g., LMP1, E6/E7)"],
+        ["Serology", "HBV/HCV infection status"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "Viral oncogenesis is a critical and preventable cause of human cancer. Integration of viral DNA, chronic inflammation, and immune modulation are core mechanisms by which viruses induce malignancy. Vaccination, screening, and antiviral therapies are essential tools in reducing virus-related cancer incidence. Future therapies may include oncolytic viruses, immune therapies, and gene editing to eliminate oncogenic viral sequences."
+    }
+  ]
+}

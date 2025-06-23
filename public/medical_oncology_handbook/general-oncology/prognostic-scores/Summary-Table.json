@@ -1,0 +1,198 @@
+{
+  "title": "Prognostic Scores",
+  "category": "Clinical Assessment",
+  "section": "Patient Evaluation",
+  "summary": "Comprehensive summary of prognostic tools in oncology, organized by tumor type and clinical application.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-10-20T00:00:00Z",
+  "version": "1.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 15,
+    "targetAudience": ["Oncologists", "Hematologists", "Clinical Researchers"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Prognostic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Topic 11: Summary Table"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1. Purpose"
+    },
+    {
+      "type": "paragraph",
+      "text": "This comprehensive summary aggregates all prognostic tools from the Prognostic Scores chapter into a set of curated, clinically oriented tables."
+    },
+    {
+      "type": "paragraph",
+      "text": "The expanded framework serves:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Practicing clinicians: to select the most appropriate tool for individualized patient care.",
+        "Educators and exam takers: for high-yield comparison and recall.",
+        "Trial designers and policy developers: for defining inclusion criteria, endpoints, and stratification schemas."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Tables are organized by:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tumor type: hematologic vs. solid",
+        "Model type: clinical, molecular, functional",
+        "Application: prognosis, therapy guidance, clinical trial utility"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2. Hematologic Malignancies – Key Prognostic Scores"
+    },
+    {
+      "type": "table",
+      "headers": ["Disease", "Score(s)", "Domains Assessed", "Clinical Role"],
+      "rows": [
+        ["DLBCL", "IPI, NCCN-IPI", "Age, LDH, stage, ECOG, extranodal sites", "Stratify for chemo intensity, clinical trials"],
+        ["Follicular Lymphoma", "FLIPI, FLIPI-2, m7-FLIPI", "Stage, Hgb, LDH, nodes ± mutations", "Prognosis, POD24 risk, m7-FLIPI used in genomics trials"],
+        ["Multiple Myeloma", "ISS, R-ISS, R2-ISS", "β2M, albumin, LDH, FISH, 1q, TP53", "Predict OS/PFS; guide high-risk therapy vs maintenance"],
+        ["MDS", "IPSS-R, IPSS-M", "Cytopenias, cytogenetics, 31 mutations", "AML progression risk; transplant/chemo timing"],
+        ["AML", "ELN 2022", "NPM1, FLT3, TP53, CEBPA, karyotype", "Risk-based therapy; transplant decision"],
+        ["CML", "Sokal, Hasford, ELTS", "Age, spleen size, platelets, WBC", "Baseline risk, TKI response durability"],
+        ["ALL (pediatric)", "MRD, genetics, CNS status", "Response kinetics, cytogenetics", "Risk-adapted intensity (e.g., early intensification)"],
+        ["CLL", "IGHV, TP53, MRD", "Somatic mutations, clearance", "Chemo-free therapy planning (e.g., venetoclax, BTKi)"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3. Solid Tumors – Organ-Specific and Molecular Scores"
+    },
+    {
+      "type": "table",
+      "headers": ["Cancer", "Tool(s)", "Biomarkers / Inputs", "Clinical Use"],
+      "rows": [
+        ["Breast Cancer", "Oncotype DX, PAM50, MammaPrint", "21–70 gene panels, subtype classification", "Omit chemo, molecular subtype identification"],
+        ["Colorectal Cancer", "MSI, Oncotype Colon, ctDNA", "MMR, gene profile, dynamic residual disease", "Determine adjuvant need, detect recurrence early"],
+        ["Prostate Cancer", "Gleason, CAPRA, Decipher", "Histology + PSA ± 22-gene expression panel", "Surgery vs surveillance; adjuvant vs salvage radiation"],
+        ["Lung Cancer", "TNM, PD-L1, EGFR, ALK, TMB", "Genomics, immune checkpoint markers", "Predict IO efficacy, stage-directed multimodal decisions"],
+        ["HCC", "BCLC, ALBI, AFP", "Tumor stage, bilirubin, albumin, vascularity", "Select surgical, transplant, systemic vs loco-regional Rx"],
+        ["RCC", "IMDC (Heng), MSKCC", "Labs (Hgb, calcium), time from diagnosis", "Select TKI, IO, or combination pathways"],
+        ["Gynecologic (Endometrial)", "FIGO + ProMisE", "POLE, MMR, p53 classification", "Risk-directed adjuvant therapy"],
+        ["CNS Tumors", "MGMT, IDH1/2, 1p/19q, TERT", "Mutation status, methylation", "Guides alkylating chemo, predicts survival"],
+        ["Melanoma", "TMB, BRAF, PD-L1, GEP", "Mutational/immune signature", "Stratify for IO, targeted therapy, recurrence monitoring"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4. Frailty and Functional Scores"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Key Features", "Primary Oncology Applications"],
+      "rows": [
+        ["ECOG / KPS", "Performance status (0–5 or 100–0)", "Clinical trials, baseline function"],
+        ["G8 Tool", "Geriatric screening (nutrition, cognition)", "Screen for frailty before CGA"],
+        ["CFS", "1–9 scale assessing physical frailty", "Chemo and surgical decision support"],
+        ["CGA", "Comprehensive, validated geriatric domains", "Predicts OS, toxicity, treatment tolerance"],
+        ["IMWG Frailty (MM)", "ADL/IADL + comorbidities", "Dose adjustment, regimen selection"],
+        ["CRASH Score", "Labs + chemo regimen + geriatric domains", "Predicts chemo toxicity risk in elderly"],
+        ["VES-13", "Patient-reported vulnerability scale", "Functional prognosis, mortality risk"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Frailty tools enhance treatment safety and personalize care for older adults, particularly in hematologic malignancies and solid tumors like GI and breast cancer."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5. Biomarker-Integrated Prognostic Tools"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Tumor Type", "Key Input", "Predicts"],
+      "rows": [
+        ["IPSS-M", "MDS", "31-gene panel + cytogenetics", "AML progression, OS"],
+        ["R2-ISS", "MM", "ISS + del(17p), 1q, LDH", "Risk-adjusted survival estimate"],
+        ["Oncotype DX", "Breast, Colon", "Recurrence gene signatures", "Risk of distant recurrence, chemo benefit"],
+        ["Decipher", "Prostate", "RNA expression classifier", "Metastasis-free survival"],
+        ["ELN 2022", "AML", "Cytogenetic + molecular", "Risk stratification and transplant guidance"],
+        ["MRD (flow, NGS)", "MM, AML, CLL", "Residual disease post-therapy", "Relapse risk, depth of response"],
+        ["TMB / MSI-H", "Multiple cancers", "Immune/mutational load", "IO eligibility and response"],
+        ["ctDNA", "CRC, NSCLC, Melanoma", "Cell-free tumor DNA", "Early recurrence, treatment surveillance"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6. Score Type Comparison"
+    },
+    {
+      "type": "table",
+      "headers": ["Score Type", "Tools (Examples)", "Strengths", "Weaknesses"],
+      "rows": [
+        ["Clinical", "IPI, ISS, IMDC", "Fast, low-cost, universally applicable", "Misses biological heterogeneity"],
+        ["Molecular", "IPSS-M, ELN, Oncotype", "Precision, predictive, prognosis-altering", "Cost, access, technical interpretation"],
+        ["Frailty", "CGA, IMWG, CRASH", "Patient-centered, toxicity forecasting", "Time-consuming, less standardized usage"],
+        ["Composite", "R2-ISS, m7-FLIPI, ProMisE", "Integrates tumor + host + biology", "Requires multi-modal infrastructure"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Composite models offer the most actionable, individualized prognostics when feasible."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "7. Prognostic Tool Use by Clinical Decision"
+    },
+    {
+      "type": "table",
+      "headers": ["Clinical Decision Point", "Recommended Tools"],
+      "rows": [
+        ["Initial staging & risk classification", "TNM, IPSS-R, ISS, IPI"],
+        ["Chemo intensity planning (elderly)", "G8, CGA, CRASH, IMWG Frailty"],
+        ["IO eligibility", "PD-L1, TMB, MSI-H"],
+        ["Transplant consideration (AML/MM/MDS)", "ELN 2022, R2-ISS, IPSS-M"],
+        ["Chemo omission (breast/colon)", "Oncotype DX, MammaPrint, MSI"],
+        ["Surveillance and early relapse detection", "MRD (NGS), ctDNA, imaging"],
+        ["Clinical trial stratification", "IPI, R2-ISS, ELN 2022, Decipher"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "8. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Prognostic scoring has transformed from stage-based classification to a layered, biology-driven science. In this evolving landscape:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Clinical scores remain foundational.",
+        "Molecular scores redefine what \"high risk\" truly means.",
+        "Functional and frailty scores ensure therapeutic safety.",
+        "Composite tools integrate disease, host, and treatment context."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Precision prognostication = Anatomy + Biology + Frailty, applied patient-by-patient, decision-by-decision."
+    }
+  ]
+}

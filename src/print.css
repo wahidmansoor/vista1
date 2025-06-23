@@ -1,0 +1,64 @@
+@page {
+  size: A4;
+  margin: 2cm;
+  
+  @top-center {
+    content: 'OncoVista Clinical Handbook';
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 9pt;
+    color: #666;
+  }
+  
+  @bottom-center {
+    content: counter(page) " of " counter(pages);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 9pt;
+    color: #666;
+  }
+}
+
+/* Print-specific layout adjustments */
+@media print {
+  .main-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Add section titles to page breaks */
+  h1, h2 {
+    break-before: page;
+  }
+
+  /* Keep related content together */
+  figure, table {
+    break-inside: avoid;
+  }
+
+  /* Enhance clinical content presentation */
+  .clinical-note, .warning-box, .important-box {
+    border: 1px solid #666 !important;
+    padding: 1em !important;
+    margin: 1em 0 !important;
+    break-inside: avoid !important;
+  }
+
+  /* Ensure tables span full width in print */
+  table {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Enhance table borders for print */
+  th, td {
+    border: 0.5pt solid #999 !important;
+  }
+
+  /* Remove interactive elements */
+  button, 
+  .interactive-element,
+  [role="button"],
+  .no-print {
+    display: none !important;
+  }
+}

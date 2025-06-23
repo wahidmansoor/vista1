@@ -1,0 +1,1482 @@
+[
+  {
+    "title": "General Oncology",
+    "items": [
+      {
+        "title": "Cancer Biology",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "general-oncology/cancer-biology/Introduction"
+          },
+          {
+            "title": "Hallmarks of Cancer",
+            "path": "general-oncology/cancer-biology/Hallmarks-of-Cancer"
+          },
+          {
+            "title": "Oncogenes and Tumor Suppressors",
+            "path": "general-oncology/cancer-biology/Oncogenes-and-Tumor-Suppressors"
+          },
+          {
+            "title": "Genomic Instability and DNA Repair Mechanisms",
+            "path": "general-oncology/cancer-biology/Genomic-Instability-and-DNA-Repair-Mechanisms"
+          },
+          {
+            "title": "Epigenetics in Cancer",
+            "path": "general-oncology/cancer-biology/Epigenetics-in-Cancer"
+          },
+          {
+            "title": "Tumor Microenvironment (TME)",
+            "path": "general-oncology/cancer-biology/tumor-microenvironment"
+          },
+          {
+            "title": "Clonal Evolution and Tumor Heterogeneity",
+            "path": "general-oncology/cancer-biology/Clonal-Evolution-and-Tumor-Heterogeneity"
+          },
+          {
+            "title": "Cancer Stem Cells (CSCs)",
+            "path": "general-oncology/cancer-biology/cancer-stem-cells"
+          },
+          {
+            "title": "Angiogenesis in Tumors",
+            "path": "general-oncology/cancer-biology/Angiogenesis-in-Tumors"
+          },
+          {
+            "title": "Invasion and Metastasis",
+            "path": "general-oncology/cancer-biology/Invasion-and-Metastasis"
+          },
+          {
+            "title": "Cancer Metabolism",
+            "path": "general-oncology/cancer-biology/Cancer-Metabolism"
+          },
+          {
+            "title": "Viral Oncogenesis",
+            "path": "general-oncology/cancer-biology/Viral-Oncogenesis"
+          },
+          {
+            "title": "Tumor Immune Evasion and Immunoediting",
+            "path": "general-oncology/cancer-biology/Tumor-Immune-Evasion-and-Immunoediting"
+          },
+          {
+            "title": "Mechanisms of Resistance to Therapy",
+            "path": "general-oncology/cancer-biology/Mechanisms-of-Resistance-to-Therapy"
+          },
+          {
+            "title": "Case-Based Applications",
+            "path": "general-oncology/cancer-biology/Case-Based-Applications"
+          },
+          {
+            "title": "Clinical Application Summary",
+            "path": "general-oncology/cancer-biology/Clinical-Application-Summary"
+          },
+          {
+            "title": "Landmark Trials and References",
+            "path": "general-oncology/cancer-biology/Landmark-Trials-and-References"
+          }
+        ]
+      },
+      {
+        "title": "Performance Status",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "general-oncology/performance-status/Introduction"
+          },
+          {
+            "title": "ECOG Performance Status (WHO Scale)",
+            "path": "general-oncology/performance-status/ecog-who-scale"
+          },
+          {
+            "title": "Karnofsky Performance Status (KPS)",
+            "path": "general-oncology/performance-status/karnofsky-performance-status"
+          },
+          {
+            "title": "Frailty Assessment and Geriatric Oncology Tools",
+            "path": "general-oncology/performance-status/Frailty-Assessment-and-Geriatric-Oncology-Tools"
+          },
+          {
+            "title": "Performance Status in Treatment Planning",
+            "path": "general-oncology/performance-status/Performance-Status-in-Treatment-Planning"
+          },
+          {
+            "title": "Performance Status in Clinical Trials",
+            "path": "general-oncology/performance-status/Performance-Status-in-Clinical-Trials"
+          },
+          {
+            "title": "Performance Status in Special Populations (Pediatric, Elderly)",
+            "path": "general-oncology/performance-status/Special-Populations"
+          },
+          {
+            "title": "Summary Table",
+            "path": "general-oncology/performance-status/Summary-Table"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "general-oncology/performance-status/Key-Takeaways"
+          },
+          {
+            "title": "Clinical Pearls",
+            "path": "general-oncology/performance-status/Clinical-Pearls"
+          }
+        ]
+      },
+      {
+        "title": "Staging Systems",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "general-oncology/staging-systems/Introduction"
+          },
+          {
+            "title": "TNM Classification (AJCC/UICC)",
+            "path": "general-oncology/staging-systems/tnm-classification"
+          },
+          {
+            "title": "Clinical (cTNM) vs Pathologic (pTNM) Staging",
+            "path": "general-oncology/staging-systems/Clinical-vs-Pathologic-Staging"
+          },
+          {
+            "title": "TNM by Cancer Type (Summary Table)",
+            "path": "general-oncology/staging-systems/TNM-Summary-Table"
+          },
+          {
+            "title": "Alternative Staging Systems (Ann Arbor, FIGO)",
+            "path": "general-oncology/staging-systems/alternative-staging-systems"
+          },
+          {
+            "title": "Hematologic Cancer Staging (NHL, HL, Leukemia)",
+            "path": "general-oncology/staging-systems/hematologic-staging"
+          },
+          {
+            "title": "Prefixes and Suffixes in TNM",
+            "path": "general-oncology/staging-systems/Prefixes-and-Suffixes-in-TNM"
+          },
+          {
+            "title": "Staging vs Grading",
+            "path": "general-oncology/staging-systems/Staging-vs-Grading"
+          },
+          {
+            "title": "How Staging Guides Clinical Decision-Making",
+            "path": "general-oncology/staging-systems/Clinical-Decision-Making"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "general-oncology/staging-systems/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "general-oncology/staging-systems/References"
+          }
+        ]
+      },
+      {
+        "title": "Prognostic Scores",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "general-oncology/prognostic-scores/Introduction"
+          },
+          {
+            "title": "Key Prognostic Score Types",
+            "path": "general-oncology/prognostic-scores/Key-Prognostic-Score-Types"
+          },
+          {
+            "title": "Disease-Specific Tools",
+            "path": "general-oncology/prognostic-scores/Disease-Specific-Tools"
+          },
+          {
+            "title": "International Prognostic Index (IPI) – NHL",
+            "path": "general-oncology/prognostic-scores/International-Prognostic-Index-(IPI)-–-NHL"
+          },
+          {
+            "title": "FLIPI – Follicular Lymphoma",
+            "path": "general-oncology/prognostic-scores/FLIPI-–-Follicular-Lymphoma"
+          },
+          {
+            "title": "R-ISS – Multiple Myeloma",
+            "path": "general-oncology/prognostic-scores/R-ISS-–-Multiple-Myeloma"
+          },
+          {
+            "title": "IPSS – Myelodysplastic Syndromes",
+            "path": "general-oncology/prognostic-scores/IPSS-–-Myelodysplastic-Syndromes"
+          },
+          {
+            "title": "Organ-Specific Prognostic Scores",
+            "path": "general-oncology/prognostic-scores/Organ-Specific-Prognostic-Scores"
+          },
+          {
+            "title": "Frailty-Based Prognostication",
+            "path": "general-oncology/prognostic-scores/Frailty-Based-Prognostication"
+          },
+          {
+            "title": "New Biomarker-Integrated Scores",
+            "path": "general-oncology/prognostic-scores/New-Biomarker-Integrated-Scores"
+          },
+          {
+            "title": "Summary Table",
+            "path": "general-oncology/prognostic-scores/Summary-Table"
+          },
+          {
+            "title": "References",
+            "path": "general-oncology/prognostic-scores/References"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Diagnosis & Workup",
+    "items": [
+      {
+        "title": "Diagnostic Flow",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "diagnosis-workup/diagnostic-flow/Introduction"
+          },
+          {
+            "title": "General Diagnostic Algorithm",
+            "path": "diagnosis-workup/diagnostic-flow/General-Diagnostic-Algorithm"
+          },
+          {
+            "title": "Biopsy as the Gold Standard",
+            "path": "diagnosis-workup/diagnostic-flow/Biopsy-as-the-Gold-Standard"
+          },
+          {
+            "title": "Role of Cytology",
+            "path": "diagnosis-workup/diagnostic-flow/Role-of-Cytology"
+          },
+          {
+            "title": "Initial Laboratory Evaluation",
+            "path": "diagnosis-workup/diagnostic-flow/Initial-Laboratory-Evaluation"
+          },
+          {
+            "title": "Imaging Strategy",
+            "path": "diagnosis-workup/diagnostic-flow/Imaging-Strategy-(Tiered-Approach)"
+          },
+          {
+            "title": "Liquid Biopsy (ctDNA, CTCs)",
+            "path": "diagnosis-workup/diagnostic-flow/Liquid-Biopsy-(ctDNA,-CTCs)"
+          },
+          {
+            "title": "Common Diagnostic Pitfalls",
+            "path": "diagnosis-workup/diagnostic-flow/Common-Diagnostic-Pitfalls"
+          },
+          {
+            "title": "Diagnostic Flow Diagram",
+            "path": "diagnosis-workup/diagnostic-flow/Diagnostic-Flow-Diagram"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "diagnosis-workup/diagnostic-flow/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "diagnosis-workup/diagnostic-flow/References"
+          },
+          {
+            "title": "Histopathology",
+            "items": [
+              {
+                "title": "Introduction",
+                "path": "diagnosis-workup/histopathology/Introduction"
+              },
+              {
+                "title": "Histologic Diagnosis Workflow",
+                "path": "diagnosis-workup/histopathology/Histologic-Diagnosis-Workflow"
+              },
+              {
+                "title": "H&E Staining Basics",
+                "path": "diagnosis-workup/histopathology/H-and-E-Staining-Basics"
+              },
+              {
+                "title": "Tumor Grading",
+                "path": "diagnosis-workup/histopathology/Tumor-Grading"
+              },
+              {
+                "title": "Immunohistochemistry (IHC) and Key Markers",
+                "path": "diagnosis-workup/histopathology/Immunohistochemistry-(IHC)-and-Key-Markers"
+              },
+              {
+                "title": "Special Stains",
+                "path": "diagnosis-workup/histopathology/Special-Stains"
+              },
+              {
+                "title": "Molecular Pathology and Next-Gen Sequencing (NGS)",
+                "path": "diagnosis-workup/histopathology/Molecular-Pathology-and-Next-Gen-Sequencing-(NGS)"
+              },
+              {
+                "title": "Reading and Interpreting Pathology Reports",
+                "path": "diagnosis-workup/histopathology/Reading-and-Interpreting-Pathology-Reports"
+              },
+              {
+                "title": "Red Flags and Clinical Pearls",
+                "path": "diagnosis-workup/histopathology/Red-Flags-and-Clinical-Pearls"
+              },
+              {
+                "title": "Key Takeaways",
+                "path": "diagnosis-workup/histopathology/Key-Takeaways"
+              },
+              {
+                "title": "References",
+                "path": "diagnosis-workup/histopathology/References"
+              }
+            ]
+          },
+          {
+            "title": "Radiology",
+            "items": [
+              {
+                "title": "Introduction",
+                "path": "diagnosis-workup/radiology/Introduction"
+              },
+              {
+                "title": "Imaging in Oncology: Role and Principles",
+                "path": "diagnosis-workup/radiology/Imaging-in-Oncology-Role-and-Principles"
+              },
+              {
+                "title": "Imaging Modalities Overview",
+                "path": "diagnosis-workup/radiology/Imaging-Modalities-Overview-(CT,-MRI,-PET,-US)"
+              },
+              {
+                "title": "Specialized Imaging Protocols",
+                "path": "diagnosis-workup/radiology/Specialized-Imaging-Protocols-(PET-CT,-PET-MRI)"
+              },
+              {
+                "title": "Radiologic Signs and Reporting Standards",
+                "path": "diagnosis-workup/radiology/Radiologic-Signs-and-Reporting-Standards"
+              },
+              {
+                "title": "Diagnostic Pitfalls in Imaging",
+                "path": "diagnosis-workup/radiology/Diagnostic-Pitfalls-in-Imaging"
+              },
+              {
+                "title": "Radiology's Role in Treatment Planning",
+                "path": "diagnosis-workup/radiology/Radiology-Role-in-Treatment-Planning"
+              },
+              {
+                "title": "Emerging Imaging Technologies (AI, Radiomics)",
+                "path": "diagnosis-workup/radiology/AI-Radiomics"
+              },
+              {
+                "title": "Key Takeaways",
+                "path": "diagnosis-workup/radiology/Key-Takeaways"
+              },
+              {
+                "title": "References",
+                "path": "diagnosis-workup/radiology/References"
+              }
+            ]
+          },
+          {
+            "title": "Tumor Markers",
+            "items": [
+              {
+                "title": "Introduction",
+                "path": "diagnosis-workup/tumor-markers/Introduction"
+              },
+              {
+                "title": "Classification of Tumor Markers",
+                "path": "diagnosis-workup/tumor-markers/Classification-of-Tumor-Markers"
+              },
+              {
+                "title": "Organ-Specific Tumor Markers",
+                "path": "diagnosis-workup/tumor-markers/Organ-Specific-Tumor-Markers-Breast-GI-GU-etc-"
+              },
+              {
+                "title": "Surveillance vs Diagnosis Roles",
+                "path": "diagnosis-workup/tumor-markers/Surveillance-vs-Diagnosis-Roles"
+              },
+              {
+                "title": "Limitations and Interpretation Pitfalls",
+                "path": "diagnosis-workup/tumor-markers/Limitations-and-Interpretation-Pitfalls"
+              },
+              {
+                "title": "Integration with Imaging and Biopsy",
+                "path": "diagnosis-workup/tumor-markers/Integration-with-Imaging-and-Biopsy"
+              },
+              {
+                "title": "Summary Table",
+                "path": "diagnosis-workup/tumor-markers/Summary-Table"
+              },
+              {
+                "title": "Key Takeaways",
+                "path": "diagnosis-workup/tumor-markers/Key-Takeaways"
+              },
+              {
+                "title": "References",
+                "path": "diagnosis-workup/tumor-markers/References"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Treatment Modalities",
+    "items": [
+      {
+        "title": "Chemotherapy",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "treatment-modalities/chemotherapy/Introduction"
+          },
+          {
+            "title": "Goals of Chemotherapy",
+            "path": "treatment-modalities/chemotherapy/Goals-of-Chemotherapy"
+          },
+          {
+            "title": "Routes of Administration",
+            "path": "treatment-modalities/chemotherapy/Routes-of-Administration"
+          },
+          {
+            "title": "Chemotherapy Agent Classification",
+            "path": "treatment-modalities/chemotherapy/Chemotherapy-Agent-Classification"
+          },
+          {
+            "title": "Common Chemo Regimens by Tumor Type",
+            "path": "treatment-modalities/chemotherapy/Common-Chemo-Regimens-by-Tumor-Type"
+          },
+          {
+            "title": "Pharmacokinetics and Pharmacodynamics",
+            "path": "treatment-modalities/chemotherapy/Pharmacokinetics-and-Pharmacodynamics"
+          },
+          {
+            "title": "Dose Modification Principles",
+            "path": "treatment-modalities/chemotherapy/Dose-Modification-Principles"
+          },
+          {
+            "title": "Chemoresistance Mechanisms",
+            "path": "treatment-modalities/chemotherapy/Chemoresistance-Mechanisms"
+          },
+          {
+            "title": "Summary Table",
+            "path": "treatment-modalities/chemotherapy/Summary-Table"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "treatment-modalities/chemotherapy/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "treatment-modalities/chemotherapy/References"
+          }
+        ]
+      },
+      {
+        "title": "Immunotherapy",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "treatment-modalities/immunotherapy/Introduction"
+          },
+          {
+            "title": "Major Classes",
+            "path": "treatment-modalities/immunotherapy/Major-Classes-Checkpoint-Inhibitors-Vaccines-Cytokines-"
+          },
+          {
+            "title": "Immune Checkpoint Inhibitors",
+            "path": "treatment-modalities/immunotherapy/Immune-Checkpoint-Inhibitors-Mechanisms-and-Approvals"
+          },
+          {
+            "title": "Biomarkers (PD-L1, TMB, MSI-H)",
+            "path": "treatment-modalities/immunotherapy/Biomarkers-(PD-L1,-TMB,-MSI-H)"
+          },
+          {
+            "title": "CAR-T Cell Therapy",
+            "path": "treatment-modalities/immunotherapy/CAR-T-Cell-Therapy"
+          },
+          {
+            "title": "Emerging Immunotherapies",
+            "path": "treatment-modalities/immunotherapy/Emerging-Immunotherapies-bispecifics-oncolytic-viruses-"
+          },
+          {
+            "title": "Immune-Related Adverse Events (irAEs)",
+            "path": "treatment-modalities/immunotherapy/Immune-Related-Adverse-Events-(irAEs)"
+          },
+          {
+            "title": "Management of irAEs",
+            "path": "treatment-modalities/immunotherapy/Management-of-irAEs"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "treatment-modalities/immunotherapy/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "treatment-modalities/immunotherapy/References"
+          }
+        ]
+      },
+      {
+        "title": "Radiotherapy",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "treatment-modalities/radiotherapy/Introduction"
+          },
+          {
+            "title": "Types of Radiotherapy",
+            "path": "treatment-modalities/radiotherapy/Types-of-Radiotherapy-(EBRT,-Brachytherapy,-SRS)"
+          },
+          {
+            "title": "Mechanisms of Action",
+            "path": "treatment-modalities/radiotherapy/Mechanisms-of-Radiation-Induced-Cancer-Control"
+          },
+          {
+            "title": "Treatment Planning",
+            "path": "treatment-modalities/radiotherapy/Radiation-Planning-(Simulation,-Immobilization,-Target-Volumes)"
+          },
+          {
+            "title": "Treatment Intent",
+            "path": "treatment-modalities/radiotherapy/Indications-by-Intent-(Curative,-Palliative)"
+          },
+          {
+            "title": "Radiation Modifiers",
+            "path": "treatment-modalities/radiotherapy/Radiosensitizers-and-Radioprotectants"
+          },
+          {
+            "title": "Toxicities",
+            "path": "treatment-modalities/radiotherapy/Acute-and-Chronic-Radiation-Toxicities"
+          },
+          {
+            "title": "Special Populations",
+            "path": "treatment-modalities/radiotherapy/Radiotherapy-in-Special-Populations"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "treatment-modalities/radiotherapy/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "treatment-modalities/radiotherapy/References"
+          }
+        ]
+      },
+      {
+        "title": "Surgery",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "treatment-modalities/surgery/Introduction"
+          },
+          {
+            "title": "Principles of Surgical Oncology",
+            "path": "treatment-modalities/surgery/Principles-of-Surgical-Oncology"
+          },
+          {
+            "title": "Resection Margins (R0, R1, R2)",
+            "path": "treatment-modalities/surgery/Resection-Margins-(R0,-R1,-R2)-and-Their-Significance"
+          },
+          {
+            "title": "Minimally Invasive and Robotic Surgery",
+            "path": "treatment-modalities/surgery/Minimally-Invasive-Techniques-and-Robotic-Surgery"
+          },
+          {
+            "title": "Surgery in Multimodal Settings",
+            "path": "treatment-modalities/surgery/Surgery-in-Multimodal-Treatment-Settings"
+          },
+          {
+            "title": "Decision-Making on Resectability",
+            "path": "treatment-modalities/surgery/Decision-Making-on-Resectability"
+          },
+          {
+            "title": "Post-Surgical Complications",
+            "path": "treatment-modalities/surgery/Post-Surgical-Complications-in-Oncology"
+          },
+          {
+            "title": "Clinical Pearls for Surgical Oncology",
+            "path": "treatment-modalities/surgery/Clinical-Pearls-for-Surgical-Oncology"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "treatment-modalities/surgery/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "treatment-modalities/surgery/References"
+          }
+        ]
+      },
+      {
+        "title": "Targeted Therapy",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "treatment-modalities/targeted-therapy/Introduction"
+          },
+          {
+            "title": "Mechanisms (TKIs, mAbs, ADCs)",
+            "path": "treatment-modalities/targeted-therapy/Mechanisms-(TKIs,-mAbs,-ADCs)"
+          },
+          {
+            "title": "Key Targetable Alterations",
+            "path": "treatment-modalities/targeted-therapy/Key-Targetable-Alterations-and-Matching-Drugs"
+          },
+          {
+            "title": "Biomarker Testing Workflow",
+            "path": "treatment-modalities/targeted-therapy/Biomarker-Testing-Workflow"
+          },
+          {
+            "title": "Resistance Mechanisms",
+            "path": "treatment-modalities/targeted-therapy/Resistance-Mechanisms-in-Targeted-Therapy"
+          },
+          {
+            "title": "Common Toxicities (Class-Specific)",
+            "path": "treatment-modalities/targeted-therapy/Common-Toxicities-(Class-Specific)"
+          },
+          {
+            "title": "Management of Toxicities",
+            "path": "treatment-modalities/targeted-therapy/Management-of-Targeted-Therapy-Toxicities"
+          },
+          {
+            "title": "Summary Table",
+            "path": "treatment-modalities/targeted-therapy/Summary-Table-(Key-Targets-and-Drugs)"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "treatment-modalities/targeted-therapy/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "treatment-modalities/targeted-therapy/References"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Systems Oncology",
+    "items": [
+      {
+        "title": "Breast Cancer",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/breast-cancer/Overview"
+          },
+          {
+            "title": "Epidemiology and Risk Factors",
+            "path": "systems-oncology/breast-cancer/Epidemiology-and-Risk-Factors"
+          },
+          {
+            "title": "Histologic and Molecular Subtypes",
+            "path": "systems-oncology/breast-cancer/Histologic-and-Molecular-Subtypes"
+          },
+          {
+            "title": "Diagnostic Workup (Imaging, Biopsy)",
+            "path": "systems-oncology/breast-cancer/Diagnostic-Workup-(Imaging,-Biopsy)"
+          },
+          {
+            "title": "Staging (AJCC 8th Edition)",
+            "path": "systems-oncology/breast-cancer/Staging-(AJCC-8th-Edition)"
+          },
+          {
+            "title": "Treatment by Stage",
+            "path": "systems-oncology/breast-cancer/Treatment-by-Stage"
+          },
+          {
+            "title": "Surgery (BCS, Mastectomy)",
+            "path": "systems-oncology/breast-cancer/Surgery-(BCS,-Mastectomy)"
+          },
+          {
+            "title": "Radiation Therapy Indications",
+            "path": "systems-oncology/breast-cancer/Radiation-Therapy-Indications"
+          },
+          {
+            "title": "Systemic Therapy: Hormone, HER2+, TNBC",
+            "path": "systems-oncology/breast-cancer/Systemic-Therapy"
+          },
+          {
+            "title": "Neoadjuvant vs Adjuvant Approaches",
+            "path": "systems-oncology/breast-cancer/Neoadjuvant-vs-Adjuvant"
+          },
+          {
+            "title": "Metastatic Breast Cancer",
+            "path": "systems-oncology/breast-cancer/Metastatic-Breast-Cancer"
+          },
+          {
+            "title": "Survivorship and Surveillance",
+            "path": "systems-oncology/breast-cancer/Survivorship-and-Surveillance"
+          },
+          {
+            "title": "Prevention and Screening Strategies",
+            "path": "systems-oncology/breast-cancer/Prevention-and-Screening-Strategies"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/breast-cancer/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/breast-cancer/References"
+          }
+        ]
+      },
+      {
+        "title": "Colorectal Cancer",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/colorectal-cancer/Overview"
+          },
+          {
+            "title": "Risk Factors and Genetic Syndromes",
+            "path": "systems-oncology/colorectal-cancer/Risk-Factors-and-Genetic-Syndromes"
+          },
+          {
+            "title": "Common Molecular Pathways",
+            "path": "systems-oncology/colorectal-cancer/Common-Molecular-Pathways"
+          },
+          {
+            "title": "Symptoms and Clinical Presentation",
+            "path": "systems-oncology/colorectal-cancer/Symptoms-and-Clinical-Presentation"
+          },
+          {
+            "title": "Diagnostic Workup (Colonoscopy, Imaging)",
+            "path": "systems-oncology/colorectal-cancer/Colonoscopy-Imaging"
+          },
+          {
+            "title": "Staging (AJCC 8th Edition)",
+            "path": "systems-oncology/colorectal-cancer/AJCC-8th-Edition"
+          },
+          {
+            "title": "Treatment Approach: Colon vs Rectal Cancer",
+            "path": "systems-oncology/colorectal-cancer/Treatment-Approach"
+          },
+          {
+            "title": "Metastatic Disease and Oligometastatic Management",
+            "path": "systems-oncology/colorectal-cancer/Metastatic-and-Oligometastatic-Management"
+          },
+          {
+            "title": "Surveillance and Recurrence Risk",
+            "path": "systems-oncology/colorectal-cancer/Surveillance-and-Recurrence-Risk"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/colorectal-cancer/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/colorectal-cancer/References"
+          }
+        ]
+      },
+      {
+        "title": "Lung Cancer",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/lung-cancer/Overview"
+          },
+          {
+            "title": "Risk Factors (Smoking, Radon, Asbestos)",
+            "path": "systems-oncology/lung-cancer/Smoking-Radon-Asbestos"
+          },
+          {
+            "title": "NSCLC Subtypes vs Small Cell Lung Cancer",
+            "path": "systems-oncology/lung-cancer/NSCLC-vs-SCLC"
+          },
+          {
+            "title": "Paraneoplastic Syndromes",
+            "path": "systems-oncology/lung-cancer/Paraneoplastic-Syndromes"
+          },
+          {
+            "title": "Diagnostic Approach",
+            "path": "systems-oncology/lung-cancer/Diagnostic-Approach"
+          },
+          {
+            "title": "Staging (AJCC 8th Edition)",
+            "path": "systems-oncology/lung-cancer/AJCC-8th-Edition"
+          },
+          {
+            "title": "NSCLC: Surgical, Radiotherapy, Systemic Treatments",
+            "path": "systems-oncology/lung-cancer/NSCLC-Treatment"
+          },
+          {
+            "title": "SCLC: Limited vs Extensive Stage",
+            "path": "systems-oncology/lung-cancer/SCLC-Treatment"
+          },
+          {
+            "title": "Radiation Therapy Role (SBRT, PCI)",
+            "path": "systems-oncology/lung-cancer/SBRT-PCI"
+          },
+          {
+            "title": "Resectability and Multidisciplinary Planning",
+            "path": "systems-oncology/lung-cancer/Resectability-and-Multidisciplinary-Planning"
+          },
+          {
+            "title": "Surveillance and Survivorship",
+            "path": "systems-oncology/lung-cancer/Surveillance-and-Survivorship"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/lung-cancer/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/lung-cancer/References"
+          }
+        ]
+      },
+      {
+        "title": "Head & Neck Cancer",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/head-neck-cancer/Overview"
+          },
+          {
+            "title": "Risk Factors (Tobacco, HPV)",
+            "path": "systems-oncology/head-neck-cancer/Tobacco-HPV"
+          },
+          {
+            "title": "Common Presentations",
+            "path": "systems-oncology/head-neck-cancer/Common-Presentations"
+          },
+          {
+            "title": "Diagnostic Workup and Imaging",
+            "path": "systems-oncology/head-neck-cancer/Diagnostic-Workup-and-Imaging"
+          },
+          {
+            "title": "Staging (AJCC 8th Edition)",
+            "path": "systems-oncology/head-neck-cancer/AJCC-8th-Edition"
+          },
+          {
+            "title": "Treatment by Subsite and Stage",
+            "path": "systems-oncology/head-neck-cancer/Treatment-by-Subsite-and-Stage"
+          },
+          {
+            "title": "Systemic Therapy Principles",
+            "path": "systems-oncology/head-neck-cancer/Systemic-Therapy-Principles"
+          },
+          {
+            "title": "Complications and Supportive Care",
+            "path": "systems-oncology/head-neck-cancer/Complications-and-Supportive-Care"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/head-neck-cancer/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/head-neck-cancer/References"
+          }
+        ]
+      },
+      {
+        "title": "Prostate Cancer",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/prostate-cancer/Overview"
+          },
+          {
+            "title": "Risk Factors (Age, Race, Genetics)",
+            "path": "systems-oncology/prostate-cancer/Age-Race-Genetics"
+          },
+          {
+            "title": "Diagnostic Evaluation (PSA, Biopsy, MRI)",
+            "path": "systems-oncology/prostate-cancer/PSA-Biopsy-MRI"
+          },
+          {
+            "title": "Risk Stratification (NCCN Guidelines)",
+            "path": "systems-oncology/prostate-cancer/NCCN-Guidelines"
+          },
+          {
+            "title": "Localized Disease Management",
+            "path": "systems-oncology/prostate-cancer/Localized-Disease-Management"
+          },
+          {
+            "title": "Androgen Deprivation Therapy (ADT)",
+            "path": "systems-oncology/prostate-cancer/ADT"
+          },
+          {
+            "title": "Metastatic Prostate Cancer (mHSPC, mCRPC)",
+            "path": "systems-oncology/prostate-cancer/mHSPC-mCRPC"
+          },
+          {
+            "title": "Surveillance and Monitoring",
+            "path": "systems-oncology/prostate-cancer/Surveillance-and-Monitoring"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/prostate-cancer/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/prostate-cancer/References"
+          }
+        ]
+      },
+      {
+        "title": "Lymphomas",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/lymphomas/Overview"
+          },
+          {
+            "title": "Classification (HL vs NHL)",
+            "path": "systems-oncology/lymphomas/HL-vs-NHL"
+          },
+          {
+            "title": "Diagnostic Workup and Immunophenotyping",
+            "path": "systems-oncology/lymphomas/Diagnostic-Workup-and-Immunophenotyping"
+          },
+          {
+            "title": "Staging – Ann Arbor System",
+            "path": "systems-oncology/lymphomas/Staging-Ann-Arbor-System"
+          },
+          {
+            "title": "Treatment of Hodgkin Lymphoma",
+            "path": "systems-oncology/lymphomas/Treatment-of-Hodgkin-Lymphoma"
+          },
+          {
+            "title": "Non-Hodgkin Lymphoma Approaches",
+            "path": "systems-oncology/lymphomas/Non-Hodgkin-Lymphoma-Approaches"
+          },
+          {
+            "title": "CNS Prophylaxis Indications",
+            "path": "systems-oncology/lymphomas/CNS-Prophylaxis-Indications"
+          },
+          {
+            "title": "Management of Relapsed/Refractory Disease",
+            "path": "systems-oncology/lymphomas/Management-of-Relapsed-Refractory-Disease"
+          },
+          {
+            "title": "Surveillance Strategies",
+            "path": "systems-oncology/lymphomas/Surveillance-Strategies"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/lymphomas/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/lymphomas/References"
+          }
+        ]
+      },
+      {
+        "title": "Leukemias",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/leukemias/Overview"
+          },
+          {
+            "title": "Clinical Features and Diagnosis",
+            "path": "systems-oncology/leukemias/Clinical-Features-and-Diagnosis"
+          },
+          {
+            "title": "AML – Approach to Diagnosis and Treatment",
+            "path": "systems-oncology/leukemias/AML-Approach-to-Diagnosis-and-Treatment"
+          },
+          {
+            "title": "APL – Emergency Recognition (ATRA Therapy)",
+            "path": "systems-oncology/leukemias/ATRA-Therapy"
+          },
+          {
+            "title": "ALL – Risk Stratification and Management",
+            "path": "systems-oncology/leukemias/ALL-Risk-Stratification-and-Management"
+          },
+          {
+            "title": "CML – TKIs and Resistance Mechanisms",
+            "path": "systems-oncology/leukemias/CML-TKIs-and-Resistance-Mechanisms"
+          },
+          {
+            "title": "CLL – Indolent vs High-Risk Disease",
+            "path": "systems-oncology/leukemias/CLL-Indolent-vs-High-Risk-Disease"
+          },
+          {
+            "title": "Leukemia Emergencies (TLS, Leukostasis, DIC)",
+            "path": "systems-oncology/leukemias/TLS-Leukostasis-DIC"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/leukemias/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/leukemias/References"
+          }
+        ]
+      },
+      {
+        "title": "Gastrointestinal Cancers",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/gastrointestinal-cancers/Overview"
+          },
+          {
+            "title": "Esophageal and GEJ Cancer",
+            "path": "systems-oncology/gastrointestinal-cancers/Esophageal-and-GEJ-Cancer"
+          },
+          {
+            "title": "Gastric Cancer",
+            "path": "systems-oncology/gastrointestinal-cancers/Gastric-Cancer"
+          },
+          {
+            "title": "Hepatocellular Carcinoma (HCC)",
+            "path": "systems-oncology/gastrointestinal-cancers/HCC"
+          },
+          {
+            "title": "Cholangiocarcinoma and Gallbladder Cancer",
+            "path": "systems-oncology/gastrointestinal-cancers/Cholangiocarcinoma-and-Gallbladder-Cancer"
+          },
+          {
+            "title": "Pancreatic Cancer",
+            "path": "systems-oncology/gastrointestinal-cancers/Pancreatic-Cancer"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/gastrointestinal-cancers/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/gastrointestinal-cancers/References"
+          }
+        ]
+      },
+      {
+        "title": "Gynecologic Cancers",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/gynecologic-cancers/Overview"
+          },
+          {
+            "title": "Ovarian Cancer",
+            "path": "systems-oncology/gynecologic-cancers/Ovarian-Cancer"
+          },
+          {
+            "title": "Endometrial Cancer",
+            "path": "systems-oncology/gynecologic-cancers/Endometrial-Cancer"
+          },
+          {
+            "title": "Cervical Cancer",
+            "path": "systems-oncology/gynecologic-cancers/Cervical-Cancer"
+          },
+          {
+            "title": "Vulvar and Vaginal Cancer (Quick Reference)",
+            "path": "systems-oncology/gynecologic-cancers/Quick-Reference"
+          },
+          {
+            "title": "Screening and Prevention Strategies",
+            "path": "systems-oncology/gynecologic-cancers/Screening-and-Prevention-Strategies"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/gynecologic-cancers/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/gynecologic-cancers/References"
+          }
+        ]
+      },
+      {
+        "title": "Urological Cancers",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/urological-cancers/Overview"
+          },
+          {
+            "title": "Bladder Cancer (NMIBC vs MIBC)",
+            "path": "systems-oncology/urological-cancers/NMIBC-vs-MIBC"
+          },
+          {
+            "title": "Renal Cell Carcinoma (RCC)",
+            "path": "systems-oncology/urological-cancers/RCC"
+          },
+          {
+            "title": "Testicular Cancer (Seminoma vs NSGCT)",
+            "path": "systems-oncology/urological-cancers/Seminoma-vs-NSGCT"
+          },
+          {
+            "title": "Surveillance and Follow-Up",
+            "path": "systems-oncology/urological-cancers/Surveillance-and-Follow-Up"
+          },
+          {
+            "title": "Summary Table",
+            "path": "systems-oncology/urological-cancers/Summary-Table"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/urological-cancers/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/urological-cancers/References"
+          }
+        ]
+      },
+      {
+        "title": "CNS Tumors",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/cns-tumors/Overview"
+          },
+          {
+            "title": "Gliomas (WHO Classification)",
+            "path": "systems-oncology/cns-tumors/WHO-Classification"
+          },
+          {
+            "title": "Meningiomas",
+            "path": "systems-oncology/cns-tumors/Meningiomas"
+          },
+          {
+            "title": "Medulloblastomas",
+            "path": "systems-oncology/cns-tumors/Medulloblastomas"
+          },
+          {
+            "title": "Brain Metastases",
+            "path": "systems-oncology/cns-tumors/Brain-Metastases"
+          },
+          {
+            "title": "Leptomeningeal Disease (LMD)",
+            "path": "systems-oncology/cns-tumors/LMD"
+          },
+          {
+            "title": "Radiation Modalities in Neuro-Oncology",
+            "path": "systems-oncology/cns-tumors/Radiation-Modalities-in-Neuro-Oncology"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/cns-tumors/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/cns-tumors/References"
+          }
+        ]
+      },
+      {
+        "title": "Skin Cancer",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/skin-cancer/Overview"
+          },
+          {
+            "title": "Melanoma",
+            "path": "systems-oncology/skin-cancer/Melanoma"
+          },
+          {
+            "title": "Non-Melanoma Skin Cancers",
+            "path": "systems-oncology/skin-cancer/Non-Melanoma-Skin-Cancers"
+          },
+          {
+            "title": "Merkel Cell Carcinoma",
+            "path": "systems-oncology/skin-cancer/Merkel-Cell-Carcinoma"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/skin-cancer/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/skin-cancer/References"
+          }
+        ]
+      },
+      {
+        "title": "Sarcomas",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/sarcomas/Overview"
+          },
+          {
+            "title": "Bone Sarcomas",
+            "path": "systems-oncology/sarcomas/Bone-Sarcomas"
+          },
+          {
+            "title": "Soft Tissue Sarcomas",
+            "path": "systems-oncology/sarcomas/Soft-Tissue-Sarcomas"
+          },
+          {
+            "title": "GIST",
+            "path": "systems-oncology/sarcomas/GIST"
+          },
+          {
+            "title": "Treatment Approaches",
+            "path": "systems-oncology/sarcomas/Treatment-Approaches"
+          },
+          {
+            "title": "Surveillance Strategies",
+            "path": "systems-oncology/sarcomas/Surveillance-Strategies"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/sarcomas/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/sarcomas/References"
+          }
+        ]
+      },
+      {
+        "title": "Rare Cancers",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/rare-cancers/Overview"
+          },
+          {
+            "title": "Thymomas and Thymic Carcinomas",
+            "path": "systems-oncology/rare-cancers/Thymomas-and-Thymic-Carcinomas"
+          },
+          {
+            "title": "Small Bowel Cancers",
+            "path": "systems-oncology/rare-cancers/Small-Bowel-Cancers"
+          },
+          {
+            "title": "Peritoneal Mesothelioma",
+            "path": "systems-oncology/rare-cancers/Peritoneal-Mesothelioma"
+          },
+          {
+            "title": "Carcinoma of Unknown Primary",
+            "path": "systems-oncology/rare-cancers/Carcinoma-of-Unknown-Primary"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/rare-cancers/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/rare-cancers/References"
+          }
+        ]
+      },
+      {
+        "title": "Endocrine Cancers",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "systems-oncology/endocrine-cancers/Overview"
+          },
+          {
+            "title": "Thyroid Cancer",
+            "path": "systems-oncology/endocrine-cancers/Thyroid-Cancer"  
+          },
+          {
+            "title": "Neuroendocrine Tumors",
+            "path": "systems-oncology/endocrine-cancers/Neuroendocrine-Tumors"
+          },
+          {
+            "title": "Adrenal Tumors",
+            "path": "systems-oncology/endocrine-cancers/Adrenal-Tumors"
+          },
+          {
+            "title": "Pituitary Tumors",
+            "path": "systems-oncology/endocrine-cancers/Pituitary-Tumors"
+          },
+          {
+            "title": "Key Takeaways",
+            "path": "systems-oncology/endocrine-cancers/Key-Takeaways"
+          },
+          {
+            "title": "References",
+            "path": "systems-oncology/endocrine-cancers/References"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Toxicities",
+    "items": [
+      {
+        "title": "Acute & Chronic Toxicities",
+        "items": [
+          {
+            "title": "Overview",
+            "path": "toxicities/acute-and-chronic-toxicities/Overview"
+          },
+          {
+            "title": "Acute Toxicity Management",
+            "path": "toxicities/acute-and-chronic-toxicities/Acute-Toxicity-Management"
+          },
+          {
+            "title": "Chronic Toxicity Monitoring",
+            "path": "toxicities/acute-and-chronic-toxicities/Chronic-Toxicity-Monitoring"
+          },
+          {
+            "title": "Long-Term Survivorship Planning",
+            "path": "toxicities/acute-and-chronic-toxicities/Long-Term-Survivorship-Planning"
+          },
+          {
+            "title": "Organ-Specific Late Effects",
+            "path": "toxicities/acute-and-chronic-toxicities/Organ-Specific-Late-Effects"
+          },
+          {
+            "title": "CTCAE (Common Terminology Criteria for Adverse Events)",
+            "path": "toxicities/acute-and-chronic-toxicities/Common-Terminology-Criteria-for-Adverse-Events"
+          },
+          {
+            "title": "Application in Clinical Trials",
+            "path": "toxicities/acute-and-chronic-toxicities/Application-in-Clinical-Trials"
+          },
+          {
+            "title": "Chemo-Specific Toxicities",
+            "items": [
+              {
+                "title": "Class-Specific Side Effects",
+                "path": "toxicities/chemo-specific-toxicities/Class-Specific-Side-Effects"
+              },
+              {
+                "title": "Neurotoxicity, Cardiotoxicity, Pulmonary Toxicity",
+                "path": "toxicities/chemo-specific-toxicities/Neurotoxicity-Cardiotoxicity-Pulmonary-Toxicity"
+              },
+              {
+                "title": "Summary Tables of Common Toxicities",
+                "path": "toxicities/chemo-specific-toxicities/Summary-Tables-of-Common-Toxicities"
+              },
+              {
+                "title": "Preventive Strategies",
+                "path": "toxicities/chemo-specific-toxicities/Preventive-Strategies"
+              }
+            ]
+          },
+          {
+            "title": "Survivorship",
+            "items": [
+              {
+                "title": "Key Domains",
+                "path": "toxicities/survivorship/Key-Domains"
+              },
+              {
+                "title": "Fertility, Psychosocial Health, Second Malignancies",
+                "path": "toxicities/survivorship/Fertility-Psychosocial-Health-Second-Malignancies"
+              },
+              {
+                "title": "Surveillance After Curative Therapy",
+                "path": "toxicities/survivorship/Surveillance-After-Curative-Therapy"
+              },
+              {
+                "title": "Survivorship Care Plans (SCPs)",
+                "path": "toxicities/survivorship/SCPs"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Supportive Care",
+    "items": [
+      {
+        "title": "Antiemetics (Nausea and Vomiting Management)",
+        "path": "supportive-care/Antiemetics-and-CINV-Management"
+      },
+      {
+        "title": "G-CSF Use (Prevention of Neutropenia)",
+        "path": "supportive-care/G-CSF-Use-and-Neutropenia-Prevention"
+      },
+      {
+        "title": "Pain Management (WHO Ladder, Neuropathic Pain)",
+        "path": "supportive-care/Pain-Management-WHO-Ladder"
+      },
+      {
+        "title": "Nutrition in Oncology (Malnutrition, Cachexia)",
+        "path": "supportive-care/Nutrition-Malnutrition-Cachexia"
+      },
+      {
+        "title": "Palliative Care Principles (Early vs Late)",
+        "path": "supportive-care/Palliative-Care-Principles"
+      },
+      {
+        "title": "Ethical and Cultural Considerations in Palliative Care",
+        "path": "supportive-care/Ethical-and-Cultural-Considerations-in-Palliative-Care"
+      }
+    ]
+  },
+  {
+    "title": "Oncologic Emergencies",
+    "items": [
+      {
+        "title": "Tumor Lysis Syndrome (TLS)",
+        "path": "oncologic-emergencies/Tumor-Lysis-Syndrome"
+      },
+      {
+        "title": "Spinal Cord Compression",
+        "path": "oncologic-emergencies/Spinal-Cord-Compression"  
+      },
+      {
+        "title": "Hypercalcemia of Malignancy",
+        "path": "oncologic-emergencies/Hypercalcemia"
+      },
+      {
+        "title": "Febrile Neutropenia",
+        "path": "oncologic-emergencies/Febrile-Neutropenia"
+      },
+      {
+        "title": "Superior Vena Cava Syndrome",
+        "path": "oncologic-emergencies/Superior-Vena-Cava-Syndrome"
+      },
+      {
+        "title": "Brain Metastases and Increased ICP",
+        "path": "oncologic-emergencies/Brain-Metastases-and-ICP"
+      }
+    ]
+  },
+  {
+    "title": "Special Topics",
+    "items": [
+      {
+        "title": "Cancer in Pregnancy",
+        "path": "special-topics/Cancer-in-Pregnancy"
+      },
+      {
+        "title": "Geriatric Oncology (Elderly Populations)",
+        "path": "special-topics/Elderly-Populations"
+      },
+      {
+        "title": "Fertility Preservation",
+        "path": "special-topics/Fertility-Preservation"
+      },
+      {
+        "title": "Cancer Genetics and Hereditary Syndromes",
+        "path": "special-topics/Cancer-Genetics-and-Hereditary-Syndromes"
+      },
+      {
+        "title": "Oncology in Immunocompromised Hosts",
+        "path": "special-topics/Oncology-in-Immunocompromised-Hosts"
+      }
+    ]
+  },
+  {
+    "title": "Resources and Tools",
+    "items": [
+      {
+        "title": "Oncology Calculators (BSA, CrCl, FN Risk, Prognostic Indices)",
+        "path": "resources-and-tools/Oncology-Calculators"
+      },
+      {
+        "title": "Radiation Tools (EQD2, BED)",
+        "path": "resources-and-tools/Radiation-Tools"
+      },
+      {
+        "title": "Quick Reference Guidelines (Summary Tables)",
+        "path": "resources-and-tools/Quick-Reference-Guidelines"
+      },
+      {
+        "title": "Downloadable Cheat Sheets and Checklists",
+        "path": "resources-and-tools/Downloadable-Cheat-Sheets-and-Checklists"
+      },
+      {
+        "title": "Key Organizations (NCCN, ASCO, ESMO, etc.)",
+        "path": "resources-and-tools/Key-Organizations"
+      }
+    ]
+  }
+]

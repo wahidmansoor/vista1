@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug ErrorBoundary</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, Component } = React;
+        
+        // Simplified version of the ErrorBoundary for debugging
+        class TestErrorBoundary extends Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    hasError: false,
+                    resetKey: 0
+                };
+            }
+            
+            static getDerivedStateFromError(error) {
+                console.log('getDerivedStateFromError called:', error.message);
+                return { hasError: true };
+            }
+            
+            componentDidCatch(error, errorInfo) {
+                console.log('componentDidCatch called:', error.message);
+            }
+            
+            handleReset = () => {
+                console.log('handleReset called');
+                this.setState(prevState => ({
+                    hasError: false,
+                    resetKey: prevState.resetKey + 1
+                }));
+            };
+            
+            render() {
+                console.log('ErrorBoundary render - hasError:', this.state.hasError, 'resetKey:', this.state.resetKey);
+                
+                if (this.state.hasError) {
+                    return (
+                        <div style={{padding: '20px', border: '2px solid red'}}>
+                            <h2>Error occurred!</h2>
+                            <button onClick={this.handleReset}>Try Again</button>
+                        </div>
+                    );
+                }
+                
+                return (
+                    <div key={this.state.resetKey} data-testid="recovered">
+                        {this.props.children}
+                    </div>
+                );
+            }
+        }
+        
+        // Test component that throws once
+        const ThrowOnce = () => {
+            const [thrown, setThrown] = useState(false);
+            console.log('ThrowOnce render - thrown:', thrown);
+            
+            if (!thrown) {
+                setThrown(true);
+                console.log('ThrowOnce: about to throw error');
+                throw new Error('Test Error');
+            }
+            return <div data-testid="recovered">Recovered Content</div>;
+        };
+        
+        // Main app
+        const App = () => {
+            const [mounted, setMounted] = useState(true);
+            
+            return (
+                <div>
+                    <button onClick={() => setMounted(!mounted)}>
+                        {mounted ? 'Unmount' : 'Mount'} Component
+                    </button>
+                    {mounted && (
+                        <TestErrorBoundary>
+                            <ThrowOnce />
+                        </TestErrorBoundary>
+                    )}
+                </div>
+            );
+        };
+        
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

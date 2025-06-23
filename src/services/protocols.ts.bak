@@ -1,0 +1,734 @@
+// src/services/protocols.ts
+
+import { supabase } from '../lib/supabaseClient';
+import type { Protocol, Drug } from '../types/protocol';
+import { protocolCache } from './protocolCache';
+
+// Critical fields that must be present for a protocol to be valid
+const CRITICAL_FIELDS = [
+  'treatment_intent',
+  'eligibility',
+  'treatment',
+  'tests',
+  'dose_modifications',
+  'precautions'
+] as const;
+
+// Protocol fields from the Supabase schema
+const PROTOCOL_FIELDS = `
+  id,
+  code,
+  tumour_group,
+  treatment_intent,
+  eligibility,
+  treatment,
+  tests,
+  dose_modifications,
+  precautions,
+  reference_list,
+  pharmacokinetics,
+  interactions,
+  drug_class,
+  administration_notes,
+  supportive_care,
+  toxicity_monitoring,
+  rescue_agents,
+  pre_medications,
+  post_medications,
+  monitoring,
+  comments,
+  created_by,
+  updated_by,
+  version,
+  tags,
+  clinical_scenario,
+  last_reviewed,
+  summary,
+  ai_notes,
+  natural_language_prompt,
+  supportive_meds,
+  cycle_info,
+  dose_reductions,
+  created_at,
+  updated_at
+`;
+
+// Helper function to safely split strings or handle arrays
+const safeSplit = (value: unknown): string[] => {
+  if (!value) return [];
+  if (Array.isArray(value)) return value;
+  if (typeof value === 'string') {
+    // Check if it's potentially a JSON string
+    if (value.startsWith('[') && value.endsWith(']')) {
+      try {
+        const parsed = JSON.parse(value);
+        if (Array.isArray(parsed)) {
+          return parsed.map(item => typeof item === 'string' ? item : JSON.stringify(item));
+        }
+      } catch (e) {
+        console.warn('Failed to parse JSON array string:', e);
+        // Fall back to regular split
+      }
+    }
+    return value.split(';').map(item => item.trim()).filter(Boolean);
+  }
+  if (typeof value === 'object' && value !== null) {
+    console.warn('Object passed to safeSplit, converting to string array:', value);
+    return Object.values(value)
+      .filter(v => v !== null && v !== undefined)
+      .map(v => String(v));
+  }
+  return [];
+};
+
+export interface ProtocolFilters {
+  tumorGroup: string | null;
+  drugName: string | null;
+  treatmentIntent: string | null;
+}
+
+// Enhanced validation for protocol data
+export const isValidProtocol = (protocol: Partial<Protocol>): boolean => {
+  // Basic required fields check
+  const requiredFields = ['id', 'code', 'tumour_group'];
+  const hasRequiredFields = requiredFields.every(field => !!protocol[field as keyof Protocol]);
+  
+  // Treatment data validation
+  if (protocol.treatment && !Array.isArray(protocol.treatment.drugs)) {
+    console.warn(`Invalid drugs array for protocol ${protocol.code}`);
+    return false;
+  }
+
+  // Count missing critical fields for warnings
+  const missingCriticalFields = CRITICAL_FIELDS.filter(
+    field => !protocol[field as keyof Protocol]
+  );
+
+  if (missingCriticalFields.length > 0) {
+    console.warn(`Protocol ${protocol.code} is missing critical fields:`, missingCriticalFields);
+  }
+
+  return hasRequiredFields;
+};
+
+// Process and normalize medications that can come in different formats
+const processMedications = (medications: unknown): any[] => {
+  // Handle null/undefined
+  if (!medications) {
+    return [];
+  }
+
+  // Already an array - validate each item
+  if (Array.isArray(medications)) {
+    if (process.env.NODE_ENV === 'development') {
+      console.debug('Medications is already an array with', medications.length, 'items');
+    }
+    return medications.filter(item => item !== null && item !== undefined);
+  }
+
+  // Handle object format with required/optional keys
+  if (typeof medications === 'object' && medications !== null) {
+    if ('required' in medications || 'optional' in medications) {
+      const medicationsObj = medications as { required?: any[]; optional?: any[] };
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('Medications is an object with required/optional keys');
+      }
+      const result = [
+        ...(Array.isArray(medicationsObj.required) ? medicationsObj.required : []),
+        ...(Array.isArray(medicationsObj.optional) ? medicationsObj.optional : [])
+      ];
+      return result;
+    }
+    
+    // Handle flat object with medication properties
+    if ('name' in medications) {
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('Medications is a single medication object');
+      }
+      return [medications];
+    }
+    
+    // Try to extract values if it's a dictionary of medications
+    if (Object.keys(medications).length > 0) {
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('Trying to extract medications from object keys');
+      }
+      return Object.values(medications).filter(val => val !== null && val !== undefined);
+    }
+  }
+
+  // String - try to parse as JSON first
+  if (typeof medications === 'string') {
+    try {
+      const parsed = JSON.parse(medications);
+      return processMedications(parsed); // Recursively process the parsed result
+    } catch (e) {
+      console.warn('Failed to parse medications string as JSON:', e);
+      return [];
+    }
+  }
+
+  console.warn('Unknown medications format:', typeof medications);
+  return [];
+};
+
+// Safely parse JSON or nested fields
+const safeJSONParse = <T>(value: unknown, defaultValue: T): T => {
+  if (value === null || value === undefined) {
+    return defaultValue;
+  }
+  
+  if (typeof value === 'string') {
+    // Handle empty strings
+    if (!value.trim()) {
+      return defaultValue;
+    }
+    
+    try {
+      const parsed = JSON.parse(value) as T;
+      
+      // Add better logging for empty nested structures
+      if (process.env.NODE_ENV === 'development') {
+        if (Array.isArray(parsed) && parsed.length === 0) {
+          console.debug('Parsed value is an empty array');
+        } else if (typeof parsed === 'object' && parsed !== null && Object.keys(parsed).length === 0) {
+          console.debug('Parsed value is an empty object');
+        }
+      }
+      
+      return parsed;
+    } catch (error) {
+      // If it's not valid JSON but starts with '[' or '{', log a warning
+      if ((value.startsWith('[') || value.startsWith('{')) && 
+          (value.endsWith(']') || value.endsWith('}'))) {
+        console.warn(`Failed to parse what looks like a JSON string: ${value.substring(0, 50)}...`);
+      }
+      return defaultValue;
+    }
+  }
+  
+  // If it's already an object/array, validate it against defaultValue
+  // to ensure it has the expected structure
+  if (typeof value === 'object') {
+    if (defaultValue === null) {
+      return value as T;
+    }
+    
+    // For array defaults, ensure we return an array
+    if (Array.isArray(defaultValue) && !Array.isArray(value)) {
+      console.warn('Expected array but got:', typeof value);
+      return defaultValue;
+    }
+    
+    return value as T;
+  }
+  
+  return defaultValue;
+};
+  // Handle null/undefined
+  if (!medications) {
+    return [];
+  }
+
+  // Already an array - validate each item
+  if (Array.isArray(medications)) {
+    if (process.env.NODE_ENV === 'development') {
+      console.debug('Medications is already an array with', medications.length, 'items');
+    }
+    return medications.filter(item => item !== null && item !== undefined);
+  }
+
+  // Handle object format with required/optional keys
+  if (typeof medications === 'object' && medications !== null) {
+    if ('required' in medications || 'optional' in medications) {
+      const medicationsObj = medications as { required?: any[]; optional?: any[] };
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('Medications is an object with required/optional keys');
+      }
+      const result = [
+        ...(Array.isArray(medicationsObj.required) ? medicationsObj.required : []),
+        ...(Array.isArray(medicationsObj.optional) ? medicationsObj.optional : [])
+      ];
+      return result;
+    }
+    
+    // Handle flat object with medication properties
+    if ('name' in medications) {
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('Medications is a single medication object');
+      }
+      return [medications];
+    }
+    
+    // Try to extract values if it's a dictionary of medications
+    if (Object.keys(medications).length > 0) {
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('Trying to extract medications from object keys');
+      }
+      return Object.values(medications).filter(val => val !== null && val !== undefined);
+    }
+  }
+
+  // String - try to parse as JSON first
+  if (typeof medications === 'string') {
+    try {
+      const parsed = JSON.parse(medications);
+      return processMedications(parsed); // Recursively process the parsed result
+    } catch (e) {
+      console.warn('Failed to parse medications string as JSON:', e);
+      return [];
+    }
+  }
+
+  console.warn('Unknown medications format:', typeof medications);
+  return [];
+};
+
+// Process monitoring data which can have baseline and ongoing arrays
+const processMonitoring = (monitoring: unknown): any => {
+  if (!monitoring) {
+    return { baseline: [], ongoing: [] };
+  }
+  
+  // Already in the expected format
+  if (typeof monitoring === 'object' && monitoring !== null) {
+    const monitoringObj = monitoring as Record<string, any>;
+    
+    // Ensure baseline and ongoing are arrays
+    return {
+      baseline: Array.isArray(monitoringObj.baseline) ? monitoringObj.baseline : [],
+      ongoing: Array.isArray(monitoringObj.ongoing) ? monitoringObj.ongoing : [],
+      frequency: monitoringObj.frequency || null,
+    };
+  }
+
+  // Try parsing JSON string
+  if (typeof monitoring === 'string') {
+    try {
+      return processMonitoring(JSON.parse(monitoring));
+    } catch (e) {
+      console.warn('Failed to parse monitoring string as JSON:', e);
+      return { baseline: [], ongoing: [] };
+    }
+  }
+  
+  return { baseline: [], ongoing: [] };
+};
+
+// Process and validate drug data with proper type safety
+const processDrugs = (drugs: unknown): Drug[] => {
+  // Guard against undefined/null input
+  if (!drugs) {
+    console.warn('processDrugs received null/undefined input');
+    return [];
+  }
+
+  // Guard against non-array input
+  if (!Array.isArray(drugs)) {
+    console.warn('processDrugs received non-array input:', typeof drugs);
+    return [];
+  }
+
+  // Log the raw drug data in development mode
+  if (process.env.NODE_ENV === 'development' && drugs.length > 0) {
+    console.debug('Processing drugs array:', drugs.length, 'items');
+    console.debug('First drug raw data:', drugs[0]);
+  }
+
+  // Filter out invalid entries and map to Drug type
+  return drugs
+    .filter((drug): drug is Record<string, unknown> => {
+      if (!drug || typeof drug !== 'object') {
+        console.warn('Invalid drug entry:', drug);
+        return false;
+      }
+      if (!('name' in drug)) {
+        console.warn('Drug entry missing required name property:', drug);
+        return false;
+      }
+      return true;
+    })
+    .map(drug => {
+      // Create a properly typed drug object with all fields
+      const processedDrug: Drug = {
+        name: String(drug.name || 'Unnamed Drug'),
+        dose: typeof drug.dose === 'string' ? drug.dose : '',
+        timing: typeof drug.timing === 'string' ? drug.timing : '',
+        administration: typeof drug.administration === 'string' ? drug.administration : '',
+        alternative_switches: Array.isArray(drug.alternative_switches) ? drug.alternative_switches.filter((x): x is string => typeof x === 'string') : [],
+        supportiveCare: Array.isArray(drug.supportiveCare) ? drug.supportiveCare.filter(x => typeof x === 'string' || (typeof x === 'object' && x !== null)) : [],
+        contraindications: Array.isArray(drug.contraindications) ? drug.contraindications.filter(x => typeof x === 'string' || (typeof x === 'object' && x !== null)) : [],
+        special_notes: Array.isArray(drug.special_notes) ? drug.special_notes.filter(x => typeof x === 'string' || (typeof x === 'object' && x !== null)) : []
+      };
+
+      // Log incomplete drug data in development mode
+      if (process.env.NODE_ENV === 'development') {
+        if (!processedDrug.dose) {
+          console.warn(`Drug ${processedDrug.name} is missing dose information`);
+        }
+        if (!processedDrug.timing && !processedDrug.administration) {
+          console.warn(`Drug ${processedDrug.name} is missing timing and administration information`);
+        }
+      }
+
+      return processedDrug;
+    });
+};
+
+// Process and normalize medications that can come in different formats
+const processMedications = (medications: unknown): any[] => {
+  // Handle null/undefined
+  if (!medications) {
+    return [];
+  }
+
+  // Already an array - validate each item
+  if (Array.isArray(medications)) {
+    if (process.env.NODE_ENV === 'development') {
+      console.debug('Medications is already an array with', medications.length, 'items');
+    }
+    return medications.filter(item => item !== null && item !== undefined);
+  }
+
+  // Handle object format with required/optional keys
+  if (typeof medications === 'object' && medications !== null) {
+    if ('required' in medications || 'optional' in medications) {
+      const medicationsObj = medications as { required?: any[]; optional?: any[] };
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('Medications is an object with required/optional keys');
+      }
+      const result = [
+        ...(Array.isArray(medicationsObj.required) ? medicationsObj.required : []),
+        ...(Array.isArray(medicationsObj.optional) ? medicationsObj.optional : [])
+      ];
+      return result;
+    }
+    
+    // Handle flat object with medication properties
+    if ('name' in medications) {
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('Medications is a single medication object');
+      }
+      return [medications];
+    }
+    
+    // Try to extract values if it's a dictionary of medications
+    if (Object.keys(medications).length > 0) {
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('Trying to extract medications from object keys');
+      }
+      return Object.values(medications).filter(val => val !== null && val !== undefined);
+    }
+  }
+
+  // String - try to parse as JSON first
+  if (typeof medications === 'string') {
+    try {
+      const parsed = JSON.parse(medications);
+      return processMedications(parsed); // Recursively process the parsed result
+    } catch (e) {
+      console.warn('Failed to parse medications string as JSON:', e);
+      return [];
+    }
+  }
+
+  console.warn('Unknown medications format:', typeof medications);
+  return [];
+};
+
+// Process monitoring data which can have baseline and ongoing arrays
+const processMonitoring = (monitoring: unknown): any => {
+  if (!monitoring) {
+    return { baseline: [], ongoing: [] };
+  }
+  
+  // Already in the expected format
+  if (typeof monitoring === 'object' && monitoring !== null) {
+    const monitoringObj = monitoring as Record<string, any>;
+    
+    // Ensure baseline and ongoing are arrays
+    return {
+      baseline: Array.isArray(monitoringObj.baseline) ? monitoringObj.baseline : [],
+      ongoing: Array.isArray(monitoringObj.ongoing) ? monitoringObj.ongoing : [],
+      frequency: monitoringObj.frequency || null,
+    };
+  }
+
+  // Try parsing JSON string
+  if (typeof monitoring === 'string') {
+    try {
+      return processMonitoring(JSON.parse(monitoring));
+    } catch (e) {
+      console.warn('Failed to parse monitoring string as JSON:', e);
+      return { baseline: [], ongoing: [] };
+    }
+  }
+  
+  return { baseline: [], ongoing: [] };
+};
+
+export const getProtocols = async (filters?: ProtocolFilters): Promise<Protocol[]> => {
+  try {
+    let query = supabase.from('cd_protocols') // MIGRATED
+      .select(PROTOCOL_FIELDS);
+
+    if (filters) {
+      if (filters.tumorGroup) {
+        query = query.eq('tumour_group', filters.tumorGroup);
+      }
+      if (filters.treatmentIntent) {
+        query = query.eq('treatment_intent', filters.treatmentIntent);
+      }
+      if (filters.drugName) {
+        query = query.contains('treatment->>drugs', filters.drugName);
+      }
+    }
+
+    const { data, error } = await query;
+
+    if (error) throw error;
+    if (!data?.length) return [];
+    
+    // Debug logging to help identify issues with raw data
+    if (process.env.NODE_ENV === 'development') {
+      console.group('Protocol Data');
+      console.log(`Fetched ${data.length} protocols`);
+      if (data.length > 0) {
+        console.log('Sample protocol raw data:', data[0]);
+        
+        // Detailed logging of fields that require parsing
+        const sampleProtocol = data[0];
+        Object.entries(sampleProtocol).forEach(([key, value]) => {
+          if (typeof value === 'string' && (
+            value.startsWith('{') || 
+            value.startsWith('[')
+          )) {
+            try {
+              const parsed = JSON.parse(value);
+              console.debug(`Field ${key} parsed structure:`, {
+                type: Array.isArray(parsed) ? 'array' : 'object',
+                keys: Array.isArray(parsed) ? parsed.length : Object.keys(parsed),
+                sample: Array.isArray(parsed) && parsed.length > 0 ? 
+                  parsed[0] : parsed
+              });
+            } catch (e) {
+              console.warn(`Field ${key} appears to be JSON-like but failed to parse:`, value.substring(0, 100));
+            }
+          }
+        });
+      }
+      console.groupEnd();
+    }
+    
+    const processedData = data.map((item): Protocol => {
+        // Raw data debugging for development environments
+        if (process.env.NODE_ENV === 'development' && item.code) {
+          console.debug(`Processing protocol: ${item.code}`);
+        }
+
+        // Process treatment data with extra logging
+        const rawTreatment = safeJSONParse(item.treatment, { drugs: [] });
+        const treatmentDrugs = processDrugs(rawTreatment.drugs || []);
+
+        if (process.env.NODE_ENV === 'development' && treatmentDrugs.length === 0 && item.code) {
+          console.warn(`Protocol ${item.code} has no drugs in treatment`);
+        }
+        
+        // Process monitoring data with enhanced handling
+        const monitoringData = processMonitoring(item.monitoring);
+
+        if (process.env.NODE_ENV === 'development' && 
+            item.code && monitoringData?.baseline?.length === 0 && 
+            monitoringData?.ongoing?.length === 0) {
+          console.warn(`Protocol ${item.code} has no monitoring data`);
+        }
+
+        return {
+          id: item.id,
+          code: item.code,
+          tumour_group: item.tumour_group,
+          treatment_intent: item.treatment_intent,
+          eligibility: safeJSONParse(item.eligibility, {
+            inclusion_criteria: [],
+            exclusion_criteria: []
+          }),
+          treatment: {
+            ...rawTreatment,
+            drugs: treatmentDrugs
+          },
+          tests: safeJSONParse(item.tests, {
+            baseline: [],
+            monitoring: []
+          }),
+          dose_modifications: safeJSONParse(item.dose_modifications, {
+            hematological: [],
+            nonHematological: [],
+            renal: [],
+            hepatic: []
+          }),
+          precautions: safeSplit(item.precautions),
+          reference_list: safeSplit(item.reference_list),
+          pharmacokinetics: safeJSONParse(item.pharmacokinetics, {}),
+          interactions: safeJSONParse(item.interactions, {
+            drugs: [],
+            contraindications: [],
+            precautions: []
+          }),
+          drug_class: safeJSONParse(item.drug_class, {}),
+          administration_notes: safeSplit(item.administration_notes),
+          supportive_care: safeJSONParse(item.supportive_care, {
+            required: [],
+            optional: [],
+            monitoring: []
+          }),
+          toxicity_monitoring: safeJSONParse(item.toxicity_monitoring, {
+            parameters: [],
+            frequency: '',
+            thresholds: {}
+          }),
+          rescue_agents: safeJSONParse(item.rescue_agents, []),
+          // Process pre and post medications with enhanced handling for different formats
+          pre_medications: processMedications(item.pre_medications),
+          post_medications: processMedications(item.post_medications),
+          monitoring: monitoringData,
+          comments: item.comments,
+          created_by: item.created_by,
+          updated_by: item.updated_by,
+          version: item.version,
+          tags: safeSplit(item.tags),
+          clinical_scenario: item.clinical_scenario,
+          last_reviewed: item.last_reviewed,
+          summary: item.summary,
+          ai_notes: safeJSONParse(item.ai_notes, {
+            recommendations: [],
+            warnings: []
+          }),
+          natural_language_prompt: item.natural_language_prompt,
+          supportive_meds: processDrugs(safeJSONParse(item.supportive_meds, [])),
+          cycle_info: item.cycle_info,
+          dose_reductions: safeJSONParse(item.dose_reductions, {
+            levels: {},
+            criteria: []
+          }),
+          created_at: item.created_at,
+          updated_at: item.updated_at
+        };
+    })
+    .filter(isValidProtocol);
+    
+    return processedData;
+  } catch (err) {
+    console.error('Protocol service error:', err);
+    throw err;
+  }
+};
+
+export const getProtocolByCode = async (code: string): Promise<Protocol | null> => {
+  const { data, error } = await supabase
+    .from('protocols')
+    .select(PROTOCOL_FIELDS)
+    .eq('code', code)
+    .single();
+
+  if (error) {
+    console.error('Error fetching protocol by code:', error);
+    return null;
+  }
+
+  if (!data) return null;
+
+  try {
+    const protocol: Protocol = {
+      id: data.id,
+      code: data.code,
+      tumour_group: data.tumour_group,
+      treatment_intent: data.treatment_intent,
+      eligibility: safeJSONParse(data.eligibility, {
+        inclusion_criteria: [],
+        exclusion_criteria: []
+      }),
+      treatment: {
+        ...safeJSONParse<{ drugs: Drug[]; protocol?: string }>(
+          data.treatment,
+          { drugs: [] }
+        ),
+        drugs: processDrugs(safeJSONParse(data.treatment, { drugs: [] }).drugs)
+      },
+      tests: safeJSONParse(data.tests, { 
+        baseline: [], 
+        monitoring: [] 
+      }),
+      dose_modifications: safeJSONParse(data.dose_modifications, {
+        hematological: [],
+        nonHematological: [],
+        renal: [],
+        hepatic: []
+      }),
+      precautions: safeSplit(data.precautions),
+      reference_list: safeSplit(data.reference_list),
+      pharmacokinetics: safeJSONParse(data.pharmacokinetics, {}),
+      interactions: safeJSONParse(data.interactions, {
+        drugs: [],
+        contraindications: [],
+        precautions: []
+      }),
+      drug_class: safeJSONParse(data.drug_class, {}),
+      administration_notes: safeSplit(data.administration_notes),
+      supportive_care: safeJSONParse(data.supportive_care, {
+        required: [],
+        optional: [],
+        monitoring: []
+      }),
+      toxicity_monitoring: safeJSONParse(data.toxicity_monitoring, {
+        parameters: [],
+        frequency: '',
+        thresholds: {}
+      }),
+      rescue_agents: safeJSONParse(data.rescue_agents, []),
+      pre_medications: safeJSONParse(data.pre_medications, {
+        required: [],
+        optional: []
+      }),
+      post_medications: safeJSONParse(data.post_medications, {
+        required: [],
+        optional: []
+      }),
+      monitoring: safeJSONParse(data.monitoring, {
+        baseline: [],
+        ongoing: [],
+        frequency: ''
+      }),
+      supportive_meds: processDrugs(safeJSONParse(data.supportive_meds, [])),
+      ai_notes: safeJSONParse(data.ai_notes, {
+        recommendations: [],
+        warnings: []
+      }),
+      tags: safeSplit(data.tags),
+      comments: data.comments,
+      summary: data.summary,
+      created_by: data.created_by,
+      updated_by: data.updated_by,
+      version: data.version,
+      clinical_scenario: data.clinical_scenario,
+      natural_language_prompt: data.natural_language_prompt,
+      cycle_info: data.cycle_info,
+      dose_reductions: safeJSONParse(data.dose_reductions, {
+        levels: {},
+        criteria: []
+      }),
+      created_at: data.created_at,
+      updated_at: data.updated_at,
+      last_reviewed: data.last_reviewed
+    };
+
+    if (!isValidProtocol(protocol)) {
+      console.warn('Invalid protocol data for code:', code);
+      return null;
+    }
+
+    return protocol;
+  } catch (parseError) {
+    console.error('Error parsing protocol data:', parseError);
+    return null;
+  }
+};

@@ -1,0 +1,411 @@
+{
+  "title": "Mechanisms of Resistance to Therapy",
+  "category": "Medical Oncology",
+  "section": "Cancer Therapeutics",
+  "summary": "Comprehensive analysis of intrinsic and acquired resistance mechanisms across chemotherapy, targeted therapy, immunotherapy, and radiotherapy, with strategies for overcoming resistance.",
+  "author": "Dr. Oncology Research Specialist",
+  "lastUpdated": "2023-12-01T14:15:00Z",
+  "version": "2.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 30,
+    "complexityLevel": "Advanced",
+    "keywords": [
+      "therapy resistance",
+      "chemotherapy resistance",
+      "targeted therapy",
+      "immunotherapy resistance",
+      "radioresistance",
+      "tumor microenvironment"
+    ],
+    "references": [
+      "Nature Reviews Cancer 2023",
+      "NEJM Oncology 2022",
+      "Cancer Cell 2023"
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Mechanisms of Resistance to Therapy"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Despite advances in chemotherapy, targeted agents, radiation, and immunotherapy, resistance to treatment remains a major barrier to long-term cancer control. Tumors may exhibit intrinsic resistance—present before therapy begins—or develop acquired resistance through treatment-induced selection and adaptation. Resistance involves diverse molecular pathways, immune evasion strategies, microenvironmental factors, and pharmacologic barriers, all of which contribute to therapeutic failure and disease recurrence."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Categories of Resistance"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1.1 Intrinsic Resistance"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pre-existing cellular or molecular traits render tumors unresponsive from the outset."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Lack of target expression (e.g., EGFR-negative tumors in anti-EGFR therapy)",
+        "Preexisting mutations (e.g., KRAS mutations in colorectal cancer → cetuximab resistance)",
+        "Impaired drug delivery (e.g., dense stroma in pancreatic cancer)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1.2 Acquired Resistance"
+    },
+    {
+      "type": "paragraph",
+      "text": "Arises under selective pressure during therapy."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Secondary mutations (e.g., EGFR T790M in NSCLC)",
+        "Phenotypic adaptation (e.g., epithelial-to-mesenchymal transition)",
+        "Activation of compensatory pathways (e.g., MET amplification)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Chemotherapy Resistance Mechanisms"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.1 Drug Efflux"
+    },
+    {
+      "type": "paragraph",
+      "text": "Overexpression of ATP-binding cassette (ABC) transporters (e.g., P-glycoprotein/MDR1) actively pumps drugs out of cancer cells."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.2 Enhanced DNA Repair"
+    },
+    {
+      "type": "paragraph",
+      "text": "Activation of:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "MGMT (O6-methylguanine-DNA methyltransferase) in glioblastoma resists alkylating agents.",
+        "NER (nucleotide excision repair) and HR (homologous recombination) pathways counter platinum agents and topoisomerase inhibitors."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.3 Drug Inactivation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Increased metabolic detoxification of chemotherapy (e.g., glutathione-S-transferase–mediated inactivation of cisplatin)."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.4 Impaired Apoptosis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Dysregulation of apoptotic regulators:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Upregulation of BCL-2/BCL-XL",
+        "Loss-of-function mutations in TP53, BAX"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Targeted Therapy Resistance"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3.1 Target Mutation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Point mutations in kinase domains prevent drug binding:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ABL T315I mutation in CML resists imatinib",
+        "EGFR T790M in NSCLC after 1st-gen TKIs"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3.2 Bypass Signaling"
+    },
+    {
+      "type": "paragraph",
+      "text": "Alternative growth pathways are upregulated:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "MET, HER3, or IGF1R activation bypassing EGFR",
+        "PI3K/AKT/mTOR pathway reactivation"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3.3 Histologic or Phenotypic Transformation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumor lineage switch:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "NSCLC → small-cell lung cancer",
+        "Hormone-sensitive prostate cancer → neuroendocrine phenotype"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Resistance to Immunotherapy"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4.1 Loss of Antigenicity"
+    },
+    {
+      "type": "paragraph",
+      "text": "Downregulation of:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "MHC class I molecules",
+        "Antigen presentation machinery (e.g., β2-microglobulin loss)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4.2 T-cell Exclusion and Exhaustion"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumor microenvironment blocks immune infiltration:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Dense fibrosis",
+        "Low chemokine expression (CXCL9, CXCL10)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Chronic antigen exposure leads to:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "PD-1, TIM-3, LAG-3 upregulation",
+        "Functional exhaustion of cytotoxic T-cells"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4.3 Immunosuppressive Microenvironment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Enriched with:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Regulatory T cells (Tregs)",
+        "Myeloid-derived suppressor cells (MDSCs)",
+        "Tumor-associated macrophages (TAMs)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "High levels of:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "TGF-β, IL-10, VEGF"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4.4 Alternate Checkpoint Activation"
+    },
+    {
+      "type": "paragraph",
+      "text": "After PD-1 blockade, tumors may upregulate:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "LAG-3",
+        "TIGIT",
+        "VISTA"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Resistance to Radiotherapy"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Upregulation of DNA damage repair (e.g., ATM, ATR, DNA-PK)",
+        "Hypoxia-induced resistance: Hypoxic cells are less susceptible to radiation-induced ROS. HIF-1α contributes to survival, angiogenesis, and EMT."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Tumor Microenvironment (TME)-Mediated Resistance"
+    },
+    {
+      "type": "paragraph",
+      "text": "The TME contributes through:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ECM stiffness and physical barriers",
+        "Stromal cell-derived survival signals (e.g., CAFs secreting HGF, IL-6)",
+        "Acidic and hypoxic conditions altering drug diffusion and efficacy"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Epigenetic and Transcriptional Adaptation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumors dynamically rewire gene expression:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Epigenetic silencing of pro-apoptotic genes",
+        "Dedifferentiation via EMT or CSC-like reprogramming",
+        "DNA methylation and histone modification changes"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Therapeutic Strategies to Overcome Resistance"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "8.1 Combination Therapy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Dual or multi-target inhibition:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "EGFR + MET in lung cancer",
+        "BRAF + MEK in melanoma"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "8.2 Synthetic Lethality"
+    },
+    {
+      "type": "paragraph",
+      "text": "Targeting alternative vulnerabilities:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "PARP inhibitors in BRCA1/2-deficient tumors"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "8.3 Immune Modulation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Overcoming resistance to checkpoint blockade:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "TGF-β inhibitors",
+        "Oncolytic viruses",
+        "STING agonists"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "8.4 Tumor Profiling and Adaptive Therapy"
+    },
+    {
+      "type": "paragraph",
+      "text": "ctDNA and single-cell sequencing for real-time tracking"
+    },
+    {
+      "type": "paragraph",
+      "text": "Dynamic treatment adjustment based on emerging resistance"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "Therapy resistance in cancer is not a singular event but a culmination of adaptive changes involving tumor-intrinsic mutations, microenvironmental shifts, immune modulation, and treatment-induced evolution. Multimodal approaches, dynamic monitoring, and precision-guided regimens are essential to delay or reverse resistance and improve patient outcomes."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "For patients developing resistance to targeted therapies, consider liquid biopsy to identify resistance mechanisms and guide subsequent targeted therapy selection."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "In immunotherapy resistance, evaluate tumor microenvironment characteristics (e.g., T-cell infiltration, PD-L1 status, and myeloid cell populations) to guide combination strategies."
+    }
+  ]
+}

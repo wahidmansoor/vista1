@@ -1,0 +1,242 @@
+{
+  "title": "Staging Systems: Hematologic Cancer Staging (NHL, HL, Leukemia)",
+  "category": "Clinical Assessment",
+  "section": "Cancer Staging",
+  "summary": "Comprehensive guide to staging systems for hematologic malignancies including lymphomas and leukemias.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-10-20T00:00:00Z",
+  "version": "1.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 15,
+    "targetAudience": ["Hematologists", "Oncologists", "Pathologists"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Staging Systems"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Topic 6: Hematologic Cancer Staging (NHL, HL, Leukemia)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Hematologic malignancies differ fundamentally from solid tumors in that they often present with systemic or diffuse disease rather than a localized mass. Staging in these diseases reflects lymphatic involvement, bone marrow infiltration, organ spread, and disease biology."
+    },
+    {
+      "type": "paragraph",
+      "text": "Key distinctions:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Lymphomas use anatomic staging systems (Ann Arbor, Lugano).",
+        "Leukemias rely on molecular and risk-based classifications, not anatomical staging.",
+        "Imaging, PET/CT, and bone marrow assessment are essential components in most cases."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2. Hodgkin Lymphoma (HL)"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Staging: Lugano Classification (2014)"
+    },
+    {
+      "type": "paragraph",
+      "text": "An evolution of the Ann Arbor system with integrated PET-CT imaging."
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Description"],
+      "rows": [
+        ["I", "Single lymph node region or a single extranodal site (IE)"],
+        ["II", "Two or more lymph node areas on the same side of the diaphragm (II) or with contiguous extranodal spread (IIE)"],
+        ["II bulky", "Stage II with a bulky nodal mass (≥10 cm or >1/3 of chest diameter)"],
+        ["III", "Lymph node regions on both sides of the diaphragm (± spleen = IIIS)"],
+        ["IV", "Disseminated extralymphatic disease (e.g., liver, lungs, bone marrow)"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Modifiers:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "A: No B symptoms",
+        "B: Presence of B symptoms (fever, weight loss, night sweats)",
+        "E: Extranodal extension",
+        "X: Bulky disease"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Bone marrow biopsy is usually unnecessary if PET-CT is available and does not show marrow involvement."
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Prognostic Tools"
+    },
+    {
+      "type": "list",
+      "items": [
+        "IPS (International Prognostic Score) for advanced HL:",
+        "  - Seven factors (e.g., low albumin, anemia, male sex, WBC >15,000)",
+        "  - Score 0–1: 5-year OS ≥ 89%; Score 4–7: OS ≤ 61%",
+        "Limited-stage HL uses unfavorable risk factors such as:",
+        "  - High ESR, bulky disease, ≥3 node regions, age ≥50"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3. Non-Hodgkin Lymphoma (NHL)"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Staging: Lugano Classification"
+    },
+    {
+      "type": "paragraph",
+      "text": "Used for both indolent and aggressive NHL types."
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Description"],
+      "rows": [
+        ["I", "Single nodal group or a single extranodal site"],
+        ["II", "≥2 nodal groups on the same side of the diaphragm"],
+        ["III", "Nodes on both sides of the diaphragm or nodes + spleen involvement"],
+        ["IV", "Disseminated extranodal disease (e.g., liver, bone marrow)"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Staging Workup"
+    },
+    {
+      "type": "list",
+      "items": [
+        "PET-CT: For FDG-avid lymphomas (most aggressive NHLs)",
+        "CT scan: For indolent, non-FDG-avid lymphomas (e.g., CLL/SLL, marginal zone lymphoma)",
+        "Bone marrow biopsy: Usually required, unless PET shows marrow involvement"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Prognostic Models"
+    },
+    {
+      "type": "list",
+      "items": [
+        "IPI (International Prognostic Index):",
+        "  - Factors: Age >60, ECOG >1, Stage III/IV, LDH, extranodal disease",
+        "FLIPI/m7-FLIPI: For follicular lymphoma, integrating clinical and molecular markers"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Histology and biology (e.g., BCL2, MYC, TP53 mutations) often outweigh anatomic stage in prognostic value."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4. Leukemias"
+    },
+    {
+      "type": "paragraph",
+      "text": "Leukemias are not staged anatomically. They are instead classified using clinical features, cytogenetics, molecular mutations, and therapy response."
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Acute Myeloid Leukemia (AML)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ELN 2022 classification (European LeukemiaNet):",
+        "  - Favorable: NPM1 mutation without FLT3-ITD, core-binding factor leukemias",
+        "  - Intermediate: Normal karyotype, IDH1/2 mutations",
+        "  - Adverse: TP53 mutation, complex karyotype, RUNX1 mutation",
+        "Bone marrow blasts >20% define AML",
+        "MRD status post-therapy increasingly guides prognosis"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Acute Lymphoblastic Leukemia (ALL)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Prognostic variables:",
+        "  - Age, WBC count, CNS/testicular involvement",
+        "  - Cytogenetics (e.g., BCR-ABL, t(12;21))",
+        "  - MRD clearance is the strongest predictor of relapse",
+        "Pediatric ALL follows risk-adapted treatment protocols based on Day 8/29 MRD"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Chronic Lymphocytic Leukemia (CLL)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Rai staging (USA):",
+        "  - 0 (lymphocytosis only) → IV (thrombocytopenia)",
+        "Binet staging (Europe):",
+        "  - A (≤2 sites) → C (cytopenia)",
+        "Molecular markers critical:",
+        "  - del(17p)/TP53 mutations = poor prognosis",
+        "  - IGHV mutation status = therapy selection",
+        "MRD assessment post-therapy predicts time to progression"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5. Key Differences Summary Table"
+    },
+    {
+      "type": "table",
+      "headers": ["Feature", "HL/NHL", "Leukemia"],
+      "rows": [
+        ["Staging system", "Ann Arbor/Lugano", "Risk classification"],
+        ["Imaging", "PET/CT standard", "Often not required"],
+        ["Bone marrow", "Optional (HL) / common (NHL)", "Always involved"],
+        ["MRD", "Not routinely used", "Essential for prognosis"],
+        ["Genetic risk", "Less emphasized", "Central to prognosis and therapy"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Hematologic cancers require tailored staging systems. HL and NHL continue to use anatomical-based staging (Ann Arbor, Lugano), while leukemias rely entirely on biologic and molecular risk stratification. PET-CT and MRD have revolutionized staging accuracy, particularly in lymphoma and leukemia, respectively. Understanding both disease biology and staging nuance is essential for optimal patient management."
+    }
+  ]
+}

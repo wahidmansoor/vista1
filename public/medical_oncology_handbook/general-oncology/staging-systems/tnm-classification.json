@@ -1,0 +1,341 @@
+{
+  "title": "Staging Systems: TNM Classification (AJCC/UICC)",
+  "category": "Clinical Assessment",
+  "section": "Cancer Staging",
+  "summary": "Detailed guide to the TNM classification system for cancer staging, including components, interpretation, and clinical applications.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-10-20T00:00:00Z",
+  "version": "1.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 15,
+    "targetAudience": ["Oncologists", "Surgeons", "Pathologists", "Radiologists"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Staging Systems"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Topic 2: TNM Classification (AJCC/UICC)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The TNM classification system, developed jointly by the American Joint Committee on Cancer (AJCC) and the Union for International Cancer Control (UICC), is the global standard for anatomic cancer staging."
+    },
+    {
+      "type": "paragraph",
+      "text": "It categorizes tumors based on:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "T – Tumor size and invasion",
+        "N – Nodal involvement",
+        "M – Distant metastasis"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "The TNM system facilitates consistent cancer staging across clinical settings, research protocols, and cancer registries worldwide."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2. TNM Components and Interpretation"
+    },
+    {
+      "type": "table",
+      "headers": ["Component", "Definition", "Example (Breast)"],
+      "rows": [
+        ["T", "Size and local extent of the primary tumor", "T1: ≤2 cm, T4: chest wall or skin invasion"],
+        ["N", "Involvement of regional lymph nodes", "N2: fixed axillary nodes or internal mammary nodes"],
+        ["M", "Distant metastasis (present or absent)", "M1: lung, bone, liver, or nonregional node metastasis"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Each component is scored independently and then grouped into stage categories I–IV based on tumor-specific algorithms."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3. T Category – Primary Tumor"
+    },
+    {
+      "type": "paragraph",
+      "text": "The T classification varies by cancer type but generally follows:"
+    },
+    {
+      "type": "table",
+      "headers": ["Code", "Description"],
+      "rows": [
+        ["Tis", "Carcinoma in situ"],
+        ["T1–T4", "Increasing tumor size and/or local invasion"],
+        ["T4a–T4d", "Specific invasion patterns (e.g., T4d = inflammatory breast cancer)"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Example (Breast Cancer):"
+    },
+    {
+      "type": "list",
+      "items": [
+        "T1a: >0.1 cm but ≤0.5 cm",
+        "T2: >2 cm but ≤5 cm",
+        "T4: Any size with skin/chest wall involvement [See full AMBOSS table → Breast Cancer TNM](https://www.amboss.com/us/knowledge/breast-cancer?utm_medium=chatgpt-plugin&utm_source=chatgpt)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4. N Category – Lymph Nodes"
+    },
+    {
+      "type": "paragraph",
+      "text": "The N category accounts for:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Number of positive nodes",
+        "Anatomical location",
+        "Size or fixity (in some tumors)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Example (Breast Cancer):"
+    },
+    {
+      "type": "list",
+      "items": [
+        "N1: Mobile level I–II axillary nodes",
+        "N2a: Fixed/matted axillary nodes",
+        "N3b: Axillary + internal mammary involvement"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Example (Melanoma): Presence of microsatellitosis or in-transit metastases affects the N stage [See Melanoma Staging Details](https://www.amboss.com/us/knowledge/melanoma?utm_medium=chatgpt-plugin&utm_source=chatgpt)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5. M Category – Metastases"
+    },
+    {
+      "type": "list",
+      "items": [
+        "M0: No distant metastasis",
+        "M1a–M1c: Subcategorized by site/extent"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Examples:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Melanoma M1c: Non-CNS visceral metastasis",
+        "Lung Cancer M1a: Tumor in contralateral lung lobe",
+        "M1 includes nonregional nodes (e.g., cervical nodes in breast cancer)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6. TNM Stage Grouping (0–IV)"
+    },
+    {
+      "type": "paragraph",
+      "text": "General pattern:"
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Typical Interpretation"],
+      "rows": [
+        ["0", "In situ carcinoma"],
+        ["I", "Small, localized tumors"],
+        ["II", "Larger tumors or limited nodal spread"],
+        ["III", "Advanced locoregional disease"],
+        ["IV", "Distant metastasis (M1) present"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Site-specific examples:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Breast: T3N2M0 = Stage III",
+        "Gastric: T1N0M0 = Stage IA [See Gastric Cancer Staging](https://www.amboss.com/us/knowledge/gastric-cancer?utm_medium=chatgpt-plugin&utm_source=chatgpt)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "7. Prefixes: Defining TNM Context"
+    },
+    {
+      "type": "table",
+      "headers": ["Prefix", "Meaning"],
+      "rows": [
+        ["cTNM", "Clinical staging (pre-treatment)"],
+        ["pTNM", "Pathologic staging (post-surgery)"],
+        ["ypTNM", "After neoadjuvant therapy"],
+        ["rTNM", "Restaging at recurrence"],
+        ["aTNM", "Staging from autopsy data"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Prefixes should be clearly documented in clinical records and trial data."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "8. AJCC 8th Edition: Prognostic Enhancements"
+    },
+    {
+      "type": "paragraph",
+      "text": "Modern TNM staging now integrates tumor biology in select cancers:"
+    },
+    {
+      "type": "table",
+      "headers": ["Tumor", "Added Factors"],
+      "rows": [
+        ["Breast", "ER/PR/HER2, grade, Oncotype DX"],
+        ["Prostate", "PSA, Gleason Grade Group"],
+        ["Melanoma", "Ulceration, Breslow depth, mitotic index"],
+        ["HPV-positive oropharyngeal", "Separate TNM groups reflecting better prognosis"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These changes improve risk stratification but add complexity to staging decisions."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "9. Imaging and Diagnostic Tools in TNM"
+    },
+    {
+      "type": "table",
+      "headers": ["Modality", "Role"],
+      "rows": [
+        ["CT / PET-CT", "Assess cT, cN, M1 status"],
+        ["MRI", "Useful in CNS, rectal, and liver tumors"],
+        ["EUS / Endoscopy", "Crucial for GI tract depth of invasion"],
+        ["SLNB (Sentinel Node Biopsy)", "Breast, melanoma – defines early N stage"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Histopathologic confirmation is ideal for suspected metastases (M1)."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "10. Exceptions: Cancers Not Using TNM"
+    },
+    {
+      "type": "table",
+      "headers": ["Disease", "Alternative Staging"],
+      "rows": [
+        ["Leukemia", "ELN, IPSS-R, IPSS-M"],
+        ["Lymphoma", "Ann Arbor, Lugano"],
+        ["CNS tumors", "WHO CNS grading + molecular profile (e.g., IDH1, MGMT)"],
+        ["Gynecologic cancers", "FIGO staging"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These systems reflect non-anatomical dissemination and tumor biology."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "11. Prognostic Relevance of TNM"
+    },
+    {
+      "type": "paragraph",
+      "text": "TNM stage correlates with:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Overall survival",
+        "Disease-free survival",
+        "Treatment decisions"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Example:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "NSCLC Stage IA: Curative resection",
+        "Stage IIIA: Neoadjuvant therapy",
+        "Stage IV: Systemic/palliative care"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "12. Use in Clinical Trials"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Trials often require TNM-based inclusion criteria",
+        "Stratification by stage subgroup improves interpretation of outcomes",
+        "TNM data must be source-verified, often using imaging and histology reports"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "13. Summary Table – Breast Cancer TNM (AJCC 8)"
+    },
+    {
+      "type": "table",
+      "headers": ["Component", "Subclassification", "Criteria"],
+      "rows": [
+        ["T1", "T1a, T1b, T1c", "≤2 cm in total size"],
+        ["N2", "N2a / N2b", "Fixed axillary or internal mammary nodes"],
+        ["M1", "—", "Distant metastasis (e.g., bone, lung)"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "→ See [AMBOSS Breast Cancer Staging](https://www.amboss.com/us/knowledge/breast-cancer?utm_medium=chatgpt-plugin&utm_source=chatgpt)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "14. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "The TNM classification system remains the backbone of solid tumor staging. It has evolved from a purely anatomical tool to a biologically informed, context-aware framework that continues to guide prognosis, therapy, and research worldwide."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Mastery of TNM staging is essential for oncologists, surgeons, pathologists, and all members of the multidisciplinary cancer care team."
+    }
+  ]
+}

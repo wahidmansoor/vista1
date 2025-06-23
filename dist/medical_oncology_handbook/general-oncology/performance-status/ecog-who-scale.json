@@ -1,0 +1,279 @@
+{
+  "title": "ECOG Performance Status (WHO Scale) – Expanded",
+  "category": "Clinical Oncology",
+  "section": "Patient Assessment",
+  "summary": "Comprehensive guide to the ECOG Performance Status scale, including clinical applications, limitations, and future directions in oncology practice.",
+  "author": "Oncology Practice Team",
+  "lastUpdated": "2024-05-10T14:30:00Z",
+  "version": "1.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 25,
+    "targetAudience": ["Oncologists", "Palliative Care Specialists", "Clinical Researchers"],
+    "educationalLevel": "Intermediate",
+    "keywords": [
+      "ECOG",
+      "performance status",
+      "functional assessment",
+      "treatment eligibility",
+      "prognostic tool"
+    ],
+    "references": [
+      "Journal of Clinical Oncology",
+      "European Journal of Cancer",
+      "Journal of Palliative Medicine"
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "ECOG Performance Status (WHO Scale) – Expanded"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Overview"
+    },
+    {
+      "type": "paragraph",
+      "text": "The ECOG Performance Status (PS) scale is a standardized tool developed by the Eastern Cooperative Oncology Group to assess a cancer patient's functional capacity. It ranges from 0 (fully active) to 5 (deceased) and plays a central role in oncologic decision-making. The ECOG scale is not only used to evaluate treatment fitness but also to predict prognosis, assess clinical trial eligibility, and guide palliative care needs. Despite its simplicity, its subjectivity and lack of granularity require clinicians to contextualize its use within broader clinical assessments."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Detailed ECOG Scale"
+    },
+    {
+      "type": "table",
+      "headers": ["ECOG Grade", "Functional Description"],
+      "rows": [
+        [
+          "0",
+          "Fully active. No limitations in daily life. Can perform work and strenuous physical activity."
+        ],
+        [
+          "1",
+          "Restricted in physically strenuous activity. Ambulatory and able to do light/sedentary work."
+        ],
+        [
+          "2",
+          "Ambulatory and capable of all self-care, but unable to work. Up and about >50% of waking hours."
+        ],
+        [
+          "3",
+          "Limited self-care ability. Confined to bed/chair >50% of waking hours."
+        ],
+        [
+          "4",
+          "Completely disabled. No self-care. Totally confined to bed or chair."
+        ],
+        [
+          "5",
+          "Death."
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Clinical Utility Across Oncology"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3.1 Predictive Utility"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Survival Correlation: A strong inverse relationship between ECOG score and overall survival (OS) and progression-free survival (PFS).",
+        "Treatment Response: High ECOG (0-1) correlates with better response rates and treatment tolerance."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3.2 Therapeutic Stratification"
+    },
+    {
+      "type": "table",
+      "headers": ["ECOG", "Therapeutic Implication"],
+      "rows": [
+        [
+          "0-1",
+          "Full-intensity systemic therapy; eligible for most clinical trials."
+        ],
+        [
+          "2",
+          "Dose-reduced or single-agent therapy; careful toxicity monitoring."
+        ],
+        [
+          "3-4",
+          "Focus on palliation, symptom relief; generally not for systemic therapy."
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. ECOG in Multispecialty Oncology"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Medical Oncology"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Used to select chemotherapy regimens and determine candidacy for immunotherapy and biologics.",
+        "Examples:",
+        "- Immunotherapy trials: Usually restricted to ECOG 0-1.",
+        "- Targeted therapy: Some agents are tolerated even in ECOG 2-3 patients."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Radiation Oncology"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ECOG influences:",
+        "- Fractionation schedules (e.g., hypofractionation for ECOG ≥2).",
+        "- Intent of therapy (curative vs palliative)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Surgical Oncology"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Higher ECOG correlates with increased perioperative complications.",
+        "Preoperative clearance incorporates ECOG alongside:",
+        "- ASA (American Society of Anesthesiologists) score.",
+        "- Cardiac and pulmonary reserve assessments."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Limitations and Considerations"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5.1 Limitations"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Subjective interpretation among providers.",
+        "Insensitive to short-term fluctuations (e.g., temporary infections, fatigue).",
+        "Does not account for:",
+        "- Cognitive status",
+        "- Nutritional state",
+        "- Social determinants"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5.2 Solutions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Use in combination with other tools:",
+        "- Geriatric assessments (e.g., G8, CGA).",
+        "- Functional tests: Timed Up & Go, grip strength, ADLs/IADLs.",
+        "- Biomarkers: Sarcopenia (via imaging), inflammatory markers."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Special Populations"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Older Adults"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ECOG may under-represent frailty.",
+        "Combine with:",
+        "- Lansky score (pediatrics).",
+        "- CGA: Comprehensive geriatric assessment.",
+        "- VES-13: Vulnerable Elders Survey."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Palliative Care Patients"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ECOG integrated into Palliative Performance Scales (PPS).",
+        "Predicts:",
+        "- Life expectancy",
+        "- Eligibility for hospice",
+        "- Intensity of supportive care"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "AMBOSS Note: Tools such as Karnofsky, PPS, and ECOG are among the core functional assessments in palliative medicine ([source](https://www.amboss.com/us/knowledge/overview-of-palliative-medicine?utm_medium=chatgpt-plugin&utm_source=chatgpt))."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. ECOG and Health Policy"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Reimbursement and treatment authorization may require documentation of ECOG.",
+        "Health technology assessments (e.g., NICE, PBS) may use ECOG thresholds to justify:",
+        "- Cost-effectiveness",
+        "- Resource allocation"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Future Directions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Digital ECOG Tracking: Wearable devices for step counts, sleep, and activity tracking.",
+        "AI-Enhanced Scoring: Algorithms to estimate PS from electronic health record (EHR) data.",
+        "Dynamic ECOG Models: Time-series approaches capturing performance trajectory, not static value.",
+        "Molecular Correlation: Integration with sarcopenia imaging, cachexia indices, and metabolic signatures."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "The ECOG Performance Status scale is more than a clinical shorthand—it's a tool that encapsulates a patient's physical resilience, therapeutic window, and prognostic outlook. As oncology care becomes more personalized, ECOG remains a touchstone for aligning treatment intensity with patient capacity. Augmented by multidisciplinary input and evolving technology, it continues to serve as a foundation for functional oncology in both high- and low-resource settings."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "When documenting ECOG status, always include specific examples of functional limitations (e.g., 'ECOG 2 - patient can dress and feed independently but becomes short of breath after walking 20 meters') to improve reliability across providers."
+    }
+  ]
+}

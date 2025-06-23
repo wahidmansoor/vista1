@@ -1,0 +1,247 @@
+{
+  "title": "Karnofsky Performance Status (KPS)",
+  "category": "Clinical Oncology",
+  "section": "Patient Assessment",
+  "summary": "Comprehensive guide to the Karnofsky Performance Status scale, including clinical applications, scoring, limitations, and integration with treatment decisions.",
+  "author": "Oncology Practice Team",
+  "lastUpdated": "2024-06-15T09:15:00Z",
+  "version": "1.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 20,
+    "targetAudience": ["Oncologists", "Palliative Care Specialists", "Neuro-oncologists"],
+    "educationalLevel": "Intermediate",
+    "keywords": [
+      "Karnofsky",
+      "performance status",
+      "functional assessment",
+      "palliative care",
+      "neuro-oncology"
+    ],
+    "references": [
+      "Journal of Clinical Oncology",
+      "Neuro-Oncology",
+      "Journal of Palliative Medicine"
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Karnofsky Performance Status (KPS)"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Karnofsky Performance Status (KPS) is a well-established tool used to quantify a cancer patient's level of functional independence. Developed in 1949, the scale ranges from 100 (fully functional) to 0 (death) in 10-point increments. Though originally created to assess chemotherapy effects, KPS remains a cornerstone in palliative medicine, neuro-oncology, and transplant eligibility, where granular insight into a patient's physical functioning is essential."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. KPS Score Descriptions"
+    },
+    {
+      "type": "table",
+      "headers": ["KPS Score", "Functional Description"],
+      "rows": [
+        ["100", "Normal, no complaints or evidence of disease."],
+        ["90", "Able to carry on normal activity; minor signs or symptoms of disease."],
+        ["80", "Normal activity with effort; some symptoms of disease."],
+        ["70", "Cares for self but unable to carry on normal activity or active work."],
+        ["60", "Requires occasional assistance but is able to care for most needs."],
+        ["50", "Requires considerable assistance and frequent medical care."],
+        ["40", "Disabled; requires special care and assistance."],
+        ["30", "Severely disabled; hospitalization indicated."],
+        ["20", "Very sick; active supportive treatment necessary."],
+        ["10", "Moribund."],
+        ["0", "Dead."]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Clinical Utility"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3.1 In Brain Tumors and Metastases"
+    },
+    {
+      "type": "list",
+      "items": [
+        "KPS is critical in assessing functional prognosis in patients with brain metastases.",
+        "Treatment options—such as surgical resection, stereotactic radiosurgery (SRS), and systemic therapy—are selected partly based on KPS.",
+        "For glioblastoma and other CNS tumors, KPS aids decisions on initiating chemoradiotherapy or referring to palliative care."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3.2 In Palliative Oncology"
+    },
+    {
+      "type": "list",
+      "items": [
+        "KPS is among the most commonly used scales in palliative outcome measurement, alongside the ECOG scale and Palliative Performance Scale (PPS).",
+        "A KPS score <50 often indicates the need for symptom-focused care, eligibility for hospice, or de-escalation of active treatments."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Integration in Prognostic Models"
+    },
+    {
+      "type": "paragraph",
+      "text": "KPS plays a vital role in several prognostic tools:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Graded Prognostic Assessment (GPA) for brain metastases incorporates KPS, number of lesions, age, and extracranial disease.",
+        "RPA (Recursive Partitioning Analysis) also uses KPS for survival prediction in CNS malignancies.",
+        "Hematology-specific tools (e.g., HCT-CI for stem cell transplant) utilize KPS to stratify risk pre-transplant."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Benefits of the KPS Scale"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Granularity: Its 10-point scale offers finer resolution than ECOG's 6-point structure.",
+        "Longitudinal Monitoring: Ideal for tracking functional decline or improvement during cancer treatment or clinical deterioration.",
+        "Neuro-Oncologic Precision: More accurately reflects early neurologic deficits that may not yet affect ambulation or self-care."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Limitations"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6.1 Subjectivity"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Scoring can differ across clinicians.",
+        "Ambiguity in defining thresholds like 'requires considerable assistance.'"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6.2 Lack of Cognitive Assessment"
+    },
+    {
+      "type": "list",
+      "items": [
+        "While functional, it does not directly measure cognitive decline, which is especially relevant in neuro-oncology."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6.3 Static Viewpoint"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Represents a snapshot, not a trajectory—limiting its predictive power without repeated assessments."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Enhancing Accuracy"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Multidisciplinary Input: Include evaluations by nurses, caregivers, and physical therapists.",
+        "Functional Correlation: Supplement KPS with objective tools (e.g., timed walk tests, grip strength).",
+        "Dynamic Reassessment: At baseline, prior to therapy initiation, and during follow-up or hospitalizations."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Comparison with ECOG"
+    },
+    {
+      "type": "table",
+      "headers": ["KPS Score", "ECOG Equivalent"],
+      "rows": [
+        ["100-90", "0"],
+        ["80-70", "1"],
+        ["60-50", "2"],
+        ["40-30", "3"],
+        ["20-10", "4"],
+        ["0", "5"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Application in Therapeutic Decisions"
+    },
+    {
+      "type": "table",
+      "headers": ["KPS", "Implications"],
+      "rows": [
+        [
+          "100-80",
+          "Eligible for curative treatments (surgery, combination chemo, transplant)."
+        ],
+        [
+          "70-60",
+          "Consider reduced-dose or single-agent regimens; assess need for support services."
+        ],
+        [
+          "50-40",
+          "Likely benefit most from symptom-directed or palliative approaches."
+        ],
+        [
+          "≤30",
+          "Best managed with comfort care or hospice; minimal benefit from systemic therapy."
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Future Directions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Wearables and Digital Tools: May soon allow continuous functional tracking approximating KPS.",
+        "Machine Learning Integration: Use of natural language processing (NLP) to auto-extract KPS estimates from EHR notes.",
+        "Biomarker Correlation: Research ongoing to correlate KPS with systemic inflammation markers, sarcopenia, and functional reserve."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Karnofsky Performance Status remains an essential, versatile tool in oncology and palliative care. Though subjective, it offers unmatched detail in assessing patient independence and therapy tolerance. Modern oncology increasingly integrates KPS into decision algorithms, prognostic models, and resource allocation frameworks. Continued efforts to digitize and objectify performance status will only expand its utility."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "For neuro-oncology patients, always supplement KPS with a focused neurologic exam - subtle cognitive or motor deficits may not be captured by KPS alone but significantly impact treatment decisions."
+    }
+  ]
+}

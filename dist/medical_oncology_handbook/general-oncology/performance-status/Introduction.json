@@ -1,0 +1,262 @@
+{
+  "title": "Performance Status",
+  "category": "Clinical Oncology",
+  "section": "Patient Assessment",
+  "summary": "Comprehensive guide to performance status assessment in oncology, including scales, clinical utility, limitations, and evolving applications in modern cancer care.",
+  "author": "Oncology Practice Team",
+  "lastUpdated": "2024-04-15T10:00:00Z",
+  "version": "1.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 20,
+    "targetAudience": ["Oncologists", "Palliative Care Specialists", "Oncology Nurses"],
+    "educationalLevel": "Intermediate",
+    "keywords": [
+      "performance status",
+      "ECOG",
+      "Karnofsky",
+      "functional assessment",
+      "treatment eligibility"
+    ],
+    "references": [
+      "Journal of Clinical Oncology",
+      "Annals of Oncology",
+      "Journal of Palliative Medicine"
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Performance Status"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Overview"
+    },
+    {
+      "type": "paragraph",
+      "text": "Performance status (PS) is a clinical measure of a patient's general well-being and functional capabilities in the context of disease, particularly cancer. It is crucial in oncology because it reflects a patient's ability to carry out daily activities and tolerate cancer-directed therapies. PS serves as both a prognostic indicator and a determinant of treatment eligibility. It guides decisions about therapy intensity, trial inclusion, appropriateness of surgical or radiation interventions, and transition to palliative care."
+    },
+    {
+      "type": "paragraph",
+      "text": "In contrast to objective laboratory data, PS is subjectively assessed based on clinical evaluation, patient reporting, and caregiver insight. Despite this limitation, PS remains central to oncology care due to its ease of application, reproducibility in structured formats, and clinical relevance."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Historical Context and Scales"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.1 Karnofsky Performance Status (KPS)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Developed in 1949 to quantify cancer patients' ability to survive chemotherapy.",
+        "Uses an 11-point scale from 100 (normal function) to 0 (death).",
+        "Emphasizes functional independence and care requirements.",
+        "Widely used in palliative medicine and neuro-oncology."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.2 Eastern Cooperative Oncology Group (ECOG) Scale"
+    },
+    {
+      "type": "paragraph",
+      "text": "Simpler 6-point scale (0-5), developed by WHO and ECOG. Common in clinical trials and routine oncology practice."
+    },
+    {
+      "type": "table",
+      "headers": ["ECOG Score", "Description"],
+      "rows": [
+        ["0", "Fully active, no symptoms"],
+        ["1", "Symptoms present, but ambulatory"],
+        ["2", "Ambulatory >50% of time, self-care intact"],
+        ["3", "Limited self-care, confined to bed/chair >50%"],
+        ["4", "Completely disabled"],
+        ["5", "Dead"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Prognostic and Predictive Utility"
+    },
+    {
+      "type": "paragraph",
+      "text": "Numerous studies confirm that performance status is a strong predictor of survival, independent of tumor stage or type."
+    },
+    {
+      "type": "list",
+      "items": [
+        "In advanced malignancies, PS often outweighs traditional biomarkers (e.g., LDH, CRP) in predicting overall survival.",
+        "PS ≥2 is associated with significantly higher treatment-related mortality, especially in chemotherapy or high-dose radiation settings.",
+        "ECOG PS is incorporated into oncologic staging systems, such as the Barcelona Clinic Liver Cancer (BCLC) system for hepatocellular carcinoma."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Functional Assessment in Oncology and Palliative Care"
+    },
+    {
+      "type": "paragraph",
+      "text": "Performance status is routinely assessed in:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Pre-treatment evaluation (e.g., chemotherapy fitness)",
+        "Palliative decision-making",
+        "Trial inclusion/exclusion criteria",
+        "Longitudinal follow-up to evaluate disease trajectory"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Other validated scales often used in specialized populations:"
+    },
+    {
+      "type": "table",
+      "headers": ["Scale", "Application"],
+      "rows": [
+        ["Palliative Performance Scale (PPS)", "Terminal/palliative care"],
+        ["Lansky Score", "Pediatric oncology"],
+        ["G8, VES-13", "Geriatric oncology and frailty"],
+        ["Modified Rankin Scale", "Neuro-oncology or post-stroke care"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Integration with Multidisciplinary Care"
+    },
+    {
+      "type": "paragraph",
+      "text": "Performance status assessment is an essential part of pre-chemotherapy screening and multidisciplinary cancer care:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Geriatric oncology: PS is combined with frailty assessments (e.g., G8, CGA) to guide therapy in older adults.",
+        "Rehabilitation: Poor PS may trigger referral to physical or occupational therapy.",
+        "Nutrition and psychosocial support: Decline in PS often correlates with nutritional compromise or depression, necessitating broader support services."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Evolving Considerations in Modern Oncology"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6.1 Immunotherapy"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Early immunotherapy trials excluded PS ≥2.",
+        "Real-world studies show that selected PS 2 patients may still benefit, but toxicity remains a concern.",
+        "Immune-related adverse events (irAEs) may be more severe or harder to manage in poor PS patients."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6.2 Targeted Therapy"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Some tyrosine kinase inhibitors (e.g., osimertinib, alectinib) show efficacy even in PS ≥2-3 patients.",
+        "This challenges traditional views that poor PS uniformly precludes systemic therapy."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Limitations and Pitfalls"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "7.1 Inter-Rater Variability"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ECOG and KPS are subjective; different providers may score differently.",
+        "Studies report moderate inter-rater reliability (~60-70%)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "7.2 Static Measurement"
+    },
+    {
+      "type": "list",
+      "items": [
+        "PS does not capture disease trajectory or recovery potential.",
+        "Acute illness (e.g., infection) can temporarily worsen PS, leading to inappropriate treatment decisions if reassessment is delayed."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "7.3 Non-Oncologic Contributors"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Comorbidities like arthritis, COPD, or cardiac disease may lower PS even if cancer is controlled.",
+        "Overreliance on PS can lead to undertreatment of potentially fit patients."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Global Relevance and Resource Allocation"
+    },
+    {
+      "type": "list",
+      "items": [
+        "In low- and middle-income countries, PS is often the primary triage tool in the absence of genomic testing or advanced imaging.",
+        "Many public health systems (e.g., NHS, PBS) use PS thresholds to approve funding for therapies like immunotherapy."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Future Directions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Digital health tools (e.g., wearables) may soon provide objective PS proxies (e.g., step counts, heart rate variability).",
+        "Integration with biomarkers (e.g., CRP, albumin, sarcopenia metrics) may refine risk stratification.",
+        "Machine learning models are being trained on longitudinal PS data to predict treatment tolerability and survival."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "Performance status remains a cornerstone of patient-centered oncology. It bridges the gap between biological disease burden and the real-world lived experience of cancer patients. Though not without limitations, PS provides a practical, reproducible, and impactful lens through which to make informed treatment decisions. As cancer care becomes more complex and personalized, the integration of PS with genomic, physiologic, and psychosocial data will continue to evolve—ensuring that treatment decisions reflect both biological feasibility and functional reality."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Always reassess performance status after addressing reversible causes of functional decline (e.g., pain control, anemia correction, or treatment of depression) before making definitive treatment decisions based on PS alone."
+    }
+  ]
+}

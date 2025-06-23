@@ -1,0 +1,396 @@
+{
+  "title": "Prognostic Scores: FLIPI – Follicular Lymphoma",
+  "category": "Hematologic Malignancies",
+  "section": "Lymphoma",
+  "summary": "Comprehensive guide to FLIPI and FLIPI-2 prognostic scoring systems for follicular lymphoma, including clinical applications and modern molecular integrations.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-11-25T00:00:00Z",
+  "version": "2.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 12,
+    "relatedTopics": [
+      "Indolent Lymphoma Management",
+      "Molecular Prognostics in Lymphoma",
+      "POD24 in Follicular Lymphoma"
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Prognostic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Topic 4: FLIPI – Follicular Lymphoma"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Follicular lymphoma (FL) is the most common indolent non-Hodgkin lymphoma (NHL) and arises from germinal center B-cells. It typically has a slow, waxing and waning course, often with painless lymphadenopathy and systemic symptoms in advanced stages."
+    },
+    {
+      "type": "paragraph",
+      "text": "A hallmark molecular event is the t(14;18)(q32;q21) translocation, leading to BCL2 overexpression—which inhibits apoptosis and contributes to malignant B-cell survival."
+    },
+    {
+      "type": "paragraph",
+      "text": "Despite being indolent, FL is considered incurable with conventional therapy, and many patients experience multiple relapses over their lifetime."
+    },
+    {
+      "type": "paragraph",
+      "text": "To improve clinical risk stratification, two key prognostic models have been developed:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "FLIPI (2004) – based on OS in the pre-rituximab era.",
+        "FLIPI-2 (2009) – developed to better assess PFS in patients treated with rituximab-based regimens."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Why a Prognostic Score for FL?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Unlike aggressive lymphomas (e.g., DLBCL), FL presents with unique management challenges:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Late-stage diagnosis is common, yet initial treatment may be deferred.",
+        "Responses to therapy can be excellent, but relapse is expected.",
+        "Disease course ranges from decades-long indolence to early aggressive transformation."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Prognostic scoring tools serve several clinical functions:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Estimate overall survival (OS) and progression-free survival (PFS).",
+        "Predict high-risk events such as early disease progression (POD24).",
+        "Help tailor:"
+      ]
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Treatment intensity (e.g., watchful waiting vs. immediate therapy).",
+        "Maintenance strategies.",
+        "Eligibility for transplantation or clinical trials."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. The Original FLIPI Model (2004)"
+    },
+    {
+      "type": "paragraph",
+      "text": "FLIPI was derived from retrospective data of >4,000 patients across 5 countries. It aimed to create a simple, clinically applicable score for estimating OS."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "FLIPI Prognostic Factors (1 point each)"
+    },
+    {
+      "type": "table",
+      "headers": ["Factor", "Risk Threshold"],
+      "rows": [
+        ["Age", ">60 years"],
+        ["Stage", "Ann Arbor III or IV"],
+        ["Hemoglobin", "<12 g/dL"],
+        ["LDH", "Elevated"],
+        ["Nodal Areas", ">4 involved sites"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. FLIPI Risk Stratification"
+    },
+    {
+      "type": "table",
+      "headers": ["Score", "Risk Group", "Estimated 10-Year OS"],
+      "rows": [
+        ["0–1", "Low", "~70%"],
+        ["2", "Intermediate", "~50%"],
+        ["3–5", "High", "~35%"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Note: A majority of FL patients fall into intermediate or high-risk categories at diagnosis."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. FLIPI-2 (2009): A Modernized Index"
+    },
+    {
+      "type": "paragraph",
+      "text": "In response to treatment evolution, FLIPI-2 was developed in the rituximab era, aiming to better predict PFS."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "FLIPI-2 Prognostic Variables"
+    },
+    {
+      "type": "table",
+      "headers": ["Factor", "Risk Threshold"],
+      "rows": [
+        ["Age", ">60 years"],
+        ["β2-microglobulin", "Elevated"],
+        ["Hemoglobin", "<12 g/dL"],
+        ["Largest lymph node", ">6 cm"],
+        ["Bone marrow involvement", "Present"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "FLIPI-2 Risk Stratification"
+    },
+    {
+      "type": "table",
+      "headers": ["Score", "Risk Group", "Estimated 5-Year PFS"],
+      "rows": [
+        ["0–1", "Low", "~80–85%"],
+        ["2", "Intermediate", "~50–60%"],
+        ["≥3", "High", "~30–40%"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Limitations of FLIPI/FLIPI-2"
+    },
+    {
+      "type": "table",
+      "headers": ["Issue", "Details"],
+      "rows": [
+        ["Outdated reference era", "FLIPI predates rituximab; FLIPI-2 predates obinutuzumab."],
+        ["No molecular data", "Ignores relevant gene mutations (e.g., TP53, EZH2)."],
+        ["Static model", "Risk score is fixed at diagnosis and doesn't evolve."],
+        ["Not predictive", "Cannot anticipate response to specific therapies."]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "These limitations highlight the need for integrated molecular and dynamic risk models."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Clinical Applications"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "✅ Common Uses"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Patient counseling regarding expected outcomes.",
+        "Determining follow-up frequency.",
+        "Informing decisions on maintenance rituximab.",
+        "Risk stratification in clinical trial design."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "❌ Not Used For"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Choosing between frontline regimens.",
+        "Eligibility for transplantation or CAR-T cell therapy.",
+        "Estimating risk of transformation to aggressive lymphoma."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. FLIPI and POD24"
+    },
+    {
+      "type": "list",
+      "items": [
+        "POD24: Progression of disease within 24 months of initiating frontline therapy.",
+        "Strongly associated with poor overall survival and increased mortality.",
+        "FLIPI has limited ability to predict POD24."
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "More precise tools such as m7-FLIPI aim to improve prediction of POD24 and transformation risk."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Integration with Molecular Tools"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "m7-FLIPI"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Combines:"
+      ]
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "FLIPI score",
+        "ECOG performance status",
+        "Mutational status of 7 genes: EZH2, TP53, MEF2B, ARID1A, EP300, FOXO1, CREBBP"
+      ]
+    },
+    {
+      "type": "list",
+      "items": [
+        "Provides:"
+      ]
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Enhanced risk stratification.",
+        "Prediction of early progression and resistance to immunochemotherapy."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "PRIMA-PI"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Derived from the PRIMA study.",
+        "Uses just:"
+      ]
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "β2-microglobulin",
+        "Bone marrow involvement"
+      ]
+    },
+    {
+      "type": "list",
+      "items": [
+        "Pros: Simpler and bedside friendly.",
+        "Cons: Less validated and less granular than m7-FLIPI or FLIPI-2."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. FLIPI in Clinical Trials"
+    },
+    {
+      "type": "paragraph",
+      "text": "FLIPI remains the most widely used risk model in FL clinical trials due to its simplicity and legacy."
+    },
+    {
+      "type": "paragraph",
+      "text": "Used for:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Eligibility stratification (e.g., FLIPI ≥3 in high-risk trials).",
+        "Subgroup analysis based on baseline risk."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Trials"
+    },
+    {
+      "type": "list",
+      "items": [
+        "GALLIUM: Compared obinutuzumab vs rituximab-based therapy.",
+        "RELEVANCE: R^2 regimen (rituximab + lenalidomide) vs chemoimmunotherapy."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Summary Table: FLIPI vs FLIPI-2"
+    },
+    {
+      "type": "table",
+      "headers": ["Feature", "FLIPI", "FLIPI-2"],
+      "rows": [
+        ["Year", "2004", "2009"],
+        ["Primary Endpoint", "Overall Survival (OS)", "Progression-Free Survival (PFS)"],
+        ["Treatment Era", "Pre-rituximab", "Rituximab era"],
+        ["Key Variables", "Age, Stage, LDH, Hb, Nodes", "Age, β2M, Hb, Node size, BM"],
+        ["Application", "Broad clinical use", "More common in trial settings"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "12. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "FLIPI and FLIPI-2 have provided a robust foundation for understanding follicular lymphoma prognosis for two decades. While not suitable for guiding frontline therapy, these scores:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Anchor risk discussions with patients.",
+        "Inform surveillance strategies.",
+        "Guide eligibility and stratification in clinical trials."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Emerging tools like m7-FLIPI and PRIMA-PI mark a shift toward molecularly integrated prognostics, offering improved prediction of early failure and personalized care strategies."
+    },
+    {
+      "type": "paragraph",
+      "text": "Still, FLIPI remains the most validated and widely recognized standard, bridging historical context with evolving care paradigms."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Practice Recommendations"
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Use FLIPI for initial risk assessment in newly diagnosed FL",
+        "Consider FLIPI-2 for patients receiving rituximab-containing regimens",
+        "In high-risk cases, supplement with m7-FLIPI if molecular testing available",
+        "Remember FLIPI scores don't dictate therapy choice but inform prognosis",
+        "Reassess risk at progression using contemporary tools"
+      ]
+    }
+  ]
+}

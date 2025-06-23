@@ -1,0 +1,1428 @@
+﻿# CODEBASE AUDIT RESULTS
+
+## Files Never Imported (Potential Dead Code)
+- index.ts
+- main.tsx
+- vite-env.d.ts
+- vite.config.ts
+- ai\clinicalConsultant.ts
+- ai\privacyProtection.ts
+- api\ai-agent.ts
+- api\summaryService.ts
+- api\__tests__\ai-agent.validation.test.ts
+- auth\auth-provider.tsx
+- auth\ProtectedRoute.tsx
+- components\AuthButton.tsx
+- components\AuthLoading.tsx
+- components\ClinicalDashboard.tsx
+- components\CompactGlowingLogo.tsx
+- components\EmergencyResponseSystem.tsx
+- components\GlowingLogoImage.tsx
+- components\LoginButton.tsx
+- components\LogoutButton.tsx
+- components\MainNav.tsx
+- components\NotFoundRedirect.tsx
+- components\ProtectedRoute.tsx
+- components\RecommendationPanel.tsx
+- components\RiskVisualization.tsx
+- components\RouterLogger.tsx
+- components\SupabaseTester.tsx
+- components\TestMarkdownViewer.tsx
+- components\ThemeToggle.tsx
+- components\TopicNotFound.tsx
+- components\ai-agent\AIAgent.tsx
+- components\ai-agent\AIChatAssistant.tsx
+- components\ai-agent\mockResponses.ts
+- components\ai-agent\promptBuilder.ts
+- components\ai-agent\PromptSuggestions.tsx
+- components\ai-agent\responseRenderer.tsx
+- components\charts\IPSChart.tsx
+- components\HandbookSearch\HandbookSearch.tsx
+- components\HandbookSearch\index.ts
+- components\HandbookSearch\SearchPage.tsx
+- components\Layout\index.tsx
+- components\MarkdownViewer\MarkdownViewer.tsx
+- components\MarkdownViewer\RawMarkdownViewer.tsx
+- components\shared\GlossaryTooltip.tsx
+- components\ui\accordion.tsx
+- components\ui\alert.tsx
+- components\ui\AlertBanner.tsx
+- components\ui\button.tsx
+- components\ui\checkbox.tsx
+- components\ui\collapsible.tsx
+- components\ui\dialog.tsx
+- components\ui\label.tsx
+- components\ui\progress.tsx
+- components\ui\radio-group.tsx
+- components\ui\scroll-area.tsx
+- components\ui\select.tsx
+- components\ui\separator.tsx
+- components\ui\slider.tsx
+- components\ui\switch.tsx
+- components\ui\symptom-search.tsx
+- components\ui\tabs.tsx
+- components\ui\textarea.tsx
+- components\ui\toast.tsx
+- components\ui\toaster.tsx
+- components\ui\toggle.tsx
+- components\ui\tooltip.tsx
+- components\ui\use-toast.ts
+- components\ui\medication\Section.tsx
+- components\ui\medication\TagList.tsx
+- config\paths.ts
+- config\premedWhitelist.ts
+- context\LayoutContext.tsx
+- context\UserContext.tsx
+- data\diagnostic-pathways.ts
+- data\clinical\genetic_risk_profiles.ts
+- data\clinical\symptom_correlations.ts
+- devtools\medications\MedicationDebugPanel.tsx
+- devtools\medications\MedicationDebugView.tsx
+- devtools\medications\MedicationsDebugPanel.tsx
+- education\clinicalTraining.ts
+- export\documentGeneration.ts
+- handbook\palliative-care\palliativeTOC.ts
+- hooks\useAIResponseHistory.ts
+- hooks\useAuth.ts
+- hooks\useDebounce.ts
+- hooks\useEmergencyService.ts
+- hooks\useHandbookData.ts
+- hooks\useUser.ts
+- hooks\__tests__\useHandbookData.test.tsx
+- layout\Layout.tsx
+- layout\RootLayout.tsx
+- lib\gemini.ts
+- lib\openai.ts
+- lib\rate-limit.ts
+- lib\supabase.ts
+- lib\supabaseClient.ts
+- lib\api\aiAgentAPI.ts
+- lib\api\aiAgentAPI_backup.ts
+- lib\errors\AIErrorHandler.ts
+- lib\services\AIService.ts
+- lib\services\__tests__\AIService.test.ts
+- logic\clinicalReasoning.ts
+- logic\screeningEngine.ts
+- modules\cdu\CDU.tsx
+- modules\cdu\index.ts
+- modules\cdu\index.tsx
+- modules\cdu\calculations\Calculations.tsx
+- modules\cdu\components\FilterChips.tsx
+- modules\cdu\components\MedicationDetailView.tsx
+- modules\cdu\components\charts\CompletenessMatrix.tsx
+- modules\cdu\components\charts\GroupDistributionChart.tsx
+- modules\cdu\components\charts\IntentDistributionChart.tsx
+- modules\cdu\components\charts\TimelineChart.tsx
+- modules\cdu\layout\CDULayout.tsx
+- modules\cdu\medications\MedicationsView.tsx
+- modules\cdu\medications\__tests__\MedicationsView.test.tsx
+- modules\cdu\pages\CDUHome.tsx
+- modules\cdu\safe\CDU.tsx
+- modules\cdu\safe\calculations\Calculations.tsx
+- modules\cdu\safe\toxicity\Toxicity.tsx
+- modules\cdu\sections\DiseaseProgressTracker.tsx
+- modules\cdu\toxicity\Toxicity.tsx
+- modules\handbook\Handbook.tsx
+- modules\handbook\HandbookLayout.tsx
+- modules\handbook\HandbookViewer.tsx
+- modules\handbook\index.ts
+- modules\handbook\components\HandbookSection.tsx
+- modules\inpatient\index.ts
+- modules\inpatient\index.tsx
+- modules\inpatient\Inpatient.tsx
+- modules\inpatient\InpatientLayout.tsx
+- modules\inpatient\InpatientModule.tsx
+- modules\inpatient\components\checklists\AdmissionChecklist.tsx
+- modules\inpatient\sections\admission\AdmissionAlertTriggers.tsx
+- modules\inpatient\sections\admission\AdmissionGuidelines.tsx
+- modules\inpatient\sections\admission\AdmissionProcessSteps.tsx
+- modules\inpatient\sections\admission\PreAdmissionChecklist.tsx
+- modules\inpatient\sections\discharge\DischargeGuidelines.tsx
+- modules\inpatient\sections\discharge\components\EmergencyAccordion.tsx
+- modules\inpatient\sections\emergencies\components\EmergencyAccordion.tsx
+- modules\inpatient\sections\emergencies\components\EmergencyDetailModal.tsx
+- modules\inpatient\sections\supportive_care\SupportiveCare.tsx
+- modules\opd\index.ts
+- modules\opd\index.tsx
+- modules\opd\OPD.tsx
+- modules\opd\cancer-screening\CancerScreening.tsx
+- modules\opd\components\Button.tsx
+- modules\opd\components\EvaluationSummary.tsx
+- modules\opd\components\FormField.tsx
+- modules\opd\components\OPDModule.tsx
+- modules\opd\components\ProgressStepper.tsx
+- modules\opd\components\ScrollableTabs.tsx
+- modules\opd\components\evaluation\clinical\HistologySelector.tsx
+- modules\opd\components\evaluation\clinical\index.ts
+- modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx
+- modules\opd\components\evaluation\clinical\TNMStagingPanel.tsx
+- modules\opd\components\evaluation\core\EvaluationStepper.tsx
+- modules\opd\components\evaluation\core\FormAlertBar.tsx
+- modules\opd\components\evaluation\core\index.ts
+- modules\opd\components\evaluation\core\SmartSaveBanner.tsx
+- modules\opd\components\evaluation\intelligence\AutoRiskClassifier.tsx
+- modules\opd\components\evaluation\intelligence\RedFlagEngine.tsx
+- modules\opd\components\evaluation\intelligence\RedFlagEngine_Updated.tsx
+- modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx
+- modules\opd\components\evaluation\molecular\index.ts
+- modules\opd\components\evaluation\molecular\MutationPanel.tsx
+- modules\opd\components\evaluation\molecular\ReceptorPanel.tsx
+- modules\opd\components\staging\ECOGSelector.tsx
+- modules\opd\components\staging\index.ts
+- modules\opd\components\staging\KarnofskySlider.tsx
+- modules\opd\components\staging\TNMStaging.tsx
+- modules\opd\components\__tests__\FormField.test.tsx
+- modules\opd\context\EnhancedEvaluationContext.tsx
+- modules\opd\context\EvaluationContext.tsx
+- modules\opd\data\enhancedEvaluationTemplates.ts
+- modules\opd\data\evaluationTemplates.ts
+- modules\opd\diagnostic-pathways\DiagnosticPathways.tsx
+- modules\opd\diagnostic-pathways\DiagnosticPathways1.tsx
+- modules\opd\follow-up-oncology\FollowUpOncology.tsx
+- modules\opd\follow-up-oncology\components\AIFollowUpAssistant.tsx
+- modules\opd\follow-up-oncology\components\CancerSelector.tsx
+- modules\opd\follow-up-oncology\components\DiagnosticTimeline.tsx
+- modules\opd\follow-up-oncology\components\FollowUpTimeline.tsx
+- modules\opd\follow-up-oncology\components\PerformanceScoreChart.tsx
+- modules\opd\follow-up-oncology\components\QualityOfLifePanel.tsx
+- modules\opd\follow-up-oncology\components\RecurrenceRedFlags.tsx
+- modules\opd\follow-up-oncology\components\SmartFollowUpSummary.tsx
+- modules\opd\follow-up-oncology\components\SurveillanceChecklist.tsx
+- modules\opd\follow-up-oncology\components\SymptomChecker.tsx
+- modules\opd\follow-up-oncology\data\followUpData.ts
+- modules\opd\follow-up-oncology\data\followUpTemplates.ts
+- modules\opd\follow-up-oncology\logic\generateFollowUpPlan.ts
+- modules\opd\layout\OPDLayout.tsx
+- modules\opd\patient-evaluation\PatientEvaluation.tsx
+- modules\opd\patient-evaluation\PatientEvaluationForm.tsx
+- modules\opd\referral-guidelines\ReferralGuidelines.tsx
+- modules\opd\referral-guidelines\data\referralTemplates.ts
+- modules\opd\referral-guidelines\logic\triageEngine.ts
+- modules\opd\services\enhancedEvaluationService.ts
+- modules\opd\templates\cancerTemplates.ts
+- modules\palliative\index.tsx
+- modules\palliative\Palliative.tsx
+- modules\palliative\components\ConfirmationDialog.tsx
+- modules\palliative\components\ErrorMessage.tsx
+- modules\palliative\components\KeyboardShortcutsDialog.tsx
+- modules\palliative\components\LoadingSpinner.tsx
+- modules\palliative\components\PalliativeHandbookViewer.tsx
+- modules\palliative\components\checklists\AdvancedCareChecklist.tsx
+- modules\palliative\components\checklists\SymptomChecklist.tsx
+- modules\palliative\context\PalliativeContext.tsx
+- modules\palliative\context\ThemeProvider.tsx
+- modules\palliative\hooks\useKeyboardNav.ts
+- modules\palliative\hooks\usePalliativeNav.ts
+- modules\palliative\hooks\usePalliativeTheme.ts
+- modules\palliative\hooks\useSymptomData.ts
+- modules\palliative\hooks\useSymptoms.ts
+- modules\palliative\safe\Palliative.tsx
+- modules\palliative\safe\components\checklists\AdvancedCareChecklist.tsx
+- modules\palliative\safe\components\checklists\SymptomChecklist.tsx
+- modules\palliative\safe\sections\advanced_planning\AdvanceCarePlanning.tsx
+- modules\palliative\safe\sections\goals_of_care\GoalsOfCarePlanning.tsx
+- modules\palliative\safe\sections\symptom_management\AdvancedSymptomManagement.tsx
+- modules\palliative\sections\advanced_planning\AdvanceCarePlanning.tsx
+- modules\palliative\sections\advance_directives\AdvanceDirectives.tsx
+- modules\palliative\sections\advance_directives\components\CultureBlock.tsx
+- modules\palliative\sections\advance_directives\components\LegalItem.tsx
+- modules\palliative\sections\delirium\DeliriumAssessment.tsx
+- modules\palliative\sections\end_of_life\AdvanceDirectives.tsx
+- modules\palliative\sections\end_of_life\FamilySupport.tsx
+- modules\palliative\sections\goals_of_care\GoalsOfCarePlanning.tsx
+- modules\palliative\sections\pain_management\PainManagement.tsx
+- modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx
+- modules\palliative\sections\psychosocial_support\components\AssessmentTrends.tsx
+- modules\palliative\sections\psychosocial_support\components\DocumentationList.tsx
+- modules\palliative\sections\psychosocial_support\components\ResourcesList.tsx
+- modules\palliative\sections\psychosocial_support\data\psychosocialData.ts
+- modules\palliative\sections\psychosocial_support\hooks\usePsychosocialData.ts
+- modules\palliative\sections\symptom_control\EnhancedSymptomView.tsx
+- modules\palliative\sections\symptom_control\SymptomControl.tsx
+- modules\palliative\sections\symptom_control\SymptomControlNew.tsx
+- modules\palliative\sections\symptom_control\components\DeliriumAssessment.tsx
+- modules\palliative\sections\symptom_control\components\SymptomPanel.tsx
+- modules\palliative\sections\symptom_control\data\SymptomData.ts
+- modules\palliative\sections\symptom_control\data\symptomsData.ts
+- modules\palliative\sections\symptom_management\AdvancedSymptomManagement.tsx
+- modules\safe\Palliative.tsx
+- modules\safe\components\checklists\AdvancedCareChecklist.tsx
+- modules\safe\components\checklists\SymptomChecklist.tsx
+- modules\safe\sections\advanced_planning\AdvanceCarePlanning.tsx
+- modules\safe\sections\goals_of_care\GoalsOfCarePlanning.tsx
+- modules\safe\sections\symptom_management\AdvancedSymptomManagement.tsx
+- modules\tools\Calculators.tsx
+- modules\tools\index.ts
+- modules\tools\index.tsx
+- modules\tools\RedFlags.tsx
+- modules\tools\Tools.tsx
+- modules\tools\calculators\ANC.tsx
+- modules\tools\calculators\BSA.tsx
+- modules\tools\calculators\CrCl.tsx
+- modules\tools\calculators\index.tsx
+- modules\tools\cognitive\index.tsx
+- modules\tools\emergencyregimens\index.tsx
+- modules\tools\labs\index.tsx
+- modules\tools\quickguides\index.tsx
+- modules\tools\redflags\index.tsx
+- modules\tools\reminders\index.tsx
+- modules\tools\toxicities\index.tsx
+- pages\CallbackPage.tsx
+- pages\Dashboard.tsx
+- pages\LandingPage.tsx
+- pages\ProtectedPage.tsx
+- pages\api\generate-summary.ts
+- pages\api\generate.ts
+- pages\api\ai\generate-summary.ts
+- pages\handbook\MedicalHandbookTOC.tsx
+- pages\handbook\PalliativeHandbookTOC.tsx
+- pages\handbook\RadiationHandbookTOC.tsx
+- pages\HandbookPage\index.tsx
+- providers\Auth0Provider.tsx
+- quality\clinicalValidation.ts
+- routes\cduRoutes.tsx
+- routes\index.tsx
+- routes\opdRoutes.tsx
+- routes\routes.tsx
+- routes\TestRoutes.tsx
+- server\index.ts
+- server\api\ai-agent.ts
+- server\api\patient-evaluations.ts
+- server\routes\register.ts
+- services\aiAssistant.ts
+- services\AIService.ts
+- services\handbookSearch.ts
+- services\medications.ts
+- services\patientEvaluationService.ts
+- services\toxicities.ts
+- services\confidence\AIServiceWithConfidence.ts
+- services\disclaimers\ComplianceManager.ts
+- services\disclaimers\DisclaimerService.ts
+- services\emergency\config.ts
+- services\emergency\EmergencyService.ts
+- services\implementations\ClaudeService.ts
+- services\implementations\OpenAIService.ts
+- services\labInterpretation\LabInterpretationHandler.ts
+- services\labInterpretation\LabInterpreter.ts
+- services\labInterpretation\LabLogger.ts
+- services\symptomAssessment\SymptomAssessmentFactory.ts
+- services\symptomAssessment\SymptomLogger.ts
+- services\symptomAssessment\ontologies\CTCAE.ts
+- services\symptomAssessment\ontologies\SymptomOntology.ts
+- services\symptomAssessment\__tests__\mocks.ts
+- __tests__\ai-agent.integration.test.ts
+- __tests__\aiAgentAPI.test.ts
+- __tests__\generateGeminiResponse.test.ts
+- __tests__\clinical\clinical.integration.test.ts
+
+
+## Potential Duplicates
+### HandbookSidebar
+- modules\handbook\HandbookSidebar.tsx
+- modules\handbook\components\HandbookSidebar.tsx
+
+### EmergencyAccordion
+- modules\inpatient\sections\discharge\components\EmergencyAccordion.tsx
+- modules\inpatient\sections\emergencies\components\EmergencyAccordion.tsx
+
+### MedicationDebugPanel
+- devtools\medications\MedicationDebugPanel.tsx
+- modules\cdu\treatmentProtocols\MedicationDebugPanel.tsx
+
+### App
+- App.tsx
+- server\app.ts
+
+### protocolHelpers
+- types\protocolHelpers.ts
+- utils\protocolHelpers.ts
+
+### TreatmentProtocols
+- modules\cdu\safe\treatmentProtocols\TreatmentProtocols.tsx
+- modules\cdu\treatmentProtocols\TreatmentProtocols.tsx
+- pages\TreatmentProtocols.tsx
+
+### ai-agent
+- api\ai-agent.ts
+- server\api\ai-agent.ts
+- types\ai-agent.ts
+
+### ErrorBoundary
+- components\ErrorBoundary.tsx
+- modules\opd\follow-up-oncology\components\ErrorBoundary.tsx
+
+### AdvancedSymptomManagement
+- modules\palliative\safe\sections\symptom_management\AdvancedSymptomManagement.tsx
+- modules\palliative\sections\symptom_management\AdvancedSymptomManagement.tsx
+- modules\safe\sections\symptom_management\AdvancedSymptomManagement.tsx
+
+### DeliriumAssessment
+- modules\palliative\sections\delirium\DeliriumAssessment.tsx
+- modules\palliative\sections\symptom_control\components\DeliriumAssessment.tsx
+
+### SymptomChecklist
+- modules\palliative\components\checklists\SymptomChecklist.tsx
+- modules\palliative\safe\components\checklists\SymptomChecklist.tsx
+- modules\safe\components\checklists\SymptomChecklist.tsx
+
+### DoseModificationsTab
+- components\shared\protocolTabs\DoseModificationsTab.tsx
+- modules\cdu\treatmentProtocols\DoseModificationsTab.tsx
+
+### HandbookSearch
+- components\HandbookSearch\HandbookSearch.tsx
+- services\handbookSearch.ts
+
+### GoalsOfCarePlanning
+- modules\palliative\safe\sections\goals_of_care\GoalsOfCarePlanning.tsx
+- modules\palliative\sections\goals_of_care\GoalsOfCarePlanning.tsx
+- modules\safe\sections\goals_of_care\GoalsOfCarePlanning.tsx
+
+### CDU
+- modules\cdu\CDU.tsx
+- modules\cdu\safe\CDU.tsx
+
+### PalliativeModule
+- modules\palliative\PalliativeModule.tsx
+- modules\palliative\safe\PalliativeModule.tsx
+- modules\safe\PalliativeModule.tsx
+
+### generate-summary
+- pages\api\generate-summary.ts
+- pages\api\ai\generate-summary.ts
+
+### medications
+- services\medications.ts
+- types\medications.ts
+
+### SymptomManagementCard
+- modules\palliative\components\cards\SymptomManagementCard.tsx
+- modules\palliative\safe\components\cards\SymptomManagementCard.tsx
+- modules\safe\components\cards\SymptomManagementCard.tsx
+
+### DrugInteractionHandlerFactory
+- services\drugInteractions\DrugInteractionHandlerFactory.ts
+- services\drugInteractions\__tests__\DrugInteractionHandlerFactory.ts
+
+### AdvanceCarePlanning
+- modules\palliative\safe\sections\advanced_planning\AdvanceCarePlanning.tsx
+- modules\palliative\sections\advanced_planning\AdvanceCarePlanning.tsx
+- modules\safe\sections\advanced_planning\AdvanceCarePlanning.tsx
+
+### Calculations
+- modules\cdu\calculations\Calculations.tsx
+- modules\cdu\safe\calculations\Calculations.tsx
+
+### AdvancedPlanningCard
+- modules\palliative\components\cards\AdvancedPlanningCard.tsx
+- modules\palliative\safe\components\cards\AdvancedPlanningCard.tsx
+- modules\safe\components\cards\AdvancedPlanningCard.tsx
+
+### types
+- components\ai-agent\types.ts
+- lib\supabase\types.ts
+- modules\cdu\types.ts
+- modules\cdu\treatmentProtocols\types.ts
+- services\confidence\types.ts
+- services\disclaimers\types.ts
+- services\drugInteractions\types.ts
+- services\emergency\types.ts
+- services\labInterpretation\types.ts
+- services\safety\types.ts
+- services\symptomAssessment\types.ts
+
+### Toxicity
+- modules\cdu\safe\toxicity\Toxicity.tsx
+- modules\cdu\toxicity\Toxicity.tsx
+
+### Palliative
+- modules\palliative\Palliative.tsx
+- modules\palliative\safe\Palliative.tsx
+- modules\safe\Palliative.tsx
+
+### EligibilityTab
+- components\shared\protocolTabs\EligibilityTab.tsx
+- modules\cdu\treatmentProtocols\EligibilityTab.tsx
+
+### EmergencyProtocols
+- modules\inpatient\sections\emergencies\EmergencyProtocols.tsx
+- modules\inpatient\sections\emergencies\data\emergencyProtocols.ts
+
+### setup
+- services\drugInteractions\__tests__\setup.ts
+- test\setup.ts
+- __tests__\setup.ts
+
+### ProtectedRoute
+- auth\ProtectedRoute.tsx
+- components\ProtectedRoute.tsx
+
+### utils
+- lib\utils.ts
+- services\symptomAssessment\utils.ts
+
+### ReferralCard
+- modules\opd\cards\ReferralCard.tsx
+- modules\opd\referral-guidelines\ReferralCard.tsx
+
+### pdfGenerator
+- modules\cdu\treatmentProtocols\utils\pdfGenerator.ts
+- modules\opd\follow-up-oncology\utils\pdfGenerator.ts
+- utils\pdf\pdfGenerator.ts
+
+### GoalsOfCareCard
+- modules\palliative\components\cards\GoalsOfCareCard.tsx
+- modules\palliative\safe\components\cards\GoalsOfCareCard.tsx
+- modules\safe\components\cards\GoalsOfCareCard.tsx
+
+### TreatmentTab
+- modules\cdu\treatmentProtocols\TreatmentTab.tsx
+- modules\cdu\treatmentProtocols\tabs\TreatmentTab.tsx
+
+### AdvanceDirectives
+- modules\palliative\sections\advance_directives\AdvanceDirectives.tsx
+- modules\palliative\sections\end_of_life\AdvanceDirectives.tsx
+
+### AdvancedCareChecklist
+- modules\palliative\components\checklists\AdvancedCareChecklist.tsx
+- modules\palliative\safe\components\checklists\AdvancedCareChecklist.tsx
+- modules\safe\components\checklists\AdvancedCareChecklist.tsx
+
+### index
+- index.ts
+- components\HandbookSearch\index.ts
+- components\Layout\index.tsx
+- data\cancer-pathways\index.ts
+- modules\cdu\index.ts
+- modules\cdu\index.tsx
+- modules\cdu\treatmentProtocols\tabs\index.ts
+- modules\handbook\index.ts
+- modules\inpatient\index.ts
+- modules\inpatient\index.tsx
+- modules\opd\index.ts
+- modules\opd\index.tsx
+- modules\opd\components\evaluation\clinical\index.ts
+- modules\opd\components\evaluation\core\index.ts
+- modules\opd\components\evaluation\molecular\index.ts
+- modules\opd\components\staging\index.ts
+- modules\palliative\index.tsx
+- modules\tools\index.ts
+- modules\tools\index.tsx
+- modules\tools\calculators\index.tsx
+- modules\tools\cognitive\index.tsx
+- modules\tools\emergencyregimens\index.tsx
+- modules\tools\labs\index.tsx
+- modules\tools\quickguides\index.tsx
+- modules\tools\redflags\index.tsx
+- modules\tools\reminders\index.tsx
+- modules\tools\toxicities\index.tsx
+- pages\HandbookPage\index.tsx
+- routes\index.tsx
+- server\index.ts
+- types\index.ts
+
+### AIService
+- lib\services\AIService.ts
+- services\AIService.ts
+
+### EmergencyCard
+- modules\inpatient\components\cards\EmergencyCard.tsx
+- modules\inpatient\sections\emergencies\components\EmergencyCard.tsx
+
+### Handbook
+- modules\handbook\Handbook.tsx
+- modules\handbook\types\handbook.ts
+
+### OPDCard
+- modules\opd\cards\OPDCard.tsx
+- modules\opd\components\OPDCard.tsx
+
+### button
+- components\ui\button.tsx
+- modules\opd\components\Button.tsx
+
+### interfaces
+- services\emergency\interfaces.ts
+- services\symptomAssessment\interfaces.ts
+
+
+
+## Broken Import Paths
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports './components/CancerSelector' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports './components/DiagnosticTimeline' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports './components/PerformanceScoreChart' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports './components/SmartFollowUpSummary' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports './data/followUpData' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports '../types/evaluation' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports './data/followUpTemplates' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports './logic/generateFollowUpPlan' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports '@/lib/api/aiAgentAPI' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports '@/components/ui/tooltip' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\FollowUpOncology.tsx imports './components/AIFollowUpAssistant' - NOT FOUND
+- âŒ components\ErrorBoundary_fixed.tsx imports '@/utils/log' - NOT FOUND
+- âŒ components\TestMarkdownViewer.tsx imports './MarkdownViewer/RawMarkdownViewer' - NOT FOUND
+- âŒ components\TestMarkdownViewer.tsx imports './ErrorBoundary' - NOT FOUND
+- âŒ __tests__\aiAgentAPI.test.ts imports '../api/ai-agent' - NOT FOUND
+- âŒ components\ui\checkbox.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\handbook\JsonHandbookViewer.tsx imports './types/handbook' - NOT FOUND
+- âŒ modules\handbook\JsonHandbookViewer.tsx imports './ContentRenderer' - NOT FOUND
+- âŒ auth\auth-provider.tsx imports '../components/AuthLoading' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\DrugInteractionHandler.test.ts imports '../DrugInteractionHandler' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\DrugInteractionHandler.test.ts imports './DrugInteractionHandlerFactory' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\DrugInteractionHandler.test.ts imports '../types' - NOT FOUND
+- âŒ lib\api\aiAgentAPI_backup.ts imports '@/components/ai-agent/types' - NOT FOUND
+- âŒ lib\api\aiAgentAPI_backup.ts imports '@/lib/services/AIService' - NOT FOUND
+- âŒ lib\api\aiAgentAPI_backup.ts imports '@/components/ai-agent/agentLogger' - NOT FOUND
+- âŒ lib\api\aiAgentAPI_backup.ts imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ lib\api\aiAgentAPI_backup.ts imports '../../components/ai-agent/mockResponses' - NOT FOUND
+- âŒ services\labInterpretation\types.ts imports '../drugInteractions/types' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\components\ResourceDownloadCard.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\components\ResourceDownloadCard.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ components\ui\symptom-card-skeleton.tsx imports './card' - NOT FOUND
+- âŒ components\ui\symptom-card-skeleton.tsx imports './skeleton' - NOT FOUND
+- âŒ components\ui\symptom-card-skeleton.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\data\enhancedEvaluationTemplates.ts imports '../types/enhanced-evaluation' - NOT FOUND
+- âŒ services\protocolsUpdated.ts imports '@/lib/supabaseClient' - NOT FOUND
+- âŒ services\protocolsUpdated.ts imports '@/types/protocolUpdated' - NOT FOUND
+- âŒ api\ai-agent.ts imports '../lib/gemini' - NOT FOUND
+- âŒ api\ai-agent.ts imports '../components/ai-agent/mockResponses' - NOT FOUND
+- âŒ api\ai-agent.ts imports '../types/ai-agent' - NOT FOUND
+- âŒ api\ai-agent.ts imports '../lib/rate-limit' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DecisionTree.tsx imports '../../../types/cancer-pathways' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DecisionTree.tsx imports '../components/PathwaySummaryCard' - NOT FOUND
+- âŒ layout\Header_new.tsx imports '@/components/HandbookSearch' - NOT FOUND
+- âŒ pages\HandbookPage\index.tsx imports '../../modules/handbook/HandbookViewer' - NOT FOUND
+- âŒ modules\tools\OncologyEmergencyCards.tsx imports '@/components/ui/data-card' - NOT FOUND
+- âŒ modules\tools\OncologyEmergencyCards.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\tools\OncologyEmergencyCards.tsx imports '@/components/ui/input' - NOT FOUND
+- âŒ modules\tools\OncologyEmergencyCards.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\tools\OncologyEmergencyCards.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\tools\OncologyEmergencyCards.tsx imports '@/modules/tools/RedFlags' - NOT FOUND
+- âŒ modules\palliative\components\KeyboardShortcutsDialog.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\TNMStagingPanel.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\TNMStagingPanel.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\TNMStagingPanel.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\TNMStagingPanel.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\TNMStagingPanel.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\TNMStagingPanel.tsx imports '@/components/ui/select' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\TNMStagingPanel.tsx imports '@/components/ui/textarea' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\TNMStagingPanel.tsx imports '../../../types/enhanced-evaluation' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\RedFlagEngine.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\RedFlagEngine.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\RedFlagEngine.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\RedFlagEngine.tsx imports '@/components/ui/alert' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\RedFlagEngine.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\cdu\medications\MedicationDetailModal.tsx imports './../types' - NOT FOUND
+- âŒ modules\cdu\medications\MedicationDetailModal.tsx imports '@/components/ui/scroll-area' - NOT FOUND
+- âŒ modules\cdu\medications\MedicationDetailModal.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\cdu\medications\MedicationDetailModal.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\PreAdmissionChecklist.tsx imports './admissionTemplates' - NOT FOUND
+- âŒ components\ui\radio-group.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ components\HandbookSearch\SearchPage.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ components\HandbookSearch\SearchPage.tsx imports '@/services/handbookSearch' - NOT FOUND
+- âŒ components\HandbookSearch\SearchPage.tsx imports '@/components/HandbookSearch/HandbookSearch' - NOT FOUND
+- âŒ hooks\useAIResponseHistory.ts imports '@/lib/api/aiAgentAPI' - NOT FOUND
+- âŒ modules\examples\SupabaseDataCardExample.tsx imports '@/lib/supabaseClient' - NOT FOUND
+- âŒ modules\examples\SupabaseDataCardExample.tsx imports '@/components/ui/data-card' - NOT FOUND
+- âŒ modules\examples\SupabaseDataCardExample.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\AdmissionAlertTriggers.tsx imports './admissionTemplates' - NOT FOUND
+- âŒ data\cancer-pathways\prostate.ts imports '../../types/cancer-pathways' - NOT FOUND
+- âŒ modules\cdu\components\charts\GroupDistributionChart.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ services\AIService.ts imports '../modules/cdu/treatmentProtocols/types' - NOT FOUND
+- âŒ modules\cdu\safe\CDU.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\cdu\safe\CDU.tsx imports '../components/ProtocolDashboard' - NOT FOUND
+- âŒ modules\cdu\safe\CDU.tsx imports './treatmentProtocols/TreatmentProtocols' - NOT FOUND
+- âŒ modules\cdu\safe\CDU.tsx imports './toxicity/Toxicity' - NOT FOUND
+- âŒ modules\cdu\safe\CDU.tsx imports '../sections/DiseaseProgressTracker' - NOT FOUND
+- âŒ modules\cdu\safe\CDU.tsx imports '../medications/MedicationsView' - NOT FOUND
+- âŒ modules\cdu\medications\MedicationsView.tsx imports '@/lib/supabaseClient' - NOT FOUND
+- âŒ modules\cdu\medications\MedicationsView.tsx imports './MedicationDetailModal' - NOT FOUND
+- âŒ modules\cdu\medications\MedicationsView.tsx imports './../types' - NOT FOUND
+- âŒ modules\cdu\medications\MedicationsView.tsx imports '@/utils/audioFeedback' - NOT FOUND
+- âŒ modules\cdu\medications\MedicationsView.tsx imports '@/hooks/useDebounce' - NOT FOUND
+- âŒ modules\cdu\medications\MedicationsView.tsx imports '@/components/MedicationErrorBoundary' - NOT FOUND
+- âŒ modules\handbook\HandbookSidebar.tsx imports './types/handbook' - NOT FOUND
+- âŒ components\ui\SkeletonLoader.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\tools\Tools.tsx imports './components/ToolCard' - NOT FOUND
+- âŒ hooks\useUser.ts imports '../context/UserContext' - NOT FOUND
+- âŒ server\app.ts imports '../utils/validateEnv' - NOT FOUND
+- âŒ server\app.ts imports './api/patient-evaluations' - NOT FOUND
+- âŒ server\app.ts imports './api/ai-agent' - NOT FOUND
+- âŒ server\app.ts imports './routes/register' - NOT FOUND
+- âŒ api\__tests__\ai-agent.validation.test.ts imports '../../server/app' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\HistologySelector.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\HistologySelector.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\HistologySelector.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\HistologySelector.tsx imports '@/components/ui/input' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\HistologySelector.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\HistologySelector.tsx imports '@/components/ui/select' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\HistologySelector.tsx imports '@/components/ui/textarea' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\HistologySelector.tsx imports '@/components/ui/separator' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\HistologySelector.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\HistologySelector.tsx imports '../../../types/enhanced-evaluation' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\SmartFollowUpSummary.tsx imports '../../types/evaluation' - NOT FOUND
+- âŒ types\protocolHelpers.ts imports './protocol' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\AdmissionGuidelines.tsx imports './admissionTemplates' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\AdmissionGuidelines.tsx imports '@/components/ui/select' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\AdmissionGuidelines.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\AdmissionGuidelines.tsx imports '@/components/ui/checkbox' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\AdmissionGuidelines.tsx imports '@/components/ui/textarea' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\AdmissionGuidelines.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\AdmissionGuidelines.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\UnifiedProtocolCard.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\UnifiedProtocolCard.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ pages\api\generate.ts imports '@/lib/services/AIService' - NOT FOUND
+- âŒ pages\api\generate.ts imports '@/lib/errors/AIErrorHandler' - NOT FOUND
+- âŒ pages\api\generate.ts imports '@/lib/utils/inputSanitizer' - NOT FOUND
+- âŒ pages\api\generate.ts imports '@/lib/rate-limit' - NOT FOUND
+- âŒ pages\api\generate.ts imports '@/components/ai-agent/mockResponses' - NOT FOUND
+- âŒ pages\api\generate.ts imports '@/components/ai-agent/types' - NOT FOUND
+- âŒ components\shared\protocolTabs\AiSummaryTab.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ components\shared\protocolTabs\AiSummaryTab.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\handbook\HandbookSidebarNew.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\DrawerOverlay.tsx imports '../../../components/ui/button' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\DrawerOverlay.tsx imports '../../../components/ui/scroll-area' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\DrawerOverlay.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\DrawerOverlay.tsx imports '../../../types/protocol' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\DrawerOverlay.tsx imports './TreatmentTab' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\DrawerOverlay.tsx imports './TestsSectionTab' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\admissionUtils.ts imports './admissionTemplates' - NOT FOUND
+- âŒ components\ui\progress.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ data\cancer-pathways\ovarian.ts imports '../../types/cancer-pathways' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SeverityCard.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SeverityCard.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SeverityCard.tsx imports '../../../context/PalliativeContext' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\TreatmentTab.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ components\ui\scroll-area.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\palliative\sections\advance_directives\AdvanceDirectives.tsx imports './components/DirectiveCard' - NOT FOUND
+- âŒ modules\palliative\sections\advance_directives\AdvanceDirectives.tsx imports './components/CultureBlock' - NOT FOUND
+- âŒ modules\palliative\sections\advance_directives\AdvanceDirectives.tsx imports './components/LegalItem' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\AIFollowUpAssistant.tsx imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\AIFollowUpAssistant.tsx imports '@/services/aiAssistant' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\AIFollowUpAssistant.tsx imports '../data/followUpTemplates' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\AIFollowUpAssistant.tsx imports '../logic/generateFollowUpPlan' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\AIFollowUpAssistant.tsx imports '../../types/evaluation' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\AIFollowUpAssistant.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\components\AssessmentToolCard.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\inpatient\InpatientLayout.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\FamilySupport.tsx imports '../../context/PalliativeContext' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\FamilySupport.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\FamilySupport.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\FamilySupport.tsx imports '@/components/ui/input' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\FamilySupport.tsx imports '@/components/ui/label' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\FamilySupport.tsx imports '@/components/ui/checkbox' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\FamilySupport.tsx imports '@/components/ui/dialog' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\FamilySupport.tsx imports '../../context/PalliativeContext' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\SymptomChecker.tsx imports '../data/followUpTemplates' - NOT FOUND
+- âŒ routes\cduRoutes.tsx imports '@/modules/cdu' - NOT FOUND
+- âŒ routes\cduRoutes.tsx imports '@/modules/cdu/components/ProtocolDashboard' - NOT FOUND
+- âŒ routes\cduRoutes.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ routes\cduRoutes.tsx imports '@/modules/cdu/treatmentProtocols/ProtocolDetailPageContainer' - NOT FOUND
+- âŒ pages\api\ai\generate-summary.ts imports '@/lib/rate-limit' - NOT FOUND
+- âŒ pages\api\ai\generate-summary.ts imports '@/lib/openai-stream' - NOT FOUND
+- âŒ components\ui\medication\TagList.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\inpatient\sections\discharge\DischargeGuidelines.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\inpatient\sections\discharge\DischargeGuidelines.tsx imports '@/components/ui/checkbox' - NOT FOUND
+- âŒ modules\inpatient\sections\discharge\DischargeGuidelines.tsx imports '@/components/ui/textarea' - NOT FOUND
+- âŒ modules\inpatient\sections\discharge\DischargeGuidelines.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\inpatient\sections\discharge\DischargeGuidelines.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\handbook\HandbookLayout.tsx imports './UniversalHandbookViewer' - NOT FOUND
+- âŒ modules\handbook\HandbookLayout.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\cdu\medications\__tests__\MedicationTestDataFactory.ts imports '../../types' - NOT FOUND
+- âŒ modules\inpatient\sections\emergencies\components\EmergencyCard.tsx imports '../data/emergencyProtocols' - NOT FOUND
+- âŒ modules\inpatient\sections\emergencies\components\EmergencyCard.tsx imports './RedFlagTag' - NOT FOUND
+- âŒ components\ai-agent\mockResponses.ts imports '../../types/ai-agent' - NOT FOUND
+- âŒ components\RiskVisualization.tsx imports '../types/clinical' - NOT FOUND
+- âŒ services\medications.ts imports '../lib/supabaseClient' - NOT FOUND
+- âŒ services\medications.ts imports '../modules/cdu/types' - NOT FOUND
+- âŒ export\documentGeneration.ts imports './clinicalReports' - NOT FOUND
+- âŒ types\cdu-workflow.ts imports './protocol' - NOT FOUND
+- âŒ types\cdu-workflow.ts imports './cancer-pathways' - NOT FOUND
+- âŒ components\ui\toggle.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\utils\pdfGenerator.ts imports '../logic/generateFollowUpPlan' - NOT FOUND
+- âŒ utils\apiErrorHandler.ts imports './logErrorToService' - NOT FOUND
+- âŒ modules\opd\components\staging\TNMStaging.tsx imports '../../types/evaluation' - NOT FOUND
+- âŒ components\ui\tooltip.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ services\drugInteractions\DrugInteractionHandlerFactory.ts imports './DrugInteractionHandler' - NOT FOUND
+- âŒ services\drugInteractions\DrugInteractionHandlerFactory.ts imports './DrugSafetySystem' - NOT FOUND
+- âŒ services\drugInteractions\DrugInteractionHandlerFactory.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ services\drugInteractions\DrugInteractionHandlerFactory.ts imports '../confidence/ConfidenceService' - NOT FOUND
+- âŒ services\drugInteractions\DrugInteractionHandlerFactory.ts imports './types' - NOT FOUND
+- âŒ components\ai-agent\agentLogger.ts imports './types' - NOT FOUND
+- âŒ components\ai-agent\agentLogger.ts imports '@/utils/environment' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\DrugInteractionHandlerFactory.ts imports '../DrugInteractionHandler' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\DrugInteractionHandlerFactory.ts imports '../types' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\data\psychosocialData.ts imports '../components/SupportCard' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\data\psychosocialData.ts imports '../components/AssessmentToolCard' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\data\psychosocialData.ts imports '../components/DocumentationList' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomAssessmentFactory.ts imports './interfaces' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomAssessmentFactory.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomAssessmentFactory.ts imports '../emergency/EmergencyService' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomAssessmentFactory.ts imports './SymptomAssessmentHandler' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomAssessmentFactory.ts imports '../emergency/config' - NOT FOUND
+- âŒ components\ui\supabase-data-cards.tsx imports '@/lib/supabaseClient' - NOT FOUND
+- âŒ components\ui\supabase-data-cards.tsx imports '@/components/ui/data-card' - NOT FOUND
+- âŒ components\ui\supabase-data-cards.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ components\ui\supabase-data-cards.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ components\ui\supabase-data-cards.tsx imports '@/components/ui/input' - NOT FOUND
+- âŒ components\ui\supabase-data-cards.tsx imports '@/components/ui/select' - NOT FOUND
+- âŒ modules\palliative\sections\advance_directives\components\LegalItem.tsx imports '../../../../../lib/utils' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\FollowUpTimeline.tsx imports '../data/followUpTemplates' - NOT FOUND
+- âŒ modules\handbook\HandbookViewer.tsx imports '@/components/MarkdownViewer/RawMarkdownViewer' - NOT FOUND
+- âŒ modules\handbook\HandbookViewer.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\handbook\HandbookViewer.tsx imports '@/components/ErrorWrapper' - NOT FOUND
+- âŒ modules\handbook\HandbookViewer.tsx imports './UniversalHandbookViewer' - NOT FOUND
+- âŒ lib\services\AIService.ts imports '@/components/ai-agent/types' - NOT FOUND
+- âŒ lib\services\AIService.ts imports '@/lib/utils/inputSanitizer' - NOT FOUND
+- âŒ lib\services\AIService.ts imports '@/lib/errors/AIErrorHandler' - NOT FOUND
+- âŒ lib\services\AIService.ts imports '@/components/ai-agent/agentLogger' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\AdvanceDirectives.tsx imports '../../context/PalliativeContext' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\AdvanceDirectives.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\AdvanceDirectives.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\AdvanceDirectives.tsx imports '@/components/ui/label' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\AdvanceDirectives.tsx imports '@/components/ui/radio-group' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\AdvanceDirectives.tsx imports '@/components/ui/textarea' - NOT FOUND
+- âŒ modules\palliative\sections\end_of_life\AdvanceDirectives.tsx imports '../../context/PalliativeContext' - NOT FOUND
+- âŒ components\ai-agent\PromptSuggestions.tsx imports './types' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx imports '@/components/ui/input' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx imports '@/components/ui/label' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx imports '@/components/ui/switch' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx imports '@/components/ui/progress' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx imports '@/components/ui/alert' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\BiomarkerMatrix.tsx imports '../../../types/enhanced-evaluation' - NOT FOUND
+- âŒ components\ui\medication\Section.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ hooks\protocol\useProtocolUpdates.ts imports '../../../../types/protocol' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\TreatmentProtocols.tsx imports './UnifiedProtocolCard' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\TreatmentProtocols.tsx imports './components/ProtocolDetailsDialog' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\TreatmentProtocols.tsx imports './ProtocolLoadingSkeleton' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\TreatmentProtocols.tsx imports './ProtocolErrorState' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\TreatmentProtocols.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ modules\handbook\components\HandbookSidebar.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\handbook\components\HandbookSidebar.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\handbook\components\HandbookSidebar.tsx imports '@/components/ui/scroll-area' - NOT FOUND
+- âŒ modules\handbook\components\HandbookSidebar.tsx imports '@/components/MarkdownViewer/RawMarkdownViewer' - NOT FOUND
+- âŒ modules\handbook\components\HandbookSidebar.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\inpatient\InpatientModule.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\inpatient\InpatientModule.tsx imports './sections/discharge/DischargeGuidelines' - NOT FOUND
+- âŒ modules\inpatient\InpatientModule.tsx imports './sections/emergency/EmergencyProtocols' - NOT FOUND
+- âŒ modules\inpatient\InpatientModule.tsx imports './sections/admission/AdmissionAssistant' - NOT FOUND
+- âŒ modules\inpatient\InpatientModule.tsx imports './sections/supportive/SupportiveCareTools' - NOT FOUND
+- âŒ components\ui\slider.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\palliative\sections\advance_directives\components\DirectiveCard.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\utils\templateIO.ts imports '../data/followUpTemplates' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\utils\templateIO.ts imports './templateValidation' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../components/ui/button' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../components/ui/card' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../components/ui/input' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../components/ui/badge' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../components/ui/use-toast' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../components/ErrorBoundary' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../components/ui/skeleton' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../components/ui/scroll-area' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../services/protocols' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../types/protocol' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports './ProtocolCard' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../components/SupabaseTester' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../components/medicationComponents' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../components/MedicationDetailView' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../types/medications' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../services/medications' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../types/protocol' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports './ProtocolDetail' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports '../../../utils/protocolHelpers' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\RegimensLibrary.tsx imports './DrugDetailView' - NOT FOUND
+- âŒ hooks\protocol\useProtocolComparison.ts imports '../../../../types/protocol' - NOT FOUND
+- âŒ modules\inpatient\sections\emergencies\components\EmergencyAccordion.tsx imports '../data/emergencyProtocols' - NOT FOUND
+- âŒ modules\inpatient\sections\emergencies\components\EmergencyAccordion.tsx imports './RedFlagTag' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\components\SupportCard.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ components\ui\alert.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ layout\Header.tsx imports '@/components/HandbookSearch' - NOT FOUND
+- âŒ layout\Header.tsx imports '@/utils/iconUtils' - NOT FOUND
+- âŒ layout\Header.tsx imports '@/components/LoginButton' - NOT FOUND
+- âŒ layout\Header.tsx imports '@/components/LogoutButton' - NOT FOUND
+- âŒ layout\Header.tsx imports '@/components/CompactGlowingLogo' - NOT FOUND
+- âŒ modules\handbook\UniversalHandbookViewer.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\handbook\UniversalHandbookViewer.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\handbook\UniversalHandbookViewer.tsx imports './SidebarTOCNavigator' - NOT FOUND
+- âŒ modules\handbook\UniversalHandbookViewer.tsx imports './types/handbook' - NOT FOUND
+- âŒ modules\handbook\UniversalHandbookViewer.tsx imports './JsonHandbookViewer' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\CancerSelector.tsx imports '../data/followUpTemplates' - NOT FOUND
+- âŒ components\ui\MedicationDetailCard.tsx imports './card' - NOT FOUND
+- âŒ components\ui\MedicationDetailCard.tsx imports './badge' - NOT FOUND
+- âŒ components\ui\MedicationDetailCard.tsx imports './medication/Section' - NOT FOUND
+- âŒ components\ui\MedicationDetailCard.tsx imports './medication/TagList' - NOT FOUND
+- âŒ components\ui\MedicationDetailCard.tsx imports '@/modules/cdu/types' - NOT FOUND
+- âŒ services\protocols.ts imports '@/lib/supabaseClient' - NOT FOUND
+- âŒ services\protocols.ts imports '@/types/protocol' - NOT FOUND
+- âŒ services\labInterpretation\LabLogger.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ services\labInterpretation\LabLogger.ts imports './labLogger.types' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\types.ts imports '../../../services/drugInteractions/types' - NOT FOUND
+- âŒ components\ui\accordion.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ components\ui\textarea.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ layout\Sidebar.tsx imports '@/context/LayoutContext' - NOT FOUND
+- âŒ modules\handbook\ContentRenderer.tsx imports './types/handbook' - NOT FOUND
+- âŒ modules\handbook\ContentRenderer.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\OPD.tsx imports '@/components/ui/toaster' - NOT FOUND
+- âŒ modules\opd\OPD.tsx imports './components/OPDModule' - NOT FOUND
+- âŒ modules\opd\OPD.tsx imports './layout/OPDLayout' - NOT FOUND
+- âŒ modules\opd\OPD.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\opd\OPD.tsx imports './patient-evaluation/PatientEvaluationForm' - NOT FOUND
+- âŒ modules\opd\OPD.tsx imports './diagnostic-pathways/DiagnosticPathways' - NOT FOUND
+- âŒ modules\opd\OPD.tsx imports './cancer-screening/CancerScreening' - NOT FOUND
+- âŒ modules\opd\OPD.tsx imports './referral-guidelines/ReferralGuidelines' - NOT FOUND
+- âŒ modules\opd\OPD.tsx imports './follow-up-oncology/FollowUpOncology' - NOT FOUND
+- âŒ modules\opd\OPD.tsx imports './context/EvaluationContext' - NOT FOUND
+- âŒ services\drugInteractions\DrugSafetySystem.ts imports '../safety/types' - NOT FOUND
+- âŒ services\drugInteractions\DrugSafetySystem.ts imports './types' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomDataCards.tsx imports '@/components/ui/supabase-data-cards' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomDataCards.tsx imports '@/components/ui/data-card' - NOT FOUND
+- âŒ modules\cdu\components\StatCard.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ components\EmergencyResponseSystem.tsx imports '../services/emergency/types' - NOT FOUND
+- âŒ components\EmergencyResponseSystem.tsx imports '../hooks/useEmergencyService' - NOT FOUND
+- âŒ data\clinical\symptom_correlations.ts imports '../../types/clinical' - NOT FOUND
+- âŒ hooks\protocol\useProtocolVersions.ts imports '../../../../types/protocol' - NOT FOUND
+- âŒ data\clinical\screening_protocols.ts imports '../../types/clinical' - NOT FOUND
+- âŒ ai\clinicalConsultant.ts imports '../types/clinical' - NOT FOUND
+- âŒ __tests__\clinical\clinical.integration.test.ts imports '../../logic/riskAssessment' - NOT FOUND
+- âŒ __tests__\clinical\clinical.integration.test.ts imports '../../logic/screeningEngine' - NOT FOUND
+- âŒ __tests__\clinical\clinical.integration.test.ts imports '../../export/clinicalReports' - NOT FOUND
+- âŒ __tests__\clinical\clinical.integration.test.ts imports '../../quality/clinicalValidation' - NOT FOUND
+- âŒ __tests__\clinical\clinical.integration.test.ts imports '../../export/documentGeneration' - NOT FOUND
+- âŒ __tests__\clinical\clinical.integration.test.ts imports '../../types/clinical' - NOT FOUND
+- âŒ server\api\patient-evaluations.ts imports '../../lib/supabaseClient' - NOT FOUND
+- âŒ utils\log.ts imports './environment' - NOT FOUND
+- âŒ modules\inpatient\sections\emergencies\EmergencyProtocols.tsx imports './data/emergencyProtocols' - NOT FOUND
+- âŒ modules\inpatient\sections\emergencies\EmergencyProtocols.tsx imports './components/EmergencyAccordion' - NOT FOUND
+- âŒ modules\inpatient\sections\emergencies\EmergencyProtocols.tsx imports './components/EmergencyDetailModal' - NOT FOUND
+- âŒ components\ui\button.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ hooks\protocol\useProtocolFilters.ts imports '../../types/protocol' - NOT FOUND
+- âŒ services\symptomAssessment\__tests__\mocks.ts imports '../../emergency/types' - NOT FOUND
+- âŒ services\symptomAssessment\__tests__\mocks.ts imports '../../emergency/labEmergency.types' - NOT FOUND
+- âŒ services\symptomAssessment\__tests__\mocks.ts imports '../interfaces' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/components/NotFoundRedirect' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/pages/LandingPage' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/pages/Dashboard' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/pages/ProtectedPage' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/pages/CallbackPage' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/auth/ProtectedRoute' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/handbook/Handbook' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/components/HandbookSearch' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/opd/OPD' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/cdu/CDU' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/cdu/components/ProtocolDashboard' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/inpatient' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/palliative/Palliative' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/tools' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/tools/Calculators' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/tools/RedFlags' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/tools/calculators/BSA' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/tools/calculators/CrCl' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/tools/calculators/ANC' - NOT FOUND
+- âŒ routes\AppRoutes.tsx imports '@/modules/cdu/safe/treatmentProtocols/TreatmentProtocols' - NOT FOUND
+- âŒ modules\handbook\types\handbook.ts imports '@/utils/pathUtils' - NOT FOUND
+- âŒ components\ui\separator.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ services\symptomAssessment\types.ts imports '../emergency/types' - NOT FOUND
+- âŒ services\symptomAssessment\types.ts imports '../modules/cdu/treatmentProtocols/types' - NOT FOUND
+- âŒ modules\palliative\components\LoadingSpinner.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ data\cancer-pathways\pancreatic.ts imports '../../types/cancer-pathways' - NOT FOUND
+- âŒ modules\palliative\Palliative.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\palliative\Palliative.tsx imports './PalliativeModule' - NOT FOUND
+- âŒ components\ErrorBoundary_working.tsx imports '@/utils/log' - NOT FOUND
+- âŒ services\symptomAssessment\interfaces.ts imports '../emergency/types' - NOT FOUND
+- âŒ services\symptomAssessment\interfaces.ts imports '../emergency/labEmergency.types' - NOT FOUND
+- âŒ services\symptomAssessment\interfaces.ts imports '../emergency/types' - NOT FOUND
+- âŒ services\symptomAssessment\interfaces.ts imports './types' - NOT FOUND
+- âŒ ai\privacyProtection.ts imports '../types/clinical' - NOT FOUND
+- âŒ modules\opd\components\EvaluationSummary.tsx imports '../types/evaluation' - NOT FOUND
+- âŒ data\cancer-pathways\head-neck.ts imports '../../types/cancer-pathways' - NOT FOUND
+- âŒ modules\opd\components\evaluation\core\FormAlertBar.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\components\evaluation\core\FormAlertBar.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\core\FormAlertBar.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\opd\components\evaluation\core\FormAlertBar.tsx imports '@/components/ui/collapsible' - NOT FOUND
+- âŒ components\HandbookSearch\HandbookSearch.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ components\HandbookSearch\HandbookSearch.tsx imports '@/services/handbookSearch' - NOT FOUND
+- âŒ services\drugInteractions\types.ts imports '../labInterpretation/types' - NOT FOUND
+- âŒ components\ui\badge.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '@/components/ui/select' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '@/components/ui/input' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '@/components/ui/slider' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '@/components/ui/textarea' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '@/components/ui/separator' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\ReceptorPanel.tsx imports '../../../types/enhanced-evaluation' - NOT FOUND
+- âŒ logic\clinicalReasoning.ts imports '../types/clinical' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\hooks\usePsychosocialData.ts imports '../../../utils/palliativeUtils' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/modules/opd' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/modules/cdu' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/modules/inpatient' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/modules/palliative' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/modules/tools' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/modules/handbook' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/pages/handbook/MedicalHandbookTOC' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/pages/handbook/RadiationHandbookTOC' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/pages/handbook/PalliativeHandbookTOC' - NOT FOUND
+- âŒ routes\routes.tsx imports '../components/TestMarkdownViewer' - NOT FOUND
+- âŒ routes\routes.tsx imports '@/pages/CallbackPage' - NOT FOUND
+- âŒ modules\cdu\types.ts imports '@/types/protocol' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\components\ResourcesList.tsx imports '../data/psychosocialData' - NOT FOUND
+- âŒ modules\opd\referral-guidelines\ReferralGuidelines.tsx imports './ReferralCard' - NOT FOUND
+- âŒ modules\opd\referral-guidelines\ReferralGuidelines.tsx imports './ReferralForm' - NOT FOUND
+- âŒ modules\opd\referral-guidelines\ReferralGuidelines.tsx imports './TriageResult' - NOT FOUND
+- âŒ modules\opd\referral-guidelines\ReferralGuidelines.tsx imports './data/referralTemplates' - NOT FOUND
+- âŒ modules\opd\referral-guidelines\ReferralGuidelines.tsx imports './logic/triageEngine' - NOT FOUND
+- âŒ modules\opd\referral-guidelines\ReferralGuidelines.tsx imports '@/services/aiAssistant' - NOT FOUND
+- âŒ modules\opd\referral-guidelines\ReferralGuidelines.tsx imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ modules\opd\referral-guidelines\ReferralGuidelines.tsx imports '@/lib/api/aiAgentAPI' - NOT FOUND
+- âŒ modules\opd\context\EnhancedEvaluationContext.tsx imports '../data/enhancedEvaluationTemplates' - NOT FOUND
+- âŒ modules\opd\context\EnhancedEvaluationContext.tsx imports '../services/enhancedEvaluationService' - NOT FOUND
+- âŒ hooks\__tests__\useHandbookData.test.tsx imports '../useHandbookData' - NOT FOUND
+- âŒ hooks\__tests__\useHandbookData.test.tsx imports '@/utils/pathUtils' - NOT FOUND
+- âŒ hooks\__tests__\useHandbookData.test.tsx imports '@/components/ui/toast' - NOT FOUND
+- âŒ modules\palliative\sections\pain_management\PainManagement.tsx imports '@/components/ui/accordion' - NOT FOUND
+- âŒ modules\palliative\sections\pain_management\PainManagement.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\palliative\sections\pain_management\PainManagement.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\palliative\sections\pain_management\PainManagement.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\palliative\sections\pain_management\PainManagement.tsx imports '../../context/PalliativeContext' - NOT FOUND
+- âŒ modules\palliative\sections\pain_management\PainManagement.tsx imports '@/components/ui/slider' - NOT FOUND
+- âŒ modules\palliative\sections\pain_management\PainManagement.tsx imports '@/components/ui/label' - NOT FOUND
+- âŒ modules\palliative\sections\pain_management\PainManagement.tsx imports '@/components/ui/radio-group' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\OverviewTab.tsx imports '../../../types/protocol' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\OverviewTab.tsx imports '../components/medicationComponents' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\components\DocumentationList.tsx imports '@/components/ui/accordion' - NOT FOUND
+- âŒ modules\opd\components\__tests__\FormField.test.tsx imports '../FormField' - NOT FOUND
+- âŒ components\AuthButton.tsx imports '../hooks/useAuth' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\setup.ts imports '../DrugSafetySystem' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\setup.ts imports '../../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\setup.ts imports '../../confidence/ConfidenceService' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\setup.ts imports '../../safety/types' - NOT FOUND
+- âŒ services\symptomAssessment\utils.ts imports '../emergency/types' - NOT FOUND
+- âŒ services\symptomAssessment\utils.ts imports './types' - NOT FOUND
+- âŒ services\symptomAssessment\utils.ts imports '../emergency/config' - NOT FOUND
+- âŒ services\drugInteractions\DrugInteractionHandler.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ services\drugInteractions\DrugInteractionHandler.ts imports '../confidence/ConfidenceService' - NOT FOUND
+- âŒ services\drugInteractions\DrugInteractionHandler.ts imports './DrugSafetySystem' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\utils\templateValidation.ts imports '../data/followUpTemplates' - NOT FOUND
+- âŒ services\labInterpretation\LabInterpretationHandler.ts imports '../emergency/EmergencyService' - NOT FOUND
+- âŒ services\labInterpretation\LabInterpretationHandler.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ modules\cdu\components\ProtocolDashboard.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\cdu\components\ProtocolDashboard.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\cdu\components\ProtocolDashboard.tsx imports '@/components/ui/toggle' - NOT FOUND
+- âŒ modules\cdu\components\ProtocolDashboard.tsx imports '@/components/ui/scroll-area' - NOT FOUND
+- âŒ modules\cdu\components\ProtocolDashboard.tsx imports '../../../services/protocols' - NOT FOUND
+- âŒ modules\cdu\components\ProtocolDashboard.tsx imports '../../../types/protocol' - NOT FOUND
+- âŒ App.tsx imports './layout/Layout' - NOT FOUND
+- âŒ App.tsx imports './routes/AppRoutes' - NOT FOUND
+- âŒ App.tsx imports './context/LayoutContext' - NOT FOUND
+- âŒ App.tsx imports '@/components/ui/toast' - NOT FOUND
+- âŒ App.tsx imports '@/components/ui/toast' - NOT FOUND
+- âŒ components\RecommendationPanel.tsx imports '../types/clinical' - NOT FOUND
+- âŒ hooks\useHandbookData.ts imports '@/lib/supabase' - NOT FOUND
+- âŒ hooks\useHandbookData.ts imports '@/modules/handbook/types/handbook' - NOT FOUND
+- âŒ hooks\useHandbookData.ts imports '@/utils/pathUtils' - NOT FOUND
+- âŒ hooks\useHandbookData.ts imports '@/modules/handbook/types/handbook' - NOT FOUND
+- âŒ hooks\useHandbookData.ts imports '../handbook/palliative-care/palliativeTOC' - NOT FOUND
+- âŒ modules\handbook\Handbook.tsx imports '@/components/ErrorWrapper' - NOT FOUND
+- âŒ modules\handbook\Handbook.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\handbook\Handbook.tsx imports './HandbookLanding' - NOT FOUND
+- âŒ modules\handbook\Handbook.tsx imports './HandbookSidebarNew' - NOT FOUND
+- âŒ modules\handbook\Handbook.tsx imports './UniversalContentViewer' - NOT FOUND
+- âŒ modules\handbook\Handbook.tsx imports '@/hooks/useHandbookData' - NOT FOUND
+- âŒ modules\handbook\Handbook.tsx imports '@/utils/pathUtils' - NOT FOUND
+- âŒ modules\handbook\Handbook.tsx imports '@/utils/errorUtils' - NOT FOUND
+- âŒ modules\handbook\Handbook.tsx imports './constants' - NOT FOUND
+- âŒ modules\cdu\sections\DiseaseProgressTracker.tsx imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ modules\cdu\sections\DiseaseProgressTracker.tsx imports '../data/treatmentProtocolsData' - NOT FOUND
+- âŒ components\ui\symptom-search.tsx imports './input' - NOT FOUND
+- âŒ components\ui\symptom-search.tsx imports './card' - NOT FOUND
+- âŒ components\ui\symptom-search.tsx imports '@/types/symptoms' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\utils\pdfGenerator.ts imports '../../../../types/protocol' - NOT FOUND
+- âŒ modules\palliative\sections\delirium\DeliriumAssessment.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\palliative\sections\delirium\DeliriumAssessment.tsx imports '@/components/ui/label' - NOT FOUND
+- âŒ modules\palliative\sections\delirium\DeliriumAssessment.tsx imports '@/components/ui/radio-group' - NOT FOUND
+- âŒ data\cancer-pathways\bladder.ts imports '../../types/cancer-pathways' - NOT FOUND
+- âŒ modules\inpatient\sections\emergencies\components\RedFlagTag.tsx imports '../utils/emergencyUtils' - NOT FOUND
+- âŒ server\index.ts imports './utils/validateEnv' - NOT FOUND
+- âŒ server\index.ts imports './app.js' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\components\AssessmentTrends.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\components\AssessmentTrends.tsx imports '../hooks/usePsychosocialData' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\components\AssessmentTrends.tsx imports '../../../utils/palliativeUtils' - NOT FOUND
+- âŒ services\confidence\AIServiceWithConfidence.ts imports '../AIService' - NOT FOUND
+- âŒ services\confidence\AIServiceWithConfidence.ts imports './ConfidenceService' - NOT FOUND
+- âŒ services\confidence\AIServiceWithConfidence.ts imports './types' - NOT FOUND
+- âŒ services\confidence\AIServiceWithConfidence.ts imports './ConfidenceConfigFactory' - NOT FOUND
+- âŒ pages\Dashboard.tsx imports '../hooks/useUser' - NOT FOUND
+- âŒ pages\Dashboard.tsx imports '../components/LoginButton' - NOT FOUND
+- âŒ pages\Dashboard.tsx imports '../components/GlowingLogoImage' - NOT FOUND
+- âŒ pages\Dashboard.tsx imports '@/lib/api/aiAgentAPI' - NOT FOUND
+- âŒ pages\Dashboard.tsx imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ services\safety\types.ts imports '../symptomAssessment/types' - NOT FOUND
+- âŒ quality\clinicalValidation.ts imports '../types/clinical' - NOT FOUND
+- âŒ components\shared\protocolTabs\EligibilityTab.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ components\shared\protocolTabs\EligibilityTab.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ components\shared\protocolTabs\EligibilityTab.tsx imports '../../../types/protocol' - NOT FOUND
+- âŒ modules\opd\components\RedFlagAlert.tsx imports '../../../types/cancer-pathways' - NOT FOUND
+- âŒ modules\palliative\context\ThemeProvider.tsx imports '../hooks/usePalliativeTheme' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomLogger.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomLogger.ts imports './utils' - NOT FOUND
+- âŒ components\ui\collapsible.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ services\emergency\interfaces.ts imports './types' - NOT FOUND
+- âŒ services\emergency\interfaces.ts imports './labEmergency.types' - NOT FOUND
+- âŒ services\labInterpretation\LabInterpreter.ts imports '../symptomAssessment/interfaces' - NOT FOUND
+- âŒ services\labInterpretation\LabInterpreter.ts imports '../drugInteractions/DrugSafetySystem' - NOT FOUND
+- âŒ components\ui\toaster.tsx imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ lib\api\aiAgentAPI.ts imports '@/components/ai-agent/types' - NOT FOUND
+- âŒ lib\api\aiAgentAPI.ts imports '@/lib/services/AIService' - NOT FOUND
+- âŒ lib\api\aiAgentAPI.ts imports '@/components/ai-agent/agentLogger' - NOT FOUND
+- âŒ lib\api\aiAgentAPI.ts imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ lib\api\aiAgentAPI.ts imports '../../components/ai-agent/mockResponses' - NOT FOUND
+- âŒ modules\opd\components\PathwaySummaryCard.tsx imports '../../../types/cancer-pathways' - NOT FOUND
+- âŒ modules\opd\components\PathwaySummaryCard.tsx imports './RedFlagAlert' - NOT FOUND
+- âŒ modules\handbook\components\HandbookSection.tsx imports './HandbookChapter' - NOT FOUND
+- âŒ components\TestErrorBoundary.tsx imports './ErrorBoundary' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\SymptomControlNew.tsx imports '@/components/ui/scroll-area' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\SymptomControlNew.tsx imports '@/components/ui/symptom-search' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\SymptomControlNew.tsx imports '@/types/symptoms' - NOT FOUND
+- âŒ main.tsx imports './components/ErrorBoundary' - NOT FOUND
+- âŒ main.tsx imports './auth/auth-provider' - NOT FOUND
+- âŒ main.tsx imports './context/UserContext' - NOT FOUND
+- âŒ main.tsx imports './utils/validateEnv' - NOT FOUND
+- âŒ main.tsx imports './components/GlowingLogoImage' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx imports '@/components/ui/dialog' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx imports '@/components/ui/slider' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx imports '@/components/ui/textarea' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx imports './hooks/usePsychosocialData' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx imports '../../utils/palliativeUtils' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx imports '@/utils/formatDate' - NOT FOUND
+- âŒ modules\palliative\sections\psychosocial_support\PsychosocialCare.tsx imports './components/AssessmentTrends' - NOT FOUND
+- âŒ __tests__\ai-agent.integration.test.ts imports '../api/ai-agent' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports '../cards/EvaluationCard' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports '../cards/PathwayCard' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports '../cards/ScreeningCard' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports '../cards/ReferralCard' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports '../cards/FollowUpCard' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports './AISummary' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports '../patient-evaluation/PatientEvaluation' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports '../diagnostic-pathways/DiagnosticPathways' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports '../cancer-screening/CancerScreening' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports '../referral-guidelines/ReferralGuidelines' - NOT FOUND
+- âŒ modules\opd\components\OPDModule.tsx imports '../follow-up-oncology/FollowUpOncology' - NOT FOUND
+- âŒ data\cancer-pathways\gastric.ts imports '../../types/cancer-pathways' - NOT FOUND
+- âŒ components\ui\skeleton.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomSearch.tsx imports '@/components/ui/input' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomSearch.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomSearch.tsx imports '../data/SymptomData' - NOT FOUND
+- âŒ modules\palliative\components\ErrorMessage.tsx imports '@/components/ui/alert' - NOT FOUND
+- âŒ modules\palliative\components\ErrorMessage.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ services\disclaimers\ComplianceManager.ts imports './types' - NOT FOUND
+- âŒ services\disclaimers\ComplianceManager.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ services\utils\RateLimiter.ts imports '../AIService' - NOT FOUND
+- âŒ types\protocol.ts imports '@/lib/supabaseClient' - NOT FOUND
+- âŒ types\protocol.ts imports './protocolUpdated' - NOT FOUND
+- âŒ types\protocol.ts imports '@/services/protocols' - NOT FOUND
+- âŒ types\protocol.ts imports './protocolUpdated' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomPanel.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomPanel.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomPanel.tsx imports '@/components/ui/scroll-area' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomPanel.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomPanel.tsx imports '../../../context/PalliativeContext' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomPanel.tsx imports '../../../context/PalliativeContext' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomPanel.tsx imports '../data/SymptomData' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomPanel.tsx imports './SeverityCard' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\SymptomPanel.tsx imports './SymptomSearch' - NOT FOUND
+- âŒ routes\opdRoutes.tsx imports '@/modules/opd/OPD' - NOT FOUND
+- âŒ routes\opdRoutes.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ hooks\protocol\useProtocolKeyboard.ts imports '../../../../types/protocol' - NOT FOUND
+- âŒ utils\TestEnvironment.ts imports '@/utils/environment' - NOT FOUND
+- âŒ layout\RootLayout.tsx imports '../components/ui/toaster' - NOT FOUND
+- âŒ layout\RootLayout.tsx imports './Header' - NOT FOUND
+- âŒ layout\RootLayout.tsx imports '../context/LayoutContext' - NOT FOUND
+- âŒ layout\RootLayout.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\ProtocolDetailPageContainer.tsx imports './TreatmentProtocols' - NOT FOUND
+- âŒ modules\opd\components\staging\KarnofskySlider.tsx imports '@/components/ui/tooltip' - NOT FOUND
+- âŒ services\confidence\ConfidenceConfigFactory.ts imports './types' - NOT FOUND
+- âŒ services\confidence\ConfidenceConfigFactory.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx imports '@/components/ui/select' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx imports '@/components/ui/slider' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx imports '@/components/ui/textarea' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx imports '@/components/ui/separator' - NOT FOUND
+- âŒ modules\opd\components\evaluation\clinical\PerformanceStatusPanel.tsx imports '../../../types/enhanced-evaluation' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\EligibilityTab.tsx imports '../../../types/protocol' - NOT FOUND
+- âŒ services\patientEvaluationService.ts imports '../modules/opd/types/evaluation' - NOT FOUND
+- âŒ services\patientEvaluationService.ts imports '../lib/supabaseClient' - NOT FOUND
+- âŒ components\ui\data-card.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ components\ui\data-card.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ components\ui\data-card.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ components\ui\tabs.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomAssessmentHandler.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomAssessmentHandler.ts imports '../emergency/interfaces' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomAssessmentHandler.ts imports '../emergency/types' - NOT FOUND
+- âŒ services\symptomAssessment\SymptomAssessmentHandler.ts imports './types' - NOT FOUND
+- âŒ components\LazyErrorBoundary.tsx imports './ErrorBoundary' - NOT FOUND
+- âŒ services\symptomAssessment\__tests__\SymptomAssessmentHandler.test.ts imports '../SymptomAssessmentHandler' - NOT FOUND
+- âŒ services\symptomAssessment\__tests__\SymptomAssessmentHandler.test.ts imports '../SymptomAssessmentFactory' - NOT FOUND
+- âŒ services\symptomAssessment\__tests__\SymptomAssessmentHandler.test.ts imports './TestUtils' - NOT FOUND
+- âŒ services\symptomAssessment\__tests__\SymptomAssessmentHandler.test.ts imports '../../emergency/types' - NOT FOUND
+- âŒ services\symptomAssessment\__tests__\SymptomAssessmentHandler.test.ts imports '../types' - NOT FOUND
+- âŒ modules\inpatient\Inpatient.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\inpatient\Inpatient.tsx imports './sections/emergencies/EmergencyProtocols' - NOT FOUND
+- âŒ modules\inpatient\Inpatient.tsx imports './sections/admission/AdmissionGuidelines' - NOT FOUND
+- âŒ modules\inpatient\Inpatient.tsx imports './sections/supportive_care/SupportiveCare' - NOT FOUND
+- âŒ modules\inpatient\Inpatient.tsx imports './sections/discharge/DischargeGuidelines' - NOT FOUND
+- âŒ components\ui\symptom-card.tsx imports './card' - NOT FOUND
+- âŒ components\ui\symptom-card.tsx imports './badge' - NOT FOUND
+- âŒ components\ui\symptom-card.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ components\ErrorBoundary_backup2.tsx imports '@/utils/log' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\MedicationDebugPanel.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ data\clinical\genetic_risk_profiles.ts imports '../../types/clinical' - NOT FOUND
+- âŒ modules\palliative\components\ConfirmationDialog.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ services\emergency\config.ts imports './types' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\FollowUpSummaryCard.tsx imports '../logic/generateFollowUpPlan' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\components\FollowUpSummaryCard.tsx imports '../utils/pdfGenerator' - NOT FOUND
+- âŒ components\ui\label.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ components\__tests__\ErrorBoundary.test.tsx imports '@/utils/log' - NOT FOUND
+- âŒ components\__tests__\ErrorBoundary.test.tsx imports '../ErrorBoundary' - NOT FOUND
+- âŒ lib\services\__tests__\AIService.test.ts imports '../AIService' - NOT FOUND
+- âŒ lib\services\__tests__\AIService.test.ts imports '@/components/ai-agent/types' - NOT FOUND
+- âŒ lib\services\__tests__\AIService.test.ts imports '../AIService' - NOT FOUND
+- âŒ lib\services\__tests__\AIService.test.ts imports '../AIService' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '@/components/ui/input' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '@/components/ui/label' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '@/components/ui/textarea' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '@/components/ui/switch' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '@/components/ui/progress' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '@/components/ui/alert' - NOT FOUND
+- âŒ modules\opd\components\evaluation\molecular\MutationPanel.tsx imports '../../../types/enhanced-evaluation' - NOT FOUND
+- âŒ modules\opd\context\EvaluationContext.tsx imports '../types/evaluation' - NOT FOUND
+- âŒ modules\palliative\hooks\useSymptomData.ts imports '@/lib/supabaseClient' - NOT FOUND
+- âŒ components\shared\protocolTabs\RescueAgentsTab.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ components\shared\protocolTabs\RescueAgentsTab.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\cdu\components\MedicationDetailView.tsx imports '../../../types/medications' - NOT FOUND
+- âŒ modules\cdu\components\MedicationDetailView.tsx imports '../../../components/ui/button' - NOT FOUND
+- âŒ modules\cdu\components\MedicationDetailView.tsx imports './medicationComponents' - NOT FOUND
+- âŒ modules\cdu\components\MedicationDetailView.tsx imports '../../../components/ui/tabs' - NOT FOUND
+- âŒ services\disclaimers\DisclaimerService.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways.tsx imports '../../../data/cancer-pathways' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways.tsx imports './DecisionTree' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways.tsx imports '../../../types/cancer-pathways' - NOT FOUND
+- âŒ lib\gemini.ts imports '../types/ai-agent' - NOT FOUND
+- âŒ modules\cdu\medications\__tests__\MedicationsView.test.tsx imports '../MedicationsView' - NOT FOUND
+- âŒ modules\cdu\medications\__tests__\MedicationsView.test.tsx imports './MedicationTestDataFactory' - NOT FOUND
+- âŒ components\ai-agent\promptBuilder.ts imports '../../types/ai-agent' - NOT FOUND
+- âŒ services\confidence\types.ts imports '../AIService' - NOT FOUND
+- âŒ components\ErrorBoundary_backup.tsx imports '@/utils/log' - NOT FOUND
+- âŒ components\ErrorBoundary.tsx imports '@/utils/log' - NOT FOUND
+- âŒ modules\opd\components\evaluation\core\EvaluationStepper.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\components\evaluation\core\EvaluationStepper.tsx imports '../../../types/enhanced-evaluation' - NOT FOUND
+- âŒ logic\riskAssessment.ts imports '../types/clinical' - NOT FOUND
+- âŒ modules\cdu\components\charts\CompletenessMatrix.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ lib\supabaseClient.ts imports '@/types/protocol' - NOT FOUND
+- âŒ components\SupabaseTester.tsx imports '../lib/supabaseClient' - NOT FOUND
+- âŒ components\SupabaseTester.tsx imports './ui/badge' - NOT FOUND
+- âŒ modules\opd\data\evaluationTemplates.ts imports '../types/evaluation' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\AdmissionProcessSteps.tsx imports './admissionTemplates' - NOT FOUND
+- âŒ modules\cdu\components\charts\TimelineChart.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ modules\opd\components\staging\ECOGSelector.tsx imports '@/components/ui/tooltip' - NOT FOUND
+- âŒ modules\handbook\components\HandbookChapter.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ components\ui\card.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways1.tsx imports '../../../types/pathways' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways1.tsx imports './DecisionTree' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways1.tsx imports '../../../data/cancer-pathways' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways1.tsx imports '../../../data/diagnostic-pathways' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways1.tsx imports '../../../types/pathways' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways1.tsx imports './DecisionTree' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways1.tsx imports '../../../data/cancer-pathways' - NOT FOUND
+- âŒ modules\opd\diagnostic-pathways\DiagnosticPathways1.tsx imports '../../../data/diagnostic-pathways' - NOT FOUND
+- âŒ services\safety\SafetySystem.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\SymptomControl.tsx imports '../../hooks/useSymptomData' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\SymptomControl.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\SymptomControl.tsx imports '@/components/ui/input' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\SymptomControl.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\opd\components\evaluation\core\SmartSaveBanner.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\opd\components\evaluation\core\SmartSaveBanner.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\core\SmartSaveBanner.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ components\shared\protocolTabs\DoseModificationsTab.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ components\shared\protocolTabs\DoseModificationsTab.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ utils\pdf\pdfGenerator.ts imports '../../../../types/protocol' - NOT FOUND
+- âŒ components\ai-agent\AIChatAssistant.tsx imports '@/hooks/useAIResponseHistory' - NOT FOUND
+- âŒ components\ai-agent\AIChatAssistant.tsx imports '@/lib/api/aiAgentAPI' - NOT FOUND
+- âŒ components\ai-agent\AIChatAssistant.tsx imports '@/components/ai-agent/types' - NOT FOUND
+- âŒ components\ai-agent\AIChatAssistant.tsx imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ components\ai-agent\AIChatAssistant.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ components\ai-agent\AIChatAssistant.tsx imports '@/components/ui/textarea' - NOT FOUND
+- âŒ components\ai-agent\AIChatAssistant.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ components\ai-agent\AIChatAssistant.tsx imports '@/components/ui/scroll-area' - NOT FOUND
+- âŒ components\ai-agent\AIChatAssistant.tsx imports '@/components/ai-agent/agentLogger' - NOT FOUND
+- âŒ components\ai-agent\AIChatAssistant.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\handbook\SidebarTOCNavigator.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ hooks\useEmergencyService.ts imports '../services/emergency/EmergencyService' - NOT FOUND
+- âŒ hooks\useEmergencyService.ts imports '../services/safety/SafetySystem' - NOT FOUND
+- âŒ hooks\useEmergencyService.ts imports '../services/disclaimers/DisclaimerService' - NOT FOUND
+- âŒ hooks\useEmergencyService.ts imports '../services/utils/MedicalAuditLogger' - NOT FOUND
+- âŒ routes\index.tsx imports './HomeDashboard' - NOT FOUND
+- âŒ routes\index.tsx imports '../modules/opd' - NOT FOUND
+- âŒ routes\index.tsx imports '../modules/cdu' - NOT FOUND
+- âŒ routes\index.tsx imports '../modules/inpatient' - NOT FOUND
+- âŒ routes\index.tsx imports '../modules/palliative' - NOT FOUND
+- âŒ routes\index.tsx imports '../modules/tools' - NOT FOUND
+- âŒ routes\index.tsx imports '../modules/handbook' - NOT FOUND
+- âŒ routes\index.tsx imports '@/modules/inpatient/InpatientLayout' - NOT FOUND
+- âŒ routes\index.tsx imports '@/modules/inpatient/sections/discharge/DischargeGuidelines' - NOT FOUND
+- âŒ modules\cdu\safe\treatmentProtocols\TreatmentProtocols.tsx imports '@/services/protocols' - NOT FOUND
+- âŒ modules\cdu\safe\treatmentProtocols\TreatmentProtocols.tsx imports '../../../../types/protocol' - NOT FOUND
+- âŒ data\cancer-pathways\index.ts imports './breast' - NOT FOUND
+- âŒ data\cancer-pathways\index.ts imports './prostate' - NOT FOUND
+- âŒ data\cancer-pathways\index.ts imports './lung' - NOT FOUND
+- âŒ data\cancer-pathways\index.ts imports './ovarian' - NOT FOUND
+- âŒ data\cancer-pathways\index.ts imports './gastric' - NOT FOUND
+- âŒ data\cancer-pathways\index.ts imports './head-neck' - NOT FOUND
+- âŒ data\cancer-pathways\index.ts imports './pancreatic' - NOT FOUND
+- âŒ data\cancer-pathways\index.ts imports './bladder' - NOT FOUND
+- âŒ data\cancer-pathways\index.ts imports '../../types/cancer-pathways' - NOT FOUND
+- âŒ modules\cdu\CDU.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\cdu\CDU.tsx imports './treatmentProtocols/TreatmentProtocols' - NOT FOUND
+- âŒ modules\cdu\CDU.tsx imports './safe/treatmentProtocols/TreatmentProtocols' - NOT FOUND
+- âŒ modules\cdu\CDU.tsx imports './toxicity/Toxicity' - NOT FOUND
+- âŒ modules\cdu\CDU.tsx imports './sections/DiseaseProgressTracker' - NOT FOUND
+- âŒ modules\cdu\CDU.tsx imports './medications/MedicationsView' - NOT FOUND
+- âŒ components\shared\protocolTabs\DrugListTab.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ components\shared\protocolTabs\DrugListTab.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ components\ui\select.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\inpatient\sections\admission\AdmissionSummaryCard.tsx imports './admissionUtils' - NOT FOUND
+- âŒ components\ai-agent\responseRenderer.tsx imports './types' - NOT FOUND
+- âŒ export\clinicalReports.ts imports '../types/clinical' - NOT FOUND
+- âŒ components\shared\protocolTabs\SupportiveCareTab.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ components\shared\protocolTabs\SupportiveCareTab.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ components\shared\protocolTabs\SupportiveCareTab.tsx imports '../../../types/protocol' - NOT FOUND
+- âŒ modules\cdu\components\medicationComponents.tsx imports '../../../components/ui/badge' - NOT FOUND
+- âŒ modules\cdu\components\medicationComponents.tsx imports '../../../components/ui/card' - NOT FOUND
+- âŒ modules\cdu\components\medicationComponents.tsx imports '../../../types/medications' - NOT FOUND
+- âŒ modules\handbook\UniversalContentViewer.tsx imports './types/handbook' - NOT FOUND
+- âŒ modules\handbook\UniversalContentViewer.tsx imports './ContentRenderer' - NOT FOUND
+- âŒ modules\opd\cancer-screening\CancerScreening.tsx imports '@/lib/supabaseClient' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './context/PalliativeContext' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './context/ThemeProvider' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './hooks/usePalliativeNav' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './hooks/useKeyboardNav' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './components/LoadingSpinner' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './components/ErrorMessage' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './components/KeyboardShortcutsDialog' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './sections/symptom_control/SymptomControl' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './sections/pain_management/PainManagement' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './sections/end_of_life/FamilySupport' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './sections/end_of_life/AdvanceDirectives' - NOT FOUND
+- âŒ modules\palliative\PalliativeModule.tsx imports './sections/psychosocial_support/PsychosocialCare' - NOT FOUND
+- âŒ modules\cdu\components\charts\IntentDistributionChart.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ services\toxicities.ts imports '../lib/supabaseClient' - NOT FOUND
+- âŒ modules\cdu\toxicity\Toxicity.tsx imports '@/services/toxicities' - NOT FOUND
+- âŒ modules\cdu\toxicity\Toxicity.tsx imports '@/components/ui/AlertBanner' - NOT FOUND
+- âŒ services\emergency\labEmergency.types.ts imports '../labInterpretation/types' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\logic\generateFollowUpPlan.ts imports '../data/followUpTemplates' - NOT FOUND
+- âŒ modules\opd\follow-up-oncology\logic\generateFollowUpPlan.ts imports '../utils/templateValidation' - NOT FOUND
+- âŒ services\symptomAssessment\__tests__\TestUtils.ts imports '../SymptomAssessmentHandler' - NOT FOUND
+- âŒ services\symptomAssessment\__tests__\TestUtils.ts imports '../interfaces' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../components/EvaluationSummary' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../types/evaluation' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../data/evaluationTemplates' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../components/FormField' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../components/Button' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../context/EvaluationContext' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../../../services/patientEvaluationService' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../components/ProgressStepper' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '@/components/ui/tooltip' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../components/AISidebar' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../types/evaluation' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../components/staging' - NOT FOUND
+- âŒ modules\opd\patient-evaluation\PatientEvaluationForm.tsx imports '../types/evaluation' - NOT FOUND
+- âŒ components\ui\input.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ services\emergency\types.ts imports './labEmergency.types' - NOT FOUND
+- âŒ pages\ProtectedPage.tsx imports '../auth/ProtectedRoute' - NOT FOUND
+- âŒ pages\ProtectedPage.tsx imports '../hooks/useUser' - NOT FOUND
+- âŒ pages\ProtectedPage.tsx imports '../components/LogoutButton' - NOT FOUND
+- âŒ modules\palliative\hooks\useSymptoms.ts imports '../sections/symptom_control/data/SymptomData' - NOT FOUND
+- âŒ services\safety\SafetySystemFactory.ts imports './SafetySystem' - NOT FOUND
+- âŒ services\safety\SafetySystemFactory.ts imports './types' - NOT FOUND
+- âŒ providers\Auth0Provider.tsx imports '../components/AuthLoading' - NOT FOUND
+- âŒ layout\Layout.tsx imports '@/context/LayoutContext' - NOT FOUND
+- âŒ layout\Layout.tsx imports './Sidebar' - NOT FOUND
+- âŒ layout\Layout.tsx imports './Header' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\components\ProtocolDetailsDialog.tsx imports '@/components/ui/dialog' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\components\ProtocolDetailsDialog.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\components\ProtocolDetailsDialog.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\components\ProtocolDetailsDialog.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\components\ProtocolDetailsDialog.tsx imports '../TreatmentTab' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\components\ProtocolDetailsDialog.tsx imports '../TestsSectionTab' - NOT FOUND
+- âŒ modules\cdu\treatmentProtocols\components\ProtocolDetailsDialog.tsx imports '../DoseModificationsTab' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\AutoRiskClassifier.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\AutoRiskClassifier.tsx imports '@/components/ui/badge' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\AutoRiskClassifier.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\AutoRiskClassifier.tsx imports '@/components/ui/progress' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\AutoRiskClassifier.tsx imports '@/components/ui/alert' - NOT FOUND
+- âŒ modules\opd\components\evaluation\intelligence\AutoRiskClassifier.tsx imports '@/components/ui/tabs' - NOT FOUND
+- âŒ modules\inpatient\sections\emergencies\components\EmergencyDetailModal.tsx imports '../data/emergencyProtocols' - NOT FOUND
+- âŒ modules\inpatient\sections\emergencies\components\EmergencyDetailModal.tsx imports './RedFlagTag' - NOT FOUND
+- âŒ modules\palliative\components\PalliativeHandbookViewer.tsx imports '@/components/MarkdownViewer/RawMarkdownViewer' - NOT FOUND
+- âŒ modules\palliative\components\PalliativeHandbookViewer.tsx imports '@/components/ErrorBoundary' - NOT FOUND
+- âŒ services\confidence\ConfidenceService.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ components\shared\protocolTabs\MetadataFooter.tsx imports '@/types/protocol' - NOT FOUND
+- âŒ logic\screeningEngine.ts imports '../types/clinical' - NOT FOUND
+- âŒ logic\screeningEngine.ts imports './riskAssessment' - NOT FOUND
+- âŒ logic\screeningEngine.ts imports '../data/clinical/screening_protocols' - NOT FOUND
+- âŒ logic\screeningEngine.ts imports '../data/clinical/symptom_correlations' - NOT FOUND
+- âŒ modules\palliative\components\StatusBadge.tsx imports '@/lib/utils' - NOT FOUND
+- âŒ modules\cdu\medications\__tests__\MedicationDetailModal.test.tsx imports '../MedicationDetailModal' - NOT FOUND
+- âŒ modules\cdu\medications\__tests__\MedicationDetailModal.test.tsx imports './MedicationTestDataFactory' - NOT FOUND
+- âŒ pages\LandingPage.tsx imports '@/components/LoginButton' - NOT FOUND
+- âŒ pages\LandingPage.tsx imports '@/components/LogoutButton' - NOT FOUND
+- âŒ pages\LandingPage.tsx imports '@/components/GlowingLogoImage' - NOT FOUND
+- âŒ data\cancer-pathways\lung.ts imports '../../types/cancer-pathways' - NOT FOUND
+- âŒ services\emergency\EmergencyService.ts imports './types' - NOT FOUND
+- âŒ services\emergency\EmergencyService.ts imports '../utils/MedicalAuditLogger' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\DrugSafetySystem.test.ts imports '../DrugSafetySystem' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\DrugSafetySystem.test.ts imports './setup' - NOT FOUND
+- âŒ services\drugInteractions\__tests__\DrugSafetySystem.test.ts imports '../types' - NOT FOUND
+- âŒ components\ProtectedRoute.tsx imports '../hooks/useAuth' - NOT FOUND
+- âŒ __tests__\generateGeminiResponse.test.ts imports '../lib/gemini' - NOT FOUND
+- âŒ data\cancer-pathways\breast.ts imports '../../types/cancer-pathways' - NOT FOUND
+- âŒ modules\opd\services\enhancedEvaluationService.ts imports '../../../lib/supabaseClient' - NOT FOUND
+- âŒ services\protocolCache.ts imports '../types/protocol' - NOT FOUND
+- âŒ components\ai-agent\AIAgent.tsx imports '@/hooks/useAIResponseHistory' - NOT FOUND
+- âŒ components\ai-agent\AIAgent.tsx imports '@/lib/api/aiAgentAPI' - NOT FOUND
+- âŒ components\ai-agent\AIAgent.tsx imports '@/components/ai-agent/types' - NOT FOUND
+- âŒ components\ai-agent\AIAgent.tsx imports '@/components/ui/use-toast' - NOT FOUND
+- âŒ components\ai-agent\AIAgent.tsx imports '@/components/ui/button' - NOT FOUND
+- âŒ components\ai-agent\AIAgent.tsx imports './feedbackPanel' - NOT FOUND
+- âŒ components\ai-agent\AIAgent.tsx imports './agentLogger' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\DeliriumAssessment.tsx imports '@/components/ui/card' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\DeliriumAssessment.tsx imports '@/components/ui/label' - NOT FOUND
+- âŒ modules\palliative\sections\symptom_control\components\DeliriumAssessment.tsx imports '@/components/ui/radio-group' - NOT FOUND
+- âŒ components\ui\dialog.tsx imports '@/lib/utils' - NOT FOUND
+

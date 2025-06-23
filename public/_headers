@@ -1,0 +1,25 @@
+# ✅ Global Content Security Policy for the entire site
+/*
+  Content-Security-Policy: default-src 'self'; connect-src 'self' https://*.auth0.com https://*.supabase.co https://api.openai.com https://mwoncovista.com; script-src 'self' 'unsafe-inline' https://*.auth0.com; style-src 'self' 'unsafe-inline'; img-src * blob: data:; frame-src 'self'; font-src 'self'; object-src 'none';
+
+# Cache static assets for performance
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Cache fonts for 1 year and allow cross-origin
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Favicon and manifest caching
+/favicon.ico
+  Cache-Control: public, max-age=86400
+
+/manifest.json
+  Cache-Control: public, max-age=86400
+  Content-Type: application/json
+
+# Optional: disable caching for API routes
+#/api/*
+#  Cache-Control: no-cache, no-store, must-revalidate
