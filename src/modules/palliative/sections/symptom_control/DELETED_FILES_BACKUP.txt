@@ -1,0 +1,13 @@
+Backup record of deleted files for audit:
+- SymptomControlNew.tsx
+- SymptomControlDashboard.tsx
+- SymptomControl.tsx
+- REMOVE_ME.txt
+- REMOVE_LEGACY_SYMPTOM_CONTROL.txt
+- README_USE_ASSISTANT.txt
+- README_MIGRATION_COMPLETE.txt
+- README_MIGRATION.txt
+- README_LEGACY_REMOVED.txt
+- README_CONFIRMATION.txt
+- README.txt
+- EnhancedSymptomView.tsx

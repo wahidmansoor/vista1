@@ -1,0 +1,22 @@
+Symptom Control Section Cleanup Report
+
+The following files are identified as unused, legacy, or not referenced in the current codebase and should be deleted:
+
+- SymptomControlNew.tsx
+- SymptomControl.tsx
+- components/SymptomPanel.tsx
+- components/SymptomDataCards.tsx
+- components/SeverityCard.tsx
+- data/symptomsData.ts
+- components/DeliriumAssessment.tsx
+
+These files are not imported in any active component or are superseded by the new SymptomControlAssistant and dashboard system.
+
+Please proceed to delete these files and remove any empty directories after cleanup.
+
+Core files to keep:
+- SymptomControlDashboard.tsx
+- SymptomControlAssistant.tsx
+- components/SymptomSearch.tsx
+- data/SymptomData.ts
+- All dashboard, assessment, and intervention subcomponents that are referenced in the dashboard or assistant.

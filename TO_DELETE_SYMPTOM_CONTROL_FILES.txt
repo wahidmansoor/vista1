@@ -1,0 +1,12 @@
+d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\SymptomControlNew.tsx
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\SymptomControlDashboard.tsx
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\SymptomControl.tsx
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\REMOVE_ME.txt
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\REMOVE_LEGACY_SYMPTOM_CONTROL.txt
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\README_USE_ASSISTANT.txt
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\README_MIGRATION_COMPLETE.txt
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\README_MIGRATION.txt
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\README_LEGACY_REMOVED.txt
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\README_CONFIRMATION.txt
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\README.txt
+ d:\Mansoor\mwoncovista\vis1\vista1-main\src\modules\palliative\sections\symptom_control\EnhancedSymptomView.tsx
