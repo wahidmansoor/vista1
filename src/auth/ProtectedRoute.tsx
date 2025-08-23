@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { isAuthBypassEnabled, logEnvironmentInfo } from '../utils/environment';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -15,7 +16,28 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   fallback 
 }) => {
   const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  
+  // Check if authentication bypass is enabled for local development
+  const authBypass = isAuthBypassEnabled();
+  
+  // Log environment info in development
+  React.useEffect(() => {
+    logEnvironmentInfo();
+    console.log('🔍 ProtectedRoute Debug:', {
+      authBypass,
+      isAuthenticated,
+      isLoading,
+      hostname: window.location.hostname,
+      envVar: import.meta.env.VITE_AUTH_BYPASS_DEV
+    });
+  }, [authBypass, isAuthenticated, isLoading]);
 
+  // If auth bypass is enabled, skip authentication entirely
+  if (authBypass) {
+    console.log('🔓 Authentication bypassed for local development');
+    return <>{children}</>;
+  }
+  
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-teal-500 via-indigo-600 to-purple-600">
@@ -30,7 +52,9 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
         </div>
       </div>
     );
-  }  if (!isAuthenticated) {
+  }
+  
+  if (!isAuthenticated) {
     return fallback || (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-teal-500 via-indigo-600 to-purple-600">
         <div className="text-center bg-white/10 backdrop-blur-lg rounded-lg p-8 max-w-md">

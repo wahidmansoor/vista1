@@ -20,6 +20,7 @@ import RedFlagsPage from "@/modules/tools/RedFlags";
 import BSACalculator from "@/modules/tools/calculators/BSA";
 import CrClCalculator from "@/modules/tools/calculators/CrCl";
 import ANCCalculator from "@/modules/tools/calculators/ANC";
+import AuthTest from "@/pages/AuthTest";
 
 import type { ReactElement } from 'react';
 import ProtocolDetailPageContainer from "@/modules/cdu/safe/treatmentProtocols/TreatmentProtocols";
@@ -37,6 +38,14 @@ const AppRoutes: FC = () => {
       <Route path="/callback" element={
         <ErrorBoundary moduleName="Auth Callback">
           <CallbackPage />
+        </ErrorBoundary>
+      } />
+
+      <Route path="/auth-test" element={
+        <ErrorBoundary moduleName="Auth Test">
+          <ProtectedRoute>
+            <AuthTest />
+          </ProtectedRoute>
         </ErrorBoundary>
       } />
 

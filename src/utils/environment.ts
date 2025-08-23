@@ -149,6 +149,79 @@ export const ENV = {
 };
 
 // Default export for convenience
+/**
+ * Checks if the application is running in local development environment
+ * @returns {boolean} True if running in development mode
+ */
+export const isLocalDevelopment = (): boolean => {
+  // Check if we're in development mode
+  const isDev = import.meta.env.DEV;
+  
+  // Check if running on localhost or local IP
+  const isLocalhost = isBrowser && (
+    window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1' ||
+    window.location.hostname.startsWith('192.168.') ||
+    window.location.hostname.startsWith('10.') ||
+    window.location.hostname.endsWith('.local')
+  );
+  
+  // Check environment variables
+  const nodeEnv = import.meta.env.NODE_ENV;
+  const isDevEnv = nodeEnv === 'development';
+  
+  // Return true if any development indicator is present
+  return isDev || isLocalhost || isDevEnv;
+};
+
+/**
+ * Checks if authentication bypass is enabled
+ * This provides an additional layer of control via environment variable
+ * @returns {boolean} True if auth bypass is enabled
+ */
+export const isAuthBypassEnabled = (): boolean => {
+  // Check for explicit bypass flag in environment
+  const bypassFlag = import.meta.env.VITE_AUTH_BYPASS_DEV;
+  
+  // Only allow bypass in local development AND if explicitly enabled
+  return isLocalDevelopment() && (bypassFlag === 'true' || bypassFlag === '1');
+};
+
+/**
+ * Gets the current environment type
+ * @returns {string} Environment type: 'development', 'production', or 'staging'
+ */
+export const getEnvironmentType = (): string => {
+  if (isLocalDevelopment()) {
+    return 'development';
+  }
+  
+  const hostname = isBrowser ? window.location.hostname : '';
+  
+  if (hostname.includes('staging') || hostname.includes('dev.')) {
+    return 'staging';
+  }
+  
+  return 'production';
+};
+
+/**
+ * Logs environment information for debugging
+ * Only logs in development mode
+ */
+export const logEnvironmentInfo = (): void => {
+  if (isLocalDevelopment()) {
+    console.log('🔧 Environment Info:', {
+      type: getEnvironmentType(),
+      isDev: import.meta.env.DEV,
+      nodeEnv: import.meta.env.NODE_ENV,
+      hostname: isBrowser ? window.location.hostname : 'N/A',
+      authBypass: isAuthBypassEnabled(),
+      viteMode: import.meta.env.MODE
+    });
+  }
+};
+
 export default {
   getEnvVar,
   getTypedEnvVar,
@@ -158,5 +231,9 @@ export default {
   isDevelopment,
   isProduction,
   getMode,
+  isLocalDevelopment,
+  isAuthBypassEnabled,
+  getEnvironmentType,
+  logEnvironmentInfo,
   ENV
 };

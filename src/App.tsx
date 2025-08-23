@@ -6,6 +6,7 @@ import AppRoutes from './routes/AppRoutes';
 import { LayoutProvider } from './context/LayoutContext';
 import { Toast } from "@/components/ui/toast";
 import { ToastProvider } from "@/components/ui/toast";
+import AuthBypassIndicator from './components/AuthBypassIndicator';
 
 const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
@@ -49,6 +50,7 @@ const AppContent: React.FC = () => {
   return (
     <ToastProvider>
       <Toast />
+      <AuthBypassIndicator />
       <PageTransition>
         {isPublicRoute ? (
           <AppRoutes />
