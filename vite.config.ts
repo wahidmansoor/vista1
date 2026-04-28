@@ -45,7 +45,15 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       port: 3003,
-      open: true
+      open: true,
+      // Add middleware to handle static file requests properly
+      middleware: (req, res, next) => {
+        // Let static files through normally
+        if (req.url.startsWith('/assets/') || req.url.endsWith('.md') || req.url.endsWith('.json')) {
+          console.log(`📦 Allowing static asset: ${req.url}`);
+        }
+        next();
+      }
     },
     preview: {
       port: 4173,
