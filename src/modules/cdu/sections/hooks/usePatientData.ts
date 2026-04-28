@@ -19,8 +19,7 @@ import {
   FormValidationState
 } from '../types/diseaseProgress.types';
 import { validateField, validateCrossFields } from '../utils/validation';
-// Note: storageService will be imported when available
-// import { storageService } from '../utils/storageService';
+import { storageService } from '../utils/storageService';
 
 // Initial state
 const createInitialState = (): PatientDataState => ({
@@ -28,8 +27,7 @@ const createInitialState = (): PatientDataState => ({
     primaryDiagnosis: '',
     otherPrimaryDiagnosis: '',
     stageAtDiagnosis: '' as any,
-    histologyMutation: '',
-    otherHistologyMutation: '',
+    biomarkers: [],
     dateOfDiagnosis: '',
     diseaseNotes: '',
   },
@@ -50,6 +48,7 @@ const createInitialState = (): PatientDataState => ({
   treatmentLine: {
     treatmentLine: '' as any,
     treatmentRegimen: '',
+    agents: [],
     startDate: '',
     endDate: '',
     treatmentResponse: '' as any,
@@ -95,7 +94,10 @@ const patientDataReducer = (
       return {
         ...state,
         treatmentHistory: [...state.treatmentHistory, action.payload],
-        treatmentLine: createInitialState().treatmentLine, // Reset current form
+        treatmentLine: {
+          ...createInitialState().treatmentLine,
+          agents: [],
+        }, // Reset current form
       };
 
     case 'UPDATE_TREATMENT_LINE':
@@ -116,18 +118,21 @@ const patientDataReducer = (
       };
 
     case 'LOAD_DATA':
-      return {
-        ...state,
-        diseaseStatus: action.payload.diseaseStatus || createInitialState().diseaseStatus,
-        performanceStatus: action.payload.performanceStatus || createInitialState().performanceStatus,
-        progression: action.payload.progression || createInitialState().progression,
-        treatmentLine: action.payload.linesOfTreatment || createInitialState().treatmentLine,
-        treatmentHistory: Array.isArray(action.payload.linesOfTreatment) 
-          ? action.payload.linesOfTreatment 
-          : [],
-        isLoading: false,
-        lastSaved: action.payload.metadata?.lastSaved ? new Date(action.payload.metadata.lastSaved) : undefined,
-      };
+      if (action.payload) {
+        return {
+          ...state,
+          diseaseStatus: action.payload.diseaseStatus || createInitialState().diseaseStatus,
+          performanceStatus: action.payload.performanceStatus || createInitialState().performanceStatus,
+          progression: action.payload.progression || createInitialState().progression,
+          treatmentLine: action.payload.treatmentLine || createInitialState().treatmentLine,
+          treatmentHistory: Array.isArray(action.payload.treatmentHistory) 
+            ? action.payload.treatmentHistory 
+            : [],
+          isLoading: false,
+          lastSaved: action.payload.lastSaved ? new Date(action.payload.lastSaved) : undefined,
+        };
+      }
+      return state;
 
     case 'RESET_ALL':
       return createInitialState();

@@ -1,0 +1,257 @@
+{
+  "title": "RECIST 1.1: Simplified Framework for Response Assessment",
+  "category": "General Oncology",
+  "section": "Disease Monitoring",
+  "summary": "Practical guide to Response Evaluation Criteria in Solid Tumors (RECIST 1.1). Standardized method for measuring tumor response to treatment based on changes in lesion size and emergence of new lesions.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "RECIST 1.1: Response Assessment in Solid Tumors"
+    },
+    {
+      "type": "paragraph",
+      "text": "RECIST 1.1 is the international standard for assessing tumor response to treatment in solid tumors. It provides objective, reproducible criteria for classifying response based on changes in tumor measurement."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Key Principles"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Based on measurement of selected lesions over time (not all lesions measured)",
+        "Requires baseline imaging for comparison",
+        "Uses specific size thresholds to define response categories",
+        "Incorporates appearance of new lesions as indicator of progression",
+        "Provides standardized language for clinical trial participation and clinical practice"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Three Lesion Categories"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Target Lesions (Measurable Disease)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Lesions selected at baseline for measurement and follow-up tracking."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Minimum of 1, maximum of 5 lesions per organ (typically ≤10 total)",
+        "Lesions must be ≥10 mm in longest diameter on CT/MRI or ≥20 mm on plain radiograph",
+        "Must be radiographically measurable (not cystic, fatty, or necrotic)",
+        "Should represent different organ sites if multifocal disease",
+        "Same lesions followed at each reassessment"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Non-Target Lesions"
+    },
+    {
+      "type": "paragraph",
+      "text": "All other lesions at baseline that do not meet measurability criteria but are documented."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Includes lesions <10 mm, cystic lesions, lytic bone lesions, pleural effusions",
+        "Not measured but described as present, unchanged, or absent",
+        "Assessed qualitatively rather than quantitatively",
+        "Their status affects overall response classification"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "New Lesions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Any lesion not present at baseline, including lesions in new anatomic sites."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Appearance of any new lesion is classified as progressive disease",
+        "Even a single new lesion overrides partial or stable response",
+        "Must be >10 mm to be classified as new (smaller lesions may be inflammatory)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Four Response Categories"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Complete Response (CR)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "All target lesions disappear (sum of diameters = 0)",
+        "No new lesions appear",
+        "Non-target lesions resolved or unchanged"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Partial Response (PR)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "≥30% decrease in sum of target lesion diameters (compared to baseline)",
+        "No new lesions",
+        "Non-target lesions may regress or remain unchanged"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Stable Disease (SD)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "<30% decrease AND <20% increase in sum of target lesion diameters",
+        "No new lesions",
+        "Non-target lesions remain stable or resolve"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Progressive Disease (PD)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "≥20% increase in sum of target lesion diameters (compared to baseline or nadir), OR",
+        "Any new lesion appears, OR",
+        "Non-target lesions worsen with appearance of new or unequivocal progression"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Practical Example: Calculating Response"
+    },
+    {
+      "type": "paragraph",
+      "text": "Step-by-step walkthrough of RECIST response calculation."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Scenario"
+    },
+    {
+      "type": "paragraph",
+      "text": "A patient with metastatic lung cancer has baseline CT showing: (1) left upper lobe mass 32 mm, (2) right lower lobe mass 28 mm, (3) liver lesion 15 mm, (4) adrenal lesion 12 mm."
+    },
+    {
+      "type": "paragraph",
+      "text": "Selected target lesions: #1 (32 mm) and #2 (28 mm) = baseline sum 60 mm"
+    },
+    {
+      "type": "paragraph",
+      "text": "After 2 cycles of chemotherapy, repeat CT shows: (1) left mass 22 mm, (2) right mass 20 mm, (3) liver unchanged, (4) adrenal unchanged, (5) new small hepatic lesion 8 mm"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Calculation"
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "items": [
+        "Current sum of target lesions: 22 + 20 = 42 mm",
+        "Change from baseline: (42 - 60) / 60 × 100 = -30%",
+        "Assessment: ≥30% decrease = meets criteria for PR",
+        "However: New liver lesion (8 mm) is <10 mm, so interpreted as uncertain/inflammatory",
+        "Final Response: Partial Response (PR)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Common Measurement Issues"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Moving or Difficult-to-Measure Lesions"
+    },
+    {
+      "type": "paragraph",
+      "text": "If a selected target lesion becomes difficult to measure (due to location change, treatment effect, or image quality), it may be replaced with a different lesion at baseline if one exists. This should be documented."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Cavitation, Necrosis, or Treatment Effect"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cystic changes or necrosis within a lesion may reduce density but increase overall size. RECIST measures longest diameter regardless of internal composition, so size may appear stable or increase despite good treatment effect."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Bone Lesions and Sclerotic Changes"
+    },
+    {
+      "type": "paragraph",
+      "text": "Lytic bone lesions may show sclerotic (hardened) response to treatment, which is favorable but not measurable by RECIST. These should be documented but are typically classified as non-target lesions."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "When RECIST May Not Apply"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Lymphomas: Use RECIST-L (modified for lymph node measurement)",
+        "Metastatic bone disease: May use bone response criteria",
+        "Immunotherapy: Some responses are atypical (may appear to worsen before improving); use iRECIST or irRECIST",
+        "Cystic or necrotic tumors: May require modified criteria"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Key Takeaways"
+    },
+    {
+      "type": "list",
+      "items": [
+        "RECIST provides standardized, objective method for response assessment",
+        "Requires baseline imaging and consistent measurement technique",
+        "Response classification is based on target lesions + new lesions + non-target status",
+        "Appearance of new lesion = progressive disease regardless of target lesion response",
+        "Always document which lesions were selected, their baseline sizes, and current sizes"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-04-28",
+    "author": "Oncology Content Team",
+    "tags": ["RECIST", "response-assessment", "tumor-measurement", "imaging", "clinical-criteria"]
+  }
+}

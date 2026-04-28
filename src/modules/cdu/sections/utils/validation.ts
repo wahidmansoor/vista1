@@ -50,6 +50,14 @@ const STAGE_COMPATIBILITY: Record<string, StageType[]> = {
 };
 
 // Helper functions
+const containsBiomarker = (biomarkers: any[] | undefined, name: string, status?: string): boolean => {
+  if (!biomarkers) return false;
+  return biomarkers.some(bm => 
+    bm.name.toLowerCase() === name.toLowerCase() && 
+    (!status || bm.status.toLowerCase() === status.toLowerCase())
+  );
+};
+
 const isValidDate = (dateString: string): boolean => {
   if (!dateString) return true; // Optional fields
   const date = new Date(dateString);
@@ -120,6 +128,7 @@ export const validateField = (
     'diseaseStatus.primaryDiagnosis': 'Primary diagnosis is required',
     'diseaseStatus.stageAtDiagnosis': 'Stage at diagnosis is required',
     'diseaseStatus.dateOfDiagnosis': 'Date of diagnosis is required',
+    'diseaseStatus.histology': 'Histology specification is required for accurate protocol matching',
   };
   
   if (requiredFields[fieldPath] && (!value || value.toString().trim() === '')) {
@@ -161,21 +170,20 @@ export const validateField = (
       }
       break;
       
-    case 'diseaseStatus.histologyMutation':
-      if (value && !VALID_MUTATIONS.includes(value)) {
-        return {
-          isValid: false,
-          error: 'Please select a valid histology/mutation'
-        };
-      }
-      break;
-      
-    case 'diseaseStatus.otherHistologyMutation':
-      if (state.diseaseStatus.histologyMutation === 'Other' && (!value || value.trim() === '')) {
-        return {
-          isValid: false,
-          error: 'Please specify the other histology/mutation'
-        };
+    case 'diseaseStatus.biomarkers':
+      // Biomarkers array validation
+      if (Array.isArray(value)) {
+        const seen = new Set<string>();
+        for (const bm of value) {
+          if (!bm.name) return { isValid: false, error: 'Biomarker name is required' };
+          if (!bm.status) return { isValid: false, error: `Status required for ${bm.name}` };
+          
+          const key = `${bm.name}:${bm.status}`.toLowerCase();
+          if (seen.has(key)) {
+            return { isValid: false, error: `Duplicate biomarker: ${bm.name} with status ${bm.status}` };
+          }
+          seen.add(key);
+        }
       }
       break;
       
@@ -205,11 +213,20 @@ export const validateField = (
       break;
       
     case 'performanceStatus.performanceScore':
-      if (value && !isValidPerformanceScore(value, state.performanceStatus.performanceScale)) {
-        return {
-          isValid: false,
-          error: 'Invalid performance score for selected scale'
-        };
+      if (value !== undefined && value !== '') {
+        const score = parseInt(value, 10);
+        if (state.performanceStatus.performanceScale === 'ecog' && (score < 0 || score > 4)) {
+          return {
+            isValid: false,
+            error: 'ECOG score must be 0-4'
+          };
+        }
+        if (!isValidPerformanceScore(value, state.performanceStatus.performanceScale)) {
+          return {
+            isValid: false,
+            error: 'Invalid performance score for selected scale'
+          };
+        }
       }
       break;
       
@@ -349,10 +366,17 @@ export const validateCrossFields = (state: PatientDataState): string[] => {
   }
   
   // Mutation-specific warnings
-  if (state.diseaseStatus.histologyMutation === 'KRAS Mutant' && 
+  if (containsBiomarker(state.diseaseStatus.biomarkers, 'KRAS', 'Mutant') && 
       state.treatmentLine.treatmentRegimen && 
       state.treatmentLine.treatmentRegimen.toLowerCase().includes('cetuximab')) {
     errors.push('KRAS mutation makes anti-EGFR therapy ineffective');
+  }
+  
+  if (containsBiomarker(state.diseaseStatus.biomarkers, 'HER2', 'Positive') && 
+      state.treatmentLine.treatmentRegimen && 
+      !state.treatmentLine.treatmentRegimen.toLowerCase().includes('trastuzumab') &&
+      !state.treatmentLine.treatmentRegimen.toLowerCase().includes('herceptin')) {
+    errors.push('HER2 positive disease should typically include anti-HER2 therapy');
   }
   
   return errors;

@@ -1,0 +1,138 @@
+{
+  "title": "Disease Monitoring Essentials",
+  "category": "General Oncology",
+  "section": "Disease Monitoring",
+  "summary": "Systematic evaluation of cancer response to treatment and detection of disease progression. Requires structured documentation using standardized criteria to guide clinical decisions.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Disease Monitoring in Oncology"
+    },
+    {
+      "type": "paragraph",
+      "text": "Disease monitoring is the systematic process of assessing a patient's cancer status at defined intervals to determine treatment response, detect progression, and guide clinical decision-making. Standardized monitoring protocols ensure consistency in documentation and enable reliable communication across treatment teams."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Key Objectives"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Quantify tumor burden and measure change over time",
+        "Classify treatment response using standardized criteria (RECIST, PERCIST)",
+        "Detect disease progression or recurrence early",
+        "Guide decisions to continue, modify, or discontinue treatment",
+        "Document baseline disease status for prognostic assessment",
+        "Maintain consistent records for tumor boards and longitudinal tracking"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Critical Distinctions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Clear terminology prevents clinical errors in treatment planning. The following terms have distinct meanings and different prognostic implications."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Disease Progression: Increase in tumor burden on active treatment or within months of completing therapy",
+        "Recurrence: Reappearance of cancer after a complete response to prior treatment",
+        "Metastasis: Spread of cancer to a distant anatomic site (may be at diagnosis or develop later)",
+        "Treatment Resistance: Tumor growth despite adequate drug exposure; often indicates need for drug class change"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Three-Pillar Monitoring Framework"
+    },
+    {
+      "type": "paragraph",
+      "text": "Effective disease monitoring integrates three sources of information:"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1. Imaging Assessment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Radiologic evaluation of measurable disease using cross-sectional imaging (CT, MRI) or metabolic imaging (PET). Provides objective measurement of tumor burden."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2. Biomarker Surveillance"
+    },
+    {
+      "type": "paragraph",
+      "text": "Serum or tissue markers that correlate with disease burden (e.g., CEA in colorectal cancer, PSA in prostate cancer, CA-125 in ovarian cancer). Supports and contextualizes imaging findings."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3. Clinical Assessment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Patient symptoms, performance status changes, and physical examination findings. May indicate progression when imaging is stable or vice versa."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "When to Monitor"
+    },
+    {
+      "type": "paragraph",
+      "text": "Monitoring intervals depend on cancer type, treatment phase, and clinical context. General principles:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "During active therapy: Every 1-3 treatment cycles or every 6-12 weeks (varies by regimen)",
+        "After completion of therapy: Every 3-6 months for first 2 years, then every 6-12 months",
+        "If progression suspected: Urgent reassessment (days to 1 week) to confirm and guide next treatment",
+        "For hormone-sensitive cancers: May require less frequent monitoring if stable"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Disease Monitoring Workflow"
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "items": [
+        "Document baseline disease status (location, size, type of lesions)",
+        "Perform reassessment imaging at protocol-defined intervals",
+        "Measure changes in tumor burden (using RECIST or comparable criteria)",
+        "Classify response (CR, PR, SD, PD, or NE)",
+        "Correlate with biomarkers and clinical assessment",
+        "Document interpretation and clinical implications",
+        "Make treatment decision based on response category and overall clinical context"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Next Steps"
+    },
+    {
+      "type": "paragraph",
+      "text": "Review the following sections to understand the practical application of standardized monitoring criteria and how to interpret common clinical scenarios."
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-04-28",
+    "author": "Oncology Content Team",
+    "tags": ["disease-monitoring", "RECIST", "tumor-response", "imaging", "clinical-decision"]
+  }
+}

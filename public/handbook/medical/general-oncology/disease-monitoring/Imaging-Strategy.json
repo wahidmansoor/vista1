@@ -1,0 +1,252 @@
+{
+  "title": "Imaging Strategy for Disease Monitoring",
+  "category": "General Oncology",
+  "section": "Disease Monitoring",
+  "summary": "Selection and timing of imaging modalities for disease monitoring. Guidance on when to use CT, MRI, PET, and other imaging techniques to assess treatment response.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Imaging Strategy for Monitoring Cancer"
+    },
+    {
+      "type": "paragraph",
+      "text": "Appropriate selection and timing of imaging modalities is critical for accurate disease monitoring. Different imaging techniques provide complementary information, and choice of modality depends on disease type, anatomy, prior findings, and clinical context."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Primary Imaging Modalities"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Computed Tomography (CT)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Most commonly used imaging modality for oncology monitoring."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Advantages: Fast, widely available, standard for RECIST measurement, good soft tissue contrast",
+        "Disadvantages: Radiation exposure, contrast allergy risk, may miss small lesions <5 mm",
+        "Typical use: Baseline and periodic reassessment during treatment",
+        "Organs assessed: Chest (lungs), abdomen (liver, pancreas), pelvis"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Magnetic Resonance Imaging (MRI)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Superior soft tissue contrast; preferred for specific organs."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Advantages: No radiation, excellent soft tissue differentiation, better for brain and bone marrow",
+        "Disadvantages: Longer acquisition time, not suitable for acute situations, may have artifacts from metallic implants",
+        "Typical use: Brain tumors, bone marrow involvement, organ-specific tumors (prostate, liver cirrhosis)",
+        "Cannot be used for RECIST if only modality if CT already done at baseline (must maintain same modality)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Positron Emission Tomography (PET)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Metabolic imaging showing cellular activity; typically combined with CT (PET-CT)."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Advantages: Detects metabolic activity, identifies early response before size change, sensitive for bone lesions",
+        "Disadvantages: Limited availability, radiation exposure, inflammatory lesions may appear active",
+        "Typical tracers: FDG (18F-fluorodeoxyglucose) for most cancers; other tracers for specific types",
+        "Typical use: Lymphoma, sarcoma, some lung cancers; can show response before CT size changes"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Plain Radiography (Chest X-ray)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Limited role in modern disease monitoring; primarily for detection, not response measurement."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Advantages: Simple, rapid, low cost, no contrast needed",
+        "Disadvantages: Poor sensitivity for small lesions, not suitable for RECIST (requires ≥20 mm)",
+        "Typical use: Initial screening or follow-up of known large lung lesions",
+        "Not recommended: For formal response assessment in clinical trials"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Ultrasound"
+    },
+    {
+      "type": "paragraph",
+      "text": "Operator-dependent imaging with limited standardization."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Advantages: No radiation, real-time guidance for procedures, good for cystic lesions",
+        "Disadvantages: Operator dependent, difficult in obese patients, limited organ penetration",
+        "Typical use: Liver lesion evaluation, image-guided biopsy, not for formal response assessment"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Modality Selection by Disease Type"
+    },
+    {
+      "type": "table",
+      "headers": ["Cancer Type", "Primary Modality", "Secondary/Complementary"],
+      "rows": [
+        ["Lung Cancer", "Chest CT", "PET-CT if high-risk features; brain MRI if CNS symptoms"],
+        ["Metastatic Breast", "Chest/Abd/Pelvis CT", "Bone scan or PET for bone lesions; brain MRI if CNS involvement"],
+        ["Colorectal", "Chest/Abd/Pelvis CT", "PET-CT for suspected metastasis; MRI for liver resection planning"],
+        ["Lymphoma", "CT chest/Abd/Pelvis ± PET", "PET-CT preferred for response assessment"],
+        ["Ovarian Cancer", "Abd/Pelvis CT", "Consider MRI if uncertain adnexal mass"],
+        ["Bone Tumors", "Primary tumor MRI", "Chest CT for pulmonary metastases; PET for systemic disease"],
+        ["Brain Tumors", "MRI brain", "CT brain if MRI contraindicated"],
+        ["Prostate Cancer", "Prostate MRI", "Chest/Abd/Pelvis CT if metastatic; bone scan or PET for bone"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Timing of Reassessment Imaging"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "During Active Treatment"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Standard chemotherapy: Every 2-4 treatment cycles (typically 6-12 weeks)",
+        "Targeted therapy: Every 6-12 weeks depending on drug and cancer type",
+        "Immunotherapy: May image every 8-12 weeks or per protocol (atypical responses may occur)",
+        "Radiation therapy: Baseline before RT and follow-up per protocol (typically 6-12 weeks post-RT)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Suspicion for Progression"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Patient with acute worsening (pain, dyspnea, neurologic symptoms): Urgent imaging (same week)",
+        "Biomarker elevation or clinical decline: Reassess promptly (within 1-2 weeks)",
+        "Expected interval: Can defer if recent imaging and clinically stable"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Post-Treatment Surveillance"
+    },
+    {
+      "type": "list",
+      "items": [
+        "First 2 years: Every 3-6 months imaging",
+        "Years 2-5: Every 6-12 months imaging",
+        "After 5 years: Individualized based on cancer type and risk factors"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Important Imaging Principles"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Consistency in Technique"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use the same imaging modality and technique for baseline and follow-up to enable accurate comparison. Changing from CT to MRI mid-follow-up, using different contrast protocols, or imaging at different institutions may introduce measurement variability."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Timing Relative to Treatment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Avoid imaging immediately after chemotherapy infusion (within 24-48 hours) to allow clearance of blood pool activity. Some drugs may cause transient imaging changes unrelated to tumor response."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Documentation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Always document: (1) baseline lesion sizes, (2) location and characteristics of target lesions, (3) non-target disease status, (4) presence of new lesions, (5) radiologist's assessment of treatment response."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Atypical Responses"
+    },
+    {
+      "type": "paragraph",
+      "text": "Some treatments (especially immunotherapy and targeted agents) can produce atypical imaging responses: pseudoprogression (initial size increase followed by response), mixed response (some lesions regress while others progress), or slow response kinetics (delayed response). Correlation with clinical status and biomarkers is essential."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "When to Consider Advanced Imaging"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Treatment-related changes (radiation pneumonitis, fibrosis): Consider MRI or PET to distinguish treatment effect from recurrence",
+        "Equivocal findings: Second-look imaging with different modality may clarify",
+        "Surveillance after complete response: Low-dose CT may reduce radiation if prolonged surveillance needed",
+        "Specific organs (brain): MRI preferred to detect small recurrent lesions"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Key Takeaways"
+    },
+    {
+      "type": "list",
+      "items": [
+        "CT is standard initial imaging for most solid tumors",
+        "Choose modality based on baseline imaging and cancer type; maintain consistency for comparability",
+        "Reassess every 2-4 cycles during treatment or per protocol",
+        "Urgent imaging if clinical deterioration or progression suspected",
+        "Document baseline, current, and response classification at each assessment",
+        "Correlate imaging with biomarkers and clinical status for optimal interpretation"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-04-28",
+    "author": "Oncology Content Team",
+    "tags": ["imaging", "CT", "MRI", "PET", "monitoring-strategy", "modality-selection"]
+  }
+}

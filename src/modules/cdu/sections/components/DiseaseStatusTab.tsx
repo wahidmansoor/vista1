@@ -1,13 +1,15 @@
 /**
  * Disease Status Tab Component
- * Handles primary diagnosis, stage, histology, and related data entry
+ * Handles primary diagnosis, stage, biomarkers, and related data entry
  */
 
 import React from 'react';
 import {
   DiseaseStatus,
   FieldValidation,
-  StageType
+  StageType,
+  PatientBiomarker,
+  BiomarkerStatus
 } from '../types/diseaseProgress.types';
 
 interface DiseaseStatusTabProps {
@@ -30,19 +32,46 @@ const PRIMARY_DIAGNOSES = [
   "Other"
 ] as const;
 
-const HISTOLOGY_MUTATIONS = [
-  "HER2 Positive",
-  "KRAS Mutant",
-  "EGFR Mutant",
-  "ALK Rearrangement",
-  "MSI-High",
-  "PD-L1 Positive",
-  "BRAF V600E",
-  "TP53 Mutant",
+const HISTOLOGIES = [
+  "Adenocarcinoma",
+  "Squamous Cell Carcinoma",
+  "Large Cell Carcinoma",
+  "Ductal Carcinoma",
+  "Lobular Carcinoma",
+  "Serous Carcinoma",
+  "Clear Cell Carcinoma",
+  "Small Cell Carcinoma",
   "Other"
 ] as const;
 
-// Field component with validation
+const BIOMARKER_NAMES = [
+  "HER2",
+  "ER",
+  "PR",
+  "EGFR",
+  "ALK",
+  "ROS1",
+  "BRAF",
+  "KRAS",
+  "NRAS",
+  "MSI",
+  "PD-L1",
+  "BRCA1",
+  "BRCA2"
+] as const;
+
+const BIOMARKER_STATUSES: BiomarkerStatus[] = [
+  "Positive",
+  "Negative",
+  "Mutant",
+  "Wild-type",
+  "Amplified",
+  "Non-amplified",
+  "High",
+  "Low",
+  "Unknown"
+];
+
 const ValidatedField: React.FC<{
   label: string;
   error?: string;
@@ -77,14 +106,28 @@ export const DiseaseStatusTab: React.FC<DiseaseStatusTabProps> = ({
   validation = {} as Record<keyof DiseaseStatus, FieldValidation>,
   isLoading = false
 }) => {
-  const handleFieldChange = (field: keyof DiseaseStatus, value: string) => {
+  const handleFieldChange = (field: keyof DiseaseStatus, value: any) => {
     onChange({ [field]: value });
+  };
+
+  const handleAddBiomarker = () => {
+    const newBiomarker: PatientBiomarker = { name: '', status: 'Unknown' };
+    handleFieldChange('biomarkers', [...(data.biomarkers || []), newBiomarker]);
+  };
+
+  const handleUpdateBiomarker = (index: number, updates: Partial<PatientBiomarker>) => {
+    const updated = [...(data.biomarkers || [])];
+    updated[index] = { ...updated[index], ...updates };
+    handleFieldChange('biomarkers', updated);
+  };
+
+  const handleRemoveBiomarker = (index: number) => {
+    handleFieldChange('biomarkers', data.biomarkers.filter((_, i) => i !== index));
   };
 
   return (
     <div className="space-y-6">
       <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Primary Diagnosis */}
         <ValidatedField
           label="Primary Diagnosis"
           required
@@ -94,10 +137,7 @@ export const DiseaseStatusTab: React.FC<DiseaseStatusTabProps> = ({
           <select 
             value={data.primaryDiagnosis} 
             onChange={(e) => handleFieldChange('primaryDiagnosis', e.target.value)} 
-            className={`w-full input-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${
-              validation.primaryDiagnosis?.error ? 'border-red-500' : ''
-            }`}
-            aria-label="Primary Diagnosis"
+            className={`w-full input-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${validation.primaryDiagnosis?.error ? 'border-red-500' : ''}`}
             disabled={isLoading}
           >
             <option value="">Select Primary Diagnosis</option>
@@ -107,28 +147,25 @@ export const DiseaseStatusTab: React.FC<DiseaseStatusTabProps> = ({
           </select>
         </ValidatedField>
 
-        {/* Other Primary Diagnosis - Conditional */}
-        {data.primaryDiagnosis === 'Other' && (
-          <ValidatedField
-            label="Specify Other Diagnosis"
-            required
-            error={validation.otherPrimaryDiagnosis?.error}
-            warning={validation.otherPrimaryDiagnosis?.warning}
+        <ValidatedField
+          label="Histology"
+          error={validation.histology?.error}
+          warning={validation.histology?.warning}
+        >
+          <select 
+            value={data.histology || ''} 
+            onChange={(e) => handleFieldChange('histology', e.target.value)} 
+            className="w-full input-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200"
+            disabled={isLoading}
+            title="Histology"
           >
-            <input
-              type="text"
-              value={data.otherPrimaryDiagnosis || ''}
-              onChange={(e) => handleFieldChange('otherPrimaryDiagnosis', e.target.value)}
-              placeholder="Specify Other Primary Diagnosis"
-              className={`w-full input-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${
-                validation.otherPrimaryDiagnosis?.error ? 'border-red-500' : ''
-              }`}
-              disabled={isLoading}
-            />
-          </ValidatedField>
-        )}
+            <option value="">Select Histology</option>
+            {HISTOLOGIES.map((hist) => (
+              <option key={hist} value={hist}>{hist}</option>
+            ))}
+          </select>
+        </ValidatedField>
 
-        {/* Stage at Diagnosis */}
         <ValidatedField
           label="Stage at Diagnosis"
           required
@@ -138,10 +175,7 @@ export const DiseaseStatusTab: React.FC<DiseaseStatusTabProps> = ({
           <select 
             value={data.stageAtDiagnosis} 
             onChange={(e) => handleFieldChange('stageAtDiagnosis', e.target.value as StageType)} 
-            className={`input-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${
-              validation.stageAtDiagnosis?.error ? 'border-red-500' : ''
-            }`}
-            aria-label="Stage at Diagnosis"
+            className={`w-full input-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${validation.stageAtDiagnosis?.error ? 'border-red-500' : ''}`}
             disabled={isLoading}
           >
             <option value="">Select Stage</option>
@@ -152,50 +186,51 @@ export const DiseaseStatusTab: React.FC<DiseaseStatusTabProps> = ({
           </select>
         </ValidatedField>
 
-        {/* Histology/Mutation */}
-        <ValidatedField
-          label="Histology/Mutation"
-          error={validation.histologyMutation?.error}
-          warning={validation.histologyMutation?.warning}
-        >
-          <select 
-            value={data.histologyMutation} 
-            onChange={(e) => handleFieldChange('histologyMutation', e.target.value)} 
-            className={`w-full input-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${
-              validation.histologyMutation?.error ? 'border-red-500' : ''
-            }`}
-            aria-label="Histology or Mutation"
-            disabled={isLoading}
-          >
-            <option value="">Select Histology/Mutation</option>
-            {HISTOLOGY_MUTATIONS.map((mutation) => (
-              <option key={mutation} value={mutation}>{mutation}</option>
+        <div className="md:col-span-2 p-4 bg-gray-100 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="flex justify-between items-center mb-4">
+            <h5 className="font-semibold text-gray-700 dark:text-gray-300">Biomarkers & Mutations</h5>
+            <button 
+              type="button" 
+              onClick={handleAddBiomarker}
+              className="text-xs bg-indigo-500 text-white px-3 py-1 rounded hover:bg-indigo-600 transition"
+            >
+              + Add Biomarker
+            </button>
+          </div>
+          
+          <div className="space-y-3">
+            {data.biomarkers?.map((bm, index) => (
+              <div key={index} className="flex flex-wrap gap-3 items-center p-3 bg-white dark:bg-gray-800 rounded shadow-sm">
+                <select 
+                  value={bm.name}
+                  onChange={(e) => handleUpdateBiomarker(index, { name: e.target.value })}
+                  className="input-field text-sm flex-1 min-w-[120px]"
+                >
+                  <option value="">Select Marker</option>
+                  {BIOMARKER_NAMES.map(name => <option key={name} value={name}>{name}</option>)}
+                </select>
+                <select 
+                  value={bm.status}
+                  onChange={(e) => handleUpdateBiomarker(index, { status: e.target.value as BiomarkerStatus })}
+                  className="input-field text-sm flex-1 min-w-[120px]"
+                >
+                  {BIOMARKER_STATUSES.map(status => <option key={status} value={status}>{status}</option>)}
+                </select>
+                <button 
+                  type="button"
+                  onClick={() => handleRemoveBiomarker(index)}
+                  className="text-red-500 hover:text-red-700 p-1"
+                >
+                  🗑️
+                </button>
+              </div>
             ))}
-          </select>
-        </ValidatedField>
+            {(!data.biomarkers || data.biomarkers.length === 0) && (
+              <p className="text-xs text-gray-400 italic text-center py-2">No biomarkers added</p>
+            )}
+          </div>
+        </div>
 
-        {/* Other Histology/Mutation - Conditional */}
-        {data.histologyMutation === 'Other' && (
-          <ValidatedField
-            label="Specify Other Mutation"
-            required
-            error={validation.otherHistologyMutation?.error}
-            warning={validation.otherHistologyMutation?.warning}
-          >
-            <input
-              type="text"
-              value={data.otherHistologyMutation || ''}
-              onChange={(e) => handleFieldChange('otherHistologyMutation', e.target.value)}
-              placeholder="Specify Other Histology/Mutation"
-              className={`w-full input-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${
-                validation.otherHistologyMutation?.error ? 'border-red-500' : ''
-              }`}
-              disabled={isLoading}
-            />
-          </ValidatedField>
-        )}
-
-        {/* Date of Diagnosis */}
         <ValidatedField
           label="Date of Diagnosis"
           required
@@ -206,16 +241,12 @@ export const DiseaseStatusTab: React.FC<DiseaseStatusTabProps> = ({
             type="date" 
             value={data.dateOfDiagnosis} 
             onChange={(e) => handleFieldChange('dateOfDiagnosis', e.target.value)} 
-            className={`input-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${
-              validation.dateOfDiagnosis?.error ? 'border-red-500' : ''
-            }`}
-            aria-label="Date of Diagnosis"
+            className={`w-full input-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${validation.dateOfDiagnosis?.error ? 'border-red-500' : ''}`}
             disabled={isLoading}
-            max={new Date().toISOString().split('T')[0]} // Prevent future dates
+            max={new Date().toISOString().split('T')[0]}
           />
         </ValidatedField>
         
-        {/* Disease Notes */}
         <div className="md:col-span-2">
           <ValidatedField
             label="Disease Notes"
@@ -225,38 +256,23 @@ export const DiseaseStatusTab: React.FC<DiseaseStatusTabProps> = ({
             <textarea 
               value={data.diseaseNotes || ''} 
               onChange={(e) => handleFieldChange('diseaseNotes', e.target.value)} 
-              placeholder="Additional disease notes, pathology details, staging information..." 
+              placeholder="Additional disease notes..." 
               rows={4} 
-              className={`textarea-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${
-                validation.diseaseNotes?.error ? 'border-red-500' : ''
-              }`}
+              className={`w-full textarea-field focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${validation.diseaseNotes?.error ? 'border-red-500' : ''}`}
               disabled={isLoading}
             />
           </ValidatedField>
         </div>
       </form>
 
-      {/* Save Button */}
       <div className="flex justify-end mt-6">
         <button 
           type="button" 
           onClick={onSave} 
           disabled={isLoading}
-          className={`save-button bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 flex items-center ${
-            isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90'
-          }`}
+          className={`save-button bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 flex items-center ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90'}`}
         >
-          {isLoading ? (
-            <>
-              <div className="w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin mr-2" />
-              Saving...
-            </>
-          ) : (
-            <>
-              <span className="mr-2">💾</span>
-              Save Disease Status
-            </>
-          )}
+          {isLoading ? "Saving..." : "Save Disease Status"}
         </button>
       </div>
     </div>

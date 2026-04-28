@@ -84,7 +84,7 @@ const EnhancedDiseaseProgressTracker: React.FC = () => {
         primary_cancer_type: diseaseStatus.primaryDiagnosis,
         stage: diseaseStatus.stageAtDiagnosis,
         diagnosis_date: new Date(diseaseStatus.dateOfDiagnosis || Date.now()),
-        histology: diseaseStatus.histologyMutation || 'unknown',
+        histology: diseaseStatus.biomarkers?.map(b => `${b.name} ${b.status}`).join(', ') || 'unknown',
         grade: 'unknown',
         biomarker_status: {},
         metastatic_sites: [],

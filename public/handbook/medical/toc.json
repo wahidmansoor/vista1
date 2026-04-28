@@ -221,6 +221,31 @@
             "path": "general-oncology/prognostic-scores/References"
           }
         ]
+      },
+      {
+        "title": "Disease Monitoring",
+        "items": [
+          {
+            "title": "Introduction",
+            "path": "general-oncology/disease-monitoring/Introduction"
+          },
+          {
+            "title": "Definitions",
+            "path": "general-oncology/disease-monitoring/Definitions"
+          },
+          {
+            "title": "RECIST Criteria",
+            "path": "general-oncology/disease-monitoring/RECIST-Criteria"
+          },
+          {
+            "title": "Imaging Strategy",
+            "path": "general-oncology/disease-monitoring/Imaging-Strategy"
+          },
+          {
+            "title": "Treatment Decision Points",
+            "path": "general-oncology/disease-monitoring/Treatment-Decision-Points"
+          }
+        ]
       }
     ]
   },

@@ -1,0 +1,221 @@
+{
+  "title": "Key Definitions in Disease Monitoring",
+  "category": "General Oncology",
+  "section": "Disease Monitoring",
+  "summary": "Clinical definitions of disease progression, recurrence, metastasis, and treatment resistance. Understanding these distinctions is essential for accurate documentation and treatment planning.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Clinical Definitions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Precise terminology ensures clear communication among clinicians and guides appropriate therapeutic decisions. The following definitions are widely used in oncology practice and clinical trials."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Disease Progression (PD)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Increase in tumor burden on active treatment or within the first few months after completing a treatment course."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Context"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Occurs while patient is receiving chemotherapy, targeted therapy, or immunotherapy",
+        "May also refer to early progression noted within 1-3 months of completing treatment",
+        "Indicates failure of current treatment regimen"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Prognostic Implications"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Warrants prompt change to alternative treatment approach",
+        "Often indicates need for drug class change (not just dose escalation)",
+        "Associated with worse median overall survival compared to PR or SD",
+        "May warrant urgent workup to rule out complications (infection, VTE, cardiac)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Example"
+    },
+    {
+      "type": "paragraph",
+      "text": "A patient with metastatic lung cancer receiving first-line chemotherapy. At 8 weeks of treatment, CT imaging shows increase in target lesion size by 35% and emergence of new hepatic nodules. This is classified as disease progression and prompts consideration of second-line therapy."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Recurrence"
+    },
+    {
+      "type": "paragraph",
+      "text": "Reappearance of cancer after a period of complete response (no detectable disease) following completion of treatment."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Context"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Occurs after patient has completed initial treatment and achieved CR",
+        "May be locoregional (at original site) or distant (metastatic)",
+        "Indicates incomplete eradication of cancer cells despite adequate prior therapy",
+        "Time to recurrence is prognostically significant (early vs late recurrence)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Prognostic Implications"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Early recurrence (within 1-2 years) suggests aggressive biology or treatment resistance",
+        "Late recurrence may indicate new primary cancer or true late recurrence",
+        "Salvage therapy options depend on prior treatments and interval to recurrence",
+        "Prognosis generally worse than initial diagnosis, but varies by tumor type and time interval"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Example"
+    },
+    {
+      "type": "paragraph",
+      "text": "A patient with breast cancer treated with surgery, chemotherapy, and radiation achieved complete response. Two years later, imaging detects a new bone lesion with metabolic uptake on PET scan. This represents recurrence (specifically, late distant recurrence) and requires new systemic therapy."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Metastasis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Spread of cancer cells from the primary site to one or more distant anatomic locations. May be present at initial diagnosis (synchronous) or develop during or after treatment (metachronous)."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Context"
+    },
+    {
+      "type": "list",
+      "items": [
+        "At diagnosis: M1 stage disease significantly changes prognosis and treatment approach",
+        "During treatment: Appearance of new distant site(s) indicates progression",
+        "After completion of treatment: New metastasis represents recurrent disease",
+        "Common sites: bone, liver, lung, brain, lymph nodes"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Prognostic Implications"
+    },
+    {
+      "type": "list",
+      "items": [
+        "M1 disease at diagnosis typically associated with incurable disease (with exceptions)",
+        "Number of metastatic sites influences treatment selection and prognosis",
+        "Oligometastatic disease (limited number of sites) may be amenable to aggressive local therapy",
+        "Pattern of metastasis (e.g., bone-only vs visceral involvement) affects survival estimates"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Example"
+    },
+    {
+      "type": "paragraph",
+      "text": "A patient with colon cancer initially diagnosed with localized disease (Stage II). During follow-up imaging 1 year after surgery and adjuvant chemotherapy, new lesions are detected in the liver and peritoneal lymph nodes. These represent metachronous metastases and change disease classification to Stage IV."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Treatment Resistance"
+    },
+    {
+      "type": "paragraph",
+      "text": "Tumor growth or disease progression despite adequate drug exposure and biochemically active drug levels. Indicates failure at the cellular level rather than inadequate dosing."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Context"
+    },
+    {
+      "type": "list",
+      "items": [
+        "May be primary (present from initiation of therapy) or acquired (develops after initial response)",
+        "Distinct from non-compliance, inadequate dosing, or drug interactions",
+        "Often mechanism-based (e.g., pathway activation, genetic mutation)",
+        "Requires molecular investigation to identify resistance mechanism when possible"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Prognostic Implications"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Indicates need to switch drug class or mechanism of action",
+        "Continuing the same agent is unlikely to produce benefit",
+        "Prognosis depends on alternative options available for the specific cancer type",
+        "May warrant tumor re-sequencing or molecular profiling to identify actionable alterations"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Example"
+    },
+    {
+      "type": "paragraph",
+      "text": "A patient with HER2-positive breast cancer treated with trastuzumab (Herceptin) initially achieved partial response. After 12 months, scans show stable disease, but after 18 months, new progression appears despite continued trastuzumab therapy at optimal doses and adequate drug levels measured by serum analysis. This represents acquired trastuzumab resistance and warrants switch to HER2-targeted therapy with different mechanism (e.g., pertuzumab, T-DM1, or HER2 inhibitor)."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Quick Reference Table"
+    },
+    {
+      "type": "table",
+      "headers": ["Term", "Timing", "Starting Point", "Prognostic Significance"],
+      "rows": [
+        ["Progression", "During/shortly after therapy", "Any response category", "High risk; warrants urgent change"],
+        ["Recurrence", "After CR, months to years later", "Complete response", "Indicates incomplete cure; residual disease"],
+        ["Metastasis", "At diagnosis or any time", "Primary site or existing disease", "Advanced disease; stage IV"],
+        ["Resistance", "Primary or acquired", "Same drug/class", "Mechanism-based failure; need new approach"]
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-04-28",
+    "author": "Oncology Content Team",
+    "tags": ["definitions", "progression", "recurrence", "metastasis", "resistance"]
+  }
+}

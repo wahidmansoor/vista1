@@ -17,55 +17,72 @@ export const useAiAssistant = (patientData: PatientDataState) => {
 
   // Generate AI suggestions based on patient data
   const generateSuggestions = useCallback(async (userInput?: string): Promise<string> => {
-    const mutationContext = patientData.diseaseStatus.histologyMutation === 'Other' 
-      ? patientData.diseaseStatus.otherHistologyMutation 
-      : patientData.diseaseStatus.histologyMutation;
+    const biomarkers = patientData.diseaseStatus.biomarkers || [];
     
     let suggestions = '🧠 Smart Treatment Suggestions:\n';
 
-    // Use histology to suggest targeted therapies
-    if (mutationContext) {
-      switch(mutationContext) {
-        case 'HER2 Positive':
-          suggestions += '- Consider T-DM1 or Trastuzumab-based therapy\n';
-          suggestions += '- Dual HER2 blockade may be appropriate\n';
-          suggestions += '- Monitor for cardiotoxicity with echocardiograms\n';
-          break;
-        case 'KRAS Mutant':
-          suggestions += '- KRAS mutation limits anti-EGFR therapy options\n';
-          suggestions += '- Consider MEK inhibitor clinical trials\n';
-          suggestions += '- KRAS G12C inhibitors if specific mutation present\n';
-          break;
-        case 'EGFR Mutant':
-          suggestions += '- EGFR TKI therapy recommended as first-line\n';
-          suggestions += '- Monitor for T790M resistance mutation\n';
-          suggestions += '- Consider osimertinib for sensitive mutations\n';
-          break;
-        case 'PD-L1 Positive':
-          suggestions += '- Consider immunotherapy as monotherapy\n';
-          suggestions += '- Evaluate combination chemo-immunotherapy\n';
-          suggestions += '- Monitor for immune-related adverse events\n';
-          break;
-        case 'ALK Rearrangement':
-          suggestions += '- ALK inhibitor therapy indicated\n';
-          suggestions += '- Consider alectinib or brigatinib as first-line\n';
-          suggestions += '- Monitor for CNS progression\n';
-          break;
-        case 'BRAF V600E':
-          suggestions += '- BRAF/MEK inhibitor combination recommended\n';
-          suggestions += '- Monitor for skin toxicity and pyrexia\n';
-          suggestions += '- Regular ophthalmologic examinations\n';
-          break;
-        case 'MSI-High':
-          suggestions += '- Immunotherapy highly effective\n';
-          suggestions += '- Consider pembrolizumab or nivolumab\n';
-          suggestions += '- Excellent response rates expected\n';
-          break;
-        default:
-          suggestions += '- Consider comprehensive genomic profiling\n';
-          suggestions += '- Look for targetable mutations\n';
-          suggestions += '- Evaluate for clinical trial eligibility\n';
-      }
+    // Use biomarkers to suggest targeted therapies
+    if (biomarkers.length > 0) {
+      biomarkers.forEach(bm => {
+        const bmLabel = `${bm.name} ${bm.status}`;
+        suggestions += `\n📌 Regarding ${bmLabel}:\n`;
+        
+        switch(bm.name) {
+          case 'HER2':
+            if (bm.status === 'Positive' || bm.status === 'Amplified') {
+              suggestions += '- Consider T-DM1 or Trastuzumab-based therapy\n';
+              suggestions += '- Dual HER2 blockade may be appropriate\n';
+              suggestions += '- Monitor for cardiotoxicity with echocardiograms\n';
+            }
+            break;
+          case 'KRAS':
+            if (bm.status === 'Mutant') {
+              suggestions += '- KRAS mutation limits anti-EGFR therapy options\n';
+              suggestions += '- Consider MEK inhibitor clinical trials\n';
+              suggestions += '- KRAS G12C inhibitors if specific mutation present\n';
+            }
+            break;
+          case 'EGFR':
+            if (bm.status === 'Mutant') {
+              suggestions += '- EGFR TKI therapy recommended as first-line\n';
+              suggestions += '- Monitor for T790M resistance mutation\n';
+              suggestions += '- Consider osimertinib for sensitive mutations\n';
+            }
+            break;
+          case 'PD-L1':
+            if (bm.status === 'High' || bm.status === 'Positive') {
+              suggestions += '- Consider immunotherapy as monotherapy\n';
+              suggestions += '- Evaluate combination chemo-immunotherapy\n';
+              suggestions += '- Monitor for immune-related adverse events\n';
+            }
+            break;
+          case 'ALK':
+            if (bm.status === 'Positive' || bm.status === 'Mutant') {
+              suggestions += '- ALK inhibitor therapy indicated\n';
+              suggestions += '- Consider alectinib or brigatinib as first-line\n';
+              suggestions += '- Monitor for CNS progression\n';
+            }
+            break;
+          case 'BRAF':
+            if (bm.status === 'Mutant') {
+              suggestions += '- BRAF/MEK inhibitor combination recommended\n';
+              suggestions += '- Monitor for skin toxicity and pyrexia\n';
+              suggestions += '- Regular ophthalmologic examinations\n';
+            }
+            break;
+          case 'MSI':
+            if (bm.status === 'High') {
+              suggestions += '- Immunotherapy highly effective\n';
+              suggestions += '- Consider pembrolizumab or nivolumab\n';
+              suggestions += '- Excellent response rates expected\n';
+            }
+            break;
+        }
+      });
+    } else {
+      suggestions += '- Consider comprehensive genomic profiling\n';
+      suggestions += '- Look for targetable mutations\n';
+      suggestions += '- Evaluate for clinical trial eligibility\n';
     }
 
     // Add performance status based recommendations

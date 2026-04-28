@@ -1,0 +1,315 @@
+{
+  "title": "Treatment Decision Points: When to Continue, Change, or Reassess",
+  "category": "General Oncology",
+  "section": "Disease Monitoring",
+  "summary": "Clinical decision framework for interpreting disease monitoring results and determining whether to continue current treatment, escalate, modify, or switch to alternative approaches.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Treatment Decisions Based on Disease Monitoring"
+    },
+    {
+      "type": "paragraph",
+      "text": "Interpretation of disease monitoring data drives critical treatment decisions. This framework outlines common clinical scenarios and general principles for deciding whether to continue, modify, or change treatment."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Response Category and Treatment Decisions"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Complete Response (CR): All Disease Gone"
+    },
+    {
+      "type": "paragraph",
+      "text": "All target lesions resolved, no new lesions, non-target disease stable or resolved."
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Considerations"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Confirm CR is maintained on repeat imaging (not a transient finding)",
+        "Assess timing: CR after 2 cycles vs after full planned course have different implications",
+        "Consider consolidation therapy if applicable (e.g., radiation to residual mass site)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Typical Decisions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Continue current therapy per planned protocol if early CR (maintain benefit)",
+        "Complete planned course then stop if final CR achieved (avoid unnecessary toxicity)",
+        "Consider maintenance therapy if high-risk disease (e.g., aggressive histology, advanced stage)",
+        "Transition to surveillance with periodic imaging and clinic visits"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Partial Response (PR): Significant Tumor Shrinkage"
+    },
+    {
+      "type": "paragraph",
+      "text": "≥30% decrease in target lesion sum, no new lesions."
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Considerations"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Indicates drug efficacy; tumor is responding to treatment",
+        "Continue current therapy to maximize response (may achieve CR with additional cycles)",
+        "Assess toxicity: If severe, dose modifications may be needed",
+        "Some patients convert from PR to CR with additional treatment cycles (20-40% of cases)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Typical Decisions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Continue current therapy: Complete planned course",
+        "Assess tolerance: Reduce dose or extend intervals if significant toxicity",
+        "Re-image at next planned interval to assess for further response",
+        "Do not change therapy unless: new or worsening toxicity, patient request, or development of contraindication"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Stable Disease (SD): Neither Shrinkage nor Growth"
+    },
+    {
+      "type": "paragraph",
+      "text": "<30% decrease and <20% increase in target lesion sum, no new lesions."
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Considerations"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Indicates disease not progressing; some therapeutic benefit (halted growth)",
+        "Benefit varies by cancer type: SD may be favorable in slow-growing tumors, less favorable in aggressive types",
+        "May indicate inadequate dosing, inadequate drug exposure, or partial drug resistance",
+        "Duration of SD matters: 6+ months SD may warrant continuation; early SD (≤3 months) may suggest inadequate response"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Typical Decisions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Continue current therapy if: well tolerated, early in planned course, SD maintained >3-6 months",
+        "Change therapy if: SD present <3 months, biomarkers indicate progression, or patient has clinical decline",
+        "Dose escalation: Consider if initial doses conservative (check if patient at full therapeutic dose)",
+        "Re-image sooner (4-6 weeks) if concerned about early progression; otherwise standard interval"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Progressive Disease (PD): Tumor Growing"
+    },
+    {
+      "type": "paragraph",
+      "text": "≥20% increase in target lesion sum OR new lesions OR worsening non-target disease."
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Urgent Considerations"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Current therapy not effective; continuation likely futile",
+        "Requires prompt reassessment to confirm diagnosis and assess pace of progression",
+        "Assess for treatable complications: infection, VTE, cardiac complications that may mimic progression",
+        "Discuss with patient: may prompt discussion of clinical trial eligibility, palliative care integration"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "text": "Typical Decisions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Confirm PD: Repeat imaging within 1-2 weeks to ensure not technical artifact",
+        "Change therapy: Consider next-line regimen based on disease type and prior treatments",
+        "Molecular profiling: If not done, consider tumor sequencing to identify resistance mechanism",
+        "Dose reduction not recommended: PD reflects inadequate efficacy, not excess toxicity",
+        "Consider clinical trials: If available for this disease type and stage"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Additional Clinical Factors Influencing Decisions"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Performance Status Changes"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Declining ECOG score may warrant stopping treatment despite SD/PR (consider quality of life)",
+        "Improvement in performance status with treatment continuation generally indicates continued benefit",
+        "New comorbidities or organ dysfunction may necessitate drug changes (not due to disease but due to tolerability)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Biomarker Correlation"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tumor markers (CEA, PSA, CA-125) often correlate with imaging response but may lag behind",
+        "Rising markers with stable imaging warrants re-imaging sooner to detect early progression",
+        "Falling markers with stable imaging suggests benefit; continue therapy",
+        "Markers can normalize before imaging resolution (anticipated in good responders)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Symptom Trajectory"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Clinical deterioration despite imaging SD warrants investigation (complications vs occult progression)",
+        "Symptom improvement with imaging PR indicates good response; continue therapy",
+        "New symptoms with imaging progression suggests urgent change or escalation needed",
+        "Quality of life decline may warrant stopping treatment even with imaging response (patient-centered decision)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Toxicity Assessment"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Grade 3-4 toxicity with poor response (SD/PD): Stop or significantly modify therapy",
+        "Grade 3-4 toxicity with good response (PR/CR): May continue with dose reduction if necessary",
+        "Cumulative toxicity (e.g., cardiac, renal): May necessitate stopping therapy despite response",
+        "Reversible vs irreversible toxicity: Plan differently (reversible may improve with break; irreversible warrants stopping)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Treatment Modification Strategies"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Continue Without Change"
+    },
+    {
+      "type": "paragraph",
+      "text": "Appropriate when: CR or PR achieved, well tolerated, per protocol plan, early in course."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Dose Reduction / Schedule Extension"
+    },
+    {
+      "type": "paragraph",
+      "text": "Appropriate when: Response adequate (PR/CR) but significant toxicity, patient tolerating poorly, cumulative organ toxicity risk. Disadvantage: May reduce efficacy."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Add Complementary Therapy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Appropriate when: Residual disease after systemic therapy (add radiation), inadequate response (consider adding second drug), or early progression (add targeted agent if available)."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Switch Drug Class"
+    },
+    {
+      "type": "paragraph",
+      "text": "Appropriate when: PD on current therapy, acquired resistance suspected, or next-line standard regimen indicated. Should be based on disease type, molecular findings, and available options."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Stop Treatment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Appropriate when: CR achieved (planned end), intolerable toxicity, patient decline, poor prognosis with no better options, or patient preference for palliative approach."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Multidisciplinary Team Involvement"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tumor board review recommended for: Unusual responses, treatment-resistant disease, major therapy changes",
+        "Discuss with patient/family: All major decisions (therapy change, stopping treatment, clinical trial entry)",
+        "Coordination with palliative care: Important for PD patients, declining performance status, or limited prognosis",
+        "Molecular tumor boards: If genetic testing identifies actionable mutations, consider targeted therapy options"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Key Decision Framework Summary"
+    },
+    {
+      "type": "table",
+      "headers": ["Response Category", "Typical Action", "Reassess Timeline", "Key Consideration"],
+      "rows": [
+        ["CR (Complete Response)", "Complete planned course then stop/surveillance", "Per protocol (6-12 weeks)", "Confirm CR persists; consider maintenance if high-risk"],
+        ["PR (Partial Response)", "Continue current therapy", "Per protocol (6-8 weeks)", "Assess tolerance; may achieve CR with more cycles"],
+        ["SD (Stable Disease)", "Continue if tolerated and >3 months SD; otherwise change", "Per protocol or sooner if concern", "Duration matters: early SD (<3mo) may warrant change"],
+        ["PD (Progressive Disease)", "Change therapy or stop; confirm diagnosis", "Urgent (1-2 weeks)", "Confirm PD; assess cause; consider molecular profiling"]
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-04-28",
+    "author": "Oncology Content Team",
+    "tags": ["treatment-decisions", "response-assessment", "clinical-decisions", "disease-monitoring", "therapy-modification"]
+  }
+}

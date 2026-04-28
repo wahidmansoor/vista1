@@ -7,12 +7,21 @@
 export interface DiseaseStatus {
   primaryDiagnosis: string;
   otherPrimaryDiagnosis?: string;
+  histology?: string;
   stageAtDiagnosis: StageType;
-  histologyMutation: string;
-  otherHistologyMutation?: string;
+  biomarkers: PatientBiomarker[];
   dateOfDiagnosis: string;
   diseaseNotes?: string;
 }
+
+export interface PatientBiomarker {
+  name: string;
+  status: BiomarkerStatus;
+  value?: string;
+  testDate?: string;
+}
+
+export type BiomarkerStatus = 'Positive' | 'Negative' | 'Wild-type' | 'Mutant' | 'Amplified' | 'Non-amplified' | 'High' | 'Low' | 'Unknown' | 'High (>=50%)' | 'Positive (1-49%)' | 'Negative (<1%)' | 'Intermediate/Poor' | '>=5' | 'Sensitive' | 'Resistant' | '';
 
 export interface PerformanceStatus {
   assessmentDate: string;
@@ -33,6 +42,7 @@ export interface ProgressionData {
 export interface TreatmentLine {
   treatmentLine: TreatmentLineType;
   treatmentRegimen: string;
+  agents: string[];
   startDate: string;
   endDate?: string;
   treatmentResponse: TreatmentResponseType;
@@ -63,13 +73,55 @@ export interface PatientDataMetadata {
 
 // Treatment protocol interfaces
 export interface TreatmentProtocol {
+  id: string;
   diagnosis: string;
-  stage: StageType | 'Any';
-  name: string;
-  premedications: string[];
-  indications?: string[];
+  histology?: string[]; // Optional specific histologies (e.g., Squamous, Non-squamous)
+  stageEligibility: StageType[] | ['Any'];
+  lineOfTherapy: number[];
+  treatmentIntent: TreatmentIntent;
+  intentSetting?: string; // e.g., 'Metastatic', 'Adjuvant'
+  
+  // Biomarker Logic
+  biomarkerLogic: 'ALL_OF' | 'ANY_OF';
+  requiredBiomarkers: BiomarkerRequirement[];
+  excludedBiomarkers?: BiomarkerRequirement[];
+  
+  maxEcog: number;
+  name: string; // regimenName
+  agents: string[];
+  preferredOption?: boolean; // NCCN Category 1 "Preferred" vs "Other Recommended"
+  
+  evidenceLevel: EvidenceLevel;
+  guidelineSource?: string; // e.g., 'NCCN 2024.1', 'ESMO 2023'
+  lastReviewed?: string; // ISO date
+  clinicalReviewRequired: boolean; // Must always be true for these local protocols
+  
+  rationale: string;
+  warnings: string[];
   contraindications?: string[];
-  dosing?: DoseInfo;
+  contraindicationSeverity?: 'Absolute' | 'Relative';
+  monitoringRequirements?: string[];
+  references: string[];
+  knowledgeLinks?: string[]; // Anchors to handbook sections
+}
+
+export interface BiomarkerRequirement {
+  name: string;
+  status: BiomarkerStatus;
+  urgency?: 'Hard' | 'Soft'; // Hard = Missing data blocks match, Soft = Missing data just warns
+}
+
+export type EvidenceLevel = 'Category 1' | 'Category 2A' | 'Category 2B' | 'Category 3';
+export type TreatmentIntent = 'Curative' | 'Palliative' | 'Adjuvant' | 'Neo-adjuvant' | 'Maintenance';
+
+export interface ProtocolMatch {
+  protocol: TreatmentProtocol;
+  isEligible: boolean;
+  matchScore: number;
+  warnings: string[];
+  rationale: string;
+  status: 'Eligible option' | 'Potential option' | 'Action required' | 'Not recommended' | 'Not eligible';
+  matchedFactors?: string[]; // Added: For "Why This Match Matters"
 }
 
 export interface DoseInfo {
@@ -217,6 +269,7 @@ export interface UsePatientDataReturn {
 
 export interface UseProtocolSuggestionsReturn {
   protocols: TreatmentProtocol[];
+  matches: ProtocolMatch[];
   premedications: string[];
   isLoading: boolean;
   error?: string;
