@@ -139,15 +139,18 @@ export function useHandbookData(
             }
             
             if (!contentResponse.ok) {
+              console.error('❌ Both .md and .json failed - status:', contentResponse.status);
               throw new Error(`Content not found: tried .md and .json for ${basePath}`);
             }
 
             const contentText = await contentResponse.text();
+            console.log('📄 Received response - length:', contentText.length, 'first 50 chars:', contentText.substring(0, 50));
             
             // Validate response is not HTML (safety check for 404->index.html redirect)
             if (contentText.includes('<!DOCTYPE') || contentText.includes('<html') || contentText.includes('<script')) {
-              console.error('❌ CRITICAL: Received HTML instead of content:', contentText.substring(0, 100));
-              throw new Error('Received HTML page instead of content file - likely a 404 redirect');
+              console.error('❌ CRITICAL: Received HTML instead of content at', attemptedPath);
+              console.error('❌ First 200 chars:', contentText.substring(0, 200));
+              throw new Error(`Received HTML instead of content (status ${contentResponse.status}): ${attemptedPath}`);
             }
             
             setContent(contentText);

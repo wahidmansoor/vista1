@@ -1,0 +1,5 @@
+# Handbook static files - serve as-is, don't redirect to index.html
+/assets/handbook/*  /assets/handbook/:splat  200
+
+# All other routes - SPA fallback to index.html for client-side routing
+/*                  /index.html              200
