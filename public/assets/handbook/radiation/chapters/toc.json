@@ -1,0 +1,22 @@
+[
+  {
+    "id": "overview",
+    "title": "Overview",
+    "path": "/handbook/radiation-oncology/overview"
+  },
+  {
+    "id": "basics",
+    "title": "Radiation Therapy Basics",
+    "path": "/handbook/radiation-oncology/basics"
+  },
+  {
+    "id": "planning",
+    "title": "Treatment Planning",
+    "path": "/handbook/radiation-oncology/planning"
+  },
+  {
+    "id": "toxicity",
+    "title": "Toxicity Management",
+    "path": "/handbook/radiation-oncology/toxicity"
+  }
+]

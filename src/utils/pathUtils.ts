@@ -6,11 +6,12 @@
 
 /**
  * Base handbook directory within the public folder.
+ * Uses /assets/ prefix to avoid conflicting with React Router handbook routes
  */
-export const HANDBOOK_BASE_DIR = '/handbook';
+export const HANDBOOK_BASE_DIR = '/assets/handbook';
 
 /**
- * Maps section IDs to their corresponding handbook folder names in /public/handbook
+ * Maps section IDs to their corresponding handbook folder names in /public/assets/handbook
  */
 export const HANDBOOK_TYPES = {
   'medical-oncology': 'medical',
@@ -36,12 +37,12 @@ export function sectionToFolderName(section: HandbookSection): string {
  * Gets the full path to the Table of Contents (TOC) JSON file for a given section.
  * 
  * @param section - The handbook section ID (e.g., "medical-oncology")
- * @returns Full path to the TOC file (e.g., "/public/handbook/medical/toc.json")
+ * @returns Full path to the TOC file (e.g., "/assets/handbook/medical/toc.json")
  */
 export function getTocPath(section: HandbookSection): string {
   const folderName = sectionToFolderName(section);
-  // Use /public/ prefix to bypass React Router and fetch static files directly
-  return `/public/handbook/${folderName}/toc.json`;
+  // Use /assets/ prefix to avoid conflicting with React Router /handbook routes
+  return `/assets/handbook/${folderName}/toc.json`;
 }
 
 /**
@@ -53,7 +54,7 @@ export function getTocPath(section: HandbookSection): string {
  */
 export function getContentPath(section: HandbookSection, topic?: string | null): string {
   const folderName = sectionToFolderName(section);
-  const basePath = `/public/handbook/${folderName}`;
+  const basePath = `/assets/handbook/${folderName}`;
 
   if (!topic) {
     // Default to overview

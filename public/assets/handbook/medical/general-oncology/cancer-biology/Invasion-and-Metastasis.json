@@ -1,0 +1,331 @@
+{
+  "title": "Invasion and Metastasis",
+  "category": "Cancer Biology",
+  "section": "Tumor Biology",
+  "summary": "Comprehensive overview of the metastatic cascade, molecular mechanisms of tumor invasion, and clinical approaches to metastatic disease.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-12-20T00:00:00Z",
+  "version": "1.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 50,
+    "complexityLevel": "Advanced"
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Invasion and Metastasis"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Invasion and metastasis define the lethal nature of malignant tumors. Unlike benign growths confined to a single site, malignant cells possess the capacity to invade surrounding tissues and disseminate to distant organs. This complex, multistep phenomenon—collectively referred to as the metastatic cascade—is responsible for over 90% of cancer-related mortality. Understanding the mechanisms underlying invasion and metastasis is crucial for prognosis, surveillance, and therapeutic intervention in cancer care."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Definitions and Terminology"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Invasion: Direct extension of tumor cells into adjacent tissue, typically involving degradation of the basement membrane and extracellular matrix (ECM).",
+        "Metastasis: Spread of cancer cells to non-contiguous sites, establishing secondary tumors.",
+        "Micrometastasis: Small clusters of metastatic cells undetectable by imaging but potentially capable of recurrence.",
+        "Organotropism: Organ-specific patterns of metastatic colonization (e.g., prostate cancer to bone).",
+        "Seed and Soil Hypothesis: The compatibility between tumor cells ('seeds') and the host tissue environment ('soil') determines metastatic success."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Routes of Metastatic Spread"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.1 Lymphatic Spread"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Most common in carcinomas.",
+        "Tumor cells invade lymphatic vessels and spread to regional lymph nodes.",
+        "Basis for surgical lymph node dissection and staging."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.2 Hematogenous Spread"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Common in sarcomas and some carcinomas (e.g., hepatocellular carcinoma, renal cell carcinoma).",
+        "Venous drainage patterns determine metastatic destinations: Colorectal cancer → liver, Lung cancer → brain, bone"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.3 Transcoelomic Spread"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Dissemination across serosal surfaces (e.g., peritoneum, pleura).",
+        "Seen in ovarian, gastric, pancreatic carcinomas.",
+        "Often leads to malignant effusions (ascites, pleural effusions)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.4 Canalicular and Procedural Spread"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Iatrogenic dissemination through surgical or biopsy tracts.",
+        "Spread through ductal systems (e.g., bile ducts, urinary tract)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. The Metastatic Cascade"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Step 1: Local Invasion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Downregulation of E-cadherin disrupts cell-cell adhesion.",
+        "Basement membrane degradation via proteolytic enzymes: MMPs (especially MMP-2 and MMP-9), Urokinase plasminogen activator",
+        "Epithelial-Mesenchymal Transition (EMT): Epithelial cells acquire mesenchymal, motile phenotypes. Key transcription factors: Snail, Slug, Twist, ZEB1/2. Triggered by TGF-β, Wnt, Notch signaling"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Step 2: Intravasation"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tumor cells invade blood or lymphatic vessels.",
+        "Facilitated by: Tumor-associated macrophages (TAMs), Vascular permeability (via VEGF), Paracrine cytokine signaling (e.g., IL-6, TNF-α)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Step 3: Survival in Circulation"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Circulating Tumor Cells (CTCs) face: Shear stress, Immune surveillance, Anoikis (cell death due to detachment)",
+        "Survival strategies: Platelet cloaking (fibrin-platelet complexes), PD-L1 expression for immune evasion"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Step 4: Extravasation"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Adhesion to endothelium via: Selectins, integrins, ICAM-1, VCAM-1",
+        "Endothelial remodeling and transmigration into parenchyma"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Step 5: Colonization"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Most inefficient step of metastasis.",
+        "Requires: Adaptation to new microenvironment, Avoidance of immune attack, Activation of angiogenesis (pre-metastatic niche formation)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Organotropism in Metastasis"
+    },
+    {
+      "type": "table",
+      "headers": ["Target Organ", "Common Primary Tumors", "Notes"],
+      "rows": [
+        ["Liver", "Colorectal, pancreatic, breast, lung", "Via portal venous drainage"],
+        ["Lung", "Breast, colon, kidney, sarcoma", "Hematogenous spread; first filter via pulmonary capillaries"],
+        ["Bone", "Prostate (blastic), breast (mixed), kidney, lung", "Lytic vs blastic lesions; common in axial skeleton"],
+        ["Brain", "Lung, breast, melanoma, RCC", "Often at gray-white matter junction"],
+        ["Peritoneum", "Ovarian, gastric, colorectal", "Leads to carcinomatosis and ascites"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Mnemonic: 'BLT with a Kosher Pickle and Mayo on the Bun' - Breast, Lung, Thyroid, Kidney, Prostate, Myeloma → Bone"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Molecular Mediators of Metastasis"
+    },
+    {
+      "type": "table",
+      "headers": ["Step", "Molecules/Pathways"],
+      "rows": [
+        ["EMT", "Snail, Slug, Twist, ZEB1/2"],
+        ["ECM remodeling", "MMP-2, MMP-9, cathepsins, uPA"],
+        ["Motility", "Rho-GTPases (Rac1, Cdc42), integrins"],
+        ["Intravasation", "VEGF, TNF-α, IL-6, TAMs"],
+        ["Circulatory survival", "Platelets, PD-L1, CD47 ('don't eat me' signal)"],
+        ["Extravasation", "Integrins (αvβ3), CD44, CXCR4"],
+        ["Colonization", "S100 proteins, osteopontin, Tenascin-C"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Tumor Dormancy and Metastatic Latency"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Disseminated Tumor Cells (DTCs) may lie dormant for months to years.",
+        "Controlled by: Immune containment (cytotoxic T cells, NK cells), Angiogenic quiescence, Microenvironmental restraint (TGF-β, BMPs)",
+        "Reactivation Triggers: Wound healing, Systemic inflammation, Hormonal or metabolic shifts"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Diagnostic Approaches to Metastasis"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Imaging"
+    },
+    {
+      "type": "list",
+      "items": [
+        "CT/MRI: anatomic evaluation of spread",
+        "PET/CT: metabolic activity; useful in lung, melanoma, lymphoma",
+        "Bone scan: detects lytic/blastic lesions",
+        "Ultrasound: ascites, lymphadenopathy"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Molecular & Pathologic Tools"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Circulating Tumor DNA (ctDNA): non-invasive, real-time clonal tracking",
+        "Circulating Tumor Cells (CTCs): prognostic in breast, prostate",
+        "Immunohistochemistry (IHC): distinguishes tumor origin (e.g., CK7, CK20, TTF-1, PSA)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Therapeutic Considerations in Metastatic Disease"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Local Interventions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Surgical resection: potentially curative in oligometastasis (e.g., CRC liver mets)",
+        "Stereotactic radiosurgery (SRS): brain or spine metastases"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Systemic Therapy"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Chemotherapy",
+        "Targeted therapy: EGFR, ALK, HER2, BRAF inhibitors",
+        "Immunotherapy: checkpoint blockade (PD-1, CTLA-4)",
+        "Hormonal therapy: breast, prostate cancers"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Metastasis-Directed Approaches"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Anti-angiogenics: Bevacizumab (VEGF)",
+        "EMT inhibitors, MMP inhibitors (research stage)",
+        "CXCR4 antagonists (e.g., plerixafor)",
+        "Dormancy modulators (ongoing clinical trials)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Resistance Mechanisms and Immune Evasion"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Genomic heterogeneity: leads to selection of resistant clones",
+        "Microenvironmental factors: TAMs, CAFs promote immune escape",
+        "Immunoediting: Elimination (initial immune attack), Equilibrium (immune surveillance), Escape (immune-resistant clones dominate)",
+        "Checkpoint molecule upregulation: PD-L1, TIM-3, LAG-3"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "Invasion and metastasis mark the transition of tumors from localized to systemic diseases. This process requires a synchronized series of genetic, epigenetic, and microenvironmental changes enabling cancer cells to leave their origin, survive in hostile environments, and adapt to distant tissues. While metastatic disease remains a major clinical challenge, advances in molecular biology, liquid biopsy technologies, and immune-oncology are redefining how we detect, monitor, and treat cancer spread."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "References"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Hanahan D, Weinberg RA. Hallmarks of cancer: the next generation. Cell. 2011.",
+        "AMBOSS Library: General Oncology – Metastasis",
+        "Gupta GP, Massagué J. Cancer metastasis: building a framework. Cell. 2006.",
+        "Lambert AW, Pattabiraman DR, Weinberg RA. Emerging biological principles of metastasis. Cell. 2017."
+      ]
+    }
+  ]
+}

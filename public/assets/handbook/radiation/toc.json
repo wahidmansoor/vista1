@@ -1,0 +1,185 @@
+[
+  {
+    "title": "Overview",
+    "items": [
+      {
+        "title": "Introduction",
+        "path": "overview/introduction"
+      },
+      {
+        "title": "Basic Principles",
+        "path": "overview/basic-principles"
+      },
+      {
+        "title": "Radiation Safety",
+        "path": "overview/radiation-safety"
+      },
+      {
+        "title": "Treatment Planning",
+        "items": [
+          {
+            "title": "Simulation Process",
+            "path": "treatment-planning/simulation-process"
+          },
+          {
+            "title": "Target Volume Definition",
+            "path": "treatment-planning/target-volume-definition"
+          },
+          {
+            "title": "Treatment Planning Systems",
+            "path": "treatment-planning/treatment-planning-systems"
+          },
+          {
+            "title": "Quality Assurance",
+            "path": "treatment-planning/quality-assurance"
+          }
+        ]
+      },
+      {
+        "title": "Treatment Techniques",
+        "items": [
+          {
+            "title": "External Beam RT",
+            "path": "techniques/external-beam"
+          },
+          {
+            "title": "Brachytherapy",
+            "path": "techniques/brachytherapy"
+          },
+          {
+            "title": "SBRT/SRS",
+            "path": "techniques/sbrt-srs"
+          },
+          {
+            "title": "IMRT/VMAT",
+            "path": "techniques/imrt-vmat"
+          },
+          {
+            "title": "Proton Therapy",
+            "path": "techniques/proton-therapy"
+          }
+        ]
+      },
+      {
+        "title": "Site-Specific Protocols",
+        "items": [
+          {
+            "title": "Breast Cancer",
+            "items": [
+              {
+                "title": "Early Stage",
+                "path": "site-specific/breast/early-stage"
+              },
+              {
+                "title": "Locally Advanced",
+                "path": "site-specific/breast/locally-advanced"
+              },
+              {
+                "title": "Post-Mastectomy",
+                "path": "site-specific/breast/post-mastectomy"
+              },
+              {
+                "title": "Lung Cancer",
+                "items": [
+                  {
+                    "title": "NSCLC",
+                    "path": "site-specific/lung/nsclc"
+                  },
+                  {
+                    "title": "SCLC",
+                    "path": "site-specific/lung/sclc"
+                  }
+                ]
+              },
+              {
+                "title": "Head and Neck Cancer",
+                "items": [
+                  {
+                    "title": "Larynx",
+                    "path": "site-specific/head-neck/larynx"
+                  },
+                  {
+                    "title": "Oropharynx",
+                    "path": "site-specific/head-neck/oropharynx"
+                  },
+                  {
+                    "title": "Nasopharynx",
+                    "path": "site-specific/head-neck/nasopharynx"
+                  }
+                ]
+              },
+              {
+                "title": "CNS Tumors",
+                "items": [
+                  {
+                    "title": "Brain Metastases",
+                    "path": "site-specific/cns/brain-metastases"
+                  },
+                  {
+                    "title": "Gliomas",
+                    "path": "site-specific/cns/gliomas"
+                  },
+                  {
+                    "title": "Meningiomas",
+                    "path": "site-specific/cns/meningiomas"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Side Effects Management",
+        "items": [
+          {
+            "title": "Acute Effects",
+            "path": "side-effects/acute"
+          },
+          {
+            "title": "Late Effects",
+            "path": "side-effects/late"
+          },
+          {
+            "title": "Prevention Strategies",
+            "path": "side-effects/prevention"
+          }
+        ]
+      },
+      {
+        "title": "Emergency Protocols",
+        "items": [
+          {
+            "title": "Spinal Cord Compression",
+            "path": "emergencies/cord-compression"
+          },
+          {
+            "title": "Superior Vena Cava Syndrome",
+            "path": "emergencies/svc-syndrome"
+          },
+          {
+            "title": "Increased Intracranial Pressure",
+            "path": "emergencies/increased-icp"
+          }
+        ]
+      },
+      {
+        "title": "Quality of Life",
+        "items": [
+          {
+            "title": "Symptom Management",
+            "path": "quality-of-life/symptom-management"
+          },
+          {
+            "title": "Supportive Care",
+            "path": "quality-of-life/supportive-care"
+          },
+          {
+            "title": "Follow-up Care",
+            "path": "quality-of-life/follow-up"
+          }
+        ]
+      }
+    ]
+  }
+]

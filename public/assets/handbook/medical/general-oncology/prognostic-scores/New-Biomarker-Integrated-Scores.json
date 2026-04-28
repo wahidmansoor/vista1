@@ -1,0 +1,400 @@
+{
+  "title": "Prognostic Scores: New Biomarker-Integrated Scores",
+  "category": "Precision Oncology",
+  "section": "Molecular Prognostics",
+  "summary": "Comprehensive guide to modern biomarker-integrated prognostic scoring systems across cancer types, including genomic, immune, and dynamic biomarkers.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2024-01-05T00:00:00Z",
+  "version": "2.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 20,
+    "relatedTopics": [
+      "Molecular Tumor Boards",
+      "Liquid Biopsy Applications",
+      "AI in Cancer Prognostication"
+    ],
+    "externalResources": [
+      {
+        "name": "ELN 2022 AML Guidelines",
+        "url": "https://www.leukemia-net.org"
+      }
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Prognostic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Topic 10: New Biomarker-Integrated Scores"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Modern cancer care is shifting from population-level staging to individualized risk prediction based on tumor biology. Biomarker-integrated prognostic models combine:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Molecular profiling",
+        "Genetic alterations",
+        "Immunologic markers",
+        "Dynamic treatment response data (e.g., MRD, ctDNA)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These tools allow real-time, patient-specific stratification that transcends anatomic classification and guides not only prognosis but also therapeutic direction, eligibility for advanced therapies, and intensity of surveillance."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Why Biomarker-Based Scores Matter"
+    },
+    {
+      "type": "table",
+      "headers": ["Clinical Gap Addressed", "Solution Provided by Biomarker Tools"],
+      "rows": [
+        ["Same stage ≠ same outcome", "Stratifies patients within each TNM group"],
+        ["Static staging does not reflect response", "Dynamic metrics like MRD or ctDNA"],
+        ["Over- or undertreatment in early-stage cancers", "Genomic classifiers help avoid unnecessary chemo"],
+        ["Eligibility for IO/targeted therapies", "Predictive immune/genetic markers (e.g., PD-L1, MSI)"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Precision prognostics help align biology with therapy, minimizing harm while maximizing benefit."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Biomarker Categories and Examples"
+    },
+    {
+      "type": "table",
+      "headers": ["Category", "Examples", "Clinical Use"],
+      "rows": [
+        ["Genomic alterations", "TP53, FLT3-ITD, SF3B1, BRAF, EGFR", "Prognostic and predictive"],
+        ["Gene expression", "Oncotype DX, MammaPrint, Decipher", "Recurrence/metastasis risk"],
+        ["Immune signatures", "PD-L1, MSI-H, TMB", "Guide immunotherapy"],
+        ["Epigenetic changes", "MGMT methylation (GBM), DNA methylation", "Chemo responsiveness, survival"],
+        ["Dynamic markers", "MRD (flow, NGS), ctDNA", "Residual disease monitoring, relapse risk"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Disease-Specific Genomic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "A. Breast Cancer"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Genes or Signature", "Use Case"],
+      "rows": [
+        ["Oncotype DX", "21 genes (ER+, HER2−)", "Predicts chemo benefit; avoids overtreatment"],
+        ["MammaPrint", "70 genes", "Classifies node-negative and some node+ patients"],
+        ["PAM50/Prosigna", "Intrinsic subtyping", "Stratifies into Luminal A/B, HER2-E, Basal types"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "B. Colorectal Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "MSI-H / MMR-D:",
+        "Predicts favorable prognosis",
+        "Lack of benefit from 5-FU alone",
+        "Responds well to PD-1 blockade (e.g., pembrolizumab)",
+        "Oncotype DX Colon:",
+        "12-gene recurrence score for stage II disease"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "C. Prostate Cancer"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Use"],
+      "rows": [
+        ["Decipher", "Predicts metastasis post-prostatectomy"],
+        ["CAPRA", "Combines clinical and biopsy data"],
+        ["MSKCC Nomogram", "Integrates genomics with PSA, Gleason score"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Hematologic Malignancies"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "A. AML – ELN 2022"
+    },
+    {
+      "type": "table",
+      "headers": ["Risk Category", "Key Biomarkers"],
+      "rows": [
+        ["Favorable", "NPM1 (no FLT3-ITD), biallelic CEBPA"],
+        ["Intermediate", "IDH1/2, FLT3-ITD-low"],
+        ["Adverse", "TP53, RUNX1, ASXL1, complex karyotype"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Drives transplant decisions and choice of induction/consolidation."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "B. MDS – IPSS-M"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Includes:",
+        "31 gene mutations",
+        "Cytopenias, blasts, karyotype",
+        "Provides a 6-tier risk stratification",
+        "Improves prediction of OS and AML transformation over IPSS-R"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "C. Myeloma – R2-ISS"
+    },
+    {
+      "type": "table",
+      "headers": ["Additional Markers Used", "Impact"],
+      "rows": [
+        ["1q21 gain, del(17p), TP53", "Refines high-risk group beyond R-ISS"],
+        ["GEP70 expression", "Used in select trials, predicts early relapse"],
+        ["MRD by NGS", "Emerging for remission stratification"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Immunotherapy and Immune Biomarkers"
+    },
+    {
+      "type": "table",
+      "headers": ["Biomarker", "Tumor Type", "Prognostic Role"],
+      "rows": [
+        ["PD-L1 IHC", "NSCLC, melanoma, HNSCC", "Response prediction (not perfect surrogate)"],
+        ["TMB", "NSCLC, melanoma", "High TMB correlates with IO benefit"],
+        ["MSI/MMR-D", "CRC, endometrial, gastric", "Excellent IO response in advanced disease"],
+        ["TIL density", "Breast, melanoma", "Associated with better OS and PFS"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "TMB > 10 mut/Mb may qualify patients for tissue-agnostic IO approval (e.g., pembrolizumab)."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. CNS Tumors: Molecular Subtyping"
+    },
+    {
+      "type": "table",
+      "headers": ["Marker", "Tumor Type", "Implication"],
+      "rows": [
+        ["MGMT methylation", "Glioblastoma", "Better response to temozolomide"],
+        ["IDH1/2 mutations", "Low-grade glioma", "Favorable OS; guides surgery/radiation timing"],
+        ["1p/19q co-deletion", "Oligodendroglioma", "Predicts chemosensitivity and long survival"],
+        ["TERT promoter", "HGG, GBM", "Poor prognosis"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "WHO CNS classification now mandates molecular classification alongside histopathology."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Real-Time Biomarkers: MRD, ctDNA, Radiomics"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "A. MRD (Minimal Residual Disease)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Applies to AML, ALL, CLL, MM",
+        "Methods:",
+        "Multiparametric flow cytometry",
+        "PCR for fusion genes or clonal markers",
+        "NGS of clonal rearrangements",
+        "MRD negativity = best predictor of long-term remission"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "B. ctDNA (Circulating Tumor DNA)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Preoperative and postoperative clearance = relapse predictor",
+        "Longitudinal monitoring detects recurrence earlier than imaging",
+        "Tracks resistance mutations (e.g., EGFR T790M)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "C. Imaging-Derived Prognosticators"
+    },
+    {
+      "type": "table",
+      "headers": ["Feature", "Use Case"],
+      "rows": [
+        ["PET SUVmax", "Response in lymphoma, NSCLC"],
+        ["Radiomics", "MRI, CT texture to predict survival"],
+        ["Total lesion glycolysis (TLG)", "Lymphoma metabolic burden"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. AI-Driven Prognostic Platforms"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Modality", "Prediction Target"],
+      "rows": [
+        ["Decipher", "RNA expression (prostate)", "Risk of metastasis"],
+        ["MSKCC Nomograms", "Genomics + clinical data", "Recurrence and OS across tumor types"],
+        ["DeepPath / PathAI", "Histology + AI", "Recurrence, MSI status (pathology-only)"],
+        ["Tempus / FoundationONE CDx", "Multi-omic platform", "Integrated prognosis + therapy guidance"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Many of these platforms are EHR-integrated and used for real-time clinical decision support."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Clinical Applications"
+    },
+    {
+      "type": "table",
+      "headers": ["Clinical Scenario", "Tool Used", "Impact on Care"],
+      "rows": [
+        ["Node-negative ER+/HER2− breast cancer", "Oncotype DX", "Avoid chemo if RS < 18"],
+        ["Stage II colon cancer, MSI-H", "MSI + Oncotype", "Omit 5-FU monotherapy"],
+        ["AML with TP53 mutation", "ELN 2022", "Prioritize HMA or clinical trial"],
+        ["IDH1-mutant glioma", "IDH sequencing", "Delay aggressive radiation"],
+        ["High-risk myeloma (1q gain + del(17p))", "R2-ISS", "Quadruplet regimens, consider clinical trial"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Challenges in Biomarker-Based Scoring"
+    },
+    {
+      "type": "table",
+      "headers": ["Challenge", "Mitigation Strategy"],
+      "rows": [
+        ["Cost and access", "Develop low-cost PCR-based surrogates"],
+        ["Interpretation complexity", "Use molecular tumor boards"],
+        ["Dynamic tumor evolution", "Serial sampling (ctDNA, MRD)"],
+        ["Regulatory variability", "Harmonize international genomic guidelines"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "12. Future Trends in Prognostic Scoring"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Pan-cancer universal classifiers (e.g., CancerSEEK, Grail)",
+        "AI integration of genomics, imaging, pathology",
+        "Wearable-linked biomarkers for performance/biomarker correlation",
+        "Immune-microenvironment signatures to guide IO beyond PD-L1",
+        "Global standardization of MRD thresholds for clinical trials"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "13. Summary Table – Modern Biomarker-Integrated Tools"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Tumor Type", "Key Biomarkers", "Predicted Outcome"],
+      "rows": [
+        ["Oncotype DX", "Breast, Colon", "21-gene expression", "Recurrence, chemo benefit"],
+        ["IPSS-M", "MDS", "31-gene mutations", "AML transformation, OS"],
+        ["ELN 2022", "AML", "NPM1, TP53, cytogenetics", "Remission, relapse, OS"],
+        ["R2-ISS", "Myeloma", "FISH + LDH + TP53 + 1q gain", "PFS, OS"],
+        ["MSI-H/MMR-D", "CRC, endometrial", "Immune signature", "IO response, long-term survival"],
+        ["MGMT methylation", "Glioblastoma", "Epigenetic marker", "Chemo response"],
+        ["Decipher", "Prostate", "Genomic classifier", "Metastasis prediction"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "14. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Biomarker-integrated prognostic scores are redefining oncology risk assessment. They align more closely with tumor biology, therapeutic vulnerabilities, and real-time disease dynamics than traditional clinical staging. Their growing role includes:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Personalizing treatment intensity",
+        "Improving trial design",
+        "Enhancing survivorship planning",
+        "Enabling adaptive monitoring and early intervention"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "In the era of precision oncology, prognosis is no longer static—it's molecular, modular, and modifiable."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Implementation Recommendations"
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Incorporate biomarker testing into standard diagnostic workups",
+        "Use molecular tumor boards for complex cases",
+        "Prioritize dynamic biomarkers (MRD/ctDNA) for monitoring",
+        "Document biomarker status in patient records for trial eligibility",
+        "Stay updated on evolving biomarker classifications (e.g., ELN, WHO)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+    "title": "Performance Status: Clinical Pearls for Practice",
+    "category": "Clinical Oncology",
+    "section": "Patient Assessment",
+    "summary": "Practical insights and clinical pearls for effectively using performance status in oncology practice across various clinical scenarios.",
+    "author": "OncoVISTA Team",
+    "lastUpdated": "2023-10-20T00:00:00Z",
+    "version": "1.0.0",
+    "metadata": {
+      "reviewStatus": "peer-reviewed",
+      "readingTimeMinutes": 8
+    },
+    "content": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Performance Status"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Topic 10: Clinical Pearls for Practice"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "1. Introduction"
+      },
+      {
+        "type": "paragraph",
+        "text": "Performance status (PS) is more than a static score—it's a dynamic reflection of how cancer and its treatment intersect with a patient's life. When used correctly, it enables smarter therapy selection, anticipates complications, and aligns clinical decisions with patient values. This section offers distilled, practical insights (\"clinical pearls\") to apply PS more effectively in day-to-day oncology care."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "2. Clinical Pearls by Scenario"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2.1 General Oncology Practice"
+      },
+      {
+        "type": "list",
+        "items": [
+          "ECOG 2 is a clinical crossroads: Not inherently disqualifying, but warrants careful evaluation. Some patients can tolerate monotherapy or targeted agents, while others benefit more from supportive care.",
+          "Performance ≠ Chronological Age: Many patients aged >75 may be ECOG 0–1; conversely, young adults with high disease burden or psychosocial barriers may score ECOG ≥2.",
+          "Declining PS = Prognostic Inflection Point: Worsening PS often predicts clinical deterioration and should trigger early goals-of-care discussions."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2.2 Neuro-Oncology"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Use KPS (not ECOG): KPS better captures subtle functional losses due to neurologic decline (e.g., seizures, cognitive impairment, hemiparesis).",
+          "Cognitive symptoms precede mobility loss: A patient who walks unassisted but has confusion or inattention may still have a KPS <70."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2.3 Pediatric Oncology"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Lansky scale is developmentally anchored: Focus on play behavior, school participation, and caregiver perception—not just physical exertion.",
+          "Behavioral regression may precede physical signs: Decreased play, social withdrawal, or changes in eating may signal worsening PS."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2.4 Elderly Patients"
+      },
+      {
+        "type": "list",
+        "items": [
+          "PS may overestimate function: ECOG 1 in an older adult does not rule out underlying frailty, sarcopenia, or cognitive decline.",
+          "Always screen with G8 or CGA: These tools capture multidimensional risks and improve decision-making, especially around chemotherapy or surgery."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2.5 Clinical Trials"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Baseline ECOG 0–1 is common in protocols, but real-world populations are more diverse.",
+          "Trials increasingly stratify by PS or use frailty indices to support enrollment of older or less-fit patients.",
+          "Include longitudinal PS data in research notes—it aids post-hoc analysis and real-world applicability."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "3. High-Yield Practice Tips"
+      },
+      {
+        "type": "list",
+        "items": [
+          "✅ Document PS serially, not just at diagnosis—update at each visit and before new treatments.",
+          "✅ Cross-validate with frailty or geriatric assessments when treating older adults or patients with multiple comorbidities.",
+          "✅ Involve caregivers when assessing PS in children, elderly, or patients with cognitive impairment.",
+          "✅ Avoid therapeutic inertia: A patient who transitions from ECOG 1 to 2 mid-treatment may need a dose reduction or palliative referral.",
+          "✅ Use PS proactively, not reactively—integrate into preoperative evaluations, tumor boards, and discharge planning.",
+          "✅ PS can guide trial eligibility but shouldn't gatekeep care—explore low-toxicity regimens or supportive therapies when needed."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "4. Case-Based Micro-Pearls"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Case 1 – ECOG 2 with EGFR+ NSCLC: Despite moderate PS, targeted therapy (e.g., osimertinib) led to rapid improvement and requalification for subsequent lines.",
+          "Case 2 – Elderly patient with ECOG 1 and unrecognized dementia: Chemotherapy led to prolonged delirium and hospitalization. G8 might have flagged risk earlier.",
+          "Case 3 – Child with leukemia, Lansky 40: Child was withdrawn and refused to play; identified as early relapse despite stable labs."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "5. Communication Pearls"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Framing the conversation: \"Based on your current strength and stamina, here's what we can safely do together.\"",
+          "Use PS to pivot gently toward goals-of-care, palliative consults, or caregiver support.",
+          "Be cautious not to label—PS is a guide, not a judgment."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "6. Summary"
+      },
+      {
+        "type": "paragraph",
+        "text": "Performance status is a clinical lens that sharpens oncology care. Its value lies in interpretation—not just documentation. By integrating it dynamically, cross-checking it with context, and communicating it clearly, PS becomes a tool of compassion and precision."
+      }
+    ]
+  }
