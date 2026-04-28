@@ -1,0 +1,380 @@
+{
+    "title": "Performance Status in Treatment Planning",
+    "category": "Clinical Oncology",
+    "section": "Treatment Decision-Making",
+    "summary": "Comprehensive guide to integrating performance status assessment into cancer treatment planning across therapeutic modalities.",
+    "author": "Oncology Practice Team",
+    "lastUpdated": "2024-08-10T13:20:00Z",
+    "version": "1.0.0",
+    "metadata": {
+      "reviewStatus": "peer-reviewed",
+      "readingTimeMinutes": 25,
+      "targetAudience": ["Oncologists", "Oncology Fellows", "Palliative Care Specialists"],
+      "educationalLevel": "Advanced",
+      "keywords": [
+        "performance status",
+        "treatment planning",
+        "ECOG",
+        "Karnofsky",
+        "therapeutic decision-making"
+      ],
+      "references": [
+        "Journal of Clinical Oncology",
+        "Annals of Oncology",
+        "NCCN Guidelines"
+      ]
+    },
+    "content": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Performance Status in Treatment Planning"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "1. Introduction"
+      },
+      {
+        "type": "paragraph",
+        "text": "Performance status (PS) serves as a therapeutic compass in oncology. More than a descriptor, PS helps determine a patient's fitness for treatment, the appropriateness of therapeutic intensity, and the timing of palliative care. Especially in patients with comorbidities or advanced age, PS acts as a vital component of individualized cancer care. Widely used scales like ECOG and Karnofsky Performance Status (KPS) integrate clinical observation and functional assessment into a standardized framework to guide decision-making at every phase of care."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "2. Key Principles in Treatment Planning"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Balance benefit vs. risk: Higher toxicity risk and mortality in patients with poor PS.",
+          "Triage and personalization: PS determines whether curative, palliative, or supportive strategies are most appropriate.",
+          "Multidisciplinary integration: PS is routinely incorporated into tumor board discussions and clinical trial eligibility criteria.",
+          "Dynamic reassessment: Regular PS evaluation is essential at every care transition (e.g., pre-treatment, after toxicity, at disease progression)."
+        ]
+      },
+      {
+        "type": "table",
+        "headers": ["PS Tool", "Fit for Curative Therapy", "Consider Dose Reduction", "Focus on Supportive Care"],
+        "rows": [
+          ["ECOG 0-1", "Yes", "—", "—"],
+          ["ECOG 2", "Sometimes", "Yes", "Consider"],
+          ["ECOG ≥3", "Rare", "No", "Yes"],
+          ["KPS ≥80", "Yes", "—", "—"],
+          ["KPS 50-70", "Consider", "Yes", "Often"],
+          ["KPS ≤40", "No", "No", "Yes"]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "3. Chemotherapy Planning"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "ECOG Considerations"
+      },
+      {
+        "type": "list",
+        "items": [
+          "ECOG 0-1: Suitable for aggressive, full-dose combination therapies.",
+          "ECOG 2: Dose-reduced or monotherapy approaches; assess tolerability frequently.",
+          "ECOG ≥3: Generally contraindicated unless considering low-toxicity agents (e.g., oral TKIs)."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "KPS Considerations"
+      },
+      {
+        "type": "list",
+        "items": [
+          "KPS ≥80: Suitable for full-dose chemotherapy.",
+          "KPS 60-70: Consider dose attenuation or supportive therapies.",
+          "KPS <50: High risk for treatment-related complications and hospitalization."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Prechemotherapy screening (e.g., labs, frailty tools, infection screening) must accompany PS evaluation. [AMBOSS: Principles of Cancer Care](https://www.amboss.com/us/knowledge/principles-of-cancer-care)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "4. Immunotherapy Planning"
+      },
+      {
+        "type": "paragraph",
+        "text": "Although immunotherapy is generally better tolerated than chemotherapy, PS remains a strong predictor of response and toxicity:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "ECOG 0-1: Eligible for monotherapy or combination regimens.",
+          "ECOG 2: Caution advised; limited trial data.",
+          "ECOG ≥3: Typically excluded from trials; consider only with compelling biomarkers (e.g., PD-L1 ≥50%)."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Emerging real-world data suggest some ECOG 2-3 patients may improve PS post-ICI, but careful patient selection is essential."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "5. Radiotherapy Considerations"
+      },
+      {
+        "type": "paragraph",
+        "text": "Radiation therapy is feasible across a wide PS spectrum, especially for palliation:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "ECOG 0-1: Full-course curative regimens.",
+          "ECOG 2: Hypofractionated schedules preferred.",
+          "ECOG 3-4: Short-course or single-fraction palliative RT (e.g., 8 Gy × 1 for bone metastases)."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "PS assessment is complemented by organ function evaluation (e.g., renal, hepatic reserve) and nutritional status."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "6. Surgical Planning"
+      },
+      {
+        "type": "paragraph",
+        "text": "PS plays a central role in perioperative decision-making:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "ECOG 0-1 / KPS ≥80: Eligible for curative resections.",
+          "ECOG 2 / KPS 60-70: Consider functional reserve, comorbidities, and anesthesia fitness.",
+          "ECOG ≥3: Surgery only if emergent (e.g., bleeding, obstruction)."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Incorporate CGA for older adults (≥70 years) to supplement PS. [AMBOSS: Rehabilitation](https://www.amboss.com/us/knowledge/rehabilitation)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "7. Targeted Therapy & Oral Agents"
+      },
+      {
+        "type": "paragraph",
+        "text": "Targeted agents offer potential even for patients with poor PS due to:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Lower cytotoxicity",
+          "Oral availability",
+          "Rapid symptom control"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Examples:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "EGFR-mutant NSCLC: Osimertinib benefits ECOG 2-3 patients.",
+          "CML: Imatinib remains safe in older/frail individuals.",
+          "BRCA-mutant tumors: PARP inhibitors are tolerable even with borderline PS."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Ensure adherence and screen for organ dysfunction that may alter pharmacokinetics."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "8. Hematologic Malignancies"
+      },
+      {
+        "type": "paragraph",
+        "text": "Performance status informs:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Transplant candidacy (often requires KPS ≥70)",
+          "Induction therapy suitability",
+          "Risk of cytopenias and infections"
+        ]
+      },
+      {
+        "type": "table",
+        "headers": ["Malignancy", "Treatment Stratification by PS"],
+        "rows": [
+          [
+            "AML",
+            "ECOG ≥2 → Low-intensity regimens (e.g., azacitidine + venetoclax)"
+          ],
+          [
+            "Lymphoma",
+            "ECOG ≥3 → Modify R-CHOP or avoid multi-agent regimens"
+          ],
+          [
+            "Myeloma",
+            "Frailty-adjusted protocols using KPS or geriatric scores"
+          ]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "9. Palliative Care Triggers"
+      },
+      {
+        "type": "paragraph",
+        "text": "Poor PS often necessitates early integration of palliative care:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "ECOG ≥2 / KPS <50: Recommend early palliative referral.",
+          "Rapid PS decline: Hospice consideration.",
+          "Integration includes symptom control, goal setting, and caregiver support."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Tools like the Palliative Performance Scale (PPS) further stratify needs in advanced disease. [AMBOSS: Palliative Medicine Overview](https://www.amboss.com/us/knowledge/overview-of-palliative-medicine)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "10. Disease-Specific Applications"
+      },
+      {
+        "type": "table",
+        "headers": ["Cancer", "PS-Specific Strategy"],
+        "rows": [
+          [
+            "Lung",
+            "ECOG 2 → Immunotherapy monotherapy if PD-L1 ≥50%"
+          ],
+          [
+            "Breast",
+            "Frail patients → Endocrine therapy ± CDK4/6 inhibitors"
+          ],
+          [
+            "Colorectal",
+            "ECOG 0-1 → FOLFOX; ECOG ≥2 → capecitabine or 5-FU monotherapy"
+          ],
+          [
+            "Prostate",
+            "Poor PS → Androgen deprivation monotherapy only"
+          ]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "11. Enhancing and Monitoring PS"
+      },
+      {
+        "type": "paragraph",
+        "text": "Before Treatment:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Treat reversible contributors: pain, infection, electrolyte imbalance",
+          "Optimize nutrition and mobility"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "During Therapy:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Dose-modify for toxicity-induced decline",
+          "Consider treatment holiday if PS worsens"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Post-Treatment:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Use PT/OT and survivorship programs for functional recovery"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "12. Dynamic PS Reassessment"
+      },
+      {
+        "type": "paragraph",
+        "text": "Reevaluate PS:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Before any new treatment line",
+          "After adverse events or hospitalization",
+          "At scheduled treatment reviews"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Document clearly and adjust treatment accordingly. Serial assessments can reveal subtle declines or functional recovery trends."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "13. MDT and Shared Decision-Making"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Tumor board discussions should always include PS and frailty data.",
+          "PS trends inform realistic treatment expectations.",
+          "Aligns care with patient goals and values."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "14. Ethics and Communication"
+      },
+      {
+        "type": "paragraph",
+        "text": "Use PS to frame serious illness conversations:"
+      },
+      {
+        "type": "paragraph",
+        "text": "\"Given your current strength and function, certain treatments may do more harm than good. Let's focus on what will best support your comfort and wishes.\""
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "15. Summary"
+      },
+      {
+        "type": "paragraph",
+        "text": "Performance status remains central to personalized cancer therapy. Whether selecting chemotherapy, radiation, immunotherapy, surgery, or supportive care, PS serves as a dynamic guidepost. Regular, multidisciplinary reassessment ensures treatment plans remain safe, effective, and aligned with the patient's goals and capacity."
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "Always reassess performance status after addressing reversible factors (e.g., anemia correction, pain control) before making definitive treatment decisions - temporary PS decline doesn't necessarily preclude therapy if the underlying cause is treatable."
+      }
+    ]
+  }

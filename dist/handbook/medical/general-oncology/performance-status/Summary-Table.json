@@ -1,0 +1,319 @@
+{
+    "title": "Performance Status Tools Comparison",
+    "category": "Clinical Oncology",
+    "section": "Assessment Tools",
+    "summary": "Comprehensive comparison of performance status assessment tools including ECOG, Karnofsky, Lansky, and geriatric frailty measures with clinical application guidance.",
+    "author": "Oncology Practice Team",
+    "lastUpdated": "2024-11-10T09:45:00Z",
+    "version": "1.0.0",
+    "metadata": {
+      "reviewStatus": "peer-reviewed",
+      "readingTimeMinutes": 20,
+      "targetAudience": ["Oncologists", "Palliative Care Specialists", "Clinical Researchers"],
+      "educationalLevel": "Intermediate",
+      "keywords": [
+        "performance status",
+        "ECOG",
+        "Karnofsky",
+        "Lansky",
+        "frailty assessment"
+      ],
+      "references": [
+        "Journal of Clinical Oncology",
+        "JAMA Oncology",
+        "NCCN Guidelines"
+      ]
+    },
+    "content": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Performance Status Tools Comparison"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "1. Introduction"
+      },
+      {
+        "type": "paragraph",
+        "text": "Accurate and context-sensitive assessment of performance status (PS) is foundational to clinical oncology, palliative care, and geriatric medicine. From treatment planning to clinical trial eligibility, PS tools inform patient selection, risk stratification, and resource allocation. However, no single tool is optimal for all patient populations. This summary distills the strengths, limitations, and recommended uses of standard and specialty performance status tools, including digital and future-forward innovations."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "2. Core Performance Status Tools"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Table 1: Comparison - ECOG vs KPS vs Lansky"
+      },
+      {
+        "type": "table",
+        "headers": ["Feature", "ECOG (WHO Scale)", "Karnofsky Performance Status (KPS)", "Lansky Play-Performance Scale"],
+        "rows": [
+          [
+            "Score Range",
+            "0-5 (ordinal categories)",
+            "0-100 (10-point increments)",
+            "0-100 (10-point increments)"
+          ],
+          [
+            "Population",
+            "Adults (standard oncology)",
+            "Adults, esp. neuro-oncology and palliative",
+            "Children aged 1-16 years"
+          ],
+          [
+            "Format",
+            "Physician-rated",
+            "Clinician-observed + contextual input",
+            "Behavior/play-based with caregiver input"
+          ],
+          [
+            "Granularity",
+            "Low to moderate",
+            "High",
+            "High"
+          ],
+          [
+            "Ease of Use",
+            "Simple, rapid",
+            "Requires clinical judgment and context",
+            "Requires observation and family input"
+          ],
+          [
+            "Use in Trials",
+            "Universally used in trials",
+            "Occasionally used in palliative and CNS trials",
+            "Pediatric oncology trials"
+          ],
+          [
+            "Advantages",
+            "Standardized, widely accepted",
+            "Detailed, good for tracking over time",
+            "Reflects child behavior and developmental status"
+          ],
+          [
+            "Limitations",
+            "Subjective, lacks nuance",
+            "Less practical in time-limited settings",
+            "Less applicable in adolescents or teens"
+          ]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "3. Geriatric and Frailty Assessment Tools"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Table 2: Geriatric and Frailty Tools - Use and Domains"
+      },
+      {
+        "type": "table",
+        "headers": ["Tool", "Target Population", "Domains Assessed", "Completion Time", "Strengths"],
+        "rows": [
+          [
+            "CGA",
+            "Elderly (≥65 years)",
+            "Function, cognition, nutrition, polypharmacy, support",
+            "30-60 min",
+            "Multidimensional gold standard for frailty"
+          ],
+          [
+            "G8",
+            "Older adults with cancer",
+            "Nutrition, health, cognition, mobility",
+            "<5 min",
+            "SIOG-endorsed, high sensitivity"
+          ],
+          [
+            "CFS (Clinical Frailty Scale)",
+            "Adults ≥65 years",
+            "Functional status, mobility, dependence",
+            "<2 min",
+            "Visual, intuitive; good for triage"
+          ],
+          [
+            "VES-13",
+            "Vulnerable elders",
+            "ADLs, self-rated health, disability risk",
+            "5-10 min",
+            "Predicts decline, hospitalization"
+          ],
+          [
+            "Balducci Frailty Model",
+            "Elderly oncology",
+            "Age, comorbidity, function",
+            "Variable",
+            "Categorizes patients as fit, vulnerable, frail"
+          ]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "4. Clinical Scenarios and Tool Recommendation"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Table 3: Tool Matching Based on Clinical Context"
+      },
+      {
+        "type": "table",
+        "headers": ["Clinical Scenario", "Preferred Tool(s)", "Rationale"],
+        "rows": [
+          [
+            "Solid tumor clinical trials",
+            "ECOG",
+            "Regulatory standard; easy to apply and document"
+          ],
+          [
+            "Neuro-oncology patients",
+            "KPS",
+            "Sensitive to neurologic and cognitive decline"
+          ],
+          [
+            "Pediatric cancer",
+            "Lansky",
+            "Age-appropriate, behavior-focused"
+          ],
+          [
+            "Elderly chemotherapy planning",
+            "G8 + CGA",
+            "Detects hidden frailty, helps guide dose decisions"
+          ],
+          [
+            "Inpatient oncology triage",
+            "ECOG or CFS",
+            "Rapid bedside stratification"
+          ],
+          [
+            "Hospice/palliative eligibility",
+            "KPS or CFS",
+            "Validated for end-of-life functional decline"
+          ],
+          [
+            "Post-operative cancer patients",
+            "KPS + ADL/IADL scores",
+            "Captures surgical recovery and independence restoration"
+          ],
+          [
+            "Telemedicine frailty screening",
+            "G8, CFS, PROM-based apps",
+            "Quick and adaptable to remote care environments"
+          ]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "5. Approximate Score Mapping"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Table 4: Crosswalk of ECOG, KPS, Lansky"
+      },
+      {
+        "type": "table",
+        "headers": ["ECOG", "KPS Equivalent", "Lansky Equivalent", "Functional Summary"],
+        "rows": [
+          ["0", "90-100", "90-100", "Fully active"],
+          ["1", "70-80", "70-80", "Mild symptoms, ambulatory"],
+          ["2", "50-60", "50-60", "Self-care but unable to work"],
+          ["3", "30-40", "30-40", "Limited self-care, >50% bedridden"],
+          ["4", "10-20", "10-20", "Bed/chair-bound, completely dependent"],
+          ["5", "0", "0", "Deceased"]
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "⚠ These mappings are approximations. Regulatory and trial requirements should not substitute one for another without protocol allowance."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "6. Digital and Emerging Performance Tools"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Table 5: Future-Oriented Tools"
+      },
+      {
+        "type": "table",
+        "headers": ["Tool Type", "Examples", "Functionality"],
+        "rows": [
+          [
+            "Wearables",
+            "Smartwatches, accelerometers",
+            "Tracks step count, sleep, energy expenditure"
+          ],
+          [
+            "Mobile Health Apps",
+            "Patient-reported outcomes (e.g., fatigue, mobility)",
+            "Remote self-report and trends tracking"
+          ],
+          [
+            "AI-EHR Models",
+            "Natural language processing",
+            "Extract PS indicators from unstructured notes"
+          ],
+          [
+            "Virtual CGA Tools",
+            "Web-based geriatric assessments",
+            "Remote risk stratification for elderly patients"
+          ]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "7. Integration Across Health Systems"
+      },
+      {
+        "type": "paragraph",
+        "text": "Performance tools are increasingly integrated into:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "National guidelines (e.g., NCCN, ASCO, ESMO)",
+          "Insurance reimbursement criteria (e.g., hospice eligibility with KPS <50)",
+          "Tumor board presentations to justify treatment intent",
+          "Quality improvement metrics (e.g., PS documentation on pre-chemo assessments)"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "✅ Best Practice: Document PS at each treatment decision point, include rationale, and repeat during clinical deterioration or transition of care."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "8. Summary Insights"
+      },
+      {
+        "type": "list",
+        "items": [
+          "No tool fits all: selection must consider age, cancer type, setting, and goals of care.",
+          "ECOG is quick and standardized but limited in nuance.",
+          "KPS offers more detail, especially in CNS or palliative care.",
+          "Lansky fills the gap in pediatrics with developmental sensitivity.",
+          "Geriatric and frailty tools like CGA, G8, and CFS are essential in elderly care.",
+          "Digital innovation promises more objective and continuous tracking.",
+          "Using multiple tools in synergy (e.g., ECOG + G8 + PROs) enables precision, personalization, and safety in cancer care."
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "When documenting performance status, always specify which tool was used (e.g., 'ECOG 1' rather than just 'PS 1') to avoid ambiguity in clinical communication and trial eligibility assessment."
+      }
+    ]
+  }

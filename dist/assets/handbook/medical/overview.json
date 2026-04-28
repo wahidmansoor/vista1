@@ -1,0 +1,52 @@
+{
+  "title": "Medical Oncology Overview",
+  "category": "Medical Oncology",
+  "section": "Introduction",
+  "summary": "A comprehensive guide to medical oncology principles, treatments, and protocols.",
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Introduction to Medical Oncology"
+    },
+    {
+      "type": "paragraph",
+      "text": "Medical oncology is a branch of medicine that deals with the prevention, diagnosis, and treatment of cancer using systemic medication and other treatments. This handbook provides evidence-based guidelines and protocols for oncology practice."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Always consider the patient's performance status and comorbidities when selecting treatment options."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Key Areas Covered"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Diagnosis and Staging",
+        "Treatment Planning",
+        "Systemic Therapies",
+        "Supportive Care",
+        "Oncologic Emergencies",
+        "Special Populations"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Treatment Modalities"
+    },
+    {
+      "type": "table",
+      "headers": ["Modality", "Description", "Common Uses"],
+      "rows": [
+        ["Chemotherapy", "Systemic drug treatment", "Most cancer types"],
+        ["Immunotherapy", "Immune system enhancement", "Melanoma, Lung Cancer"],
+        ["Targeted Therapy", "Molecular targeting", "Specific mutations"],
+        ["Hormonal Therapy", "Hormone manipulation", "Breast, Prostate Cancer"]
+      ]
+    }
+  ]
+}

@@ -643,8 +643,8 @@ export function UniversalContentViewer({
     );
   }
 
-  // For simple markdown, render directly with ReactMarkdown
-  if (format === 'markdown' && (!processedContent || processedContent.length === 0)) {
+  // For markdown, render directly with ReactMarkdown
+  if (format === 'markdown') {
     return (
       <div className="relative">
         <StickyHeader 
@@ -665,6 +665,7 @@ export function UniversalContentViewer({
     );
   }
 
+  // For JSON content, use ContentRenderer
   return (
     <div className="relative">
       <StickyHeader 

@@ -1,0 +1,401 @@
+{
+  "title": "Prognostic Scores: Disease-Specific Tools",
+  "category": "Clinical Oncology",
+  "section": "Prognostic Assessment",
+  "summary": "Comprehensive guide to disease-specific prognostic scoring systems across hematologic and solid tumor malignancies, including clinical applications and molecular integration.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-12-15T00:00:00Z",
+  "version": "2.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 20,
+    "relatedTopics": [
+      "Molecular Profiling in Oncology",
+      "Precision Medicine Approaches",
+      "Dynamic Risk Assessment Models"
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Prognostic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Topic 8: Disease-Specific Tools"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Anatomical staging systems (e.g., TNM, Ann Arbor) are foundational, but insufficient for guiding personalized oncology care in the modern era. Disease-specific prognostic models integrate:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tumor biology (e.g., genetic mutations, gene expression)",
+        "Host characteristics (age, comorbidities, immune status)",
+        "Functional measures (e.g., performance status, organ function)",
+        "Dynamic treatment response indicators (e.g., MRD, PET response)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These models serve to:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Predict overall and progression-free survival",
+        "Estimate recurrence and transformation risk",
+        "Inform intensity, modality, and sequencing of therapy",
+        "Support clinical trial stratification and endpoints",
+        "Guide follow-up and surveillance regimens"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "The growing use of genomic assays, AI-assisted analytics, and liquid biopsy platforms has further sharpened the prognostic landscape."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Hematologic Malignancies"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Diffuse Large B-Cell Lymphoma (DLBCL)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "IPI/NCCN-IPI: Combines age, stage, LDH, ECOG, and extranodal sites.",
+        "NCCN-IPI modifies IPI by refining age categories and assigning more weight to LDH elevation."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Follicular Lymphoma (FL)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "FLIPI/FLIPI-2: Predicts OS using clinical factors.",
+        "m7-FLIPI: Integrates 7 recurrent gene mutations (e.g., EZH2, TP53) with FLIPI and ECOG."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Multiple Myeloma"
+    },
+    {
+      "type": "list",
+      "items": [
+        "R-ISS / R2-ISS: Combines β2M, albumin, LDH, cytogenetics.",
+        "MRD (flow or NGS): Emerging standard for prognosis and therapy tailoring."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "MDS"
+    },
+    {
+      "type": "list",
+      "items": [
+        "IPSS-R: Refined cytogenetics + continuous blood count metrics.",
+        "IPSS-M: Adds 31-gene NGS panel; improves AML prediction."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "AML"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ELN 2022: Classifies AML into favorable, intermediate, and adverse-risk groups using cytogenetics and mutations (e.g., NPM1, FLT3-ITD, TP53).",
+        "Measurable Residual Disease (MRD): Central to transplant timing and intensification."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "CML"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Sokal, Hasford, EUTOS, ELTS: Early tools to predict progression; ELTS now preferred in TKI era due to better OS correlation."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Hodgkin Lymphoma"
+    },
+    {
+      "type": "list",
+      "items": [
+        "IPS (International Prognostic Score): For advanced-stage disease; based on 7 clinical factors.",
+        "A-HIPI: A more modern alternative reflecting better treatment outcomes."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Breast Cancer"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Type", "Key Application"],
+      "rows": [
+        ["Oncotype DX", "21-gene qRT-PCR panel", "Guides chemo in ER+/HER2– node-negative (and selected node+) cases"],
+        ["MammaPrint", "70-gene microarray", "Stratifies recurrence risk; TAILORx and MINDACT validated"],
+        ["PAM50 (Prosigna)", "50-gene subtype assay", "Determines intrinsic subtype (e.g., Luminal A/B, HER2-E, Basal-like)"],
+        ["IHC4", "ER, PR, HER2, Ki-67", "Low-cost alternative in HR+/HER2– cancers"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Notable Clinical Impacts:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "TAILORx: Up to 85% of postmenopausal women with intermediate RS (11–25) safely avoid chemo.",
+        "Oncotype DX RS ≥26: Recommend chemo in premenopausal patients."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Prostate Cancer"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Description"],
+      "rows": [
+        ["Gleason / Grade Group", "Histological risk; GG 1–5 aligns with long-term recurrence risk."],
+        ["CAPRA Score", "Combines PSA, Gleason, T-stage, % positive biopsies, age."],
+        ["Decipher Genomic Classifier", "Predicts metastasis and mortality post-surgery or RT."],
+        ["NCCN Risk Categories", "Groups based on PSA, Gleason, T-stage, and imaging."]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "High Decipher score (>0.6) → recommend adjuvant therapy even with negative margins."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Colorectal Cancer"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Role"],
+      "rows": [
+        ["MSI/MMR Status", "MSI-H tumors: favorable prognosis, poor 5-FU benefit, great ICI response"],
+        ["Oncotype DX Colon", "Validated in stage II for recurrence risk"],
+        ["Immunoscore", "T-cell density at tumor center/margin; enhances TNM accuracy"],
+        ["CEA dynamics", "Surveillance marker post-resection"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "BRAF V600E mutation: Poor prognosis, worse ICI response in MSS tumors."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Lung Cancer"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Use"],
+      "rows": [
+        ["EGFR / ALK / KRAS", "Targeted therapy; survival depends on mutation subtype"],
+        ["PD-L1 TPS", "Predicts response to immune checkpoint inhibitors"],
+        ["TMB (Tumor Mutational Burden)", "Investigational marker for ICI response"],
+        ["PET SUVmax / Volume", "Correlates with local aggressiveness, relapse risk"],
+        ["Post-op Nomograms", "Estimate recurrence risk, guide adjuvant therapy"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "In early-stage NSCLC, Adjuvant Osimertinib (ADAURA) is standard in resected EGFR-mutant cases."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Renal Cell Carcinoma"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Features"],
+      "rows": [
+        ["IMDC Score", "Time from diagnosis, Ca, Hgb, PLTs, ANC, ECOG"],
+        ["MSKCC Score", "Historical; similar factors in VEGF-TKI context"],
+        ["Leibovich Score", "Recurrence post-nephrectomy based on pathologic criteria"],
+        ["Sarcomatoid Differentiation", "Strong adverse feature; poor ICI response"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "IMDC score drives first-line therapy selection: e.g., nivolumab + ipilimumab in poor risk."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Hepatocellular Carcinoma (HCC)"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Domain", "Use Case"],
+      "rows": [
+        ["BCLC", "Tumor burden, liver fxn, PS", "Treatment selection (e.g., TACE, systemic Rx)"],
+        ["Child-Pugh", "INR, bilirubin, albumin, ascites, encephalopathy", "Surgical/transplant candidacy"],
+        ["ALBI Score", "Albumin and bilirubin only", "Objective liver function index"],
+        ["AFP / AFP-L3", "Recurrence risk; elevated in vascular invasion", ""],
+        ["PET SUV", "Correlates with microvascular invasion, tumor grade", ""]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Gynecologic Cancers"
+    },
+    {
+      "type": "table",
+      "headers": ["Disease", "Prognostic Tool", "Application"],
+      "rows": [
+        ["Ovarian Cancer", "AGO Score, CA-125", "Predict optimal debulking"],
+        ["Endometrial Cancer", "ProMisE Classifier (POLE, p53, MMR)", "Risk groups guide adjuvant treatment"],
+        ["Cervical Cancer", "SCC antigen, FIGO, imaging", "Advanced disease stratification"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "POLEmut tumors have excellent prognosis despite high-grade histology."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. CNS Tumors"
+    },
+    {
+      "type": "table",
+      "headers": ["Tumor", "Prognostic Tools"],
+      "rows": [
+        ["Glioblastoma", "IDH mutation, MGMT methylation"],
+        ["Low-Grade Glioma", "1p/19q co-deletion, IDH1/2 mutation"],
+        ["Primary CNS Lymphoma", "IELSG Score (age, ECOG, LDH, CSF protein, sites)"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "MGMT methylation predicts temozolomide sensitivity in GBM."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Pediatric Oncology"
+    },
+    {
+      "type": "table",
+      "headers": ["Disease", "Risk Features"],
+      "rows": [
+        ["Neuroblastoma", "INRG staging, MYCN, age, histology"],
+        ["Medulloblastoma", "Molecular subtype (WNT, SHH, Group 3/4), TP53"],
+        ["Pediatric ALL", "Day 29 MRD, cytogenetics (e.g., t(12;21), Ph+), CNS status"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "High-risk neuroblastoma with MYCN amplification → multimodal therapy + transplant."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "12. Summary Table: Key Disease-Specific Tools"
+    },
+    {
+      "type": "table",
+      "headers": ["Cancer Type", "Prognostic Tool(s)", "Domain(s)"],
+      "rows": [
+        ["DLBCL", "IPI, NCCN-IPI", "Clinical"],
+        ["Follicular", "FLIPI, m7-FLIPI", "Clinical + Genetic"],
+        ["AML", "ELN, MRD", "Cytogenetic + Molecular"],
+        ["MM", "R-ISS, MRD, GEP", "Biochemical + FISH + MRD"],
+        ["Breast", "Oncotype DX, PAM50", "Genomic + Histologic"],
+        ["Colon", "MSI, Immunoscore, Oncotype DX Colon", "Genomic + Immune"],
+        ["Lung", "EGFR/ALK, PD-L1, PET metrics", "Molecular + Functional"],
+        ["RCC", "IMDC, Leibovich, Sarcomatoid status", "Clinical + Pathologic"],
+        ["HCC", "BCLC, ALBI, AFP", "Tumor + Liver Function"],
+        ["CNS", "MGMT, IDH, IELSG", "Molecular + Clinical"],
+        ["Prostate", "CAPRA, Decipher, Gleason", "Pathologic + Genomic"],
+        ["Pediatric ALL", "MRD, cytogenetics", "Dynamic + Molecular"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "13. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Disease-specific prognostic tools form the cornerstone of risk-adapted oncology. Their utility is rapidly evolving from static classifiers to dynamic, multi-omic frameworks that combine:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Genomic profiling (DNA/RNA)",
+        "Real-time functional biomarkers (e.g., PET, MRD)",
+        "Patient-specific data (age, frailty, comorbidities)",
+        "AI-driven predictive models"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "As oncology enters an era of precision prognostication, these tools enable:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Personalized treatment planning",
+        "Informed patient counseling",
+        "More efficient clinical trial design",
+        "Improved survival with less toxicity"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "The next frontier involves adaptive scoring models that continuously update during therapy, reflecting tumor evolution and real-time treatment response."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Implementation Guidelines"
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Select disease-specific tools based on tumor type and available resources",
+        "Prioritize molecular testing when it impacts treatment decisions",
+        "Reassess prognostic risk at key clinical milestones (diagnosis, progression, post-treatment)",
+        "Combine static prognostic models with dynamic biomarkers (e.g., MRD, PET response)",
+        "Document prognostic scores in patient records to support clinical trial eligibility"
+      ]
+    }
+  ]
+}

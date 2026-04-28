@@ -1,0 +1,251 @@
+{
+  "title": "Oncogenes and Tumor Suppressors",
+  "category": "Medical Oncology",
+  "section": "Cancer Biology",
+  "summary": "Comprehensive overview of oncogenes and tumor suppressor genes in cancer pathogenesis, including molecular mechanisms, clinical syndromes, and therapeutic implications.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-11-01T00:00:00Z",
+  "version": "2.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 35,
+    "complexityLevel": "Advanced"
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Oncogenes and Tumor Suppressors"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction to Oncogenes and Tumor Suppressors"
+    },
+    {
+      "type": "paragraph",
+      "text": "Oncogenes and tumor suppressor genes are pivotal regulators of cellular homeostasis. Their alterations underpin the molecular framework of oncogenesis, from initiation to metastasis. Oncogenes typically originate from proto-oncogenes—normal genes involved in cell signaling and growth—that become pathologically activated via mutations, amplifications, or translocations. Tumor suppressor genes, conversely, act as genomic guardians, ensuring appropriate cell cycle arrest, DNA repair, and apoptosis. Cancer results from the imbalance between these opposing forces, leading to unchecked proliferation and survival."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Mutations in these genes inform diagnostic classification (e.g., BCR-ABL in CML), prognostication (e.g., TP53 mutations), and therapy (e.g., HER2-targeted agents). Testing for hereditary alterations enables cancer risk stratification and familial surveillance."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Overview of Cancer-Related Genes"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Oncogenes"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Derived from: Proto-oncogenes",
+        "Function: Promote growth and survival pathways",
+        "Pathogenesis: Gain-of-function mutation in a single allele suffices to activate oncogenesis"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Tumor Suppressor Genes"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Function: Regulate cell cycle, repair DNA, and promote apoptosis",
+        "Pathogenesis: Typically require biallelic inactivation (e.g., via the two-hit hypothesis)"
+      ]
+    },
+    {
+      "type": "table",
+      "headers": ["Gene Class", "Mutation Effect", "Analogy"],
+      "rows": [
+        ["Oncogenes", "Gain-of-function", "Accelerator stuck down"],
+        ["Tumor Suppressors", "Loss-of-function", "Brakes removed"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Molecular Functions and Mechanisms"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Oncogenes:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Normal roles: Growth factor receptors, GTPases, transcription factors, kinases",
+        "Mechanisms of activation: Gene amplification (HER2 in breast cancer, MYCN in neuroblastoma), Point mutations (KRAS codon 12/13, BRAF V600E), Chromosomal translocation (BCR-ABL in CML, MYC in Burkitt lymphoma)",
+        "Pathways involved: MAPK/ERK, PI3K/AKT/mTOR, JAK/STAT"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Tumor Suppressors:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Gatekeepers: Control cell cycle (e.g., TP53, RB1)",
+        "Caretakers: Maintain genomic integrity (e.g., BRCA1/2, MMR genes)",
+        "Loss leads to: Genomic instability, Evasion of cell death, Therapy resistance"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Notable Oncogenes and Activation Pathways"
+    },
+    {
+      "type": "table",
+      "headers": ["Oncogene", "Mechanism", "Associated Cancers"],
+      "rows": [
+        ["KRAS", "Point mutation", "Colorectal, pancreatic, NSCLC"],
+        ["BCR-ABL", "Fusion gene (t(9;22))", "CML, Ph+ ALL"],
+        ["MYC", "Amplification/translocation", "Burkitt lymphoma, neuroblastoma"],
+        ["HER2", "Amplification", "Breast, gastric"],
+        ["ALK", "Rearrangement", "NSCLC, ALCL"],
+        ["RET", "Germline or somatic rearrangement", "Thyroid, MEN2"],
+        ["CCND1", "Overexpression", "Mantle cell lymphoma"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Critical Tumor Suppressor Genes and Associated Syndromes"
+    },
+    {
+      "type": "table",
+      "headers": ["Gene", "Product/Function", "Cancer Associations"],
+      "rows": [
+        ["TP53", "Cell cycle arrest, apoptosis", "Most cancers, Li-Fraumeni syndrome"],
+        ["RB1", "G1-S checkpoint control", "Retinoblastoma, osteosarcoma"],
+        ["BRCA1/2", "Homologous recombination repair", "Breast, ovarian, pancreatic, prostate"],
+        ["APC", "β-catenin degradation (Wnt pathway)", "Colorectal cancer, FAP"],
+        ["PTEN", "PI3K pathway inhibition", "Endometrial, breast, prostate"],
+        ["CDKN2A", "p16INK4a (CDK inhibitor)", "Melanoma, pancreatic"],
+        ["MMR genes", "DNA mismatch repair", "Lynch syndrome"],
+        ["VHL", "Hypoxia response regulation", "Renal cell carcinoma, VHL syndrome"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Germline Mutations and Cancer Syndromes"
+    },
+    {
+      "type": "table",
+      "headers": ["Syndrome", "Gene(s) Affected", "Cancer Risk", "Management"],
+      "rows": [
+        ["Li-Fraumeni", "TP53", "Sarcoma, breast, brain, adrenals", "Whole-body MRI, early screening"],
+        ["FAP", "APC", "Colorectal (early onset, hundreds of polyps)", "Prophylactic colectomy"],
+        ["Lynch syndrome (HNPCC)", "MLH1, MSH2, MSH6, PMS2", "Colon, endometrial, gastric, ovarian", "Colonoscopy, transvaginal US, aspirin chemoprevention"],
+        ["HBOC", "BRCA1/2", "Breast, ovarian, prostate, pancreatic", "Risk-reducing surgery, PARP inhibitors"],
+        ["Cowden Syndrome", "PTEN", "Breast, thyroid, endometrial", "Surveillance and thyroid monitoring"],
+        ["MEN syndromes (1 and 2)", "MEN1, RET", "Parathyroid, pituitary, thyroid, pancreas", "Prophylactic thyroidectomy (MEN2)"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Mechanisms of Genetic Alteration"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Point mutations – e.g., KRAS G12D",
+        "Gene amplification – HER2 in breast cancer",
+        "Translocations – BCR-ABL (t(9;22)), MYC (t(8;14))",
+        "Epigenetic silencing – MLH1 promoter methylation",
+        "Loss of heterozygosity – Common in RB1",
+        "Dominant negative effects – Mutant p53 interfering with wild-type function"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Therapeutic Implications and Targeting"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Oncogene addiction: Tumor cells can be dependent on a single oncogenic driver. Example: BCR-ABL in CML → imatinib",
+        "Targeted therapies: EGFR inhibitors (NSCLC), ALK inhibitors (crizotinib, lorlatinib), HER2 inhibitors (trastuzumab, pertuzumab)",
+        "Resistance mechanisms: Secondary mutations (e.g., EGFR T790M), Bypass pathways (e.g., MET amplification), EMT (epithelial-mesenchymal transition)",
+        "Synthetic lethality: Example: BRCA1/2-mutant tumors + PARP inhibitors, Emerging concept: TP53-deficient tumors + Wee1 inhibitors"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Diagnostic and Prognostic Utility"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Biomarker testing: HER2, BRAF, EGFR, ALK, PD-L1",
+        "Tumor mutational burden (TMB): High TMB may predict response to checkpoint inhibitors",
+        "Circulating tumor DNA (ctDNA): Liquid biopsy to detect mutations non-invasively",
+        "Next-Generation Sequencing (NGS): Simultaneous profiling of multiple genes for therapy guidance"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Integrating into Clinical Oncology"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Precision oncology: Matching therapies based on molecular alterations",
+        "Multidisciplinary tumor boards: Integration of genetic, pathologic, and clinical data",
+        "Screening & prevention: Genetic counseling for at-risk families (BRCA, MMR)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Educational Cases and Applications"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Case 1: Young woman with TNBC → BRCA1 mutation → eligible for PARP inhibitors",
+        "Case 2: Teen with osteosarcoma and family history of brain tumors → Li-Fraumeni suspected → TP53 germline testing",
+        "Case 3: Middle-aged woman with colon and endometrial cancer → Lynch syndrome work-up → MMR deficiency confirmed → cascade screening of relatives"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "12. Challenges and Future Directions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Variants of Uncertain Significance (VUS): Challenge in interpreting genetic tests",
+        "Therapeutic targeting of tumor suppressors: More difficult due to loss-of-function nature",
+        "Non-coding RNAs: Role in gene regulation and oncogenesis",
+        "AI and machine learning: Enhancing variant interpretation and treatment prediction",
+        "CRISPR-based gene editing: Experimental attempts to correct germline or somatic mutations"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "13. Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "The study of oncogenes and tumor suppressor genes has illuminated the fundamental principles of tumor biology and catalyzed transformative changes in cancer diagnosis and therapy. While oncogenes have yielded many successful targeted drugs, tumor suppressors remain a complex challenge. With expanding tools such as CRISPR, AI, and multi-omic profiling, the future of precision oncology holds promise for more effective and individualized cancer care."
+    }
+  ]
+}

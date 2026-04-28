@@ -1,0 +1,358 @@
+{
+    "title": "Staging Systems: Clinical (cTNM) vs Pathologic (pTNM) Staging",
+    "category": "Clinical Assessment",
+    "section": "Cancer Staging",
+    "summary": "Comprehensive comparison of clinical and pathologic staging systems in oncology, including timing, methods, and clinical implications.",
+    "author": "OncoVISTA Team",
+    "lastUpdated": "2023-10-20T00:00:00Z",
+    "version": "1.1.0",
+    "metadata": {
+      "reviewStatus": "peer-reviewed",
+      "readingTimeMinutes": 12,
+      "targetAudience": ["Oncologists", "Surgeons", "Pathologists", "Radiologists"]
+    },
+    "content": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Staging Systems"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Topic 3: Clinical (cTNM) vs Pathologic (pTNM) Staging"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "1. Introduction"
+      },
+      {
+        "type": "paragraph",
+        "text": "Cancer staging forms the cornerstone of treatment planning and prognostic stratification. The TNM system—developed jointly by the AJCC and UICC—is bifurcated into:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Clinical staging (cTNM): Determined before treatment using noninvasive methods.",
+          "Pathologic staging (pTNM): Determined after surgical resection and histological examination."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Both systems share the same structural categories (T, N, M), but differ in their timing, source of information, and implications for care."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2. Prefixes and Definitions"
+      },
+      {
+        "type": "table",
+        "headers": ["Stage Type", "Prefix", "When Assigned", "Basis"],
+        "rows": [
+          ["Clinical", "c", "Pre-treatment", "Imaging, biopsy, exam"],
+          ["Pathologic", "p", "Post-surgical resection", "Histopathology of specimen"],
+          ["Post-treatment", "yp", "After neoadjuvant therapy + surgery", "Residual disease after treatment"],
+          ["Restaging", "r", "At recurrence/progression", "Post-treatment reassessment"]
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "Accurate use of prefixes is essential for documentation, especially in multidisciplinary care and research."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "3. Clinical (cTNM) Staging: Noninvasive Initial Assessment"
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "When Applied:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "At the time of diagnosis, before definitive local or systemic therapy.",
+          "Required for clinical trial inclusion.",
+          "Often the only stage available in non-surgical cases (e.g., metastatic disease)."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "Data Sources:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Physical examination",
+          "Radiologic imaging: CT, MRI, PET/CT, US",
+          "Endoscopy (e.g., EUS for GI tumors)",
+          "Biopsies or cytology (FNA, core)"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "Advantages:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Universally applicable to all patients",
+          "Helps initiate treatment in real time",
+          "Often determines whether surgery is feasible"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "Limitations:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Lower sensitivity for micrometastasis",
+          "Imaging accuracy varies by tumor site (e.g., overestimation of T-stage in esophageal or prostate cancer)",
+          "Operator-dependent (e.g., ultrasonography)"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "4. Pathologic (pTNM) Staging: Gold Standard for Accuracy"
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "When Applied:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "After surgical removal of the primary tumor and regional lymph nodes."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "Sources of Data:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Full histological analysis of:",
+          "  - Tumor size and margins",
+          "  - Depth of invasion",
+          "  - Lymph node counts and positivity",
+          "  - Lymphovascular and perineural invasion"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "Advantages:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Identifies occult nodal metastases",
+          "Assesses tumor biology more precisely",
+          "Required for definitive adjuvant therapy decisions"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "Limitations:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Not applicable in non-surgical or unresectable tumors",
+          "Dependent on the quality of surgery (e.g., number of nodes resected)",
+          "May be altered by prior therapy (e.g., tumor shrinkage post-chemo)"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "5. ypTNM: Post-Neoadjuvant Pathologic Staging"
+      },
+      {
+        "type": "table",
+        "headers": ["Prefix", "Description"],
+        "rows": [
+          ["yp", "Used after preoperative treatment and surgical resection"]
+        ]
+      },
+      {
+        "type": "list",
+        "items": [
+          "Reflects residual disease",
+          "Quantifies treatment response",
+          "Can identify pathologic complete response (pCR) (ypT0N0)"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Most applicable in:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Rectal cancer",
+          "Breast cancer",
+          "Esophageal cancer",
+          "NSCLC with induction therapy"
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "Both cTNM and ypTNM should be reported to reflect disease course and response."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "6. cTNM vs pTNM: Concordance and Discordance"
+      },
+      {
+        "type": "table",
+        "headers": ["Scenario", "Definition", "Example"],
+        "rows": [
+          ["Concordance", "cTNM matches pTNM", "cT2N0M0 → pT2N0M0"],
+          ["Upstaging", "pTNM is more advanced than cTNM", "cT1N0M0 → pT1N2M0 (occult nodes)"],
+          ["Downstaging", "pTNM shows less tumor than cTNM", "cT3N1 → pT1N0 (overestimation)"]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "Causes of Discordance:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Tumor regression post-neoadjuvant therapy",
+          "Imaging modality limitations",
+          "Incomplete lymph node sampling",
+          "Tumor heterogeneity"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "7. Clinical Implications of Staging Mismatch"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Upstaged patients may require adjuvant chemotherapy or radiation",
+          "Downstaged patients might avoid overtreatment",
+          "Discordance may affect:",
+          "  - Survival estimates",
+          "  - Trial stratification",
+          "  - Surveillance intensity"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "8. Tumor-Specific Considerations"
+      },
+      {
+        "type": "table",
+        "headers": ["Tumor Type", "Staging Notes"],
+        "rows": [
+          ["Breast", "pTNM includes biologic markers: ER/PR, HER2, Ki-67, grade"],
+          ["Prostate", "MRI may under-stage; extracapsular extension defines pT3"],
+          ["Lung", "PET improves nodal assessment; mediastinoscopy adds precision"],
+          ["Rectal", "cTNM crucial for neoadjuvant planning; ypTNM dictates prognosis"],
+          ["Esophagus", "EUS helps refine cT; response often assessed with ypT and ypN"]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "9. Research and Trial Relevance"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Enrollment: Based on cTNM",
+          "Stratification: Often by cTNM at diagnosis",
+          "Efficacy analysis: Uses ypTNM or pTNM to assess treatment response"
+        ]
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "Both staging types are required in most oncologic trial datasets."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "10. Documentation Essentials"
+      },
+      {
+        "type": "table",
+        "headers": ["Requirement", "Detail"],
+        "rows": [
+          ["Prefix", "Use c, p, yp, or r before TNM"],
+          ["Date", "Document exact date of staging assignment"],
+          ["Modality", "Specify tools used (e.g., CT chest, MRI pelvis)"],
+          ["Summary", "Include overall AJCC stage group (I–IV)"]
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Example:"
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "cT2N1M0 assigned 2023-07-14 via CT chest and PET-CT\nypT1N0M0 after neoadjuvant chemoradiation and resection"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "11. Summary Table: Comparison of Staging Types"
+      },
+      {
+        "type": "table",
+        "headers": ["Feature", "cTNM", "pTNM", "ypTNM"],
+        "rows": [
+          ["Timing", "Pre-treatment", "Post-surgery", "Post-neoadjuvant therapy"],
+          ["Method", "Clinical, radiologic", "Histopathology", "Histopathology"],
+          ["Applicability", "All patients", "Surgical patients", "Patients receiving neoadjuvant therapy"],
+          ["Key Uses", "Initial planning, trial enrollment", "Adjuvant therapy, prognosis", "Therapy response, prognosis"],
+          ["Limitations", "May underestimate disease", "Depends on surgical quality", "Tumor may be distorted by therapy"]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "12. Summary"
+      },
+      {
+        "type": "paragraph",
+        "text": "cTNM, pTNM, and ypTNM represent three crucial points in a cancer patient's treatment journey:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "cTNM initiates care.",
+          "pTNM validates and adjusts treatment plans.",
+          "ypTNM assesses response and guides next steps."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "All three are integral to evidence-based, personalized cancer care. Their accurate use, documentation, and interpretation underpin the quality of oncologic decision-making."
+      },
+      {
+        "type": "clinical_pearl",
+        "text": "Mastery of these staging types ensures proper prognostication, optimal treatment, and scientific integrity in clinical research."
+      }
+    ]
+  }

@@ -1,0 +1,216 @@
+{
+  "title": "References",
+  "category": "Staging Systems",
+  "section": "Resource Library",
+  "summary": "Curated collection of authoritative references for cancer staging systems",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-12-01T08:00:00Z",
+  "version": "1.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 10,
+    "referenceTypes": ["Textbooks", "Journal Articles", "Guidelines", "Web Resources"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "References"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Foundational Resources for TNM and Cancer Staging"
+    },
+    {
+      "type": "list",
+      "items": [
+        "American Joint Committee on Cancer (AJCC). AJCC Cancer Staging Manual, 8th Edition. Springer; 2017. - Standard reference for TNM classification across all major solid tumors.",
+        "Union for International Cancer Control (UICC). TNM Classification of Malignant Tumours, 8th Edition. Wiley-Blackwell; 2017. - UICC's harmonized counterpart to AJCC's system.",
+        "Amin MB, Edge SB, Greene FL, et al. Overview of changes in the TNM classification in the 8th edition. CA Cancer J Clin. 2017;67(2):93–99. - Comprehensive summary of updates across tumor types.",
+        "Edge SB, Compton CC. The AJCC Cancer Staging Manual: Continuing to build a bridge from a population-based to a more \"personalized\" approach to cancer staging. CA Cancer J Clin. 2010;60(2):109–112."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Organ-Specific Staging Literature"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Lung Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Goldstraw P, et al. The IASLC Lung Cancer Staging Project: Proposals for the 8th Edition. J Thorac Oncol. 2016;11(1):39–51. - Defines new T descriptors and M1 subcategories."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Breast Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Giuliano AE, et al. Breast cancer staging: Changes in the AJCC 8th edition. CA Cancer J Clin. 2017;67(4):290–303. - Introduced prognostic staging incorporating ER/PR/HER2 status and grade."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Colorectal Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tie J, et al. Circulating tumor DNA analysis guides adjuvant therapy in stage II colon cancer. N Engl J Med. 2022;386:2261–2272. - Demonstrates how liquid biopsy augments staging and recurrence risk."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Prostate Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Amin MB, Edge SB. AJCC Prostate Cancer Staging Manual, 8th Edition. Springer. - Emphasizes integration of PSA, Gleason Grade Group, and T stage."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Alternative and Hematologic Staging Systems"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Lymphoma (HL/NHL)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Cheson BD, et al. Recommendations for evaluation and response in lymphoma: Lugano classification. J Clin Oncol. 2014;32(27):3059–3067.",
+        "Cheson BD, et al. Revised response criteria for malignant lymphoma. J Clin Oncol. 2007;25(5):579–586. - Emphasis on PET-adapted strategies and Deauville scale."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Gynecologic Cancers (FIGO)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Bhatla N, et al. Revised FIGO staging for carcinoma of the cervix uteri. Int J Gynaecol Obstet. 2019;145(1):129–135. - Integration of imaging and surgical findings.",
+        "Prat J. FIGO staging for uterine cancers. Int J Gynaecol Obstet. 2009;104(3):177–178."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Multiple Myeloma"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Greipp PR, et al. International staging system (ISS) for multiple myeloma. J Clin Oncol. 2005;23(15):3412–3420.",
+        "Palumbo A, et al. Revised ISS (R-ISS). J Clin Oncol. 2015;33(26):2863–2869.",
+        "D'Agostino M, et al. R2-ISS: Expanded staging for newly diagnosed myeloma. J Clin Oncol. 2022;40(29):3356–3365."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Pediatric Neuroblastoma"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Monclair T, et al. The International Neuroblastoma Risk Group (INRG) staging system. Cancer. 2009;115(13):2651–2663."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Grading vs Staging and Integrated Prognostics"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Rakha EA, et al. Validation of the Nottingham grading system in breast cancer. Breast Cancer Res. 2008;10(5):R87.",
+        "Epstein JI, et al. ISUP Consensus on Gleason Grading. Eur Urol. 2016;69(3):428–435.",
+        "Louis DN, et al. WHO Classification of Tumours of the CNS, 5th Edition. IARC; 2021. - Combines histopathology with IDH, MGMT, and 1p/19q status for staging."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Response-Adaptive and Functional Imaging"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Barrington SF, Mikhaeel NG. Role of PET in lymphoma staging and response. Lancet Oncol. 2014;15(6):e263–e275.",
+        "Trotman J, et al. PET-adapted therapy in Hodgkin lymphoma. Blood. 2020;135(16):1231–1239."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Biomarkers, MRD, and Liquid Biopsy"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Scherer F, et al. Emerging tools for MRD detection in solid tumors. Nat Rev Clin Oncol. 2022;19(5):303–322.",
+        "Tie J, et al. ctDNA to guide adjuvant chemotherapy in colon cancer. N Engl J Med. 2022;386:2261–2272."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Authoritative Guidelines and Resources"
+    },
+    {
+      "type": "list",
+      "items": [
+        "AJCC Staging: [https://cancerstaging.org](https://cancerstaging.org)",
+        "UICC TNM Tools: [https://www.uicc.org/resources/tnm](https://www.uicc.org/resources/tnm)",
+        "FIGO Guidelines: [https://www.figo.org/guidelines](https://www.figo.org/guidelines)",
+        "NCCN Clinical Practice Guidelines: [https://www.nccn.org](https://www.nccn.org)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. AMBOSS Medical References"
+    },
+    {
+      "type": "paragraph",
+      "text": "For staging-specific entries:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "[General Oncology – Grading and Staging](https://www.amboss.com/us/knowledge/general-oncology?utm_medium=chatgpt-plugin&utm_source=chatgpt)",
+        "[Lung Cancer – TNM and Clinical Groupings](https://www.amboss.com/us/knowledge/lung-cancer?utm_medium=chatgpt-plugin&utm_source=chatgpt)",
+        "[Colorectal Cancer – TNM and Dukes](https://www.amboss.com/us/knowledge/colorectal-cancer?utm_medium=chatgpt-plugin&utm_source=chatgpt)",
+        "[Pancreatic Cancer – AJCC TNM](https://www.amboss.com/us/knowledge/pancreatic-cancer?utm_medium=chatgpt-plugin&utm_source=chatgpt)",
+        "[Ovarian Cancer – FIGO/TNM Integration](https://www.amboss.com/us/knowledge/ovarian-cancer?utm_medium=chatgpt-plugin&utm_source=chatgpt)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "This curated list of references provides the foundation for understanding both traditional and modern staging systems across cancer types. As staging becomes more biologically informed, it is essential to remain updated on evolving guidelines from AJCC, UICC, FIGO, NCCN, and disease-specific working groups. These tools collectively shape patient stratification, prognosis, and treatment selection in contemporary oncology."
+    }
+  ]
+}

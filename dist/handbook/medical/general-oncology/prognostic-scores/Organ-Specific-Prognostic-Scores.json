@@ -1,0 +1,424 @@
+{
+  "title": "Prognostic Scores: Organ-Specific Prognostic Scores",
+  "category": "Clinical Oncology",
+  "section": "Prognostic Assessment",
+  "summary": "Comprehensive guide to organ-specific prognostic scoring systems across major cancer types, including clinical applications and modern molecular integrations.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-12-10T00:00:00Z",
+  "version": "2.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 18,
+    "relatedTopics": [
+      "Molecular Profiling in Solid Tumors",
+      "Cancer Staging Systems",
+      "Precision Oncology Approaches"
+    ]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Prognostic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Topic 7: Organ-Specific Prognostic Scores"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "In oncology, \"one-size-fits-all\" prognostication is inadequate. Tumors vary widely in natural history, biology, and response to therapy based on their organ of origin. Therefore, organ-specific prognostic models are indispensable in modern cancer care. These models integrate:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Pathologic variables (e.g., tumor size, grade, lymph node involvement)",
+        "Molecular and genomic data (e.g., gene expression profiles, mutation status)",
+        "Clinical factors (e.g., age, performance status, organ function)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These scores are used to:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Predict overall and disease-free survival",
+        "Assess risk of recurrence or metastasis",
+        "Guide surgical resectability and transplant eligibility",
+        "Optimize follow-up intensity",
+        "Facilitate shared decision-making with patients",
+        "Stratify participants in clinical trials"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Prognostic scores should not be used in isolation. Their optimal value is realized when integrated with biomarker panels, patient values, and therapeutic goals."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Breast Cancer"
+    },
+    {
+      "type": "paragraph",
+      "text": "Breast cancer is heterogeneous, and its management has been transformed by molecular subtyping and genomic assays."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Major Prognostic Tools:"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Type", "Use"],
+      "rows": [
+        ["Nottingham Prognostic Index (NPI)", "Pathologic", "ER+/HER2−, early-stage tumors"],
+        ["Oncotype DX (21-gene RS)", "Genomic", "HR+/HER2−, node-negative (or select 1–3 node+)"],
+        ["MammaPrint (70-gene)", "Genomic", "Early-stage, ER+/HER2−, both node-negative and node+"],
+        ["PAM50 (Prosigna)", "Genomic", "Distinguishes intrinsic subtype (Luminal A/B, etc.)"],
+        ["IHC4 + clinical factors", "Composite", "Combines ER, PR, HER2, Ki-67 with age and size"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Insights:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Oncotype DX RS ≤25: In postmenopausal women, likely no benefit from chemotherapy.",
+        "High RS or MammaPrint high-risk: May benefit from adjuvant chemo.",
+        "NPI >5.4: Associated with poor long-term prognosis."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Prostate Cancer"
+    },
+    {
+      "type": "paragraph",
+      "text": "Prognostic tools in prostate cancer guide decisions ranging from active surveillance to curative local therapy and systemic treatment."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Frameworks:"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Components"],
+      "rows": [
+        ["Gleason Score / Grade Group", "Histologic patterns of acinar differentiation"],
+        ["D'Amico Classification", "PSA, clinical stage, Gleason"],
+        ["CAPRA Score", "PSA, age, Gleason, % positive biopsy cores"],
+        ["NCCN Risk Groups", "Includes PSA kinetics, MRI findings, nodal status"],
+        ["MSKCC Nomograms", "Predict biochemical recurrence, metastasis, and OS"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Translation:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Grade Group 1 (Gleason 6): Low risk; often managed with surveillance.",
+        "CAPRA score ≥6: High risk; consider multimodal treatment.",
+        "Nomograms post-prostatectomy: Guide adjuvant radiation decisions."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Colorectal Cancer"
+    },
+    {
+      "type": "paragraph",
+      "text": "In colorectal cancer (CRC), prognosis depends not only on anatomic stage but also on molecular features and host response."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Validated Tools and Markers:"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Role"],
+      "rows": [
+        ["TNM (AJCC 8th Ed.)", "Gold standard for anatomic staging"],
+        ["MSI/MMR status", "MSI-H linked to better prognosis, poor 5-FU benefit"],
+        ["Oncotype DX Colon", "Assesses recurrence risk in Stage II"],
+        ["Immunoscore", "Quantifies immune infiltration (CD3+/CD8+ T cells)"],
+        ["CEA levels", "Postoperative monitoring, recurrence surveillance"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Clinical Concepts:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "MSI-H / dMMR tumors may avoid adjuvant chemo in Stage II.",
+        "BRAF V600E mutation: Poor prognosis, may need intensified therapy.",
+        "Oncotype DX Colon Score ≥41: High recurrence risk."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Hepatocellular Carcinoma (HCC)"
+    },
+    {
+      "type": "paragraph",
+      "text": "HCC is unique in that prognosis depends on tumor burden and liver function."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Staging and Risk Scores:"
+    },
+    {
+      "type": "table",
+      "headers": ["Score", "Components", "Primary Application"],
+      "rows": [
+        ["BCLC (Barcelona Clinic Liver Cancer)", "Stage, performance status, liver function", "Most widely used; determines treatment line"],
+        ["Child-Pugh", "Albumin, bilirubin, INR, ascites, encephalopathy", "Liver reserve and surgical eligibility"],
+        ["ALBI Score", "Albumin + bilirubin (no ascites/INR)", "Objective liver function, avoids subjective terms"],
+        ["CLIP, MELD", "Laboratory parameters, tumor features", "Transport and outcome prediction"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "BCLC Stratification:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "A: Curative therapy (resection, transplant, ablation)",
+        "B: TACE",
+        "C: Systemic therapy (e.g., Atezolizumab + Bevacizumab)",
+        "D: Palliative/supportive care"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Renal Cell Carcinoma (RCC)"
+    },
+    {
+      "type": "paragraph",
+      "text": "RCC prognosis has evolved with the advent of immune checkpoint inhibitors and targeted agents."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Prognostic Models:"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Variables", "Application"],
+      "rows": [
+        ["MSKCC (Motzer)", "PS, Hgb, Ca, LDH, time from diagnosis", "Prognostic classification"],
+        ["IMDC (Heng)", "MSKCC + platelets and neutrophils", "Widely used in mRCC trials (e.g., CheckMate)"],
+        ["Leibovich", "Pathologic (size, stage, necrosis, grade)", "Predicts recurrence after nephrectomy"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "IMDC stratification influences systemic therapy selection:\n- Favorable: IO/VEGF-TKI (e.g., pembrolizumab + axitinib)\n- Poor risk: IO/IO (e.g., nivolumab + ipilimumab)"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Lung Cancer"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Determinants of Prognosis:"
+    },
+    {
+      "type": "table",
+      "headers": ["Factor", "Role"],
+      "rows": [
+        ["TNM Staging", "Determines eligibility for curative treatment"],
+        ["Driver Mutations", "EGFR, ALK, ROS1, KRAS, MET, RET affect prognosis and therapy"],
+        ["PD-L1 Expression", "Predicts immunotherapy efficacy (not pure prognosis)"],
+        ["ECOG PS", "Strongly influences treatment and survival"],
+        ["Weight Loss/Cachexia", "Marker of systemic burden; associated with worse outcomes"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Notes:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "EGFR-mutant NSCLC has longer survival, but with unique resistance pathways.",
+        "Postoperative nomograms combine tumor size, nodal status, and SUVmax for risk stratification."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Head and Neck Cancer"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Prognostic Elements:"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool / Marker", "Interpretation"],
+      "rows": [
+        ["AJCC TNM (8th ed.)", "Separate staging for HPV+ OPSCC"],
+        ["p16 Expression", "Surrogate for HPV status; favorable outcome marker"],
+        ["Smoking Pack-Years", "Affects prognosis in HPV+ patients"],
+        ["PET/CT SUVmax", "May predict recurrence or failure post-RT"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "HPV-positive oropharyngeal cancer has better OS, allowing for treatment de-escalation trials."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Melanoma"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Prognostic Metrics:"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Application"],
+      "rows": [
+        ["AJCC TNM (8th Ed.)", "Includes Breslow depth, ulceration, mitotic index"],
+        ["BRAF/NRAS Status", "Predicts response to targeted therapy (not prognosis)"],
+        ["DecisionDx-GEP", "31-gene assay for recurrence risk (Stage I–II)"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Breslow depth >4 mm or ulceration correlates with poor outcomes."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Sarcomas and Rare Tumors"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Site-Specific Models:"
+    },
+    {
+      "type": "table",
+      "headers": ["Tumor Type", "Prognostic Tool"],
+      "rows": [
+        ["GIST", "Miettinen Criteria: size, mitotic count, location"],
+        ["Soft Tissue Sarcoma", "FNCLCC Grade, tumor size, site"],
+        ["Neuroendocrine Tumors (NETs)", "WHO Grade (Ki-67%, mitotic count), functional status"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Clinical Application:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "NETs with Ki-67 <2%: G1, often indolent.",
+        "High-grade NECs (Ki-67 >55%): Aggressive, treated like small cell carcinoma."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Choosing the Right Score: Integrated Summary"
+    },
+    {
+      "type": "table",
+      "headers": ["Organ", "Core Tools", "Purpose"],
+      "rows": [
+        ["Breast", "NPI, Oncotype DX, MammaPrint", "Recurrence, adjuvant therapy selection"],
+        ["Prostate", "Gleason, D'Amico, CAPRA, MSKCC", "Treatment stratification, recurrence risk"],
+        ["Colon", "TNM, MSI, CEA, Immunoscore", "Recurrence risk, chemo benefit prediction"],
+        ["HCC", "BCLC, ALBI, Child-Pugh", "Resection vs TACE vs systemic therapy"],
+        ["RCC", "IMDC, MSKCC, Leibovich", "Systemic therapy, recurrence risk post-op"],
+        ["Lung", "TNM, ECOG, EGFR/ALK/PD-L1", "Survival, therapy selection"],
+        ["Melanoma", "AJCC TNM, GEP, BRAF", "Recurrence prediction, targeted therapy planning"],
+        ["NETs", "WHO Grade, Ki-67, Functional status", "Risk of progression and aggressiveness"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "12. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Organ-specific prognostic models serve as essential decision-making tools across cancer types. They evolve alongside:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Advances in genomics",
+        "Integration of real-time imaging metrics",
+        "Emergence of machine learning–based prediction tools"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Used judiciously, they:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tailor therapy to disease biology and behavior",
+        "Minimize overtreatment",
+        "Optimize quality-adjusted survival",
+        "Support individualized cancer care"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "As oncology moves into the era of AI-guided personalization, the future of prognostication lies in real-time, multimodal integration of clinical, pathologic, molecular, and imaging data."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key Practice Recommendations"
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Select organ-specific prognostic tools based on tumor type and available data",
+        "Integrate molecular markers when available (e.g., MSI, EGFR, PD-L1)",
+        "Reassess prognostic risk at key decision points (diagnosis, progression, post-treatment)",
+        "Combine prognostic scores with performance status and comorbidity assessments",
+        "Use prognostic information to guide shared decision-making with patients"
+      ]
+    }
+  ]
+}

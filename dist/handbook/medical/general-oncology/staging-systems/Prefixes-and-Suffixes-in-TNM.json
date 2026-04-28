@@ -1,0 +1,249 @@
+{
+  "title": "Prefixes and Suffixes in TNM",
+  "category": "Staging Systems",
+  "section": "TNM Staging",
+  "summary": "Detailed explanation of prefixes and suffixes used in TNM cancer staging system",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-10-20T09:00:00Z",
+  "version": "1.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 12,
+    "targetAudience": ["Oncologists", "Pathologists", "Cancer Registrars"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Prefixes and Suffixes in TNM"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The TNM staging system, developed by AJCC and UICC, is the cornerstone of anatomic cancer staging. To capture clinical complexity and procedural context, prefixes and suffixes are used to modify TNM components. These modifiers convey essential information about:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Timing of staging (e.g., pre-treatment vs post-treatment)",
+        "Type of diagnostic method used (e.g., imaging, surgery, biopsy)",
+        "Special circumstances (e.g., recurrence, multifocal tumors)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Accurate and standardized use of these modifiers ensures consistency across:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Clinical records",
+        "Cancer registries",
+        "Multicenter trials",
+        "Longitudinal patient tracking"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Common Prefixes in TNM Staging"
+    },
+    {
+      "type": "table",
+      "headers": ["Prefix", "Full Term", "Definition", "Example"],
+      "rows": [
+        ["c", "Clinical", "Based on physical exam, imaging, or biopsy before treatment", "cT2N1M0"],
+        ["p", "Pathologic", "Based on surgical and histopathologic findings", "pT3N0M0"],
+        ["yc", "Post-neoadjuvant clinical", "After neoadjuvant therapy, before surgery", "ycT1N0M0"],
+        ["yp", "Post-neoadjuvant pathologic", "After neoadjuvant therapy and surgery", "ypT0N0M0"],
+        ["r", "Restaging", "After recurrence or retreatment", "rT2N1M0"],
+        ["a", "Autopsy", "Determined postmortem", "aT4N3M1"],
+        ["u", "Ultrasound/endoscopy", "Based on endoscopic ultrasound or imaging-guided biopsy", "uT1N0M0"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Always include the correct prefix in documentation to distinguish staging context and timepoint."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Common Suffixes in TNM Staging"
+    },
+    {
+      "type": "table",
+      "headers": ["Suffix", "Meaning", "Use Case"],
+      "rows": [
+        ["(m)", "Multiple tumors in same organ", "T2(m): multifocal breast or liver cancer"],
+        ["(is)", "Carcinoma in situ", "Tis: DCIS in breast, in situ cervical"],
+        ["(sn)", "Sentinel lymph node biopsy used", "N0(sn): no metastasis in sentinel node"],
+        ["(f)", "Fine needle aspiration used", "N1(f): node positivity by FNA"],
+        ["(x)", "Component not assessable", "N(x): no adequate nodal assessment"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Special Considerations for Suffix Use"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "A. Sentinel Node Evaluation – (sn)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Applied when only sentinel lymph node biopsy (SLNB) is used without complete lymphadenectomy. Common in breast cancer and melanoma. Micrometastasis (≤2 mm) → N1mi(sn)"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "B. Multifocality – (m)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Used when two or more tumors arise independently in the same organ. Important in:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Hepatocellular carcinoma",
+        "Multifocal breast cancer",
+        "Multicentric thyroid carcinoma"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "C. Unstageable Components – (x)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Used when a staging component is unknown or not evaluated. Indicates incomplete staging and may warrant further work-up."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Examples of TNM with Modifiers"
+    },
+    {
+      "type": "table",
+      "headers": ["Clinical Context", "TNM Expression"],
+      "rows": [
+        ["Baseline clinical staging from CT", "cT3N2M0"],
+        ["Pathologic staging post-resection", "pT2N1M0"],
+        ["Post-neoadjuvant complete response", "ypT0N0M0"],
+        ["Tumor recurrence restaged", "rT1N2M0"],
+        ["Tumor found at autopsy", "aT4N3M1"],
+        ["Tumor staged by EUS", "uT1N0M0"],
+        ["Sentinel node negative", "N0(sn)"],
+        ["Multiple tumors in same breast", "T2(m)"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Importance in Clinical Trials and Registries"
+    },
+    {
+      "type": "paragraph",
+      "text": "Correct use of prefixes/suffixes is essential in:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Defining trial eligibility cohorts (e.g., based on cTNM)",
+        "Evaluating treatment efficacy (ypTNM)",
+        "Database accuracy in registries like SEER or NCDB",
+        "Staging reproducibility across centers and timepoints"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Failure to use accurate modifiers may lead to:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Misclassification",
+        "Inaccurate survival stratification",
+        "Ineligible trial enrollment"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Extended Use in Site-Specific Cancers"
+    },
+    {
+      "type": "paragraph",
+      "text": "Breast Cancer:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ypT0N0M0 after neoadjuvant therapy suggests pathologic complete response (pCR)",
+        "SLNB: N0(sn) or N1mi(sn)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Colorectal Cancer:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ypT2N1 after chemoradiation and resection"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Esophageal Cancer:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "ycT3N0 post-chemoradiation, followed by ypT2N0 after surgery"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Summary Table – Prefixes and Suffixes"
+    },
+    {
+      "type": "table",
+      "headers": ["Modifier", "Type", "Interpretation"],
+      "rows": [
+        ["c", "Prefix", "Pre-treatment clinical staging"],
+        ["p", "Prefix", "Post-surgical pathology"],
+        ["yp", "Prefix", "Pathologic post-neoadjuvant"],
+        ["yc", "Prefix", "Clinical post-neoadjuvant"],
+        ["r", "Prefix", "Recurrence restaging"],
+        ["a", "Prefix", "Autopsy staging"],
+        ["u", "Prefix", "Endoscopic/ultrasound-based"],
+        ["(sn)", "Suffix", "Sentinel node used"],
+        ["(m)", "Suffix", "Multiple primary tumors"],
+        ["(f)", "Suffix", "Fine needle biopsy confirmed"],
+        ["(x)", "Suffix", "Component cannot be assessed"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Prefixes and suffixes in TNM staging provide essential detail that enhances the accuracy, clinical relevance, and reproducibility of cancer staging. Their correct use is vital for individual patient care, multidisciplinary coordination, and robust cancer research. As staging systems evolve with therapy, imaging, and pathology, these modifiers ensure that TNM classification keeps pace with clinical complexity."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Accurate staging begins with correct prefixes and suffixes—they tell the whole story."
+    }
+  ]
+}
