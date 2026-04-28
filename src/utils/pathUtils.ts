@@ -36,11 +36,12 @@ export function sectionToFolderName(section: HandbookSection): string {
  * Gets the full path to the Table of Contents (TOC) JSON file for a given section.
  * 
  * @param section - The handbook section ID (e.g., "medical-oncology")
- * @returns Full path to the TOC file (e.g., "/handbook/medical/toc.json")
+ * @returns Full path to the TOC file (e.g., "/public/handbook/medical/toc.json")
  */
 export function getTocPath(section: HandbookSection): string {
   const folderName = sectionToFolderName(section);
-  return `${HANDBOOK_BASE_DIR}/${folderName}/toc.json`;
+  // Use /public/ prefix to bypass React Router and fetch static files directly
+  return `/public/handbook/${folderName}/toc.json`;
 }
 
 /**
@@ -52,7 +53,7 @@ export function getTocPath(section: HandbookSection): string {
  */
 export function getContentPath(section: HandbookSection, topic?: string | null): string {
   const folderName = sectionToFolderName(section);
-  const basePath = `${HANDBOOK_BASE_DIR}/${folderName}`;
+  const basePath = `/public/handbook/${folderName}`;
 
   if (!topic) {
     // Default to overview
