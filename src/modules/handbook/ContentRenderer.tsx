@@ -460,6 +460,13 @@ export function ContentRenderer({ content, className }: ContentRendererProps) {
           </div>
         );
 
+      case 'divider':
+        return (
+          <div key={getKey(block, index)} className="my-6">
+            <hr className="border-t border-gray-300 dark:border-gray-600" />
+          </div>
+        );
+
       default:
         console.warn(`Unknown block type: ${block.type || 'undefined'}`, block);
         

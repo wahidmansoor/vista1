@@ -303,8 +303,6 @@ function processJsonContent(jsonString: string): { blocks: HandbookContentBlock[
       } else if (normalizedBlock.type === 'numbers') {
         normalizedBlock.type = 'list';
         normalizedBlock.ordered = true;
-      } else if (normalizedBlock.type === 'definitions') {
-        normalizedBlock.type = 'definition_list';
       }
       
       // Ensure blocks have proper content field
