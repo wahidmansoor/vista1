@@ -122,35 +122,47 @@ export function useHandbookData(
             let contentResponse: Response | null = null;
             let attemptedPath = '';
             let detectedFormat: 'markdown' | 'json' = 'markdown';
+            let contentText: string | null = null;
             
             // Try .md first
             attemptedPath = `${basePath}.md`;
             console.log('📄 Attempting to fetch:', attemptedPath);
             contentResponse = await fetch(attemptedPath);
             
-            if (!contentResponse.ok) {
-              // Try .json
+            if (contentResponse.ok) {
+              contentText = await contentResponse.text();
+              
+              // Check if we got HTML instead of content (Netlify 404 redirect)
+              if (contentText.includes('<!DOCTYPE') || contentText.includes('<html') || contentText.includes('<script')) {
+                console.warn('⚠️ .md request returned HTML (likely 404 redirect), trying .json instead');
+                contentText = null; // Clear to try next format
+              } else {
+                detectedFormat = 'markdown';
+              }
+            }
+            
+            // If .md didn't work, try .json
+            if (!contentText) {
               attemptedPath = `${basePath}.json`;
-              console.log('📄 .md not found, attempting:', attemptedPath);
+              console.log('📄 Trying .json format:', attemptedPath);
               contentResponse = await fetch(attemptedPath);
-              detectedFormat = 'json';
-            } else {
-              detectedFormat = 'markdown';
+              
+              if (contentResponse.ok) {
+                contentText = await contentResponse.text();
+                
+                // Check for HTML again
+                if (contentText.includes('<!DOCTYPE') || contentText.includes('<html') || contentText.includes('<script')) {
+                  console.error('❌ CRITICAL: .json also returned HTML (status 200)');
+                  contentText = null;
+                } else {
+                  detectedFormat = 'json';
+                }
+              }
             }
             
-            if (!contentResponse.ok) {
-              console.error('❌ Both .md and .json failed - status:', contentResponse.status);
-              throw new Error(`Content not found: tried .md and .json for ${basePath}`);
-            }
-
-            const contentText = await contentResponse.text();
-            console.log('📄 Received response - length:', contentText.length, 'first 50 chars:', contentText.substring(0, 50));
-            
-            // Validate response is not HTML (safety check for 404->index.html redirect)
-            if (contentText.includes('<!DOCTYPE') || contentText.includes('<html') || contentText.includes('<script')) {
-              console.error('❌ CRITICAL: Received HTML instead of content at', attemptedPath);
-              console.error('❌ First 200 chars:', contentText.substring(0, 200));
-              throw new Error(`Received HTML instead of content (status ${contentResponse.status}): ${attemptedPath}`);
+            // If both failed, throw error
+            if (!contentText) {
+              throw new Error(`Content not found in any format for ${basePath}. Tried .md and .json. Check that files are deployed to production.`);
             }
             
             setContent(contentText);
