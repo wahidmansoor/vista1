@@ -60,37 +60,47 @@ export function useHandbookData(
           const tocJson = await tocResponse.json();
           console.log('📑 TOC loaded successfully:', tocJson);
 
-          // Transform TOC data to match expected format
+          // Transform TOC data to match expected format (keep nested structure)
           let transformedToc: any[] = [];
           
+          // Helper function to ensure all items have valid titles and paths
+          const validateToc = (items: any[], basePath: string = ''): any[] => {
+            if (!Array.isArray(items)) {
+              return [];
+            }
+            
+            return items
+              .filter(item => item && item.title && item.title !== 'undefined')
+              .map((item: any) => ({
+                id: item.id || item.path || item.title,
+                title: item.title,
+                path: item.path 
+                  ? (basePath && !item.path.includes('/') 
+                      ? `${basePath}/${item.path}` 
+                      : item.path)
+                  : undefined,
+                items: item.items ? validateToc(item.items, item.path || basePath) : undefined
+              }))
+              .filter(item => item.title); // Remove any items that still don't have titles
+          };
+          
           if (Array.isArray(tocJson)) {
-            // If it's already an array, use it directly
-            transformedToc = tocJson.map((item: any) => ({
-              id: item.id || item.path || item.title,
-              title: item.title || item.name,
-              path: item.path || `/handbook/${section}/${item.id}`
-            }));
+            // Process the nested structure, preserving nesting
+            transformedToc = validateToc(tocJson);
           } else if (tocJson.chapters && Array.isArray(tocJson.chapters)) {
-            // If it has a chapters property, use that
-            transformedToc = tocJson.chapters.map((item: any) => ({
-              id: item.id || item.path || item.title,
-              title: item.title || item.name,
-              path: item.path || `/handbook/${section}/${item.id}`
-            }));
+            transformedToc = validateToc(tocJson.chapters);
           } else if (tocJson.sections && Array.isArray(tocJson.sections)) {
-            // If it has a sections property, use that
-            transformedToc = tocJson.sections.map((item: any) => ({
-              id: item.id || item.path || item.title,
-              title: item.title || item.name,
-              path: item.path || `/handbook/${section}/${item.id}`
-            }));
+            transformedToc = validateToc(tocJson.sections);
           } else {
-            // If it's an object with properties that are sections, iterate through them
-            transformedToc = Object.entries(tocJson).map(([key, item]: [string, any]) => ({
-              id: item.id || key,
-              title: item.title || key,
-              path: item.path || `/handbook/${section}/${key}`
-            }));
+            // If it's an object with properties, convert to array
+            transformedToc = Object.entries(tocJson)
+              .filter(([, item]: [string, any]) => item && item.title)
+              .map(([key, item]: [string, any]) => ({
+                id: item.id || key,
+                title: item.title || key,
+                path: item.path || `/handbook/${section}/${key}`,
+                items: item.items ? validateToc(item.items) : undefined
+              }));
           }
 
           console.log('📑 Transformed TOC loaded successfully with', transformedToc.length, 'entries');
