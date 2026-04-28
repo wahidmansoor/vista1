@@ -66,8 +66,8 @@ export function getContentPath(section: HandbookSection, topic?: string | null):
     .replace(/^\/+|\/+$/g, '') // Remove leading/trailing slashes
     .replace(/\.md$|\.json$/, ''); // Remove any existing extensions
 
-  // Try markdown first, then fall back to other formats
-  const path = `${basePath}/${cleanTopic}.md`;
+  // Return clean path without extension - loader will try both .md and .json
+  const path = `${basePath}/${cleanTopic}`;
   console.log(`📄 getContentPath generated: ${path} from topic: ${topic}`);
   
   return path;

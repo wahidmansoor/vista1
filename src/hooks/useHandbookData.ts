@@ -116,24 +116,46 @@ export function useHandbookData(
           console.log('📄 Loading content from local files for:', { section, topic });
           
           try {
-            const contentPath = getContentPath(section as HandbookSection, topic);
-            console.log('📄 Fetching content from:', contentPath);
+            const basePath = getContentPath(section as HandbookSection, topic);
             
-            const contentResponse = await fetch(contentPath);
+            // Try markdown first, then JSON
+            let contentResponse: Response | null = null;
+            let attemptedPath = '';
+            let detectedFormat: 'markdown' | 'json' = 'markdown';
+            
+            // Try .md first
+            attemptedPath = `${basePath}.md`;
+            console.log('📄 Attempting to fetch:', attemptedPath);
+            contentResponse = await fetch(attemptedPath);
+            
             if (!contentResponse.ok) {
-              throw new Error(`Content not found: ${contentResponse.status} ${contentResponse.statusText}`);
+              // Try .json
+              attemptedPath = `${basePath}.json`;
+              console.log('📄 .md not found, attempting:', attemptedPath);
+              contentResponse = await fetch(attemptedPath);
+              detectedFormat = 'json';
+            } else {
+              detectedFormat = 'markdown';
+            }
+            
+            if (!contentResponse.ok) {
+              throw new Error(`Content not found: tried .md and .json for ${basePath}`);
             }
 
             const contentText = await contentResponse.text();
             
-            // Determine format based on file extension
-            const fileFormat = contentPath.endsWith('.md') ? 'markdown' : 'json';
+            // Validate response is not HTML (safety check for 404->index.html redirect)
+            if (contentText.includes('<!DOCTYPE') || contentText.includes('<html') || contentText.includes('<script')) {
+              console.error('❌ CRITICAL: Received HTML instead of content:', contentText.substring(0, 100));
+              throw new Error('Received HTML page instead of content file - likely a 404 redirect');
+            }
             
             setContent(contentText);
-            setFormat(fileFormat);
-            setActiveFile(contentPath);
+            setFormat(detectedFormat);
+            setActiveFile(attemptedPath);
             console.log('📄 Content loaded successfully:', { 
-              format: fileFormat, 
+              format: detectedFormat, 
+              path: attemptedPath,
               contentLength: contentText.length 
             });
           } catch (contentErr) {
