@@ -1,0 +1,1 @@
+# Radiation Tools\n\n## Equivalent Dose in 2 Gy Fractions (EQD2)\n\n## Biologically Effective Dose (BED)\n\n## Common Fractionation Schemes\n\n## Dose Constraints for Critical Organs\n\n## Clinical Applications\n\n## Online Calculators and Resources

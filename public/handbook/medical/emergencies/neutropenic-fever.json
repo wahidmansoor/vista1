@@ -1,0 +1,75 @@
+{
+  "title": "Neutropenic Fever Management",
+  "category": "Medical Oncology",
+  "section": "Oncologic Emergencies",
+  "summary": "Evidence-based guidelines for assessment and management of febrile neutropenia in cancer patients.",
+  "content": [
+    {
+      "type": "clinical_pearl",
+      "text": "Neutropenic fever is a medical emergency. Initial antibiotics should be administered within 1 hour of presentation."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Definition"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Single oral temperature of ≥38.3°C (101°F)",
+        "Temperature of ≥38.0°C (100.4°F) sustained over 1 hour",
+        "ANC <500 cells/μL or expected to decrease to <500 cells/μL"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Risk Assessment"
+    },
+    {
+      "type": "table",
+      "headers": ["Risk Factor", "High Risk", "Low Risk"],
+      "rows": [
+        ["ANC", "<100 cells/μL", ">100 cells/μL"],
+        ["Duration", "Expected >7 days", "Expected <7 days"],
+        ["Comorbidities", "Significant", "None/Minor"],
+        ["Clinical Status", "Unstable", "Stable"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Initial Management"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Obtain complete history and physical examination",
+        "Blood cultures (peripheral and central line if present)",
+        "CBC with differential, CMP, lactate",
+        "Chest X-ray if pulmonary symptoms present"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Empiric Antibiotic Therapy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Initial antibiotic choice should provide broad-spectrum coverage including Pseudomonas aeruginosa. Local antibiogram patterns should guide specific choices."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Consider MRSA coverage with vancomycin if: hemodynamic instability, pneumonia, skin/soft tissue infection, or known MRSA colonization."
+    },
+    {
+      "type": "table",
+      "headers": ["Setting", "Preferred Regimen", "Alternative"],
+      "rows": [
+        ["Inpatient", "Cefepime or Piperacillin-tazobactam", "Meropenem"],
+        ["Outpatient", "Ciprofloxacin + Amoxicillin-clavulanate", "Based on sensitivities"]
+      ]
+    }
+  ]
+}

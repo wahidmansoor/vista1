@@ -1,0 +1,22 @@
+[
+  {
+    "id": "introduction",
+    "title": "Introduction",
+    "path": "/handbook/medical-oncology/introduction"
+  },
+  {
+    "id": "diagnosis",
+    "title": "Diagnosis Workup",
+    "path": "/handbook/medical-oncology/diagnosis"
+  },
+  {
+    "id": "treatment",
+    "title": "Treatment Planning",
+    "path": "/handbook/medical-oncology/treatment"
+  },
+  {
+    "id": "followup",
+    "title": "Follow-up and Surveillance",
+    "path": "/handbook/medical-oncology/followup"
+  }
+]

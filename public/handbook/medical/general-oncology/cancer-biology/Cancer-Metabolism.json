@@ -1,0 +1,381 @@
+{
+  "title": "Cancer Metabolism",
+  "category": "Cancer Biology",
+  "section": "Tumor Biology",
+  "summary": "Comprehensive overview of metabolic reprogramming in cancer cells, including the Warburg effect, key metabolic pathways, and therapeutic targeting strategies.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-12-25T00:00:00Z",
+  "version": "1.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 50,
+    "complexityLevel": "Advanced"
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Cancer Metabolism"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cancer metabolism refers to the reprogramming of cellular bioenergetic and biosynthetic pathways that allow malignant cells to sustain rapid proliferation, adapt to hostile microenvironments, evade immune responses, and resist therapies. Unlike normal cells that predominantly rely on mitochondrial oxidative phosphorylation (OXPHOS), cancer cells often favor glycolysis even in the presence of oxygen—a phenomenon known as the Warburg effect."
+    },
+    {
+      "type": "paragraph",
+      "text": "This reprogramming is not simply a consequence of malignancy but a fundamental enabler of tumor development and progression. Understanding the metabolic adaptations of cancer cells unveils a powerful therapeutic axis with the potential to disrupt tumor viability, sensitize to treatment, and improve clinical outcomes."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. The Warburg Effect"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Definition"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Warburg effect describes the preference of cancer cells to convert glucose into lactate via glycolysis even under normoxic conditions."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Mechanisms"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Oncogene activation (e.g., MYC, RAS) and loss of tumor suppressors (e.g., TP53) increase glycolytic flux.",
+        "HIF-1α stabilization, even without hypoxia, upregulates GLUT transporters and glycolytic enzymes.",
+        "Mitochondria remain intact but oxidative metabolism is downregulated or uncoupled from biosynthesis."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Functional Advantages"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Rapid ATP generation (despite inefficiency per molecule of glucose).",
+        "Accumulation of glycolytic intermediates used for: Nucleotide biosynthesis (via PPP), Amino acid and lipid synthesis",
+        "Acidic microenvironment enhances tissue invasion, immune evasion, and angiogenesis."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Core Metabolic Pathways in Cancer"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.1 Glycolysis and Lactate Production"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Increased glucose uptake: via GLUT1, GLUT3",
+        "Overexpression of: Hexokinase 2 (HK2), Phosphofructokinase-1 (PFK1), Lactate dehydrogenase A (LDHA)",
+        "Lactate exported via MCT1/MCT4, contributing to extracellular acidification"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.2 Pentose Phosphate Pathway (PPP)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Provides: NADPH: for redox balance (via glutathione) and lipid biosynthesis, Ribose-5-phosphate: for nucleotide synthesis",
+        "Regulated by G6PD (glucose-6-phosphate dehydrogenase)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.3 Glutaminolysis"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Glutamine → glutamate → α-ketoglutarate (feeds into TCA cycle)",
+        "Essential in MYC-driven tumors",
+        "Supports anaplerosis, redox homeostasis, and biosynthesis"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.4 Lipid Metabolism"
+    },
+    {
+      "type": "list",
+      "items": [
+        "De novo lipogenesis via FASN (fatty acid synthase)",
+        "Cancer cells synthesize fatty acids even when abundant in circulation",
+        "Lipids used for: Membrane biogenesis, Energy storage, Signaling molecules"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.5 Oxidative Phosphorylation (OXPHOS)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Still functional in many tumors, especially: Quiescent or therapy-resistant cells, Cancer stem cells",
+        "Targeting mitochondrial metabolism is emerging as a therapeutic strategy"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Key Regulators of Metabolic Reprogramming"
+    },
+    {
+      "type": "table",
+      "headers": ["Gene/Pathway", "Function in Metabolism"],
+      "rows": [
+        ["MYC", "Upregulates glycolysis, glutaminolysis, nucleotide synthesis"],
+        ["KRAS", "Promotes glucose uptake, macromolecular synthesis"],
+        ["TP53", "Induces TIGAR, inhibits glycolysis; enhances OXPHOS"],
+        ["PI3K/AKT/mTOR", "Stimulates glucose uptake, lipid biosynthesis"],
+        ["LKB1/AMPK", "Master energy sensors; suppress anabolic metabolism"],
+        ["HIF-1α", "Activates glycolysis, VEGF, and lactate production"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Hypoxia, HIF, and Adaptation"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "HIF-1α (Hypoxia-Inducible Factor-1α)"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Stabilized under: Hypoxia, Oncogenic signaling (via PI3K, RAS), VHL loss (seen in renal cell carcinoma)",
+        "Induces transcription of: Glycolytic enzymes, VEGF (angiogenesis), EPO (erythropoiesis)",
+        "Promotes acidic, immune-evading, angiogenic tumor phenotype"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Tumor Microenvironment (TME) and Metabolic Crosstalk"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Lactate and Acidosis"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Acts as: A signaling molecule: induces VEGF, M2 macrophage polarization, A metabolic fuel: shuttled to oxidative cancer cells or stroma",
+        "Acidic pH promotes ECM remodeling and invasion"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Metabolic Symbiosis"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Hypoxic cells: glycolytic → lactate producers",
+        "Normoxic cells: OXPHOS-dependent → lactate consumers"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "CAF and Immune Cell Interactions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "CAFs: undergo aerobic glycolysis → feed cancer cells via 'reverse Warburg effect'",
+        "Immune cells: M1 macrophages: glycolytic, pro-inflammatory, M2 macrophages, Tregs: rely on OXPHOS and fatty acid oxidation → immunosuppressive"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Mitochondria in Cancer"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Functions beyond ATP: Apoptosis regulation, ROS generation (signal for proliferation or death)",
+        "Alterations include: mtDNA mutations, Imbalance of fusion/fission dynamics",
+        "OXPHOS dependency seen in: Ovarian cancer, AML, Melanoma subpopulations"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Metabolic Plasticity"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Cancer cells dynamically shift between: Glycolysis ↔ OXPHOS, Fatty acid synthesis ↔ oxidation",
+        "Triggers: Nutrient deprivation, Hypoxia, Therapy-induced stress",
+        "This plasticity is a major obstacle to single-pathway inhibition."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Therapeutic Targeting of Cancer Metabolism"
+    },
+    {
+      "type": "table",
+      "headers": ["Targeted Pathway", "Drug Examples", "Status"],
+      "rows": [
+        ["Glycolysis", "2-DG, GLUT inhibitors", "Preclinical/Phase I"],
+        ["Glutaminolysis", "CB-839 (telaglenastat)", "Phase I/II (RCC, TNBC)"],
+        ["Fatty acid synthesis", "FASN inhibitors (TVB-2640)", "Clinical trials"],
+        ["OXPHOS", "IACS-010759", "Preclinical/AML trials"],
+        ["Lactate signaling", "MCT inhibitors", "Early research"],
+        ["Metabolic-immuno combo", "+ anti-PD1/PD-L1", "Investigational"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Immune Evasion via Metabolism"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Nutrient depletion (glucose, arginine, tryptophan) → T-cell dysfunction",
+        "Lactate accumulation → inhibits NK and cytotoxic T cells",
+        "Adenosine production → suppresses immune effectors",
+        "HIF-driven pathways reduce antigen presentation and support regulatory cell types"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Cancer Stem Cells (CSCs) and Metabolism"
+    },
+    {
+      "type": "list",
+      "items": [
+        "CSCs show: OXPHOS reliance (e.g., glioblastoma), Flexible metabolism under therapeutic pressure",
+        "Metabolic targeting can impair: Self-renewal, Therapy resistance, Tumor relapse"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Biomarkers and Diagnostics in Cancer Metabolism"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Imaging"
+    },
+    {
+      "type": "list",
+      "items": [
+        "FDG-PET: detects glucose uptake in tumors",
+        "New tracers: [^18F]-glutamine, acetate, and lactate in development"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Liquid and Tissue Biomarkers"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Lactate, pyruvate, ketone levels (experimental)",
+        "Metabolomic signatures: under investigation for diagnostics and monitoring",
+        "ctDNA + metabolomics: dual biomarker approach for early relapse"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "12. Emerging Concepts"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Oncometabolites"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Mutant IDH1/2 → 2-hydroxyglutarate (2-HG)",
+        "Epigenetic reprogramming → blocks differentiation",
+        "Targetable with IDH inhibitors (e.g., ivosidenib)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Metabolic Zonation and Heterogeneity"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Intratumoral metabolic niches (hypoxia, pH, substrate access)",
+        "Spatially resolved metabolomics reveals adaptation zones"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "AI and Metabolic Profiling"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Machine learning applied to mass spectrometry data",
+        "Predicts metabolic dependencies and drug responses"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cancer metabolism reflects a sophisticated reprogramming of bioenergetics and biosynthesis to support tumor survival, growth, and immune escape. From the Warburg effect to mitochondrial dependencies, metabolic adaptations are deeply intertwined with oncogenic signaling and tumor microenvironment dynamics. Exploiting these dependencies via targeted metabolic therapy, especially in combination with immunotherapy or cytotoxic agents, holds promise for improving clinical outcomes across tumor types. Precision metabolic profiling will be key to unlocking individualized treatment strategies in the next generation of oncology."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "References"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Hanahan D, Weinberg RA. Hallmarks of Cancer: The Next Generation. Cell. 2011.",
+        "Pavlova NN, Thompson CB. The Emerging Hallmarks of Cancer Metabolism. Cell Metab. 2016.",
+        "AMBOSS Library: General Oncology – Carcinogenesis & Metabolism"
+      ]
+    }
+  ]
+}

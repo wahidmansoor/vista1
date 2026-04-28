@@ -1,0 +1,266 @@
+{
+  "title": "Staging Systems: Introduction",
+  "category": "Clinical Assessment",
+  "section": "Cancer Staging",
+  "summary": "Comprehensive overview of cancer staging systems, their clinical applications, and evolving trends in oncology.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-10-20T00:00:00Z",
+  "version": "1.1.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 15,
+    "targetAudience": ["Oncologists", "Surgeons", "Pathologists", "Radiologists"]
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Staging Systems"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Topic 1: Introduction"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1. Purpose and Clinical Impact of Cancer Staging"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cancer staging determines the extent of disease spread, forming the cornerstone of oncology care. It enables a standardized classification used in:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Treatment planning: Helps determine whether surgery, systemic therapy, or radiation is appropriate",
+        "Prognostic estimation: Staging correlates with survival; higher stage typically equals poorer prognosis",
+        "Clinical trial design: Inclusion/exclusion criteria often hinge on stage (e.g., 'resectable Stage IIIA NSCLC')",
+        "Surveillance and epidemiology: Cancer registries use stage to compare disease trends",
+        "Interdisciplinary communication: Ensures consistent terminology between oncologists, radiologists, and pathologists"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "A high-stage, low-grade tumor often has a worse prognosis than a low-stage, high-grade tumor. Stage trumps grade in many solid tumors when estimating survival."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2. Historical Evolution of Staging"
+    },
+    {
+      "type": "table",
+      "headers": ["Year", "Milestone"],
+      "rows": [
+        ["1944", "First staging system by the American College of Surgeons"],
+        ["1959", "Union for International Cancer Control (UICC) adopts TNM system"],
+        ["1977", "Formation of AJCC, aligning U.S. staging with UICC standards"],
+        ["2002–2020s", "Integration of biomarkers (e.g., ER/PR, MGMT, IDH, MSI) into staging models"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Modern staging is no longer purely anatomical—it blends clinical, pathological, and molecular features."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3. Core Functions of Staging Systems"
+    },
+    {
+      "type": "table",
+      "headers": ["Function", "Purpose"],
+      "rows": [
+        ["Assess disease extent", "Helps identify localized vs metastatic disease"],
+        ["Guide therapy", "Determines curative vs palliative intent, need for adjuvant therapy"],
+        ["Predict prognosis", "Stage-linked survival curves used in counseling and outcome projection"],
+        ["Trial eligibility", "Uniform enrollment criteria across international studies"],
+        ["Public health planning", "Population-level comparisons of cancer burden and screening outcomes"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4. Anatomic vs Biological Staging"
+    },
+    {
+      "type": "table",
+      "headers": ["Dimension", "Description", "Examples"],
+      "rows": [
+        ["Anatomic", "Size, nodal spread, and distant metastasis", "TNM, FIGO, Ann Arbor"],
+        ["Biologic", "Molecular and genetic factors", "R-ISS, IPSS-M, BRAF/EGFR/MSI"],
+        ["Functional", "Host-related factors like performance or frailty", "ECOG, IMWG Frailty, CGA"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "The most accurate prognostication comes from combining staging + grading + biology + host status."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5. Overview of TNM Staging"
+    },
+    {
+      "type": "paragraph",
+      "text": "The TNM classification system is the global standard for staging solid tumors, updated by AJCC (U.S.) and UICC (international)."
+    },
+    {
+      "type": "table",
+      "headers": ["Component", "Meaning"],
+      "rows": [
+        ["T (Tumor)", "Size and direct local invasion"],
+        ["N (Nodes)", "Regional lymph node involvement"],
+        ["M (Metastasis)", "Presence of distant metastasis"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Each element is assigned a level (e.g., T2, N1, M0) and combined into a stage group (I–IV)."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tis: carcinoma in situ",
+        "T1–T4: increasing size and depth of invasion",
+        "N0–N3: number and location of involved lymph nodes",
+        "M0 vs M1: absence or presence of distant spread"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Nodal and metastatic involvement carry the highest prognostic weight."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6. Extensions of TNM: Prefixes and Suffixes"
+    },
+    {
+      "type": "table",
+      "headers": ["Symbol", "Meaning"],
+      "rows": [
+        ["cTNM", "Clinical staging (pre-treatment, based on imaging, PE, biopsy)"],
+        ["pTNM", "Pathologic staging (postoperative histology)"],
+        ["ypTNM", "Staging after neoadjuvant therapy"],
+        ["rTNM", "Restaging at recurrence"],
+        ["M1a/M1b/M1c", "Metastatic subtypes (e.g., pleural vs organ metastases in lung cancer)"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Certainty level may also be specified (e.g., C1–C5, from PE to autopsy-based)."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "7. Stage Grouping (AJCC Stages 0–IV)"
+    },
+    {
+      "type": "table",
+      "headers": ["Stage", "Interpretation"],
+      "rows": [
+        ["0", "Carcinoma in situ"],
+        ["I–II", "Localized/early disease"],
+        ["III", "Locally advanced, possibly resectable"],
+        ["IV", "Metastatic/inoperable in most cancers"]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Exceptions apply—e.g., Stage IV testicular cancer is often curable, unlike most solid tumors."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "8. Cancer-Specific Adaptations"
+    },
+    {
+      "type": "table",
+      "headers": ["Cancer Type", "Customization"],
+      "rows": [
+        ["Breast", "ER/PR, HER2, tumor grade → Prognostic Stage"],
+        ["Prostate", "PSA, Gleason Grade Group"],
+        ["Cervical (FIGO)", "Based on clinical and surgical findings"],
+        ["Lymphoma", "Ann Arbor or Lugano systems (nodal distribution, B symptoms)"],
+        ["Leukemia", "Uses cytogenetics and blood parameters, not TNM"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "9. Tumor Grading vs Staging"
+    },
+    {
+      "type": "table",
+      "headers": ["Feature", "Grading", "Staging"],
+      "rows": [
+        ["Purpose", "Histologic aggressiveness", "Anatomic extent of spread"],
+        ["Basis", "Differentiation, mitoses, atypia", "Size, nodal status, metastasis"],
+        ["Examples", "Gleason (prostate), Nottingham (breast)", "TNM, Ann Arbor, FIGO"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Staging affects treatment; grading adds prognostic precision."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "10. Clinical Examples by Stage"
+    },
+    {
+      "type": "list",
+      "items": [
+        "NSCLC Stage I: Surgical resection; no adjuvant chemo if node-negative",
+        "Stage II CRC: Surgery + adjuvant chemo (if high-risk features)",
+        "Stage III breast cancer: Neoadjuvant chemo + surgery + radiation",
+        "Stage IV pancreatic cancer: Chemotherapy (palliative intent)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "11. Staging Limitations and Emerging Trends"
+    },
+    {
+      "type": "table",
+      "headers": ["Limitation", "Modern Solutions"],
+      "rows": [
+        ["Ignores tumor biology", "Incorporation of biomarkers (e.g., HER2, IDH1, MSI)"],
+        ["Static framework", "Addition of dynamic tools like ctDNA, MRD, radiomics"],
+        ["Inter-observer variability", "AI-driven radiology and histology interpretations"],
+        ["Rare tumors lack systems", "Use of consensus-based or trial-specific criteria"]
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "12. Future of Staging: Integration and Individualization"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Multi-omics (genomics + proteomics + metabolomics)",
+        "Real-time monitoring (MRD, ctDNA, imaging biomarkers)",
+        "AI staging algorithms (combining image, text, and lab data)",
+        "Global harmonization (single staging for use in all regions and trials)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "13. Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Staging is the cornerstone of cancer diagnosis and management. It defines disease extent, directs therapy, and informs survival—while increasingly incorporating biology, response, and patient resilience. Mastery of staging principles is essential for delivering modern, precise, and patient-centered oncology care."
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "\"Staging tells us where the cancer is—biology tells us how it behaves. The future belongs to systems that capture both.\""
+    }
+  ]
+}

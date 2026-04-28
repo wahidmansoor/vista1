@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
 import { HandbookSection } from '@/modules/handbook/types/handbook';
-import { isValidSection } from '@/utils/pathUtils';
+import { isValidSection, getTocPath, getContentPath } from '@/utils/pathUtils';
 import { UseHandbookDataReturn } from '@/modules/handbook/types/handbook';
-import { palliativeCareTOC } from '../handbook/palliative-care/palliativeTOC';
 
 // Extended interface for backward compatibility with existing code
 interface ExtendedUseHandbookDataReturn extends UseHandbookDataReturn {
@@ -25,7 +23,7 @@ export function useHandbookData(
 
   useEffect(() => {
     const loadData = async () => {
-      console.log('📚 useHandbookData loading from Supabase:', { section, topic });
+      console.log('📚 useHandbookData loading from local files:', { section, topic });
       setIsLoading(true);
       setError(null);
       setTocData(null);
@@ -47,110 +45,57 @@ export function useHandbookData(
           return;
         }
 
-        // Get TOC data - fetch all entries for the section to build navigation
-        console.log('📑 Loading TOC from Supabase for section:', section);
+        // Get TOC data - fetch from local toc.json file
+        console.log('📑 Loading TOC from local files for section:', section);
         
         try {
-          // Check if this is the palliative-care section and use manual ordering
-          if (section === 'palliative-care') {
-            console.log('📑 Using manual TOC ordering for palliative-care section');
-            
-            try {
-              // Get all entries for the section from Supabase
-              const { data: tocEntries, error: tocError } = await supabase
-                .from('handbook_files')
-                .select('topic, title, path')
-                .eq('section', section);
-
-              if (tocError) {
-                throw new Error(`Failed to load TOC: ${tocError.message}`);
-              }
-
-              if (!tocEntries || tocEntries.length === 0) {
-                console.warn('⚠️ No TOC entries found for section:', section);
-                setTocData([]);
-              } else {
-                // Create a map of topic to entry for quick lookup
-                const entryMap = new Map(tocEntries.map(entry => [
-                  entry.topic.replace('.md', ''), // Remove .md extension for matching
-                  entry
-                ]));
-
-                // Use manual ordering from palliativeCareTOC
-                const orderedToc = palliativeCareTOC.map(tocItem => {
-                  const topicKey = tocItem.path;
-                  const dbEntry = entryMap.get(topicKey);
-                  
-                  return {
-                    id: tocItem.path,
-                    title: dbEntry?.title || tocItem.title,
-                    path: `/handbook/palliative-care/${tocItem.path}`
-                  };
-                }).filter(item => item.title); // Filter out items that weren't found in DB
-
-                // Add any entries from DB that weren't in the manual TOC (as fallback)
-                const manualTopics = new Set(palliativeCareTOC.map(item => item.path));
-                const additionalEntries = tocEntries
-                  .filter(entry => !manualTopics.has(entry.topic.replace('.md', '')))
-                  .map(entry => ({
-                    id: entry.topic,
-                    title: entry.title,
-                    path: entry.path || `/${section}/${entry.topic}`
-                  }));
-
-                const finalToc = [...orderedToc, ...additionalEntries];
-                
-                console.log('📑 Manual TOC loaded successfully with', finalToc.length, 'entries in clinical order');
-                setTocData(finalToc);
-              }
-            } catch (manualTocErr) {
-              console.warn('⚠️ Failed to use manual TOC, falling back to alphabetical:', manualTocErr);
-              // Fallback to alphabetical ordering if manual TOC fails
-              const { data: tocEntries, error: tocError } = await supabase
-                .from('handbook_files')
-                .select('topic, title, path')
-                .eq('section', section)
-                .order('topic');
-
-              if (tocError) {
-                throw new Error(`Failed to load TOC: ${tocError.message}`);
-              }
-
-              const transformedToc = tocEntries?.map(entry => ({
-                id: entry.topic,
-                title: entry.title,
-                path: entry.path || `/${section}/${entry.topic}`
-              })) || [];
-              
-              setTocData(transformedToc);
-            }
-          } else {
-            // Use default alphabetical ordering for other sections
-            const { data: tocEntries, error: tocError } = await supabase
-              .from('handbook_files')
-              .select('topic, title, path')
-              .eq('section', section)
-              .order('topic');
-
-            if (tocError) {
-              throw new Error(`Failed to load TOC: ${tocError.message}`);
-            }
-
-            if (!tocEntries || tocEntries.length === 0) {
-              console.warn('⚠️ No TOC entries found for section:', section);
-              setTocData([]);
-            } else {
-              // Transform Supabase data to match existing TOC format
-              const transformedToc = tocEntries.map(entry => ({
-                id: entry.topic,
-                title: entry.title,
-                path: entry.path || `/${section}/${entry.topic}`
-              }));
-              
-              console.log('📑 TOC loaded successfully with', transformedToc.length, 'entries');
-              setTocData(transformedToc);
-            }
+          const tocPath = getTocPath(section as HandbookSection);
+          console.log('📑 Fetching TOC from:', tocPath);
+          
+          const tocResponse = await fetch(tocPath);
+          if (!tocResponse.ok) {
+            throw new Error(`Failed to fetch TOC: ${tocResponse.status} ${tocResponse.statusText}`);
           }
+
+          const tocJson = await tocResponse.json();
+          console.log('📑 TOC loaded successfully:', tocJson);
+
+          // Transform TOC data to match expected format
+          let transformedToc: any[] = [];
+          
+          if (Array.isArray(tocJson)) {
+            // If it's already an array, use it directly
+            transformedToc = tocJson.map((item: any) => ({
+              id: item.id || item.path || item.title,
+              title: item.title || item.name,
+              path: item.path || `/handbook/${section}/${item.id}`
+            }));
+          } else if (tocJson.chapters && Array.isArray(tocJson.chapters)) {
+            // If it has a chapters property, use that
+            transformedToc = tocJson.chapters.map((item: any) => ({
+              id: item.id || item.path || item.title,
+              title: item.title || item.name,
+              path: item.path || `/handbook/${section}/${item.id}`
+            }));
+          } else if (tocJson.sections && Array.isArray(tocJson.sections)) {
+            // If it has a sections property, use that
+            transformedToc = tocJson.sections.map((item: any) => ({
+              id: item.id || item.path || item.title,
+              title: item.title || item.name,
+              path: item.path || `/handbook/${section}/${item.id}`
+            }));
+          } else {
+            // If it's an object with properties that are sections, iterate through them
+            transformedToc = Object.entries(tocJson).map(([key, item]: [string, any]) => ({
+              id: item.id || key,
+              title: item.title || key,
+              path: item.path || `/handbook/${section}/${key}`
+            }));
+          }
+
+          console.log('📑 Transformed TOC loaded successfully with', transformedToc.length, 'entries');
+          setTocData(transformedToc);
+
         } catch (tocErr) {
           console.error('❌ Error loading TOC:', tocErr);
           throw new Error(`Failed to load handbook navigation: ${tocErr instanceof Error ? tocErr.message : 'Unknown error'}`);
@@ -158,32 +103,29 @@ export function useHandbookData(
 
         // Get specific content if topic is provided
         if (topic) {
-          console.log('📄 Loading content from Supabase for:', { section, topic });
+          console.log('📄 Loading content from local files for:', { section, topic });
           
           try {
-            const { data: contentData, error: contentError } = await supabase
-              .from('handbook_files')
-              .select('content, format, title, path')
-              .eq('section', section)
-              .eq('topic', topic)
-              .single();
-
-            if (contentError) {
-              if (contentError.code === 'PGRST116') {
-                throw new Error(`Content not found for ${section}/${topic}`);
-              }
-              throw new Error(`Failed to load content: ${contentError.message}`);
+            const contentPath = getContentPath(section as HandbookSection, topic);
+            console.log('📄 Fetching content from:', contentPath);
+            
+            const contentResponse = await fetch(contentPath);
+            if (!contentResponse.ok) {
+              throw new Error(`Content not found: ${contentResponse.status} ${contentResponse.statusText}`);
             }
 
-            if (contentData) {
-              setContent(contentData.content);
-              setFormat(contentData.format);
-              setActiveFile(contentData.path || `/${section}/${topic}`);
-              console.log('📄 Content loaded successfully:', { 
-                format: contentData.format, 
-                contentLength: contentData.content?.length 
-              });
-            }
+            const contentText = await contentResponse.text();
+            
+            // Determine format based on file extension
+            const fileFormat = contentPath.endsWith('.md') ? 'markdown' : 'json';
+            
+            setContent(contentText);
+            setFormat(fileFormat);
+            setActiveFile(contentPath);
+            console.log('📄 Content loaded successfully:', { 
+              format: fileFormat, 
+              contentLength: contentText.length 
+            });
           } catch (contentErr) {
             console.error('❌ Error loading content:', contentErr);
             throw contentErr;

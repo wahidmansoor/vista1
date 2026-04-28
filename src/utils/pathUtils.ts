@@ -7,15 +7,15 @@
 /**
  * Base handbook directory within the public folder.
  */
-export const HANDBOOK_BASE_DIR = '/public';
+export const HANDBOOK_BASE_DIR = '/handbook';
 
 /**
- * Maps section IDs to their corresponding handbook types
+ * Maps section IDs to their corresponding handbook folder names in /public/handbook
  */
 export const HANDBOOK_TYPES = {
-  'medical-oncology': 'medical_oncology_handbook',
-  'radiation-oncology': 'radiation_handbook',
-  'palliative-care': 'palliative_handbook'
+  'medical-oncology': 'medical',
+  'radiation-oncology': 'radiation',
+  'palliative-care': 'palliative'
 } as const;
 
 export type HandbookSection = keyof typeof HANDBOOK_TYPES;
@@ -36,7 +36,7 @@ export function sectionToFolderName(section: HandbookSection): string {
  * Gets the full path to the Table of Contents (TOC) JSON file for a given section.
  * 
  * @param section - The handbook section ID (e.g., "medical-oncology")
- * @returns Full path to the TOC file (e.g., "/public/medical_oncology_handbook/toc.json")
+ * @returns Full path to the TOC file (e.g., "/handbook/medical/toc.json")
  */
 export function getTocPath(section: HandbookSection): string {
   const folderName = sectionToFolderName(section);
@@ -55,44 +55,17 @@ export function getContentPath(section: HandbookSection, topic?: string | null):
   const basePath = `${HANDBOOK_BASE_DIR}/${folderName}`;
 
   if (!topic) {
-    // For radiation handbook, use overview.md
-    if (section === 'radiation-oncology') {
-      return `${basePath}/sections/overview.md`;
-    }
-    return `${basePath}/overview.json`;
+    // Default to overview
+    return `${basePath}/overview.md`;
   }
 
   // Clean up the topic path and ensure it has the correct extension
   const cleanTopic = topic
     .replace(/^\/+|\/+$/g, '') // Remove leading/trailing slashes
-    .replace(/\.json$|\.md$/, ''); // Remove any existing extensions
-    // Special handling for radiation handbook - it uses sections/*.md structure
-  if (section === 'radiation-oncology') {
-    // Handle specific cases - map 'overview/introduction' to 'sections/overview.md'
-    if (cleanTopic === 'overview/introduction') {
-      const path = `${basePath}/sections/overview.md`;
-      console.log(`📄 getContentPath mapped special case: ${path} from topic: ${topic}`);
-      return path;
-    }
-    
-    // If the path contains a slash, first check if it's "category/topic" format
-    if (cleanTopic.includes('/')) {
-      const parts = cleanTopic.split('/');
-      // Try the last part first (most likely the actual topic)
-      const topicName = parts[parts.length - 1];
-      const path = `${basePath}/sections/${topicName}.md`;
-      console.log(`📄 getContentPath generated (radiation nested): ${path} from topic: ${topic}`);
-      return path;
-    }
-    
-    // Standard case - direct mapping to sections folder
-    const path = `${basePath}/sections/${cleanTopic}.md`;
-    console.log(`📄 getContentPath generated (radiation): ${path} from topic: ${topic}`);
-    return path;
-  }
-  
-  // Standard path for other handbooks
-  const path = `${basePath}/${cleanTopic}.json`;
+    .replace(/\.md$|\.json$/, ''); // Remove any existing extensions
+
+  // Try markdown first, then fall back to other formats
+  const path = `${basePath}/${cleanTopic}.md`;
   console.log(`📄 getContentPath generated: ${path} from topic: ${topic}`);
   
   return path;

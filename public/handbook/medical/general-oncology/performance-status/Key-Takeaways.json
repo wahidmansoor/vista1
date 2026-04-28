@@ -1,0 +1,270 @@
+{
+  "title": "Performance Status",
+  "category": "Clinical Oncology",
+  "section": "Patient Assessment",
+  "summary": "A comprehensive guide to performance status assessment in oncology practice, including tools, clinical implications, and future directions.",
+  "author": "OncoVISTA Team",
+  "lastUpdated": "2023-10-20T00:00:00Z",
+  "version": "1.0.0",
+  "metadata": {
+    "reviewStatus": "peer-reviewed",
+    "readingTimeMinutes": 10
+  },
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Performance Status"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Topic 9: Key Takeaways"
+    },
+    {
+      "type": "paragraph",
+      "text": "Expanded and clinically contextualized for practice, research, and education"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Definition and Purpose"
+    },
+    {
+      "type": "paragraph",
+      "text": "Performance status (PS) is a clinician-assessed summary measure of a patient's ability to perform everyday activities. It is one of the most consistently used clinical predictors in oncology. PS reflects underlying physiologic reserve, and thus directly impacts decisions regarding:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Treatment intensity",
+        "Clinical trial eligibility",
+        "Prognosis and survival",
+        "Referral to palliative or supportive care"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "PS should be interpreted dynamically, with reassessment at every clinical milestone."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Core Performance Status Tools Overview"
+    },
+    {
+      "type": "table",
+      "headers": ["Tool", "Target Population", "Score Range", "Clinical Notes"],
+      "rows": [
+        ["ECOG", "Adults (standard use)", "0–5", "Simple, rapid; standard for trials and systemic therapy decisions"],
+        ["KPS", "Adults (esp. palliative, neuro-oncology)", "0–100", "Higher resolution; more sensitive to functional trajectory"],
+        ["Lansky", "Pediatrics (1–16 years)", "0–100", "Behavior- and play-based; caregiver input essential"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Use ECOG or KPS depending on context; for pediatrics, always apply Lansky."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Beyond Standard PS: Geriatric and Frailty Tools"
+    },
+    {
+      "type": "paragraph",
+      "text": "ECOG/KPS alone often miss hidden vulnerabilities in older patients. Supplement with:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "CGA (Comprehensive Geriatric Assessment): Full multidomain evaluation",
+        "G8: 8-item screening for early frailty detection",
+        "CFS: Rapid bedside frailty stratification (1–9 scale)",
+        "VES-13: 13-item functional vulnerability tool",
+        "Balducci Classification: Clinically segments elderly into fit, vulnerable, and frail"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These tools are predictive of toxicity, hospitalization, and mortality, especially when ECOG is 1–2."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Treatment Planning Based on PS"
+    },
+    {
+      "type": "table",
+      "headers": ["PS Category", "Interpretation", "Clinical Action"],
+      "rows": [
+        ["Good (ECOG 0–1, KPS ≥80)", "Fully functional, active", "Full-dose chemotherapy, surgery, trials"],
+        ["Intermediate (ECOG 2)", "Ambulatory but functionally limited", "Dose-reduced or monotherapy; assess for CGA"],
+        ["Poor (ECOG ≥3, KPS <50)", "Dependent, symptomatic", "Palliative care focus; avoid high-toxicity regimens"]
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Poor PS is a key signal to re-evaluate treatment goals and prioritize quality of life."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Clinical Trial Implications"
+    },
+    {
+      "type": "paragraph",
+      "text": "PS has historically been used to standardize safety in trials, but this may exclude patients most representative of real-world practice."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Most Phase II/III trials require ECOG ≤1",
+        "Elderly and ECOG ≥2 patients are underrepresented",
+        "Innovative trials now use:"
+      ]
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "PS stratification arms",
+        "CGA-guided eligibility",
+        "Inclusion of real-world data (RWD) cohorts"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Regulatory trend: Increasing pressure to balance safety with inclusivity and relevance."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Pediatric and Elderly Considerations"
+    },
+    {
+      "type": "paragraph",
+      "text": "In children, PS must be contextualized by:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Developmental stage",
+        "Play and school function",
+        "Use Lansky Scale (0–100)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In older adults:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Combine ECOG with frailty measures",
+        "Assess ADLs, cognition, nutrition, caregiver support"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "PS interpretation must go beyond the score and into the life context of the patient."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. When to Reassess PS"
+    },
+    {
+      "type": "paragraph",
+      "text": "Performance status is not static. It should be re-evaluated:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "At diagnosis",
+        "Before starting a new treatment line",
+        "After hospitalization or treatment toxicity",
+        "At any point of clinical decline or new symptoms",
+        "During goals-of-care or hospice discussions"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Always document changes and their clinical impact."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Future Directions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Emerging technologies are modernizing PS:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Wearables: Step count, mobility, activity duration",
+        "Mobile health apps: Daily fatigue, mood, pain input",
+        "AI models: Infer PS from EMR notes, labs, imaging",
+        "Remote CGA: Digital geriatric assessments via telemedicine"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These tools promise to make PS more objective, continuous, and patient-centered."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Ethical Use of PS"
+    },
+    {
+      "type": "paragraph",
+      "text": "PS must never be used punitively. Instead, it should:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Guide realistic conversations about treatment options",
+        "Help patients and caregivers understand risks vs benefit",
+        "Ensure decisions are goal-aligned and ethically sound",
+        "Avoid systemic biases in interpreting PS, especially in underserved populations"
+      ]
+    },
+    {
+      "type": "clinical_pearl",
+      "text": "Quote for framing: \"Your strength and daily function give us a sense of what treatments will help — and which might cause harm. Let's decide what fits best with your goals.\""
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Final Summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "Performance status remains a foundational pillar of oncology care. Used wisely, it can:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Clarify who benefits from therapy",
+        "Support personalized, age-appropriate care",
+        "Inform palliative or hospice transitions",
+        "Strengthen multidisciplinary planning and communication"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "Key principles to remember:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Select the right tool for age, setting, and decision",
+        "Supplement ECOG/KPS with geriatric and psychosocial insights",
+        "Reassess frequently and document clearly",
+        "Embrace technology to enhance, not replace, clinical judgment"
+      ]
+    }
+  ]
+}
