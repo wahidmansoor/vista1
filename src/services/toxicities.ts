@@ -67,7 +67,7 @@ export const sanitizeToxicity = (data: Partial<ToxicityData>): ToxicityData => (
   labs: Array.isArray(data.labs) ? data.labs : [],
   clinical_category: data.clinical_category || 'Uncategorized',
   symptom_onset: data.symptom_onset || '',
-  expected_onset: data.expected_onset || '',
+  expected_onset: data.expected_onset || 'Not specified',
   onset_timing_days: data.onset_timing_days || 0,
   reversibility: data.reversibility || 'Unknown',
   toxicity_type: data.toxicity_type || 'Unknown',
