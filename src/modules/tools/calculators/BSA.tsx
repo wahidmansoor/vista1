@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ChevronLeft } from 'lucide-react';
+import CalculatorDisclaimer from '../components/CalculatorDisclaimer';
 
 const BSACalculator: React.FC = () => {
+  const navigate = useNavigate();
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
   const [bsa, setBsa] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const calculateBSA = () => {
+    setError(null);
     const h = parseFloat(height);
     const w = parseFloat(weight);
     if (isNaN(h) || isNaN(w) || h <= 0 || w <= 0) {
+      setError('Please enter valid numeric values for height and weight.');
       setBsa(null);
       return;
     }
@@ -20,10 +27,18 @@ const BSACalculator: React.FC = () => {
     setHeight('');
     setWeight('');
     setBsa(null);
+    setError(null);
   };
 
   return (
     <div className="p-6">
+      <button
+        onClick={() => navigate('/tools/calculators')}
+        className="flex items-center gap-1 text-sm text-indigo-600 dark:text-indigo-400 hover:underline mb-4"
+      >
+        <ChevronLeft className="w-4 h-4" />
+        Back to Calculators
+      </button>
       <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">🧮 BSA Calculator (Mosteller Formula)</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -50,6 +65,12 @@ const BSACalculator: React.FC = () => {
         </div>
       </div>
 
+      {error && (
+        <div className="mt-4 p-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg">
+          {error}
+        </div>
+      )}
+
       <div className="flex gap-4 mt-6">
         <button
           onClick={calculateBSA}
@@ -65,12 +86,14 @@ const BSACalculator: React.FC = () => {
         </button>
       </div>
 
-      {bsa !== null && (
-        <div className="mt-8 p-6 bg-green-100 dark:bg-green-700 rounded-lg">
-          <h2 className="text-xl font-bold text-green-800 dark:text-green-200">Calculated BSA</h2>
-          <p className="text-lg text-green-700 dark:text-green-300 mt-2">{bsa} m²</p>
+      {bsa !== null && !error && (
+        <div className="mt-8 p-6 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl border border-indigo-100 dark:border-indigo-800">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Calculated BSA</h2>
+          <p className="text-lg text-indigo-900 dark:text-indigo-300 mt-2">{bsa} m²</p>
         </div>
       )}
+
+      <CalculatorDisclaimer />
     </div>
   );
 };

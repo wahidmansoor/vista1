@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Tab, Menu, Transition } from '@headlessui/react';
-import { BarChart2, Activity, FolderOpen, Syringe, Bot, AlertTriangle, ChevronDown, CheckCircle2, FileText, Save, List, Trash2, Download } from 'lucide-react';
+import { BarChart2, Activity, FolderOpen, Syringe, Bot, AlertTriangle, ChevronDown, CheckCircle2, FileText, Save, List, Trash2, Download, History } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
 
 // Import new hooks and components
@@ -14,7 +14,12 @@ import { ClinicalSummaryModal } from './components/ClinicalSummaryModal';
 import { ClinicalDataGaps } from './components/ClinicalDataGaps';
 import { TreatmentProtocol } from './types/diseaseProgress.types';
 import { generateClinicalSummary } from './utils/generateClinicalSummary';
-import { caseStorageService, SavedCase } from './utils/caseStorageService';
+import { caseStorageService, CaseRecord, CaseSnapshot } from './utils/caseStorageService';
+import CaseHistoryModal from './components/CaseHistoryModal';
+import PilotCasesPanel from './components/PilotCasesPanel';
+import ValidationPanel from './components/ValidationPanel';
+import ValidationInsightsPanel from './components/ValidationInsightsPanel';
+import { PilotCase } from './pilot/sampleCases';
 
 // Legacy imports - will be removed after refactoring
 import { TREATMENT_PROTOCOLS } from "../data/treatmentProtocolsData";
@@ -34,7 +39,11 @@ const DiseaseProgressTracker: React.FC = () => {
   const [compareList, setCompareList] = useState<TreatmentProtocol[]>([]);
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false);
   const [generatedSummary, setGeneratedSummary] = useState('');
-  const [savedCases, setSavedCases] = useState<SavedCase[]>([]);
+  const [savedCases, setSavedCases] = useState<CaseRecord[]>([]);
+  const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
+  const [selectedCaseForHistory, setSelectedCaseForHistory] = useState<CaseRecord | null>(null);
+  const [activePilotCaseId, setActivePilotCaseId] = useState<string | undefined>();
+  const [showValidation, setShowValidation] = useState(false);
 
   // Load cases on mount
   useEffect(() => {
@@ -48,19 +57,73 @@ const DiseaseProgressTracker: React.FC = () => {
       eligibleMatches,
       ineligibleMatches
     );
-    caseStorageService.saveCase(patientData.state, undefined, summary);
-    setSavedCases(caseStorageService.loadCases());
+
+    const protocolResults = sortedMatches.map(m => ({
+      protocolId: m.protocol.id,
+      protocolName: m.protocol.name,
+      status: m.status
+    }));
+
+    const result = caseStorageService.safeSaveCase(
+      patientData.state, 
+      patientData.state.diseaseStatus.primaryDiagnosis || "Unnamed Case", 
+      summary,
+      protocolResults
+    );
+
+    if (result.success) {
+      setSavedCases(caseStorageService.loadCases());
+      toast({
+        title: "Case Saved",
+        description: "A new snapshot has been added to this case.",
+      });
+    } else {
+      toast({
+        title: "Save Error",
+        description: result.error,
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleLoadCase = (record: CaseRecord) => {
+    const latest = record.snapshots[record.snapshots.length - 1];
+    if (latest) {
+      patientData.actions.loadFromStorage(latest.clinicalData);
+      toast({
+        title: "Case Loaded",
+        description: `Loaded latest version of ${record.title}`,
+      });
+    }
+  };
+
+  const handleLoadSnapshot = (snapshot: CaseSnapshot) => {
+    patientData.actions.loadFromStorage(snapshot.clinicalData);
     toast({
-      title: "Case Saved",
-      description: "Patient scenario has been saved locally.",
+      title: "Version Loaded",
+      description: `Loaded Version ${snapshot.version} from ${new Date(snapshot.timestamp).toLocaleString()}`,
     });
   };
 
-  const handleLoadCase = (savedCase: SavedCase) => {
-    patientData.actions.loadFromStorage(savedCase.data);
+  const handleLoadPilotCase = (pc: PilotCase) => {
+    // Partial load state for pilot cases
+    if (pc.data.diseaseStatus) {
+      patientData.actions.setDiseaseStatus(pc.data.diseaseStatus);
+    }
+    if (pc.data.performanceStatus) {
+      patientData.actions.setPerformanceStatus(pc.data.performanceStatus);
+    }
+    if (pc.data.treatmentLine) {
+      patientData.actions.setTreatmentLine(pc.data.treatmentLine);
+    }
+    
+    setActivePilotCaseId(pc.id);
+    setSelectedIndex(4); // Switch to CDS tab to see results
+    setShowValidation(true); // Reset validation visibility for new case
+
     toast({
-      title: "Case Loaded",
-      description: `Loaded case from ${new Date(savedCase.updatedAt).toLocaleDateString()}`,
+      title: "Pilot Case Loaded",
+      description: `Loaded deterministic data for ${pc.name}`,
     });
   };
 
@@ -240,6 +303,17 @@ const DiseaseProgressTracker: React.FC = () => {
 
   return (
     <div className="p-6 bg-content rounded-2xl shadow-lg fix-visibility">
+      {/* Pilot Cases Panel - Internal Use Only */}
+      {import.meta.env.DEV && (
+        <>
+          <PilotCasesPanel 
+            onLoadCase={handleLoadPilotCase} 
+            currentActiveCaseId={activePilotCaseId} 
+          />
+          <ValidationInsightsPanel />
+        </>
+      )}
+
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">📈 Disease & Progress Tracker</h2>
@@ -269,28 +343,40 @@ const DiseaseProgressTracker: React.FC = () => {
                     savedCases.map((c) => (
                       <Menu.Item key={c.caseId}>
                         {({ active }) => (
-                          <div className={`${active ? 'bg-indigo-50 dark:bg-indigo-900/30' : ''} px-3 py-2 rounded-lg flex items-center justify-between group`}>
-                            <button
-                              onClick={() => handleLoadCase(c)}
-                              className="flex-1 text-left"
-                            >
-                              <div className="text-sm font-bold text-slate-700 dark:text-slate-200">
-                                {c.data.diseaseStatus.primaryDiagnosis || "Unnamed Case"}
-                              </div>
-                              <div className="text-[10px] text-slate-500">
-                                {new Date(c.updatedAt).toLocaleDateString()} at {new Date(c.updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                              </div>
-                            </button>
+                          <div className={`${active ? 'bg-indigo-50 dark:bg-indigo-900/30' : ''} px-3 py-2 rounded-lg flex flex-col group`}>
+                            <div className="flex items-center justify-between">
+                              <button
+                                onClick={() => handleLoadCase(c)}
+                                className="flex-1 text-left"
+                              >
+                                <div className="text-sm font-bold text-slate-700 dark:text-slate-200">
+                                  {c.title}
+                                </div>
+                                <div className="text-[10px] text-slate-500">
+                                  v{c.snapshots.length} • {new Date(c.updatedAt).toLocaleDateString()}
+                                </div>
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDeleteCase(c.caseId);
+                                }}
+                                className="p-1.5 text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                                title="Delete Case"
+                                aria-label="Delete Case"
+                              >
+                                <Trash2 className="h-3.5 w-3.5" />
+                              </button>
+                            </div>
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleDeleteCase(c.caseId);
+                                setSelectedCaseForHistory(c);
+                                setIsHistoryModalOpen(true);
                               }}
-                              className="p-1.5 text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
-                              title="Delete Case"
-                              aria-label="Delete Case"
+                              className="mt-1 text-[10px] text-indigo-600 dark:text-indigo-400 font-bold hover:underline self-start flex items-center gap-1"
                             >
-                              <Trash2 className="h-3.5 w-3.5" />
+                              <History className="h-2.5 w-2.5" /> View History Trail
                             </button>
                           </div>
                         )}
@@ -302,13 +388,18 @@ const DiseaseProgressTracker: React.FC = () => {
             </Transition>
           </Menu>
 
-          <button
-            type="button"
-            onClick={handleSaveCase}
-            className="px-4 py-3 bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 font-semibold rounded-lg border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-50 transition flex items-center gap-2 shadow-sm"
-          >
-            <Save className="h-4 w-4" /> Save
-          </button>
+          <div className="flex flex-col items-end gap-1">
+            <button
+              type="button"
+              onClick={handleSaveCase}
+              className="px-4 py-3 bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 font-semibold rounded-lg border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-50 transition flex items-center gap-2 shadow-sm"
+            >
+              <Save className="h-4 w-4" /> Save
+            </button>
+            <span className="text-[9px] text-amber-600 dark:text-amber-400 font-medium italic">
+              No PII in titles
+            </span>
+          </div>
 
           <div className="h-10 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
 
@@ -694,6 +785,17 @@ const DiseaseProgressTracker: React.FC = () => {
                 </details>
               )}
 
+              {/* Pilot Validation Feedback Panel */}
+              {showValidation && activePilotCaseId && (
+                <ValidationPanel
+                  caseId={activePilotCaseId}
+                  caseTitle={patientData.state.diseaseStatus.primaryDiagnosis || "Pilot Case"}
+                  snapshotVersion={1} // Pilot cases usually validate first generation
+                  onSubmitted={() => setShowValidation(false)}
+                  onSkip={() => setShowValidation(false)}
+                />
+              )}
+
               {/* Safety Footer */}
               <div className="mt-8 p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-center shadow-sm">
                 <p className="text-xs text-slate-500 dark:text-slate-400 font-medium italic leading-relaxed">
@@ -764,6 +866,16 @@ const DiseaseProgressTracker: React.FC = () => {
         onClose={() => setIsSummaryModalOpen(false)}
         summaryText={generatedSummary}
       />
+
+      {/* Case History Modal */}
+      {selectedCaseForHistory && (
+        <CaseHistoryModal
+          isOpen={isHistoryModalOpen}
+          onClose={() => setIsHistoryModalOpen(false)}
+          caseRecord={selectedCaseForHistory}
+          onLoadSnapshot={handleLoadSnapshot}
+        />
+      )}
     </div>
   );
 };

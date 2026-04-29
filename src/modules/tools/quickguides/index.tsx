@@ -1,8 +1,10 @@
+import PlaceholderPage from '../components/PlaceholderPage';
+
 const QuickGuidesPage = () => (
-  <div className="p-6">
-    <h1 className="text-2xl font-bold mb-4">Symptom Control Quick Guides</h1>
-    <div className="text-gray-600 dark:text-gray-400">Coming Soon...</div>
-  </div>
+  <PlaceholderPage 
+    title="Symptom Control Quick Guides" 
+    description="Evidence-based management protocols for pain, nausea, and other treatment-related symptoms." 
+  />
 );
 
 export default QuickGuidesPage;
